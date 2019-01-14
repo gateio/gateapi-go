@@ -1,0 +1,1755 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: support@mail.gate.io
+    name: API support
+    url: https://gate.io/page/contacts
+  description: |-
+    APIv4 futures provides all sorts of futures trading operations.
+    There are public APIs to retrieve the real-time market statistics,
+    and private APIs which needs authentication to trade on user's behalf.
+  license:
+    name: Apache License 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  title: Gate API v4
+  version: 1.1.0
+servers:
+- description: Real Trading
+  url: https://fx-api.gateio.io/api/v4
+- description: TestNet Trading
+  url: https://fx-api-testnet.gateio.io/api/v4
+security:
+- api_key: []
+  api_sign: []
+  api_timestamp: []
+tags:
+- description: Futures trade
+  name: futures
+paths:
+  /futures/contracts:
+    get:
+      operationId: listFuturesContracts
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - name: BTC_USD
+                type: inverse
+                quanto_multiplier: "0"
+                mark_type: index
+                last_price: "4123"
+                mark_price: "4121.41"
+                index_price: "4121.5"
+                funding_next_apply: 1546588800
+                funding_rate: "0.000333"
+                funding_interval: 28800
+                funding_offset: 0
+                interest_rate: "0.001"
+                order_price_round: "0.5"
+                mark_price_round: "0.01"
+                leverage_min: "1"
+                leverage_max: "100"
+                maintenance_rate: "0.005"
+                risk_limit_base: "10"
+                risk_limit_step: "10"
+                risk_limit_max: "50"
+                maker_fee_rate: -0.00025
+                taker_fee_rate: "0.00075"
+                order_price_deviate: "1"
+                order_size_min: 1
+                order_size_max: 1000000
+                orders_limit: 50
+                orderbook_id: 39635902
+                trade_id: 6935987
+                trade_size: 1992012909
+                position_size: 4323221
+              schema:
+                items:
+                  $ref: '#/components/schemas/Contract'
+                type: array
+          description: List retrieved
+      security: []
+      summary: List all futures contracts
+      tags:
+      - futures
+  /futures/order_book:
+    get:
+      description: Bids will be sorted by price from high to low, while asks sorted reversely
+      operationId: listFuturesOrderBook
+      parameters:
+      - description: Futures contract
+        example: BTC_USD
+        in: query
+        name: contract
+        required: true
+        schema:
+          type: string
+      - description: Order depth. 0 means no aggregation is applied. default to 0
+        example: "0"
+        explode: true
+        in: query
+        name: interval
+        required: false
+        schema:
+          default: "0"
+          enum:
+          - "0"
+          - "0.1"
+          - "0.01"
+          type: string
+        style: form
+      - description: Maximum number of order depth data in asks or bids
+        example: 10
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          format: int32
+          maximum: 20
+          minimum: 1
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+                asks:
+                - p: "1.52"
+                  s: 100
+                - p: "1.53"
+                  s: 40
+                bids:
+                - p: "1.17"
+                  s: 150
+                - p: "1.16"
+                  s: 203
+              schema:
+                $ref: '#/components/schemas/FuturesOrderBook'
+          description: Order book retrieved
+      security: []
+      summary: Futures order book
+      tags:
+      - futures
+  /futures/trades:
+    get:
+      operationId: listFuturesTrades
+      parameters:
+      - description: Futures contract
+        example: BTC_USD
+        in: query
+        name: contract
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of record returned in one list
+        example: 100
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          maximum: 1000
+          minimum: 1
+          type: integer
+      - description: Specify list staring point using the last record of `id` in previous list-query results
+        example: "12345"
+        in: query
+        name: last_id
+        required: false
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - id: 121234231
+                create_time: 1514764800
+                contract: BTC_USD
+                size: -100
+                price: "100.123"
+              schema:
+                items:
+                  $ref: '#/components/schemas/FuturesTrade'
+                type: array
+          description: List retrieved
+      security: []
+      summary: Futures trading history
+      tags:
+      - futures
+  /futures/candlesticks:
+    get:
+      description: |-
+        Return specified contract candlesticks.
+        If prefix `contract` with `mark_`, the contract's mark price candlesticks are returned;
+        if prefix with `index_`, index price candlesticks will be returned.
+
+        Maximum of 2000 points are returned in one query. Be sure not to exceed the limit when specifying `from`, `to` and `interval`
+      operationId: listFuturesCandlesticks
+      parameters:
+      - description: Futures contract
+        example: BTC_USD
+        in: query
+        name: contract
+        required: true
+        schema:
+          type: string
+      - description: |-
+          Start time of candlesticks, formatted in Unix timestamp in seconds.
+          Default to`to - 100 * interval` if not specified
+        example: 1546905600
+        explode: true
+        in: query
+        name: from
+        required: false
+        schema:
+          type: number
+        style: form
+      - description: End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time
+        example: 1546935600
+        explode: true
+        in: query
+        name: to
+        required: false
+        schema:
+          type: number
+        style: form
+      - description: Maximum recent data points returned. `limit` is conflicted with `from` and `to`. If either `from` or `to` is specified, request will be rejected.
+        example: 100
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          format: int32
+          maximum: 2000
+          type: integer
+        style: form
+      - description: Interval time between data points
+        example: 5m
+        explode: true
+        in: query
+        name: interval
+        required: false
+        schema:
+          default: 5m
+          enum:
+          - 10s
+          - 1m
+          - 5m
+          - 15m
+          - 30m
+          - 1h
+          - 4h
+          - 8h
+          - 1d
+          - 7d
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - t: 1539852480
+                v: 97151
+                c: "1.032"
+                h: "1.032"
+                l: "1.032"
+                o: "1.032"
+              schema:
+                items:
+                  $ref: '#/components/schemas/FuturesCandlestick'
+                type: array
+          description: Successfully retrieved
+      security: []
+      summary: Get futures candlesticks
+      tags:
+      - futures
+  /futures/tickers:
+    get:
+      operationId: listFuturesTickers
+      parameters:
+      - description: Futures contract, return related data only if specified
+        example: BTC_USD
+        in: query
+        name: contract
+        required: false
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - contract: BTC_USD
+                last: "6432"
+                change_percentage: "4.43"
+                total_size: "32323904"
+                volume_24h: "184040233284.328"
+                mark_price: "6534"
+                funding_rate: "0"
+                index_price: "6531"
+              schema:
+                items:
+                  $ref: '#/components/schemas/FuturesTicker'
+                type: array
+          description: Successfully retrieved
+      security: []
+      summary: List futures tickers
+      tags:
+      - futures
+  /futures/funding_rate:
+    get:
+      operationId: listFuturesFundingRateHistory
+      parameters:
+      - description: Futures contract
+        example: BTC_USD
+        in: query
+        name: contract
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of record returned in one list
+        example: 100
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          maximum: 1000
+          minimum: 1
+          type: integer
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - t: 1543968000
+                r: "0.000157"
+              schema:
+                items:
+                  $ref: '#/components/schemas/FundingRateRecord'
+                type: array
+          description: History retrieved
+      security: []
+      summary: Funding rate history
+      tags:
+      - futures
+  /futures/insurance:
+    get:
+      operationId: listFuturesInsuranceLedger
+      parameters:
+      - description: Maximum number of record returned in one list
+        example: 100
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          maximum: 1000
+          minimum: 1
+          type: integer
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - t: 1543968000
+                b: "83.0031"
+              schema:
+                items:
+                  $ref: '#/components/schemas/InsuranceRecord'
+                type: array
+          description: Successfully retrieved
+      security: []
+      summary: Futures insurance balance history
+      tags:
+      - futures
+  /futures/accounts:
+    get:
+      operationId: listFuturesAccounts
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+                total: "4.4516"
+                unrealised_pnl: "0"
+                available: "4.98"
+                order_margin: "0.1"
+                position_margin: "5.1"
+              schema:
+                $ref: '#/components/schemas/FuturesAccount'
+          description: List retrieved
+      summary: Query futures account
+      tags:
+      - futures
+  /futures/positions:
+    get:
+      operationId: listPositions
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - user: 10000
+                contract: BTC_USD
+                size: -9440
+                leverage: "0"
+                risk_limit: "100"
+                leverage_max: "100"
+                maintenance_rate: "0.005"
+                value: "2.497143098997"
+                margin: "4.431548146258"
+                entry_price: "3779.55"
+                liq_price: "99999999"
+                mark_price: "3780.32"
+                unrealised_pnl: -0.000507486844
+                realised_pnl: "0.045543982432"
+                history_pnl: "0"
+                last_close_pnl: "0"
+                adl_ranking: 5
+                pending_orders: 16
+                close_order:
+                  id: 232323
+                  price: "3779"
+                  is_liq: false
+              schema:
+                items:
+                  $ref: '#/components/schemas/Position'
+                type: array
+          description: List retrieved
+      summary: List all positions of a user
+      tags:
+      - futures
+  /futures/positions/{contract}/margin:
+    post:
+      operationId: updatePositionMargin
+      parameters:
+      - description: Futures contract
+        example: BTC_USD
+        in: path
+        name: contract
+        required: true
+        schema:
+          type: string
+      - description: Margin change. Use positive number to increase margin, negative number otherwise.
+        example: "0.01"
+        explode: true
+        in: query
+        name: change
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+                user: 10000
+                contract: BTC_USD
+                size: -9440
+                leverage: "0"
+                risk_limit: "100"
+                leverage_max: "100"
+                maintenance_rate: "0.005"
+                value: "2.497143098997"
+                margin: "4.431548146258"
+                entry_price: "3779.55"
+                liq_price: "99999999"
+                mark_price: "3780.32"
+                unrealised_pnl: -0.000507486844
+                realised_pnl: "0.045543982432"
+                history_pnl: "0"
+                last_close_pnl: "0"
+                adl_ranking: 5
+                pending_orders: 16
+                close_order:
+                  id: 232323
+                  price: "3779"
+                  is_liq: false
+              schema:
+                $ref: '#/components/schemas/Position'
+          description: Position information
+      summary: Update position margin
+      tags:
+      - futures
+  /futures/positions/{contract}/leverage:
+    post:
+      operationId: updatePositionLeverage
+      parameters:
+      - description: Futures contract
+        example: BTC_USD
+        in: path
+        name: contract
+        required: true
+        schema:
+          type: string
+      - description: New position leverage
+        example: "10"
+        explode: true
+        in: query
+        name: leverage
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+                user: 10000
+                contract: BTC_USD
+                size: -9440
+                leverage: "0"
+                risk_limit: "100"
+                leverage_max: "100"
+                maintenance_rate: "0.005"
+                value: "2.497143098997"
+                margin: "4.431548146258"
+                entry_price: "3779.55"
+                liq_price: "99999999"
+                mark_price: "3780.32"
+                unrealised_pnl: -0.000507486844
+                realised_pnl: "0.045543982432"
+                history_pnl: "0"
+                last_close_pnl: "0"
+                adl_ranking: 5
+                pending_orders: 16
+                close_order:
+                  id: 232323
+                  price: "3779"
+                  is_liq: false
+              schema:
+                $ref: '#/components/schemas/Position'
+          description: Position information
+      summary: Update position leverage
+      tags:
+      - futures
+  /futures/positions/{contract}/risk_limit:
+    post:
+      operationId: updatePositionRiskLimit
+      parameters:
+      - description: Futures contract
+        example: BTC_USD
+        in: path
+        name: contract
+        required: true
+        schema:
+          type: string
+      - description: New position risk limit
+        example: "10"
+        explode: true
+        in: query
+        name: risk_limit
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+                user: 10000
+                contract: BTC_USD
+                size: -9440
+                leverage: "0"
+                risk_limit: "100"
+                leverage_max: "100"
+                maintenance_rate: "0.005"
+                value: "2.497143098997"
+                margin: "4.431548146258"
+                entry_price: "3779.55"
+                liq_price: "99999999"
+                mark_price: "3780.32"
+                unrealised_pnl: -0.000507486844
+                realised_pnl: "0.045543982432"
+                history_pnl: "0"
+                last_close_pnl: "0"
+                adl_ranking: 5
+                pending_orders: 16
+                close_order:
+                  id: 232323
+                  price: "3779"
+                  is_liq: false
+              schema:
+                $ref: '#/components/schemas/Position'
+          description: Position information
+      summary: Update position risk limit
+      tags:
+      - futures
+  /futures/orders:
+    delete:
+      operationId: cancelOrders
+      parameters:
+      - description: Futures contract
+        example: BTC_USD
+        in: query
+        name: contract
+        required: true
+        schema:
+          type: string
+      - description: All bids or asks. Both included in not specified
+        example: ask
+        explode: true
+        in: query
+        name: side
+        required: false
+        schema:
+          enum:
+          - ask
+          - bid
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - id: 15675394
+                user: 100000
+                contract: BTC_USD
+                create_time: 1546569968
+                size: 6024
+                iceberg: 0
+                left: 6024
+                price: "3765"
+                fill_price: "0"
+                mkfr: -0.00025
+                tkfr: "0.00075"
+                tif: gtc
+                refu: 0
+                is_reduce_only: false
+                is_close: false
+                is_liq: false
+                text: api
+                status: finished
+                finish_time: 1514764900
+                finish_as: cancelled
+              schema:
+                items:
+                  $ref: '#/components/schemas/FuturesOrder'
+                type: array
+          description: All orders matched cancelled
+      summary: Cancel all `open` orders matched
+      tags:
+      - futures
+    get:
+      operationId: listOrders
+      parameters:
+      - description: Futures contract
+        example: BTC_USD
+        in: query
+        name: contract
+        required: true
+        schema:
+          type: string
+      - description: List orders based on status
+        example: open
+        explode: true
+        in: query
+        name: status
+        required: true
+        schema:
+          enum:
+          - open
+          - finished
+          type: string
+        style: form
+      - description: Maximum number of record returned in one list
+        example: 100
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          maximum: 1000
+          minimum: 1
+          type: integer
+      - description: Specify list staring point using the last record of `id` in previous list-query results
+        example: "12345"
+        in: query
+        name: last_id
+        required: false
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - id: 15675394
+                user: 100000
+                contract: BTC_USD
+                create_time: 1546569968
+                size: 6024
+                iceberg: 0
+                left: 6024
+                price: "3765"
+                fill_price: "0"
+                mkfr: -0.00025
+                tkfr: "0.00075"
+                tif: gtc
+                refu: 0
+                is_reduce_only: false
+                is_close: false
+                is_liq: false
+                text: api
+                status: finished
+                finish_time: 1514764900
+                finish_as: cancelled
+              schema:
+                items:
+                  $ref: '#/components/schemas/FuturesOrder'
+                type: array
+          description: List retrieved
+      summary: List futures orders
+      tags:
+      - futures
+    post:
+      operationId: createOrder
+      requestBody:
+        content:
+          application/json:
+            example:
+              id: 15675394
+              user: 100000
+              contract: BTC_USD
+              create_time: 1546569968
+              size: 6024
+              iceberg: 0
+              left: 6024
+              price: "3765"
+              fill_price: "0"
+              mkfr: -0.00025
+              tkfr: "0.00075"
+              tif: gtc
+              refu: 0
+              is_reduce_only: false
+              is_close: false
+              is_liq: false
+              text: api
+              status: finished
+              finish_time: 1514764900
+              finish_as: cancelled
+            schema:
+              $ref: '#/components/schemas/FuturesOrder'
+        required: true
+      responses:
+        201:
+          content:
+            application/json:
+              example:
+                id: 15675394
+                user: 100000
+                contract: BTC_USD
+                create_time: 1546569968
+                size: 6024
+                iceberg: 0
+                left: 6024
+                price: "3765"
+                fill_price: "0"
+                mkfr: -0.00025
+                tkfr: "0.00075"
+                tif: gtc
+                refu: 0
+                is_reduce_only: false
+                is_close: false
+                is_liq: false
+                text: api
+                status: finished
+                finish_time: 1514764900
+                finish_as: cancelled
+              schema:
+                $ref: '#/components/schemas/FuturesOrder'
+          description: Order details
+      summary: Create a futures order
+      tags:
+      - futures
+  /futures/orders/{order_id}:
+    delete:
+      operationId: cancelOrder
+      parameters:
+      - description: ID returned on order successfully being created
+        example: "12345"
+        explode: false
+        in: path
+        name: order_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+                id: 15675394
+                user: 100000
+                contract: BTC_USD
+                create_time: 1546569968
+                size: 6024
+                iceberg: 0
+                left: 6024
+                price: "3765"
+                fill_price: "0"
+                mkfr: -0.00025
+                tkfr: "0.00075"
+                tif: gtc
+                refu: 0
+                is_reduce_only: false
+                is_close: false
+                is_liq: false
+                text: api
+                status: finished
+                finish_time: 1514764900
+                finish_as: cancelled
+              schema:
+                $ref: '#/components/schemas/FuturesOrder'
+          description: Order details
+      summary: Cancel a single order
+      tags:
+      - futures
+    get:
+      operationId: getOrder
+      parameters:
+      - description: ID returned on order successfully being created
+        example: "12345"
+        explode: false
+        in: path
+        name: order_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+                id: 15675394
+                user: 100000
+                contract: BTC_USD
+                create_time: 1546569968
+                size: 6024
+                iceberg: 0
+                left: 6024
+                price: "3765"
+                fill_price: "0"
+                mkfr: -0.00025
+                tkfr: "0.00075"
+                tif: gtc
+                refu: 0
+                is_reduce_only: false
+                is_close: false
+                is_liq: false
+                text: api
+                status: finished
+                finish_time: 1514764900
+                finish_as: cancelled
+              schema:
+                $ref: '#/components/schemas/FuturesOrder'
+          description: Order details
+      summary: Get a single order
+      tags:
+      - futures
+  /futures/my_trades:
+    get:
+      operationId: getMyTrades
+      parameters:
+      - description: Futures contract, return related data only if specified
+        example: BTC_USD
+        in: query
+        name: contract
+        required: false
+        schema:
+          type: string
+      - description: Futures order ID, return related data only if specified
+        example: 12345
+        in: query
+        name: order
+        required: false
+        schema:
+          type: integer
+      - description: Maximum number of record returned in one list
+        example: 100
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          maximum: 1000
+          minimum: 1
+          type: integer
+      - description: Specify list staring point using the last record of `id` in previous list-query results
+        example: "12345"
+        in: query
+        name: last_id
+        required: false
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - id: 121234231
+                create_time: 1514764800
+                contract: BTC_USD
+                order_id: "21893289839"
+                size: 100
+                price: "100.123"
+                role: taker
+              schema:
+                items:
+                  $ref: '#/components/schemas/MyFuturesTrade'
+                type: array
+          description: List retrieved
+      summary: List personal trading history
+      tags:
+      - futures
+  /futures/position_close:
+    get:
+      operationId: listPositionClose
+      parameters:
+      - description: Futures contract, return related data only if specified
+        example: BTC_USD
+        in: query
+        name: contract
+        required: false
+        schema:
+          type: string
+      - description: Maximum number of record returned in one list
+        example: 100
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          maximum: 1000
+          minimum: 1
+          type: integer
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - time: 1546487347
+                pnl: "0.00013"
+                side: long
+                contract: BTC_USD
+                text: web
+              schema:
+                items:
+                  $ref: '#/components/schemas/PositionClose'
+                type: array
+          description: List retrieved
+      summary: List position close history
+      tags:
+      - futures
+components:
+  examples:
+    Contract:
+      value:
+        name: BTC_USD
+        type: inverse
+        quanto_multiplier: "0"
+        mark_type: index
+        last_price: "4123"
+        mark_price: "4121.41"
+        index_price: "4121.5"
+        funding_next_apply: 1546588800
+        funding_rate: "0.000333"
+        funding_interval: 28800
+        funding_offset: 0
+        interest_rate: "0.001"
+        order_price_round: "0.5"
+        mark_price_round: "0.01"
+        leverage_min: "1"
+        leverage_max: "100"
+        maintenance_rate: "0.005"
+        risk_limit_base: "10"
+        risk_limit_step: "10"
+        risk_limit_max: "50"
+        maker_fee_rate: -0.00025
+        taker_fee_rate: "0.00075"
+        order_price_deviate: "1"
+        order_size_min: 1
+        order_size_max: 1000000
+        orders_limit: 50
+        orderbook_id: 39635902
+        trade_id: 6935987
+        trade_size: 1992012909
+        position_size: 4323221
+    Position:
+      value:
+        user: 10000
+        contract: BTC_USD
+        size: -9440
+        leverage: "0"
+        risk_limit: "100"
+        leverage_max: "100"
+        maintenance_rate: "0.005"
+        value: "2.497143098997"
+        margin: "4.431548146258"
+        entry_price: "3779.55"
+        liq_price: "99999999"
+        mark_price: "3780.32"
+        unrealised_pnl: -0.000507486844
+        realised_pnl: "0.045543982432"
+        history_pnl: "0"
+        last_close_pnl: "0"
+        adl_ranking: 5
+        pending_orders: 16
+        close_order:
+          id: 232323
+          price: "3779"
+          is_liq: false
+    FuturesOrder:
+      value:
+        id: 15675394
+        user: 100000
+        contract: BTC_USD
+        create_time: 1546569968
+        size: 6024
+        iceberg: 0
+        left: 6024
+        price: "3765"
+        fill_price: "0"
+        mkfr: -0.00025
+        tkfr: "0.00075"
+        tif: gtc
+        refu: 0
+        is_reduce_only: false
+        is_close: false
+        is_liq: false
+        text: api
+        status: finished
+        finish_time: 1514764900
+        finish_as: cancelled
+  parameters:
+    url_user:
+      description: 用户 ID
+      explode: false
+      in: path
+      name: user_id
+      required: true
+      schema:
+        type: string
+      style: simple
+  responses:
+    Position:
+      content:
+        application/json:
+          example:
+            user: 10000
+            contract: BTC_USD
+            size: -9440
+            leverage: "0"
+            risk_limit: "100"
+            leverage_max: "100"
+            maintenance_rate: "0.005"
+            value: "2.497143098997"
+            margin: "4.431548146258"
+            entry_price: "3779.55"
+            liq_price: "99999999"
+            mark_price: "3780.32"
+            unrealised_pnl: -0.000507486844
+            realised_pnl: "0.045543982432"
+            history_pnl: "0"
+            last_close_pnl: "0"
+            adl_ranking: 5
+            pending_orders: 16
+            close_order:
+              id: 232323
+              price: "3779"
+              is_liq: false
+          schema:
+            $ref: '#/components/schemas/Position'
+      description: Position information
+    FuturesOrder:
+      content:
+        application/json:
+          example:
+            id: 15675394
+            user: 100000
+            contract: BTC_USD
+            create_time: 1546569968
+            size: 6024
+            iceberg: 0
+            left: 6024
+            price: "3765"
+            fill_price: "0"
+            mkfr: -0.00025
+            tkfr: "0.00075"
+            tif: gtc
+            refu: 0
+            is_reduce_only: false
+            is_close: false
+            is_liq: false
+            text: api
+            status: finished
+            finish_time: 1514764900
+            finish_as: cancelled
+          schema:
+            $ref: '#/components/schemas/FuturesOrder'
+      description: Order details
+  schemas:
+    Contract:
+      example:
+        maintenance_rate: maintenance_rate
+        index_price: index_price
+        order_price_round: order_price_round
+        order_size_max: 5
+        type: inverse
+        orderbook_id: 5
+        leverage_min: leverage_min
+        trade_id: 2
+        quanto_multiplier: quanto_multiplier
+        risk_limit_max: risk_limit_max
+        risk_limit_base: risk_limit_base
+        order_size_min: 1
+        order_price_deviate: order_price_deviate
+        position_size: 9
+        leverage_max: leverage_max
+        mark_price_round: mark_price_round
+        taker_fee_rate: taker_fee_rate
+        risk_limit_step: risk_limit_step
+        mark_price: mark_price
+        maker_fee_rate: maker_fee_rate
+        mark_type: internal
+        funding_rate: funding_rate
+        funding_interval: 0
+        funding_next_apply: 6.02745618307040320615897144307382404804229736328125
+        trade_size: 7
+        name: name
+        last_price: last_price
+      properties:
+        name:
+          description: Futures contract name
+          type: string
+        type:
+          description: Futures contract type
+          enum:
+          - inverse
+          - direct
+          type: string
+        quanto_multiplier:
+          description: Multiplier used in converting from invoicing to settlement currency in quanto futures
+          type: string
+        leverage_min:
+          description: Minimum leverage
+          type: string
+        leverage_max:
+          description: Maximum leverage
+          type: string
+        maintenance_rate:
+          description: Maintenance rate of margin
+          type: string
+        mark_type:
+          description: Mark price type, internal - based on internal trading, index - based on external index price
+          enum:
+          - internal
+          - index
+          type: string
+        mark_price:
+          description: Current mark price
+          type: string
+        index_price:
+          description: Current index price
+          type: string
+        last_price:
+          description: Last trading price
+          type: string
+        maker_fee_rate:
+          description: Maker fee rate, where negative means rebate
+          type: string
+        taker_fee_rate:
+          description: Taker fee rate
+          type: string
+        order_price_round:
+          description: Minimum order price increment
+          type: string
+        mark_price_round:
+          description: Minimum mark price increment
+          type: string
+        funding_rate:
+          description: Current funding rate
+          type: string
+        funding_interval:
+          description: Funding application interval, unit in seconds
+          type: integer
+        funding_next_apply:
+          description: Next funding time
+          type: number
+        risk_limit_base:
+          description: Risk limit base
+          type: string
+        risk_limit_step:
+          description: Step of adjusting risk limit
+          type: string
+        risk_limit_max:
+          description: Maximum risk limit the contract allowed
+          type: string
+        order_size_min:
+          description: Minimum order size the contract allowed
+          format: int64
+          type: integer
+        order_size_max:
+          description: Maximum order size the contract allowed
+          format: int64
+          type: integer
+        order_price_deviate:
+          description: |-
+            deviation between order price and current index price. If price of an order is denoted as order_price, it must meet the following condition:
+
+                abs(order_price - mark_price) <= mark_price * order_price_deviate
+          type: string
+        orderbook_id:
+          description: Current orderbook ID
+          format: int64
+          type: integer
+        trade_id:
+          description: Current trade ID
+          format: int64
+          type: integer
+        trade_size:
+          description: Historical accumulation trade size
+          format: int64
+          type: integer
+        position_size:
+          description: Current total long position size
+          format: int64
+          type: integer
+      type: object
+    Position:
+      example:
+        leverage: leverage
+        maintenance_rate: maintenance_rate
+        margin: margin
+        entry_price: entry_price
+        history_pnl: history_pnl
+        close_order:
+          is_liq: true
+          price: price
+          id: 5
+        contract: contract
+        mark_price: mark_price
+        liq_price: liq_price
+        risk_limit: risk_limit
+        unrealised_pnl: unrealised_pnl
+        realised_pnl: realised_pnl
+        adl_ranking: 1
+        size: 6
+        last_close_pnl: last_close_pnl
+        pending_orders: 5
+        user: 0
+        leverage_max: leverage_max
+        value: value
+      properties:
+        user:
+          description: User ID
+          format: int64
+          readOnly: true
+          type: integer
+        contract:
+          description: Futures contract
+          readOnly: true
+          type: string
+        size:
+          description: Position size
+          format: int64
+          readOnly: true
+          type: integer
+        leverage:
+          description: Position leverage
+          type: string
+        risk_limit:
+          description: Position risk limit
+          type: string
+        leverage_max:
+          description: Maximum leverage under current risk limit
+          readOnly: true
+          type: string
+        maintenance_rate:
+          description: Maintenance rate under current risk limit
+          readOnly: true
+          type: string
+        value:
+          description: Position value calculated in settlement currency
+          readOnly: true
+          type: string
+        margin:
+          description: Position margin
+          type: string
+        entry_price:
+          description: Entry price
+          readOnly: true
+          type: string
+        liq_price:
+          description: Liquidation price
+          readOnly: true
+          type: string
+        mark_price:
+          description: Current mark price
+          readOnly: true
+          type: string
+        unrealised_pnl:
+          description: Unrealized PNL
+          readOnly: true
+          type: string
+        realised_pnl:
+          description: Realized PNL
+          readOnly: true
+          type: string
+        history_pnl:
+          description: History realized PNL
+          readOnly: true
+          type: string
+        last_close_pnl:
+          description: PNL of last position close
+          readOnly: true
+          type: string
+        adl_ranking:
+          description: ADL ranking, range from 1 to 5
+          readOnly: true
+          type: integer
+        pending_orders:
+          description: Current open orders
+          readOnly: true
+          type: integer
+        close_order:
+          $ref: '#/components/schemas/Position_close_order'
+      type: object
+    FuturesOrder:
+      example:
+        finish_as: filled
+        reduce_only: false
+        create_time: 6.02745618307040320615897144307382404804229736328125
+        contract: contract
+        is_close: true
+        finish_time: 1.46581298050294517310021547018550336360931396484375
+        tif: gtc
+        is_liq: true
+        size: 5
+        left: 2
+        price: price
+        is_reduce_only: true
+        iceberg: 5
+        id: 0
+        text: text
+        close: false
+        fill_price: fill_price
+        status: open
+      properties:
+        id:
+          description: Futures order ID
+          format: int64
+          readOnly: true
+          type: integer
+        create_time:
+          description: Order creation time
+          readOnly: true
+          type: number
+        finish_time:
+          description: Order finished time. Not returned if order is open
+          readOnly: true
+          type: number
+        finish_as:
+          description: |-
+            how the order is finished.
+
+            - filled: all filled
+            - cancelled: manually cancelled
+            - liquidated: cancelled because of liquidation
+            - ioc: time in force is `IOC`, finish immediately
+            - auto_deleveraged: finished by ADL
+            - reduce_only: cancelled because of increasing position while `reduce-only` set
+          enum:
+          - filled
+          - cancelled
+          - liquidated
+          - ioc
+          - auto_deleveraged
+          - reduce_only
+          readOnly: true
+          type: string
+        status:
+          description: |-
+            Order status
+
+            - `open`: waiting to be traded
+            - `finished`: finished
+          enum:
+          - open
+          - finished
+          readOnly: true
+          type: string
+        contract:
+          description: Futures contract
+          type: string
+        size:
+          description: Order size. Specify positive number to make a bid, and negative number to ask
+          format: int64
+          type: integer
+        iceberg:
+          description: Display size for iceberg order. 0 for non-iceberg. Note that you would pay the taker fee for the hidden size
+          format: int64
+          type: integer
+        price:
+          description: Order price. 0 for market order with `tif` set as `ioc`
+          type: string
+        close:
+          default: false
+          description: Set as `true` to close the position, with `size` set to 0
+          type: boolean
+          writeOnly: true
+        is_close:
+          description: Is the order to close position
+          readOnly: true
+          type: boolean
+        reduce_only:
+          default: false
+          description: Set as `true` to be post-only order
+          type: boolean
+          writeOnly: true
+        is_reduce_only:
+          description: Is the order post-only
+          readOnly: true
+          type: boolean
+        is_liq:
+          description: Is the order for liquidation
+          readOnly: true
+          type: boolean
+        tif:
+          default: gtc
+          description: |-
+            Time in force
+
+            - gtc: GoodTillCancelled
+            - ioc: ImmediateOrCancelled, taker only
+            - poc: PendingOrCancelled, post-only
+          enum:
+          - gtc
+          - ioc
+          - poc
+          type: string
+        left:
+          description: Size left to be traded
+          format: int64
+          readOnly: true
+          type: integer
+        fill_price:
+          description: Fill price of the order
+          readOnly: true
+          type: string
+        text:
+          description: |
+            How order is created
+
+            - web: from web
+            - api: from API
+            - app: from mobile phones
+            - auto_deleveraging: from ADL
+            - liquidation: from liquidation
+            - insurance: from insurance
+          type: string
+      required:
+      - contract
+      type: object
+    FuturesOrderBook:
+      example:
+        asks:
+        - p: p
+          s: 0
+        - p: p
+          s: 0
+        bids:
+        - p: p
+          s: 0
+        - p: p
+          s: 0
+      properties:
+        asks:
+          description: Asks order depth
+          items:
+            $ref: '#/components/schemas/futures_order_book_item'
+          type: array
+        bids:
+          description: Bids order depth
+          items:
+            $ref: '#/components/schemas/futures_order_book_item'
+          type: array
+      required:
+      - asks
+      - bids
+      type: object
+    FuturesTrade:
+      example:
+        create_time: 6.02745618307040320615897144307382404804229736328125
+        size: 1
+        price: price
+        contract: contract
+        id: 0
+      properties:
+        id:
+          description: Trade ID
+          format: int64
+          type: integer
+        create_time:
+          description: Trading time
+          type: number
+        contract:
+          description: Futures contract
+          type: string
+        size:
+          description: Trading size
+          format: int64
+          type: integer
+        price:
+          description: Trading price
+          type: string
+      type: object
+    FuturesCandlestick:
+      description: data point in every timestamp
+      example:
+        c: c
+        t: 0.80082819046101150206595775671303272247314453125
+        v: 6
+        h: h
+        l: l
+        o: o
+      properties:
+        t:
+          description: Unix timestamp in seconds
+          type: number
+        v:
+          description: size volume. Only returned if `contract` is not prefixed
+          format: int64
+          type: integer
+        c:
+          description: Close price
+          type: string
+        h:
+          description: Highest price
+          type: string
+        l:
+          description: Lowest price
+          type: string
+        o:
+          description: Open price
+          type: string
+      type: object
+    FuturesTicker:
+      example:
+        funding_rate: funding_rate
+        last: last
+        change_percentage: change_percentage
+        contract: contract
+        mark_price: mark_price
+        total_size: total_size
+        volume_24h: volume_24h
+        index_price: index_price
+        quanto_base_rate: quanto_base_rate
+      properties:
+        contract:
+          description: Futures contract
+          type: string
+        last:
+          description: Last trading price
+          type: string
+        change_percentage:
+          description: Change percentage.
+          type: string
+        total_size:
+          description: Contract total size
+          type: string
+        volume_24h:
+          description: Trade size in recent 24h
+          type: string
+        mark_price:
+          description: Recent mark price
+          type: string
+        funding_rate:
+          description: Funding rate
+          type: string
+        index_price:
+          description: Index price
+          type: string
+        quanto_base_rate:
+          description: Exchange rate of base currency and settlement currency in Quanto contract. Not existed in contract of other types
+          type: string
+      type: object
+    FundingRateRecord:
+      example:
+        r: r
+        t: 0
+      properties:
+        t:
+          description: Unix timestamp in seconds
+          format: int64
+          type: integer
+        r:
+          description: Funding rate
+          type: string
+      type: object
+    InsuranceRecord:
+      example:
+        b: b
+        t: 0
+      properties:
+        t:
+          description: Unix timestamp in seconds
+          format: int64
+          type: integer
+        b:
+          description: Insurance balance
+          type: string
+      type: object
+    FuturesAccount:
+      example:
+        total: total
+        available: available
+        unrealised_pnl: unrealised_pnl
+        position_margin: position_margin
+        order_margin: order_margin
+      properties:
+        total:
+          description: Total assets, total = position_margin + order_margin + available
+          type: string
+        unrealised_pnl:
+          description: Unrealized PNL
+          type: string
+        position_margin:
+          description: Position margin
+          type: string
+        order_margin:
+          description: Order margin of unfinished orders
+          type: string
+        available:
+          description: Available balance to transfer out or trade
+          type: string
+      type: object
+    MyFuturesTrade:
+      example:
+        role: taker
+        create_time: 6.02745618307040320615897144307382404804229736328125
+        size: 1
+        price: price
+        contract: contract
+        id: 0
+        order_id: order_id
+      properties:
+        id:
+          description: Trade ID
+          format: int64
+          type: integer
+        create_time:
+          description: Trading time
+          type: number
+        contract:
+          description: Futures contract
+          type: string
+        order_id:
+          description: Order ID related
+          type: string
+        size:
+          description: Trading size
+          format: int64
+          type: integer
+        price:
+          description: Trading price
+          type: string
+        role:
+          description: Trade role. Available values are `taker` and `maker`
+          enum:
+          - taker
+          - maker
+          type: string
+      type: object
+    PositionClose:
+      example:
+        side: long
+        contract: contract
+        time: 0.80082819046101150206595775671303272247314453125
+        text: text
+        pnl: pnl
+      properties:
+        time:
+          description: Position close time
+          readOnly: true
+          type: number
+        contract:
+          description: Futures contract
+          readOnly: true
+          type: string
+        side:
+          description: Position side, long or short
+          enum:
+          - long
+          - short
+          readOnly: true
+          type: string
+        pnl:
+          description: PNL
+          readOnly: true
+          type: string
+        text:
+          description: Text of close order
+          readOnly: true
+          type: string
+      type: object
+    Position_close_order:
+      description: Current close order if any, or `null`
+      example:
+        is_liq: true
+        price: price
+        id: 5
+      properties:
+        id:
+          description: Close order ID
+          format: int64
+          type: integer
+        price:
+          description: Close order price
+          type: string
+        is_liq:
+          description: Is the close order from liquidation
+          type: boolean
+    futures_order_book_item:
+      example:
+        p: p
+        s: 0
+      properties:
+        p:
+          description: Price
+          type: string
+        s:
+          description: Size
+          format: int64
+          type: integer
+  securitySchemes:
+    api_key:
+      description: API Key
+      in: header
+      name: KEY
+      type: apiKey
+    api_sign:
+      description: Signature generated based on API key and secret
+      in: header
+      name: SIGN
+      type: apiKey
+    api_timestamp:
+      description: API request timestamp
+      in: header
+      name: Timestamp
+      type: apiKey
