@@ -1,4 +1,4 @@
-    # Go API client for gateapi
+# Go API client for gateapi
 
 APIv4 futures provides all sorts of futures trading operations. There are public APIs to retrieve the real-time market statistics, and private APIs which needs authentication to trade on user's behalf.
 
@@ -42,7 +42,7 @@ func main() {
     // client.ChangeBasePath("https://some-other-host")
     client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
     api := client.FuturesApi
-    
+
     orderId := "12345"; // string - ID returned on order successfully being created
     result, _, err = api.CancelOrder(nil, orderId)
     if err != nil {
