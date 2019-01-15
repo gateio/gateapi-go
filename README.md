@@ -1,4 +1,4 @@
-# Go API client for gateapi
+    # Go API client for gateapi
 
 APIv4 futures provides all sorts of futures trading operations. There are public APIs to retrieve the real-time market statistics, and private APIs which needs authentication to trade on user's behalf.
 
@@ -14,15 +14,44 @@ For more information, please visit [https://gate.io/page/contacts](https://gate.
 
 Install the following dependencies:
 ```
-go get github.com/stretchr/testify/assert
-go get golang.org/x/oauth2
 go get golang.org/x/net/context
 go get github.com/antihax/optional
 ```
 
-Put the package under your project folder and add the following in import:
+Put the package under the working directory(e.g. $GOPATH location), rename it into `gateapi` and in your own project add the following in import:
 ```golang
-import "./gateapi"
+import "gateapi"
+```
+
+## Getting Started
+
+Please follow the [installation](#installation) instruction and execute the following Go code:
+
+```golang
+
+package main
+
+import (
+    "fmt"
+    "gateapi"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against other hosts
+    // client.ChangeBasePath("https://some-other-host")
+    client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
+    api := client.FuturesApi
+    
+    orderId := "12345"; // string - ID returned on order successfully being created
+    result, _, err = api.CancelOrder(nil, orderId)
+    if err != nil {
+        fmt.Println(err.Error())
+    } else {
+        fmt.Println(result)
+    }
+}
+
 ```
 
 ## Documentation for API Endpoints
@@ -69,42 +98,6 @@ Class | Method | HTTP request | Description
  - [PositionClose](docs/PositionClose.md)
  - [PositionCloseOrder](docs/PositionCloseOrder.md)
 
-
-## Documentation For Authorization
-
-## api_key
-- **Type**: API key 
-
-Example
-```golang
-auth := context.WithValue(context.Background(), sw.ContextAPIKey, sw.APIKey{
-	Key: "APIKEY",
-	Prefix: "Bearer", // Omit if not necessary.
-})
-r, err := client.Service.Operation(auth, args)
-```
-## api_sign
-- **Type**: API key 
-
-Example
-```golang
-auth := context.WithValue(context.Background(), sw.ContextAPIKey, sw.APIKey{
-	Key: "APIKEY",
-	Prefix: "Bearer", // Omit if not necessary.
-})
-r, err := client.Service.Operation(auth, args)
-```
-## api_timestamp
-- **Type**: API key 
-
-Example
-```golang
-auth := context.WithValue(context.Background(), sw.ContextAPIKey, sw.APIKey{
-	Key: "APIKEY",
-	Prefix: "Bearer", // Omit if not necessary.
-})
-r, err := client.Service.Operation(auth, args)
-```
 
 ## Author
 

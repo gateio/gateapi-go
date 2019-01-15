@@ -36,13 +36,31 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **orderId** | **string**| ID returned on order successfully being created | 
 
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
+api := client.FuturesApi
+orderId := "12345"; // string - ID returned on order successfully being created
+
+result, _, err = api.CancelOrder(nil, orderId)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
 ### Return type
 
 [**FuturesOrder**](FuturesOrder.md)
 
 ### Authorization
 
-[api_key](../README.md#api_key), [api_sign](../README.md#api_sign), [api_timestamp](../README.md#api_timestamp)
+Authentication with API key and secret is required
 
 ### HTTP request headers
 
@@ -71,13 +89,31 @@ Name | Type | Description  | Notes
 
  **side** | **optional.String**| All bids or asks. Both included in not specified | 
 
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
+api := client.FuturesApi
+contract := "BTC_USD"; // string - Futures contract
+
+result, _, err = api.CancelOrders(nil, contract, nil)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
 ### Return type
 
 [**[]FuturesOrder**](FuturesOrder.md)
 
 ### Authorization
 
-[api_key](../README.md#api_key), [api_sign](../README.md#api_sign), [api_timestamp](../README.md#api_timestamp)
+Authentication with API key and secret is required
 
 ### HTTP request headers
 
@@ -97,13 +133,31 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **futuresOrder** | [**FuturesOrder**](FuturesOrder.md)|  | 
 
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
+api := client.FuturesApi
+futuresOrder := new (gateapi.FuturesOrder); // FuturesOrder - 
+
+result, _, err = api.CreateOrder(nil, futuresOrder)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
 ### Return type
 
 [**FuturesOrder**](FuturesOrder.md)
 
 ### Authorization
 
-[api_key](../README.md#api_key), [api_sign](../README.md#api_sign), [api_timestamp](../README.md#api_timestamp)
+Authentication with API key and secret is required
 
 ### HTTP request headers
 
@@ -133,13 +187,30 @@ Name | Type | Description  | Notes
  **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
  **lastId** | **optional.String**| Specify list staring point using the last record of &#x60;id&#x60; in previous list-query results | 
 
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
+api := client.FuturesApi
+
+result, _, err = api.GetMyTrades(nil, nil)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
 ### Return type
 
 [**[]MyFuturesTrade**](MyFuturesTrade.md)
 
 ### Authorization
 
-[api_key](../README.md#api_key), [api_sign](../README.md#api_sign), [api_timestamp](../README.md#api_timestamp)
+Authentication with API key and secret is required
 
 ### HTTP request headers
 
@@ -159,13 +230,31 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **orderId** | **string**| ID returned on order successfully being created | 
 
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
+api := client.FuturesApi
+orderId := "12345"; // string - ID returned on order successfully being created
+
+result, _, err = api.GetOrder(nil, orderId)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
 ### Return type
 
 [**FuturesOrder**](FuturesOrder.md)
 
 ### Authorization
 
-[api_key](../README.md#api_key), [api_sign](../README.md#api_sign), [api_timestamp](../README.md#api_timestamp)
+Authentication with API key and secret is required
 
 ### HTTP request headers
 
@@ -181,13 +270,29 @@ Query futures account
 ### Required Parameters
 This endpoint does not need any parameter.
 
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
+api := client.FuturesApi
+result, _, err = api.ListFuturesAccounts(nil)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
 ### Return type
 
 [**FuturesAccount**](FuturesAccount.md)
 
 ### Authorization
 
-[api_key](../README.md#api_key), [api_sign](../README.md#api_sign), [api_timestamp](../README.md#api_timestamp)
+Authentication with API key and secret is required
 
 ### HTTP request headers
 
@@ -221,6 +326,23 @@ Name | Type | Description  | Notes
  **limit** | **optional.Int32**| Maximum recent data points returned. &#x60;limit&#x60; is conflicted with &#x60;from&#x60; and &#x60;to&#x60;. If either &#x60;from&#x60; or &#x60;to&#x60; is specified, request will be rejected. | [default to 100]
  **interval** | **optional.String**| Interval time between data points | [default to 5m]
 
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+api := client.FuturesApi
+contract := "BTC_USD"; // string - Futures contract
+
+result, _, err = api.ListFuturesCandlesticks(nil, contract, nil)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
 ### Return type
 
 [**[]FuturesCandlestick**](FuturesCandlestick.md)
@@ -242,6 +364,21 @@ List all futures contracts
 
 ### Required Parameters
 This endpoint does not need any parameter.
+
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+api := client.FuturesApi
+result, _, err = api.ListFuturesContracts(nil)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
 
 ### Return type
 
@@ -278,6 +415,23 @@ Name | Type | Description  | Notes
 
  **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
 
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+api := client.FuturesApi
+contract := "BTC_USD"; // string - Futures contract
+
+result, _, err = api.ListFuturesFundingRateHistory(nil, contract, nil)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
 ### Return type
 
 [**[]FundingRateRecord**](FundingRateRecord.md)
@@ -310,6 +464,22 @@ Optional parameters are passed through a pointer to a ListFuturesInsuranceLedger
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
+
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+api := client.FuturesApi
+
+result, _, err = api.ListFuturesInsuranceLedger(nil, nil)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
 
 ### Return type
 
@@ -349,6 +519,23 @@ Name | Type | Description  | Notes
  **interval** | **optional.String**| Order depth. 0 means no aggregation is applied. default to 0 | [default to 0]
  **limit** | **optional.Int32**| Maximum number of order depth data in asks or bids | [default to 10]
 
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+api := client.FuturesApi
+contract := "BTC_USD"; // string - Futures contract
+
+result, _, err = api.ListFuturesOrderBook(nil, contract, nil)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
 ### Return type
 
 [**FuturesOrderBook**](FuturesOrderBook.md)
@@ -381,6 +568,22 @@ Optional parameters are passed through a pointer to a ListFuturesTickersOpts str
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **contract** | **optional.String**| Futures contract, return related data only if specified | 
+
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+api := client.FuturesApi
+
+result, _, err = api.ListFuturesTickers(nil, nil)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
 
 ### Return type
 
@@ -417,6 +620,23 @@ Name | Type | Description  | Notes
 
  **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
  **lastId** | **optional.String**| Specify list staring point using the last record of &#x60;id&#x60; in previous list-query results | 
+
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+api := client.FuturesApi
+contract := "BTC_USD"; // string - Futures contract
+
+result, _, err = api.ListFuturesTrades(nil, contract, nil)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
 
 ### Return type
 
@@ -456,13 +676,32 @@ Name | Type | Description  | Notes
  **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
  **lastId** | **optional.String**| Specify list staring point using the last record of &#x60;id&#x60; in previous list-query results | 
 
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
+api := client.FuturesApi
+contract := "BTC_USD"; // string - Futures contract
+status := "open"; // string - List orders based on status
+
+result, _, err = api.ListOrders(nil, contract, status, nil)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
 ### Return type
 
 [**[]FuturesOrder**](FuturesOrder.md)
 
 ### Authorization
 
-[api_key](../README.md#api_key), [api_sign](../README.md#api_sign), [api_timestamp](../README.md#api_timestamp)
+Authentication with API key and secret is required
 
 ### HTTP request headers
 
@@ -490,13 +729,30 @@ Name | Type | Description  | Notes
  **contract** | **optional.String**| Futures contract, return related data only if specified | 
  **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
 
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
+api := client.FuturesApi
+
+result, _, err = api.ListPositionClose(nil, nil)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
 ### Return type
 
 [**[]PositionClose**](PositionClose.md)
 
 ### Authorization
 
-[api_key](../README.md#api_key), [api_sign](../README.md#api_sign), [api_timestamp](../README.md#api_timestamp)
+Authentication with API key and secret is required
 
 ### HTTP request headers
 
@@ -512,13 +768,29 @@ List all positions of a user
 ### Required Parameters
 This endpoint does not need any parameter.
 
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
+api := client.FuturesApi
+result, _, err = api.ListPositions(nil)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
 ### Return type
 
 [**[]Position**](Position.md)
 
 ### Authorization
 
-[api_key](../README.md#api_key), [api_sign](../README.md#api_sign), [api_timestamp](../README.md#api_timestamp)
+Authentication with API key and secret is required
 
 ### HTTP request headers
 
@@ -539,13 +811,32 @@ Name | Type | Description  | Notes
   **contract** | **string**| Futures contract | 
   **leverage** | **string**| New position leverage | 
 
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
+api := client.FuturesApi
+contract := "BTC_USD"; // string - Futures contract
+leverage := "10"; // string - New position leverage
+
+result, _, err = api.UpdatePositionLeverage(nil, contract, leverage)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
 ### Return type
 
 [**Position**](Position.md)
 
 ### Authorization
 
-[api_key](../README.md#api_key), [api_sign](../README.md#api_sign), [api_timestamp](../README.md#api_timestamp)
+Authentication with API key and secret is required
 
 ### HTTP request headers
 
@@ -566,13 +857,32 @@ Name | Type | Description  | Notes
   **contract** | **string**| Futures contract | 
   **change** | **string**| Margin change. Use positive number to increase margin, negative number otherwise. | 
 
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
+api := client.FuturesApi
+contract := "BTC_USD"; // string - Futures contract
+change := "0.01"; // string - Margin change. Use positive number to increase margin, negative number otherwise.
+
+result, _, err = api.UpdatePositionMargin(nil, contract, change)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
 ### Return type
 
 [**Position**](Position.md)
 
 ### Authorization
 
-[api_key](../README.md#api_key), [api_sign](../README.md#api_sign), [api_timestamp](../README.md#api_timestamp)
+Authentication with API key and secret is required
 
 ### HTTP request headers
 
@@ -593,13 +903,32 @@ Name | Type | Description  | Notes
   **contract** | **string**| Futures contract | 
   **riskLimit** | **string**| New position risk limit | 
 
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
+api := client.FuturesApi
+contract := "BTC_USD"; // string - Futures contract
+riskLimit := "10"; // string - New position risk limit
+
+result, _, err = api.UpdatePositionRiskLimit(nil, contract, riskLimit)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
 ### Return type
 
 [**Position**](Position.md)
 
 ### Authorization
 
-[api_key](../README.md#api_key), [api_sign](../README.md#api_sign), [api_timestamp](../README.md#api_timestamp)
+Authentication with API key and secret is required
 
 ### HTTP request headers
 

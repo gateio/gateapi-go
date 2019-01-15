@@ -13,6 +13,9 @@ package gateapi
 import (
 	"bytes"
 	"context"
+	"crypto/hmac"
+	"crypto/sha512"
+	"encoding/hex"
 	"encoding/json"
 	"encoding/xml"
 	"errors"
@@ -29,8 +32,6 @@ import (
 	"strings"
 	"time"
 	"unicode/utf8"
-
-	"golang.org/x/oauth2"
 )
 
 var (
@@ -156,6 +157,11 @@ func (c *APIClient) ChangeBasePath(path string) {
 	c.cfg.BasePath = path
 }
 
+func (c *APIClient) SetKeySecret(key string, secret string) {
+	c.cfg.Key = key
+	c.cfg.Secret = secret
+}
+
 // prepareRequest build the request
 func (c *APIClient) prepareRequest(
 	ctx context.Context,
@@ -166,7 +172,8 @@ func (c *APIClient) prepareRequest(
 	formParams url.Values,
 	formFileName string,
 	fileName string,
-	fileBytes []byte) (localVarRequest *http.Request, err error) {
+	fileBytes []byte,
+	authRequired bool) (localVarRequest *http.Request, err error) {
 
 	var body *bytes.Buffer
 
@@ -251,6 +258,24 @@ func (c *APIClient) prepareRequest(
 	// Encode the parameters.
 	url.RawQuery = query.Encode()
 
+	// generate signature if needed
+	if authRequired {
+		h := sha512.New()
+		if body != nil {
+			h.Write(body.Bytes())
+		}
+		hashedPayload := hex.EncodeToString(h.Sum(nil))
+
+		t := strconv.FormatInt(time.Now().Unix(), 10)
+		msg := fmt.Sprintf("%s\n%s\n%s\n%s\n%s", method, url, url.RawPath, hashedPayload, t)
+		mac := hmac.New(sha512.New, []byte(c.cfg.Secret))
+		mac.Write([]byte(msg))
+		sign := hex.EncodeToString(mac.Sum(nil))
+		headerParams["KEY"] = c.cfg.Key
+		headerParams["SIGN"] = sign
+		headerParams["Timestamp"] = t
+	}
+
 	// Generate a new request
 	if body != nil {
 		localVarRequest, err = http.NewRequest(method, url.String(), body)
@@ -281,29 +306,6 @@ func (c *APIClient) prepareRequest(
 	if ctx != nil {
 		// add context to the request
 		localVarRequest = localVarRequest.WithContext(ctx)
-
-		// Walk through any authentication.
-
-		// OAuth2 authentication
-		if tok, ok := ctx.Value(ContextOAuth2).(oauth2.TokenSource); ok {
-			// We were able to grab an oauth2 token from the context
-			var latestToken *oauth2.Token
-			if latestToken, err = tok.Token(); err != nil {
-				return nil, err
-			}
-
-			latestToken.SetAuthHeader(localVarRequest)
-		}
-
-		// Basic HTTP Authentication
-		if auth, ok := ctx.Value(ContextBasicAuth).(BasicAuth); ok {
-			localVarRequest.SetBasicAuth(auth.UserName, auth.Password)
-		}
-
-		// AccessToken Authentication
-		if auth, ok := ctx.Value(ContextAccessToken).(string); ok {
-			localVarRequest.Header.Add("Authorization", "Bearer "+auth)
-		}
 	}
 
 	for header, value := range c.cfg.DefaultHeader {

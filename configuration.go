@@ -26,13 +26,13 @@ func (c contextKey) String() string {
 
 var (
 	// ContextOAuth2 takes an oauth2.TokenSource as authentication for the request.
-	ContextOAuth2 = contextKey("token")
+	// ContextOAuth2 = contextKey("token")
 
 	// ContextBasicAuth takes BasicAuth as authentication for the request.
 	ContextBasicAuth = contextKey("basic")
 
 	// ContextAccessToken takes a string oauth2 access token as authentication for the request.
-	ContextAccessToken = contextKey("accesstoken")
+	// ContextAccessToken = contextKey("accesstoken")
 
 	// ContextAPIKey takes an APIKey as authentication for the request
 	ContextAPIKey = contextKey("apikey")
@@ -56,6 +56,8 @@ type Configuration struct {
 	Scheme        string            `json:"scheme,omitempty"`
 	DefaultHeader map[string]string `json:"defaultHeader,omitempty"`
 	UserAgent     string            `json:"userAgent,omitempty"`
+	Key           string
+	Secret        string
 	HTTPClient    *http.Client
 }
 
@@ -64,6 +66,8 @@ func NewConfiguration() *Configuration {
 		BasePath:      "https://fx-api.gateio.io/api/v4",
 		DefaultHeader: make(map[string]string),
 		UserAgent:     "OpenAPI-Generator/1.1.0/go",
+		Key:           "",
+		Secret:        "",
 	}
 	return cfg
 }
