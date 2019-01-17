@@ -8,11 +8,9 @@ info:
     APIv4 futures provides all sorts of futures trading operations.
     There are public APIs to retrieve the real-time market statistics,
     and private APIs which needs authentication to trade on user's behalf.
-  license:
-    name: Apache License 2.0
-    url: https://www.apache.org/licenses/LICENSE-2.0
+  termsOfService: https://www.gate.io/docs/agreement.pdf
   title: Gate API v4
-  version: 1.1.0
+  version: 1.2.0
 servers:
 - description: Real Trading
   url: https://fx-api.gateio.io/api/v4
@@ -64,6 +62,7 @@ paths:
                 trade_id: 6935987
                 trade_size: 1992012909
                 position_size: 4323221
+                config_change_time: 1547540148
               schema:
                 items:
                   $ref: '#/components/schemas/Contract'
@@ -71,6 +70,60 @@ paths:
           description: List retrieved
       security: []
       summary: List all futures contracts
+      tags:
+      - futures
+  /futures/contracts/{contract}:
+    get:
+      operationId: getFuturesContract
+      parameters:
+      - description: Futures contract
+        example: BTC_USD
+        in: path
+        name: contract
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+                name: BTC_USD
+                type: inverse
+                quanto_multiplier: "0"
+                mark_type: index
+                last_price: "4123"
+                mark_price: "4121.41"
+                index_price: "4121.5"
+                funding_next_apply: 1546588800
+                funding_rate: "0.000333"
+                funding_interval: 28800
+                funding_offset: 0
+                interest_rate: "0.001"
+                order_price_round: "0.5"
+                mark_price_round: "0.01"
+                leverage_min: "1"
+                leverage_max: "100"
+                maintenance_rate: "0.005"
+                risk_limit_base: "10"
+                risk_limit_step: "10"
+                risk_limit_max: "50"
+                maker_fee_rate: -0.00025
+                taker_fee_rate: "0.00075"
+                order_price_deviate: "1"
+                order_size_min: 1
+                order_size_max: 1000000
+                orders_limit: 50
+                orderbook_id: 39635902
+                trade_id: 6935987
+                trade_size: 1992012909
+                position_size: 4323221
+                config_change_time: 1547540148
+              schema:
+                $ref: '#/components/schemas/Contract'
+          description: Contract information
+      security: []
+      summary: Get a single contract
       tags:
       - futures
   /futures/order_book:
@@ -390,6 +443,73 @@ paths:
       summary: Query futures account
       tags:
       - futures
+  /futures/account_book:
+    get:
+      operationId: listFuturesAccountBook
+      parameters:
+      - description: Maximum number of record returned in one list
+        example: 100
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          maximum: 1000
+          minimum: 1
+          type: integer
+      - description: Start timestamp
+        example: 1547706332
+        in: query
+        name: from
+        required: false
+        schema:
+          type: integer
+      - description: End timestamp
+        example: 1547706332
+        in: query
+        name: to
+        required: false
+        schema:
+          type: integer
+      - description: |-
+          Changing Type
+
+          - dnw: Deposit & Withdraw
+          - pnl: Profit & Loss by reducing position
+          - fee: Trading fee
+          - refr: Referrer rebate
+          - fund: Funding
+        explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          enum:
+          - dnw
+          - pnl
+          - fee
+          - refr
+          - fund
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - time: 1547633726
+                change: "0.000010152188"
+                balance: "4.59316525194"
+                text: ETH_USD:6086261
+                type: fee
+              schema:
+                items:
+                  $ref: '#/components/schemas/FuturesAccountBook'
+                type: array
+          description: List retrieved
+      summary: Query account book
+      tags:
+      - futures
   /futures/positions:
     get:
       operationId: listPositions
@@ -426,6 +546,50 @@ paths:
                 type: array
           description: List retrieved
       summary: List all positions of a user
+      tags:
+      - futures
+  /futures/positions/{contract}:
+    get:
+      operationId: getPosition
+      parameters:
+      - description: Futures contract
+        example: BTC_USD
+        in: path
+        name: contract
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+                user: 10000
+                contract: BTC_USD
+                size: -9440
+                leverage: "0"
+                risk_limit: "100"
+                leverage_max: "100"
+                maintenance_rate: "0.005"
+                value: "2.497143098997"
+                margin: "4.431548146258"
+                entry_price: "3779.55"
+                liq_price: "99999999"
+                mark_price: "3780.32"
+                unrealised_pnl: -0.000507486844
+                realised_pnl: "0.045543982432"
+                history_pnl: "0"
+                last_close_pnl: "0"
+                adl_ranking: 5
+                pending_orders: 16
+                close_order:
+                  id: 232323
+                  price: "3779"
+                  is_liq: false
+              schema:
+                $ref: '#/components/schemas/Position'
+          description: Position information
+      summary: Get single position
       tags:
       - futures
   /futures/positions/{contract}/margin:
@@ -990,6 +1154,7 @@ components:
         trade_id: 6935987
         trade_size: 1992012909
         position_size: 4323221
+        config_change_time: 1547540148
     Position:
       value:
         user: 10000
@@ -1038,7 +1203,7 @@ components:
         finish_as: cancelled
   parameters:
     url_user:
-      description: 用户 ID
+      description: User ID
       explode: false
       in: path
       name: user_id
@@ -1047,6 +1212,44 @@ components:
         type: string
       style: simple
   responses:
+    Contract:
+      content:
+        application/json:
+          example:
+            name: BTC_USD
+            type: inverse
+            quanto_multiplier: "0"
+            mark_type: index
+            last_price: "4123"
+            mark_price: "4121.41"
+            index_price: "4121.5"
+            funding_next_apply: 1546588800
+            funding_rate: "0.000333"
+            funding_interval: 28800
+            funding_offset: 0
+            interest_rate: "0.001"
+            order_price_round: "0.5"
+            mark_price_round: "0.01"
+            leverage_min: "1"
+            leverage_max: "100"
+            maintenance_rate: "0.005"
+            risk_limit_base: "10"
+            risk_limit_step: "10"
+            risk_limit_max: "50"
+            maker_fee_rate: -0.00025
+            taker_fee_rate: "0.00075"
+            order_price_deviate: "1"
+            order_size_min: 1
+            order_size_max: 1000000
+            orders_limit: 50
+            orderbook_id: 39635902
+            trade_id: 6935987
+            trade_size: 1992012909
+            position_size: 4323221
+            config_change_time: 1547540148
+          schema:
+            $ref: '#/components/schemas/Contract'
+      description: Contract information
     Position:
       content:
         application/json:
@@ -1116,6 +1319,7 @@ components:
         trade_id: 2
         quanto_multiplier: quanto_multiplier
         risk_limit_max: risk_limit_max
+        config_change_time: 3.61607674925191080461672754609026014804840087890625
         risk_limit_base: risk_limit_base
         order_size_min: 1
         order_price_deviate: order_price_deviate
@@ -1230,6 +1434,9 @@ components:
           description: Current total long position size
           format: int64
           type: integer
+        config_change_time:
+          description: Configuration's last changed time
+          type: number
       type: object
     Position:
       example:
@@ -1334,19 +1541,23 @@ components:
       example:
         finish_as: filled
         reduce_only: false
-        create_time: 6.02745618307040320615897144307382404804229736328125
+        create_time: 1.46581298050294517310021547018550336360931396484375
         contract: contract
         is_close: true
-        finish_time: 1.46581298050294517310021547018550336360931396484375
+        finish_time: 5.962133916683182377482808078639209270477294921875
         tif: gtc
         is_liq: true
         size: 5
-        left: 2
+        left: 7
+        tkfr: tkfr
         price: price
         is_reduce_only: true
-        iceberg: 5
+        refu: refu
+        iceberg: 2
+        mkfr: mkfr
         id: 0
         text: text
+        user: 6
         close: false
         fill_price: fill_price
         status: open
@@ -1354,6 +1565,10 @@ components:
         id:
           description: Futures order ID
           format: int64
+          readOnly: true
+          type: integer
+        user:
+          description: User ID
           readOnly: true
           type: integer
         create_time:
@@ -1366,7 +1581,7 @@ components:
           type: number
         finish_as:
           description: |-
-            how the order is finished.
+            How the order is finished.
 
             - filled: all filled
             - cancelled: manually cancelled
@@ -1462,6 +1677,19 @@ components:
             - auto_deleveraging: from ADL
             - liquidation: from liquidation
             - insurance: from insurance
+          readOnly: true
+          type: string
+        tkfr:
+          description: Taker fee
+          readOnly: true
+          type: string
+        mkfr:
+          description: Maker fee
+          readOnly: true
+          type: string
+        refu:
+          description: Reference user ID
+          readOnly: true
           type: string
       required:
       - contract
@@ -1637,6 +1865,43 @@ components:
           type: string
         available:
           description: Available balance to transfer out or trade
+          type: string
+      type: object
+    FuturesAccountBook:
+      example:
+        balance: balance
+        change: change
+        time: 0.80082819046101150206595775671303272247314453125
+        text: text
+        type: dnw
+      properties:
+        time:
+          description: Change time
+          type: number
+        change:
+          description: Change amount
+          type: string
+        balance:
+          description: Balance after change
+          type: string
+        type:
+          description: |-
+            Changing Type
+
+            - dnw: Deposit & Withdraw
+            - pnl: Profit & Loss by reducing position
+            - fee: Trading fee
+            - refr: Referrer rebate
+            - fund: Funding
+          enum:
+          - dnw
+          - pnl
+          - fee
+          - refr
+          - fund
+          type: string
+        text:
+          description: Comment
           type: string
       type: object
     MyFuturesTrade:
