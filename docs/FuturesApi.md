@@ -7,8 +7,11 @@ Method | HTTP request | Description
 [**CancelOrder**](FuturesApi.md#CancelOrder) | **Delete** /futures/orders/{order_id} | Cancel a single order
 [**CancelOrders**](FuturesApi.md#CancelOrders) | **Delete** /futures/orders | Cancel all &#x60;open&#x60; orders matched
 [**CreateOrder**](FuturesApi.md#CreateOrder) | **Post** /futures/orders | Create a futures order
+[**GetFuturesContract**](FuturesApi.md#GetFuturesContract) | **Get** /futures/contracts/{contract} | Get a single contract
 [**GetMyTrades**](FuturesApi.md#GetMyTrades) | **Get** /futures/my_trades | List personal trading history
 [**GetOrder**](FuturesApi.md#GetOrder) | **Get** /futures/orders/{order_id} | Get a single order
+[**GetPosition**](FuturesApi.md#GetPosition) | **Get** /futures/positions/{contract} | Get single position
+[**ListFuturesAccountBook**](FuturesApi.md#ListFuturesAccountBook) | **Get** /futures/account_book | Query account book
 [**ListFuturesAccounts**](FuturesApi.md#ListFuturesAccounts) | **Get** /futures/accounts | Query futures account
 [**ListFuturesCandlesticks**](FuturesApi.md#ListFuturesCandlesticks) | **Get** /futures/candlesticks | Get futures candlesticks
 [**ListFuturesContracts**](FuturesApi.md#ListFuturesContracts) | **Get** /futures/contracts | List all futures contracts
@@ -166,6 +169,49 @@ Authentication with API key and secret is required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **GetFuturesContract**
+> Contract GetFuturesContract(ctx, contract)
+Get a single contract
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **contract** | **string**| Futures contract | 
+
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+api := client.FuturesApi
+contract := "BTC_USD"; // string - Futures contract
+
+result, _, err = api.GetFuturesContract(nil, contract)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
+### Return type
+
+[**Contract**](Contract.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **GetMyTrades**
 > []MyFuturesTrade GetMyTrades(ctx, optional)
 List personal trading history
@@ -251,6 +297,103 @@ if err != nil {
 ### Return type
 
 [**FuturesOrder**](FuturesOrder.md)
+
+### Authorization
+
+Authentication with API key and secret is required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **GetPosition**
+> Position GetPosition(ctx, contract)
+Get single position
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **contract** | **string**| Futures contract | 
+
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
+api := client.FuturesApi
+contract := "BTC_USD"; // string - Futures contract
+
+result, _, err = api.GetPosition(nil, contract)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
+### Return type
+
+[**Position**](Position.md)
+
+### Authorization
+
+Authentication with API key and secret is required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ListFuturesAccountBook**
+> []FuturesAccountBook ListFuturesAccountBook(ctx, optional)
+Query account book
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***ListFuturesAccountBookOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a ListFuturesAccountBookOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
+ **from** | **optional.Int32**| Start timestamp | 
+ **to** | **optional.Int32**| End timestamp | 
+ **type_** | **optional.String**| Changing Type  - dnw: Deposit &amp; Withdraw - pnl: Profit &amp; Loss by reducing position - fee: Trading fee - refr: Referrer rebate - fund: Funding | 
+
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
+api := client.FuturesApi
+
+result, _, err = api.ListFuturesAccountBook(nil, nil)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
+### Return type
+
+[**[]FuturesAccountBook**](FuturesAccountBook.md)
 
 ### Authorization
 

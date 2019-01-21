@@ -10,15 +10,15 @@
 
 package gateapi
 
-type PositionClose struct {
-	// Position close time
+type FuturesAccountBook struct {
+	// Change time
 	Time float32 `json:"time,omitempty"`
-	// Futures contract
-	Contract string `json:"contract,omitempty"`
-	// Position side, long or short
-	Side string `json:"side,omitempty"`
-	// PNL
-	Pnl string `json:"pnl,omitempty"`
-	// Text of close order
+	// Change amount
+	Change string `json:"change,omitempty"`
+	// Balance after change
+	Balance string `json:"balance,omitempty"`
+	// Changing Type  - dnw: Deposit & Withdraw - pnl: Profit & Loss by reducing position - fee: Trading fee - refr: Referrer rebate - fund: Funding
+	Type string `json:"type,omitempty"`
+	// Comment
 	Text string `json:"text,omitempty"`
 }
