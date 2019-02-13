@@ -10,12 +10,12 @@ info:
     and private APIs which needs authentication to trade on user's behalf.
   termsOfService: https://www.gate.io/docs/agreement.pdf
   title: Gate API v4
-  version: 1.2.1
+  version: 1.3.0
 servers:
 - description: Real Trading
-  url: https://fx-api.gateio.io/api/v4
+  url: https://fx-api.gateio.ws/api/v4
 - description: TestNet Trading
-  url: https://fx-api-testnet.gateio.io/api/v4
+  url: https://fx-api-testnet.gateio.ws/api/v4
 security:
 - api_key: []
   api_sign: []
