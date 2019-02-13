@@ -10,7 +10,7 @@ info:
     and private APIs which needs authentication to trade on user's behalf.
   termsOfService: https://www.gate.io/docs/agreement.pdf
   title: Gate API v4
-  version: 1.2.0
+  version: 1.2.1
 servers:
 - description: Real Trading
   url: https://fx-api.gateio.io/api/v4
@@ -344,7 +344,9 @@ paths:
                 last: "6432"
                 change_percentage: "4.43"
                 total_size: "32323904"
-                volume_24h: "184040233284.328"
+                volume_24h: "184040233284"
+                volume_24h_btc: "28613220"
+                volume_24h_usd: "184040233284"
                 mark_price: "6534"
                 funding_rate: "0"
                 index_price: "6531"
@@ -479,6 +481,7 @@ paths:
           - fee: Trading fee
           - refr: Referrer rebate
           - fund: Funding
+        example: dnw
         explode: true
         in: query
         name: type
@@ -1552,7 +1555,7 @@ components:
         tkfr: tkfr
         price: price
         is_reduce_only: true
-        refu: refu
+        refu: 9
         iceberg: 2
         mkfr: mkfr
         id: 0
@@ -1690,7 +1693,7 @@ components:
         refu:
           description: Reference user ID
           readOnly: true
-          type: string
+          type: integer
       required:
       - contract
       type: object
@@ -1780,12 +1783,14 @@ components:
     FuturesTicker:
       example:
         funding_rate: funding_rate
+        volume_24h_btc: volume_24h_btc
         last: last
         change_percentage: change_percentage
         contract: contract
         mark_price: mark_price
         total_size: total_size
         volume_24h: volume_24h
+        volume_24h_usd: volume_24h_usd
         index_price: index_price
         quanto_base_rate: quanto_base_rate
       properties:
@@ -1803,6 +1808,12 @@ components:
           type: string
         volume_24h:
           description: Trade size in recent 24h
+          type: string
+        volume_24h_btc:
+          description: Trade volume in recent 24h in BTC
+          type: string
+        volume_24h_usd:
+          description: Trade volume in recent 24h in USD
           type: string
         mark_price:
           description: Recent mark price
