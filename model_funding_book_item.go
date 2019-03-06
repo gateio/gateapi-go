@@ -10,9 +10,11 @@
 
 package gateapi
 
-type InsuranceRecord struct {
-	// Unix timestamp in seconds
-	T int64 `json:"t,omitempty"`
-	// Insurance balance
-	B string `json:"b,omitempty"`
+type FundingBookItem struct {
+	// Loan rate
+	Rate string `json:"rate,omitempty"`
+	// Borrowable amount
+	Amount string `json:"amount,omitempty"`
+	// How long the loan should be repaid
+	Days int32 `json:"days,omitempty"`
 }

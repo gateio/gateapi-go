@@ -10,9 +10,7 @@
 
 package gateapi
 
-type InsuranceRecord struct {
-	// Unix timestamp in seconds
-	T int64 `json:"t,omitempty"`
-	// Insurance balance
-	B string `json:"b,omitempty"`
+type TriggerOrderResponse struct {
+	// Auto order ID
+	Id int64 `json:"id,omitempty"`
 }

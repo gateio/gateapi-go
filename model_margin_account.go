@@ -10,9 +10,10 @@
 
 package gateapi
 
-type InsuranceRecord struct {
-	// Unix timestamp in seconds
-	T int64 `json:"t,omitempty"`
-	// Insurance balance
-	B string `json:"b,omitempty"`
+// Margin account detail. `base` refers to base currency, while `quotes to quote currency
+type MarginAccount struct {
+	// Currency pair
+	CurrencyPair string `json:"currency_pair,omitempty"`
+	Base MarginAccountCurrency `json:"base,omitempty"`
+	Quote MarginAccountCurrency `json:"quote,omitempty"`
 }

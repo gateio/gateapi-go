@@ -10,15 +10,17 @@
 
 package gateapi
 
-type FuturesTrade struct {
+type Trade struct {
 	// Trade ID
-	Id int64 `json:"id,omitempty"`
+	Id string `json:"id,omitempty"`
 	// Trading time
-	CreateTime float32 `json:"create_time,omitempty"`
-	// Futures contract
-	Contract string `json:"contract,omitempty"`
-	// Trading size
-	Size int64 `json:"size,omitempty"`
-	// Trading price
+	CreateTime string `json:"create_time,omitempty"`
+	// Order side
+	Side string `json:"side,omitempty"`
+	// Trade amount
+	Amount string `json:"amount,omitempty"`
+	// Order price
 	Price string `json:"price,omitempty"`
+	// Related order ID. No value in public endpoints
+	OrderId string `json:"order_id,omitempty"`
 }
