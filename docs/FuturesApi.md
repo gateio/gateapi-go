@@ -1,16 +1,20 @@
 # \FuturesApi
 
-All URIs are relative to *https://fx-api.gateio.ws/api/v4*
+All URIs are relative to *https://api.gateio.ws/api/v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CancelOrder**](FuturesApi.md#CancelOrder) | **Delete** /futures/orders/{order_id} | Cancel a single order
 [**CancelOrders**](FuturesApi.md#CancelOrders) | **Delete** /futures/orders | Cancel all &#x60;open&#x60; orders matched
+[**CancelPriceTriggeredOrder**](FuturesApi.md#CancelPriceTriggeredOrder) | **Delete** /futures/price_orders/{order_id} | Cancel a single order
+[**CancelPriceTriggeredOrderList**](FuturesApi.md#CancelPriceTriggeredOrderList) | **Delete** /futures/price_orders | Cancel all open orders
 [**CreateOrder**](FuturesApi.md#CreateOrder) | **Post** /futures/orders | Create a futures order
+[**CreatePriceTriggeredOrder**](FuturesApi.md#CreatePriceTriggeredOrder) | **Post** /futures/price_orders | Create a price-triggered order
 [**GetFuturesContract**](FuturesApi.md#GetFuturesContract) | **Get** /futures/contracts/{contract} | Get a single contract
 [**GetMyTrades**](FuturesApi.md#GetMyTrades) | **Get** /futures/my_trades | List personal trading history
 [**GetOrder**](FuturesApi.md#GetOrder) | **Get** /futures/orders/{order_id} | Get a single order
 [**GetPosition**](FuturesApi.md#GetPosition) | **Get** /futures/positions/{contract} | Get single position
+[**GetPriceTriggeredOrder**](FuturesApi.md#GetPriceTriggeredOrder) | **Get** /futures/price_orders/{order_id} | Get a single order
 [**ListFuturesAccountBook**](FuturesApi.md#ListFuturesAccountBook) | **Get** /futures/account_book | Query account book
 [**ListFuturesAccounts**](FuturesApi.md#ListFuturesAccounts) | **Get** /futures/accounts | Query futures account
 [**ListFuturesCandlesticks**](FuturesApi.md#ListFuturesCandlesticks) | **Get** /futures/candlesticks | Get futures candlesticks
@@ -23,6 +27,7 @@ Method | HTTP request | Description
 [**ListOrders**](FuturesApi.md#ListOrders) | **Get** /futures/orders | List futures orders
 [**ListPositionClose**](FuturesApi.md#ListPositionClose) | **Get** /futures/position_close | List position close history
 [**ListPositions**](FuturesApi.md#ListPositions) | **Get** /futures/positions | List all positions of a user
+[**ListPriceTriggeredOrders**](FuturesApi.md#ListPriceTriggeredOrders) | **Get** /futures/price_orders | List all auto orders
 [**UpdatePositionLeverage**](FuturesApi.md#UpdatePositionLeverage) | **Post** /futures/positions/{contract}/leverage | Update position leverage
 [**UpdatePositionMargin**](FuturesApi.md#UpdatePositionMargin) | **Post** /futures/positions/{contract}/margin | Update position margin
 [**UpdatePositionRiskLimit**](FuturesApi.md#UpdatePositionRiskLimit) | **Post** /futures/positions/{contract}/risk_limit | Update position risk limit
@@ -125,6 +130,94 @@ Authentication with API key and secret is required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **CancelPriceTriggeredOrder**
+> FuturesPriceTriggeredOrder CancelPriceTriggeredOrder(ctx, orderId)
+Cancel a single order
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **orderId** | **string**| ID returned on order successfully being created | 
+
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
+api := client.FuturesApi
+orderId := "orderId_example"; // string - ID returned on order successfully being created
+
+result, _, err = api.CancelPriceTriggeredOrder(nil, orderId)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
+### Return type
+
+[**FuturesPriceTriggeredOrder**](FuturesPriceTriggeredOrder.md)
+
+### Authorization
+
+Authentication with API key and secret is required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **CancelPriceTriggeredOrderList**
+> []FuturesPriceTriggeredOrder CancelPriceTriggeredOrderList(ctx, contract)
+Cancel all open orders
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **contract** | **string**| Futures contract | 
+
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
+api := client.FuturesApi
+contract := "BTC_USD"; // string - Futures contract
+
+result, _, err = api.CancelPriceTriggeredOrderList(nil, contract)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
+### Return type
+
+[**[]FuturesPriceTriggeredOrder**](FuturesPriceTriggeredOrder.md)
+
+### Authorization
+
+Authentication with API key and secret is required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **CreateOrder**
 > FuturesOrder CreateOrder(ctx, futuresOrder)
 Create a futures order
@@ -157,6 +250,50 @@ if err != nil {
 ### Return type
 
 [**FuturesOrder**](FuturesOrder.md)
+
+### Authorization
+
+Authentication with API key and secret is required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **CreatePriceTriggeredOrder**
+> TriggerOrderResponse CreatePriceTriggeredOrder(ctx, futuresPriceTriggeredOrder)
+Create a price-triggered order
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **futuresPriceTriggeredOrder** | [**FuturesPriceTriggeredOrder**](FuturesPriceTriggeredOrder.md)|  | 
+
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
+api := client.FuturesApi
+futuresPriceTriggeredOrder := new (gateapi.FuturesPriceTriggeredOrder); // FuturesPriceTriggeredOrder - 
+
+result, _, err = api.CreatePriceTriggeredOrder(nil, futuresPriceTriggeredOrder)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
+### Return type
+
+[**TriggerOrderResponse**](TriggerOrderResponse.md)
 
 ### Authorization
 
@@ -341,6 +478,50 @@ if err != nil {
 ### Return type
 
 [**Position**](Position.md)
+
+### Authorization
+
+Authentication with API key and secret is required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **GetPriceTriggeredOrder**
+> FuturesPriceTriggeredOrder GetPriceTriggeredOrder(ctx, orderId)
+Get a single order
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **orderId** | **string**| ID returned on order successfully being created | 
+
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
+api := client.FuturesApi
+orderId := "orderId_example"; // string - ID returned on order successfully being created
+
+result, _, err = api.GetPriceTriggeredOrder(nil, orderId)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
+### Return type
+
+[**FuturesPriceTriggeredOrder**](FuturesPriceTriggeredOrder.md)
 
 ### Authorization
 
@@ -930,6 +1111,61 @@ if err != nil {
 ### Return type
 
 [**[]Position**](Position.md)
+
+### Authorization
+
+Authentication with API key and secret is required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ListPriceTriggeredOrders**
+> []FuturesPriceTriggeredOrder ListPriceTriggeredOrders(ctx, status, optional)
+List all auto orders
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **status** | **string**| List orders based on status | 
+ **optional** | ***ListPriceTriggeredOrdersOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a ListPriceTriggeredOrdersOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **contract** | **optional.String**| Futures contract, return related data only if specified | 
+ **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
+ **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
+
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
+api := client.FuturesApi
+status := "status_example"; // string - List orders based on status
+
+result, _, err = api.ListPriceTriggeredOrders(nil, status, nil)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
+### Return type
+
+[**[]FuturesPriceTriggeredOrder**](FuturesPriceTriggeredOrder.md)
 
 ### Authorization
 

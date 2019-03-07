@@ -4,16 +4,13 @@ info:
     email: support@mail.gate.io
     name: API support
     url: https://gate.io/page/contacts
-  description: |-
-    APIv4 futures provides all sorts of futures trading operations.
-    There are public APIs to retrieve the real-time market statistics,
-    and private APIs which needs authentication to trade on user's behalf.
+  description: APIv4 provides spot, margin and futures trading operations. There are public APIs to retrieve the real-time market statistics, and private APIs which needs authentication to trade on user's behalf.
   termsOfService: https://www.gate.io/docs/agreement.pdf
   title: Gate API v4
-  version: 1.3.0
+  version: 4.5.0
 servers:
 - description: Real Trading
-  url: https://fx-api.gateio.ws/api/v4
+  url: https://api.gateio.ws/api/v4
 - description: TestNet Trading
   url: https://fx-api-testnet.gateio.ws/api/v4
 security:
@@ -21,9 +18,1212 @@ security:
   api_sign: []
   api_timestamp: []
 tags:
+- description: Spot trading
+  name: spot
+- description: Margin API; margin trading uses spot trading API
+  name: margin
 - description: Futures trade
   name: futures
 paths:
+  /spot/currency_pairs:
+    get:
+      operationId: listCurrencyPairs
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - id: ETH_USDT
+                base: ETH
+                quote: USDT
+                fee: "0.2"
+                min_base_amount: "0.001"
+                min_quote_amount: "1.0"
+                precision: 6
+              schema:
+                items:
+                  $ref: '#/components/schemas/CurrencyPair'
+                type: array
+          description: All currency pairs retrieved
+      security: []
+      summary: List all currency pairs supported
+      tags:
+      - spot
+  /spot/currency_pairs/{currency_pair}:
+    get:
+      operationId: getCurrencyPair
+      parameters:
+      - description: Currency pair
+        example: ETH_BTC
+        explode: false
+        in: path
+        name: currency_pair
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+                id: ETH_USDT
+                base: ETH
+                quote: USDT
+                fee: "0.2"
+                min_base_amount: "0.001"
+                min_quote_amount: "1.0"
+                precision: 6
+              schema:
+                $ref: '#/components/schemas/CurrencyPair'
+          description: Successfully retrieved
+      security: []
+      summary: Get detail of one single order
+      tags:
+      - spot
+  /spot/tickers:
+    get:
+      description: Return only related data if `currency_pair` is specified; otherwise return all of them
+      operationId: listTickers
+      parameters:
+      - description: Currency pair
+        example: BTC_USDT
+        in: query
+        name: currency_pair
+        required: false
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - currency_pair: ETH_BTC
+                last: "10.32"
+                lowest_ask: "10.32"
+                highest_bid: "10.33"
+                change_percentage: -0.0052
+                base_volume: "132.4"
+                quote_volume: "1366.36"
+                high_24h: "10.33"
+                low_24h: "10.32"
+              schema:
+                items:
+                  $ref: '#/components/schemas/Ticker'
+                type: array
+          description: Successfully retrieved
+      security: []
+      summary: Retrieve ticker information
+      tags:
+      - spot
+  /spot/order_book:
+    get:
+      description: Order book will be sorted by price from high to low on bids; reversed on asks
+      operationId: listOrderBook
+      parameters:
+      - description: Currency pair
+        example: BTC_USDT
+        in: query
+        name: currency_pair
+        required: false
+        schema:
+          type: string
+      - description: Price precision of order book. 0 means no aggregation is applied
+        example: "0"
+        explode: true
+        in: query
+        name: interval
+        required: false
+        schema:
+          default: "0"
+          type: string
+        style: form
+      - description: Maximum number of order depth data in asks or bids
+        example: 10
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          format: int32
+          maximum: 30
+          minimum: 1
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+                asks:
+                - - "1.52"
+                  - "1.151"
+                - - "1.53"
+                  - "1.218"
+                bids:
+                - - "1.17"
+                  - "201.863"
+                - - "1.16"
+                  - "725.464"
+              schema:
+                $ref: '#/components/schemas/OrderBook'
+          description: Successfully retrieved
+      security: []
+      summary: Retrieve order book
+      tags:
+      - spot
+  /spot/trades:
+    get:
+      operationId: listTrades
+      parameters:
+      - description: Currency pair
+        example: BTC_USDT
+        in: query
+        name: currency_pair
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of record returned in one list
+        example: 100
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          maximum: 1000
+          minimum: 1
+          type: integer
+      - description: Specify list staring point using the last record of `id` in previous list-query results
+        example: "12345"
+        in: query
+        name: last_id
+        required: false
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - id: "1232893232"
+                create_time: "1548000000"
+                order_id: "4128442423"
+                side: buy
+                amount: "0.15"
+                price: "0.03"
+              schema:
+                items:
+                  $ref: '#/components/schemas/Trade'
+                type: array
+          description: List retrieved
+      security: []
+      summary: Retrieve market trades
+      tags:
+      - spot
+  /spot/candlesticks:
+    get:
+      description: Candlestick data will start from (current time - limit * interval), end at current time
+      operationId: listCandlesticks
+      parameters:
+      - description: Currency pair
+        example: BTC_USDT
+        in: query
+        name: currency_pair
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of record returned in one list
+        example: 100
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          maximum: 1000
+          minimum: 1
+          type: integer
+      - description: Interval time between data points
+        example: 5m
+        explode: true
+        in: query
+        name: interval
+        required: false
+        schema:
+          default: 30m
+          enum:
+          - 10s
+          - 1m
+          - 5m
+          - 15m
+          - 30m
+          - 1h
+          - 4h
+          - 8h
+          - 1d
+          - 7d
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - - "1539852480"
+                - "971519.677"
+                - "0.0021724"
+                - "0.0021922"
+                - "0.0021724"
+                - "0.0021737"
+              schema:
+                items:
+                  description: |-
+                    Candlestick data point detail. Meaning from left to right:
+
+                    - Unix timestamp in seconds
+                    - Trading volume
+                    - Close price
+                    - Highest price
+                    - Lowest price
+                    - Open price
+                  items:
+                    type: string
+                  maxItems: 6
+                  minItems: 6
+                  type: array
+                type: array
+          description: Successfully retrieved
+      security: []
+      summary: Market candlesticks
+      tags:
+      - spot
+  /spot/accounts:
+    get:
+      operationId: listSpotAccounts
+      parameters:
+      - description: Retrieved specified currency related data
+        example: BTC
+        in: query
+        name: currency
+        required: false
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - currency: ETH
+                available: "968.8"
+                locked: "0"
+              schema:
+                items:
+                  $ref: '#/components/schemas/SpotAccount'
+                type: array
+          description: List retrieved
+      summary: List spot accounts
+      tags:
+      - spot
+  /spot/orders:
+    delete:
+      operationId: cancelOrders
+      parameters:
+      - description: Currency pair
+        example: BTC_USDT
+        in: query
+        name: currency_pair
+        required: true
+        schema:
+          type: string
+      - description: All bids or asks. Both included in not specified
+        example: sell
+        explode: true
+        in: query
+        name: side
+        required: false
+        schema:
+          enum:
+          - buy
+          - sell
+          type: string
+        style: form
+      - description: Specify account type. Default to all account types being included
+        example: spot
+        explode: true
+        in: query
+        name: account
+        required: false
+        schema:
+          enum:
+          - spot
+          - margin
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - id: "12332324"
+                create_time: "1548000000"
+                currency_pair: ETC_BTC
+                status: cancelled
+                type: limit
+                account: spot
+                side: buy
+                amount: "1"
+                price: "5.00032"
+                time_in_force: gtc
+                left: "0.5"
+                fill_price: "5.1"
+              schema:
+                items:
+                  $ref: '#/components/schemas/Order'
+                type: array
+          description: Batch cancellation request accepted. Query order status by listing orders
+      summary: Cancel all `open` orders in specified currency pair
+      tags:
+      - spot
+    get:
+      operationId: listOrders
+      parameters:
+      - description: Currency pair
+        example: BTC_USDT
+        in: query
+        name: currency_pair
+        required: true
+        schema:
+          type: string
+      - description: |
+          List orders based on status
+
+          `open` - order is waiting to be filled
+          `finished` - order has been filled or cancelled
+        example: open
+        explode: true
+        in: query
+        name: status
+        required: true
+        schema:
+          enum:
+          - open
+          - finished
+          type: string
+        style: form
+      - description: Page number
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+      - description: Maximum number of record returned in one list
+        example: 100
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          maximum: 1000
+          minimum: 1
+          type: integer
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - id: "12332324"
+                create_time: "1548000000"
+                currency_pair: ETC_BTC
+                status: cancelled
+                type: limit
+                account: spot
+                side: buy
+                amount: "1"
+                price: "5.00032"
+                time_in_force: gtc
+                left: "0.5"
+                fill_price: "5.1"
+              schema:
+                items:
+                  $ref: '#/components/schemas/Order'
+                type: array
+          description: List retrieved
+      summary: List futures orders
+      tags:
+      - spot
+    post:
+      operationId: createOrder
+      requestBody:
+        content:
+          application/json:
+            example:
+              id: "12332324"
+              create_time: "1548000000"
+              currency_pair: ETC_BTC
+              status: cancelled
+              type: limit
+              account: spot
+              side: buy
+              amount: "1"
+              price: "5.00032"
+              time_in_force: gtc
+              left: "0.5"
+              fill_price: "5.1"
+            schema:
+              $ref: '#/components/schemas/Order'
+        required: true
+      responses:
+        201:
+          content:
+            application/json:
+              example:
+                id: "12332324"
+                create_time: "1548000000"
+                currency_pair: ETC_BTC
+                status: cancelled
+                type: limit
+                account: spot
+                side: buy
+                amount: "1"
+                price: "5.00032"
+                time_in_force: gtc
+                left: "0.5"
+                fill_price: "5.1"
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: Order created.
+      summary: Create an order
+      tags:
+      - spot
+  /spot/orders/{order_id}:
+    delete:
+      operationId: cancelOrder
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+                id: "12332324"
+                create_time: "1548000000"
+                currency_pair: ETC_BTC
+                status: cancelled
+                type: limit
+                account: spot
+                side: buy
+                amount: "1"
+                price: "5.00032"
+                time_in_force: gtc
+                left: "0.5"
+                fill_price: "5.1"
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: Order cancelled
+      summary: Cancel a single order
+      tags:
+      - spot
+    get:
+      operationId: getOrder
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+                id: "12332324"
+                create_time: "1548000000"
+                currency_pair: ETC_BTC
+                status: cancelled
+                type: limit
+                account: spot
+                side: buy
+                amount: "1"
+                price: "5.00032"
+                time_in_force: gtc
+                left: "0.5"
+                fill_price: "5.1"
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: Detail retrieved
+      summary: Get a single order
+      tags:
+      - spot
+  /spot/my_trades:
+    get:
+      operationId: listMyTrades
+      parameters:
+      - description: Currency pair
+        example: BTC_USDT
+        in: query
+        name: currency_pair
+        required: true
+        schema:
+          type: string
+      - description: Maximum number of record returned in one list
+        example: 100
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          maximum: 1000
+          minimum: 1
+          type: integer
+      - description: Page number
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+      - description: List all trades of specified order
+        example: "12345"
+        explode: true
+        in: query
+        name: order_id
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - id: "1232893232"
+                create_time: "1548000000"
+                order_id: "4128442423"
+                side: buy
+                amount: "0.15"
+                price: "0.03"
+              schema:
+                items:
+                  $ref: '#/components/schemas/Trade'
+                type: array
+          description: List retrieved
+      summary: List personal trading history
+      tags:
+      - spot
+  /margin/currency_pairs:
+    get:
+      operationId: listMarginCurrencyPairs
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - id: ETH_USDT
+                base: ETH
+                quote: USDT
+                leverage: 3
+                min_base_amount: "0.01"
+                min_quote_amount: "100"
+                max_quote_amount: "1000000"
+              schema:
+                items:
+                  $ref: '#/components/schemas/MarginCurrencyPair'
+                type: array
+          description: List retrieved
+      security: []
+      summary: List all supported currency pairs supported in margin trading
+      tags:
+      - margin
+  /margin/funding_book:
+    get:
+      operationId: listFundingBook
+      parameters:
+      - description: Retrieved specified currency related data
+        example: BTC
+        in: query
+        name: currency
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - rate: "0.002"
+                amount: "320.03"
+                days: 10
+              schema:
+                items:
+                  $ref: '#/components/schemas/FundingBookItem'
+                type: array
+          description: Order book retrieved
+      security: []
+      summary: Order book of lending loans
+      tags:
+      - margin
+  /margin/accounts:
+    get:
+      operationId: listMarginAccounts
+      parameters:
+      - description: Currency pair
+        example: BTC_USDT
+        in: query
+        name: currency_pair
+        required: false
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - currency_pair: ETH_BTC
+                base:
+                  currency: ETH
+                  available: "30.1"
+                  locked: "0"
+                  borrowed: "10.1"
+                quote:
+                  currency: BTC
+                  available: "10"
+                  locked: "0"
+                  borrowed: "1.5"
+              schema:
+                items:
+                  $ref: '#/components/schemas/MarginAccount'
+                type: array
+          description: List retrieved
+      summary: Margin account list
+      tags:
+      - margin
+  /margin/funding_accounts:
+    get:
+      operationId: listFundingAccounts
+      parameters:
+      - description: Retrieved specified currency related data
+        example: BTC
+        in: query
+        name: currency
+        required: false
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - currency: BTC
+                available: "1.238"
+                locked: "0"
+                lent: "3.32"
+                total_lent: "3.32"
+              schema:
+                items:
+                  $ref: '#/components/schemas/FundingAccount'
+                type: array
+          description: List retrieved
+      summary: Funding account list
+      tags:
+      - margin
+  /margin/loans:
+    get:
+      operationId: listLoans
+      parameters:
+      - description: Loan status
+        example: open
+        explode: true
+        in: query
+        name: status
+        required: true
+        schema:
+          description: '`auto_repaid` is not allowed for `lend` side; `open` not for
+            `borrow`'
+          enum:
+          - open
+          - loaned
+          - finished
+          - auto_repaid
+          type: string
+        style: form
+      - description: Lend or borrow
+        example: lend
+        in: query
+        name: side
+        required: true
+        schema:
+          enum:
+          - lend
+          - borrow
+          type: string
+      - description: Retrieved specified currency related data
+        example: BTC
+        in: query
+        name: currency
+        required: false
+        schema:
+          type: string
+      - description: Page number
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+      - description: Maximum number of record returned in one list
+        example: 100
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          maximum: 1000
+          minimum: 1
+          type: integer
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - id: "123435"
+                create_time: "1548000000"
+                expire_time: "1548100000"
+                side: borrow
+                status: loaned
+                currency: BTC
+                rate: "0.002"
+                amount: "1.5"
+                days: 10
+                auto_renew: true
+                currency_pair: ETH_BTC
+                left: "0"
+                repaid: "0"
+                paid_interest: "0"
+                unpaid_interest: "0"
+              schema:
+                items:
+                  $ref: '#/components/schemas/Loan'
+                type: array
+          description: List retrieved
+      summary: List all loans
+      tags:
+      - margin
+    post:
+      operationId: createLoan
+      requestBody:
+        content:
+          application/json:
+            example:
+              id: "123435"
+              create_time: "1548000000"
+              expire_time: "1548100000"
+              side: borrow
+              status: loaned
+              currency: BTC
+              rate: "0.002"
+              amount: "1.5"
+              days: 10
+              auto_renew: true
+              currency_pair: ETH_BTC
+              left: "0"
+              repaid: "0"
+              paid_interest: "0"
+              unpaid_interest: "0"
+            schema:
+              $ref: '#/components/schemas/Loan'
+        required: true
+      responses:
+        201:
+          content:
+            application/json:
+              example:
+                id: "123435"
+                create_time: "1548000000"
+                expire_time: "1548100000"
+                side: borrow
+                status: loaned
+                currency: BTC
+                rate: "0.002"
+                amount: "1.5"
+                days: 10
+                auto_renew: true
+                currency_pair: ETH_BTC
+                left: "0"
+                repaid: "0"
+                paid_interest: "0"
+                unpaid_interest: "0"
+              schema:
+                $ref: '#/components/schemas/Loan'
+          description: Loan created
+      summary: Lend or borrow
+      tags:
+      - margin
+  /margin/merged_loans:
+    post:
+      operationId: mergeLoans
+      parameters:
+      - description: Retrieved specified currency related data
+        example: BTC
+        in: query
+        name: currency
+        required: true
+        schema:
+          type: string
+      - description: Lending loan ID list separated by `,`. Maximum of 20 IDs are allowed in one request
+        example: 123,234,345
+        explode: true
+        in: query
+        name: ids
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        201:
+          content:
+            application/json:
+              example:
+                id: "123435"
+                create_time: "1548000000"
+                expire_time: "1548100000"
+                side: borrow
+                status: loaned
+                currency: BTC
+                rate: "0.002"
+                amount: "1.5"
+                days: 10
+                auto_renew: true
+                currency_pair: ETH_BTC
+                left: "0"
+                repaid: "0"
+                paid_interest: "0"
+                unpaid_interest: "0"
+              schema:
+                $ref: '#/components/schemas/Loan'
+          description: Loans merged
+      summary: Merge multiple lending loans
+      tags:
+      - margin
+  /margin/loans/{loan_id}:
+    delete:
+      description: Only lending loans can be cancelled
+      operationId: cancelLoan
+      parameters:
+      - description: Retrieved specified currency related data
+        example: BTC
+        in: query
+        name: currency
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+                id: "123435"
+                create_time: "1548000000"
+                expire_time: "1548100000"
+                side: borrow
+                status: loaned
+                currency: BTC
+                rate: "0.002"
+                amount: "1.5"
+                days: 10
+                auto_renew: true
+                currency_pair: ETH_BTC
+                left: "0"
+                repaid: "0"
+                paid_interest: "0"
+                unpaid_interest: "0"
+              schema:
+                $ref: '#/components/schemas/Loan'
+          description: Order cancelled
+      summary: Cancel lending loan
+      tags:
+      - margin
+    get:
+      operationId: getLoan
+      parameters:
+      - description: Lend or borrow
+        example: lend
+        in: query
+        name: side
+        required: true
+        schema:
+          enum:
+          - lend
+          - borrow
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+                id: "123435"
+                create_time: "1548000000"
+                expire_time: "1548100000"
+                side: borrow
+                status: loaned
+                currency: BTC
+                rate: "0.002"
+                amount: "1.5"
+                days: 10
+                auto_renew: true
+                currency_pair: ETH_BTC
+                left: "0"
+                repaid: "0"
+                paid_interest: "0"
+                unpaid_interest: "0"
+              schema:
+                $ref: '#/components/schemas/Loan'
+          description: List retrieved
+      summary: Retrieve one single loan detail
+      tags:
+      - margin
+    patch:
+      description: Only `auto_renew` modification is supported currently
+      operationId: updateLoan
+      requestBody:
+        content:
+          application/json:
+            example:
+              currency: BTC
+              side: borrow
+              currency_pair: BTC_USDT
+              auto_renew: false
+            schema:
+              $ref: '#/components/schemas/LoanPatch'
+        required: true
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+                id: "123435"
+                create_time: "1548000000"
+                expire_time: "1548100000"
+                side: borrow
+                status: loaned
+                currency: BTC
+                rate: "0.002"
+                amount: "1.5"
+                days: 10
+                auto_renew: true
+                currency_pair: ETH_BTC
+                left: "0"
+                repaid: "0"
+                paid_interest: "0"
+                unpaid_interest: "0"
+              schema:
+                $ref: '#/components/schemas/Loan'
+          description: Updated
+      summary: Modify a loan
+      tags:
+      - margin
+  /margin/loans/{loan_id}/repayment:
+    get:
+      operationId: listLoanRepayments
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - id: "12342323"
+                create_time: "1578000000"
+                principal: "100"
+                interest: "2"
+              schema:
+                items:
+                  $ref: '#/components/schemas/Repayment'
+                type: array
+          description: List retrieved
+      summary: List loan repayment records
+      tags:
+      - margin
+    post:
+      operationId: repayLoan
+      requestBody:
+        content:
+          application/json:
+            example:
+              currency_pair: ETH_BTC
+              currency: ETH
+              mode: partial
+              amount: "100"
+            schema:
+              $ref: '#/components/schemas/RepayRequest'
+        required: true
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+                id: "123435"
+                create_time: "1548000000"
+                expire_time: "1548100000"
+                side: borrow
+                status: loaned
+                currency: BTC
+                rate: "0.002"
+                amount: "1.5"
+                days: 10
+                auto_renew: true
+                currency_pair: ETH_BTC
+                left: "0"
+                repaid: "0"
+                paid_interest: "0"
+                unpaid_interest: "0"
+              schema:
+                $ref: '#/components/schemas/Loan'
+          description: Loan repaid
+      summary: Repay a loan
+      tags:
+      - margin
+  /margin/loan_records:
+    get:
+      operationId: listLoanRecords
+      parameters:
+      - description: Loan ID
+        explode: true
+        in: query
+        name: loan_id
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: Loan record status
+        explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          enum:
+          - loaned
+          - finished
+          type: string
+        style: form
+      - description: Page number
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+      - description: Maximum number of record returned in one list
+        example: 100
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          maximum: 1000
+          minimum: 1
+          type: integer
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - id: "122342323"
+                loan_id: "12840282"
+                create_time: "1548000000"
+                expire_time: "1548100000"
+                status: loaned
+                borrow_user_id: '******12'
+                currency: BTC
+                rate: "0.002"
+                amount: "1.5"
+                days: 10
+                auto_renew: false
+                repaid: "0"
+                paid_interest: "0"
+                unpaid_interest: "0"
+              schema:
+                items:
+                  $ref: '#/components/schemas/LoanRecord'
+                type: array
+          description: List retrieved
+      summary: List repayment records of specified loan
+      tags:
+      - margin
+  /margin/loan_records/{loan_record_id}:
+    get:
+      operationId: getLoanRecord
+      parameters:
+      - description: Loan ID
+        explode: true
+        in: query
+        name: loan_id
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+                id: "122342323"
+                loan_id: "12840282"
+                create_time: "1548000000"
+                expire_time: "1548100000"
+                status: loaned
+                borrow_user_id: '******12'
+                currency: BTC
+                rate: "0.002"
+                amount: "1.5"
+                days: 10
+                auto_renew: false
+                repaid: "0"
+                paid_interest: "0"
+                unpaid_interest: "0"
+              schema:
+                $ref: '#/components/schemas/LoanRecord'
+          description: Detail retrieved
+      summary: Get one single loan record
+      tags:
+      - margin
+    patch:
+      description: Only `auto_renew` modification is supported currently
+      operationId: updateLoanRecord
+      requestBody:
+        content:
+          application/json:
+            example:
+              currency: BTC
+              side: borrow
+              currency_pair: BTC_USDT
+              auto_renew: false
+            schema:
+              $ref: '#/components/schemas/LoanPatch'
+        required: true
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+                id: "122342323"
+                loan_id: "12840282"
+                create_time: "1548000000"
+                expire_time: "1548100000"
+                status: loaned
+                borrow_user_id: '******12'
+                currency: BTC
+                rate: "0.002"
+                amount: "1.5"
+                days: 10
+                auto_renew: false
+                repaid: "0"
+                paid_interest: "0"
+                unpaid_interest: "0"
+              schema:
+                $ref: '#/components/schemas/LoanRecord'
+          description: Loan record updated
+      summary: Modify a loan record
+      tags:
+      - margin
   /futures/contracts:
     get:
       operationId: listFuturesContracts
@@ -1123,6 +2323,254 @@ paths:
       summary: List position close history
       tags:
       - futures
+  /futures/price_orders:
+    delete:
+      operationId: cancelPriceTriggeredOrderList
+      parameters:
+      - description: Futures contract
+        example: BTC_USD
+        in: query
+        name: contract
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - initial:
+                  contract: BTC_USD
+                  size: 100
+                  price: "5.03"
+                  close: false
+                  tif: gtc
+                  text: web
+                trigger:
+                  strategy_type: 0
+                  price_type: 0
+                  price: "3000"
+                  rule: 1
+                  expiration: 86400
+                id: 1283293
+                user: 1234
+                create_time: 1514764800
+                finish_time: 1514764900
+                trade_id: 13566
+                status: finished
+                finish_as: cancelled
+                reason: ""
+              schema:
+                items:
+                  $ref: '#/components/schemas/FuturesPriceTriggeredOrder'
+                type: array
+          description: Batch cancellation request accepted. Query order status by listing orders
+      summary: Cancel all open orders
+      tags:
+      - futures
+    get:
+      operationId: listPriceTriggeredOrders
+      parameters:
+      - description: List orders based on status
+        explode: true
+        in: query
+        name: status
+        required: true
+        schema:
+          enum:
+          - open
+          - finished
+          type: string
+        style: form
+      - description: Futures contract, return related data only if specified
+        example: BTC_USD
+        in: query
+        name: contract
+        required: false
+        schema:
+          type: string
+      - description: Maximum number of record returned in one list
+        example: 100
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          maximum: 1000
+          minimum: 1
+          type: integer
+      - description: List offset, starting from 0
+        example: 0
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          minimum: 0
+          type: integer
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - initial:
+                  contract: BTC_USD
+                  size: 100
+                  price: "5.03"
+                  close: false
+                  tif: gtc
+                  text: web
+                trigger:
+                  strategy_type: 0
+                  price_type: 0
+                  price: "3000"
+                  rule: 1
+                  expiration: 86400
+                id: 1283293
+                user: 1234
+                create_time: 1514764800
+                finish_time: 1514764900
+                trade_id: 13566
+                status: finished
+                finish_as: cancelled
+                reason: ""
+              schema:
+                items:
+                  $ref: '#/components/schemas/FuturesPriceTriggeredOrder'
+                type: array
+          description: List retrieved
+      summary: List all auto orders
+      tags:
+      - futures
+    post:
+      operationId: createPriceTriggeredOrder
+      requestBody:
+        content:
+          application/json:
+            example:
+              initial:
+                contract: BTC_USD
+                size: 100
+                price: "5.03"
+                close: false
+                tif: gtc
+                text: web
+              trigger:
+                strategy_type: 0
+                price_type: 0
+                price: "3000"
+                rule: 1
+                expiration: 86400
+              id: 1283293
+              user: 1234
+              create_time: 1514764800
+              finish_time: 1514764900
+              trade_id: 13566
+              status: finished
+              finish_as: cancelled
+              reason: ""
+            schema:
+              $ref: '#/components/schemas/FuturesPriceTriggeredOrder'
+        required: true
+      responses:
+        201:
+          content:
+            application/json:
+              example:
+                id: 1432329
+              schema:
+                $ref: '#/components/schemas/TriggerOrderResponse'
+          description: Order created
+      summary: Create a price-triggered order
+      tags:
+      - futures
+  /futures/price_orders/{order_id}:
+    delete:
+      operationId: cancelPriceTriggeredOrder
+      parameters:
+      - description: ID returned on order successfully being created
+        explode: false
+        in: path
+        name: order_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+                initial:
+                  contract: BTC_USD
+                  size: 100
+                  price: "5.03"
+                  close: false
+                  tif: gtc
+                  text: web
+                trigger:
+                  strategy_type: 0
+                  price_type: 0
+                  price: "3000"
+                  rule: 1
+                  expiration: 86400
+                id: 1283293
+                user: 1234
+                create_time: 1514764800
+                finish_time: 1514764900
+                trade_id: 13566
+                status: finished
+                finish_as: cancelled
+                reason: ""
+              schema:
+                $ref: '#/components/schemas/FuturesPriceTriggeredOrder'
+          description: Auto order detail
+      summary: Cancel a single order
+      tags:
+      - futures
+    get:
+      operationId: getPriceTriggeredOrder
+      parameters:
+      - description: ID returned on order successfully being created
+        explode: false
+        in: path
+        name: order_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+                initial:
+                  contract: BTC_USD
+                  size: 100
+                  price: "5.03"
+                  close: false
+                  tif: gtc
+                  text: web
+                trigger:
+                  strategy_type: 0
+                  price_type: 0
+                  price: "3000"
+                  rule: 1
+                  expiration: 86400
+                id: 1283293
+                user: 1234
+                create_time: 1514764800
+                finish_time: 1514764900
+                trade_id: 13566
+                status: finished
+                finish_as: cancelled
+                reason: ""
+              schema:
+                $ref: '#/components/schemas/FuturesPriceTriggeredOrder'
+          description: Auto order detail
+      summary: Get a single order
+      tags:
+      - futures
 components:
   examples:
     Contract:
@@ -1204,6 +2652,29 @@ components:
         status: finished
         finish_time: 1514764900
         finish_as: cancelled
+    FuturesPriceTriggeredOrder:
+      value:
+        initial:
+          contract: BTC_USD
+          size: 100
+          price: "5.03"
+          close: false
+          tif: gtc
+          text: web
+        trigger:
+          strategy_type: 0
+          price_type: 0
+          price: "3000"
+          rule: 1
+          expiration: 86400
+        id: 1283293
+        user: 1234
+        create_time: 1514764800
+        finish_time: 1514764900
+        trade_id: 13566
+        status: finished
+        finish_as: cancelled
+        reason: ""
   parameters:
     url_user:
       description: User ID
@@ -1214,6 +2685,22 @@ components:
       schema:
         type: string
       style: simple
+    account:
+      description: |-
+        API Key 所属账户, default - 默认账户, futures - 合约账户
+
+        默认值设置为 `futures` 是为了兼容历史接口
+      explode: true
+      in: query
+      name: account
+      required: false
+      schema:
+        default: futures
+        enum:
+        - default
+        - futures
+        type: string
+      style: form
   responses:
     Contract:
       content:
@@ -1309,6 +2796,34 @@ components:
           schema:
             $ref: '#/components/schemas/FuturesOrder'
       description: Order details
+    FuturesPriceTriggeredOrder:
+      content:
+        application/json:
+          example:
+            initial:
+              contract: BTC_USD
+              size: 100
+              price: "5.03"
+              close: false
+              tif: gtc
+              text: web
+            trigger:
+              strategy_type: 0
+              price_type: 0
+              price: "3000"
+              rule: 1
+              expiration: 86400
+            id: 1283293
+            user: 1234
+            create_time: 1514764800
+            finish_time: 1514764900
+            trade_id: 13566
+            status: finished
+            finish_as: cancelled
+            reason: ""
+          schema:
+            $ref: '#/components/schemas/FuturesPriceTriggeredOrder'
+      description: Auto order detail
   schemas:
     Contract:
       example:
@@ -1697,6 +3212,677 @@ components:
       required:
       - contract
       type: object
+    FuturesPriceTriggeredOrder:
+      example:
+        finish_as: cancelled
+        reason: reason
+        trade_id: 2
+        create_time: 9.301444243932575517419536481611430644989013671875
+        initial:
+          tif: gtc
+          reduce_only: false
+          size: 0
+          price: price
+          contract: contract
+          is_reduce_only: true
+          is_close: true
+          text: web
+          close: false
+        trigger:
+          price: price
+          price_type: 1
+          rule: 5
+          strategy_type: 6
+          expiration: 5
+        id: 2
+        user: 7
+        finish_time: 3.61607674925191080461672754609026014804840087890625
+        status: open
+      properties:
+        initial:
+          $ref: '#/components/schemas/FuturesInitialOrder'
+        trigger:
+          $ref: '#/components/schemas/FuturesPriceTrigger'
+        id:
+          description: Auto order ID
+          format: int64
+          readOnly: true
+          type: integer
+        user:
+          description: User ID
+          format: int32
+          readOnly: true
+          type: integer
+        create_time:
+          description: Creation time
+          readOnly: true
+          type: number
+        finish_time:
+          description: Finished time
+          readOnly: true
+          type: number
+        trade_id:
+          description: ID of the newly created order on condition triggered
+          format: int64
+          readOnly: true
+          type: integer
+        status:
+          description: Order status.
+          enum:
+          - open
+          - finished
+          readOnly: true
+          type: string
+        finish_as:
+          description: How order is finished
+          enum:
+          - cancelled
+          - succeeded
+          - failed
+          - expired
+          readOnly: true
+          type: string
+        reason:
+          description: Extra messages of how order is finished
+          readOnly: true
+          type: string
+      required:
+      - initial
+      - trigger
+      type: object
+    CurrencyPair:
+      example:
+        quote: quote
+        min_base_amount: min_base_amount
+        fee: fee
+        precision: 0
+        min_quote_amount: min_quote_amount
+        id: id
+        base: base
+      properties:
+        id:
+          description: Currency pair
+          type: string
+        base:
+          description: Base currency
+          type: string
+        quote:
+          description: Quote currency
+          type: string
+        fee:
+          description: Trading fee
+          type: string
+        min_base_amount:
+          description: Minimum amount of base currency to trade, `null` means no limit
+          type: string
+        min_quote_amount:
+          description: Minimum amount of quote currency to trade, `null` means no limit
+          type: string
+        precision:
+          description: Price scale
+          type: integer
+      type: object
+    Ticker:
+      example:
+        currency_pair: currency_pair
+        last: last
+        change_percentage: change_percentage
+        quote_volume: quote_volume
+        base_volume: base_volume
+        high_24h: high_24h
+        low_24h: low_24h
+        lowest_ask: lowest_ask
+        highest_bid: highest_bid
+      properties:
+        currency_pair:
+          description: Currency pair
+          type: string
+        last:
+          description: Last trading price
+          type: string
+        lowest_ask:
+          description: Lowest ask
+          type: string
+        highest_bid:
+          description: Highest bid
+          type: string
+        change_percentage:
+          description: Change percentage.
+          type: string
+        base_volume:
+          description: Base currency trade volume
+          type: string
+        quote_volume:
+          description: Quote currency trade volume
+          type: string
+        high_24h:
+          description: Highest price in 24h
+          type: string
+        low_24h:
+          description: Lowest price in 24h
+          type: string
+      type: object
+    OrderBook:
+      example:
+        asks:
+        - - asks
+          - asks
+        - - asks
+          - asks
+        bids:
+        - - bids
+          - bids
+        - - bids
+          - bids
+      properties:
+        asks:
+          description: Asks order depth
+          items:
+            description: price and amount
+            items:
+              type: string
+            maxItems: 2
+            minItems: 2
+            type: array
+          type: array
+        bids:
+          description: Bids order depth
+          items:
+            description: price and amount
+            items:
+              type: string
+            maxItems: 2
+            minItems: 2
+            type: array
+          type: array
+      required:
+      - asks
+      - bids
+      type: object
+    Trade:
+      example:
+        side: buy
+        amount: amount
+        create_time: create_time
+        price: price
+        id: id
+        order_id: order_id
+      properties:
+        id:
+          description: Trade ID
+          type: string
+        create_time:
+          description: Trading time
+          type: string
+        side:
+          description: Order side
+          enum:
+          - buy
+          - sell
+          type: string
+        amount:
+          description: Trade amount
+          type: string
+        price:
+          description: Order price
+          type: string
+        order_id:
+          description: Related order ID. No value in public endpoints
+          type: string
+      type: object
+    SpotAccount:
+      example:
+        available: available
+        currency: currency
+        locked: locked
+      properties:
+        currency:
+          description: Currency detail
+          type: string
+        available:
+          description: Available amount
+          type: string
+        locked:
+          description: Locked amount, used in trading
+          type: string
+      type: object
+    Order:
+      description: Order details
+      example:
+        side: buy
+        amount: amount
+        time_in_force: gtc
+        currency_pair: currency_pair
+        create_time: create_time
+        left: left
+        price: price
+        id: id
+        type: limit
+        fill_price: fill_price
+        account: spot
+        status: open
+      properties:
+        id:
+          description: Order ID
+          readOnly: true
+          type: string
+        create_time:
+          description: Order creation time
+          readOnly: true
+          type: string
+        status:
+          description: |-
+            Order status
+
+            - `open`: to be filled- `closed`: filled- `cancelled`: cancelled
+          enum:
+          - open
+          - closed
+          - cancelled
+          readOnly: true
+          type: string
+        currency_pair:
+          description: Currency pair
+          type: string
+        type:
+          default: limit
+          description: Order type. limit - limit order
+          enum:
+          - limit
+          type: string
+        account:
+          default: spot
+          description: Account type. spot - use spot account; margin - use margin account
+          enum:
+          - spot
+          - margin
+          type: string
+        side:
+          description: Order side
+          enum:
+          - buy
+          - sell
+          type: string
+        amount:
+          description: Trade amount
+          type: string
+        price:
+          description: Order price
+          type: string
+        time_in_force:
+          default: gtc
+          description: Time in force
+          enum:
+          - gtc
+          - ioc
+          type: string
+        left:
+          description: Amount left to fill
+          readOnly: true
+          type: string
+        fill_price:
+          description: Fill price of the order
+          readOnly: true
+          type: string
+      required:
+      - amount
+      - currency_pair
+      - price
+      - side
+      type: object
+    MarginCurrencyPair:
+      example:
+        leverage: 0
+        quote: quote
+        min_base_amount: min_base_amount
+        min_quote_amount: min_quote_amount
+        max_quote_amount: max_quote_amount
+        id: id
+        base: base
+      properties:
+        id:
+          description: Currency pair
+          type: string
+        base:
+          description: Base currency
+          type: string
+        quote:
+          description: Quote currency
+          type: string
+        leverage:
+          description: Leverage
+          type: integer
+        min_base_amount:
+          description: Minimum base currency to loan, `null` means no limit
+          type: string
+        min_quote_amount:
+          description: Minimum quote currency to loan, `null` means no limit
+          type: string
+        max_quote_amount:
+          description: Maximum borrowable amount for quote currency. Base currency limit is calculated by quote maximum and market price. `null` means no limit
+          type: string
+      type: object
+    FundingBookItem:
+      example:
+        amount: amount
+        rate: rate
+        days: 0
+      properties:
+        rate:
+          description: Loan rate
+          type: string
+        amount:
+          description: Borrowable amount
+          type: string
+        days:
+          description: How long the loan should be repaid
+          type: integer
+      type: object
+    MarginAccount:
+      description: Margin account detail. `base` refers to base currency, while `quotes to quote currency
+      example:
+        currency_pair: currency_pair
+        quote:
+          available: available
+          currency: currency
+          locked: locked
+          borrowed: borrowed
+        base:
+          available: available
+          currency: currency
+          locked: locked
+          borrowed: borrowed
+      properties:
+        currency_pair:
+          description: Currency pair
+          type: string
+        base:
+          $ref: '#/components/schemas/MarginAccountCurrency'
+        quote:
+          $ref: '#/components/schemas/MarginAccountCurrency'
+      type: object
+    MarginAccountCurrency:
+      description: Account currency detail
+      example:
+        available: available
+        currency: currency
+        locked: locked
+        borrowed: borrowed
+      properties:
+        currency:
+          description: Currency name
+          type: string
+        available:
+          description: Amount suitable for margin trading.
+          type: string
+        locked:
+          description: Locked amount, used in margin trading
+          type: string
+        borrowed:
+          description: Borrowed amount
+          type: string
+      type: object
+    FundingAccount:
+      example:
+        available: available
+        currency: currency
+        total_lent: total_lent
+        locked: locked
+        lent: lent
+      properties:
+        currency:
+          description: Currency name
+          type: string
+        available:
+          description: Available assets to lend, which is identical to spot account `available`
+          type: string
+        locked:
+          description: Locked amount. i.e. amount in `open` loans
+          type: string
+        lent:
+          description: Amount that is loaned but not repaid
+          type: string
+        total_lent:
+          description: Amount used for lending. total_lent = lent + locked
+          type: string
+      type: object
+    Loan:
+      example:
+        side: lend
+        amount: amount
+        create_time: create_time
+        expire_time: expire_time
+        currency_pair: currency_pair
+        repaid: repaid
+        auto_renew: false
+        rate: rate
+        left: left
+        days: 0
+        paid_interest: paid_interest
+        currency: currency
+        id: id
+        unpaid_interest: unpaid_interest
+        status: open
+      properties:
+        id:
+          description: Loan ID
+          readOnly: true
+          type: string
+        create_time:
+          description: Creation time
+          readOnly: true
+          type: string
+        expire_time:
+          description: Repay time of the loan. No value will be returned for lending loan
+          readOnly: true
+          type: string
+        status:
+          description: |-
+            Loan status
+
+            open - not fully loaned
+            loaned - all loaned out for lending loan; loaned in for borrowing side
+            finished - loan is finished, either being all repaid or cancelled by the lender
+            auto_repaid - automatically repaid by the system
+          enum:
+          - open
+          - loaned
+          - finished
+          - auto_repaid
+          readOnly: true
+          type: string
+        side:
+          description: Loan side
+          enum:
+          - lend
+          - borrow
+          type: string
+        currency:
+          description: Loan currency
+          type: string
+        rate:
+          description: Loan rate
+          type: string
+        amount:
+          description: Loan amount
+          type: string
+        days:
+          description: Loan days
+          type: integer
+        auto_renew:
+          default: false
+          description: Auto renew the loan on expiration
+          type: boolean
+        currency_pair:
+          description: Currency pair. Required for borrowing side
+          type: string
+        left:
+          description: Amount not lending out
+          readOnly: true
+          type: string
+        repaid:
+          description: Repaid amount
+          readOnly: true
+          type: string
+        paid_interest:
+          description: Repaid interest
+          readOnly: true
+          type: string
+        unpaid_interest:
+          description: Interest not repaid
+          readOnly: true
+          type: string
+      required:
+      - amount
+      - currency
+      - days
+      - rate
+      - side
+      type: object
+    LoanPatch:
+      example:
+        side: lend
+        currency_pair: currency_pair
+        auto_renew: true
+        currency: currency
+        loan_id: loan_id
+      properties:
+        currency:
+          description: Loan currency
+          type: string
+        side:
+          description: Loan side. Possible values are `lend` and `borrow`. For `LoanRecord` patching, only `lend` is supported
+          enum:
+          - lend
+          - borrow
+          type: string
+        auto_renew:
+          description: Auto renew
+          type: boolean
+        currency_pair:
+          description: Currency pair. Required for borrowing side
+          type: string
+        loan_id:
+          description: Loan ID. Required for `LoanRecord` patching
+          type: string
+      required:
+      - auto_renew
+      - currency
+      - side
+      type: object
+    Repayment:
+      example:
+        principal: principal
+        create_time: create_time
+        interest: interest
+        id: id
+      properties:
+        id:
+          description: Loan record ID
+          type: string
+        create_time:
+          description: Repayment time
+          type: string
+        principal:
+          description: Repaid principal
+          type: string
+        interest:
+          description: Repaid interest
+          type: string
+      type: object
+    RepayRequest:
+      example:
+        mode: all
+        amount: amount
+        currency_pair: currency_pair
+        currency: currency
+      properties:
+        currency_pair:
+          description: Currency pair
+          type: string
+        currency:
+          description: Loan currency
+          type: string
+        mode:
+          description: Repay mode. all - repay all; partial - repay only some portion
+          enum:
+          - all
+          - partial
+          type: string
+        amount:
+          description: Repay amount. Required in `partial` mode
+          type: string
+      required:
+      - currency
+      - currency_pair
+      - mode
+      type: object
+    LoanRecord:
+      example:
+        amount: amount
+        create_time: create_time
+        expire_time: expire_time
+        repaid: repaid
+        auto_renew: false
+        rate: rate
+        borrow_user_id: borrow_user_id
+        days: 0
+        paid_interest: paid_interest
+        currency: currency
+        id: id
+        unpaid_interest: unpaid_interest
+        loan_id: loan_id
+        status: loaned
+      properties:
+        id:
+          description: Loan record ID
+          type: string
+        loan_id:
+          description: Loan ID the record belongs to
+          type: string
+        create_time:
+          description: Loan time
+          type: string
+        expire_time:
+          description: Expiration time
+          type: string
+        status:
+          description: Loan record status
+          enum:
+          - loaned
+          - finished
+          type: string
+        borrow_user_id:
+          description: Garbled user ID
+          type: string
+        currency:
+          description: Loan currency
+          type: string
+        rate:
+          description: Loan rate
+          type: string
+        amount:
+          description: Loan amount
+          type: string
+        days:
+          description: Loan days
+          type: integer
+        auto_renew:
+          default: false
+          description: Whether the record will auto renew on expiration
+          type: boolean
+        repaid:
+          description: Repaid amount
+          type: string
+        paid_interest:
+          description: Repaid interest
+          readOnly: true
+          type: string
+        unpaid_interest:
+          description: Interest not repaid
+          readOnly: true
+          type: string
+      type: object
     FuturesOrderBook:
       example:
         asks:
@@ -1984,6 +4170,118 @@ components:
           readOnly: true
           type: string
       type: object
+    FuturesInitialOrder:
+      example:
+        tif: gtc
+        reduce_only: false
+        size: 0
+        price: price
+        contract: contract
+        is_reduce_only: true
+        is_close: true
+        text: web
+        close: false
+      properties:
+        contract:
+          description: Futures contract
+          type: string
+        size:
+          description: Order size. Positive size means to buy, while negative one means to sell. Set to 0 to close the position
+          format: int64
+          type: integer
+        price:
+          description: Order price. Set to 0 to use market price
+          type: string
+        close:
+          default: false
+          description: Set to true if trying to close the position
+          type: boolean
+          writeOnly: true
+        tif:
+          default: gtc
+          description: |-
+            Time in force. If using market price, only `ioc` is supported.
+
+            - gtc: GoodTillCancelled
+            - ioc: ImmediateOrCancelled
+          enum:
+          - gtc
+          - ioc
+          type: string
+        text:
+          description: 'How the order is created. Possible values are: web, api and
+            app'
+          enum:
+          - web
+          - api
+          - app
+          type: string
+        reduce_only:
+          default: false
+          description: Set to true to create an post-only order
+          type: boolean
+        is_reduce_only:
+          description: Is the order post-only
+          readOnly: true
+          type: boolean
+        is_close:
+          description: Is the order to close position
+          readOnly: true
+          type: boolean
+      required:
+      - contract
+      - price
+      type: object
+    FuturesPriceTrigger:
+      example:
+        price: price
+        price_type: 1
+        rule: 5
+        strategy_type: 6
+        expiration: 5
+      properties:
+        strategy_type:
+          description: "How the order will be triggered\n\n - `0`: by price, which\
+            \ means order will be triggered on price condition satisfied\n - `1`:\
+            \ by price gap, which means order will be triggered on gap of recent two\
+            \ prices of specified `price_type` satisfied. \nOnly `0` is supported\
+            \ currently"
+          enum:
+          - 0
+          - 1
+          type: integer
+        price_type:
+          description: Price type. 0 - latest deal price, 1 - mark price, 2 - index price
+          enum:
+          - 0
+          - 1
+          - 2
+          type: integer
+        price:
+          description: Value of price on price triggered, or price gap on price gap triggered
+          type: string
+        rule:
+          description: |-
+            Trigger condition type
+
+            - `1`: calculated price based on `strategy_type` and `price_type` >= `price`
+            - `2`: calculated price based on `strategy_type` and `price_type` <= `price`
+          enum:
+          - 1
+          - 2
+          type: integer
+        expiration:
+          description: How many seconds will the order wait for the condition being triggered. Order will be cancelled on timed out
+          type: integer
+      type: object
+    TriggerOrderResponse:
+      example:
+        id: 0
+      properties:
+        id:
+          description: Auto order ID
+          format: int64
+          type: integer
     Position_close_order:
       description: Current close order if any, or `null`
       example:

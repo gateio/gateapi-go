@@ -10,9 +10,14 @@
 
 package gateapi
 
-type InsuranceRecord struct {
-	// Unix timestamp in seconds
-	T int64 `json:"t,omitempty"`
-	// Insurance balance
-	B string `json:"b,omitempty"`
+// Account currency detail
+type MarginAccountCurrency struct {
+	// Currency name
+	Currency string `json:"currency,omitempty"`
+	// Amount suitable for margin trading.
+	Available string `json:"available,omitempty"`
+	// Locked amount, used in margin trading
+	Locked string `json:"locked,omitempty"`
+	// Borrowed amount
+	Borrowed string `json:"borrowed,omitempty"`
 }

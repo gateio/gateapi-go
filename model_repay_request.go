@@ -10,9 +10,13 @@
 
 package gateapi
 
-type InsuranceRecord struct {
-	// Unix timestamp in seconds
-	T int64 `json:"t,omitempty"`
-	// Insurance balance
-	B string `json:"b,omitempty"`
+type RepayRequest struct {
+	// Currency pair
+	CurrencyPair string `json:"currency_pair"`
+	// Loan currency
+	Currency string `json:"currency"`
+	// Repay mode. all - repay all; partial - repay only some portion
+	Mode string `json:"mode"`
+	// Repay amount. Required in `partial` mode
+	Amount string `json:"amount,omitempty"`
 }
