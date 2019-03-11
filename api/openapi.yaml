@@ -7,7 +7,7 @@ info:
   description: APIv4 provides spot, margin and futures trading operations. There are public APIs to retrieve the real-time market statistics, and private APIs which needs authentication to trade on user's behalf.
   termsOfService: https://www.gate.io/docs/agreement.pdf
   title: Gate API v4
-  version: 4.5.0
+  version: 4.5.1
 servers:
 - description: Real Trading
   url: https://api.gateio.ws/api/v4
@@ -501,6 +501,23 @@ paths:
   /spot/orders/{order_id}:
     delete:
       operationId: cancelOrder
+      parameters:
+      - description: ID returned on order successfully being created
+        example: "12345"
+        explode: false
+        in: path
+        name: order_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Currency pair
+        example: BTC_USDT
+        in: query
+        name: currency_pair
+        required: true
+        schema:
+          type: string
       responses:
         200:
           content:
@@ -526,6 +543,23 @@ paths:
       - spot
     get:
       operationId: getOrder
+      parameters:
+      - description: ID returned on order successfully being created
+        example: "12345"
+        explode: false
+        in: path
+        name: order_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Currency pair
+        example: BTC_USDT
+        in: query
+        name: currency_pair
+        required: true
+        schema:
+          type: string
       responses:
         200:
           content:
@@ -908,6 +942,14 @@ paths:
       description: Only lending loans can be cancelled
       operationId: cancelLoan
       parameters:
+      - description: Loan ID
+        explode: false
+        in: path
+        name: loan_id
+        required: true
+        schema:
+          type: string
+        style: simple
       - description: Retrieved specified currency related data
         example: BTC
         in: query
@@ -944,6 +986,14 @@ paths:
     get:
       operationId: getLoan
       parameters:
+      - description: Loan ID
+        explode: false
+        in: path
+        name: loan_id
+        required: true
+        schema:
+          type: string
+        style: simple
       - description: Lend or borrow
         example: lend
         in: query
@@ -983,6 +1033,15 @@ paths:
     patch:
       description: Only `auto_renew` modification is supported currently
       operationId: updateLoan
+      parameters:
+      - description: Loan ID
+        explode: false
+        in: path
+        name: loan_id
+        required: true
+        schema:
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -1023,6 +1082,15 @@ paths:
   /margin/loans/{loan_id}/repayment:
     get:
       operationId: listLoanRepayments
+      parameters:
+      - description: Loan ID
+        explode: false
+        in: path
+        name: loan_id
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         200:
           content:
@@ -1042,6 +1110,15 @@ paths:
       - margin
     post:
       operationId: repayLoan
+      parameters:
+      - description: Loan ID
+        explode: false
+        in: path
+        name: loan_id
+        required: true
+        schema:
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -1152,6 +1229,14 @@ paths:
     get:
       operationId: getLoanRecord
       parameters:
+      - description: Loan record ID
+        explode: false
+        in: path
+        name: loan_record_id
+        required: true
+        schema:
+          type: string
+        style: simple
       - description: Loan ID
         explode: true
         in: query
@@ -1188,6 +1273,15 @@ paths:
     patch:
       description: Only `auto_renew` modification is supported currently
       operationId: updateLoanRecord
+      parameters:
+      - description: Loan record ID
+        explode: false
+        in: path
+        name: loan_record_id
+        required: true
+        schema:
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -2368,6 +2462,7 @@ paths:
       summary: Cancel all open orders
       tags:
       - futures
+    description: Price triggered order
     get:
       operationId: listPriceTriggeredOrders
       parameters:
