@@ -22,7 +22,7 @@ Method | HTTP request | Description
 
 
 # **CancelLoan**
-> Loan CancelLoan(ctx, currency)
+> Loan CancelLoan(ctx, loanId, currency)
 Cancel lending loan
 
 Only lending loans can be cancelled
@@ -32,6 +32,7 @@ Only lending loans can be cancelled
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **loanId** | **string**| Loan ID | 
   **currency** | **string**| Retrieved specified currency related data | 
 
 ### Example
@@ -42,9 +43,10 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.MarginApi
+loanId := "loanId_example"; // string - Loan ID
 currency := "BTC"; // string - Retrieved specified currency related data
 
-result, _, err = api.CancelLoan(nil, currency)
+result, _, err = api.CancelLoan(nil, loanId, currency)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -112,7 +114,7 @@ Authentication with API key and secret is required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetLoan**
-> Loan GetLoan(ctx, side)
+> Loan GetLoan(ctx, loanId, side)
 Retrieve one single loan detail
 
 ### Required Parameters
@@ -120,6 +122,7 @@ Retrieve one single loan detail
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **loanId** | **string**| Loan ID | 
   **side** | **string**| Lend or borrow | 
 
 ### Example
@@ -130,9 +133,10 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.MarginApi
+loanId := "loanId_example"; // string - Loan ID
 side := "lend"; // string - Lend or borrow
 
-result, _, err = api.GetLoan(nil, side)
+result, _, err = api.GetLoan(nil, loanId, side)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -156,7 +160,7 @@ Authentication with API key and secret is required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetLoanRecord**
-> LoanRecord GetLoanRecord(ctx, loanId)
+> LoanRecord GetLoanRecord(ctx, loanRecordId, loanId)
 Get one single loan record
 
 ### Required Parameters
@@ -164,6 +168,7 @@ Get one single loan record
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **loanRecordId** | **string**| Loan record ID | 
   **loanId** | **string**| Loan ID | 
 
 ### Example
@@ -174,9 +179,10 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.MarginApi
+loanRecordId := "loanRecordId_example"; // string - Loan record ID
 loanId := "loanId_example"; // string - Loan ID
 
-result, _, err = api.GetLoanRecord(nil, loanId)
+result, _, err = api.GetLoanRecord(nil, loanRecordId, loanId)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -348,11 +354,15 @@ Authentication with API key and secret is required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListLoanRepayments**
-> []Repayment ListLoanRepayments(ctx, )
+> []Repayment ListLoanRepayments(ctx, loanId)
 List loan repayment records
 
 ### Required Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **loanId** | **string**| Loan ID | 
 
 ### Example
 
@@ -362,7 +372,9 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.MarginApi
-result, _, err = api.ListLoanRepayments(nil)
+loanId := "loanId_example"; // string - Loan ID
+
+result, _, err = api.ListLoanRepayments(nil, loanId)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -577,7 +589,7 @@ Authentication with API key and secret is required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RepayLoan**
-> Loan RepayLoan(ctx, repayRequest)
+> Loan RepayLoan(ctx, loanId, repayRequest)
 Repay a loan
 
 ### Required Parameters
@@ -585,6 +597,7 @@ Repay a loan
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **loanId** | **string**| Loan ID | 
   **repayRequest** | [**RepayRequest**](RepayRequest.md)|  | 
 
 ### Example
@@ -595,9 +608,10 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.MarginApi
+loanId := "loanId_example"; // string - Loan ID
 repayRequest := new (gateapi.RepayRequest); // RepayRequest - 
 
-result, _, err = api.RepayLoan(nil, repayRequest)
+result, _, err = api.RepayLoan(nil, loanId, repayRequest)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -621,7 +635,7 @@ Authentication with API key and secret is required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdateLoan**
-> Loan UpdateLoan(ctx, loanPatch)
+> Loan UpdateLoan(ctx, loanId, loanPatch)
 Modify a loan
 
 Only `auto_renew` modification is supported currently
@@ -631,6 +645,7 @@ Only `auto_renew` modification is supported currently
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **loanId** | **string**| Loan ID | 
   **loanPatch** | [**LoanPatch**](LoanPatch.md)|  | 
 
 ### Example
@@ -641,9 +656,10 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.MarginApi
+loanId := "loanId_example"; // string - Loan ID
 loanPatch := new (gateapi.LoanPatch); // LoanPatch - 
 
-result, _, err = api.UpdateLoan(nil, loanPatch)
+result, _, err = api.UpdateLoan(nil, loanId, loanPatch)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -667,7 +683,7 @@ Authentication with API key and secret is required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdateLoanRecord**
-> LoanRecord UpdateLoanRecord(ctx, loanPatch)
+> LoanRecord UpdateLoanRecord(ctx, loanRecordId, loanPatch)
 Modify a loan record
 
 Only `auto_renew` modification is supported currently
@@ -677,6 +693,7 @@ Only `auto_renew` modification is supported currently
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **loanRecordId** | **string**| Loan record ID | 
   **loanPatch** | [**LoanPatch**](LoanPatch.md)|  | 
 
 ### Example
@@ -687,9 +704,10 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.MarginApi
+loanRecordId := "loanRecordId_example"; // string - Loan record ID
 loanPatch := new (gateapi.LoanPatch); // LoanPatch - 
 
-result, _, err = api.UpdateLoanRecord(nil, loanPatch)
+result, _, err = api.UpdateLoanRecord(nil, loanRecordId, loanPatch)
 if err != nil {
     fmt.Println(err.Error())
 } else {

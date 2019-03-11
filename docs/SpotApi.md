@@ -20,11 +20,16 @@ Method | HTTP request | Description
 
 
 # **CancelOrder**
-> Order CancelOrder(ctx, )
+> Order CancelOrder(ctx, orderId, currencyPair)
 Cancel a single order
 
 ### Required Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **orderId** | **string**| ID returned on order successfully being created | 
+  **currencyPair** | **string**| Currency pair | 
 
 ### Example
 
@@ -34,7 +39,10 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.SpotApi
-result, _, err = api.CancelOrder(nil)
+orderId := "12345"; // string - ID returned on order successfully being created
+currencyPair := "BTC_USDT"; // string - Currency pair
+
+result, _, err = api.CancelOrder(nil, orderId, currencyPair)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -199,11 +207,16 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetOrder**
-> Order GetOrder(ctx, )
+> Order GetOrder(ctx, orderId, currencyPair)
 Get a single order
 
 ### Required Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **orderId** | **string**| ID returned on order successfully being created | 
+  **currencyPair** | **string**| Currency pair | 
 
 ### Example
 
@@ -213,7 +226,10 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.SpotApi
-result, _, err = api.GetOrder(nil)
+orderId := "12345"; // string - ID returned on order successfully being created
+currencyPair := "BTC_USDT"; // string - Currency pair
+
+result, _, err = api.GetOrder(nil, orderId, currencyPair)
 if err != nil {
     fmt.Println(err.Error())
 } else {
