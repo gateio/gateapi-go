@@ -43,7 +43,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.MarginApi
-loanId := "loanId_example"; // string - Loan ID
+loanId := "12345"; // string - Loan ID
 currency := "BTC"; // string - Retrieved specified currency related data
 
 result, _, err = api.CancelLoan(nil, loanId, currency)
@@ -133,7 +133,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.MarginApi
-loanId := "loanId_example"; // string - Loan ID
+loanId := "12345"; // string - Loan ID
 side := "lend"; // string - Lend or borrow
 
 result, _, err = api.GetLoan(nil, loanId, side)
@@ -179,8 +179,8 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.MarginApi
-loanRecordId := "loanRecordId_example"; // string - Loan record ID
-loanId := "loanId_example"; // string - Loan ID
+loanRecordId := "12345"; // string - Loan record ID
+loanId := "12345"; // string - Loan ID
 
 result, _, err = api.GetLoanRecord(nil, loanRecordId, loanId)
 if err != nil {
@@ -328,7 +328,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.MarginApi
-loanId := "loanId_example"; // string - Loan ID
+loanId := "12345"; // string - Loan ID
 
 result, _, err = api.ListLoanRecords(nil, loanId, nil)
 if err != nil {
@@ -372,7 +372,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.MarginApi
-loanId := "loanId_example"; // string - Loan ID
+loanId := "12345"; // string - Loan ID
 
 result, _, err = api.ListLoanRepayments(nil, loanId)
 if err != nil {
@@ -608,7 +608,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.MarginApi
-loanId := "loanId_example"; // string - Loan ID
+loanId := "12345"; // string - Loan ID
 repayRequest := new (gateapi.RepayRequest); // RepayRequest - 
 
 result, _, err = api.RepayLoan(nil, loanId, repayRequest)
@@ -656,7 +656,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.MarginApi
-loanId := "loanId_example"; // string - Loan ID
+loanId := "12345"; // string - Loan ID
 loanPatch := new (gateapi.LoanPatch); // LoanPatch - 
 
 result, _, err = api.UpdateLoan(nil, loanId, loanPatch)
@@ -704,7 +704,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.MarginApi
-loanRecordId := "loanRecordId_example"; // string - Loan record ID
+loanRecordId := "12345"; // string - Loan record ID
 loanPatch := new (gateapi.LoanPatch); // LoanPatch - 
 
 result, _, err = api.UpdateLoanRecord(nil, loanRecordId, loanPatch)
