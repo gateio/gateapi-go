@@ -5,9 +5,12 @@ info:
     name: API support
     url: https://gate.io/page/contacts
   description: APIv4 provides spot, margin and futures trading operations. There are public APIs to retrieve the real-time market statistics, and private APIs which needs authentication to trade on user's behalf.
+  license:
+    name: Apache License 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
   termsOfService: https://www.gate.io/docs/agreement.pdf
   title: Gate API v4
-  version: 4.5.1
+  version: 4.5.2
 servers:
 - description: Real Trading
   url: https://api.gateio.ws/api/v4
@@ -125,7 +128,7 @@ paths:
         example: BTC_USDT
         in: query
         name: currency_pair
-        required: false
+        required: true
         schema:
           type: string
       - description: Price precision of order book. 0 means no aggregation is applied
@@ -943,6 +946,7 @@ paths:
       operationId: cancelLoan
       parameters:
       - description: Loan ID
+        example: "12345"
         explode: false
         in: path
         name: loan_id
@@ -987,6 +991,7 @@ paths:
       operationId: getLoan
       parameters:
       - description: Loan ID
+        example: "12345"
         explode: false
         in: path
         name: loan_id
@@ -1035,6 +1040,7 @@ paths:
       operationId: updateLoan
       parameters:
       - description: Loan ID
+        example: "12345"
         explode: false
         in: path
         name: loan_id
@@ -1084,6 +1090,7 @@ paths:
       operationId: listLoanRepayments
       parameters:
       - description: Loan ID
+        example: "12345"
         explode: false
         in: path
         name: loan_id
@@ -1112,6 +1119,7 @@ paths:
       operationId: repayLoan
       parameters:
       - description: Loan ID
+        example: "12345"
         explode: false
         in: path
         name: loan_id
@@ -1161,6 +1169,7 @@ paths:
       operationId: listLoanRecords
       parameters:
       - description: Loan ID
+        example: "12345"
         explode: true
         in: query
         name: loan_id
@@ -1169,6 +1178,7 @@ paths:
           type: string
         style: form
       - description: Loan record status
+        example: loaned
         explode: true
         in: query
         name: status
@@ -1230,6 +1240,7 @@ paths:
       operationId: getLoanRecord
       parameters:
       - description: Loan record ID
+        example: "12345"
         explode: false
         in: path
         name: loan_record_id
@@ -1238,6 +1249,7 @@ paths:
           type: string
         style: simple
       - description: Loan ID
+        example: "12345"
         explode: true
         in: query
         name: loan_id
@@ -1275,6 +1287,7 @@ paths:
       operationId: updateLoanRecord
       parameters:
       - description: Loan record ID
+        example: "12345"
         explode: false
         in: path
         name: loan_record_id

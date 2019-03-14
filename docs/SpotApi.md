@@ -400,7 +400,7 @@ Authentication with API key and secret is required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListOrderBook**
-> OrderBook ListOrderBook(ctx, optional)
+> OrderBook ListOrderBook(ctx, currencyPair, optional)
 Retrieve order book
 
 Order book will be sorted by price from high to low on bids; reversed on asks
@@ -410,6 +410,7 @@ Order book will be sorted by price from high to low on bids; reversed on asks
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **currencyPair** | **string**| Currency pair | 
  **optional** | ***ListOrderBookOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -417,7 +418,7 @@ Optional parameters are passed through a pointer to a ListOrderBookOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **currencyPair** | **optional.String**| Currency pair | 
+
  **interval** | **optional.String**| Price precision of order book. 0 means no aggregation is applied | [default to 0]
  **limit** | **optional.Int32**| Maximum number of order depth data in asks or bids | [default to 10]
 
@@ -428,8 +429,9 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // uncomment the next line if your are testing against other hosts
 // client.ChangeBasePath("https://some-other-host")
 api := client.SpotApi
+currencyPair := "BTC_USDT"; // string - Currency pair
 
-result, _, err = api.ListOrderBook(nil, nil)
+result, _, err = api.ListOrderBook(nil, currencyPair, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
