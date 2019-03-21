@@ -3,14 +3,14 @@ info:
   contact:
     email: support@mail.gate.io
     name: API support
-    url: https://gate.io/page/contacts
+    url: https://www.gate.io/page/contacts
   description: APIv4 provides spot, margin and futures trading operations. There are public APIs to retrieve the real-time market statistics, and private APIs which needs authentication to trade on user's behalf.
   license:
     name: Apache License 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
   termsOfService: https://www.gate.io/docs/agreement.pdf
   title: Gate API v4
-  version: 4.5.2
+  version: 4.6.0
 servers:
 - description: Real Trading
   url: https://api.gateio.ws/api/v4
@@ -2063,7 +2063,7 @@ paths:
       - futures
   /futures/orders:
     delete:
-      operationId: cancelOrders
+      operationId: cancelFuturesOrders
       parameters:
       - description: Futures contract
         example: BTC_USD
@@ -2118,7 +2118,7 @@ paths:
       tags:
       - futures
     get:
-      operationId: listOrders
+      operationId: listFuturesOrders
       parameters:
       - description: Futures contract
         example: BTC_USD
@@ -2190,7 +2190,7 @@ paths:
       tags:
       - futures
     post:
-      operationId: createOrder
+      operationId: createFuturesOrder
       requestBody:
         content:
           application/json:
@@ -2251,7 +2251,7 @@ paths:
       - futures
   /futures/orders/{order_id}:
     delete:
-      operationId: cancelOrder
+      operationId: cancelFuturesOrder
       parameters:
       - description: ID returned on order successfully being created
         example: "12345"
@@ -2294,7 +2294,7 @@ paths:
       tags:
       - futures
     get:
-      operationId: getOrder
+      operationId: getFuturesOrder
       parameters:
       - description: ID returned on order successfully being created
         example: "12345"

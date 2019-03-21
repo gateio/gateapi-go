@@ -46,7 +46,7 @@ api := client.MarginApi
 loanId := "12345"; // string - Loan ID
 currency := "BTC"; // string - Retrieved specified currency related data
 
-result, _, err = api.CancelLoan(nil, loanId, currency)
+result, _, err := api.CancelLoan(nil, loanId, currency)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -90,7 +90,7 @@ client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.MarginApi
 loan := new (gateapi.Loan); // Loan - 
 
-result, _, err = api.CreateLoan(nil, loan)
+result, _, err := api.CreateLoan(nil, loan)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -136,7 +136,7 @@ api := client.MarginApi
 loanId := "12345"; // string - Loan ID
 side := "lend"; // string - Lend or borrow
 
-result, _, err = api.GetLoan(nil, loanId, side)
+result, _, err := api.GetLoan(nil, loanId, side)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -182,7 +182,7 @@ api := client.MarginApi
 loanRecordId := "12345"; // string - Loan record ID
 loanId := "12345"; // string - Loan ID
 
-result, _, err = api.GetLoanRecord(nil, loanRecordId, loanId)
+result, _, err := api.GetLoanRecord(nil, loanRecordId, loanId)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -232,7 +232,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.MarginApi
 
-result, _, err = api.ListFundingAccounts(nil, nil)
+result, _, err := api.ListFundingAccounts(nil, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -275,7 +275,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 api := client.MarginApi
 currency := "BTC"; // string - Retrieved specified currency related data
 
-result, _, err = api.ListFundingBook(nil, currency)
+result, _, err := api.ListFundingBook(nil, currency)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -330,7 +330,7 @@ client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.MarginApi
 loanId := "12345"; // string - Loan ID
 
-result, _, err = api.ListLoanRecords(nil, loanId, nil)
+result, _, err := api.ListLoanRecords(nil, loanId, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -374,7 +374,7 @@ client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.MarginApi
 loanId := "12345"; // string - Loan ID
 
-result, _, err = api.ListLoanRepayments(nil, loanId)
+result, _, err := api.ListLoanRepayments(nil, loanId)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -432,7 +432,7 @@ api := client.MarginApi
 status := "open"; // string - Loan status
 side := "lend"; // string - Lend or borrow
 
-result, _, err = api.ListLoans(nil, status, side, nil)
+result, _, err := api.ListLoans(nil, status, side, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -482,7 +482,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.MarginApi
 
-result, _, err = api.ListMarginAccounts(nil, nil)
+result, _, err := api.ListMarginAccounts(nil, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -519,7 +519,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // uncomment the next line if your are testing against other hosts
 // client.ChangeBasePath("https://some-other-host")
 api := client.MarginApi
-result, _, err = api.ListMarginCurrencyPairs(nil)
+result, _, err := api.ListMarginCurrencyPairs(nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -565,7 +565,7 @@ api := client.MarginApi
 currency := "BTC"; // string - Retrieved specified currency related data
 ids := "123,234,345"; // string - Lending loan ID list separated by `,`. Maximum of 20 IDs are allowed in one request
 
-result, _, err = api.MergeLoans(nil, currency, ids)
+result, _, err := api.MergeLoans(nil, currency, ids)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -611,7 +611,7 @@ api := client.MarginApi
 loanId := "12345"; // string - Loan ID
 repayRequest := new (gateapi.RepayRequest); // RepayRequest - 
 
-result, _, err = api.RepayLoan(nil, loanId, repayRequest)
+result, _, err := api.RepayLoan(nil, loanId, repayRequest)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -659,7 +659,7 @@ api := client.MarginApi
 loanId := "12345"; // string - Loan ID
 loanPatch := new (gateapi.LoanPatch); // LoanPatch - 
 
-result, _, err = api.UpdateLoan(nil, loanId, loanPatch)
+result, _, err := api.UpdateLoan(nil, loanId, loanPatch)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -707,7 +707,7 @@ api := client.MarginApi
 loanRecordId := "12345"; // string - Loan record ID
 loanPatch := new (gateapi.LoanPatch); // LoanPatch - 
 
-result, _, err = api.UpdateLoanRecord(nil, loanRecordId, loanPatch)
+result, _, err := api.UpdateLoanRecord(nil, loanRecordId, loanPatch)
 if err != nil {
     fmt.Println(err.Error())
 } else {

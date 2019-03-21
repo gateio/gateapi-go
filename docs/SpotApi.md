@@ -42,7 +42,7 @@ api := client.SpotApi
 orderId := "12345"; // string - ID returned on order successfully being created
 currencyPair := "BTC_USDT"; // string - Currency pair
 
-result, _, err = api.CancelOrder(nil, orderId, currencyPair)
+result, _, err := api.CancelOrder(nil, orderId, currencyPair)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -96,7 +96,7 @@ client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.SpotApi
 currencyPair := "BTC_USDT"; // string - Currency pair
 
-result, _, err = api.CancelOrders(nil, currencyPair, nil)
+result, _, err := api.CancelOrders(nil, currencyPair, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -140,7 +140,7 @@ client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.SpotApi
 order := new (gateapi.Order); // Order - 
 
-result, _, err = api.CreateOrder(nil, order)
+result, _, err := api.CreateOrder(nil, order)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -183,7 +183,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 api := client.SpotApi
 currencyPair := "ETH_BTC"; // string - Currency pair
 
-result, _, err = api.GetCurrencyPair(nil, currencyPair)
+result, _, err := api.GetCurrencyPair(nil, currencyPair)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -229,7 +229,7 @@ api := client.SpotApi
 orderId := "12345"; // string - ID returned on order successfully being created
 currencyPair := "BTC_USDT"; // string - Currency pair
 
-result, _, err = api.GetOrder(nil, orderId, currencyPair)
+result, _, err := api.GetOrder(nil, orderId, currencyPair)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -284,7 +284,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 api := client.SpotApi
 currencyPair := "BTC_USDT"; // string - Currency pair
 
-result, _, err = api.ListCandlesticks(nil, currencyPair, nil)
+result, _, err := api.ListCandlesticks(nil, currencyPair, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -321,7 +321,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // uncomment the next line if your are testing against other hosts
 // client.ChangeBasePath("https://some-other-host")
 api := client.SpotApi
-result, _, err = api.ListCurrencyPairs(nil)
+result, _, err := api.ListCurrencyPairs(nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -376,7 +376,7 @@ client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.SpotApi
 currencyPair := "BTC_USDT"; // string - Currency pair
 
-result, _, err = api.ListMyTrades(nil, currencyPair, nil)
+result, _, err := api.ListMyTrades(nil, currencyPair, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -431,7 +431,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 api := client.SpotApi
 currencyPair := "BTC_USDT"; // string - Currency pair
 
-result, _, err = api.ListOrderBook(nil, currencyPair, nil)
+result, _, err := api.ListOrderBook(nil, currencyPair, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -488,7 +488,7 @@ api := client.SpotApi
 currencyPair := "BTC_USDT"; // string - Currency pair
 status := "open"; // string - List orders based on status  `open` - order is waiting to be filled `finished` - order has been filled or cancelled 
 
-result, _, err = api.ListOrders(nil, currencyPair, status, nil)
+result, _, err := api.ListOrders(nil, currencyPair, status, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -538,7 +538,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.SpotApi
 
-result, _, err = api.ListSpotAccounts(nil, nil)
+result, _, err := api.ListSpotAccounts(nil, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -589,7 +589,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 api := client.SpotApi
 
-result, _, err = api.ListTickers(nil, nil)
+result, _, err := api.ListTickers(nil, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -642,7 +642,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 api := client.SpotApi
 currencyPair := "BTC_USDT"; // string - Currency pair
 
-result, _, err = api.ListTrades(nil, currencyPair, nil)
+result, _, err := api.ListTrades(nil, currencyPair, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
