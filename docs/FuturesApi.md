@@ -4,15 +4,15 @@ All URIs are relative to *https://api.gateio.ws/api/v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CancelOrder**](FuturesApi.md#CancelOrder) | **Delete** /futures/orders/{order_id} | Cancel a single order
-[**CancelOrders**](FuturesApi.md#CancelOrders) | **Delete** /futures/orders | Cancel all &#x60;open&#x60; orders matched
+[**CancelFuturesOrder**](FuturesApi.md#CancelFuturesOrder) | **Delete** /futures/orders/{order_id} | Cancel a single order
+[**CancelFuturesOrders**](FuturesApi.md#CancelFuturesOrders) | **Delete** /futures/orders | Cancel all &#x60;open&#x60; orders matched
 [**CancelPriceTriggeredOrder**](FuturesApi.md#CancelPriceTriggeredOrder) | **Delete** /futures/price_orders/{order_id} | Cancel a single order
 [**CancelPriceTriggeredOrderList**](FuturesApi.md#CancelPriceTriggeredOrderList) | **Delete** /futures/price_orders | Cancel all open orders
-[**CreateOrder**](FuturesApi.md#CreateOrder) | **Post** /futures/orders | Create a futures order
+[**CreateFuturesOrder**](FuturesApi.md#CreateFuturesOrder) | **Post** /futures/orders | Create a futures order
 [**CreatePriceTriggeredOrder**](FuturesApi.md#CreatePriceTriggeredOrder) | **Post** /futures/price_orders | Create a price-triggered order
 [**GetFuturesContract**](FuturesApi.md#GetFuturesContract) | **Get** /futures/contracts/{contract} | Get a single contract
+[**GetFuturesOrder**](FuturesApi.md#GetFuturesOrder) | **Get** /futures/orders/{order_id} | Get a single order
 [**GetMyTrades**](FuturesApi.md#GetMyTrades) | **Get** /futures/my_trades | List personal trading history
-[**GetOrder**](FuturesApi.md#GetOrder) | **Get** /futures/orders/{order_id} | Get a single order
 [**GetPosition**](FuturesApi.md#GetPosition) | **Get** /futures/positions/{contract} | Get single position
 [**GetPriceTriggeredOrder**](FuturesApi.md#GetPriceTriggeredOrder) | **Get** /futures/price_orders/{order_id} | Get a single order
 [**ListFuturesAccountBook**](FuturesApi.md#ListFuturesAccountBook) | **Get** /futures/account_book | Query account book
@@ -22,9 +22,9 @@ Method | HTTP request | Description
 [**ListFuturesFundingRateHistory**](FuturesApi.md#ListFuturesFundingRateHistory) | **Get** /futures/funding_rate | Funding rate history
 [**ListFuturesInsuranceLedger**](FuturesApi.md#ListFuturesInsuranceLedger) | **Get** /futures/insurance | Futures insurance balance history
 [**ListFuturesOrderBook**](FuturesApi.md#ListFuturesOrderBook) | **Get** /futures/order_book | Futures order book
+[**ListFuturesOrders**](FuturesApi.md#ListFuturesOrders) | **Get** /futures/orders | List futures orders
 [**ListFuturesTickers**](FuturesApi.md#ListFuturesTickers) | **Get** /futures/tickers | List futures tickers
 [**ListFuturesTrades**](FuturesApi.md#ListFuturesTrades) | **Get** /futures/trades | Futures trading history
-[**ListOrders**](FuturesApi.md#ListOrders) | **Get** /futures/orders | List futures orders
 [**ListPositionClose**](FuturesApi.md#ListPositionClose) | **Get** /futures/position_close | List position close history
 [**ListPositions**](FuturesApi.md#ListPositions) | **Get** /futures/positions | List all positions of a user
 [**ListPriceTriggeredOrders**](FuturesApi.md#ListPriceTriggeredOrders) | **Get** /futures/price_orders | List all auto orders
@@ -33,8 +33,8 @@ Method | HTTP request | Description
 [**UpdatePositionRiskLimit**](FuturesApi.md#UpdatePositionRiskLimit) | **Post** /futures/positions/{contract}/risk_limit | Update position risk limit
 
 
-# **CancelOrder**
-> FuturesOrder CancelOrder(ctx, orderId)
+# **CancelFuturesOrder**
+> FuturesOrder CancelFuturesOrder(ctx, orderId)
 Cancel a single order
 
 ### Required Parameters
@@ -54,7 +54,7 @@ client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
 orderId := "12345"; // string - ID returned on order successfully being created
 
-result, _, err = api.CancelOrder(nil, orderId)
+result, _, err := api.CancelFuturesOrder(nil, orderId)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -77,8 +77,8 @@ Authentication with API key and secret is required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **CancelOrders**
-> []FuturesOrder CancelOrders(ctx, contract, optional)
+# **CancelFuturesOrders**
+> []FuturesOrder CancelFuturesOrders(ctx, contract, optional)
 Cancel all `open` orders matched
 
 ### Required Parameters
@@ -87,10 +87,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **contract** | **string**| Futures contract | 
- **optional** | ***CancelOrdersOpts** | optional parameters | nil if no parameters
+ **optional** | ***CancelFuturesOrdersOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
-Optional parameters are passed through a pointer to a CancelOrdersOpts struct
+Optional parameters are passed through a pointer to a CancelFuturesOrdersOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
@@ -107,7 +107,7 @@ client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
 contract := "BTC_USD"; // string - Futures contract
 
-result, _, err = api.CancelOrders(nil, contract, nil)
+result, _, err := api.CancelFuturesOrders(nil, contract, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -151,7 +151,7 @@ client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
 orderId := "orderId_example"; // string - ID returned on order successfully being created
 
-result, _, err = api.CancelPriceTriggeredOrder(nil, orderId)
+result, _, err := api.CancelPriceTriggeredOrder(nil, orderId)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -195,7 +195,7 @@ client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
 contract := "BTC_USD"; // string - Futures contract
 
-result, _, err = api.CancelPriceTriggeredOrderList(nil, contract)
+result, _, err := api.CancelPriceTriggeredOrderList(nil, contract)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -218,8 +218,8 @@ Authentication with API key and secret is required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **CreateOrder**
-> FuturesOrder CreateOrder(ctx, futuresOrder)
+# **CreateFuturesOrder**
+> FuturesOrder CreateFuturesOrder(ctx, futuresOrder)
 Create a futures order
 
 ### Required Parameters
@@ -239,7 +239,7 @@ client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
 futuresOrder := new (gateapi.FuturesOrder); // FuturesOrder - 
 
-result, _, err = api.CreateOrder(nil, futuresOrder)
+result, _, err := api.CreateFuturesOrder(nil, futuresOrder)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -283,7 +283,7 @@ client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
 futuresPriceTriggeredOrder := new (gateapi.FuturesPriceTriggeredOrder); // FuturesPriceTriggeredOrder - 
 
-result, _, err = api.CreatePriceTriggeredOrder(nil, futuresPriceTriggeredOrder)
+result, _, err := api.CreatePriceTriggeredOrder(nil, futuresPriceTriggeredOrder)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -326,7 +326,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 api := client.FuturesApi
 contract := "BTC_USD"; // string - Futures contract
 
-result, _, err = api.GetFuturesContract(nil, contract)
+result, _, err := api.GetFuturesContract(nil, contract)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -341,6 +341,50 @@ if err != nil {
 ### Authorization
 
 No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **GetFuturesOrder**
+> FuturesOrder GetFuturesOrder(ctx, orderId)
+Get a single order
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **orderId** | **string**| ID returned on order successfully being created | 
+
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
+api := client.FuturesApi
+orderId := "12345"; // string - ID returned on order successfully being created
+
+result, _, err := api.GetFuturesOrder(nil, orderId)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
+### Return type
+
+[**FuturesOrder**](FuturesOrder.md)
+
+### Authorization
+
+Authentication with API key and secret is required
 
 ### HTTP request headers
 
@@ -379,7 +423,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
 
-result, _, err = api.GetMyTrades(nil, nil)
+result, _, err := api.GetMyTrades(nil, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -390,50 +434,6 @@ if err != nil {
 ### Return type
 
 [**[]MyFuturesTrade**](MyFuturesTrade.md)
-
-### Authorization
-
-Authentication with API key and secret is required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **GetOrder**
-> FuturesOrder GetOrder(ctx, orderId)
-Get a single order
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **orderId** | **string**| ID returned on order successfully being created | 
-
-### Example
-
-```golang
-client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-// uncomment the next line if your are testing against other hosts
-// client.ChangeBasePath("https://some-other-host")
-client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
-api := client.FuturesApi
-orderId := "12345"; // string - ID returned on order successfully being created
-
-result, _, err = api.GetOrder(nil, orderId)
-if err != nil {
-    fmt.Println(err.Error())
-} else {
-    fmt.Println(result)
-}
-```
-
-### Return type
-
-[**FuturesOrder**](FuturesOrder.md)
 
 ### Authorization
 
@@ -467,7 +467,7 @@ client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
 contract := "BTC_USD"; // string - Futures contract
 
-result, _, err = api.GetPosition(nil, contract)
+result, _, err := api.GetPosition(nil, contract)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -511,7 +511,7 @@ client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
 orderId := "orderId_example"; // string - ID returned on order successfully being created
 
-result, _, err = api.GetPriceTriggeredOrder(nil, orderId)
+result, _, err := api.GetPriceTriggeredOrder(nil, orderId)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -564,7 +564,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
 
-result, _, err = api.ListFuturesAccountBook(nil, nil)
+result, _, err := api.ListFuturesAccountBook(nil, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -602,7 +602,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
-result, _, err = api.ListFuturesAccounts(nil)
+result, _, err := api.ListFuturesAccounts(nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -659,7 +659,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 api := client.FuturesApi
 contract := "BTC_USD"; // string - Futures contract
 
-result, _, err = api.ListFuturesCandlesticks(nil, contract, nil)
+result, _, err := api.ListFuturesCandlesticks(nil, contract, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -696,7 +696,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // uncomment the next line if your are testing against other hosts
 // client.ChangeBasePath("https://some-other-host")
 api := client.FuturesApi
-result, _, err = api.ListFuturesContracts(nil)
+result, _, err := api.ListFuturesContracts(nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -748,7 +748,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 api := client.FuturesApi
 contract := "BTC_USD"; // string - Futures contract
 
-result, _, err = api.ListFuturesFundingRateHistory(nil, contract, nil)
+result, _, err := api.ListFuturesFundingRateHistory(nil, contract, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -797,7 +797,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 api := client.FuturesApi
 
-result, _, err = api.ListFuturesInsuranceLedger(nil, nil)
+result, _, err := api.ListFuturesInsuranceLedger(nil, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -852,7 +852,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 api := client.FuturesApi
 contract := "BTC_USD"; // string - Futures contract
 
-result, _, err = api.ListFuturesOrderBook(nil, contract, nil)
+result, _, err := api.ListFuturesOrderBook(nil, contract, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -867,6 +867,63 @@ if err != nil {
 ### Authorization
 
 No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ListFuturesOrders**
+> []FuturesOrder ListFuturesOrders(ctx, contract, status, optional)
+List futures orders
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **contract** | **string**| Futures contract | 
+  **status** | **string**| List orders based on status | 
+ **optional** | ***ListFuturesOrdersOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a ListFuturesOrdersOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
+ **lastId** | **optional.String**| Specify list staring point using the last record of &#x60;id&#x60; in previous list-query results | 
+
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
+api := client.FuturesApi
+contract := "BTC_USD"; // string - Futures contract
+status := "open"; // string - List orders based on status
+
+result, _, err := api.ListFuturesOrders(nil, contract, status, nil)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
+### Return type
+
+[**[]FuturesOrder**](FuturesOrder.md)
+
+### Authorization
+
+Authentication with API key and secret is required
 
 ### HTTP request headers
 
@@ -901,7 +958,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 api := client.FuturesApi
 
-result, _, err = api.ListFuturesTickers(nil, nil)
+result, _, err := api.ListFuturesTickers(nil, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -954,7 +1011,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 api := client.FuturesApi
 contract := "BTC_USD"; // string - Futures contract
 
-result, _, err = api.ListFuturesTrades(nil, contract, nil)
+result, _, err := api.ListFuturesTrades(nil, contract, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -969,63 +1026,6 @@ if err != nil {
 ### Authorization
 
 No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **ListOrders**
-> []FuturesOrder ListOrders(ctx, contract, status, optional)
-List futures orders
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **contract** | **string**| Futures contract | 
-  **status** | **string**| List orders based on status | 
- **optional** | ***ListOrdersOpts** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a pointer to a ListOrdersOpts struct
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
- **lastId** | **optional.String**| Specify list staring point using the last record of &#x60;id&#x60; in previous list-query results | 
-
-### Example
-
-```golang
-client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-// uncomment the next line if your are testing against other hosts
-// client.ChangeBasePath("https://some-other-host")
-client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
-api := client.FuturesApi
-contract := "BTC_USD"; // string - Futures contract
-status := "open"; // string - List orders based on status
-
-result, _, err = api.ListOrders(nil, contract, status, nil)
-if err != nil {
-    fmt.Println(err.Error())
-} else {
-    fmt.Println(result)
-}
-```
-
-### Return type
-
-[**[]FuturesOrder**](FuturesOrder.md)
-
-### Authorization
-
-Authentication with API key and secret is required
 
 ### HTTP request headers
 
@@ -1062,7 +1062,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
 
-result, _, err = api.ListPositionClose(nil, nil)
+result, _, err := api.ListPositionClose(nil, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -1100,7 +1100,7 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
-result, _, err = api.ListPositions(nil)
+result, _, err := api.ListPositions(nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -1155,7 +1155,7 @@ client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
 status := "status_example"; // string - List orders based on status
 
-result, _, err = api.ListPriceTriggeredOrders(nil, status, nil)
+result, _, err := api.ListPriceTriggeredOrders(nil, status, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -1201,7 +1201,7 @@ api := client.FuturesApi
 contract := "BTC_USD"; // string - Futures contract
 leverage := "10"; // string - New position leverage
 
-result, _, err = api.UpdatePositionLeverage(nil, contract, leverage)
+result, _, err := api.UpdatePositionLeverage(nil, contract, leverage)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -1247,7 +1247,7 @@ api := client.FuturesApi
 contract := "BTC_USD"; // string - Futures contract
 change := "0.01"; // string - Margin change. Use positive number to increase margin, negative number otherwise.
 
-result, _, err = api.UpdatePositionMargin(nil, contract, change)
+result, _, err := api.UpdatePositionMargin(nil, contract, change)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -1293,7 +1293,7 @@ api := client.FuturesApi
 contract := "BTC_USD"; // string - Futures contract
 riskLimit := "10"; // string - New position risk limit
 
-result, _, err = api.UpdatePositionRiskLimit(nil, contract, riskLimit)
+result, _, err := api.UpdatePositionRiskLimit(nil, contract, riskLimit)
 if err != nil {
     fmt.Println(err.Error())
 } else {
