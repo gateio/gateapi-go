@@ -10,7 +10,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0
   termsOfService: https://www.gate.io/docs/agreement.pdf
   title: Gate API v4
-  version: 4.6.0
+  version: 4.6.1
 servers:
 - description: Real Trading
   url: https://api.gateio.ws/api/v4
@@ -1649,13 +1649,16 @@ paths:
               example:
               - contract: BTC_USD
                 last: "6432"
+                low_24h: "6278"
+                high_24h: "6790"
                 change_percentage: "4.43"
                 total_size: "32323904"
                 volume_24h: "184040233284"
                 volume_24h_btc: "28613220"
                 volume_24h_usd: "184040233284"
                 mark_price: "6534"
-                funding_rate: "0"
+                funding_rate: "0.0001"
+                funding_rate_indicative: "0.0001"
                 index_price: "6531"
               schema:
                 items:
@@ -4076,16 +4079,19 @@ components:
       type: object
     FuturesTicker:
       example:
-        funding_rate: funding_rate
         volume_24h_btc: volume_24h_btc
         last: last
-        change_percentage: change_percentage
         contract: contract
         mark_price: mark_price
         total_size: total_size
+        index_price: index_price
+        funding_rate: funding_rate
+        change_percentage: change_percentage
+        low_24h: low_24h
+        high_24h: high_24h
         volume_24h: volume_24h
         volume_24h_usd: volume_24h_usd
-        index_price: index_price
+        funding_rate_indicative: funding_rate_indicative
         quanto_base_rate: quanto_base_rate
       properties:
         contract:
@@ -4099,6 +4105,12 @@ components:
           type: string
         total_size:
           description: Contract total size
+          type: string
+        low_24h:
+          description: Lowest trading price in recent 24h
+          type: string
+        high_24h:
+          description: Highest trading price in recent 24h
           type: string
         volume_24h:
           description: Trade size in recent 24h
@@ -4114,6 +4126,9 @@ components:
           type: string
         funding_rate:
           description: Funding rate
+          type: string
+        funding_rate_indicative:
+          description: Indicative Funding rate in next period
           type: string
         index_price:
           description: Index price
