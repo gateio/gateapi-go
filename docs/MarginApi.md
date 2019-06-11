@@ -418,6 +418,9 @@ Name | Type | Description  | Notes
 
 
  **currency** | **optional.String**| Retrieved specified currency related data | 
+ **currencyPair** | **optional.String**| Currency pair | 
+ **sortBy** | **optional.String**| Specify which field is used to sort. &#x60;create_time&#x60; or &#x60;rate&#x60; is supported. Default to &#x60;create_time&#x60; | 
+ **reverseSort** | **optional.Bool**| Whether to sort in descending order. Default to &#x60;true&#x60; | 
  **page** | **optional.Int32**| Page number | [default to 1]
  **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
 

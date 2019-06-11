@@ -19,6 +19,8 @@ Name | Type | Description | Notes
 **RealisedPnl** | **string** | Realized PNL | [optional] 
 **HistoryPnl** | **string** | History realized PNL | [optional] 
 **LastClosePnl** | **string** | PNL of last position close | [optional] 
+**RealisedPoint** | **string** | Realized POINT PNL | [optional] 
+**HistoryPoint** | **string** | History realized POINT PNL | [optional] 
 **AdlRanking** | **int32** | ADL ranking, range from 1 to 5 | [optional] 
 **PendingOrders** | **int32** | Current open orders | [optional] 
 **CloseOrder** | [**PositionCloseOrder**](Position_close_order.md) |  | [optional] 

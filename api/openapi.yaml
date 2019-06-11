@@ -10,7 +10,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0
   termsOfService: https://www.gate.io/docs/agreement.pdf
   title: Gate API v4
-  version: 4.6.1
+  version: 4.7.2
 servers:
 - description: Real Trading
   url: https://api.gateio.ws/api/v4
@@ -21,6 +21,8 @@ security:
   api_sign: []
   api_timestamp: []
 tags:
+- description: Wallet
+  name: wallet
 - description: Spot trading
   name: spot
 - description: Margin API; margin trading uses spot trading API
@@ -28,6 +30,31 @@ tags:
 - description: Futures trade
   name: futures
 paths:
+  /wallet/transfers:
+    post:
+      description: |-
+        Transfer between different accounts. Currently support transfers between the following:
+
+        1. spot - margin
+      operationId: transfer
+      requestBody:
+        content:
+          application/json:
+            example:
+              currency: BTC
+              from: spot
+              to: margin
+              amount: "1"
+              currency_pair: BTC_USDT
+            schema:
+              $ref: '#/components/schemas/Transfer'
+        required: true
+      responses:
+        204:
+          description: Balance transferred
+      summary: Transfer between accounts
+      tags:
+      - wallet
   /spot/currency_pairs:
     get:
       operationId: listCurrencyPairs
@@ -454,7 +481,7 @@ paths:
                   $ref: '#/components/schemas/Order'
                 type: array
           description: List retrieved
-      summary: List futures orders
+      summary: List orders
       tags:
       - spot
     post:
@@ -797,6 +824,33 @@ paths:
         required: false
         schema:
           type: string
+      - description: Currency pair
+        example: BTC_USDT
+        in: query
+        name: currency_pair
+        required: false
+        schema:
+          type: string
+      - description: Specify which field is used to sort. `create_time` or `rate` is supported. Default to `create_time`
+        example: rate
+        explode: true
+        in: query
+        name: sort_by
+        required: false
+        schema:
+          enum:
+          - create_time
+          - rate
+          type: string
+        style: form
+      - description: Whether to sort in descending order. Default to `true`
+        explode: true
+        in: query
+        name: reverse_sort
+        required: false
+        schema:
+          type: boolean
+        style: form
       - description: Page number
         example: 1
         in: query
@@ -1749,6 +1803,7 @@ paths:
                 available: "4.98"
                 order_margin: "0.1"
                 position_margin: "5.1"
+                point: "10000"
               schema:
                 $ref: '#/components/schemas/FuturesAccount'
           description: List retrieved
@@ -1784,13 +1839,15 @@ paths:
         schema:
           type: integer
       - description: |-
-          Changing Type
-
+          Changing Type:
           - dnw: Deposit & Withdraw
           - pnl: Profit & Loss by reducing position
           - fee: Trading fee
           - refr: Referrer rebate
           - fund: Funding
+          - point_dnw: POINT Deposit & Withdraw
+          - point_fee: POINT Trading fee
+          - point_refr: POINT Referrer rebate
         example: dnw
         explode: true
         in: query
@@ -1803,6 +1860,9 @@ paths:
           - fee
           - refr
           - fund
+          - point_dnw
+          - point_fee
+          - point_refr
           type: string
         style: form
       responses:
@@ -1847,6 +1907,8 @@ paths:
                 realised_pnl: "0.045543982432"
                 history_pnl: "0"
                 last_close_pnl: "0"
+                realised_point: "0"
+                history_point: "0"
                 adl_ranking: 5
                 pending_orders: 16
                 close_order:
@@ -1893,6 +1955,8 @@ paths:
                 realised_pnl: "0.045543982432"
                 history_pnl: "0"
                 last_close_pnl: "0"
+                realised_point: "0"
+                history_point: "0"
                 adl_ranking: 5
                 pending_orders: 16
                 close_order:
@@ -1946,6 +2010,8 @@ paths:
                 realised_pnl: "0.045543982432"
                 history_pnl: "0"
                 last_close_pnl: "0"
+                realised_point: "0"
+                history_point: "0"
                 adl_ranking: 5
                 pending_orders: 16
                 close_order:
@@ -1999,6 +2065,8 @@ paths:
                 realised_pnl: "0.045543982432"
                 history_pnl: "0"
                 last_close_pnl: "0"
+                realised_point: "0"
+                history_point: "0"
                 adl_ranking: 5
                 pending_orders: 16
                 close_order:
@@ -2052,6 +2120,8 @@ paths:
                 realised_pnl: "0.045543982432"
                 history_pnl: "0"
                 last_close_pnl: "0"
+                realised_point: "0"
+                history_point: "0"
                 adl_ranking: 5
                 pending_orders: 16
                 close_order:
@@ -2433,6 +2503,63 @@ paths:
       summary: List position close history
       tags:
       - futures
+  /futures/liquidates:
+    get:
+      operationId: listLiquidates
+      parameters:
+      - description: Futures contract, return related data only if specified
+        example: BTC_USD
+        in: query
+        name: contract
+        required: false
+        schema:
+          type: string
+      - description: Maximum number of record returned in one list
+        example: 100
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 100
+          maximum: 1000
+          minimum: 1
+          type: integer
+      - description: Specify a liquidation timestamp
+        example: 1546905600
+        explode: true
+        in: query
+        name: at
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - time: 1548654951
+                contract: BTC_USD
+                size: 600
+                leverage: "25"
+                margin: "0.006705256878"
+                entry_price: "3536.123"
+                liq_price: "3421.54"
+                mark_price: "3420.27"
+                order_id: 317393847
+                order_price: "3405"
+                fill_price: "3424"
+                left: 0
+              schema:
+                items:
+                  $ref: '#/components/schemas/FuturesLiquidate'
+                type: array
+          description: List retrieved
+      summary: List liquidation history
+      tags:
+      - futures
   /futures/price_orders:
     delete:
       operationId: cancelPriceTriggeredOrderList
@@ -2735,6 +2862,8 @@ components:
         realised_pnl: "0.045543982432"
         history_pnl: "0"
         last_close_pnl: "0"
+        realised_point: "0"
+        history_point: "0"
         adl_ranking: 5
         pending_orders: 16
         close_order:
@@ -2787,6 +2916,16 @@ components:
         finish_as: cancelled
         reason: ""
   parameters:
+    stream_id:
+      description: 直播 ID
+      example: 22153bfd35f44f4bb3b9123ca9ba60b7
+      explode: false
+      in: path
+      name: stream_id
+      required: true
+      schema:
+        type: string
+      style: simple
     url_user:
       description: User ID
       explode: false
@@ -2871,6 +3010,8 @@ components:
             realised_pnl: "0.045543982432"
             history_pnl: "0"
             last_close_pnl: "0"
+            realised_point: "0"
+            history_point: "0"
             adl_ranking: 5
             pending_orders: 16
             close_order:
@@ -2936,7 +3077,288 @@ components:
             $ref: '#/components/schemas/FuturesPriceTriggeredOrder'
       description: Auto order detail
   schemas:
+    CurrencyPair:
+      description: Spot currency pair
+      example:
+        quote: quote
+        min_base_amount: min_base_amount
+        fee: fee
+        precision: 0
+        min_quote_amount: min_quote_amount
+        id: id
+        base: base
+      properties:
+        id:
+          description: Currency pair
+          type: string
+        base:
+          description: Base currency
+          type: string
+        quote:
+          description: Quote currency
+          type: string
+        fee:
+          description: Trading fee
+          type: string
+        min_base_amount:
+          description: Minimum amount of base currency to trade, `null` means no limit
+          type: string
+        min_quote_amount:
+          description: Minimum amount of quote currency to trade, `null` means no limit
+          type: string
+        precision:
+          description: Price scale
+          type: integer
+      type: object
+    Order:
+      description: Spot order details
+      example:
+        side: buy
+        amount: amount
+        time_in_force: gtc
+        currency_pair: currency_pair
+        create_time: create_time
+        left: left
+        price: price
+        id: id
+        type: limit
+        fill_price: fill_price
+        account: spot
+        status: open
+      properties:
+        id:
+          description: Order ID
+          readOnly: true
+          type: string
+        create_time:
+          description: Order creation time
+          readOnly: true
+          type: string
+        status:
+          description: |-
+            Order status
+
+            - `open`: to be filled- `closed`: filled- `cancelled`: cancelled
+          enum:
+          - open
+          - closed
+          - cancelled
+          readOnly: true
+          type: string
+        currency_pair:
+          description: Currency pair
+          type: string
+        type:
+          default: limit
+          description: Order type. limit - limit order
+          enum:
+          - limit
+          type: string
+        account:
+          default: spot
+          description: Account type. spot - use spot account; margin - use margin account
+          enum:
+          - spot
+          - margin
+          type: string
+        side:
+          description: Order side
+          enum:
+          - buy
+          - sell
+          type: string
+        amount:
+          description: Trade amount
+          type: string
+        price:
+          description: Order price
+          type: string
+        time_in_force:
+          default: gtc
+          description: Time in force
+          enum:
+          - gtc
+          - ioc
+          type: string
+        left:
+          description: Amount left to fill
+          readOnly: true
+          type: string
+        fill_price:
+          description: Fill price of the order
+          readOnly: true
+          type: string
+      required:
+      - amount
+      - currency_pair
+      - price
+      - side
+      type: object
+    Loan:
+      description: Margin loan details
+      example:
+        side: lend
+        amount: amount
+        create_time: create_time
+        expire_time: expire_time
+        currency_pair: currency_pair
+        repaid: repaid
+        auto_renew: false
+        rate: rate
+        left: left
+        days: 0
+        paid_interest: paid_interest
+        currency: currency
+        id: id
+        unpaid_interest: unpaid_interest
+        status: open
+      properties:
+        id:
+          description: Loan ID
+          readOnly: true
+          type: string
+        create_time:
+          description: Creation time
+          readOnly: true
+          type: string
+        expire_time:
+          description: Repay time of the loan. No value will be returned for lending loan
+          readOnly: true
+          type: string
+        status:
+          description: |-
+            Loan status
+
+            open - not fully loaned
+            loaned - all loaned out for lending loan; loaned in for borrowing side
+            finished - loan is finished, either being all repaid or cancelled by the lender
+            auto_repaid - automatically repaid by the system
+          enum:
+          - open
+          - loaned
+          - finished
+          - auto_repaid
+          readOnly: true
+          type: string
+        side:
+          description: Loan side
+          enum:
+          - lend
+          - borrow
+          type: string
+        currency:
+          description: Loan currency
+          type: string
+        rate:
+          description: |-
+            Loan rate. Only rates in [0.0002, 0.002] are supported.
+
+            Not required in lending. Market rate calculated from recent rates will be used if not set
+          type: string
+        amount:
+          description: Loan amount
+          type: string
+        days:
+          description: Loan days
+          type: integer
+        auto_renew:
+          default: false
+          description: Auto renew the loan on expiration
+          type: boolean
+        currency_pair:
+          description: Currency pair. Required for borrowing side
+          type: string
+        left:
+          description: Amount not lending out
+          readOnly: true
+          type: string
+        repaid:
+          description: Repaid amount
+          readOnly: true
+          type: string
+        paid_interest:
+          description: Repaid interest
+          readOnly: true
+          type: string
+        unpaid_interest:
+          description: Interest not repaid
+          readOnly: true
+          type: string
+      required:
+      - amount
+      - currency
+      - days
+      - side
+      type: object
+    LoanRecord:
+      description: Margin loaned record details
+      example:
+        amount: amount
+        create_time: create_time
+        expire_time: expire_time
+        repaid: repaid
+        auto_renew: false
+        rate: rate
+        borrow_user_id: borrow_user_id
+        days: 0
+        paid_interest: paid_interest
+        currency: currency
+        id: id
+        unpaid_interest: unpaid_interest
+        loan_id: loan_id
+        status: loaned
+      properties:
+        id:
+          description: Loan record ID
+          type: string
+        loan_id:
+          description: Loan ID the record belongs to
+          type: string
+        create_time:
+          description: Loan time
+          type: string
+        expire_time:
+          description: Expiration time
+          type: string
+        status:
+          description: Loan record status
+          enum:
+          - loaned
+          - finished
+          type: string
+        borrow_user_id:
+          description: Garbled user ID
+          type: string
+        currency:
+          description: Loan currency
+          type: string
+        rate:
+          description: Loan rate
+          type: string
+        amount:
+          description: Loan amount
+          type: string
+        days:
+          description: Loan days
+          type: integer
+        auto_renew:
+          default: false
+          description: Whether the record will auto renew on expiration
+          type: boolean
+        repaid:
+          description: Repaid amount
+          type: string
+        paid_interest:
+          description: Repaid interest
+          readOnly: true
+          type: string
+        unpaid_interest:
+          description: Interest not repaid
+          readOnly: true
+          type: string
+      type: object
     Contract:
+      description: Futures contract details
       example:
         maintenance_rate: maintenance_rate
         index_price: index_price
@@ -3068,6 +3490,7 @@ components:
           type: number
       type: object
     Position:
+      description: Futures position details
       example:
         leverage: leverage
         maintenance_rate: maintenance_rate
@@ -3078,6 +3501,7 @@ components:
           is_liq: true
           price: price
           id: 5
+        realised_point: realised_point
         contract: contract
         mark_price: mark_price
         liq_price: liq_price
@@ -3088,6 +3512,7 @@ components:
         size: 6
         last_close_pnl: last_close_pnl
         pending_orders: 5
+        history_point: history_point
         user: 0
         leverage_max: leverage_max
         value: value
@@ -3155,6 +3580,14 @@ components:
           description: PNL of last position close
           readOnly: true
           type: string
+        realised_point:
+          description: Realized POINT PNL
+          readOnly: true
+          type: string
+        history_point:
+          description: History realized POINT PNL
+          readOnly: true
+          type: string
         adl_ranking:
           description: ADL ranking, range from 1 to 5
           readOnly: true
@@ -3167,6 +3600,7 @@ components:
           $ref: '#/components/schemas/Position_close_order'
       type: object
     FuturesOrder:
+      description: Futures order details
       example:
         finish_as: filled
         reduce_only: false
@@ -3267,7 +3701,7 @@ components:
           type: boolean
           writeOnly: true
         is_reduce_only:
-          description: Is the order post-only
+          description: Is the order reduce-only
           readOnly: true
           type: boolean
         is_liq:
@@ -3324,6 +3758,7 @@ components:
       - contract
       type: object
     FuturesPriceTriggeredOrder:
+      description: Futures order details
       example:
         finish_as: cancelled
         reason: reason
@@ -3401,37 +3836,41 @@ components:
       - initial
       - trigger
       type: object
-    CurrencyPair:
+    Transfer:
       example:
-        quote: quote
-        min_base_amount: min_base_amount
-        fee: fee
-        precision: 0
-        min_quote_amount: min_quote_amount
-        id: id
-        base: base
+        amount: amount
+        currency_pair: currency_pair
+        currency: currency
+        from: spot
+        to: spot
       properties:
-        id:
-          description: Currency pair
+        currency:
+          description: Transfer currency name
           type: string
-        base:
-          description: Base currency
+        from:
+          description: Account transferred from. `spot` - spot account. `margin` - margin account
+          enum:
+          - spot
+          - margin
           type: string
-        quote:
-          description: Quote currency
+        to:
+          description: Account transferred to. `spot` - spot account. `margin` - margin account
+          enum:
+          - spot
+          - margin
           type: string
-        fee:
-          description: Trading fee
+        amount:
+          description: Transfer amount
           type: string
-        min_base_amount:
-          description: Minimum amount of base currency to trade, `null` means no limit
+        currency_pair:
+          description: Required if transfer from or to margin account
           type: string
-        min_quote_amount:
-          description: Minimum amount of quote currency to trade, `null` means no limit
-          type: string
-        precision:
-          description: Price scale
-          type: integer
+      required:
+      - amount
+      - currency
+      - currency_pair
+      - from
+      - to
       type: object
     Ticker:
       example:
@@ -3557,90 +3996,6 @@ components:
           description: Locked amount, used in trading
           type: string
       type: object
-    Order:
-      description: Order details
-      example:
-        side: buy
-        amount: amount
-        time_in_force: gtc
-        currency_pair: currency_pair
-        create_time: create_time
-        left: left
-        price: price
-        id: id
-        type: limit
-        fill_price: fill_price
-        account: spot
-        status: open
-      properties:
-        id:
-          description: Order ID
-          readOnly: true
-          type: string
-        create_time:
-          description: Order creation time
-          readOnly: true
-          type: string
-        status:
-          description: |-
-            Order status
-
-            - `open`: to be filled- `closed`: filled- `cancelled`: cancelled
-          enum:
-          - open
-          - closed
-          - cancelled
-          readOnly: true
-          type: string
-        currency_pair:
-          description: Currency pair
-          type: string
-        type:
-          default: limit
-          description: Order type. limit - limit order
-          enum:
-          - limit
-          type: string
-        account:
-          default: spot
-          description: Account type. spot - use spot account; margin - use margin account
-          enum:
-          - spot
-          - margin
-          type: string
-        side:
-          description: Order side
-          enum:
-          - buy
-          - sell
-          type: string
-        amount:
-          description: Trade amount
-          type: string
-        price:
-          description: Order price
-          type: string
-        time_in_force:
-          default: gtc
-          description: Time in force
-          enum:
-          - gtc
-          - ioc
-          type: string
-        left:
-          description: Amount left to fill
-          readOnly: true
-          type: string
-        fill_price:
-          description: Fill price of the order
-          readOnly: true
-          type: string
-      required:
-      - amount
-      - currency_pair
-      - price
-      - side
-      type: object
     MarginCurrencyPair:
       example:
         leverage: 0
@@ -3757,99 +4112,6 @@ components:
           description: Amount used for lending. total_lent = lent + locked
           type: string
       type: object
-    Loan:
-      example:
-        side: lend
-        amount: amount
-        create_time: create_time
-        expire_time: expire_time
-        currency_pair: currency_pair
-        repaid: repaid
-        auto_renew: false
-        rate: rate
-        left: left
-        days: 0
-        paid_interest: paid_interest
-        currency: currency
-        id: id
-        unpaid_interest: unpaid_interest
-        status: open
-      properties:
-        id:
-          description: Loan ID
-          readOnly: true
-          type: string
-        create_time:
-          description: Creation time
-          readOnly: true
-          type: string
-        expire_time:
-          description: Repay time of the loan. No value will be returned for lending loan
-          readOnly: true
-          type: string
-        status:
-          description: |-
-            Loan status
-
-            open - not fully loaned
-            loaned - all loaned out for lending loan; loaned in for borrowing side
-            finished - loan is finished, either being all repaid or cancelled by the lender
-            auto_repaid - automatically repaid by the system
-          enum:
-          - open
-          - loaned
-          - finished
-          - auto_repaid
-          readOnly: true
-          type: string
-        side:
-          description: Loan side
-          enum:
-          - lend
-          - borrow
-          type: string
-        currency:
-          description: Loan currency
-          type: string
-        rate:
-          description: Loan rate
-          type: string
-        amount:
-          description: Loan amount
-          type: string
-        days:
-          description: Loan days
-          type: integer
-        auto_renew:
-          default: false
-          description: Auto renew the loan on expiration
-          type: boolean
-        currency_pair:
-          description: Currency pair. Required for borrowing side
-          type: string
-        left:
-          description: Amount not lending out
-          readOnly: true
-          type: string
-        repaid:
-          description: Repaid amount
-          readOnly: true
-          type: string
-        paid_interest:
-          description: Repaid interest
-          readOnly: true
-          type: string
-        unpaid_interest:
-          description: Interest not repaid
-          readOnly: true
-          type: string
-      required:
-      - amount
-      - currency
-      - days
-      - rate
-      - side
-      type: object
     LoanPatch:
       example:
         side: lend
@@ -3927,72 +4189,6 @@ components:
       - currency
       - currency_pair
       - mode
-      type: object
-    LoanRecord:
-      example:
-        amount: amount
-        create_time: create_time
-        expire_time: expire_time
-        repaid: repaid
-        auto_renew: false
-        rate: rate
-        borrow_user_id: borrow_user_id
-        days: 0
-        paid_interest: paid_interest
-        currency: currency
-        id: id
-        unpaid_interest: unpaid_interest
-        loan_id: loan_id
-        status: loaned
-      properties:
-        id:
-          description: Loan record ID
-          type: string
-        loan_id:
-          description: Loan ID the record belongs to
-          type: string
-        create_time:
-          description: Loan time
-          type: string
-        expire_time:
-          description: Expiration time
-          type: string
-        status:
-          description: Loan record status
-          enum:
-          - loaned
-          - finished
-          type: string
-        borrow_user_id:
-          description: Garbled user ID
-          type: string
-        currency:
-          description: Loan currency
-          type: string
-        rate:
-          description: Loan rate
-          type: string
-        amount:
-          description: Loan amount
-          type: string
-        days:
-          description: Loan days
-          type: integer
-        auto_renew:
-          default: false
-          description: Whether the record will auto renew on expiration
-          type: boolean
-        repaid:
-          description: Repaid amount
-          type: string
-        paid_interest:
-          description: Repaid interest
-          readOnly: true
-          type: string
-        unpaid_interest:
-          description: Interest not repaid
-          readOnly: true
-          type: string
       type: object
     FuturesOrderBook:
       example:
@@ -4168,6 +4364,7 @@ components:
         total: total
         available: available
         unrealised_pnl: unrealised_pnl
+        point: point
         position_margin: position_margin
         order_margin: order_margin
       properties:
@@ -4185,6 +4382,9 @@ components:
           type: string
         available:
           description: Available balance to transfer out or trade
+          type: string
+        point:
+          description: POINT amount
           type: string
       type: object
     FuturesAccountBook:
@@ -4206,19 +4406,24 @@ components:
           type: string
         type:
           description: |-
-            Changing Type
-
+            Changing Type:
             - dnw: Deposit & Withdraw
             - pnl: Profit & Loss by reducing position
             - fee: Trading fee
             - refr: Referrer rebate
             - fund: Funding
+            - point_dnw: POINT Deposit & Withdraw
+            - point_fee: POINT Trading fee
+            - point_refr: POINT Referrer rebate
           enum:
           - dnw
           - pnl
           - fee
           - refr
           - fund
+          - point_dnw
+          - point_fee
+          - point_refr
           type: string
         text:
           description: Comment
@@ -4293,6 +4498,74 @@ components:
           readOnly: true
           type: string
       type: object
+    FuturesLiquidate:
+      example:
+        leverage: leverage
+        margin: margin
+        entry_price: entry_price
+        size: 6
+        left: 5
+        contract: contract
+        mark_price: mark_price
+        liq_price: liq_price
+        order_price: order_price
+        time: 0
+        order_id: 1
+        fill_price: fill_price
+      properties:
+        time:
+          description: Liquidation time
+          format: int64
+          readOnly: true
+          type: integer
+        contract:
+          description: Futures contract
+          readOnly: true
+          type: string
+        leverage:
+          description: Position leverage
+          readOnly: true
+          type: string
+        size:
+          description: Position size
+          format: int64
+          readOnly: true
+          type: integer
+        margin:
+          description: Position margin
+          readOnly: true
+          type: string
+        entry_price:
+          description: Average entry price
+          readOnly: true
+          type: string
+        liq_price:
+          description: Liquidation price
+          readOnly: true
+          type: string
+        mark_price:
+          description: Mark price
+          readOnly: true
+          type: string
+        order_id:
+          description: Liquidation order ID
+          format: int64
+          readOnly: true
+          type: integer
+        order_price:
+          description: Liquidation order price
+          readOnly: true
+          type: string
+        fill_price:
+          description: Liquidation order average taker price
+          readOnly: true
+          type: string
+        left:
+          description: Liquidation order maker size
+          format: int64
+          readOnly: true
+          type: integer
+      type: object
     FuturesInitialOrder:
       example:
         tif: gtc
@@ -4341,10 +4614,10 @@ components:
           type: string
         reduce_only:
           default: false
-          description: Set to true to create an post-only order
+          description: Set to true to create an reduce-only order
           type: boolean
         is_reduce_only:
-          description: Is the order post-only
+          description: Is the order reduce-only
           readOnly: true
           type: boolean
         is_close:

@@ -25,6 +25,7 @@ Method | HTTP request | Description
 [**ListFuturesOrders**](FuturesApi.md#ListFuturesOrders) | **Get** /futures/orders | List futures orders
 [**ListFuturesTickers**](FuturesApi.md#ListFuturesTickers) | **Get** /futures/tickers | List futures tickers
 [**ListFuturesTrades**](FuturesApi.md#ListFuturesTrades) | **Get** /futures/trades | Futures trading history
+[**ListLiquidates**](FuturesApi.md#ListLiquidates) | **Get** /futures/liquidates | List liquidation history
 [**ListPositionClose**](FuturesApi.md#ListPositionClose) | **Get** /futures/position_close | List position close history
 [**ListPositions**](FuturesApi.md#ListPositions) | **Get** /futures/positions | List all positions of a user
 [**ListPriceTriggeredOrders**](FuturesApi.md#ListPriceTriggeredOrders) | **Get** /futures/price_orders | List all auto orders
@@ -553,7 +554,7 @@ Name | Type | Description  | Notes
  **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
  **from** | **optional.Int32**| Start timestamp | 
  **to** | **optional.Int32**| End timestamp | 
- **type_** | **optional.String**| Changing Type  - dnw: Deposit &amp; Withdraw - pnl: Profit &amp; Loss by reducing position - fee: Trading fee - refr: Referrer rebate - fund: Funding | 
+ **type_** | **optional.String**| Changing Type: - dnw: Deposit &amp; Withdraw - pnl: Profit &amp; Loss by reducing position - fee: Trading fee - refr: Referrer rebate - fund: Funding - point_dnw: POINT Deposit &amp; Withdraw - point_fee: POINT Trading fee - point_refr: POINT Referrer rebate | 
 
 ### Example
 
@@ -1026,6 +1027,58 @@ if err != nil {
 ### Authorization
 
 No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ListLiquidates**
+> []FuturesLiquidate ListLiquidates(ctx, optional)
+List liquidation history
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***ListLiquidatesOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a ListLiquidatesOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **contract** | **optional.String**| Futures contract, return related data only if specified | 
+ **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
+ **at** | **optional.Int32**| Specify a liquidation timestamp | [default to 0]
+
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
+api := client.FuturesApi
+
+result, _, err := api.ListLiquidates(nil, nil)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
+### Return type
+
+[**[]FuturesLiquidate**](FuturesLiquidate.md)
+
+### Authorization
+
+Authentication with API key and secret is required
 
 ### HTTP request headers
 
