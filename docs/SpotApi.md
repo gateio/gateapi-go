@@ -13,7 +13,7 @@ Method | HTTP request | Description
 [**ListCurrencyPairs**](SpotApi.md#ListCurrencyPairs) | **Get** /spot/currency_pairs | List all currency pairs supported
 [**ListMyTrades**](SpotApi.md#ListMyTrades) | **Get** /spot/my_trades | List personal trading history
 [**ListOrderBook**](SpotApi.md#ListOrderBook) | **Get** /spot/order_book | Retrieve order book
-[**ListOrders**](SpotApi.md#ListOrders) | **Get** /spot/orders | List futures orders
+[**ListOrders**](SpotApi.md#ListOrders) | **Get** /spot/orders | List orders
 [**ListSpotAccounts**](SpotApi.md#ListSpotAccounts) | **Get** /spot/accounts | List spot accounts
 [**ListTickers**](SpotApi.md#ListTickers) | **Get** /spot/tickers | Retrieve ticker information
 [**ListTrades**](SpotApi.md#ListTrades) | **Get** /spot/trades | Retrieve market trades
@@ -456,7 +456,7 @@ No authorization required
 
 # **ListOrders**
 > []Order ListOrders(ctx, currencyPair, status, optional)
-List futures orders
+List orders
 
 ### Required Parameters
 

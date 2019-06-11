@@ -10,13 +10,15 @@
 
 package gateapi
 
-type RepayRequest struct {
-	// Currency pair
-	CurrencyPair string `json:"currency_pair"`
-	// Loan currency
+type Transfer struct {
+	// Transfer currency name
 	Currency string `json:"currency"`
-	// Repay mode. all - repay all; partial - repay only some portion
-	Mode string `json:"mode"`
-	// Repay amount. Required in `partial` mode
-	Amount string `json:"amount,omitempty"`
+	// Account transferred from. `spot` - spot account. `margin` - margin account
+	From string `json:"from"`
+	// Account transferred to. `spot` - spot account. `margin` - margin account
+	To string `json:"to"`
+	// Transfer amount
+	Amount string `json:"amount"`
+	// Required if transfer from or to margin account
+	CurrencyPair string `json:"currency_pair"`
 }
