@@ -10,7 +10,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0
   termsOfService: https://www.gate.io/docs/agreement.pdf
   title: Gate API v4
-  version: 4.7.2
+  version: 4.7.3
 servers:
 - description: Real Trading
   url: https://api.gateio.ws/api/v4
@@ -395,6 +395,7 @@ paths:
             application/json:
               example:
               - id: "12332324"
+                text: t-123456
                 create_time: "1548000000"
                 currency_pair: ETC_BTC
                 status: cancelled
@@ -465,6 +466,7 @@ paths:
             application/json:
               example:
               - id: "12332324"
+                text: t-123456
                 create_time: "1548000000"
                 currency_pair: ETC_BTC
                 status: cancelled
@@ -491,6 +493,7 @@ paths:
           application/json:
             example:
               id: "12332324"
+              text: t-123456
               create_time: "1548000000"
               currency_pair: ETC_BTC
               status: cancelled
@@ -511,6 +514,7 @@ paths:
             application/json:
               example:
                 id: "12332324"
+                text: t-123456
                 create_time: "1548000000"
                 currency_pair: ETC_BTC
                 status: cancelled
@@ -554,6 +558,7 @@ paths:
             application/json:
               example:
                 id: "12332324"
+                text: t-123456
                 create_time: "1548000000"
                 currency_pair: ETC_BTC
                 status: cancelled
@@ -596,6 +601,7 @@ paths:
             application/json:
               example:
                 id: "12332324"
+                text: t-123456
                 create_time: "1548000000"
                 currency_pair: ETC_BTC
                 status: cancelled
@@ -2178,7 +2184,7 @@ paths:
                 is_reduce_only: false
                 is_close: false
                 is_liq: false
-                text: api
+                text: t-my-custom-id
                 status: finished
                 finish_time: 1514764900
                 finish_as: cancelled
@@ -2250,7 +2256,7 @@ paths:
                 is_reduce_only: false
                 is_close: false
                 is_liq: false
-                text: api
+                text: t-my-custom-id
                 status: finished
                 finish_time: 1514764900
                 finish_as: cancelled
@@ -2284,7 +2290,7 @@ paths:
               is_reduce_only: false
               is_close: false
               is_liq: false
-              text: api
+              text: t-my-custom-id
               status: finished
               finish_time: 1514764900
               finish_as: cancelled
@@ -2312,7 +2318,7 @@ paths:
                 is_reduce_only: false
                 is_close: false
                 is_liq: false
-                text: api
+                text: t-my-custom-id
                 status: finished
                 finish_time: 1514764900
                 finish_as: cancelled
@@ -2356,7 +2362,7 @@ paths:
                 is_reduce_only: false
                 is_close: false
                 is_liq: false
-                text: api
+                text: t-my-custom-id
                 status: finished
                 finish_time: 1514764900
                 finish_as: cancelled
@@ -2399,7 +2405,7 @@ paths:
                 is_reduce_only: false
                 is_close: false
                 is_liq: false
-                text: api
+                text: t-my-custom-id
                 status: finished
                 finish_time: 1514764900
                 finish_as: cancelled
@@ -2888,7 +2894,7 @@ components:
         is_reduce_only: false
         is_close: false
         is_liq: false
-        text: api
+        text: t-my-custom-id
         status: finished
         finish_time: 1514764900
         finish_as: cancelled
@@ -2926,6 +2932,66 @@ components:
       schema:
         type: string
       style: simple
+    strategyId:
+      description: 策略Id
+      example: 22153bfd35f44f4bb3b9123ca9ba60b7
+      explode: false
+      in: path
+      name: strategyId
+      required: true
+      schema:
+        type: string
+      style: simple
+    backtestId:
+      description: 回测Id
+      example: 22153bfd35f44f4bb3b9123ca9ba60b7
+      explode: false
+      in: path
+      name: backtestId
+      required: true
+      schema:
+        type: string
+      style: simple
+    limit:
+      description: Maximum number of record returned in one list
+      example: 100
+      explode: true
+      in: query
+      name: limit
+      required: false
+      schema:
+        default: 100
+        format: int32
+        maximum: 1000
+        minimum: 1
+        type: integer
+      style: form
+    offset:
+      description: List offset, starting from 0
+      example: 0
+      explode: true
+      in: query
+      name: offset
+      required: false
+      schema:
+        default: 0
+        format: int32
+        minimum: 0
+        type: integer
+      style: form
+    page:
+      description: Page number
+      example: 1
+      explode: true
+      in: query
+      name: page
+      required: false
+      schema:
+        default: 1
+        format: int32
+        minimum: 1
+        type: integer
+      style: form
     url_user:
       description: User ID
       explode: false
@@ -3041,7 +3107,7 @@ components:
             is_reduce_only: false
             is_close: false
             is_liq: false
-            text: api
+            text: t-my-custom-id
             status: finished
             finish_time: 1514764900
             finish_as: cancelled
@@ -3115,13 +3181,14 @@ components:
       example:
         side: buy
         amount: amount
+        create_time: create_time
+        type: limit
         time_in_force: gtc
         currency_pair: currency_pair
-        create_time: create_time
         left: left
         price: price
         id: id
-        type: limit
+        text: text
         fill_price: fill_price
         account: spot
         status: open
@@ -3129,6 +3196,14 @@ components:
         id:
           description: Order ID
           readOnly: true
+          type: string
+        text:
+          description: |
+            User defined information. If not empty, must follow the rules below:
+
+            1. prefixed with `t-`
+            2. no longer than 16 bytes without `t-` prefix
+            3. can only include 0-9, A-Z, a-z, underscore(_), hyphen(-) or dot(.)
           type: string
         create_time:
           description: Order creation time
@@ -3138,7 +3213,9 @@ components:
           description: |-
             Order status
 
-            - `open`: to be filled- `closed`: filled- `cancelled`: cancelled
+            - `open`: to be filled
+            - `closed`: filled
+            - `cancelled`: cancelled
           enum:
           - open
           - closed
@@ -3732,7 +3809,12 @@ components:
           type: string
         text:
           description: |
-            How order is created
+            User defined information. If not empty, must follow the rules below:
+
+            1. prefixed with `t-`
+            2. no longer than 16 bytes without `t-` prefix
+            3. can only include 0-9, A-Z, a-z, underscore(_), hyphen(-) or dot(.)
+            Besides user defined information, reserved contents are listed below, denoting how the order is created:
 
             - web: from web
             - api: from API
@@ -3740,7 +3822,6 @@ components:
             - auto_deleveraging: from ADL
             - liquidation: from liquidation
             - insurance: from insurance
-          readOnly: true
           type: string
         tkfr:
           description: Taker fee
