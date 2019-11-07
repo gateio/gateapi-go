@@ -419,7 +419,7 @@ Optional parameters are passed through a pointer to a ListOrderBookOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **interval** | **optional.String**| Price precision of order book. 0 means no aggregation is applied | [default to 0]
+ **interval** | **optional.String**| Order depth. 0 means no aggregation is applied. default to 0 | [default to 0]
  **limit** | **optional.Int32**| Maximum number of order depth data in asks or bids | [default to 10]
 
 ### Example

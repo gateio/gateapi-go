@@ -10,7 +10,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0
   termsOfService: https://www.gate.io/docs/agreement.pdf
   title: Gate API v4
-  version: 4.7.3
+  version: 4.8.0
 servers:
 - description: Real Trading
   url: https://api.gateio.ws/api/v4
@@ -158,16 +158,14 @@ paths:
         required: true
         schema:
           type: string
-      - description: Price precision of order book. 0 means no aggregation is applied
+      - description: Order depth. 0 means no aggregation is applied. default to 0
         example: "0"
-        explode: true
         in: query
         name: interval
         required: false
         schema:
           default: "0"
           type: string
-        style: form
       - description: Maximum number of order depth data in asks or bids
         example: 10
         explode: true
@@ -1391,9 +1389,21 @@ paths:
       summary: Modify a loan record
       tags:
       - margin
-  /futures/contracts:
+  /futures/{settle}/contracts:
     get:
       operationId: listFuturesContracts
+      parameters:
+      - description: Settle currency
+        example: btc
+        in: path
+        name: settle
+        required: false
+        schema:
+          default: btc
+          enum:
+          - btc
+          - usdt
+          type: string
       responses:
         200:
           content:
@@ -1439,10 +1449,21 @@ paths:
       summary: List all futures contracts
       tags:
       - futures
-  /futures/contracts/{contract}:
+  /futures/{settle}/contracts/{contract}:
     get:
       operationId: getFuturesContract
       parameters:
+      - description: Settle currency
+        example: btc
+        in: path
+        name: settle
+        required: false
+        schema:
+          default: btc
+          enum:
+          - btc
+          - usdt
+          type: string
       - description: Futures contract
         example: BTC_USD
         in: path
@@ -1493,11 +1514,22 @@ paths:
       summary: Get a single contract
       tags:
       - futures
-  /futures/order_book:
+  /futures/{settle}/order_book:
     get:
       description: Bids will be sorted by price from high to low, while asks sorted reversely
       operationId: listFuturesOrderBook
       parameters:
+      - description: Settle currency
+        example: btc
+        in: path
+        name: settle
+        required: false
+        schema:
+          default: btc
+          enum:
+          - btc
+          - usdt
+          type: string
       - description: Futures contract
         example: BTC_USD
         in: query
@@ -1554,10 +1586,21 @@ paths:
       summary: Futures order book
       tags:
       - futures
-  /futures/trades:
+  /futures/{settle}/trades:
     get:
       operationId: listFuturesTrades
       parameters:
+      - description: Settle currency
+        example: btc
+        in: path
+        name: settle
+        required: false
+        schema:
+          default: btc
+          enum:
+          - btc
+          - usdt
+          type: string
       - description: Futures contract
         example: BTC_USD
         in: query
@@ -1601,7 +1644,7 @@ paths:
       summary: Futures trading history
       tags:
       - futures
-  /futures/candlesticks:
+  /futures/{settle}/candlesticks:
     get:
       description: |-
         Return specified contract candlesticks.
@@ -1611,6 +1654,17 @@ paths:
         Maximum of 2000 points are returned in one query. Be sure not to exceed the limit when specifying `from`, `to` and `interval`
       operationId: listFuturesCandlesticks
       parameters:
+      - description: Settle currency
+        example: btc
+        in: path
+        name: settle
+        required: false
+        schema:
+          default: btc
+          enum:
+          - btc
+          - usdt
+          type: string
       - description: Futures contract
         example: BTC_USD
         in: query
@@ -1691,10 +1745,21 @@ paths:
       summary: Get futures candlesticks
       tags:
       - futures
-  /futures/tickers:
+  /futures/{settle}/tickers:
     get:
       operationId: listFuturesTickers
       parameters:
+      - description: Settle currency
+        example: btc
+        in: path
+        name: settle
+        required: false
+        schema:
+          default: btc
+          enum:
+          - btc
+          - usdt
+          type: string
       - description: Futures contract, return related data only if specified
         example: BTC_USD
         in: query
@@ -1716,6 +1781,9 @@ paths:
                 volume_24h: "184040233284"
                 volume_24h_btc: "28613220"
                 volume_24h_usd: "184040233284"
+                volume_24h_base: "28613220"
+                volume_24h_quote: "184040233284"
+                volume_24h_settle: "28613220"
                 mark_price: "6534"
                 funding_rate: "0.0001"
                 funding_rate_indicative: "0.0001"
@@ -1729,10 +1797,21 @@ paths:
       summary: List futures tickers
       tags:
       - futures
-  /futures/funding_rate:
+  /futures/{settle}/funding_rate:
     get:
       operationId: listFuturesFundingRateHistory
       parameters:
+      - description: Settle currency
+        example: btc
+        in: path
+        name: settle
+        required: false
+        schema:
+          default: btc
+          enum:
+          - btc
+          - usdt
+          type: string
       - description: Futures contract
         example: BTC_USD
         in: query
@@ -1766,10 +1845,21 @@ paths:
       summary: Funding rate history
       tags:
       - futures
-  /futures/insurance:
+  /futures/{settle}/insurance:
     get:
       operationId: listFuturesInsuranceLedger
       parameters:
+      - description: Settle currency
+        example: btc
+        in: path
+        name: settle
+        required: false
+        schema:
+          default: btc
+          enum:
+          - btc
+          - usdt
+          type: string
       - description: Maximum number of record returned in one list
         example: 100
         in: query
@@ -1796,9 +1886,21 @@ paths:
       summary: Futures insurance balance history
       tags:
       - futures
-  /futures/accounts:
+  /futures/{settle}/accounts:
     get:
       operationId: listFuturesAccounts
+      parameters:
+      - description: Settle currency
+        example: btc
+        in: path
+        name: settle
+        required: false
+        schema:
+          default: btc
+          enum:
+          - btc
+          - usdt
+          type: string
       responses:
         200:
           content:
@@ -1810,16 +1912,28 @@ paths:
                 order_margin: "0.1"
                 position_margin: "5.1"
                 point: "10000"
+                currency: BTC
               schema:
                 $ref: '#/components/schemas/FuturesAccount'
           description: List retrieved
       summary: Query futures account
       tags:
       - futures
-  /futures/account_book:
+  /futures/{settle}/account_book:
     get:
       operationId: listFuturesAccountBook
       parameters:
+      - description: Settle currency
+        example: btc
+        in: path
+        name: settle
+        required: false
+        schema:
+          default: btc
+          enum:
+          - btc
+          - usdt
+          type: string
       - description: Maximum number of record returned in one list
         example: 100
         in: query
@@ -1889,7 +2003,7 @@ paths:
       summary: Query account book
       tags:
       - futures
-  /futures/positions:
+  /futures/{settle}/positions:
     get:
       operationId: listPositions
       responses:
@@ -1929,10 +2043,21 @@ paths:
       summary: List all positions of a user
       tags:
       - futures
-  /futures/positions/{contract}:
+  /futures/{settle}/positions/{contract}:
     get:
       operationId: getPosition
       parameters:
+      - description: Settle currency
+        example: btc
+        in: path
+        name: settle
+        required: false
+        schema:
+          default: btc
+          enum:
+          - btc
+          - usdt
+          type: string
       - description: Futures contract
         example: BTC_USD
         in: path
@@ -1975,10 +2100,21 @@ paths:
       summary: Get single position
       tags:
       - futures
-  /futures/positions/{contract}/margin:
+  /futures/{settle}/positions/{contract}/margin:
     post:
       operationId: updatePositionMargin
       parameters:
+      - description: Settle currency
+        example: btc
+        in: path
+        name: settle
+        required: false
+        schema:
+          default: btc
+          enum:
+          - btc
+          - usdt
+          type: string
       - description: Futures contract
         example: BTC_USD
         in: path
@@ -2030,10 +2166,21 @@ paths:
       summary: Update position margin
       tags:
       - futures
-  /futures/positions/{contract}/leverage:
+  /futures/{settle}/positions/{contract}/leverage:
     post:
       operationId: updatePositionLeverage
       parameters:
+      - description: Settle currency
+        example: btc
+        in: path
+        name: settle
+        required: false
+        schema:
+          default: btc
+          enum:
+          - btc
+          - usdt
+          type: string
       - description: Futures contract
         example: BTC_USD
         in: path
@@ -2085,10 +2232,21 @@ paths:
       summary: Update position leverage
       tags:
       - futures
-  /futures/positions/{contract}/risk_limit:
+  /futures/{settle}/positions/{contract}/risk_limit:
     post:
       operationId: updatePositionRiskLimit
       parameters:
+      - description: Settle currency
+        example: btc
+        in: path
+        name: settle
+        required: false
+        schema:
+          default: btc
+          enum:
+          - btc
+          - usdt
+          type: string
       - description: Futures contract
         example: BTC_USD
         in: path
@@ -2140,10 +2298,22 @@ paths:
       summary: Update position risk limit
       tags:
       - futures
-  /futures/orders:
+  /futures/{settle}/orders:
     delete:
+      description: Zero-fill order cannot be retrieved 60 seconds after cancellation
       operationId: cancelFuturesOrders
       parameters:
+      - description: Settle currency
+        example: btc
+        in: path
+        name: settle
+        required: false
+        schema:
+          default: btc
+          enum:
+          - btc
+          - usdt
+          type: string
       - description: Futures contract
         example: BTC_USD
         in: query
@@ -2197,8 +2367,20 @@ paths:
       tags:
       - futures
     get:
+      description: Zero-fill order cannot be retrieved 60 seconds after cancellation
       operationId: listFuturesOrders
       parameters:
+      - description: Settle currency
+        example: btc
+        in: path
+        name: settle
+        required: false
+        schema:
+          default: btc
+          enum:
+          - btc
+          - usdt
+          type: string
       - description: Futures contract
         example: BTC_USD
         in: query
@@ -2269,7 +2451,20 @@ paths:
       tags:
       - futures
     post:
+      description: Zero-fill order cannot be retrieved 60 seconds after cancellation
       operationId: createFuturesOrder
+      parameters:
+      - description: Settle currency
+        example: btc
+        in: path
+        name: settle
+        required: false
+        schema:
+          default: btc
+          enum:
+          - btc
+          - usdt
+          type: string
       requestBody:
         content:
           application/json:
@@ -2328,10 +2523,21 @@ paths:
       summary: Create a futures order
       tags:
       - futures
-  /futures/orders/{order_id}:
+  /futures/{settle}/orders/{order_id}:
     delete:
       operationId: cancelFuturesOrder
       parameters:
+      - description: Settle currency
+        example: btc
+        in: path
+        name: settle
+        required: false
+        schema:
+          default: btc
+          enum:
+          - btc
+          - usdt
+          type: string
       - description: ID returned on order successfully being created
         example: "12345"
         explode: false
@@ -2373,8 +2579,20 @@ paths:
       tags:
       - futures
     get:
+      description: Zero-fill order cannot be retrieved 60 seconds after cancellation
       operationId: getFuturesOrder
       parameters:
+      - description: Settle currency
+        example: btc
+        in: path
+        name: settle
+        required: false
+        schema:
+          default: btc
+          enum:
+          - btc
+          - usdt
+          type: string
       - description: ID returned on order successfully being created
         example: "12345"
         explode: false
@@ -2415,10 +2633,21 @@ paths:
       summary: Get a single order
       tags:
       - futures
-  /futures/my_trades:
+  /futures/{settle}/my_trades:
     get:
       operationId: getMyTrades
       parameters:
+      - description: Settle currency
+        example: btc
+        in: path
+        name: settle
+        required: false
+        schema:
+          default: btc
+          enum:
+          - btc
+          - usdt
+          type: string
       - description: Futures contract, return related data only if specified
         example: BTC_USD
         in: query
@@ -2470,10 +2699,21 @@ paths:
       summary: List personal trading history
       tags:
       - futures
-  /futures/position_close:
+  /futures/{settle}/position_close:
     get:
       operationId: listPositionClose
       parameters:
+      - description: Settle currency
+        example: btc
+        in: path
+        name: settle
+        required: false
+        schema:
+          default: btc
+          enum:
+          - btc
+          - usdt
+          type: string
       - description: Futures contract, return related data only if specified
         example: BTC_USD
         in: query
@@ -2509,10 +2749,21 @@ paths:
       summary: List position close history
       tags:
       - futures
-  /futures/liquidates:
+  /futures/{settle}/liquidates:
     get:
       operationId: listLiquidates
       parameters:
+      - description: Settle currency
+        example: btc
+        in: path
+        name: settle
+        required: false
+        schema:
+          default: btc
+          enum:
+          - btc
+          - usdt
+          type: string
       - description: Futures contract, return related data only if specified
         example: BTC_USD
         in: query
@@ -2566,10 +2817,21 @@ paths:
       summary: List liquidation history
       tags:
       - futures
-  /futures/price_orders:
+  /futures/{settle}/price_orders:
     delete:
       operationId: cancelPriceTriggeredOrderList
       parameters:
+      - description: Settle currency
+        example: btc
+        in: path
+        name: settle
+        required: false
+        schema:
+          default: btc
+          enum:
+          - btc
+          - usdt
+          type: string
       - description: Futures contract
         example: BTC_USD
         in: query
@@ -2615,6 +2877,17 @@ paths:
     get:
       operationId: listPriceTriggeredOrders
       parameters:
+      - description: Settle currency
+        example: btc
+        in: path
+        name: settle
+        required: false
+        schema:
+          default: btc
+          enum:
+          - btc
+          - usdt
+          type: string
       - description: List orders based on status
         explode: true
         in: query
@@ -2688,6 +2961,18 @@ paths:
       - futures
     post:
       operationId: createPriceTriggeredOrder
+      parameters:
+      - description: Settle currency
+        example: btc
+        in: path
+        name: settle
+        required: false
+        schema:
+          default: btc
+          enum:
+          - btc
+          - usdt
+          type: string
       requestBody:
         content:
           application/json:
@@ -2728,10 +3013,21 @@ paths:
       summary: Create a price-triggered order
       tags:
       - futures
-  /futures/price_orders/{order_id}:
+  /futures/{settle}/price_orders/{order_id}:
     delete:
       operationId: cancelPriceTriggeredOrder
       parameters:
+      - description: Settle currency
+        example: btc
+        in: path
+        name: settle
+        required: false
+        schema:
+          default: btc
+          enum:
+          - btc
+          - usdt
+          type: string
       - description: ID returned on order successfully being created
         explode: false
         in: path
@@ -2775,6 +3071,17 @@ paths:
     get:
       operationId: getPriceTriggeredOrder
       parameters:
+      - description: Settle currency
+        example: btc
+        in: path
+        name: settle
+        required: false
+        schema:
+          default: btc
+          enum:
+          - btc
+          - usdt
+          type: string
       - description: ID returned on order successfully being created
         explode: false
         in: path
@@ -2921,7 +3228,49 @@ components:
         status: finished
         finish_as: cancelled
         reason: ""
+  headers:
+    X-Pagination-Limit:
+      description: 请求的 item 数量
+      example: 20
+      explode: false
+      schema:
+        format: int32
+        type: integer
+      style: simple
+    X-Pagination-Offset:
+      description: 请求的偏移量
+      example: 0
+      explode: false
+      schema:
+        format: int32
+        type: integer
+      style: simple
   parameters:
+    user:
+      description: User ID
+      example: 12345
+      explode: true
+      in: query
+      name: user
+      required: true
+      schema:
+        format: int32
+        type: integer
+      style: form
+    limit:
+      description: Maximum number of record returned in one list
+      example: 100
+      explode: true
+      in: query
+      name: limit
+      required: false
+      schema:
+        default: 100
+        format: int32
+        maximum: 1000
+        minimum: 1
+        type: integer
+      style: form
     stream_id:
       description: 直播 ID
       example: 22153bfd35f44f4bb3b9123ca9ba60b7
@@ -2952,20 +3301,16 @@ components:
       schema:
         type: string
       style: simple
-    limit:
-      description: Maximum number of record returned in one list
-      example: 100
-      explode: true
-      in: query
-      name: limit
-      required: false
+    shareId:
+      description: 分享Id
+      example: 22153bfd35f44f4bb3b9123ca9ba60b7
+      explode: false
+      in: path
+      name: shareId
+      required: true
       schema:
-        default: 100
-        format: int32
-        maximum: 1000
-        minimum: 1
-        type: integer
-      style: form
+        type: string
+      style: simple
     offset:
       description: List offset, starting from 0
       example: 0
@@ -2992,6 +3337,18 @@ components:
         minimum: 1
         type: integer
       style: form
+    third_party:
+      description: 第三方名称
+      example: gateio
+      explode: false
+      in: path
+      name: third_party
+      required: false
+      schema:
+        enum:
+        - gateio
+        type: string
+      style: simple
     url_user:
       description: User ID
       explode: false
@@ -3609,7 +3966,7 @@ components:
           readOnly: true
           type: integer
         leverage:
-          description: Position leverage
+          description: Position leverage. 0 means cross margin; positive number means isolated margin
           type: string
         risk_limit:
           description: Position risk limit
@@ -3774,7 +4131,7 @@ components:
           type: boolean
         reduce_only:
           default: false
-          description: Set as `true` to be post-only order
+          description: Set as `true` to be reduce-only order
           type: boolean
           writeOnly: true
         is_reduce_only:
@@ -3792,7 +4149,7 @@ components:
 
             - gtc: GoodTillCancelled
             - ioc: ImmediateOrCancelled, taker only
-            - poc: PendingOrCancelled, post-only
+            - poc: PendingOrCancelled, reduce-only
           enum:
           - gtc
           - ioc
@@ -4356,12 +4713,15 @@ components:
       type: object
     FuturesTicker:
       example:
+        volume_24h_quote: volume_24h_quote
         volume_24h_btc: volume_24h_btc
         last: last
         contract: contract
         mark_price: mark_price
         total_size: total_size
         index_price: index_price
+        volume_24h_settle: volume_24h_settle
+        volume_24h_base: volume_24h_base
         funding_rate: funding_rate
         change_percentage: change_percentage
         low_24h: low_24h
@@ -4393,10 +4753,19 @@ components:
           description: Trade size in recent 24h
           type: string
         volume_24h_btc:
-          description: Trade volume in recent 24h in BTC
+          description: Trade volumes in recent 24h in BTC(deprecated, use `volume_24h_base`, `volume_24h_quote`, `volume_24h_settle` instead)
           type: string
         volume_24h_usd:
-          description: Trade volume in recent 24h in USD
+          description: Trade volumes in recent 24h in USD(deprecated, use `volume_24h_base`, `volume_24h_quote`, `volume_24h_settle` instead)
+          type: string
+        volume_24h_base:
+          description: Trade volume in recent 24h, in base currency
+          type: string
+        volume_24h_quote:
+          description: Trade volume in recent 24h, in quote currency
+          type: string
+        volume_24h_settle:
+          description: Trade volume in recent 24h, in settle currency
           type: string
         mark_price:
           description: Recent mark price
@@ -4444,6 +4813,7 @@ components:
       example:
         total: total
         available: available
+        currency: currency
         unrealised_pnl: unrealised_pnl
         point: point
         position_margin: position_margin
@@ -4466,6 +4836,9 @@ components:
           type: string
         point:
           description: POINT amount
+          type: string
+        currency:
+          description: Settle currency
           type: string
       type: object
     FuturesAccountBook:
