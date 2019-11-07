@@ -4,38 +4,38 @@ All URIs are relative to *https://api.gateio.ws/api/v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CancelFuturesOrder**](FuturesApi.md#CancelFuturesOrder) | **Delete** /futures/orders/{order_id} | Cancel a single order
-[**CancelFuturesOrders**](FuturesApi.md#CancelFuturesOrders) | **Delete** /futures/orders | Cancel all &#x60;open&#x60; orders matched
-[**CancelPriceTriggeredOrder**](FuturesApi.md#CancelPriceTriggeredOrder) | **Delete** /futures/price_orders/{order_id} | Cancel a single order
-[**CancelPriceTriggeredOrderList**](FuturesApi.md#CancelPriceTriggeredOrderList) | **Delete** /futures/price_orders | Cancel all open orders
-[**CreateFuturesOrder**](FuturesApi.md#CreateFuturesOrder) | **Post** /futures/orders | Create a futures order
-[**CreatePriceTriggeredOrder**](FuturesApi.md#CreatePriceTriggeredOrder) | **Post** /futures/price_orders | Create a price-triggered order
-[**GetFuturesContract**](FuturesApi.md#GetFuturesContract) | **Get** /futures/contracts/{contract} | Get a single contract
-[**GetFuturesOrder**](FuturesApi.md#GetFuturesOrder) | **Get** /futures/orders/{order_id} | Get a single order
-[**GetMyTrades**](FuturesApi.md#GetMyTrades) | **Get** /futures/my_trades | List personal trading history
-[**GetPosition**](FuturesApi.md#GetPosition) | **Get** /futures/positions/{contract} | Get single position
-[**GetPriceTriggeredOrder**](FuturesApi.md#GetPriceTriggeredOrder) | **Get** /futures/price_orders/{order_id} | Get a single order
-[**ListFuturesAccountBook**](FuturesApi.md#ListFuturesAccountBook) | **Get** /futures/account_book | Query account book
-[**ListFuturesAccounts**](FuturesApi.md#ListFuturesAccounts) | **Get** /futures/accounts | Query futures account
-[**ListFuturesCandlesticks**](FuturesApi.md#ListFuturesCandlesticks) | **Get** /futures/candlesticks | Get futures candlesticks
-[**ListFuturesContracts**](FuturesApi.md#ListFuturesContracts) | **Get** /futures/contracts | List all futures contracts
-[**ListFuturesFundingRateHistory**](FuturesApi.md#ListFuturesFundingRateHistory) | **Get** /futures/funding_rate | Funding rate history
-[**ListFuturesInsuranceLedger**](FuturesApi.md#ListFuturesInsuranceLedger) | **Get** /futures/insurance | Futures insurance balance history
-[**ListFuturesOrderBook**](FuturesApi.md#ListFuturesOrderBook) | **Get** /futures/order_book | Futures order book
-[**ListFuturesOrders**](FuturesApi.md#ListFuturesOrders) | **Get** /futures/orders | List futures orders
-[**ListFuturesTickers**](FuturesApi.md#ListFuturesTickers) | **Get** /futures/tickers | List futures tickers
-[**ListFuturesTrades**](FuturesApi.md#ListFuturesTrades) | **Get** /futures/trades | Futures trading history
-[**ListLiquidates**](FuturesApi.md#ListLiquidates) | **Get** /futures/liquidates | List liquidation history
-[**ListPositionClose**](FuturesApi.md#ListPositionClose) | **Get** /futures/position_close | List position close history
-[**ListPositions**](FuturesApi.md#ListPositions) | **Get** /futures/positions | List all positions of a user
-[**ListPriceTriggeredOrders**](FuturesApi.md#ListPriceTriggeredOrders) | **Get** /futures/price_orders | List all auto orders
-[**UpdatePositionLeverage**](FuturesApi.md#UpdatePositionLeverage) | **Post** /futures/positions/{contract}/leverage | Update position leverage
-[**UpdatePositionMargin**](FuturesApi.md#UpdatePositionMargin) | **Post** /futures/positions/{contract}/margin | Update position margin
-[**UpdatePositionRiskLimit**](FuturesApi.md#UpdatePositionRiskLimit) | **Post** /futures/positions/{contract}/risk_limit | Update position risk limit
+[**CancelFuturesOrder**](FuturesApi.md#CancelFuturesOrder) | **Delete** /futures/{settle}/orders/{order_id} | Cancel a single order
+[**CancelFuturesOrders**](FuturesApi.md#CancelFuturesOrders) | **Delete** /futures/{settle}/orders | Cancel all &#x60;open&#x60; orders matched
+[**CancelPriceTriggeredOrder**](FuturesApi.md#CancelPriceTriggeredOrder) | **Delete** /futures/{settle}/price_orders/{order_id} | Cancel a single order
+[**CancelPriceTriggeredOrderList**](FuturesApi.md#CancelPriceTriggeredOrderList) | **Delete** /futures/{settle}/price_orders | Cancel all open orders
+[**CreateFuturesOrder**](FuturesApi.md#CreateFuturesOrder) | **Post** /futures/{settle}/orders | Create a futures order
+[**CreatePriceTriggeredOrder**](FuturesApi.md#CreatePriceTriggeredOrder) | **Post** /futures/{settle}/price_orders | Create a price-triggered order
+[**GetFuturesContract**](FuturesApi.md#GetFuturesContract) | **Get** /futures/{settle}/contracts/{contract} | Get a single contract
+[**GetFuturesOrder**](FuturesApi.md#GetFuturesOrder) | **Get** /futures/{settle}/orders/{order_id} | Get a single order
+[**GetMyTrades**](FuturesApi.md#GetMyTrades) | **Get** /futures/{settle}/my_trades | List personal trading history
+[**GetPosition**](FuturesApi.md#GetPosition) | **Get** /futures/{settle}/positions/{contract} | Get single position
+[**GetPriceTriggeredOrder**](FuturesApi.md#GetPriceTriggeredOrder) | **Get** /futures/{settle}/price_orders/{order_id} | Get a single order
+[**ListFuturesAccountBook**](FuturesApi.md#ListFuturesAccountBook) | **Get** /futures/{settle}/account_book | Query account book
+[**ListFuturesAccounts**](FuturesApi.md#ListFuturesAccounts) | **Get** /futures/{settle}/accounts | Query futures account
+[**ListFuturesCandlesticks**](FuturesApi.md#ListFuturesCandlesticks) | **Get** /futures/{settle}/candlesticks | Get futures candlesticks
+[**ListFuturesContracts**](FuturesApi.md#ListFuturesContracts) | **Get** /futures/{settle}/contracts | List all futures contracts
+[**ListFuturesFundingRateHistory**](FuturesApi.md#ListFuturesFundingRateHistory) | **Get** /futures/{settle}/funding_rate | Funding rate history
+[**ListFuturesInsuranceLedger**](FuturesApi.md#ListFuturesInsuranceLedger) | **Get** /futures/{settle}/insurance | Futures insurance balance history
+[**ListFuturesOrderBook**](FuturesApi.md#ListFuturesOrderBook) | **Get** /futures/{settle}/order_book | Futures order book
+[**ListFuturesOrders**](FuturesApi.md#ListFuturesOrders) | **Get** /futures/{settle}/orders | List futures orders
+[**ListFuturesTickers**](FuturesApi.md#ListFuturesTickers) | **Get** /futures/{settle}/tickers | List futures tickers
+[**ListFuturesTrades**](FuturesApi.md#ListFuturesTrades) | **Get** /futures/{settle}/trades | Futures trading history
+[**ListLiquidates**](FuturesApi.md#ListLiquidates) | **Get** /futures/{settle}/liquidates | List liquidation history
+[**ListPositionClose**](FuturesApi.md#ListPositionClose) | **Get** /futures/{settle}/position_close | List position close history
+[**ListPositions**](FuturesApi.md#ListPositions) | **Get** /futures/{settle}/positions | List all positions of a user
+[**ListPriceTriggeredOrders**](FuturesApi.md#ListPriceTriggeredOrders) | **Get** /futures/{settle}/price_orders | List all auto orders
+[**UpdatePositionLeverage**](FuturesApi.md#UpdatePositionLeverage) | **Post** /futures/{settle}/positions/{contract}/leverage | Update position leverage
+[**UpdatePositionMargin**](FuturesApi.md#UpdatePositionMargin) | **Post** /futures/{settle}/positions/{contract}/margin | Update position margin
+[**UpdatePositionRiskLimit**](FuturesApi.md#UpdatePositionRiskLimit) | **Post** /futures/{settle}/positions/{contract}/risk_limit | Update position risk limit
 
 
 # **CancelFuturesOrder**
-> FuturesOrder CancelFuturesOrder(ctx, orderId)
+> FuturesOrder CancelFuturesOrder(ctx, settle, orderId)
 Cancel a single order
 
 ### Required Parameters
@@ -43,6 +43,7 @@ Cancel a single order
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
   **orderId** | **string**| ID returned on order successfully being created | 
 
 ### Example
@@ -53,9 +54,10 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
+settle := "btc"; // string - Settle currency
 orderId := "12345"; // string - ID returned on order successfully being created
 
-result, _, err := api.CancelFuturesOrder(nil, orderId)
+result, _, err := api.CancelFuturesOrder(nil, settle, orderId)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -79,14 +81,17 @@ Authentication with API key and secret is required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **CancelFuturesOrders**
-> []FuturesOrder CancelFuturesOrders(ctx, contract, optional)
+> []FuturesOrder CancelFuturesOrders(ctx, settle, contract, optional)
 Cancel all `open` orders matched
+
+Zero-fill order cannot be retrieved 60 seconds after cancellation
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
   **contract** | **string**| Futures contract | 
  **optional** | ***CancelFuturesOrdersOpts** | optional parameters | nil if no parameters
 
@@ -95,6 +100,7 @@ Optional parameters are passed through a pointer to a CancelFuturesOrdersOpts st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
 
  **side** | **optional.String**| All bids or asks. Both included in not specified | 
 
@@ -106,9 +112,10 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
+settle := "btc"; // string - Settle currency
 contract := "BTC_USD"; // string - Futures contract
 
-result, _, err := api.CancelFuturesOrders(nil, contract, nil)
+result, _, err := api.CancelFuturesOrders(nil, settle, contract, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -132,7 +139,7 @@ Authentication with API key and secret is required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **CancelPriceTriggeredOrder**
-> FuturesPriceTriggeredOrder CancelPriceTriggeredOrder(ctx, orderId)
+> FuturesPriceTriggeredOrder CancelPriceTriggeredOrder(ctx, settle, orderId)
 Cancel a single order
 
 ### Required Parameters
@@ -140,6 +147,7 @@ Cancel a single order
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
   **orderId** | **string**| ID returned on order successfully being created | 
 
 ### Example
@@ -150,9 +158,10 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
+settle := "btc"; // string - Settle currency
 orderId := "orderId_example"; // string - ID returned on order successfully being created
 
-result, _, err := api.CancelPriceTriggeredOrder(nil, orderId)
+result, _, err := api.CancelPriceTriggeredOrder(nil, settle, orderId)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -176,7 +185,7 @@ Authentication with API key and secret is required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **CancelPriceTriggeredOrderList**
-> []FuturesPriceTriggeredOrder CancelPriceTriggeredOrderList(ctx, contract)
+> []FuturesPriceTriggeredOrder CancelPriceTriggeredOrderList(ctx, settle, contract)
 Cancel all open orders
 
 ### Required Parameters
@@ -184,6 +193,7 @@ Cancel all open orders
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
   **contract** | **string**| Futures contract | 
 
 ### Example
@@ -194,9 +204,10 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
+settle := "btc"; // string - Settle currency
 contract := "BTC_USD"; // string - Futures contract
 
-result, _, err := api.CancelPriceTriggeredOrderList(nil, contract)
+result, _, err := api.CancelPriceTriggeredOrderList(nil, settle, contract)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -220,14 +231,17 @@ Authentication with API key and secret is required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **CreateFuturesOrder**
-> FuturesOrder CreateFuturesOrder(ctx, futuresOrder)
+> FuturesOrder CreateFuturesOrder(ctx, settle, futuresOrder)
 Create a futures order
+
+Zero-fill order cannot be retrieved 60 seconds after cancellation
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
   **futuresOrder** | [**FuturesOrder**](FuturesOrder.md)|  | 
 
 ### Example
@@ -238,9 +252,10 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
+settle := "btc"; // string - Settle currency
 futuresOrder := new (gateapi.FuturesOrder); // FuturesOrder - 
 
-result, _, err := api.CreateFuturesOrder(nil, futuresOrder)
+result, _, err := api.CreateFuturesOrder(nil, settle, futuresOrder)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -264,7 +279,7 @@ Authentication with API key and secret is required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **CreatePriceTriggeredOrder**
-> TriggerOrderResponse CreatePriceTriggeredOrder(ctx, futuresPriceTriggeredOrder)
+> TriggerOrderResponse CreatePriceTriggeredOrder(ctx, settle, futuresPriceTriggeredOrder)
 Create a price-triggered order
 
 ### Required Parameters
@@ -272,6 +287,7 @@ Create a price-triggered order
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
   **futuresPriceTriggeredOrder** | [**FuturesPriceTriggeredOrder**](FuturesPriceTriggeredOrder.md)|  | 
 
 ### Example
@@ -282,9 +298,10 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
+settle := "btc"; // string - Settle currency
 futuresPriceTriggeredOrder := new (gateapi.FuturesPriceTriggeredOrder); // FuturesPriceTriggeredOrder - 
 
-result, _, err := api.CreatePriceTriggeredOrder(nil, futuresPriceTriggeredOrder)
+result, _, err := api.CreatePriceTriggeredOrder(nil, settle, futuresPriceTriggeredOrder)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -308,7 +325,7 @@ Authentication with API key and secret is required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetFuturesContract**
-> Contract GetFuturesContract(ctx, contract)
+> Contract GetFuturesContract(ctx, settle, contract)
 Get a single contract
 
 ### Required Parameters
@@ -316,6 +333,7 @@ Get a single contract
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
   **contract** | **string**| Futures contract | 
 
 ### Example
@@ -325,9 +343,10 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // uncomment the next line if your are testing against other hosts
 // client.ChangeBasePath("https://some-other-host")
 api := client.FuturesApi
+settle := "btc"; // string - Settle currency
 contract := "BTC_USD"; // string - Futures contract
 
-result, _, err := api.GetFuturesContract(nil, contract)
+result, _, err := api.GetFuturesContract(nil, settle, contract)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -351,14 +370,17 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetFuturesOrder**
-> FuturesOrder GetFuturesOrder(ctx, orderId)
+> FuturesOrder GetFuturesOrder(ctx, settle, orderId)
 Get a single order
+
+Zero-fill order cannot be retrieved 60 seconds after cancellation
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
   **orderId** | **string**| ID returned on order successfully being created | 
 
 ### Example
@@ -369,9 +391,10 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
+settle := "btc"; // string - Settle currency
 orderId := "12345"; // string - ID returned on order successfully being created
 
-result, _, err := api.GetFuturesOrder(nil, orderId)
+result, _, err := api.GetFuturesOrder(nil, settle, orderId)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -395,7 +418,7 @@ Authentication with API key and secret is required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetMyTrades**
-> []MyFuturesTrade GetMyTrades(ctx, optional)
+> []MyFuturesTrade GetMyTrades(ctx, settle, optional)
 List personal trading history
 
 ### Required Parameters
@@ -403,6 +426,7 @@ List personal trading history
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
  **optional** | ***GetMyTradesOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -410,6 +434,7 @@ Optional parameters are passed through a pointer to a GetMyTradesOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
  **contract** | **optional.String**| Futures contract, return related data only if specified | 
  **order** | **optional.Int32**| Futures order ID, return related data only if specified | 
  **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
@@ -423,8 +448,9 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
+settle := "btc"; // string - Settle currency
 
-result, _, err := api.GetMyTrades(nil, nil)
+result, _, err := api.GetMyTrades(nil, settle, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -448,7 +474,7 @@ Authentication with API key and secret is required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetPosition**
-> Position GetPosition(ctx, contract)
+> Position GetPosition(ctx, settle, contract)
 Get single position
 
 ### Required Parameters
@@ -456,6 +482,7 @@ Get single position
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
   **contract** | **string**| Futures contract | 
 
 ### Example
@@ -466,9 +493,10 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
+settle := "btc"; // string - Settle currency
 contract := "BTC_USD"; // string - Futures contract
 
-result, _, err := api.GetPosition(nil, contract)
+result, _, err := api.GetPosition(nil, settle, contract)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -492,7 +520,7 @@ Authentication with API key and secret is required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetPriceTriggeredOrder**
-> FuturesPriceTriggeredOrder GetPriceTriggeredOrder(ctx, orderId)
+> FuturesPriceTriggeredOrder GetPriceTriggeredOrder(ctx, settle, orderId)
 Get a single order
 
 ### Required Parameters
@@ -500,6 +528,7 @@ Get a single order
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
   **orderId** | **string**| ID returned on order successfully being created | 
 
 ### Example
@@ -510,9 +539,10 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
+settle := "btc"; // string - Settle currency
 orderId := "orderId_example"; // string - ID returned on order successfully being created
 
-result, _, err := api.GetPriceTriggeredOrder(nil, orderId)
+result, _, err := api.GetPriceTriggeredOrder(nil, settle, orderId)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -536,7 +566,7 @@ Authentication with API key and secret is required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListFuturesAccountBook**
-> []FuturesAccountBook ListFuturesAccountBook(ctx, optional)
+> []FuturesAccountBook ListFuturesAccountBook(ctx, settle, optional)
 Query account book
 
 ### Required Parameters
@@ -544,6 +574,7 @@ Query account book
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
  **optional** | ***ListFuturesAccountBookOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -551,6 +582,7 @@ Optional parameters are passed through a pointer to a ListFuturesAccountBookOpts
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
  **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
  **from** | **optional.Int32**| Start timestamp | 
  **to** | **optional.Int32**| End timestamp | 
@@ -564,8 +596,9 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
+settle := "btc"; // string - Settle currency
 
-result, _, err := api.ListFuturesAccountBook(nil, nil)
+result, _, err := api.ListFuturesAccountBook(nil, settle, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -589,11 +622,15 @@ Authentication with API key and secret is required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListFuturesAccounts**
-> FuturesAccount ListFuturesAccounts(ctx, )
+> FuturesAccount ListFuturesAccounts(ctx, settle)
 Query futures account
 
 ### Required Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
 
 ### Example
 
@@ -603,7 +640,9 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
-result, _, err := api.ListFuturesAccounts(nil)
+settle := "btc"; // string - Settle currency
+
+result, _, err := api.ListFuturesAccounts(nil, settle)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -627,7 +666,7 @@ Authentication with API key and secret is required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListFuturesCandlesticks**
-> []FuturesCandlestick ListFuturesCandlesticks(ctx, contract, optional)
+> []FuturesCandlestick ListFuturesCandlesticks(ctx, settle, contract, optional)
 Get futures candlesticks
 
 Return specified contract candlesticks. If prefix `contract` with `mark_`, the contract's mark price candlesticks are returned; if prefix with `index_`, index price candlesticks will be returned.  Maximum of 2000 points are returned in one query. Be sure not to exceed the limit when specifying `from`, `to` and `interval`
@@ -637,6 +676,7 @@ Return specified contract candlesticks. If prefix `contract` with `mark_`, the c
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
   **contract** | **string**| Futures contract | 
  **optional** | ***ListFuturesCandlesticksOpts** | optional parameters | nil if no parameters
 
@@ -645,6 +685,7 @@ Optional parameters are passed through a pointer to a ListFuturesCandlesticksOpt
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
 
  **from** | **optional.Float32**| Start time of candlesticks, formatted in Unix timestamp in seconds. Default to&#x60;to - 100 * interval&#x60; if not specified | 
  **to** | **optional.Float32**| End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time | 
@@ -658,9 +699,10 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // uncomment the next line if your are testing against other hosts
 // client.ChangeBasePath("https://some-other-host")
 api := client.FuturesApi
+settle := "btc"; // string - Settle currency
 contract := "BTC_USD"; // string - Futures contract
 
-result, _, err := api.ListFuturesCandlesticks(nil, contract, nil)
+result, _, err := api.ListFuturesCandlesticks(nil, settle, contract, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -684,11 +726,15 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListFuturesContracts**
-> []Contract ListFuturesContracts(ctx, )
+> []Contract ListFuturesContracts(ctx, settle)
 List all futures contracts
 
 ### Required Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
 
 ### Example
 
@@ -697,7 +743,9 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // uncomment the next line if your are testing against other hosts
 // client.ChangeBasePath("https://some-other-host")
 api := client.FuturesApi
-result, _, err := api.ListFuturesContracts(nil)
+settle := "btc"; // string - Settle currency
+
+result, _, err := api.ListFuturesContracts(nil, settle)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -721,7 +769,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListFuturesFundingRateHistory**
-> []FundingRateRecord ListFuturesFundingRateHistory(ctx, contract, optional)
+> []FundingRateRecord ListFuturesFundingRateHistory(ctx, settle, contract, optional)
 Funding rate history
 
 ### Required Parameters
@@ -729,6 +777,7 @@ Funding rate history
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
   **contract** | **string**| Futures contract | 
  **optional** | ***ListFuturesFundingRateHistoryOpts** | optional parameters | nil if no parameters
 
@@ -737,6 +786,7 @@ Optional parameters are passed through a pointer to a ListFuturesFundingRateHist
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
 
  **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
 
@@ -747,9 +797,10 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // uncomment the next line if your are testing against other hosts
 // client.ChangeBasePath("https://some-other-host")
 api := client.FuturesApi
+settle := "btc"; // string - Settle currency
 contract := "BTC_USD"; // string - Futures contract
 
-result, _, err := api.ListFuturesFundingRateHistory(nil, contract, nil)
+result, _, err := api.ListFuturesFundingRateHistory(nil, settle, contract, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -773,7 +824,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListFuturesInsuranceLedger**
-> []InsuranceRecord ListFuturesInsuranceLedger(ctx, optional)
+> []InsuranceRecord ListFuturesInsuranceLedger(ctx, settle, optional)
 Futures insurance balance history
 
 ### Required Parameters
@@ -781,6 +832,7 @@ Futures insurance balance history
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
  **optional** | ***ListFuturesInsuranceLedgerOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -788,6 +840,7 @@ Optional parameters are passed through a pointer to a ListFuturesInsuranceLedger
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
  **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
 
 ### Example
@@ -797,8 +850,9 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // uncomment the next line if your are testing against other hosts
 // client.ChangeBasePath("https://some-other-host")
 api := client.FuturesApi
+settle := "btc"; // string - Settle currency
 
-result, _, err := api.ListFuturesInsuranceLedger(nil, nil)
+result, _, err := api.ListFuturesInsuranceLedger(nil, settle, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -822,7 +876,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListFuturesOrderBook**
-> FuturesOrderBook ListFuturesOrderBook(ctx, contract, optional)
+> FuturesOrderBook ListFuturesOrderBook(ctx, settle, contract, optional)
 Futures order book
 
 Bids will be sorted by price from high to low, while asks sorted reversely
@@ -832,6 +886,7 @@ Bids will be sorted by price from high to low, while asks sorted reversely
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
   **contract** | **string**| Futures contract | 
  **optional** | ***ListFuturesOrderBookOpts** | optional parameters | nil if no parameters
 
@@ -840,6 +895,7 @@ Optional parameters are passed through a pointer to a ListFuturesOrderBookOpts s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
 
  **interval** | **optional.String**| Order depth. 0 means no aggregation is applied. default to 0 | [default to 0]
  **limit** | **optional.Int32**| Maximum number of order depth data in asks or bids | [default to 10]
@@ -851,9 +907,10 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // uncomment the next line if your are testing against other hosts
 // client.ChangeBasePath("https://some-other-host")
 api := client.FuturesApi
+settle := "btc"; // string - Settle currency
 contract := "BTC_USD"; // string - Futures contract
 
-result, _, err := api.ListFuturesOrderBook(nil, contract, nil)
+result, _, err := api.ListFuturesOrderBook(nil, settle, contract, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -877,14 +934,17 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListFuturesOrders**
-> []FuturesOrder ListFuturesOrders(ctx, contract, status, optional)
+> []FuturesOrder ListFuturesOrders(ctx, settle, contract, status, optional)
 List futures orders
+
+Zero-fill order cannot be retrieved 60 seconds after cancellation
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
   **contract** | **string**| Futures contract | 
   **status** | **string**| List orders based on status | 
  **optional** | ***ListFuturesOrdersOpts** | optional parameters | nil if no parameters
@@ -894,6 +954,7 @@ Optional parameters are passed through a pointer to a ListFuturesOrdersOpts stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
 
 
  **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
@@ -907,10 +968,11 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
+settle := "btc"; // string - Settle currency
 contract := "BTC_USD"; // string - Futures contract
 status := "open"; // string - List orders based on status
 
-result, _, err := api.ListFuturesOrders(nil, contract, status, nil)
+result, _, err := api.ListFuturesOrders(nil, settle, contract, status, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -934,7 +996,7 @@ Authentication with API key and secret is required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListFuturesTickers**
-> []FuturesTicker ListFuturesTickers(ctx, optional)
+> []FuturesTicker ListFuturesTickers(ctx, settle, optional)
 List futures tickers
 
 ### Required Parameters
@@ -942,6 +1004,7 @@ List futures tickers
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
  **optional** | ***ListFuturesTickersOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -949,6 +1012,7 @@ Optional parameters are passed through a pointer to a ListFuturesTickersOpts str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
  **contract** | **optional.String**| Futures contract, return related data only if specified | 
 
 ### Example
@@ -958,8 +1022,9 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // uncomment the next line if your are testing against other hosts
 // client.ChangeBasePath("https://some-other-host")
 api := client.FuturesApi
+settle := "btc"; // string - Settle currency
 
-result, _, err := api.ListFuturesTickers(nil, nil)
+result, _, err := api.ListFuturesTickers(nil, settle, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -983,7 +1048,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListFuturesTrades**
-> []FuturesTrade ListFuturesTrades(ctx, contract, optional)
+> []FuturesTrade ListFuturesTrades(ctx, settle, contract, optional)
 Futures trading history
 
 ### Required Parameters
@@ -991,6 +1056,7 @@ Futures trading history
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
   **contract** | **string**| Futures contract | 
  **optional** | ***ListFuturesTradesOpts** | optional parameters | nil if no parameters
 
@@ -999,6 +1065,7 @@ Optional parameters are passed through a pointer to a ListFuturesTradesOpts stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
 
  **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
  **lastId** | **optional.String**| Specify list staring point using the last record of &#x60;id&#x60; in previous list-query results | 
@@ -1010,9 +1077,10 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // uncomment the next line if your are testing against other hosts
 // client.ChangeBasePath("https://some-other-host")
 api := client.FuturesApi
+settle := "btc"; // string - Settle currency
 contract := "BTC_USD"; // string - Futures contract
 
-result, _, err := api.ListFuturesTrades(nil, contract, nil)
+result, _, err := api.ListFuturesTrades(nil, settle, contract, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -1036,7 +1104,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListLiquidates**
-> []FuturesLiquidate ListLiquidates(ctx, optional)
+> []FuturesLiquidate ListLiquidates(ctx, settle, optional)
 List liquidation history
 
 ### Required Parameters
@@ -1044,6 +1112,7 @@ List liquidation history
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
  **optional** | ***ListLiquidatesOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -1051,6 +1120,7 @@ Optional parameters are passed through a pointer to a ListLiquidatesOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
  **contract** | **optional.String**| Futures contract, return related data only if specified | 
  **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
  **at** | **optional.Int32**| Specify a liquidation timestamp | [default to 0]
@@ -1063,8 +1133,9 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
+settle := "btc"; // string - Settle currency
 
-result, _, err := api.ListLiquidates(nil, nil)
+result, _, err := api.ListLiquidates(nil, settle, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -1088,7 +1159,7 @@ Authentication with API key and secret is required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListPositionClose**
-> []PositionClose ListPositionClose(ctx, optional)
+> []PositionClose ListPositionClose(ctx, settle, optional)
 List position close history
 
 ### Required Parameters
@@ -1096,6 +1167,7 @@ List position close history
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
  **optional** | ***ListPositionCloseOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -1103,6 +1175,7 @@ Optional parameters are passed through a pointer to a ListPositionCloseOpts stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
  **contract** | **optional.String**| Futures contract, return related data only if specified | 
  **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
 
@@ -1114,8 +1187,9 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
+settle := "btc"; // string - Settle currency
 
-result, _, err := api.ListPositionClose(nil, nil)
+result, _, err := api.ListPositionClose(nil, settle, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -1177,7 +1251,7 @@ Authentication with API key and secret is required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListPriceTriggeredOrders**
-> []FuturesPriceTriggeredOrder ListPriceTriggeredOrders(ctx, status, optional)
+> []FuturesPriceTriggeredOrder ListPriceTriggeredOrders(ctx, settle, status, optional)
 List all auto orders
 
 ### Required Parameters
@@ -1185,6 +1259,7 @@ List all auto orders
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
   **status** | **string**| List orders based on status | 
  **optional** | ***ListPriceTriggeredOrdersOpts** | optional parameters | nil if no parameters
 
@@ -1193,6 +1268,7 @@ Optional parameters are passed through a pointer to a ListPriceTriggeredOrdersOp
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
 
  **contract** | **optional.String**| Futures contract, return related data only if specified | 
  **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
@@ -1206,9 +1282,10 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
+settle := "btc"; // string - Settle currency
 status := "status_example"; // string - List orders based on status
 
-result, _, err := api.ListPriceTriggeredOrders(nil, status, nil)
+result, _, err := api.ListPriceTriggeredOrders(nil, settle, status, nil)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -1232,7 +1309,7 @@ Authentication with API key and secret is required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdatePositionLeverage**
-> Position UpdatePositionLeverage(ctx, contract, leverage)
+> Position UpdatePositionLeverage(ctx, settle, contract, leverage)
 Update position leverage
 
 ### Required Parameters
@@ -1240,6 +1317,7 @@ Update position leverage
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
   **contract** | **string**| Futures contract | 
   **leverage** | **string**| New position leverage | 
 
@@ -1251,10 +1329,11 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
+settle := "btc"; // string - Settle currency
 contract := "BTC_USD"; // string - Futures contract
 leverage := "10"; // string - New position leverage
 
-result, _, err := api.UpdatePositionLeverage(nil, contract, leverage)
+result, _, err := api.UpdatePositionLeverage(nil, settle, contract, leverage)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -1278,7 +1357,7 @@ Authentication with API key and secret is required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdatePositionMargin**
-> Position UpdatePositionMargin(ctx, contract, change)
+> Position UpdatePositionMargin(ctx, settle, contract, change)
 Update position margin
 
 ### Required Parameters
@@ -1286,6 +1365,7 @@ Update position margin
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
   **contract** | **string**| Futures contract | 
   **change** | **string**| Margin change. Use positive number to increase margin, negative number otherwise. | 
 
@@ -1297,10 +1377,11 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
+settle := "btc"; // string - Settle currency
 contract := "BTC_USD"; // string - Futures contract
 change := "0.01"; // string - Margin change. Use positive number to increase margin, negative number otherwise.
 
-result, _, err := api.UpdatePositionMargin(nil, contract, change)
+result, _, err := api.UpdatePositionMargin(nil, settle, contract, change)
 if err != nil {
     fmt.Println(err.Error())
 } else {
@@ -1324,7 +1405,7 @@ Authentication with API key and secret is required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdatePositionRiskLimit**
-> Position UpdatePositionRiskLimit(ctx, contract, riskLimit)
+> Position UpdatePositionRiskLimit(ctx, settle, contract, riskLimit)
 Update position risk limit
 
 ### Required Parameters
@@ -1332,6 +1413,7 @@ Update position risk limit
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
   **contract** | **string**| Futures contract | 
   **riskLimit** | **string**| New position risk limit | 
 
@@ -1343,10 +1425,11 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
+settle := "btc"; // string - Settle currency
 contract := "BTC_USD"; // string - Futures contract
 riskLimit := "10"; // string - New position risk limit
 
-result, _, err := api.UpdatePositionRiskLimit(nil, contract, riskLimit)
+result, _, err := api.UpdatePositionRiskLimit(nil, settle, contract, riskLimit)
 if err != nil {
     fmt.Println(err.Error())
 } else {
