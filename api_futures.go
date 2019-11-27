@@ -2288,9 +2288,10 @@ func (a *FuturesApiService) ListPositionClose(ctx context.Context, settle string
 /*
 FuturesApiService List all positions of a user
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param settle Settle currency
 @return []Position
 */
-func (a *FuturesApiService) ListPositions(ctx context.Context) ([]Position, *http.Response, error) {
+func (a *FuturesApiService) ListPositions(ctx context.Context, settle string) ([]Position, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Get")
 		localVarPostBody     interface{}
@@ -2302,6 +2303,7 @@ func (a *FuturesApiService) ListPositions(ctx context.Context) ([]Position, *htt
 
 	// create path and map variables
 	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/positions"
+	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

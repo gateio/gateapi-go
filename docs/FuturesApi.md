@@ -1213,11 +1213,15 @@ Authentication with API key and secret is required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListPositions**
-> []Position ListPositions(ctx, )
+> []Position ListPositions(ctx, settle)
 List all positions of a user
 
 ### Required Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **settle** | **string**| Settle currency | [default to btc]
 
 ### Example
 
@@ -1227,7 +1231,9 @@ client := gateapi.NewAPIClient(gateapi.NewConfiguration())
 // client.ChangeBasePath("https://some-other-host")
 client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
 api := client.FuturesApi
-result, _, err := api.ListPositions(nil)
+settle := "btc"; // string - Settle currency
+
+result, _, err := api.ListPositions(nil, settle)
 if err != nil {
     fmt.Println(err.Error())
 } else {
