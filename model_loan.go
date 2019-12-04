@@ -41,4 +41,8 @@ type Loan struct {
 	PaidInterest string `json:"paid_interest,omitempty"`
 	// Interest not repaid
 	UnpaidInterest string `json:"unpaid_interest,omitempty"`
+	// Loan fee rate
+	FeeRate string `json:"fee_rate,omitempty"`
+	// Original loan ID if the loan is auto-renewed. Equal to `id` if not
+	OrigId string `json:"orig_id,omitempty"`
 }

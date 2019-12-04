@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CancelOrder**](SpotApi.md#CancelOrder) | **Delete** /spot/orders/{order_id} | Cancel a single order
 [**CancelOrders**](SpotApi.md#CancelOrders) | **Delete** /spot/orders | Cancel all &#x60;open&#x60; orders in specified currency pair
+[**CreateBatchOrders**](SpotApi.md#CreateBatchOrders) | **Post** /spot/batch_orders | Create a batch of orders
 [**CreateOrder**](SpotApi.md#CreateOrder) | **Post** /spot/orders | Create an order
 [**GetCurrencyPair**](SpotApi.md#GetCurrencyPair) | **Get** /spot/currency_pairs/{currency_pair} | Get detail of one single order
 [**GetOrder**](SpotApi.md#GetOrder) | **Get** /spot/orders/{order_id} | Get a single order
@@ -115,6 +116,52 @@ Authentication with API key and secret is required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **CreateBatchOrders**
+> []BatchOrder CreateBatchOrders(ctx, order)
+Create a batch of orders
+
+Batch orders requirements:  1. custom order field `text` is required 2. At most 4 currency pairs, maximum 5 orders each, are allowed in one request 3. No mixture of spot orders and margin orders, e.g. `account` must be identical for all orders 
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **order** | [**[]Order**](Order.md)|  | 
+
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
+api := client.SpotApi
+order := make([]gateapi.Order, 0); // []Order - 
+
+result, _, err := api.CreateBatchOrders(nil, order)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
+### Return type
+
+[**[]BatchOrder**](BatchOrder.md)
+
+### Authorization
+
+Authentication with API key and secret is required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
