@@ -678,7 +678,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
- **lastId** | **optional.String**| Specify list staring point using the last record of &#x60;id&#x60; in previous list-query results | 
+ **lastId** | **optional.String**| Specify list staring point using the &#x60;id&#x60; of last record in previous list-query results | 
 
 ### Example
 

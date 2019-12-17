@@ -438,7 +438,7 @@ Name | Type | Description  | Notes
  **contract** | **optional.String**| Futures contract, return related data only if specified | 
  **order** | **optional.Int32**| Futures order ID, return related data only if specified | 
  **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
- **lastId** | **optional.String**| Specify list staring point using the last record of &#x60;id&#x60; in previous list-query results | 
+ **lastId** | **optional.String**| Specify list staring point using the &#x60;id&#x60; of last record in previous list-query results | 
 
 ### Example
 
@@ -958,7 +958,7 @@ Name | Type | Description  | Notes
 
 
  **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
- **lastId** | **optional.String**| Specify list staring point using the last record of &#x60;id&#x60; in previous list-query results | 
+ **lastId** | **optional.String**| Specify list staring point using the &#x60;id&#x60; of last record in previous list-query results | 
 
 ### Example
 
@@ -1068,7 +1068,9 @@ Name | Type | Description  | Notes
 
 
  **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
- **lastId** | **optional.String**| Specify list staring point using the last record of &#x60;id&#x60; in previous list-query results | 
+ **lastId** | **optional.String**| Specify list staring point using the id of last record in previous list-query results  This parameter is deprecated. Use &#x60;from&#x60; and &#x60;to&#x60; instead to limit time range | 
+ **from** | **optional.Float32**| Specify starting time in Unix seconds. If not specified, &#x60;to&#x60; and &#x60;limit&#x60; will be used to limit response items. If items between &#x60;from&#x60; and &#x60;to&#x60; are more than &#x60;limit&#x60;, only &#x60;limit&#x60; number will be returned.  | 
+ **to** | **optional.Float32**| Specify end time in Unix seconds, default to current time | 
 
 ### Example
 

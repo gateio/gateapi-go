@@ -769,7 +769,7 @@ FuturesApiService List personal trading history
  * @param "Contract" (optional.String) -  Futures contract, return related data only if specified
  * @param "Order" (optional.Int32) -  Futures order ID, return related data only if specified
  * @param "Limit" (optional.Int32) -  Maximum number of record returned in one list
- * @param "LastId" (optional.String) -  Specify list staring point using the last record of `id` in previous list-query results
+ * @param "LastId" (optional.String) -  Specify list staring point using the `id` of last record in previous list-query results
 @return []MyFuturesTrade
 */
 
@@ -1772,7 +1772,7 @@ Zero-fill order cannot be retrieved 60 seconds after cancellation
  * @param status List orders based on status
  * @param optional nil or *ListFuturesOrdersOpts - Optional Parameters:
  * @param "Limit" (optional.Int32) -  Maximum number of record returned in one list
- * @param "LastId" (optional.String) -  Specify list staring point using the last record of `id` in previous list-query results
+ * @param "LastId" (optional.String) -  Specify list staring point using the `id` of last record in previous list-query results
 @return []FuturesOrder
 */
 
@@ -1976,13 +1976,17 @@ FuturesApiService Futures trading history
  * @param contract Futures contract
  * @param optional nil or *ListFuturesTradesOpts - Optional Parameters:
  * @param "Limit" (optional.Int32) -  Maximum number of record returned in one list
- * @param "LastId" (optional.String) -  Specify list staring point using the last record of `id` in previous list-query results
+ * @param "LastId" (optional.String) -  Specify list staring point using the id of last record in previous list-query results  This parameter is deprecated. Use `from` and `to` instead to limit time range
+ * @param "From" (optional.Float32) -  Specify starting time in Unix seconds. If not specified, `to` and `limit` will be used to limit response items. If items between `from` and `to` are more than `limit`, only `limit` number will be returned. 
+ * @param "To" (optional.Float32) -  Specify end time in Unix seconds, default to current time
 @return []FuturesTrade
 */
 
 type ListFuturesTradesOpts struct {
 	Limit optional.Int32
 	LastId optional.String
+	From optional.Float32
+	To optional.Float32
 }
 
 func (a *FuturesApiService) ListFuturesTrades(ctx context.Context, settle string, contract string, localVarOptionals *ListFuturesTradesOpts) ([]FuturesTrade, *http.Response, error) {
@@ -2009,6 +2013,12 @@ func (a *FuturesApiService) ListFuturesTrades(ctx context.Context, settle string
 	}
 	if localVarOptionals != nil && localVarOptionals.LastId.IsSet() {
 		localVarQueryParams.Add("last_id", parameterToString(localVarOptionals.LastId.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.From.IsSet() {
+		localVarQueryParams.Add("from", parameterToString(localVarOptionals.From.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.To.IsSet() {
+		localVarQueryParams.Add("to", parameterToString(localVarOptionals.To.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
