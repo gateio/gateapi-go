@@ -1282,7 +1282,7 @@ SpotApiService Retrieve market trades
  * @param currencyPair Currency pair
  * @param optional nil or *ListTradesOpts - Optional Parameters:
  * @param "Limit" (optional.Int32) -  Maximum number of record returned in one list
- * @param "LastId" (optional.String) -  Specify list staring point using the last record of `id` in previous list-query results
+ * @param "LastId" (optional.String) -  Specify list staring point using the `id` of last record in previous list-query results
 @return []Trade
 */
 
