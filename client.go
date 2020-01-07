@@ -38,7 +38,7 @@ var (
 	xmlCheck  = regexp.MustCompile("(?i:[application|text]/xml)")
 )
 
-// APIClient manages communication with the Gate API v4 API v4.9.0
+// APIClient manages communication with the Gate API v4 API
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
