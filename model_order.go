@@ -17,6 +17,8 @@ type Order struct {
 	Text string `json:"text,omitempty"`
 	// Order creation time
 	CreateTime string `json:"create_time,omitempty"`
+	// Order last modification time
+	UpdateTime string `json:"update_time,omitempty"`
 	// Order status  - `open`: to be filled - `closed`: filled - `cancelled`: cancelled
 	Status string `json:"status,omitempty"`
 	// Currency pair
@@ -35,6 +37,14 @@ type Order struct {
 	TimeInForce string `json:"time_in_force,omitempty"`
 	// Amount left to fill
 	Left string `json:"left,omitempty"`
-	// Fill price of the order
+	// Total filled in quote currency
 	FillPrice string `json:"fill_price,omitempty"`
+	// Fee deducted
+	Fee string `json:"fee,omitempty"`
+	// Fee currency unit
+	FeeCurrency string `json:"fee_currency,omitempty"`
+	// Point used to deduct fee
+	PointFee string `json:"point_fee,omitempty"`
+	// GT used to deduct fee
+	GtFee string `json:"gt_fee,omitempty"`
 }

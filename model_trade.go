@@ -22,4 +22,12 @@ type Trade struct {
 	Price string `json:"price,omitempty"`
 	// Related order ID. No value in public endpoints
 	OrderId string `json:"order_id,omitempty"`
+	// Fee deducted. No value in public endpoints
+	Fee string `json:"fee,omitempty"`
+	// Fee currency unit. No value in public endpoints
+	FeeCurrency string `json:"fee_currency,omitempty"`
+	// Point used to deduct fee
+	PointFee string `json:"point_fee,omitempty"`
+	// GT used to deduct fee
+	GtFee string `json:"gt_fee,omitempty"`
 }

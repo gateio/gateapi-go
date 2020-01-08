@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Message** | **string** | Detailed error message, empty string if order succeeds | [optional] 
 **Id** | **string** | Order ID | [optional] 
 **CreateTime** | **string** | Order creation time | [optional] 
+**UpdateTime** | **string** | Order last modification time | [optional] 
 **Status** | **string** | Order status  - &#x60;open&#x60;: to be filled - &#x60;closed&#x60;: filled - &#x60;cancelled&#x60;: cancelled | [optional] 
 **CurrencyPair** | **string** | Currency pair | [optional] 
 **Type** | **string** | Order type. limit - limit order | [optional] [default to TYPE_LIMIT]
@@ -19,6 +20,10 @@ Name | Type | Description | Notes
 **TimeInForce** | **string** | Time in force | [optional] [default to TIME_IN_FORCE_GTC]
 **Left** | **string** | Amount left to fill | [optional] 
 **FillPrice** | **string** | Fill price of the order | [optional] 
+**Fee** | **string** | Fee deducted | [optional] 
+**FeeCurrency** | **string** | Fee currency unit | [optional] 
+**PointFee** | **string** | Point used to deduct fee | [optional] 
+**GtFee** | **string** | GT used to deduct fee | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
