@@ -4,6 +4,7 @@ All URIs are relative to *https://api.gateio.ws/api/v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**CancelBatchOrders**](SpotApi.md#CancelBatchOrders) | **Post** /spot/cancel_batch_orders | Cancel a batch of orders with an ID list
 [**CancelOrder**](SpotApi.md#CancelOrder) | **Delete** /spot/orders/{order_id} | Cancel a single order
 [**CancelOrders**](SpotApi.md#CancelOrders) | **Delete** /spot/orders | Cancel all &#x60;open&#x60; orders in specified currency pair
 [**CreateBatchOrders**](SpotApi.md#CreateBatchOrders) | **Post** /spot/batch_orders | Create a batch of orders
@@ -19,6 +20,52 @@ Method | HTTP request | Description
 [**ListTickers**](SpotApi.md#ListTickers) | **Get** /spot/tickers | Retrieve ticker information
 [**ListTrades**](SpotApi.md#ListTrades) | **Get** /spot/trades | Retrieve market trades
 
+
+# **CancelBatchOrders**
+> []CancelOrderResult CancelBatchOrders(ctx, cancelOrder)
+Cancel a batch of orders with an ID list
+
+Multiple currency pairs can be specified, but maximum 20 orders are allowed per request
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **cancelOrder** | [**[]CancelOrder**](CancelOrder.md)|  | 
+
+### Example
+
+```golang
+client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+// uncomment the next line if your are testing against other hosts
+// client.ChangeBasePath("https://some-other-host")
+client.SetKeySecret("YOUR API KEY", "YOUR API SECRET")
+api := client.SpotApi
+cancelOrder := make([]gateapi.CancelOrder, 0); // []CancelOrder - 
+
+result, _, err := api.CancelBatchOrders(nil, cancelOrder)
+if err != nil {
+    fmt.Println(err.Error())
+} else {
+    fmt.Println(result)
+}
+```
+
+### Return type
+
+[**[]CancelOrderResult**](CancelOrderResult.md)
+
+### Authorization
+
+Authentication with API key and secret is required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **CancelOrder**
 > Order CancelOrder(ctx, orderId, currencyPair)
