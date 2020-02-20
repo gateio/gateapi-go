@@ -35,6 +35,8 @@ type Order struct {
 	Price string `json:"price"`
 	// Time in force
 	TimeInForce string `json:"time_in_force,omitempty"`
+	// Used in margin trading(e.g. `account` is `margin`) to allow automatic loan of insufficient part if balance is not enough.
+	AutoBorrow bool `json:"auto_borrow,omitempty"`
 	// Amount left to fill
 	Left string `json:"left,omitempty"`
 	// Total filled in quote currency
