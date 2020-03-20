@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **Side** | **string** | Order side | [optional] 
 **Amount** | **string** | Trade amount | [optional] 
 **Price** | **string** | Order price | [optional] 
-**TimeInForce** | **string** | Time in force | [optional] [default to TIME_IN_FORCE_GTC]
+**TimeInForce** | **string** | Time in force  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled, taker only - poc: PendingOrCancelled, reduce only | [optional] [default to TIME_IN_FORCE_GTC]
 **AutoBorrow** | **bool** | Used in margin trading(e.g. &#x60;account&#x60; is &#x60;margin&#x60;) to allow automatic loan of insufficient part if balance is not enough. | [optional] 
 **Left** | **string** | Amount left to fill | [optional] 
 **FillPrice** | **string** | Fill price of the order | [optional] 
@@ -25,6 +25,9 @@ Name | Type | Description | Notes
 **FeeCurrency** | **string** | Fee currency unit | [optional] 
 **PointFee** | **string** | Point used to deduct fee | [optional] 
 **GtFee** | **string** | GT used to deduct fee | [optional] 
+**GtDiscount** | **bool** | Whether GT fee discount is used | [optional] 
+**RebatedFee** | **string** | Rebated fee | [optional] 
+**RebatedFeeCurrency** | **string** | Rebated fee currency unit | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
