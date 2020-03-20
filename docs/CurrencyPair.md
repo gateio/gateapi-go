@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **MinQuoteAmount** | **string** | Minimum amount of quote currency to trade, &#x60;null&#x60; means no limit | [optional] 
 **AmountPrecision** | **int32** | Amount scale | [optional] 
 **Precision** | **int32** | Price scale | [optional] 
+**TradeStatus** | **string** | How currency pair can be traded  - untradable: cannot be bought or sold - buyable: can be bought - sellable: can be sold - tradable: can be bought or sold | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

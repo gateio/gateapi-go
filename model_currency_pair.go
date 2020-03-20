@@ -27,4 +27,6 @@ type CurrencyPair struct {
 	AmountPrecision int32 `json:"amount_precision,omitempty"`
 	// Price scale
 	Precision int32 `json:"precision,omitempty"`
+	// How currency pair can be traded  - untradable: cannot be bought or sold - buyable: can be bought - sellable: can be sold - tradable: can be bought or sold
+	TradeStatus string `json:"trade_status,omitempty"`
 }

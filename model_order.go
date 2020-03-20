@@ -33,7 +33,7 @@ type Order struct {
 	Amount string `json:"amount"`
 	// Order price
 	Price string `json:"price"`
-	// Time in force
+	// Time in force  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled, taker only - poc: PendingOrCancelled, reduce only
 	TimeInForce string `json:"time_in_force,omitempty"`
 	// Used in margin trading(e.g. `account` is `margin`) to allow automatic loan of insufficient part if balance is not enough.
 	AutoBorrow bool `json:"auto_borrow,omitempty"`
@@ -49,4 +49,10 @@ type Order struct {
 	PointFee string `json:"point_fee,omitempty"`
 	// GT used to deduct fee
 	GtFee string `json:"gt_fee,omitempty"`
+	// Whether GT fee discount is used
+	GtDiscount bool `json:"gt_discount,omitempty"`
+	// Rebated fee
+	RebatedFee string `json:"rebated_fee,omitempty"`
+	// Rebated fee currency unit
+	RebatedFeeCurrency string `json:"rebated_fee_currency,omitempty"`
 }
