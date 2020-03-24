@@ -35,7 +35,7 @@ type Order struct {
 	Price string `json:"price"`
 	// Time in force  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled, taker only - poc: PendingOrCancelled, reduce only
 	TimeInForce string `json:"time_in_force,omitempty"`
-	// Used in margin trading(e.g. `account` is `margin`) to allow automatic loan of insufficient part if balance is not enough.
+	// Used in margin trading(i.e. `account` is `margin`) to allow automatic loan of insufficient part if balance is not enough.
 	AutoBorrow bool `json:"auto_borrow,omitempty"`
 	// Amount left to fill
 	Left string `json:"left,omitempty"`
