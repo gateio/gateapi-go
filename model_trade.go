@@ -16,6 +16,8 @@ type Trade struct {
 	CreateTime string `json:"create_time,omitempty"`
 	// Order side
 	Side string `json:"side,omitempty"`
+	// Trade role
+	Role string `json:"role,omitempty"`
 	// Trade amount
 	Amount string `json:"amount,omitempty"`
 	// Order price
