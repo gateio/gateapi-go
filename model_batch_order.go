@@ -45,8 +45,10 @@ type BatchOrder struct {
 	AutoBorrow bool `json:"auto_borrow,omitempty"`
 	// Amount left to fill
 	Left string `json:"left,omitempty"`
-	// Fill price of the order
+	// Total filled in quote currency. Deprecated in favor of `filled_total`
 	FillPrice string `json:"fill_price,omitempty"`
+	// Total filled in quote currency
+	FilledTotal string `json:"filled_total,omitempty"`
 	// Fee deducted
 	Fee string `json:"fee,omitempty"`
 	// Fee currency unit
