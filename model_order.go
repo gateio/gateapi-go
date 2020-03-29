@@ -39,8 +39,10 @@ type Order struct {
 	AutoBorrow bool `json:"auto_borrow,omitempty"`
 	// Amount left to fill
 	Left string `json:"left,omitempty"`
-	// Total filled in quote currency
+	// Total filled in quote currency. Deprecated in favor of `filled_total`
 	FillPrice string `json:"fill_price,omitempty"`
+	// Total filled in quote currency
+	FilledTotal string `json:"filled_total,omitempty"`
 	// Fee deducted
 	Fee string `json:"fee,omitempty"`
 	// Fee currency unit
