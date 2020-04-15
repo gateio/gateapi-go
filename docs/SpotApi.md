@@ -350,7 +350,7 @@ Authentication with API key and secret is required
 > [][]string ListCandlesticks(ctx, currencyPair, optional)
 Market candlesticks
 
-Candlestick data will start from (current time - limit * interval), end at current time
+Maximum of 1000 points are returned in one query. Be sure not to exceed the limit when specifying `from`, `to` and `interval`
 
 ### Required Parameters
 
@@ -366,7 +366,9 @@ Optional parameters are passed through a pointer to a ListCandlesticksOpts struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
+ **limit** | **optional.Int32**| Maximum recent data points returned. &#x60;limit&#x60; is conflicted with &#x60;from&#x60; and &#x60;to&#x60;. If either &#x60;from&#x60; or &#x60;to&#x60; is specified, request will be rejected. | [default to 100]
+ **from** | **optional.Int64**| Start time of candlesticks, formatted in Unix timestamp in seconds. Default to&#x60;to - 100 * interval&#x60; if not specified | 
+ **to** | **optional.Int64**| End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time | 
  **interval** | **optional.String**| Interval time between data points | [default to 30m]
 
 ### Example
