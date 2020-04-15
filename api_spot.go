@@ -668,17 +668,21 @@ func (a *SpotApiService) GetOrder(ctx context.Context, orderId string, currencyP
 
 /*
 SpotApiService Market candlesticks
-Candlestick data will start from (current time - limit * interval), end at current time
+Maximum of 1000 points are returned in one query. Be sure not to exceed the limit when specifying &#x60;from&#x60;, &#x60;to&#x60; and &#x60;interval&#x60;
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param currencyPair Currency pair
  * @param optional nil or *ListCandlesticksOpts - Optional Parameters:
- * @param "Limit" (optional.Int32) -  Maximum number of record returned in one list
+ * @param "Limit" (optional.Int32) -  Maximum recent data points returned. `limit` is conflicted with `from` and `to`. If either `from` or `to` is specified, request will be rejected.
+ * @param "From" (optional.Int64) -  Start time of candlesticks, formatted in Unix timestamp in seconds. Default to`to - 100 * interval` if not specified
+ * @param "To" (optional.Int64) -  End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time
  * @param "Interval" (optional.String) -  Interval time between data points
 @return [][]string
 */
 
 type ListCandlesticksOpts struct {
 	Limit optional.Int32
+	From optional.Int64
+	To optional.Int64
 	Interval optional.String
 }
 
@@ -702,6 +706,12 @@ func (a *SpotApiService) ListCandlesticks(ctx context.Context, currencyPair stri
 	localVarQueryParams.Add("currency_pair", parameterToString(currencyPair, ""))
 	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
 		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.From.IsSet() {
+		localVarQueryParams.Add("from", parameterToString(localVarOptionals.From.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.To.IsSet() {
+		localVarQueryParams.Add("to", parameterToString(localVarOptionals.To.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.Interval.IsSet() {
 		localVarQueryParams.Add("interval", parameterToString(localVarOptionals.Interval.Value(), ""))
