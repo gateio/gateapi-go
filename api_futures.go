@@ -769,7 +769,9 @@ FuturesApiService List personal trading history
  * @param "Contract" (optional.String) -  Futures contract, return related data only if specified
  * @param "Order" (optional.Int32) -  Futures order ID, return related data only if specified
  * @param "Limit" (optional.Int32) -  Maximum number of record returned in one list
+ * @param "Offset" (optional.Int32) -  List offset, starting from 0
  * @param "LastId" (optional.String) -  Specify list staring point using the `id` of last record in previous list-query results
+ * @param "CountTotal" (optional.Int32) -  Whether to return total number matched. Default to 0(no return)
 @return []MyFuturesTrade
 */
 
@@ -777,7 +779,9 @@ type GetMyTradesOpts struct {
 	Contract optional.String
 	Order optional.Int32
 	Limit optional.Int32
+	Offset optional.Int32
 	LastId optional.String
+	CountTotal optional.Int32
 }
 
 func (a *FuturesApiService) GetMyTrades(ctx context.Context, settle string, localVarOptionals *GetMyTradesOpts) ([]MyFuturesTrade, *http.Response, error) {
@@ -807,8 +811,14 @@ func (a *FuturesApiService) GetMyTrades(ctx context.Context, settle string, loca
 	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
 		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
 	}
+	if localVarOptionals != nil && localVarOptionals.Offset.IsSet() {
+		localVarQueryParams.Add("offset", parameterToString(localVarOptionals.Offset.Value(), ""))
+	}
 	if localVarOptionals != nil && localVarOptionals.LastId.IsSet() {
 		localVarQueryParams.Add("last_id", parameterToString(localVarOptionals.LastId.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.CountTotal.IsSet() {
+		localVarQueryParams.Add("count_total", parameterToString(localVarOptionals.CountTotal.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}
@@ -1772,13 +1782,17 @@ Zero-fill order cannot be retrieved 60 seconds after cancellation
  * @param status List orders based on status
  * @param optional nil or *ListFuturesOrdersOpts - Optional Parameters:
  * @param "Limit" (optional.Int32) -  Maximum number of record returned in one list
+ * @param "Offset" (optional.Int32) -  List offset, starting from 0
  * @param "LastId" (optional.String) -  Specify list staring point using the `id` of last record in previous list-query results
+ * @param "CountTotal" (optional.Int32) -  Whether to return total number matched. Default to 0(no return)
 @return []FuturesOrder
 */
 
 type ListFuturesOrdersOpts struct {
 	Limit optional.Int32
+	Offset optional.Int32
 	LastId optional.String
+	CountTotal optional.Int32
 }
 
 func (a *FuturesApiService) ListFuturesOrders(ctx context.Context, settle string, contract string, status string, localVarOptionals *ListFuturesOrdersOpts) ([]FuturesOrder, *http.Response, error) {
@@ -1804,8 +1818,14 @@ func (a *FuturesApiService) ListFuturesOrders(ctx context.Context, settle string
 	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
 		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
 	}
+	if localVarOptionals != nil && localVarOptionals.Offset.IsSet() {
+		localVarQueryParams.Add("offset", parameterToString(localVarOptionals.Offset.Value(), ""))
+	}
 	if localVarOptionals != nil && localVarOptionals.LastId.IsSet() {
 		localVarQueryParams.Add("last_id", parameterToString(localVarOptionals.LastId.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.CountTotal.IsSet() {
+		localVarQueryParams.Add("count_total", parameterToString(localVarOptionals.CountTotal.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHttpContentTypes := []string{}

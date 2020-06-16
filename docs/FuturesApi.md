@@ -438,7 +438,9 @@ Name | Type | Description  | Notes
  **contract** | **optional.String**| Futures contract, return related data only if specified | 
  **order** | **optional.Int32**| Futures order ID, return related data only if specified | 
  **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
+ **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
  **lastId** | **optional.String**| Specify list staring point using the &#x60;id&#x60; of last record in previous list-query results | 
+ **countTotal** | **optional.Int32**| Whether to return total number matched. Default to 0(no return) | [default to 0]
 
 ### Example
 
@@ -958,7 +960,9 @@ Name | Type | Description  | Notes
 
 
  **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
+ **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
  **lastId** | **optional.String**| Specify list staring point using the &#x60;id&#x60; of last record in previous list-query results | 
+ **countTotal** | **optional.Int32**| Whether to return total number matched. Default to 0(no return) | [default to 0]
 
 ### Example
 
