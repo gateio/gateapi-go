@@ -31,6 +31,7 @@ Name | Type | Description | Notes
 **TradeSize** | **int64** | Historical accumulation trade size | [optional] 
 **PositionSize** | **int64** | Current total long position size | [optional] 
 **ConfigChangeTime** | **float32** | Configuration&#39;s last changed time | [optional] 
+**InDelisting** | **bool** | Contract is delisting | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

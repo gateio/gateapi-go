@@ -67,4 +67,6 @@ type Contract struct {
 	PositionSize int64 `json:"position_size,omitempty"`
 	// Configuration's last changed time
 	ConfigChangeTime float32 `json:"config_change_time,omitempty"`
+	// Contract is delisting
+	InDelisting bool `json:"in_delisting,omitempty"`
 }

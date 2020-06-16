@@ -53,6 +53,8 @@ type APIClient struct {
 	SpotApi *SpotApiService
 
 	WalletApi *WalletApiService
+
+	WithdrawalApi *WithdrawalApiService
 }
 
 type service struct {
@@ -75,6 +77,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.MarginApi = (*MarginApiService)(&c.common)
 	c.SpotApi = (*SpotApiService)(&c.common)
 	c.WalletApi = (*WalletApiService)(&c.common)
+	c.WithdrawalApi = (*WithdrawalApiService)(&c.common)
 
 	return c
 }
