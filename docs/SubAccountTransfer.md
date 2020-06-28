@@ -7,6 +7,9 @@ Name | Type | Description | Notes
 **SubAccount** | **string** | Sub account user ID | 
 **Direction** | **string** | Transfer direction. to - transfer into sub account; from - transfer out from sub account | 
 **Amount** | **string** | Transfer amount | 
+**Uid** | **string** | Main account user ID | [optional] 
+**Timest** | **string** | Transfer timestamp | [optional] 
+**Source** | **string** | Where the operation is initiated from | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

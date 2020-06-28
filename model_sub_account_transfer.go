@@ -18,4 +18,10 @@ type SubAccountTransfer struct {
 	Direction string `json:"direction"`
 	// Transfer amount
 	Amount string `json:"amount"`
+	// Main account user ID
+	Uid string `json:"uid,omitempty"`
+	// Transfer timestamp
+	Timest string `json:"timest,omitempty"`
+	// Where the operation is initiated from
+	Source string `json:"source,omitempty"`
 }
