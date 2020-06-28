@@ -114,7 +114,8 @@ func (a *WalletApiService) GetDepositAddress(ctx context.Context, currency strin
 }
 
 /*
-WalletApiService Retrieve deposit records. Time range cannot exceed 30 days
+WalletApiService Retrieve deposit records
+Record time range cannot exceed 30 days
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *ListDepositsOpts - Optional Parameters:
  * @param "Currency" (optional.String) -  Filter by currency. Return all currency records if not specified
@@ -230,7 +231,125 @@ func (a *WalletApiService) ListDeposits(ctx context.Context, localVarOptionals *
 }
 
 /*
-WalletApiService Retrieve withdrawal records. Time range cannot exceed 30 days
+WalletApiService Transfer records between main and sub accounts
+Record time range cannot exceed 30 days  &gt; Note: only records after 2020-04-10 can be retrieved
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *ListSubAccountTransfersOpts - Optional Parameters:
+ * @param "SubUid" (optional.String) -  Sub account user ID. Return records related to all sub accounts if not specified
+ * @param "From" (optional.Int64) -  Time range beginning, default to 7 days before current time
+ * @param "To" (optional.Int64) -  Time range ending, default to current time
+ * @param "Limit" (optional.Int32) -  Maximum number of record returned in one list
+ * @param "Offset" (optional.Int32) -  List offset, starting from 0
+@return []SubAccountTransfer
+*/
+
+type ListSubAccountTransfersOpts struct {
+	SubUid optional.String
+	From optional.Int64
+	To optional.Int64
+	Limit optional.Int32
+	Offset optional.Int32
+}
+
+func (a *WalletApiService) ListSubAccountTransfers(ctx context.Context, localVarOptionals *ListSubAccountTransfersOpts) ([]SubAccountTransfer, *http.Response, error) {
+	var (
+		localVarHttpMethod   = strings.ToUpper("Get")
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []SubAccountTransfer
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/wallet/sub_account_transfers"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.SubUid.IsSet() {
+		localVarQueryParams.Add("sub_uid", parameterToString(localVarOptionals.SubUid.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.From.IsSet() {
+		localVarQueryParams.Add("from", parameterToString(localVarOptionals.From.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.To.IsSet() {
+		localVarQueryParams.Add("to", parameterToString(localVarOptionals.To.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
+		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Offset.IsSet() {
+		localVarQueryParams.Add("offset", parameterToString(localVarOptionals.Offset.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams,
+		localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes, true)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v []SubAccountTransfer
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
+WalletApiService Retrieve withdrawal records
+Record time range cannot exceed 30 days
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *ListWithdrawalsOpts - Optional Parameters:
  * @param "Currency" (optional.String) -  Filter by currency. Return all currency records if not specified
