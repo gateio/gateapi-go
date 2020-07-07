@@ -77,7 +77,7 @@ Name | Type | Description  | Notes
  **currency** | **optional.String**| Filter by currency. Return all currency records if not specified | 
  **from** | **optional.Int64**| Time range beginning, default to 7 days before current time | 
  **to** | **optional.Int64**| Time range ending, default to current time | 
- **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
+ **limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
  **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
 
 ### Example
@@ -133,7 +133,7 @@ Name | Type | Description  | Notes
  **subUid** | **optional.String**| Sub account user ID. Return records related to all sub accounts if not specified | 
  **from** | **optional.Int64**| Time range beginning, default to 7 days before current time | 
  **to** | **optional.Int64**| Time range ending, default to current time | 
- **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
+ **limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
  **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
 
 ### Example
@@ -189,7 +189,7 @@ Name | Type | Description  | Notes
  **currency** | **optional.String**| Filter by currency. Return all currency records if not specified | 
  **from** | **optional.Int64**| Time range beginning, default to 7 days before current time | 
  **to** | **optional.Int64**| Time range ending, default to current time | 
- **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
+ **limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
  **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
 
 ### Example
@@ -228,7 +228,7 @@ Authentication with API key and secret is required
 > Transfer(ctx, transfer)
 Transfer between accounts
 
-Transfer between different accounts. Currently support transfers between the following:  1. spot - margin 2. spot - futures
+Transfer between different accounts. Currently support transfers between the following:  1. spot - margin 2. spot - futures(perpetual) 2. spot - delivery
 
 ### Required Parameters
 

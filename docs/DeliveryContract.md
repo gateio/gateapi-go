@@ -1,9 +1,11 @@
-# Contract
+# DeliveryContract
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | Futures contract | [optional] 
+**Underling** | **string** | Underlying | [optional] 
+**Cycle** | **string** | Cycle type, e.g. WEEKLY, QUARTERLY | [optional] 
 **Type** | **string** | Futures contract type | [optional] 
 **QuantoMultiplier** | **string** | Multiplier used in converting from invoicing to settlement currency in quanto futures | [optional] 
 **LeverageMin** | **string** | Minimum leverage | [optional] 
@@ -17,9 +19,13 @@ Name | Type | Description | Notes
 **TakerFeeRate** | **string** | Taker fee rate | [optional] 
 **OrderPriceRound** | **string** | Minimum order price increment | [optional] 
 **MarkPriceRound** | **string** | Minimum mark price increment | [optional] 
-**FundingRate** | **string** | Current funding rate | [optional] 
-**FundingInterval** | **int32** | Funding application interval, unit in seconds | [optional] 
-**FundingNextApply** | **float32** | Next funding time | [optional] 
+**BasisRate** | **string** | Fair basis rate | [optional] 
+**BasisValue** | **string** | Fair basis value | [optional] 
+**BasisImpactValue** | **string** | Funding used for calculating impact bid, ask price | [optional] 
+**SettlePrice** | **string** | Settle price | [optional] 
+**SettlePriceInterval** | **int32** | Settle price update interval | [optional] 
+**SettlePriceDuration** | **int32** | Settle price update duration in seconds | [optional] 
+**ExpireTime** | **int64** | Contract expiry timestamp | [optional] 
 **RiskLimitBase** | **string** | Risk limit base | [optional] 
 **RiskLimitStep** | **string** | Step of adjusting risk limit | [optional] 
 **RiskLimitMax** | **string** | Maximum risk limit the contract allowed | [optional] 

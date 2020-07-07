@@ -121,7 +121,7 @@ Record time range cannot exceed 30 days
  * @param "Currency" (optional.String) -  Filter by currency. Return all currency records if not specified
  * @param "From" (optional.Int64) -  Time range beginning, default to 7 days before current time
  * @param "To" (optional.Int64) -  Time range ending, default to current time
- * @param "Limit" (optional.Int32) -  Maximum number of record returned in one list
+ * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
  * @param "Offset" (optional.Int32) -  List offset, starting from 0
 @return []LedgerRecord
 */
@@ -238,7 +238,7 @@ Record time range cannot exceed 30 days  &gt; Note: only records after 2020-04-1
  * @param "SubUid" (optional.String) -  Sub account user ID. Return records related to all sub accounts if not specified
  * @param "From" (optional.Int64) -  Time range beginning, default to 7 days before current time
  * @param "To" (optional.Int64) -  Time range ending, default to current time
- * @param "Limit" (optional.Int32) -  Maximum number of record returned in one list
+ * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
  * @param "Offset" (optional.Int32) -  List offset, starting from 0
 @return []SubAccountTransfer
 */
@@ -355,7 +355,7 @@ Record time range cannot exceed 30 days
  * @param "Currency" (optional.String) -  Filter by currency. Return all currency records if not specified
  * @param "From" (optional.Int64) -  Time range beginning, default to 7 days before current time
  * @param "To" (optional.Int64) -  Time range ending, default to current time
- * @param "Limit" (optional.Int32) -  Maximum number of record returned in one list
+ * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
  * @param "Offset" (optional.Int32) -  List offset, starting from 0
 @return []LedgerRecord
 */
@@ -466,7 +466,7 @@ func (a *WalletApiService) ListWithdrawals(ctx context.Context, localVarOptional
 
 /*
 WalletApiService Transfer between accounts
-Transfer between different accounts. Currently support transfers between the following:  1. spot - margin 2. spot - futures
+Transfer between different accounts. Currently support transfers between the following:  1. spot - margin 2. spot - futures(perpetual) 2. spot - delivery
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param transfer
 */

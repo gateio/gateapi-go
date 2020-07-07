@@ -24,16 +24,16 @@ var (
 	_ context.Context
 )
 
-type FuturesApiService service
+type DeliveryApiService service
 
 /*
-FuturesApiService Cancel a single order
+DeliveryApiService Cancel a single order
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
  * @param orderId ID returned on order successfully being created
 @return FuturesOrder
 */
-func (a *FuturesApiService) CancelFuturesOrder(ctx context.Context, settle string, orderId string) (FuturesOrder, *http.Response, error) {
+func (a *DeliveryApiService) CancelDeliveryOrder(ctx context.Context, settle string, orderId string) (FuturesOrder, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Delete")
 		localVarPostBody     interface{}
@@ -44,7 +44,7 @@ func (a *FuturesApiService) CancelFuturesOrder(ctx context.Context, settle strin
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/orders/{order_id}"
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/orders/{order_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"order_id"+"}", fmt.Sprintf("%v", orderId), -1)
 
@@ -117,21 +117,21 @@ func (a *FuturesApiService) CancelFuturesOrder(ctx context.Context, settle strin
 }
 
 /*
-FuturesApiService Cancel all `open` orders matched
+DeliveryApiService Cancel all `open` orders matched
 Zero-fill order cannot be retrieved 60 seconds after cancellation
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
  * @param contract Futures contract
- * @param optional nil or *CancelFuturesOrdersOpts - Optional Parameters:
+ * @param optional nil or *CancelDeliveryOrdersOpts - Optional Parameters:
  * @param "Side" (optional.String) -  All bids or asks. Both included in not specified
 @return []FuturesOrder
 */
 
-type CancelFuturesOrdersOpts struct {
+type CancelDeliveryOrdersOpts struct {
 	Side optional.String
 }
 
-func (a *FuturesApiService) CancelFuturesOrders(ctx context.Context, settle string, contract string, localVarOptionals *CancelFuturesOrdersOpts) ([]FuturesOrder, *http.Response, error) {
+func (a *DeliveryApiService) CancelDeliveryOrders(ctx context.Context, settle string, contract string, localVarOptionals *CancelDeliveryOrdersOpts) ([]FuturesOrder, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Delete")
 		localVarPostBody     interface{}
@@ -142,7 +142,7 @@ func (a *FuturesApiService) CancelFuturesOrders(ctx context.Context, settle stri
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/orders"
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/orders"
 	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -218,13 +218,13 @@ func (a *FuturesApiService) CancelFuturesOrders(ctx context.Context, settle stri
 }
 
 /*
-FuturesApiService Cancel a single order
+DeliveryApiService Cancel a single order
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
  * @param orderId ID returned on order successfully being created
 @return FuturesPriceTriggeredOrder
 */
-func (a *FuturesApiService) CancelPriceTriggeredOrder(ctx context.Context, settle string, orderId string) (FuturesPriceTriggeredOrder, *http.Response, error) {
+func (a *DeliveryApiService) CancelPriceTriggeredDeliveryOrder(ctx context.Context, settle string, orderId string) (FuturesPriceTriggeredOrder, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Delete")
 		localVarPostBody     interface{}
@@ -235,7 +235,7 @@ func (a *FuturesApiService) CancelPriceTriggeredOrder(ctx context.Context, settl
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/price_orders/{order_id}"
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/price_orders/{order_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"order_id"+"}", fmt.Sprintf("%v", orderId), -1)
 
@@ -308,13 +308,13 @@ func (a *FuturesApiService) CancelPriceTriggeredOrder(ctx context.Context, settl
 }
 
 /*
-FuturesApiService Cancel all open orders
+DeliveryApiService Cancel all open orders
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
  * @param contract Futures contract
 @return []FuturesPriceTriggeredOrder
 */
-func (a *FuturesApiService) CancelPriceTriggeredOrderList(ctx context.Context, settle string, contract string) ([]FuturesPriceTriggeredOrder, *http.Response, error) {
+func (a *DeliveryApiService) CancelPriceTriggeredDeliveryOrderList(ctx context.Context, settle string, contract string) ([]FuturesPriceTriggeredOrder, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Delete")
 		localVarPostBody     interface{}
@@ -325,7 +325,7 @@ func (a *FuturesApiService) CancelPriceTriggeredOrderList(ctx context.Context, s
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/price_orders"
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/price_orders"
 	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -398,14 +398,14 @@ func (a *FuturesApiService) CancelPriceTriggeredOrderList(ctx context.Context, s
 }
 
 /*
-FuturesApiService Create a futures order
+DeliveryApiService Create a futures order
 Zero-fill order cannot be retrieved 60 seconds after cancellation
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
  * @param futuresOrder
 @return FuturesOrder
 */
-func (a *FuturesApiService) CreateFuturesOrder(ctx context.Context, settle string, futuresOrder FuturesOrder) (FuturesOrder, *http.Response, error) {
+func (a *DeliveryApiService) CreateDeliveryOrder(ctx context.Context, settle string, futuresOrder FuturesOrder) (FuturesOrder, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Post")
 		localVarPostBody     interface{}
@@ -416,7 +416,7 @@ func (a *FuturesApiService) CreateFuturesOrder(ctx context.Context, settle strin
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/orders"
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/orders"
 	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -490,13 +490,13 @@ func (a *FuturesApiService) CreateFuturesOrder(ctx context.Context, settle strin
 }
 
 /*
-FuturesApiService Create a price-triggered order
+DeliveryApiService Create a price-triggered order
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
  * @param futuresPriceTriggeredOrder
 @return TriggerOrderResponse
 */
-func (a *FuturesApiService) CreatePriceTriggeredOrder(ctx context.Context, settle string, futuresPriceTriggeredOrder FuturesPriceTriggeredOrder) (TriggerOrderResponse, *http.Response, error) {
+func (a *DeliveryApiService) CreatePriceTriggeredDeliveryOrder(ctx context.Context, settle string, futuresPriceTriggeredOrder FuturesPriceTriggeredOrder) (TriggerOrderResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Post")
 		localVarPostBody     interface{}
@@ -507,7 +507,7 @@ func (a *FuturesApiService) CreatePriceTriggeredOrder(ctx context.Context, settl
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/price_orders"
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/price_orders"
 	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -581,24 +581,24 @@ func (a *FuturesApiService) CreatePriceTriggeredOrder(ctx context.Context, settl
 }
 
 /*
-FuturesApiService Get a single contract
+DeliveryApiService Get a single contract
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
  * @param contract Futures contract
-@return Contract
+@return DeliveryContract
 */
-func (a *FuturesApiService) GetFuturesContract(ctx context.Context, settle string, contract string) (Contract, *http.Response, error) {
+func (a *DeliveryApiService) GetDeliveryContract(ctx context.Context, settle string, contract string) (DeliveryContract, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Get")
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  Contract
+		localVarReturnValue  DeliveryContract
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/contracts/{contract}"
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/contracts/{contract}"
 	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"contract"+"}", fmt.Sprintf("%v", contract), -1)
 
@@ -646,7 +646,7 @@ func (a *FuturesApiService) GetFuturesContract(ctx context.Context, settle strin
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v Contract
+			var v DeliveryContract
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -671,14 +671,14 @@ func (a *FuturesApiService) GetFuturesContract(ctx context.Context, settle strin
 }
 
 /*
-FuturesApiService Get a single order
+DeliveryApiService Get a single order
 Zero-fill order cannot be retrieved 60 seconds after cancellation
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
  * @param orderId ID returned on order successfully being created
 @return FuturesOrder
 */
-func (a *FuturesApiService) GetFuturesOrder(ctx context.Context, settle string, orderId string) (FuturesOrder, *http.Response, error) {
+func (a *DeliveryApiService) GetDeliveryOrder(ctx context.Context, settle string, orderId string) (FuturesOrder, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Get")
 		localVarPostBody     interface{}
@@ -689,7 +689,7 @@ func (a *FuturesApiService) GetFuturesOrder(ctx context.Context, settle string, 
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/orders/{order_id}"
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/orders/{order_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"order_id"+"}", fmt.Sprintf("%v", orderId), -1)
 
@@ -762,11 +762,101 @@ func (a *FuturesApiService) GetFuturesOrder(ctx context.Context, settle string, 
 }
 
 /*
-FuturesApiService List personal trading history
+DeliveryApiService Get single position
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
- * @param optional nil or *GetMyTradesOpts - Optional Parameters:
- * @param "Contract" (optional.String) -  Futures contract, return related data only if specified
+ * @param contract Futures contract
+@return Position
+*/
+func (a *DeliveryApiService) GetDeliveryPosition(ctx context.Context, settle string, contract string) (Position, *http.Response, error) {
+	var (
+		localVarHttpMethod   = strings.ToUpper("Get")
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  Position
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/positions/{contract}"
+	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"contract"+"}", fmt.Sprintf("%v", contract), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams,
+		localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes, true)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v Position
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
+DeliveryApiService List personal trading history
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param settle Settle currency
+ * @param optional nil or *GetMyDeliveryTradesOpts - Optional Parameters:
+ * @param "Contract" (optional.String) -  Futures contract
  * @param "Order" (optional.Int32) -  Futures order ID, return related data only if specified
  * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
  * @param "Offset" (optional.Int32) -  List offset, starting from 0
@@ -775,7 +865,7 @@ FuturesApiService List personal trading history
 @return []MyFuturesTrade
 */
 
-type GetMyTradesOpts struct {
+type GetMyDeliveryTradesOpts struct {
 	Contract optional.String
 	Order optional.Int32
 	Limit optional.Int32
@@ -784,7 +874,7 @@ type GetMyTradesOpts struct {
 	CountTotal optional.Int32
 }
 
-func (a *FuturesApiService) GetMyTrades(ctx context.Context, settle string, localVarOptionals *GetMyTradesOpts) ([]MyFuturesTrade, *http.Response, error) {
+func (a *DeliveryApiService) GetMyDeliveryTrades(ctx context.Context, settle string, localVarOptionals *GetMyDeliveryTradesOpts) ([]MyFuturesTrade, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Get")
 		localVarPostBody     interface{}
@@ -795,7 +885,7 @@ func (a *FuturesApiService) GetMyTrades(ctx context.Context, settle string, loca
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/my_trades"
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/my_trades"
 	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -885,103 +975,13 @@ func (a *FuturesApiService) GetMyTrades(ctx context.Context, settle string, loca
 }
 
 /*
-FuturesApiService Get single position
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param settle Settle currency
- * @param contract Futures contract
-@return Position
-*/
-func (a *FuturesApiService) GetPosition(ctx context.Context, settle string, contract string) (Position, *http.Response, error) {
-	var (
-		localVarHttpMethod   = strings.ToUpper("Get")
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  Position
-	)
-
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/positions/{contract}"
-	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"contract"+"}", fmt.Sprintf("%v", contract), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
-	if localVarHttpContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHttpContentType
-	}
-
-	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
-	if localVarHttpHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
-	}
-	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams,
-		localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes, true)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHttpResponse, err := a.client.callAPI(r)
-	if err != nil || localVarHttpResponse == nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
-	localVarHttpResponse.Body.Close()
-	if err != nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	if localVarHttpResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHttpResponse.Status,
-		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v Position
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		return localVarReturnValue, localVarHttpResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHttpResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHttpResponse, nil
-}
-
-/*
-FuturesApiService Get a single order
+DeliveryApiService Get a single order
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
  * @param orderId ID returned on order successfully being created
 @return FuturesPriceTriggeredOrder
 */
-func (a *FuturesApiService) GetPriceTriggeredOrder(ctx context.Context, settle string, orderId string) (FuturesPriceTriggeredOrder, *http.Response, error) {
+func (a *DeliveryApiService) GetPriceTriggeredDeliveryOrder(ctx context.Context, settle string, orderId string) (FuturesPriceTriggeredOrder, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Get")
 		localVarPostBody     interface{}
@@ -992,7 +992,7 @@ func (a *FuturesApiService) GetPriceTriggeredOrder(ctx context.Context, settle s
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/price_orders/{order_id}"
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/price_orders/{order_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"order_id"+"}", fmt.Sprintf("%v", orderId), -1)
 
@@ -1065,10 +1065,10 @@ func (a *FuturesApiService) GetPriceTriggeredOrder(ctx context.Context, settle s
 }
 
 /*
-FuturesApiService Query account book
+DeliveryApiService Query account book
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
- * @param optional nil or *ListFuturesAccountBookOpts - Optional Parameters:
+ * @param optional nil or *ListDeliveryAccountBookOpts - Optional Parameters:
  * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
  * @param "From" (optional.Int32) -  Start timestamp
  * @param "To" (optional.Int32) -  End timestamp
@@ -1076,14 +1076,14 @@ FuturesApiService Query account book
 @return []FuturesAccountBook
 */
 
-type ListFuturesAccountBookOpts struct {
+type ListDeliveryAccountBookOpts struct {
 	Limit optional.Int32
 	From optional.Int32
 	To optional.Int32
 	Type_ optional.String
 }
 
-func (a *FuturesApiService) ListFuturesAccountBook(ctx context.Context, settle string, localVarOptionals *ListFuturesAccountBookOpts) ([]FuturesAccountBook, *http.Response, error) {
+func (a *DeliveryApiService) ListDeliveryAccountBook(ctx context.Context, settle string, localVarOptionals *ListDeliveryAccountBookOpts) ([]FuturesAccountBook, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Get")
 		localVarPostBody     interface{}
@@ -1094,7 +1094,7 @@ func (a *FuturesApiService) ListFuturesAccountBook(ctx context.Context, settle s
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/account_book"
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/account_book"
 	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1178,12 +1178,12 @@ func (a *FuturesApiService) ListFuturesAccountBook(ctx context.Context, settle s
 }
 
 /*
-FuturesApiService Query futures account
+DeliveryApiService Query futures account
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
 @return FuturesAccount
 */
-func (a *FuturesApiService) ListFuturesAccounts(ctx context.Context, settle string) (FuturesAccount, *http.Response, error) {
+func (a *DeliveryApiService) ListDeliveryAccounts(ctx context.Context, settle string) (FuturesAccount, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Get")
 		localVarPostBody     interface{}
@@ -1194,7 +1194,7 @@ func (a *FuturesApiService) ListFuturesAccounts(ctx context.Context, settle stri
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/accounts"
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/accounts"
 	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1266,12 +1266,12 @@ func (a *FuturesApiService) ListFuturesAccounts(ctx context.Context, settle stri
 }
 
 /*
-FuturesApiService Get futures candlesticks
+DeliveryApiService Get futures candlesticks
 Return specified contract candlesticks. If prefix &#x60;contract&#x60; with &#x60;mark_&#x60;, the contract&#39;s mark price candlesticks are returned; if prefix with &#x60;index_&#x60;, index price candlesticks will be returned.  Maximum of 2000 points are returned in one query. Be sure not to exceed the limit when specifying &#x60;from&#x60;, &#x60;to&#x60; and &#x60;interval&#x60;
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
  * @param contract Futures contract
- * @param optional nil or *ListFuturesCandlesticksOpts - Optional Parameters:
+ * @param optional nil or *ListDeliveryCandlesticksOpts - Optional Parameters:
  * @param "From" (optional.Float32) -  Start time of candlesticks, formatted in Unix timestamp in seconds. Default to`to - 100 * interval` if not specified
  * @param "To" (optional.Float32) -  End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time
  * @param "Limit" (optional.Int32) -  Maximum recent data points returned. `limit` is conflicted with `from` and `to`. If either `from` or `to` is specified, request will be rejected.
@@ -1279,14 +1279,14 @@ Return specified contract candlesticks. If prefix &#x60;contract&#x60; with &#x6
 @return []FuturesCandlestick
 */
 
-type ListFuturesCandlesticksOpts struct {
+type ListDeliveryCandlesticksOpts struct {
 	From optional.Float32
 	To optional.Float32
 	Limit optional.Int32
 	Interval optional.String
 }
 
-func (a *FuturesApiService) ListFuturesCandlesticks(ctx context.Context, settle string, contract string, localVarOptionals *ListFuturesCandlesticksOpts) ([]FuturesCandlestick, *http.Response, error) {
+func (a *DeliveryApiService) ListDeliveryCandlesticks(ctx context.Context, settle string, contract string, localVarOptionals *ListDeliveryCandlesticksOpts) ([]FuturesCandlestick, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Get")
 		localVarPostBody     interface{}
@@ -1297,7 +1297,7 @@ func (a *FuturesApiService) ListFuturesCandlesticks(ctx context.Context, settle 
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/candlesticks"
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/candlesticks"
 	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1382,23 +1382,23 @@ func (a *FuturesApiService) ListFuturesCandlesticks(ctx context.Context, settle 
 }
 
 /*
-FuturesApiService List all futures contracts
+DeliveryApiService List all futures contracts
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
-@return []Contract
+@return []DeliveryContract
 */
-func (a *FuturesApiService) ListFuturesContracts(ctx context.Context, settle string) ([]Contract, *http.Response, error) {
+func (a *DeliveryApiService) ListDeliveryContracts(ctx context.Context, settle string) ([]DeliveryContract, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Get")
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []Contract
+		localVarReturnValue  []DeliveryContract
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/contracts"
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/contracts"
 	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1445,7 +1445,7 @@ func (a *FuturesApiService) ListFuturesContracts(ctx context.Context, settle str
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v []Contract
+			var v []DeliveryContract
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1470,119 +1470,19 @@ func (a *FuturesApiService) ListFuturesContracts(ctx context.Context, settle str
 }
 
 /*
-FuturesApiService Funding rate history
+DeliveryApiService Futures insurance balance history
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
- * @param contract Futures contract
- * @param optional nil or *ListFuturesFundingRateHistoryOpts - Optional Parameters:
- * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
-@return []FundingRateRecord
-*/
-
-type ListFuturesFundingRateHistoryOpts struct {
-	Limit optional.Int32
-}
-
-func (a *FuturesApiService) ListFuturesFundingRateHistory(ctx context.Context, settle string, contract string, localVarOptionals *ListFuturesFundingRateHistoryOpts) ([]FundingRateRecord, *http.Response, error) {
-	var (
-		localVarHttpMethod   = strings.ToUpper("Get")
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  []FundingRateRecord
-	)
-
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/funding_rate"
-	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	localVarQueryParams.Add("contract", parameterToString(contract, ""))
-	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
-		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
-	}
-	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
-	if localVarHttpContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHttpContentType
-	}
-
-	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
-	if localVarHttpHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
-	}
-	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams,
-		localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes, false)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHttpResponse, err := a.client.callAPI(r)
-	if err != nil || localVarHttpResponse == nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
-	localVarHttpResponse.Body.Close()
-	if err != nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	if localVarHttpResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHttpResponse.Status,
-		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v []FundingRateRecord
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		return localVarReturnValue, localVarHttpResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHttpResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHttpResponse, nil
-}
-
-/*
-FuturesApiService Futures insurance balance history
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param settle Settle currency
- * @param optional nil or *ListFuturesInsuranceLedgerOpts - Optional Parameters:
+ * @param optional nil or *ListDeliveryInsuranceLedgerOpts - Optional Parameters:
  * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
 @return []InsuranceRecord
 */
 
-type ListFuturesInsuranceLedgerOpts struct {
+type ListDeliveryInsuranceLedgerOpts struct {
 	Limit optional.Int32
 }
 
-func (a *FuturesApiService) ListFuturesInsuranceLedger(ctx context.Context, settle string, localVarOptionals *ListFuturesInsuranceLedgerOpts) ([]InsuranceRecord, *http.Response, error) {
+func (a *DeliveryApiService) ListDeliveryInsuranceLedger(ctx context.Context, settle string, localVarOptionals *ListDeliveryInsuranceLedgerOpts) ([]InsuranceRecord, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Get")
 		localVarPostBody     interface{}
@@ -1593,7 +1493,7 @@ func (a *FuturesApiService) ListFuturesInsuranceLedger(ctx context.Context, sett
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/insurance"
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/insurance"
 	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1668,23 +1568,131 @@ func (a *FuturesApiService) ListFuturesInsuranceLedger(ctx context.Context, sett
 }
 
 /*
-FuturesApiService Futures order book
+DeliveryApiService List liquidation history
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param settle Settle currency
+ * @param optional nil or *ListDeliveryLiquidatesOpts - Optional Parameters:
+ * @param "Contract" (optional.String) -  Futures contract
+ * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
+ * @param "At" (optional.Int32) -  Specify a liquidation timestamp
+@return []FuturesLiquidate
+*/
+
+type ListDeliveryLiquidatesOpts struct {
+	Contract optional.String
+	Limit optional.Int32
+	At optional.Int32
+}
+
+func (a *DeliveryApiService) ListDeliveryLiquidates(ctx context.Context, settle string, localVarOptionals *ListDeliveryLiquidatesOpts) ([]FuturesLiquidate, *http.Response, error) {
+	var (
+		localVarHttpMethod   = strings.ToUpper("Get")
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []FuturesLiquidate
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/liquidates"
+	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.Contract.IsSet() {
+		localVarQueryParams.Add("contract", parameterToString(localVarOptionals.Contract.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
+		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.At.IsSet() {
+		localVarQueryParams.Add("at", parameterToString(localVarOptionals.At.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams,
+		localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes, true)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v []FuturesLiquidate
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
+DeliveryApiService Futures order book
 Bids will be sorted by price from high to low, while asks sorted reversely
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
  * @param contract Futures contract
- * @param optional nil or *ListFuturesOrderBookOpts - Optional Parameters:
+ * @param optional nil or *ListDeliveryOrderBookOpts - Optional Parameters:
  * @param "Interval" (optional.String) -  Order depth. 0 means no aggregation is applied. default to 0
  * @param "Limit" (optional.Int32) -  Maximum number of order depth data in asks or bids
 @return FuturesOrderBook
 */
 
-type ListFuturesOrderBookOpts struct {
+type ListDeliveryOrderBookOpts struct {
 	Interval optional.String
 	Limit optional.Int32
 }
 
-func (a *FuturesApiService) ListFuturesOrderBook(ctx context.Context, settle string, contract string, localVarOptionals *ListFuturesOrderBookOpts) (FuturesOrderBook, *http.Response, error) {
+func (a *DeliveryApiService) ListDeliveryOrderBook(ctx context.Context, settle string, contract string, localVarOptionals *ListDeliveryOrderBookOpts) (FuturesOrderBook, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Get")
 		localVarPostBody     interface{}
@@ -1695,7 +1703,7 @@ func (a *FuturesApiService) ListFuturesOrderBook(ctx context.Context, settle str
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/order_book"
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/order_book"
 	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1774,13 +1782,13 @@ func (a *FuturesApiService) ListFuturesOrderBook(ctx context.Context, settle str
 }
 
 /*
-FuturesApiService List futures orders
+DeliveryApiService List futures orders
 Zero-fill order cannot be retrieved 60 seconds after cancellation
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
- * @param contract Futures contract
  * @param status List orders based on status
- * @param optional nil or *ListFuturesOrdersOpts - Optional Parameters:
+ * @param optional nil or *ListDeliveryOrdersOpts - Optional Parameters:
+ * @param "Contract" (optional.String) -  Futures contract
  * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
  * @param "Offset" (optional.Int32) -  List offset, starting from 0
  * @param "LastId" (optional.String) -  Specify list staring point using the `id` of last record in previous list-query results
@@ -1788,14 +1796,15 @@ Zero-fill order cannot be retrieved 60 seconds after cancellation
 @return []FuturesOrder
 */
 
-type ListFuturesOrdersOpts struct {
+type ListDeliveryOrdersOpts struct {
+	Contract optional.String
 	Limit optional.Int32
 	Offset optional.Int32
 	LastId optional.String
 	CountTotal optional.Int32
 }
 
-func (a *FuturesApiService) ListFuturesOrders(ctx context.Context, settle string, contract string, status string, localVarOptionals *ListFuturesOrdersOpts) ([]FuturesOrder, *http.Response, error) {
+func (a *DeliveryApiService) ListDeliveryOrders(ctx context.Context, settle string, status string, localVarOptionals *ListDeliveryOrdersOpts) ([]FuturesOrder, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Get")
 		localVarPostBody     interface{}
@@ -1806,14 +1815,16 @@ func (a *FuturesApiService) ListFuturesOrders(ctx context.Context, settle string
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/orders"
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/orders"
 	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	localVarQueryParams.Add("contract", parameterToString(contract, ""))
+	if localVarOptionals != nil && localVarOptionals.Contract.IsSet() {
+		localVarQueryParams.Add("contract", parameterToString(localVarOptionals.Contract.Value(), ""))
+	}
 	localVarQueryParams.Add("status", parameterToString(status, ""))
 	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
 		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
@@ -1892,19 +1903,318 @@ func (a *FuturesApiService) ListFuturesOrders(ctx context.Context, settle string
 }
 
 /*
-FuturesApiService List futures tickers
+DeliveryApiService List position close history
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
- * @param optional nil or *ListFuturesTickersOpts - Optional Parameters:
- * @param "Contract" (optional.String) -  Futures contract, return related data only if specified
+ * @param optional nil or *ListDeliveryPositionCloseOpts - Optional Parameters:
+ * @param "Contract" (optional.String) -  Futures contract
+ * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
+@return []PositionClose
+*/
+
+type ListDeliveryPositionCloseOpts struct {
+	Contract optional.String
+	Limit optional.Int32
+}
+
+func (a *DeliveryApiService) ListDeliveryPositionClose(ctx context.Context, settle string, localVarOptionals *ListDeliveryPositionCloseOpts) ([]PositionClose, *http.Response, error) {
+	var (
+		localVarHttpMethod   = strings.ToUpper("Get")
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []PositionClose
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/position_close"
+	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.Contract.IsSet() {
+		localVarQueryParams.Add("contract", parameterToString(localVarOptionals.Contract.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
+		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams,
+		localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes, true)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v []PositionClose
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
+DeliveryApiService List all positions of a user
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param settle Settle currency
+@return []Position
+*/
+func (a *DeliveryApiService) ListDeliveryPositions(ctx context.Context, settle string) ([]Position, *http.Response, error) {
+	var (
+		localVarHttpMethod   = strings.ToUpper("Get")
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []Position
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/positions"
+	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams,
+		localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes, true)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v []Position
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
+DeliveryApiService List settlement history
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param settle Settle currency
+ * @param optional nil or *ListDeliverySettlementsOpts - Optional Parameters:
+ * @param "Contract" (optional.String) -  Futures contract
+ * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
+ * @param "At" (optional.Int32) -  Specify a settlement timestamp
+@return []DeliverySettlement
+*/
+
+type ListDeliverySettlementsOpts struct {
+	Contract optional.String
+	Limit optional.Int32
+	At optional.Int32
+}
+
+func (a *DeliveryApiService) ListDeliverySettlements(ctx context.Context, settle string, localVarOptionals *ListDeliverySettlementsOpts) ([]DeliverySettlement, *http.Response, error) {
+	var (
+		localVarHttpMethod   = strings.ToUpper("Get")
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []DeliverySettlement
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/settlements"
+	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.Contract.IsSet() {
+		localVarQueryParams.Add("contract", parameterToString(localVarOptionals.Contract.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
+		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.At.IsSet() {
+		localVarQueryParams.Add("at", parameterToString(localVarOptionals.At.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams,
+		localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes, true)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		if localVarHttpResponse.StatusCode == 200 {
+			var v []DeliverySettlement
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/*
+DeliveryApiService List futures tickers
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param settle Settle currency
+ * @param optional nil or *ListDeliveryTickersOpts - Optional Parameters:
+ * @param "Contract" (optional.String) -  Futures contract
 @return []FuturesTicker
 */
 
-type ListFuturesTickersOpts struct {
+type ListDeliveryTickersOpts struct {
 	Contract optional.String
 }
 
-func (a *FuturesApiService) ListFuturesTickers(ctx context.Context, settle string, localVarOptionals *ListFuturesTickersOpts) ([]FuturesTicker, *http.Response, error) {
+func (a *DeliveryApiService) ListDeliveryTickers(ctx context.Context, settle string, localVarOptionals *ListDeliveryTickersOpts) ([]FuturesTicker, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Get")
 		localVarPostBody     interface{}
@@ -1915,7 +2225,7 @@ func (a *FuturesApiService) ListFuturesTickers(ctx context.Context, settle strin
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/tickers"
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/tickers"
 	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1990,11 +2300,11 @@ func (a *FuturesApiService) ListFuturesTickers(ctx context.Context, settle strin
 }
 
 /*
-FuturesApiService Futures trading history
+DeliveryApiService Futures trading history
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
  * @param contract Futures contract
- * @param optional nil or *ListFuturesTradesOpts - Optional Parameters:
+ * @param optional nil or *ListDeliveryTradesOpts - Optional Parameters:
  * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
  * @param "LastId" (optional.String) -  Specify list staring point using the id of last record in previous list-query results  This parameter is deprecated. Use `from` and `to` instead to limit time range
  * @param "From" (optional.Float32) -  Specify starting time in Unix seconds. If not specified, `to` and `limit` will be used to limit response items. If items between `from` and `to` are more than `limit`, only `limit` number will be returned. 
@@ -2002,14 +2312,14 @@ FuturesApiService Futures trading history
 @return []FuturesTrade
 */
 
-type ListFuturesTradesOpts struct {
+type ListDeliveryTradesOpts struct {
 	Limit optional.Int32
 	LastId optional.String
 	From optional.Float32
 	To optional.Float32
 }
 
-func (a *FuturesApiService) ListFuturesTrades(ctx context.Context, settle string, contract string, localVarOptionals *ListFuturesTradesOpts) ([]FuturesTrade, *http.Response, error) {
+func (a *DeliveryApiService) ListDeliveryTrades(ctx context.Context, settle string, contract string, localVarOptionals *ListDeliveryTradesOpts) ([]FuturesTrade, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Get")
 		localVarPostBody     interface{}
@@ -2020,7 +2330,7 @@ func (a *FuturesApiService) ListFuturesTrades(ctx context.Context, settle string
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/trades"
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/trades"
 	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -2105,323 +2415,24 @@ func (a *FuturesApiService) ListFuturesTrades(ctx context.Context, settle string
 }
 
 /*
-FuturesApiService List liquidation history
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param settle Settle currency
- * @param optional nil or *ListLiquidatesOpts - Optional Parameters:
- * @param "Contract" (optional.String) -  Futures contract, return related data only if specified
- * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
- * @param "At" (optional.Int32) -  Specify a liquidation timestamp
-@return []FuturesLiquidate
-*/
-
-type ListLiquidatesOpts struct {
-	Contract optional.String
-	Limit optional.Int32
-	At optional.Int32
-}
-
-func (a *FuturesApiService) ListLiquidates(ctx context.Context, settle string, localVarOptionals *ListLiquidatesOpts) ([]FuturesLiquidate, *http.Response, error) {
-	var (
-		localVarHttpMethod   = strings.ToUpper("Get")
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  []FuturesLiquidate
-	)
-
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/liquidates"
-	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if localVarOptionals != nil && localVarOptionals.Contract.IsSet() {
-		localVarQueryParams.Add("contract", parameterToString(localVarOptionals.Contract.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
-		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.At.IsSet() {
-		localVarQueryParams.Add("at", parameterToString(localVarOptionals.At.Value(), ""))
-	}
-	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
-	if localVarHttpContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHttpContentType
-	}
-
-	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
-	if localVarHttpHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
-	}
-	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams,
-		localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes, true)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHttpResponse, err := a.client.callAPI(r)
-	if err != nil || localVarHttpResponse == nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
-	localVarHttpResponse.Body.Close()
-	if err != nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	if localVarHttpResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHttpResponse.Status,
-		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v []FuturesLiquidate
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		return localVarReturnValue, localVarHttpResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHttpResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHttpResponse, nil
-}
-
-/*
-FuturesApiService List position close history
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param settle Settle currency
- * @param optional nil or *ListPositionCloseOpts - Optional Parameters:
- * @param "Contract" (optional.String) -  Futures contract, return related data only if specified
- * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
-@return []PositionClose
-*/
-
-type ListPositionCloseOpts struct {
-	Contract optional.String
-	Limit optional.Int32
-}
-
-func (a *FuturesApiService) ListPositionClose(ctx context.Context, settle string, localVarOptionals *ListPositionCloseOpts) ([]PositionClose, *http.Response, error) {
-	var (
-		localVarHttpMethod   = strings.ToUpper("Get")
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  []PositionClose
-	)
-
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/position_close"
-	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if localVarOptionals != nil && localVarOptionals.Contract.IsSet() {
-		localVarQueryParams.Add("contract", parameterToString(localVarOptionals.Contract.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
-		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
-	}
-	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
-	if localVarHttpContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHttpContentType
-	}
-
-	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
-	if localVarHttpHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
-	}
-	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams,
-		localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes, true)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHttpResponse, err := a.client.callAPI(r)
-	if err != nil || localVarHttpResponse == nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
-	localVarHttpResponse.Body.Close()
-	if err != nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	if localVarHttpResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHttpResponse.Status,
-		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v []PositionClose
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		return localVarReturnValue, localVarHttpResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHttpResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHttpResponse, nil
-}
-
-/*
-FuturesApiService List all positions of a user
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param settle Settle currency
-@return []Position
-*/
-func (a *FuturesApiService) ListPositions(ctx context.Context, settle string) ([]Position, *http.Response, error) {
-	var (
-		localVarHttpMethod   = strings.ToUpper("Get")
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  []Position
-	)
-
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/positions"
-	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHttpContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
-	if localVarHttpContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHttpContentType
-	}
-
-	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
-	if localVarHttpHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
-	}
-	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams,
-		localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes, true)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHttpResponse, err := a.client.callAPI(r)
-	if err != nil || localVarHttpResponse == nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
-	localVarHttpResponse.Body.Close()
-	if err != nil {
-		return localVarReturnValue, localVarHttpResponse, err
-	}
-
-	if localVarHttpResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHttpResponse.Status,
-		}
-		if localVarHttpResponse.StatusCode == 200 {
-			var v []Position
-			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHttpResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHttpResponse, newErr
-		}
-		return localVarReturnValue, localVarHttpResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHttpResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHttpResponse, nil
-}
-
-/*
-FuturesApiService List all auto orders
+DeliveryApiService List all auto orders
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
  * @param status List orders based on status
- * @param optional nil or *ListPriceTriggeredOrdersOpts - Optional Parameters:
+ * @param optional nil or *ListPriceTriggeredDeliveryOrdersOpts - Optional Parameters:
  * @param "Contract" (optional.String) -  Futures contract, return related data only if specified
  * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
  * @param "Offset" (optional.Int32) -  List offset, starting from 0
 @return []FuturesPriceTriggeredOrder
 */
 
-type ListPriceTriggeredOrdersOpts struct {
+type ListPriceTriggeredDeliveryOrdersOpts struct {
 	Contract optional.String
 	Limit optional.Int32
 	Offset optional.Int32
 }
 
-func (a *FuturesApiService) ListPriceTriggeredOrders(ctx context.Context, settle string, status string, localVarOptionals *ListPriceTriggeredOrdersOpts) ([]FuturesPriceTriggeredOrder, *http.Response, error) {
+func (a *DeliveryApiService) ListPriceTriggeredDeliveryOrders(ctx context.Context, settle string, status string, localVarOptionals *ListPriceTriggeredDeliveryOrdersOpts) ([]FuturesPriceTriggeredOrder, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Get")
 		localVarPostBody     interface{}
@@ -2432,7 +2443,7 @@ func (a *FuturesApiService) ListPriceTriggeredOrders(ctx context.Context, settle
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/price_orders"
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/price_orders"
 	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -2514,14 +2525,14 @@ func (a *FuturesApiService) ListPriceTriggeredOrders(ctx context.Context, settle
 }
 
 /*
-FuturesApiService Update position leverage
+DeliveryApiService Update position leverage
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
  * @param contract Futures contract
  * @param leverage New position leverage
 @return Position
 */
-func (a *FuturesApiService) UpdatePositionLeverage(ctx context.Context, settle string, contract string, leverage string) (Position, *http.Response, error) {
+func (a *DeliveryApiService) UpdateDeliveryPositionLeverage(ctx context.Context, settle string, contract string, leverage string) (Position, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Post")
 		localVarPostBody     interface{}
@@ -2532,7 +2543,7 @@ func (a *FuturesApiService) UpdatePositionLeverage(ctx context.Context, settle s
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/positions/{contract}/leverage"
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/positions/{contract}/leverage"
 	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"contract"+"}", fmt.Sprintf("%v", contract), -1)
 
@@ -2606,14 +2617,14 @@ func (a *FuturesApiService) UpdatePositionLeverage(ctx context.Context, settle s
 }
 
 /*
-FuturesApiService Update position margin
+DeliveryApiService Update position margin
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
  * @param contract Futures contract
  * @param change Margin change. Use positive number to increase margin, negative number otherwise.
 @return Position
 */
-func (a *FuturesApiService) UpdatePositionMargin(ctx context.Context, settle string, contract string, change string) (Position, *http.Response, error) {
+func (a *DeliveryApiService) UpdateDeliveryPositionMargin(ctx context.Context, settle string, contract string, change string) (Position, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Post")
 		localVarPostBody     interface{}
@@ -2624,7 +2635,7 @@ func (a *FuturesApiService) UpdatePositionMargin(ctx context.Context, settle str
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/positions/{contract}/margin"
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/positions/{contract}/margin"
 	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"contract"+"}", fmt.Sprintf("%v", contract), -1)
 
@@ -2698,14 +2709,14 @@ func (a *FuturesApiService) UpdatePositionMargin(ctx context.Context, settle str
 }
 
 /*
-FuturesApiService Update position risk limit
+DeliveryApiService Update position risk limit
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
  * @param contract Futures contract
  * @param riskLimit New position risk limit
 @return Position
 */
-func (a *FuturesApiService) UpdatePositionRiskLimit(ctx context.Context, settle string, contract string, riskLimit string) (Position, *http.Response, error) {
+func (a *DeliveryApiService) UpdateDeliveryPositionRiskLimit(ctx context.Context, settle string, contract string, riskLimit string) (Position, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Post")
 		localVarPostBody     interface{}
@@ -2716,7 +2727,7 @@ func (a *FuturesApiService) UpdatePositionRiskLimit(ctx context.Context, settle 
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/positions/{contract}/risk_limit"
+	localVarPath := a.client.cfg.BasePath + "/delivery/{settle}/positions/{contract}/risk_limit"
 	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", fmt.Sprintf("%v", settle), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"contract"+"}", fmt.Sprintf("%v", contract), -1)
 
