@@ -458,7 +458,7 @@ Optional parameters are passed through a pointer to a ListMyTradesOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
+ **limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
  **page** | **optional.Int32**| Page number | [default to 1]
  **orderId** | **optional.String**| List all trades of specified order | 
 
@@ -571,7 +571,7 @@ Name | Type | Description  | Notes
 
 
  **page** | **optional.Int32**| Page number | [default to 1]
- **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
+ **limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
 
 ### Example
 
@@ -726,7 +726,7 @@ Optional parameters are passed through a pointer to a ListTradesOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
+ **limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
  **lastId** | **optional.String**| Specify list staring point using the &#x60;id&#x60; of last record in previous list-query results | 
 
 ### Example

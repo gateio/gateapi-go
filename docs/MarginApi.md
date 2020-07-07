@@ -318,7 +318,7 @@ Name | Type | Description  | Notes
 
  **status** | **optional.String**| Loan record status | 
  **page** | **optional.Int32**| Page number | [default to 1]
- **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
+ **limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
 
 ### Example
 
@@ -422,7 +422,7 @@ Name | Type | Description  | Notes
  **sortBy** | **optional.String**| Specify which field is used to sort. &#x60;create_time&#x60; or &#x60;rate&#x60; is supported. Default to &#x60;create_time&#x60; | 
  **reverseSort** | **optional.Bool**| Whether to sort in descending order. Default to &#x60;true&#x60; | 
  **page** | **optional.Int32**| Page number | [default to 1]
- **limit** | **optional.Int32**| Maximum number of record returned in one list | [default to 100]
+ **limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
 
 ### Example
 

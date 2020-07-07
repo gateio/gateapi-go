@@ -871,7 +871,7 @@ SpotApiService List personal trading history
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param currencyPair Currency pair
  * @param optional nil or *ListMyTradesOpts - Optional Parameters:
- * @param "Limit" (optional.Int32) -  Maximum number of record returned in one list
+ * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
  * @param "Page" (optional.Int32) -  Page number
  * @param "OrderId" (optional.String) -  List all trades of specified order
 @return []Trade
@@ -1085,7 +1085,7 @@ SpotApiService List orders
  * @param status List orders based on status  `open` - order is waiting to be filled `finished` - order has been filled or cancelled 
  * @param optional nil or *ListOrdersOpts - Optional Parameters:
  * @param "Page" (optional.Int32) -  Page number
- * @param "Limit" (optional.Int32) -  Maximum number of record returned in one list
+ * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
 @return []Order
 */
 
@@ -1381,7 +1381,7 @@ SpotApiService Retrieve market trades
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param currencyPair Currency pair
  * @param optional nil or *ListTradesOpts - Optional Parameters:
- * @param "Limit" (optional.Int32) -  Maximum number of record returned in one list
+ * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
  * @param "LastId" (optional.String) -  Specify list staring point using the `id` of last record in previous list-query results
 @return []Trade
 */

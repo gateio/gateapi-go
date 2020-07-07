@@ -10,9 +10,13 @@
 package gateapi
 
 // Futures contract details
-type Contract struct {
+type DeliveryContract struct {
 	// Futures contract
 	Name string `json:"name,omitempty"`
+	// Underlying
+	Underling string `json:"underling,omitempty"`
+	// Cycle type, e.g. WEEKLY, QUARTERLY
+	Cycle string `json:"cycle,omitempty"`
 	// Futures contract type
 	Type string `json:"type,omitempty"`
 	// Multiplier used in converting from invoicing to settlement currency in quanto futures
@@ -39,12 +43,20 @@ type Contract struct {
 	OrderPriceRound string `json:"order_price_round,omitempty"`
 	// Minimum mark price increment
 	MarkPriceRound string `json:"mark_price_round,omitempty"`
-	// Current funding rate
-	FundingRate string `json:"funding_rate,omitempty"`
-	// Funding application interval, unit in seconds
-	FundingInterval int32 `json:"funding_interval,omitempty"`
-	// Next funding time
-	FundingNextApply float32 `json:"funding_next_apply,omitempty"`
+	// Fair basis rate
+	BasisRate string `json:"basis_rate,omitempty"`
+	// Fair basis value
+	BasisValue string `json:"basis_value,omitempty"`
+	// Funding used for calculating impact bid, ask price
+	BasisImpactValue string `json:"basis_impact_value,omitempty"`
+	// Settle price
+	SettlePrice string `json:"settle_price,omitempty"`
+	// Settle price update interval
+	SettlePriceInterval int32 `json:"settle_price_interval,omitempty"`
+	// Settle price update duration in seconds
+	SettlePriceDuration int32 `json:"settle_price_duration,omitempty"`
+	// Contract expiry timestamp
+	ExpireTime int64 `json:"expire_time,omitempty"`
 	// Risk limit base
 	RiskLimitBase string `json:"risk_limit_base,omitempty"`
 	// Step of adjusting risk limit

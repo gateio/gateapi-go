@@ -577,7 +577,7 @@ MarginApiService List repayment records of specified loan
  * @param optional nil or *ListLoanRecordsOpts - Optional Parameters:
  * @param "Status" (optional.String) -  Loan record status
  * @param "Page" (optional.Int32) -  Page number
- * @param "Limit" (optional.Int32) -  Maximum number of record returned in one list
+ * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
 @return []LoanRecord
 */
 
@@ -777,7 +777,7 @@ MarginApiService List all loans
  * @param "SortBy" (optional.String) -  Specify which field is used to sort. `create_time` or `rate` is supported. Default to `create_time`
  * @param "ReverseSort" (optional.Bool) -  Whether to sort in descending order. Default to `true`
  * @param "Page" (optional.Int32) -  Page number
- * @param "Limit" (optional.Int32) -  Maximum number of record returned in one list
+ * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
 @return []Loan
 */
 
