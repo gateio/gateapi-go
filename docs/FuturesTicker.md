@@ -1,6 +1,7 @@
 # FuturesTicker
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Contract** | **string** | Futures contract | [optional] 

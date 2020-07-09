@@ -1,6 +1,7 @@
 # InsuranceRecord
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **T** | **int64** | Unix timestamp in seconds | [optional] 

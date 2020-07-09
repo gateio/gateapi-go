@@ -50,6 +50,6 @@ type Position struct {
 	// ADL ranking, range from 1 to 5
 	AdlRanking int32 `json:"adl_ranking,omitempty"`
 	// Current open orders
-	PendingOrders int32 `json:"pending_orders,omitempty"`
-	CloseOrder PositionCloseOrder `json:"close_order,omitempty"`
+	PendingOrders int32              `json:"pending_orders,omitempty"`
+	CloseOrder    PositionCloseOrder `json:"close_order,omitempty"`
 }

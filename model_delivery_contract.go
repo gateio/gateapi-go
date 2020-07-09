@@ -14,7 +14,7 @@ type DeliveryContract struct {
 	// Futures contract
 	Name string `json:"name,omitempty"`
 	// Underlying
-	Underling string `json:"underling,omitempty"`
+	Underlying string `json:"underlying,omitempty"`
 	// Cycle type, e.g. WEEKLY, QUARTERLY
 	Cycle string `json:"cycle,omitempty"`
 	// Futures contract type

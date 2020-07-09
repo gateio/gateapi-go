@@ -1,6 +1,7 @@
 # FuturesOrderBook
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Asks** | [**[]FuturesOrderBookItem**](futures_order_book_item.md) | Asks order depth | 

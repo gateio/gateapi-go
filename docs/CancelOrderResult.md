@@ -1,6 +1,7 @@
 # CancelOrderResult
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CurrencyPair** | **string** | Order currency pair | [optional] 

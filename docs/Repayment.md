@@ -1,6 +1,7 @@
 # Repayment
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | Loan record ID | [optional] 

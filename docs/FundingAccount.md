@@ -1,6 +1,7 @@
 # FundingAccount
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Currency** | **string** | Currency name | [optional] 

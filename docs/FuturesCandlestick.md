@@ -1,6 +1,7 @@
 # FuturesCandlestick
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **T** | **float32** | Unix timestamp in seconds | [optional] 

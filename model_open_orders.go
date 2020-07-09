@@ -9,10 +9,10 @@
 
 package gateapi
 
-// error response body format when status code is non-2xx
-type GateErrorResponse struct {
-	// Error label
-	Label string `json:"label,omitempty"`
-	// Detailed error message
-	Message string `json:"message,omitempty"`
+type OpenOrders struct {
+	// Currency pair
+	CurrencyPair string `json:"currency_pair,omitempty"`
+	// Total open orders in this currency pair
+	Total  int32   `json:"total,omitempty"`
+	Orders []Order `json:"orders,omitempty"`
 }

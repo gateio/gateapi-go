@@ -1,6 +1,7 @@
 # FuturesOrderBookItem
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **P** | **string** | Price | [optional] 
