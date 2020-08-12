@@ -1,6 +1,7 @@
 # PositionCloseOrder
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **int64** | Close order ID | [optional] 

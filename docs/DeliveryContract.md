@@ -1,10 +1,11 @@
 # DeliveryContract
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | Futures contract | [optional] 
-**Underling** | **string** | Underlying | [optional] 
+**Underlying** | **string** | Underlying | [optional] 
 **Cycle** | **string** | Cycle type, e.g. WEEKLY, QUARTERLY | [optional] 
 **Type** | **string** | Futures contract type | [optional] 
 **QuantoMultiplier** | **string** | Multiplier used in converting from invoicing to settlement currency in quanto futures | [optional] 

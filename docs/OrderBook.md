@@ -1,6 +1,7 @@
 # OrderBook
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Asks** | [**[][]string**](array.md) | Asks order depth | 

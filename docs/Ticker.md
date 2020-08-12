@@ -1,6 +1,7 @@
 # Ticker
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CurrencyPair** | **string** | Currency pair | [optional] 

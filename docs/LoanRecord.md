@@ -1,6 +1,7 @@
 # LoanRecord
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | Loan record ID | [optional] 
@@ -15,8 +16,8 @@ Name | Type | Description | Notes
 **Days** | **int32** | Loan days | [optional] 
 **AutoRenew** | **bool** | Whether the record will auto renew on expiration | [optional] [default to false]
 **Repaid** | **string** | Repaid amount | [optional] 
-**PaidInterest** | **string** | Repaid interest | [optional] 
-**UnpaidInterest** | **string** | Interest not repaid | [optional] 
+**PaidInterest** | **string** | Repaid interest | [optional] [readonly] 
+**UnpaidInterest** | **string** | Interest not repaid | [optional] [readonly] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

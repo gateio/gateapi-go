@@ -1,6 +1,7 @@
 # CurrencyPair
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | Currency pair | [optional] 

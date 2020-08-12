@@ -1,6 +1,7 @@
 # LoanPatch
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Currency** | **string** | Loan currency | 

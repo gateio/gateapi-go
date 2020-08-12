@@ -13,7 +13,7 @@ package gateapi
 type Order struct {
 	// Order ID
 	Id string `json:"id,omitempty"`
-	// User defined information. If not empty, must follow the rules below:  1. prefixed with `t-` 2. no longer than 16 bytes without `t-` prefix 3. can only include 0-9, A-Z, a-z, underscore(_), hyphen(-) or dot(.) 
+	// User defined information. If not empty, must follow the rules below:  1. prefixed with `t-` 2. no longer than 28 bytes without `t-` prefix 3. can only include 0-9, A-Z, a-z, underscore(_), hyphen(-) or dot(.)
 	Text string `json:"text,omitempty"`
 	// Order creation time
 	CreateTime string `json:"create_time,omitempty"`

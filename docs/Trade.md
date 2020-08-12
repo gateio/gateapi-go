@@ -1,6 +1,7 @@
 # Trade
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | Trade ID | [optional] 

@@ -1,6 +1,7 @@
 # FuturesAccount
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Total** | **string** | Total assets, total &#x3D; position_margin + order_margin + available | [optional] 

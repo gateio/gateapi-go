@@ -1,6 +1,7 @@
 # DepositAddress
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Currency** | **string** | Currency detail | 

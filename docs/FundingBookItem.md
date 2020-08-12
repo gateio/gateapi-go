@@ -1,6 +1,7 @@
 # FundingBookItem
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Rate** | **string** | Loan rate | [optional] 

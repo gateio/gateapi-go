@@ -11,7 +11,7 @@ package gateapi
 
 // Batch order details
 type BatchOrder struct {
-	// User defined information. If not empty, must follow the rules below:  1. prefixed with `t-` 2. no longer than 16 bytes without `t-` prefix 3. can only include 0-9, A-Z, a-z, underscore(_), hyphen(-) or dot(.) 
+	// User defined information. If not empty, must follow the rules below:  1. prefixed with `t-` 2. no longer than 28 bytes without `t-` prefix 3. can only include 0-9, A-Z, a-z, underscore(_), hyphen(-) or dot(.)
 	Text string `json:"text,omitempty"`
 	// Whether order succeeds
 	Succeeded bool `json:"succeeded,omitempty"`
