@@ -31,30 +31,34 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	currency := "currency_example" // string - Currency name
-	
-	result, _, err := client.WalletApi.GetDepositAddress(ctx, currency)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    currency := "currency_example" // string - Currency name
+    
+    result, _, err := client.WalletApi.GetDepositAddress(ctx, currency)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -89,7 +93,7 @@ Record time range cannot exceed 30 days
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***ListWithdrawalsOpts** | optional parameters | nil if no parameters
+**optional** | **ListWithdrawalsOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 
@@ -97,11 +101,11 @@ Optional parameters are passed through a pointer to a ListWithdrawalsOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **currency** | **optional.String**| Filter by currency. Return all currency records if not specified | 
- **from** | **optional.Int64**| Time range beginning, default to 7 days before current time | 
- **to** | **optional.Int64**| Time range ending, default to current time | 
- **limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
- **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
+**currency** | **optional.String**| Filter by currency. Return all currency records if not specified | 
+**from** | **optional.Int64**| Time range beginning, default to 7 days before current time | 
+**to** | **optional.Int64**| Time range ending, default to current time | 
+**limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
 
 ### Example
 
@@ -109,29 +113,33 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	
-	result, _, err := client.WalletApi.ListWithdrawals(ctx, nil)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    
+    result, _, err := client.WalletApi.ListWithdrawals(ctx, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -166,7 +174,7 @@ Record time range cannot exceed 30 days
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***ListDepositsOpts** | optional parameters | nil if no parameters
+**optional** | **ListDepositsOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 
@@ -174,11 +182,11 @@ Optional parameters are passed through a pointer to a ListDepositsOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **currency** | **optional.String**| Filter by currency. Return all currency records if not specified | 
- **from** | **optional.Int64**| Time range beginning, default to 7 days before current time | 
- **to** | **optional.Int64**| Time range ending, default to current time | 
- **limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
- **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
+**currency** | **optional.String**| Filter by currency. Return all currency records if not specified | 
+**from** | **optional.Int64**| Time range beginning, default to 7 days before current time | 
+**to** | **optional.Int64**| Time range ending, default to current time | 
+**limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
 
 ### Example
 
@@ -186,29 +194,33 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	
-	result, _, err := client.WalletApi.ListDeposits(ctx, nil)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    
+    result, _, err := client.WalletApi.ListDeposits(ctx, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -251,30 +263,34 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	transfer := gateapi.Transfer{} // Transfer - 
-	
-	result, _, err := client.WalletApi.Transfer(ctx, transfer)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    transfer := gateapi.Transfer{} // Transfer - 
+    
+    result, _, err := client.WalletApi.Transfer(ctx, transfer)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -309,7 +325,7 @@ Record time range cannot exceed 30 days  > Note: only records after 2020-04-10 c
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
- **optional** | ***ListSubAccountTransfersOpts** | optional parameters | nil if no parameters
+**optional** | **ListSubAccountTransfersOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 
@@ -317,11 +333,11 @@ Optional parameters are passed through a pointer to a ListSubAccountTransfersOpt
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **subUid** | **optional.String**| Sub account user ID. Return records related to all sub accounts if not specified | 
- **from** | **optional.Int64**| Time range beginning, default to 7 days before current time | 
- **to** | **optional.Int64**| Time range ending, default to current time | 
- **limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
- **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
+**subUid** | **optional.String**| Sub account user ID. Return records related to all sub accounts if not specified | 
+**from** | **optional.Int64**| Time range beginning, default to 7 days before current time | 
+**to** | **optional.Int64**| Time range ending, default to current time | 
+**limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
 
 ### Example
 
@@ -329,29 +345,33 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	
-	result, _, err := client.WalletApi.ListSubAccountTransfers(ctx, nil)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    
+    result, _, err := client.WalletApi.ListSubAccountTransfers(ctx, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -392,30 +412,34 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	subAccountTransfer := gateapi.SubAccountTransfer{} // SubAccountTransfer - 
-	
-	result, _, err := client.WalletApi.TransferWithSubAccount(ctx, subAccountTransfer)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    subAccountTransfer := gateapi.SubAccountTransfer{} // SubAccountTransfer - 
+    
+    result, _, err := client.WalletApi.TransferWithSubAccount(ctx, subAccountTransfer)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 

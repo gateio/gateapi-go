@@ -94,7 +94,12 @@ func (a *WalletApiService) GetDepositAddress(ctx context.Context, currency strin
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -209,7 +214,12 @@ func (a *WalletApiService) ListWithdrawals(ctx context.Context, localVarOptional
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -324,7 +334,12 @@ func (a *WalletApiService) ListDeposits(ctx context.Context, localVarOptionals *
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -410,7 +425,12 @@ func (a *WalletApiService) Transfer(ctx context.Context, transfer Transfer) (*ht
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarHTTPResponse, gateErr
 		}
 		return localVarHTTPResponse, newErr
 	}
@@ -516,7 +536,12 @@ func (a *WalletApiService) ListSubAccountTransfers(ctx context.Context, localVar
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -601,7 +626,12 @@ func (a *WalletApiService) TransferWithSubAccount(ctx context.Context, subAccoun
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarHTTPResponse, gateErr
 		}
 		return localVarHTTPResponse, newErr
 	}

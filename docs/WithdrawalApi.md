@@ -26,30 +26,34 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	ledgerRecord := gateapi.LedgerRecord{} // LedgerRecord - 
-	
-	result, _, err := client.WithdrawalApi.Withdraw(ctx, ledgerRecord)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    ledgerRecord := gateapi.LedgerRecord{} // LedgerRecord - 
+    
+    result, _, err := client.WithdrawalApi.Withdraw(ctx, ledgerRecord)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 

@@ -90,7 +90,12 @@ func (a *FuturesApiService) ListFuturesContracts(ctx context.Context, settle str
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -174,7 +179,12 @@ func (a *FuturesApiService) GetFuturesContract(ctx context.Context, settle strin
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -273,7 +283,12 @@ func (a *FuturesApiService) ListFuturesOrderBook(ctx context.Context, settle str
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -381,7 +396,12 @@ func (a *FuturesApiService) ListFuturesTrades(ctx context.Context, settle string
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -490,7 +510,12 @@ func (a *FuturesApiService) ListFuturesCandlesticks(ctx context.Context, settle 
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -581,7 +606,12 @@ func (a *FuturesApiService) ListFuturesTickers(ctx context.Context, settle strin
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -674,7 +704,12 @@ func (a *FuturesApiService) ListFuturesFundingRateHistory(ctx context.Context, s
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -765,7 +800,12 @@ func (a *FuturesApiService) ListFuturesInsuranceLedger(ctx context.Context, sett
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -852,7 +892,12 @@ func (a *FuturesApiService) ListFuturesAccounts(ctx context.Context, settle stri
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -964,7 +1009,12 @@ func (a *FuturesApiService) ListFuturesAccountBook(ctx context.Context, settle s
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1051,7 +1101,12 @@ func (a *FuturesApiService) ListPositions(ctx context.Context, settle string) ([
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1141,7 +1196,12 @@ func (a *FuturesApiService) GetPosition(ctx context.Context, settle string, cont
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1233,7 +1293,12 @@ func (a *FuturesApiService) UpdatePositionMargin(ctx context.Context, settle str
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1325,7 +1390,12 @@ func (a *FuturesApiService) UpdatePositionLeverage(ctx context.Context, settle s
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1417,7 +1487,12 @@ func (a *FuturesApiService) UpdatePositionRiskLimit(ctx context.Context, settle 
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1534,7 +1609,12 @@ func (a *FuturesApiService) ListFuturesOrders(ctx context.Context, settle string
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1625,7 +1705,12 @@ func (a *FuturesApiService) CreateFuturesOrder(ctx context.Context, settle strin
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1725,7 +1810,12 @@ func (a *FuturesApiService) CancelFuturesOrders(ctx context.Context, settle stri
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1816,7 +1906,12 @@ func (a *FuturesApiService) GetFuturesOrder(ctx context.Context, settle string, 
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1906,7 +2001,12 @@ func (a *FuturesApiService) CancelFuturesOrder(ctx context.Context, settle strin
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1926,7 +2026,7 @@ func (a *FuturesApiService) CancelFuturesOrder(ctx context.Context, settle strin
 // GetMyTradesOpts Optional parameters for the method 'GetMyTrades'
 type GetMyTradesOpts struct {
 	Contract   optional.String
-	Order      optional.Int32
+	Order      optional.Int64
 	Limit      optional.Int32
 	Offset     optional.Int32
 	LastId     optional.String
@@ -1939,7 +2039,7 @@ GetMyTrades List personal trading history
  * @param settle Settle currency
  * @param optional nil or *GetMyTradesOpts - Optional Parameters:
  * @param "Contract" (optional.String) -  Futures contract, return related data only if specified
- * @param "Order" (optional.Int32) -  Futures order ID, return related data only if specified
+ * @param "Order" (optional.Int64) -  Futures order ID, return related data only if specified
  * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
  * @param "Offset" (optional.Int32) -  List offset, starting from 0
  * @param "LastId" (optional.String) -  Specify list staring point using the `id` of last record in previous list-query results
@@ -2028,7 +2128,12 @@ func (a *FuturesApiService) GetMyTrades(ctx context.Context, settle string, loca
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2130,7 +2235,12 @@ func (a *FuturesApiService) ListPositionClose(ctx context.Context, settle string
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2237,7 +2347,12 @@ func (a *FuturesApiService) ListLiquidates(ctx context.Context, settle string, l
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2346,7 +2461,12 @@ func (a *FuturesApiService) ListPriceTriggeredOrders(ctx context.Context, settle
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2436,7 +2556,12 @@ func (a *FuturesApiService) CreatePriceTriggeredOrder(ctx context.Context, settl
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2525,7 +2650,12 @@ func (a *FuturesApiService) CancelPriceTriggeredOrderList(ctx context.Context, s
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2615,7 +2745,12 @@ func (a *FuturesApiService) GetPriceTriggeredOrder(ctx context.Context, settle s
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2705,7 +2840,12 @@ func (a *FuturesApiService) CancelPriceTriggeredOrder(ctx context.Context, settl
 	if localVarHTTPResponse.StatusCode >= 300 {
 		newErr := GenericOpenAPIError{
 			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
