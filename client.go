@@ -581,3 +581,24 @@ func (e GenericOpenAPIError) Body() []byte {
 func (e GenericOpenAPIError) Model() interface{} {
 	return e.model
 }
+
+type GateAPIError struct {
+	APIError GenericOpenAPIError
+	// Error label
+	Label string `json:"label,omitempty"`
+	// Detailed error message
+	Message string `json:"message,omitempty"`
+	// Another possible detailed error message
+	Detail string `json:"detail,omitempty"`
+}
+
+func (e GateAPIError) Error() string {
+	return fmt.Sprintf("label: %s, message: %s", e.Label, e.GetMessage())
+}
+
+func (e GateAPIError) GetMessage() string {
+	if e.Detail != "" {
+		return e.Detail
+	}
+	return e.Message
+}

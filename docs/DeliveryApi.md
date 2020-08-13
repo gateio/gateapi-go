@@ -53,24 +53,28 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.Background()
-	settle := "usdt" // string - Settle currency
-	
-	result, _, err := client.DeliveryApi.ListDeliveryContracts(ctx, settle)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.Background()
+    settle := "usdt" // string - Settle currency
+    
+    result, _, err := client.DeliveryApi.ListDeliveryContracts(ctx, settle)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -112,25 +116,29 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.Background()
-	settle := "usdt" // string - Settle currency
-	contract := "BTC_USDT_20200814" // string - Futures contract
-	
-	result, _, err := client.DeliveryApi.GetDeliveryContract(ctx, settle, contract)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.Background()
+    settle := "usdt" // string - Settle currency
+    contract := "BTC_USDT_20200814" // string - Futures contract
+    
+    result, _, err := client.DeliveryApi.GetDeliveryContract(ctx, settle, contract)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -167,7 +175,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
 **contract** | **string**| Futures contract | 
- **optional** | ***ListDeliveryOrderBookOpts** | optional parameters | nil if no parameters
+**optional** | **ListDeliveryOrderBookOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 
@@ -175,10 +183,8 @@ Optional parameters are passed through a pointer to a ListDeliveryOrderBookOpts 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
-
- **interval** | **optional.String**| Order depth. 0 means no aggregation is applied. default to 0 | [default to 0]
- **limit** | **optional.Int32**| Maximum number of order depth data in asks or bids | [default to 10]
+**interval** | **optional.String**| Order depth. 0 means no aggregation is applied. default to 0 | [default to 0]
+**limit** | **optional.Int32**| Maximum number of order depth data in asks or bids | [default to 10]
 
 ### Example
 
@@ -186,25 +192,29 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.Background()
-	settle := "usdt" // string - Settle currency
-	contract := "BTC_USDT_20200814" // string - Futures contract
-	
-	result, _, err := client.DeliveryApi.ListDeliveryOrderBook(ctx, settle, contract, nil)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.Background()
+    settle := "usdt" // string - Settle currency
+    contract := "BTC_USDT_20200814" // string - Futures contract
+    
+    result, _, err := client.DeliveryApi.ListDeliveryOrderBook(ctx, settle, contract, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -239,7 +249,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
 **contract** | **string**| Futures contract | 
- **optional** | ***ListDeliveryTradesOpts** | optional parameters | nil if no parameters
+**optional** | **ListDeliveryTradesOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 
@@ -247,12 +257,10 @@ Optional parameters are passed through a pointer to a ListDeliveryTradesOpts str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
-
- **limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
- **lastId** | **optional.String**| Specify list staring point using the id of last record in previous list-query results  This parameter is deprecated. Use &#x60;from&#x60; and &#x60;to&#x60; instead to limit time range | 
- **from** | **optional.Float32**| Specify starting time in Unix seconds. If not specified, &#x60;to&#x60; and &#x60;limit&#x60; will be used to limit response items. If items between &#x60;from&#x60; and &#x60;to&#x60; are more than &#x60;limit&#x60;, only &#x60;limit&#x60; number will be returned.  | 
- **to** | **optional.Float32**| Specify end time in Unix seconds, default to current time | 
+**limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
+**lastId** | **optional.String**| Specify list staring point using the id of last record in previous list-query results  This parameter is deprecated. Use &#x60;from&#x60; and &#x60;to&#x60; instead to limit time range | 
+**from** | **optional.Float32**| Specify starting time in Unix seconds. If not specified, &#x60;to&#x60; and &#x60;limit&#x60; will be used to limit response items. If items between &#x60;from&#x60; and &#x60;to&#x60; are more than &#x60;limit&#x60;, only &#x60;limit&#x60; number will be returned.  | 
+**to** | **optional.Float32**| Specify end time in Unix seconds, default to current time | 
 
 ### Example
 
@@ -260,25 +268,29 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.Background()
-	settle := "usdt" // string - Settle currency
-	contract := "BTC_USDT_20200814" // string - Futures contract
-	
-	result, _, err := client.DeliveryApi.ListDeliveryTrades(ctx, settle, contract, nil)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.Background()
+    settle := "usdt" // string - Settle currency
+    contract := "BTC_USDT_20200814" // string - Futures contract
+    
+    result, _, err := client.DeliveryApi.ListDeliveryTrades(ctx, settle, contract, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -315,7 +327,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
 **contract** | **string**| Futures contract | 
- **optional** | ***ListDeliveryCandlesticksOpts** | optional parameters | nil if no parameters
+**optional** | **ListDeliveryCandlesticksOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 
@@ -323,12 +335,10 @@ Optional parameters are passed through a pointer to a ListDeliveryCandlesticksOp
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
-
- **from** | **optional.Float32**| Start time of candlesticks, formatted in Unix timestamp in seconds. Default to&#x60;to - 100 * interval&#x60; if not specified | 
- **to** | **optional.Float32**| End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time | 
- **limit** | **optional.Int32**| Maximum recent data points returned. &#x60;limit&#x60; is conflicted with &#x60;from&#x60; and &#x60;to&#x60;. If either &#x60;from&#x60; or &#x60;to&#x60; is specified, request will be rejected. | [default to 100]
- **interval** | **optional.String**| Interval time between data points | [default to 5m]
+**from** | **optional.Float32**| Start time of candlesticks, formatted in Unix timestamp in seconds. Default to&#x60;to - 100 * interval&#x60; if not specified | 
+**to** | **optional.Float32**| End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time | 
+**limit** | **optional.Int32**| Maximum recent data points returned. &#x60;limit&#x60; is conflicted with &#x60;from&#x60; and &#x60;to&#x60;. If either &#x60;from&#x60; or &#x60;to&#x60; is specified, request will be rejected. | [default to 100]
+**interval** | **optional.String**| Interval time between data points | [default to 5m]
 
 ### Example
 
@@ -336,25 +346,29 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.Background()
-	settle := "usdt" // string - Settle currency
-	contract := "BTC_USDT_20200814" // string - Futures contract
-	
-	result, _, err := client.DeliveryApi.ListDeliveryCandlesticks(ctx, settle, contract, nil)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.Background()
+    settle := "usdt" // string - Settle currency
+    contract := "BTC_USDT_20200814" // string - Futures contract
+    
+    result, _, err := client.DeliveryApi.ListDeliveryCandlesticks(ctx, settle, contract, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -388,7 +402,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
- **optional** | ***ListDeliveryTickersOpts** | optional parameters | nil if no parameters
+**optional** | **ListDeliveryTickersOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 
@@ -396,8 +410,7 @@ Optional parameters are passed through a pointer to a ListDeliveryTickersOpts st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
- **contract** | **optional.String**| Futures contract | 
+**contract** | **optional.String**| Futures contract | 
 
 ### Example
 
@@ -405,24 +418,28 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.Background()
-	settle := "usdt" // string - Settle currency
-	
-	result, _, err := client.DeliveryApi.ListDeliveryTickers(ctx, settle, nil)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.Background()
+    settle := "usdt" // string - Settle currency
+    
+    result, _, err := client.DeliveryApi.ListDeliveryTickers(ctx, settle, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -456,7 +473,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
- **optional** | ***ListDeliveryInsuranceLedgerOpts** | optional parameters | nil if no parameters
+**optional** | **ListDeliveryInsuranceLedgerOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 
@@ -464,8 +481,7 @@ Optional parameters are passed through a pointer to a ListDeliveryInsuranceLedge
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
- **limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
+**limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
 
 ### Example
 
@@ -473,24 +489,28 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.Background()
-	settle := "usdt" // string - Settle currency
-	
-	result, _, err := client.DeliveryApi.ListDeliveryInsuranceLedger(ctx, settle, nil)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.Background()
+    settle := "usdt" // string - Settle currency
+    
+    result, _, err := client.DeliveryApi.ListDeliveryInsuranceLedger(ctx, settle, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -531,30 +551,34 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	settle := "usdt" // string - Settle currency
-	
-	result, _, err := client.DeliveryApi.ListDeliveryAccounts(ctx, settle)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    
+    result, _, err := client.DeliveryApi.ListDeliveryAccounts(ctx, settle)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -588,7 +612,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
- **optional** | ***ListDeliveryAccountBookOpts** | optional parameters | nil if no parameters
+**optional** | **ListDeliveryAccountBookOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 
@@ -596,11 +620,10 @@ Optional parameters are passed through a pointer to a ListDeliveryAccountBookOpt
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
- **limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
- **from** | **optional.Int64**| Start timestamp | 
- **to** | **optional.Int64**| End timestamp | 
- **type_** | **optional.String**| Changing Type: - dnw: Deposit &amp; Withdraw - pnl: Profit &amp; Loss by reducing position - fee: Trading fee - refr: Referrer rebate - fund: Funding - point_dnw: POINT Deposit &amp; Withdraw - point_fee: POINT Trading fee - point_refr: POINT Referrer rebate | 
+**limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
+**from** | **optional.Int64**| Start timestamp | 
+**to** | **optional.Int64**| End timestamp | 
+**type_** | **optional.String**| Changing Type: - dnw: Deposit &amp; Withdraw - pnl: Profit &amp; Loss by reducing position - fee: Trading fee - refr: Referrer rebate - fund: Funding - point_dnw: POINT Deposit &amp; Withdraw - point_fee: POINT Trading fee - point_refr: POINT Referrer rebate | 
 
 ### Example
 
@@ -608,30 +631,34 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	settle := "usdt" // string - Settle currency
-	
-	result, _, err := client.DeliveryApi.ListDeliveryAccountBook(ctx, settle, nil)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    
+    result, _, err := client.DeliveryApi.ListDeliveryAccountBook(ctx, settle, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -672,30 +699,34 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	settle := "usdt" // string - Settle currency
-	
-	result, _, err := client.DeliveryApi.ListDeliveryPositions(ctx, settle)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    
+    result, _, err := client.DeliveryApi.ListDeliveryPositions(ctx, settle)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -737,31 +768,35 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	settle := "usdt" // string - Settle currency
-	contract := "BTC_USDT_20200814" // string - Futures contract
-	
-	result, _, err := client.DeliveryApi.GetDeliveryPosition(ctx, settle, contract)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    contract := "BTC_USDT_20200814" // string - Futures contract
+    
+    result, _, err := client.DeliveryApi.GetDeliveryPosition(ctx, settle, contract)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -804,32 +839,36 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	settle := "usdt" // string - Settle currency
-	contract := "BTC_USDT_20200814" // string - Futures contract
-	change := "0.01" // string - Margin change. Use positive number to increase margin, negative number otherwise.
-	
-	result, _, err := client.DeliveryApi.UpdateDeliveryPositionMargin(ctx, settle, contract, change)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    contract := "BTC_USDT_20200814" // string - Futures contract
+    change := "0.01" // string - Margin change. Use positive number to increase margin, negative number otherwise.
+    
+    result, _, err := client.DeliveryApi.UpdateDeliveryPositionMargin(ctx, settle, contract, change)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -872,32 +911,36 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	settle := "usdt" // string - Settle currency
-	contract := "BTC_USDT_20200814" // string - Futures contract
-	leverage := "10" // string - New position leverage
-	
-	result, _, err := client.DeliveryApi.UpdateDeliveryPositionLeverage(ctx, settle, contract, leverage)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    contract := "BTC_USDT_20200814" // string - Futures contract
+    leverage := "10" // string - New position leverage
+    
+    result, _, err := client.DeliveryApi.UpdateDeliveryPositionLeverage(ctx, settle, contract, leverage)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -940,32 +983,36 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	settle := "usdt" // string - Settle currency
-	contract := "BTC_USDT_20200814" // string - Futures contract
-	riskLimit := "10" // string - New position risk limit
-	
-	result, _, err := client.DeliveryApi.UpdateDeliveryPositionRiskLimit(ctx, settle, contract, riskLimit)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    contract := "BTC_USDT_20200814" // string - Futures contract
+    riskLimit := "10" // string - New position risk limit
+    
+    result, _, err := client.DeliveryApi.UpdateDeliveryPositionRiskLimit(ctx, settle, contract, riskLimit)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -1002,7 +1049,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
 **status** | **string**| List orders based on status | 
- **optional** | ***ListDeliveryOrdersOpts** | optional parameters | nil if no parameters
+**optional** | **ListDeliveryOrdersOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 
@@ -1010,13 +1057,11 @@ Optional parameters are passed through a pointer to a ListDeliveryOrdersOpts str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
-
- **contract** | **optional.String**| Futures contract | 
- **limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
- **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
- **lastId** | **optional.String**| Specify list staring point using the &#x60;id&#x60; of last record in previous list-query results | 
- **countTotal** | **optional.Int32**| Whether to return total number matched. Default to 0(no return) | [default to 0]
+**contract** | **optional.String**| Futures contract | 
+**limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
+**lastId** | **optional.String**| Specify list staring point using the &#x60;id&#x60; of last record in previous list-query results | 
+**countTotal** | **optional.Int32**| Whether to return total number matched. Default to 0(no return) | [default to 0]
 
 ### Example
 
@@ -1024,31 +1069,35 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	settle := "usdt" // string - Settle currency
-	status := "open" // string - List orders based on status
-	
-	result, _, err := client.DeliveryApi.ListDeliveryOrders(ctx, settle, status, nil)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    status := "open" // string - List orders based on status
+    
+    result, _, err := client.DeliveryApi.ListDeliveryOrders(ctx, settle, status, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -1092,31 +1141,35 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	settle := "usdt" // string - Settle currency
-	futuresOrder := gateapi.FuturesOrder{} // FuturesOrder - 
-	
-	result, _, err := client.DeliveryApi.CreateDeliveryOrder(ctx, settle, futuresOrder)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    futuresOrder := gateapi.FuturesOrder{} // FuturesOrder - 
+    
+    result, _, err := client.DeliveryApi.CreateDeliveryOrder(ctx, settle, futuresOrder)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -1153,7 +1206,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
 **contract** | **string**| Futures contract | 
- **optional** | ***CancelDeliveryOrdersOpts** | optional parameters | nil if no parameters
+**optional** | **CancelDeliveryOrdersOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 
@@ -1161,9 +1214,7 @@ Optional parameters are passed through a pointer to a CancelDeliveryOrdersOpts s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
-
- **side** | **optional.String**| All bids or asks. Both included in not specified | 
+**side** | **optional.String**| All bids or asks. Both included in not specified | 
 
 ### Example
 
@@ -1171,31 +1222,35 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	settle := "usdt" // string - Settle currency
-	contract := "BTC_USDT_20200814" // string - Futures contract
-	
-	result, _, err := client.DeliveryApi.CancelDeliveryOrders(ctx, settle, contract, nil)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    contract := "BTC_USDT_20200814" // string - Futures contract
+    
+    result, _, err := client.DeliveryApi.CancelDeliveryOrders(ctx, settle, contract, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -1239,31 +1294,35 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	settle := "usdt" // string - Settle currency
-	orderId := "12345" // string - ID returned on order successfully being created
-	
-	result, _, err := client.DeliveryApi.GetDeliveryOrder(ctx, settle, orderId)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    orderId := "12345" // string - ID returned on order successfully being created
+    
+    result, _, err := client.DeliveryApi.GetDeliveryOrder(ctx, settle, orderId)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -1305,31 +1364,35 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	settle := "usdt" // string - Settle currency
-	orderId := "12345" // string - ID returned on order successfully being created
-	
-	result, _, err := client.DeliveryApi.CancelDeliveryOrder(ctx, settle, orderId)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    orderId := "12345" // string - ID returned on order successfully being created
+    
+    result, _, err := client.DeliveryApi.CancelDeliveryOrder(ctx, settle, orderId)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -1363,7 +1426,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
- **optional** | ***GetMyDeliveryTradesOpts** | optional parameters | nil if no parameters
+**optional** | **GetMyDeliveryTradesOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 
@@ -1371,13 +1434,12 @@ Optional parameters are passed through a pointer to a GetMyDeliveryTradesOpts st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
- **contract** | **optional.String**| Futures contract | 
- **order** | **optional.Int32**| Futures order ID, return related data only if specified | 
- **limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
- **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
- **lastId** | **optional.String**| Specify list staring point using the &#x60;id&#x60; of last record in previous list-query results | 
- **countTotal** | **optional.Int32**| Whether to return total number matched. Default to 0(no return) | [default to 0]
+**contract** | **optional.String**| Futures contract | 
+**order** | **optional.Int64**| Futures order ID, return related data only if specified | 
+**limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
+**lastId** | **optional.String**| Specify list staring point using the &#x60;id&#x60; of last record in previous list-query results | 
+**countTotal** | **optional.Int32**| Whether to return total number matched. Default to 0(no return) | [default to 0]
 
 ### Example
 
@@ -1385,30 +1447,34 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	settle := "usdt" // string - Settle currency
-	
-	result, _, err := client.DeliveryApi.GetMyDeliveryTrades(ctx, settle, nil)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    
+    result, _, err := client.DeliveryApi.GetMyDeliveryTrades(ctx, settle, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -1442,7 +1508,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
- **optional** | ***ListDeliveryPositionCloseOpts** | optional parameters | nil if no parameters
+**optional** | **ListDeliveryPositionCloseOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 
@@ -1450,9 +1516,8 @@ Optional parameters are passed through a pointer to a ListDeliveryPositionCloseO
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
- **contract** | **optional.String**| Futures contract | 
- **limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
+**contract** | **optional.String**| Futures contract | 
+**limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
 
 ### Example
 
@@ -1460,30 +1525,34 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	settle := "usdt" // string - Settle currency
-	
-	result, _, err := client.DeliveryApi.ListDeliveryPositionClose(ctx, settle, nil)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    
+    result, _, err := client.DeliveryApi.ListDeliveryPositionClose(ctx, settle, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -1517,7 +1586,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
- **optional** | ***ListDeliveryLiquidatesOpts** | optional parameters | nil if no parameters
+**optional** | **ListDeliveryLiquidatesOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 
@@ -1525,10 +1594,9 @@ Optional parameters are passed through a pointer to a ListDeliveryLiquidatesOpts
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
- **contract** | **optional.String**| Futures contract | 
- **limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
- **at** | **optional.Int32**| Specify a liquidation timestamp | [default to 0]
+**contract** | **optional.String**| Futures contract | 
+**limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
+**at** | **optional.Int32**| Specify a liquidation timestamp | [default to 0]
 
 ### Example
 
@@ -1536,30 +1604,34 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	settle := "usdt" // string - Settle currency
-	
-	result, _, err := client.DeliveryApi.ListDeliveryLiquidates(ctx, settle, nil)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    
+    result, _, err := client.DeliveryApi.ListDeliveryLiquidates(ctx, settle, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -1593,7 +1665,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
- **optional** | ***ListDeliverySettlementsOpts** | optional parameters | nil if no parameters
+**optional** | **ListDeliverySettlementsOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 
@@ -1601,10 +1673,9 @@ Optional parameters are passed through a pointer to a ListDeliverySettlementsOpt
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
- **contract** | **optional.String**| Futures contract | 
- **limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
- **at** | **optional.Int32**| Specify a settlement timestamp | [default to 0]
+**contract** | **optional.String**| Futures contract | 
+**limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
+**at** | **optional.Int32**| Specify a settlement timestamp | [default to 0]
 
 ### Example
 
@@ -1612,30 +1683,34 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	settle := "usdt" // string - Settle currency
-	
-	result, _, err := client.DeliveryApi.ListDeliverySettlements(ctx, settle, nil)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    
+    result, _, err := client.DeliveryApi.ListDeliverySettlements(ctx, settle, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -1670,7 +1745,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
 **status** | **string**| List orders based on status | 
- **optional** | ***ListPriceTriggeredDeliveryOrdersOpts** | optional parameters | nil if no parameters
+**optional** | **ListPriceTriggeredDeliveryOrdersOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 
@@ -1678,11 +1753,9 @@ Optional parameters are passed through a pointer to a ListPriceTriggeredDelivery
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
-
- **contract** | **optional.String**| Futures contract, return related data only if specified | 
- **limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
- **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
+**contract** | **optional.String**| Futures contract, return related data only if specified | 
+**limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
 
 ### Example
 
@@ -1690,31 +1763,35 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	settle := "usdt" // string - Settle currency
-	status := "status_example" // string - List orders based on status
-	
-	result, _, err := client.DeliveryApi.ListPriceTriggeredDeliveryOrders(ctx, settle, status, nil)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    status := "status_example" // string - List orders based on status
+    
+    result, _, err := client.DeliveryApi.ListPriceTriggeredDeliveryOrders(ctx, settle, status, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -1756,31 +1833,35 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	settle := "usdt" // string - Settle currency
-	futuresPriceTriggeredOrder := gateapi.FuturesPriceTriggeredOrder{} // FuturesPriceTriggeredOrder - 
-	
-	result, _, err := client.DeliveryApi.CreatePriceTriggeredDeliveryOrder(ctx, settle, futuresPriceTriggeredOrder)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    futuresPriceTriggeredOrder := gateapi.FuturesPriceTriggeredOrder{} // FuturesPriceTriggeredOrder - 
+    
+    result, _, err := client.DeliveryApi.CreatePriceTriggeredDeliveryOrder(ctx, settle, futuresPriceTriggeredOrder)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -1822,31 +1903,35 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	settle := "usdt" // string - Settle currency
-	contract := "BTC_USD" // string - Futures contract
-	
-	result, _, err := client.DeliveryApi.CancelPriceTriggeredDeliveryOrderList(ctx, settle, contract)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    contract := "BTC_USD" // string - Futures contract
+    
+    result, _, err := client.DeliveryApi.CancelPriceTriggeredDeliveryOrderList(ctx, settle, contract)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -1888,31 +1973,35 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	settle := "usdt" // string - Settle currency
-	orderId := "orderId_example" // string - ID returned on order successfully being created
-	
-	result, _, err := client.DeliveryApi.GetPriceTriggeredDeliveryOrder(ctx, settle, orderId)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    orderId := "orderId_example" // string - ID returned on order successfully being created
+    
+    result, _, err := client.DeliveryApi.GetPriceTriggeredDeliveryOrder(ctx, settle, orderId)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
@@ -1954,31 +2043,35 @@ Name | Type | Description  | Notes
 package main
 
 import (
-	"context"
-	"fmt"
-	"gateapi"
+    "context"
+    "fmt"
+    "gateapi"
 )
 
 func main() {
-	client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-	// uncomment the next line if your are testing against other hosts
-	// client.ChangeBasePath("https://some-other-host")
-	ctx := context.WithValue(context.Background(),
-							 gateapi.ContextGateAPIV4,
-							 gateapi.GateAPIV4{
-								 Key:	 "YOUR_API_KEY",
-								 Secret: "YOUR_API_SECRET",
-							 }
-							)
-	settle := "usdt" // string - Settle currency
-	orderId := "orderId_example" // string - ID returned on order successfully being created
-	
-	result, _, err := client.DeliveryApi.CancelPriceTriggeredDeliveryOrder(ctx, settle, orderId)
-	if err != nil {
-		fmt.Println(err.Error())
-	} else {
-		fmt.Println(result)
-	}
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    orderId := "orderId_example" // string - ID returned on order successfully being created
+    
+    result, _, err := client.DeliveryApi.CancelPriceTriggeredDeliveryOrder(ctx, settle, orderId)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
 }
 ```
 
