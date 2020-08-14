@@ -90,7 +90,7 @@ func (a *SpotApiService) ListCurrencyPairs(ctx context.Context) ([]CurrencyPair,
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -176,7 +176,7 @@ func (a *SpotApiService) GetCurrencyPair(ctx context.Context, currencyPair strin
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -270,7 +270,7 @@ func (a *SpotApiService) ListTickers(ctx context.Context, localVarOptionals *Lis
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -371,7 +371,7 @@ func (a *SpotApiService) ListOrderBook(ctx context.Context, currencyPair string,
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -471,7 +471,7 @@ func (a *SpotApiService) ListTrades(ctx context.Context, currencyPair string, lo
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -582,7 +582,7 @@ func (a *SpotApiService) ListCandlesticks(ctx context.Context, currencyPair stri
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -681,7 +681,7 @@ func (a *SpotApiService) GetFee(ctx context.Context, localVarOptionals *GetFeeOp
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -780,7 +780,7 @@ func (a *SpotApiService) ListSpotAccounts(ctx context.Context, localVarOptionals
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -873,7 +873,7 @@ func (a *SpotApiService) CreateBatchOrders(ctx context.Context, order []Order) (
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -978,7 +978,7 @@ func (a *SpotApiService) ListAllOpenOrders(ctx context.Context, localVarOptional
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -1086,7 +1086,7 @@ func (a *SpotApiService) ListOrders(ctx context.Context, currencyPair string, st
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -1178,7 +1178,7 @@ func (a *SpotApiService) CreateOrder(ctx context.Context, order Order) (Order, *
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -1284,7 +1284,7 @@ func (a *SpotApiService) CancelOrders(ctx context.Context, currencyPair string, 
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -1377,7 +1377,7 @@ func (a *SpotApiService) CancelBatchOrders(ctx context.Context, cancelOrder []Ca
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -1471,7 +1471,7 @@ func (a *SpotApiService) GetOrder(ctx context.Context, orderId string, currencyP
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -1565,7 +1565,7 @@ func (a *SpotApiService) CancelOrder(ctx context.Context, orderId string, curren
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -1676,7 +1676,7 @@ func (a *SpotApiService) ListMyTrades(ctx context.Context, currencyPair string, 
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}

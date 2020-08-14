@@ -90,7 +90,7 @@ func (a *MarginApiService) ListMarginCurrencyPairs(ctx context.Context) ([]Margi
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -175,7 +175,7 @@ func (a *MarginApiService) ListFundingBook(ctx context.Context, currency string)
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -274,7 +274,7 @@ func (a *MarginApiService) ListMarginAccounts(ctx context.Context, localVarOptio
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -399,7 +399,7 @@ func (a *MarginApiService) ListMarginAccountBook(ctx context.Context, localVarOp
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -498,7 +498,7 @@ func (a *MarginApiService) ListFundingAccounts(ctx context.Context, localVarOpti
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -626,7 +626,7 @@ func (a *MarginApiService) ListLoans(ctx context.Context, status string, side st
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -718,7 +718,7 @@ func (a *MarginApiService) CreateLoan(ctx context.Context, loan Loan) (Loan, *ht
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -811,7 +811,7 @@ func (a *MarginApiService) MergeLoans(ctx context.Context, currency string, ids 
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -905,7 +905,7 @@ func (a *MarginApiService) GetLoan(ctx context.Context, loanId string, side stri
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -1000,7 +1000,7 @@ func (a *MarginApiService) CancelLoan(ctx context.Context, loanId string, curren
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -1096,7 +1096,7 @@ func (a *MarginApiService) UpdateLoan(ctx context.Context, loanId string, loanPa
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -1188,7 +1188,7 @@ func (a *MarginApiService) ListLoanRepayments(ctx context.Context, loanId string
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -1283,7 +1283,7 @@ func (a *MarginApiService) RepayLoan(ctx context.Context, loanId string, repayRe
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -1394,7 +1394,7 @@ func (a *MarginApiService) ListLoanRecords(ctx context.Context, loanId string, l
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -1488,7 +1488,7 @@ func (a *MarginApiService) GetLoanRecord(ctx context.Context, loanRecordId strin
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -1584,7 +1584,7 @@ func (a *MarginApiService) UpdateLoanRecord(ctx context.Context, loanRecordId st
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}

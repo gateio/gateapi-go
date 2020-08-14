@@ -73,4 +73,6 @@ type Contract struct {
 	ConfigChangeTime float32 `json:"config_change_time,omitempty"`
 	// Contract is delisting
 	InDelisting bool `json:"in_delisting,omitempty"`
+	// Maximum number of open orders
+	OrdersLimit int32 `json:"orders_limit,omitempty"`
 }
