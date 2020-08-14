@@ -93,7 +93,7 @@ func (a *DeliveryApiService) ListDeliveryContracts(ctx context.Context, settle s
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -182,7 +182,7 @@ func (a *DeliveryApiService) GetDeliveryContract(ctx context.Context, settle str
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -286,7 +286,7 @@ func (a *DeliveryApiService) ListDeliveryOrderBook(ctx context.Context, settle s
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -399,7 +399,7 @@ func (a *DeliveryApiService) ListDeliveryTrades(ctx context.Context, settle stri
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -513,7 +513,7 @@ func (a *DeliveryApiService) ListDeliveryCandlesticks(ctx context.Context, settl
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -609,7 +609,7 @@ func (a *DeliveryApiService) ListDeliveryTickers(ctx context.Context, settle str
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -705,7 +705,7 @@ func (a *DeliveryApiService) ListDeliveryInsuranceLedger(ctx context.Context, se
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -797,7 +797,7 @@ func (a *DeliveryApiService) ListDeliveryAccounts(ctx context.Context, settle st
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -914,7 +914,7 @@ func (a *DeliveryApiService) ListDeliveryAccountBook(ctx context.Context, settle
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -1006,7 +1006,7 @@ func (a *DeliveryApiService) ListDeliveryPositions(ctx context.Context, settle s
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -1101,7 +1101,7 @@ func (a *DeliveryApiService) GetDeliveryPosition(ctx context.Context, settle str
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -1198,7 +1198,7 @@ func (a *DeliveryApiService) UpdateDeliveryPositionMargin(ctx context.Context, s
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -1295,7 +1295,7 @@ func (a *DeliveryApiService) UpdateDeliveryPositionLeverage(ctx context.Context,
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -1392,7 +1392,7 @@ func (a *DeliveryApiService) UpdateDeliveryPositionRiskLimit(ctx context.Context
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -1517,7 +1517,7 @@ func (a *DeliveryApiService) ListDeliveryOrders(ctx context.Context, settle stri
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -1613,7 +1613,7 @@ func (a *DeliveryApiService) CreateDeliveryOrder(ctx context.Context, settle str
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -1718,7 +1718,7 @@ func (a *DeliveryApiService) CancelDeliveryOrders(ctx context.Context, settle st
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -1814,7 +1814,7 @@ func (a *DeliveryApiService) GetDeliveryOrder(ctx context.Context, settle string
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -1909,7 +1909,7 @@ func (a *DeliveryApiService) CancelDeliveryOrder(ctx context.Context, settle str
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -2036,7 +2036,7 @@ func (a *DeliveryApiService) GetMyDeliveryTrades(ctx context.Context, settle str
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -2143,7 +2143,7 @@ func (a *DeliveryApiService) ListDeliveryPositionClose(ctx context.Context, sett
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -2255,7 +2255,7 @@ func (a *DeliveryApiService) ListDeliveryLiquidates(ctx context.Context, settle 
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -2367,7 +2367,7 @@ func (a *DeliveryApiService) ListDeliverySettlements(ctx context.Context, settle
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -2481,7 +2481,7 @@ func (a *DeliveryApiService) ListPriceTriggeredDeliveryOrders(ctx context.Contex
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -2576,7 +2576,7 @@ func (a *DeliveryApiService) CreatePriceTriggeredDeliveryOrder(ctx context.Conte
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -2670,7 +2670,7 @@ func (a *DeliveryApiService) CancelPriceTriggeredDeliveryOrderList(ctx context.C
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -2765,7 +2765,7 @@ func (a *DeliveryApiService) GetPriceTriggeredDeliveryOrder(ctx context.Context,
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
@@ -2860,7 +2860,7 @@ func (a *DeliveryApiService) CancelPriceTriggeredDeliveryOrder(ctx context.Conte
 			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
 		}
 		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil {
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
 			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
