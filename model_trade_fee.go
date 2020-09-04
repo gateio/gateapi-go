@@ -24,4 +24,6 @@ type TradeFee struct {
 	GtMakerFee string `json:"gt_maker_fee,omitempty"`
 	// Loan fee rate of margin lending
 	LoanFee string `json:"loan_fee,omitempty"`
+	// Point type. 0 - Initial version. 1 - new version since 202009
+	PointType string `json:"point_type,omitempty"`
 }
