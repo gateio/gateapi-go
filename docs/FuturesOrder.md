@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **int64** | Futures order ID | [optional] [readonly] 
 **User** | **int32** | User ID | [optional] [readonly] 
-**CreateTime** | **float32** | Order creation time | [optional] [readonly] 
-**FinishTime** | **float32** | Order finished time. Not returned if order is open | [optional] [readonly] 
+**CreateTime** | **float64** | Order creation time | [optional] [readonly] 
+**FinishTime** | **float64** | Order finished time. Not returned if order is open | [optional] [readonly] 
 **FinishAs** | **string** | How the order is finished.  - filled: all filled - cancelled: manually cancelled - liquidated: cancelled because of liquidation - ioc: time in force is &#x60;IOC&#x60;, finish immediately - auto_deleveraged: finished by ADL - reduce_only: cancelled because of increasing position while &#x60;reduce-only&#x60; set | [optional] [readonly] 
 **Status** | **string** | Order status  - &#x60;open&#x60;: waiting to be traded - &#x60;finished&#x60;: finished | [optional] [readonly] 
 **Contract** | **string** | Futures contract | 

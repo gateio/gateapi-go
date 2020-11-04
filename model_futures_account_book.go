@@ -11,7 +11,7 @@ package gateapi
 
 type FuturesAccountBook struct {
 	// Change time
-	Time float32 `json:"time,omitempty"`
+	Time float64 `json:"time,omitempty"`
 	// Change amount
 	Change string `json:"change,omitempty"`
 	// Balance after change

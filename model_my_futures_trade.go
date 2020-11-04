@@ -13,7 +13,7 @@ type MyFuturesTrade struct {
 	// Trade ID
 	Id int64 `json:"id,omitempty"`
 	// Trading time
-	CreateTime float32 `json:"create_time,omitempty"`
+	CreateTime float64 `json:"create_time,omitempty"`
 	// Futures contract
 	Contract string `json:"contract,omitempty"`
 	// Order ID related

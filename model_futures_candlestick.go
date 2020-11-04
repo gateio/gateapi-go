@@ -12,7 +12,7 @@ package gateapi
 // data point in every timestamp
 type FuturesCandlestick struct {
 	// Unix timestamp in seconds
-	T float32 `json:"t,omitempty"`
+	T float64 `json:"t,omitempty"`
 	// size volume. Only returned if `contract` is not prefixed
 	V int64 `json:"v,omitempty"`
 	// Close price

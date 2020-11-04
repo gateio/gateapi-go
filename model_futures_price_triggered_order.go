@@ -18,9 +18,9 @@ type FuturesPriceTriggeredOrder struct {
 	// User ID
 	User int32 `json:"user,omitempty"`
 	// Creation time
-	CreateTime float32 `json:"create_time,omitempty"`
+	CreateTime float64 `json:"create_time,omitempty"`
 	// Finished time
-	FinishTime float32 `json:"finish_time,omitempty"`
+	FinishTime float64 `json:"finish_time,omitempty"`
 	// ID of the newly created order on condition triggered
 	TradeId int64 `json:"trade_id,omitempty"`
 	// Order status.

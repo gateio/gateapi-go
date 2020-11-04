@@ -293,6 +293,7 @@ func (a *SpotApiService) ListTickers(ctx context.Context, localVarOptionals *Lis
 type ListOrderBookOpts struct {
 	Interval optional.String
 	Limit    optional.Int32
+	WithId   optional.Bool
 }
 
 /*
@@ -303,6 +304,7 @@ Order book will be sorted by price from high to low on bids; reversed on asks
  * @param optional nil or *ListOrderBookOpts - Optional Parameters:
  * @param "Interval" (optional.String) -  Order depth. 0 means no aggregation is applied. default to 0
  * @param "Limit" (optional.Int32) -  Maximum number of order depth data in asks or bids
+ * @param "WithId" (optional.Bool) -  Return order book ID
 @return OrderBook
 */
 func (a *SpotApiService) ListOrderBook(ctx context.Context, currencyPair string, localVarOptionals *ListOrderBookOpts) (OrderBook, *http.Response, error) {
@@ -327,6 +329,9 @@ func (a *SpotApiService) ListOrderBook(ctx context.Context, currencyPair string,
 	}
 	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
 		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.WithId.IsSet() {
+		localVarQueryParams.Add("with_id", parameterToString(localVarOptionals.WithId.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

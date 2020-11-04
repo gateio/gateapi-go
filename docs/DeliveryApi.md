@@ -56,7 +56,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -120,7 +120,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -197,7 +197,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -262,8 +262,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
 **lastId** | **optional.String**| Specify list staring point using the id of last record in previous list-query results  This parameter is deprecated. Use &#x60;from&#x60; and &#x60;to&#x60; instead to limit time range | 
-**from** | **optional.Float32**| Specify starting time in Unix seconds. If not specified, &#x60;to&#x60; and &#x60;limit&#x60; will be used to limit response items. If items between &#x60;from&#x60; and &#x60;to&#x60; are more than &#x60;limit&#x60;, only &#x60;limit&#x60; number will be returned.  | 
-**to** | **optional.Float32**| Specify end time in Unix seconds, default to current time | 
+**from** | **optional.Int64**| Specify starting time in Unix seconds. If not specified, &#x60;to&#x60; and &#x60;limit&#x60; will be used to limit response items. If items between &#x60;from&#x60; and &#x60;to&#x60; are more than &#x60;limit&#x60;, only &#x60;limit&#x60; number will be returned.  | 
+**to** | **optional.Int64**| Specify end time in Unix seconds, default to current time | 
 
 ### Example
 
@@ -274,7 +274,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -339,8 +339,8 @@ Optional parameters are passed through a pointer to a ListDeliveryCandlesticksOp
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**from** | **optional.Float32**| Start time of candlesticks, formatted in Unix timestamp in seconds. Default to&#x60;to - 100 * interval&#x60; if not specified | 
-**to** | **optional.Float32**| End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time | 
+**from** | **optional.Int64**| Start time of candlesticks, formatted in Unix timestamp in seconds. Default to&#x60;to - 100 * interval&#x60; if not specified | 
+**to** | **optional.Int64**| End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time | 
 **limit** | **optional.Int32**| Maximum recent data points returned. &#x60;limit&#x60; is conflicted with &#x60;from&#x60; and &#x60;to&#x60;. If either &#x60;from&#x60; or &#x60;to&#x60; is specified, request will be rejected. | [default to 100]
 **interval** | **optional.String**| Interval time between data points | [default to 5m]
 
@@ -353,7 +353,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -426,7 +426,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -498,7 +498,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -561,7 +561,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -642,7 +642,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -711,7 +711,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -781,7 +781,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -853,7 +853,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -926,7 +926,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -999,7 +999,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -1086,7 +1086,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -1159,7 +1159,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -1241,7 +1241,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -1314,7 +1314,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -1385,7 +1385,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -1469,7 +1469,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -1548,7 +1548,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -1628,7 +1628,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -1708,7 +1708,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -1789,7 +1789,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -1860,7 +1860,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -1931,7 +1931,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -2002,7 +2002,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -2073,7 +2073,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {

@@ -5,6 +5,7 @@ All URIs are relative to *https://api.gateio.ws/api/v4*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ListMarginCurrencyPairs**](MarginApi.md#ListMarginCurrencyPairs) | **Get** /margin/currency_pairs | List all supported currency pairs supported in margin trading
+[**GetMarginCurrencyPair**](MarginApi.md#GetMarginCurrencyPair) | **Get** /margin/currency_pairs/{currency_pair} | Query one single margin currency pair
 [**ListFundingBook**](MarginApi.md#ListFundingBook) | **Get** /margin/funding_book | Order book of lending loans
 [**ListMarginAccounts**](MarginApi.md#ListMarginAccounts) | **Get** /margin/accounts | Margin account list
 [**ListMarginAccountBook**](MarginApi.md#ListMarginAccountBook) | **Get** /margin/account_book | List margin account balance change history
@@ -40,7 +41,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -80,6 +81,69 @@ No authorization required
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
+## GetMarginCurrencyPair
+
+> MarginCurrencyPair GetMarginCurrencyPair(ctx, currencyPair)
+
+Query one single margin currency pair
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**currencyPair** | **string**| Margin currency pair | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v5"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.Background()
+    currencyPair := "BTC_USDT" // string - Margin currency pair
+    
+    result, _, err := client.MarginApi.GetMarginCurrencyPair(ctx, currencyPair)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**MarginCurrencyPair**](MarginCurrencyPair.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
 ## ListFundingBook
 
 > []FundingBookItem ListFundingBook(ctx, currency)
@@ -102,7 +166,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -173,7 +237,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -256,7 +320,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -332,7 +396,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -415,7 +479,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -485,7 +549,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -555,7 +619,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -626,7 +690,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -699,7 +763,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -772,7 +836,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -842,7 +906,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -912,7 +976,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -993,7 +1057,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -1063,7 +1127,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {
@@ -1136,7 +1200,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {

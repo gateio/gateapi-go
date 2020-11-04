@@ -44,7 +44,7 @@ type Contract struct {
 	// Funding application interval, unit in seconds
 	FundingInterval int32 `json:"funding_interval,omitempty"`
 	// Next funding time
-	FundingNextApply float32 `json:"funding_next_apply,omitempty"`
+	FundingNextApply float64 `json:"funding_next_apply,omitempty"`
 	// Risk limit base
 	RiskLimitBase string `json:"risk_limit_base,omitempty"`
 	// Step of adjusting risk limit
@@ -70,7 +70,7 @@ type Contract struct {
 	// Current total long position size
 	PositionSize int64 `json:"position_size,omitempty"`
 	// Configuration's last changed time
-	ConfigChangeTime float32 `json:"config_change_time,omitempty"`
+	ConfigChangeTime float64 `json:"config_change_time,omitempty"`
 	// Contract is delisting
 	InDelisting bool `json:"in_delisting,omitempty"`
 	// Maximum number of open orders

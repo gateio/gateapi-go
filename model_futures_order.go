@@ -16,9 +16,9 @@ type FuturesOrder struct {
 	// User ID
 	User int32 `json:"user,omitempty"`
 	// Order creation time
-	CreateTime float32 `json:"create_time,omitempty"`
+	CreateTime float64 `json:"create_time,omitempty"`
 	// Order finished time. Not returned if order is open
-	FinishTime float32 `json:"finish_time,omitempty"`
+	FinishTime float64 `json:"finish_time,omitempty"`
 	// How the order is finished.  - filled: all filled - cancelled: manually cancelled - liquidated: cancelled because of liquidation - ioc: time in force is `IOC`, finish immediately - auto_deleveraged: finished by ADL - reduce_only: cancelled because of increasing position while `reduce-only` set
 	FinishAs string `json:"finish_as,omitempty"`
 	// Order status  - `open`: waiting to be traded - `finished`: finished

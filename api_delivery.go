@@ -309,8 +309,8 @@ func (a *DeliveryApiService) ListDeliveryOrderBook(ctx context.Context, settle s
 type ListDeliveryTradesOpts struct {
 	Limit  optional.Int32
 	LastId optional.String
-	From   optional.Float32
-	To     optional.Float32
+	From   optional.Int64
+	To     optional.Int64
 }
 
 /*
@@ -321,8 +321,8 @@ ListDeliveryTrades Futures trading history
  * @param optional nil or *ListDeliveryTradesOpts - Optional Parameters:
  * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
  * @param "LastId" (optional.String) -  Specify list staring point using the id of last record in previous list-query results  This parameter is deprecated. Use `from` and `to` instead to limit time range
- * @param "From" (optional.Float32) -  Specify starting time in Unix seconds. If not specified, `to` and `limit` will be used to limit response items. If items between `from` and `to` are more than `limit`, only `limit` number will be returned.
- * @param "To" (optional.Float32) -  Specify end time in Unix seconds, default to current time
+ * @param "From" (optional.Int64) -  Specify starting time in Unix seconds. If not specified, `to` and `limit` will be used to limit response items. If items between `from` and `to` are more than `limit`, only `limit` number will be returned.
+ * @param "To" (optional.Int64) -  Specify end time in Unix seconds, default to current time
 @return []FuturesTrade
 */
 func (a *DeliveryApiService) ListDeliveryTrades(ctx context.Context, settle string, contract string, localVarOptionals *ListDeliveryTradesOpts) ([]FuturesTrade, *http.Response, error) {
@@ -420,8 +420,8 @@ func (a *DeliveryApiService) ListDeliveryTrades(ctx context.Context, settle stri
 
 // ListDeliveryCandlesticksOpts Optional parameters for the method 'ListDeliveryCandlesticks'
 type ListDeliveryCandlesticksOpts struct {
-	From     optional.Float32
-	To       optional.Float32
+	From     optional.Int64
+	To       optional.Int64
 	Limit    optional.Int32
 	Interval optional.String
 }
@@ -433,8 +433,8 @@ Return specified contract candlesticks. If prefix &#x60;contract&#x60; with &#x6
  * @param settle Settle currency
  * @param contract Futures contract
  * @param optional nil or *ListDeliveryCandlesticksOpts - Optional Parameters:
- * @param "From" (optional.Float32) -  Start time of candlesticks, formatted in Unix timestamp in seconds. Default to`to - 100 * interval` if not specified
- * @param "To" (optional.Float32) -  End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time
+ * @param "From" (optional.Int64) -  Start time of candlesticks, formatted in Unix timestamp in seconds. Default to`to - 100 * interval` if not specified
+ * @param "To" (optional.Int64) -  End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time
  * @param "Limit" (optional.Int32) -  Maximum recent data points returned. `limit` is conflicted with `from` and `to`. If either `from` or `to` is specified, request will be rejected.
  * @param "Interval" (optional.String) -  Interval time between data points
 @return []FuturesCandlestick

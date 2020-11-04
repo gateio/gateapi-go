@@ -29,7 +29,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go"
+    "github.com/gateio/gateapi-go/v5"
 )
 
 func main() {

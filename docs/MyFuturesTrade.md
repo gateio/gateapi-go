@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **int64** | Trade ID | [optional] 
-**CreateTime** | **float32** | Trading time | [optional] 
+**CreateTime** | **float64** | Trading time | [optional] 
 **Contract** | **string** | Futures contract | [optional] 
 **OrderId** | **string** | Order ID related | [optional] 
 **Size** | **int64** | Trading size | [optional] 

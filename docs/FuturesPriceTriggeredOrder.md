@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **Trigger** | [**FuturesPriceTrigger**](FuturesPriceTrigger.md) |  | 
 **Id** | **int64** | Auto order ID | [optional] [readonly] 
 **User** | **int32** | User ID | [optional] [readonly] 
-**CreateTime** | **float32** | Creation time | [optional] [readonly] 
-**FinishTime** | **float32** | Finished time | [optional] [readonly] 
+**CreateTime** | **float64** | Creation time | [optional] [readonly] 
+**FinishTime** | **float64** | Finished time | [optional] [readonly] 
 **TradeId** | **int64** | ID of the newly created order on condition triggered | [optional] [readonly] 
 **Status** | **string** | Order status. | [optional] [readonly] 
 **FinishAs** | **string** | How order is finished | [optional] [readonly] 

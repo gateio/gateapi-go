@@ -10,6 +10,8 @@
 package gateapi
 
 type OrderBook struct {
+	// Order book ID, which is updated whenever the order book is changed. Valid only when `with_id` is set to `true`
+	Id int64 `json:"id,omitempty"`
 	// Asks order depth
 	Asks [][]string `json:"asks"`
 	// Bids order depth
