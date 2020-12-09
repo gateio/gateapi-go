@@ -14,19 +14,19 @@ type FuturesLiquidate struct {
 	Time int64 `json:"time,omitempty"`
 	// Futures contract
 	Contract string `json:"contract,omitempty"`
-	// Position leverage
+	// Position leverage. Not returned in public endpoints.
 	Leverage string `json:"leverage,omitempty"`
 	// Position size
 	Size int64 `json:"size,omitempty"`
-	// Position margin
+	// Position margin. Not returned in public endpoints.
 	Margin string `json:"margin,omitempty"`
-	// Average entry price
+	// Average entry price. Not returned in public endpoints.
 	EntryPrice string `json:"entry_price,omitempty"`
-	// Liquidation price
+	// Liquidation price. Not returned in public endpoints.
 	LiqPrice string `json:"liq_price,omitempty"`
-	// Mark price
+	// Mark price. Not returned in public endpoints.
 	MarkPrice string `json:"mark_price,omitempty"`
-	// Liquidation order ID
+	// Liquidation order ID. Not returned in public endpoints.
 	OrderId int64 `json:"order_id,omitempty"`
 	// Liquidation order price
 	OrderPrice string `json:"order_price,omitempty"`

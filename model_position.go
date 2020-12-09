@@ -52,4 +52,6 @@ type Position struct {
 	// Current open orders
 	PendingOrders int32              `json:"pending_orders,omitempty"`
 	CloseOrder    PositionCloseOrder `json:"close_order,omitempty"`
+	// Position mode, including:  - `single`: dual mode is not enabled- `dual_long`: long position in dual mode- `dual_short`: short position in dual mode
+	DualMode string `json:"dual_mode,omitempty"`
 }

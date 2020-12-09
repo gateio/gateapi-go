@@ -397,8 +397,9 @@ func (a *SpotApiService) ListOrderBook(ctx context.Context, currencyPair string,
 
 // ListTradesOpts Optional parameters for the method 'ListTrades'
 type ListTradesOpts struct {
-	Limit  optional.Int32
-	LastId optional.String
+	Limit   optional.Int32
+	LastId  optional.String
+	Reverse optional.Bool
 }
 
 /*
@@ -408,6 +409,7 @@ ListTrades Retrieve market trades
  * @param optional nil or *ListTradesOpts - Optional Parameters:
  * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
  * @param "LastId" (optional.String) -  Specify list staring point using the `id` of last record in previous list-query results
+ * @param "Reverse" (optional.Bool) -  Whether to retrieve records whose IDs are smaller than `last_id`'s. Default to larger ones.  When `last_id` is specified. Set `reverse` to `true` to trace back trading history; `false` to retrieve latest tradings.  No effect if `last_id` is not specified.
 @return []Trade
 */
 func (a *SpotApiService) ListTrades(ctx context.Context, currencyPair string, localVarOptionals *ListTradesOpts) ([]Trade, *http.Response, error) {
@@ -432,6 +434,9 @@ func (a *SpotApiService) ListTrades(ctx context.Context, currencyPair string, lo
 	}
 	if localVarOptionals != nil && localVarOptionals.LastId.IsSet() {
 		localVarQueryParams.Add("last_id", parameterToString(localVarOptionals.LastId.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Reverse.IsSet() {
+		localVarQueryParams.Add("reverse", parameterToString(localVarOptionals.Reverse.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -806,7 +811,7 @@ func (a *SpotApiService) ListSpotAccounts(ctx context.Context, localVarOptionals
 
 /*
 CreateBatchOrders Create a batch of orders
-Batch orders requirements:  1. custom order field &#x60;text&#x60; is required 2. At most 4 currency pairs, maximum 5 orders each, are allowed in one request 3. No mixture of spot orders and margin orders, i.e. &#x60;account&#x60; must be identical for all orders
+Batch orders requirements:  1. custom order field &#x60;text&#x60; is required 2. At most 4 currency pairs, maximum 10 orders each, are allowed in one request 3. No mixture of spot orders and margin orders, i.e. &#x60;account&#x60; must be identical for all orders
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param order
 @return []BatchOrder

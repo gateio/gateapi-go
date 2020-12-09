@@ -24,4 +24,6 @@ type FuturesAccount struct {
 	Point string `json:"point,omitempty"`
 	// Settle currency
 	Currency string `json:"currency,omitempty"`
+	// Whether dual mode is enabled
+	InDualMode bool `json:"in_dual_mode,omitempty"`
 }

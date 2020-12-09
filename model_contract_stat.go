@@ -16,8 +16,10 @@ type ContractStat struct {
 	LsrTaker float32 `json:"lsr_taker,omitempty"`
 	// Long/short taker size ratio
 	LsrAccount float32 `json:"lsr_account,omitempty"`
-	// Liquidation size
-	LiqSize int64 `json:"liq_size,omitempty"`
+	// Long liquidation size
+	LongLiqSize int64 `json:"long_liq_size,omitempty"`
+	// Short liquidation size
+	ShortLiqSize int64 `json:"short_liq_size,omitempty"`
 	// Open interest
 	OpenInterest int64 `json:"open_interest,omitempty"`
 }
