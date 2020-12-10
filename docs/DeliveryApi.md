@@ -1946,7 +1946,7 @@ func main() {
                              }
                             )
     settle := "usdt" // string - Settle currency
-    contract := "BTC_USD" // string - Futures contract
+    contract := "BTC_USDT" // string - Futures contract
     
     result, _, err := client.DeliveryApi.CancelPriceTriggeredDeliveryOrderList(ctx, settle, contract)
     if err != nil {

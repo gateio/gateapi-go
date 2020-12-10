@@ -213,7 +213,7 @@ func main() {
     // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
     ctx := context.Background()
     settle := btc // string - Settle currency
-    contract := "BTC_USD" // string - Futures contract
+    contract := "BTC_USDT" // string - Futures contract
     
     result, _, err := client.FuturesApi.ListFuturesOrderBook(ctx, settle, contract, nil)
     if err != nil {
@@ -290,7 +290,7 @@ func main() {
     // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
     ctx := context.Background()
     settle := btc // string - Settle currency
-    contract := "BTC_USD" // string - Futures contract
+    contract := "BTC_USDT" // string - Futures contract
     
     result, _, err := client.FuturesApi.ListFuturesTrades(ctx, settle, contract, nil)
     if err != nil {
@@ -369,7 +369,7 @@ func main() {
     // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
     ctx := context.Background()
     settle := btc // string - Settle currency
-    contract := "BTC_USD" // string - Futures contract
+    contract := "BTC_USDT" // string - Futures contract
     
     result, _, err := client.FuturesApi.ListFuturesCandlesticks(ctx, settle, contract, nil)
     if err != nil {
@@ -515,7 +515,7 @@ func main() {
     // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
     ctx := context.Background()
     settle := btc // string - Settle currency
-    contract := "BTC_USD" // string - Futures contract
+    contract := "BTC_USDT" // string - Futures contract
     
     result, _, err := client.FuturesApi.ListFuturesFundingRateHistory(ctx, settle, contract, nil)
     if err != nil {
@@ -663,7 +663,7 @@ func main() {
     // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
     ctx := context.Background()
     settle := btc // string - Settle currency
-    contract := "BTC_USD" // string - Futures contract
+    contract := "BTC_USDT" // string - Futures contract
     
     result, _, err := client.FuturesApi.ListContractStats(ctx, settle, contract, nil)
     if err != nil {
@@ -1698,7 +1698,7 @@ func main() {
                              }
                             )
     settle := btc // string - Settle currency
-    contract := "BTC_USD" // string - Futures contract
+    contract := "BTC_USDT" // string - Futures contract
     status := "open" // string - List orders based on status
     
     result, _, err := client.FuturesApi.ListFuturesOrders(ctx, settle, contract, status, nil)
@@ -1854,7 +1854,7 @@ func main() {
                              }
                             )
     settle := btc // string - Settle currency
-    contract := "BTC_USD" // string - Futures contract
+    contract := "BTC_USDT" // string - Futures contract
     
     result, _, err := client.FuturesApi.CancelFuturesOrders(ctx, settle, contract, nil)
     if err != nil {
@@ -2464,7 +2464,7 @@ func main() {
                              }
                             )
     settle := btc // string - Settle currency
-    contract := "BTC_USD" // string - Futures contract
+    contract := "BTC_USDT" // string - Futures contract
     
     result, _, err := client.FuturesApi.CancelPriceTriggeredOrderList(ctx, settle, contract)
     if err != nil {
