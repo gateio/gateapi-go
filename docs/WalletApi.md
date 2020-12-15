@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**ListSubAccountTransfers**](WalletApi.md#ListSubAccountTransfers) | **Get** /wallet/sub_account_transfers | Transfer records between main and sub accounts
 [**TransferWithSubAccount**](WalletApi.md#TransferWithSubAccount) | **Post** /wallet/sub_account_transfers | Transfer between main and sub accounts
 [**ListWithdrawStatus**](WalletApi.md#ListWithdrawStatus) | **Get** /wallet/withdraw_status | Retrieve withdrawal status
+[**ListSubAccountBalances**](WalletApi.md#ListSubAccountBalances) | **Get** /wallet/sub_account_balances | Retrieve sub account balances
 
 
 ## GetDepositAddress
@@ -530,6 +531,82 @@ func main() {
 ### Return type
 
 [**[]WithdrawStatus**](WithdrawStatus.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## ListSubAccountBalances
+
+> []SubAccountBalance ListSubAccountBalances(ctx, optional)
+
+Retrieve sub account balances
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**optional** | **ListSubAccountBalancesOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a ListSubAccountBalancesOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**subUid** | **optional.String**| Sub account user ID. Return records related to all sub accounts if not specified | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v5"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    
+    result, _, err := client.WalletApi.ListSubAccountBalances(ctx, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**[]SubAccountBalance**](SubAccountBalance.md)
 
 ### Authorization
 
