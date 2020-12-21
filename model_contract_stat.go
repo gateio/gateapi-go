@@ -18,8 +18,22 @@ type ContractStat struct {
 	LsrAccount float32 `json:"lsr_account,omitempty"`
 	// Long liquidation size
 	LongLiqSize int64 `json:"long_liq_size,omitempty"`
+	// Long liquidation amount(base currency)
+	LongLiqAmount float32 `json:"long_liq_amount,omitempty"`
+	// Long liquidation volume(quote currency)
+	LongLiqUsd float32 `json:"long_liq_usd,omitempty"`
 	// Short liquidation size
 	ShortLiqSize int64 `json:"short_liq_size,omitempty"`
-	// Open interest
+	// Short liquidation amount(base currency)
+	ShortLiqAmount float32 `json:"short_liq_amount,omitempty"`
+	// Short liquidation volume(quote currency)
+	ShortLiqUsd float32 `json:"short_liq_usd,omitempty"`
+	// Open interest size
 	OpenInterest int64 `json:"open_interest,omitempty"`
+	// Open interest volume(quote currency)
+	OpenInterestUsd float32 `json:"open_interest_usd,omitempty"`
+	// Top trader long/short account ratio
+	TopLsrAccount string `json:"top_lsr_account,omitempty"`
+	// Top trader long/short position ratio
+	TopLsrSize string `json:"top_lsr_size,omitempty"`
 }

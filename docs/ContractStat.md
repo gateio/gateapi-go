@@ -8,8 +8,15 @@ Name | Type | Description | Notes
 **LsrTaker** | **float32** | Long/short account number ratio | [optional] 
 **LsrAccount** | **float32** | Long/short taker size ratio | [optional] 
 **LongLiqSize** | **int64** | Long liquidation size | [optional] 
+**LongLiqAmount** | **float32** | Long liquidation amount(base currency) | [optional] 
+**LongLiqUsd** | **float32** | Long liquidation volume(quote currency) | [optional] 
 **ShortLiqSize** | **int64** | Short liquidation size | [optional] 
-**OpenInterest** | **int64** | Open interest | [optional] 
+**ShortLiqAmount** | **float32** | Short liquidation amount(base currency) | [optional] 
+**ShortLiqUsd** | **float32** | Short liquidation volume(quote currency) | [optional] 
+**OpenInterest** | **int64** | Open interest size | [optional] 
+**OpenInterestUsd** | **float32** | Open interest volume(quote currency) | [optional] 
+**TopLsrAccount** | **string** | Top trader long/short account ratio | [optional] 
+**TopLsrSize** | **string** | Top trader long/short position ratio | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
