@@ -33,7 +33,7 @@ type ContractStat struct {
 	// Open interest volume(quote currency)
 	OpenInterestUsd float32 `json:"open_interest_usd,omitempty"`
 	// Top trader long/short account ratio
-	TopLsrAccount string `json:"top_lsr_account,omitempty"`
+	TopLsrAccount float32 `json:"top_lsr_account,omitempty"`
 	// Top trader long/short position ratio
-	TopLsrSize string `json:"top_lsr_size,omitempty"`
+	TopLsrSize float32 `json:"top_lsr_size,omitempty"`
 }
