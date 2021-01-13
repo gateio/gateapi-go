@@ -14,6 +14,8 @@ type Trade struct {
 	Id string `json:"id,omitempty"`
 	// Trading time
 	CreateTime string `json:"create_time,omitempty"`
+	// Trading time, with millisecond precision
+	CreateTimeMs string `json:"create_time_ms,omitempty"`
 	// Order side
 	Side string `json:"side,omitempty"`
 	// Trade role
