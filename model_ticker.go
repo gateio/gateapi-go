@@ -28,4 +28,12 @@ type Ticker struct {
 	High24h string `json:"high_24h,omitempty"`
 	// Lowest price in 24h
 	Low24h string `json:"low_24h,omitempty"`
+	// ETF net value
+	EtfNetValue string `json:"etf_net_value,omitempty"`
+	// ETF previous net value at re-balancing time
+	EtfPreNetValue string `json:"etf_pre_net_value,omitempty"`
+	// ETF previous re-balancing time
+	EtfPreTimestamp int64 `json:"etf_pre_timestamp,omitempty"`
+	// ETF current leverage
+	EtfLeverage string `json:"etf_leverage,omitempty"`
 }
