@@ -29,4 +29,12 @@ type CurrencyPair struct {
 	Precision int32 `json:"precision,omitempty"`
 	// How currency pair can be traded  - untradable: cannot be bought or sold - buyable: can be bought - sellable: can be sold - tradable: can be bought or sold
 	TradeStatus string `json:"trade_status,omitempty"`
+	// ETF net value
+	EtfNetValue string `json:"etf_net_value,omitempty"`
+	// ETF previous net value at re-balancing time
+	EtfPreNetValue string `json:"etf_pre_net_value,omitempty"`
+	// ETF previous re-balancing time
+	EtfPreTimestamp int64 `json:"etf_pre_timestamp,omitempty"`
+	// ETF current leverage
+	EtfLeverage string `json:"etf_leverage,omitempty"`
 }
