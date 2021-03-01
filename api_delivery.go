@@ -205,6 +205,7 @@ func (a *DeliveryApiService) GetDeliveryContract(ctx context.Context, settle str
 type ListDeliveryOrderBookOpts struct {
 	Interval optional.String
 	Limit    optional.Int32
+	WithId   optional.Bool
 }
 
 /*
@@ -216,6 +217,7 @@ Bids will be sorted by price from high to low, while asks sorted reversely
  * @param optional nil or *ListDeliveryOrderBookOpts - Optional Parameters:
  * @param "Interval" (optional.String) -  Order depth. 0 means no aggregation is applied. default to 0
  * @param "Limit" (optional.Int32) -  Maximum number of order depth data in asks or bids
+ * @param "WithId" (optional.Bool) -  Whether order book update ID would be returned. This ID increments by 1 on every order book update
 @return FuturesOrderBook
 */
 func (a *DeliveryApiService) ListDeliveryOrderBook(ctx context.Context, settle string, contract string, localVarOptionals *ListDeliveryOrderBookOpts) (FuturesOrderBook, *http.Response, error) {
@@ -242,6 +244,9 @@ func (a *DeliveryApiService) ListDeliveryOrderBook(ctx context.Context, settle s
 	}
 	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
 		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.WithId.IsSet() {
+		localVarQueryParams.Add("with_id", parameterToString(localVarOptionals.WithId.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

@@ -787,6 +787,7 @@ type GetFeeOpts struct {
 
 /*
 GetFee Query user trading fee rates
+This API is deprecated in favour of new fee retrieving API &#x60;/wallet/fee&#x60;.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *GetFeeOpts - Optional Parameters:
  * @param "CurrencyPair" (optional.String) -  Specify a currency pair to retrieve precise fee rate  This field is optional. In most cases, the fee rate is identical among all currency pairs

@@ -205,6 +205,7 @@ func (a *FuturesApiService) GetFuturesContract(ctx context.Context, settle strin
 type ListFuturesOrderBookOpts struct {
 	Interval optional.String
 	Limit    optional.Int32
+	WithId   optional.Bool
 }
 
 /*
@@ -216,6 +217,7 @@ Bids will be sorted by price from high to low, while asks sorted reversely
  * @param optional nil or *ListFuturesOrderBookOpts - Optional Parameters:
  * @param "Interval" (optional.String) -  Order depth. 0 means no aggregation is applied. default to 0
  * @param "Limit" (optional.Int32) -  Maximum number of order depth data in asks or bids
+ * @param "WithId" (optional.Bool) -  Whether order book update ID would be returned. This ID increments by 1 on every order book update
 @return FuturesOrderBook
 */
 func (a *FuturesApiService) ListFuturesOrderBook(ctx context.Context, settle string, contract string, localVarOptionals *ListFuturesOrderBookOpts) (FuturesOrderBook, *http.Response, error) {
@@ -242,6 +244,9 @@ func (a *FuturesApiService) ListFuturesOrderBook(ctx context.Context, settle str
 	}
 	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
 		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.WithId.IsSet() {
+		localVarQueryParams.Add("with_id", parameterToString(localVarOptionals.WithId.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2855,6 +2860,7 @@ func (a *FuturesApiService) GetMyTrades(ctx context.Context, settle string, loca
 type ListPositionCloseOpts struct {
 	Contract optional.String
 	Limit    optional.Int32
+	Offset   optional.Int32
 }
 
 /*
@@ -2864,6 +2870,7 @@ ListPositionClose List position close history
  * @param optional nil or *ListPositionCloseOpts - Optional Parameters:
  * @param "Contract" (optional.String) -  Futures contract, return related data only if specified
  * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
+ * @param "Offset" (optional.Int32) -  List offset, starting from 0
 @return []PositionClose
 */
 func (a *FuturesApiService) ListPositionClose(ctx context.Context, settle string, localVarOptionals *ListPositionCloseOpts) ([]PositionClose, *http.Response, error) {
@@ -2889,6 +2896,9 @@ func (a *FuturesApiService) ListPositionClose(ctx context.Context, settle string
 	}
 	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
 		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Offset.IsSet() {
+		localVarQueryParams.Add("offset", parameterToString(localVarOptionals.Offset.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

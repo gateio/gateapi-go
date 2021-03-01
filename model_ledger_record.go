@@ -14,11 +14,11 @@ type LedgerRecord struct {
 	Id string `json:"id,omitempty"`
 	// Hash record of the withdrawal
 	Txid string `json:"txid,omitempty"`
-	// Record time
+	// Operation time
 	Timestamp string `json:"timestamp,omitempty"`
-	// Trade amount
+	// Currency amount
 	Amount string `json:"amount"`
-	// Record currency
+	// Currency name
 	Currency string `json:"currency"`
 	// Withdrawal address. Required for withdrawals
 	Address string `json:"address,omitempty"`
@@ -26,4 +26,6 @@ type LedgerRecord struct {
 	Memo string `json:"memo,omitempty"`
 	// Record status.  - DONE: done - CANCEL: cancelled - REQUEST: requesting - MANUAL: waiting for manual approval - BCODE: GateCode operation
 	Status string `json:"status,omitempty"`
+	// Name of the chain used in withdrawals
+	Chain string `json:"chain,omitempty"`
 }

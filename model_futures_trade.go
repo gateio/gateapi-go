@@ -14,6 +14,8 @@ type FuturesTrade struct {
 	Id int64 `json:"id,omitempty"`
 	// Trading time
 	CreateTime float64 `json:"create_time,omitempty"`
+	// Trading time, with milliseconds set to 3 decimal places.
+	CreateTimeMs float64 `json:"create_time_ms,omitempty"`
 	// Futures contract
 	Contract string `json:"contract,omitempty"`
 	// Trading size

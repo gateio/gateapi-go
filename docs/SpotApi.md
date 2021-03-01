@@ -572,6 +572,8 @@ No authorization required
 
 Query user trading fee rates
 
+This API is deprecated in favour of new fee retrieving API `/wallet/fee`.
+
 ### Required Parameters
 
 Name | Type | Description  | Notes

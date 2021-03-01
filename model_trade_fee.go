@@ -26,4 +26,8 @@ type TradeFee struct {
 	LoanFee string `json:"loan_fee,omitempty"`
 	// Point type. 0 - Initial version. 1 - new version since 202009
 	PointType string `json:"point_type,omitempty"`
+	// Futures trading taker fee
+	FuturesTakerFee string `json:"futures_taker_fee,omitempty"`
+	// Future trading maker fee
+	FuturesMakerFee string `json:"futures_maker_fee,omitempty"`
 }

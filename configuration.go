@@ -90,7 +90,7 @@ func NewConfiguration() *Configuration {
 	cfg := &Configuration{
 		BasePath:      "https://api.gateio.ws/api/v4",
 		DefaultHeader: make(map[string]string),
-		UserAgent:     "OpenAPI-Generator/5.18.4/go",
+		UserAgent:     "OpenAPI-Generator/5.19.2/go",
 		Debug:         false,
 		Servers: []ServerConfiguration{
 			{

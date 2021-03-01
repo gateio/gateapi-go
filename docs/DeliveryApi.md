@@ -187,6 +187,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **interval** | **optional.String**| Order depth. 0 means no aggregation is applied. default to 0 | [default to 0]
 **limit** | **optional.Int32**| Maximum number of order depth data in asks or bids | [default to 10]
+**withId** | **optional.Bool**| Whether order book update ID would be returned. This ID increments by 1 on every order book update | [default to false]
 
 ### Example
 
