@@ -9,10 +9,7 @@
 
 package gateapi
 
-type OpenOrders struct {
-	// Currency pair
-	CurrencyPair string `json:"currency_pair,omitempty"`
-	// Total open orders in this currency pair
-	Total  int32   `json:"total,omitempty"`
-	Orders []Order `json:"orders,omitempty"`
+type AutoRepaySetting struct {
+	// Auto repayment status. `on` - enabled, `off` - disabled
+	Status string `json:"status,omitempty"`
 }

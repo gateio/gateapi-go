@@ -51,7 +51,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    currency := "currency_example" // string - Currency name
+    currency := "USDT" // string - Currency name
     
     result, _, err := client.WalletApi.GetDepositAddress(ctx, currency)
     if err != nil {
@@ -406,6 +406,8 @@ func main() {
 > TransferWithSubAccount(ctx, subAccountTransfer)
 
 Transfer between main and sub accounts
+
+Support transferring with sub user's spot or futures account. Note that only main user's spot account is used no matter which sub user's account is operated.
 
 ### Required Parameters
 
