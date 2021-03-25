@@ -29,4 +29,8 @@ type CurrencyPair struct {
 	Precision int32 `json:"precision,omitempty"`
 	// How currency pair can be traded  - untradable: cannot be bought or sold - buyable: can be bought - sellable: can be sold - tradable: can be bought or sold
 	TradeStatus string `json:"trade_status,omitempty"`
+	// 允许卖出时间，秒级 Unix 时间戳
+	SellStart int64 `json:"sell_start,omitempty"`
+	// 允许买入时间，秒级 Unix 时间戳
+	BuyStart int64 `json:"buy_start,omitempty"`
 }

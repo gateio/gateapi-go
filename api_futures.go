@@ -2543,7 +2543,7 @@ GetFuturesOrder Get a single order
 Zero-fill order cannot be retrieved 60 seconds after cancellation
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
- * @param orderId ID returned on order successfully being created
+ * @param orderId Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID are accepted only in the first 30 minutes after order creation.After that, only order ID is accepted.
 @return FuturesOrder
 */
 func (a *FuturesApiService) GetFuturesOrder(ctx context.Context, settle string, orderId string) (FuturesOrder, *http.Response, error) {
@@ -2638,7 +2638,7 @@ func (a *FuturesApiService) GetFuturesOrder(ctx context.Context, settle string, 
 CancelFuturesOrder Cancel a single order
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
- * @param orderId ID returned on order successfully being created
+ * @param orderId Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID are accepted only in the first 30 minutes after order creation.After that, only order ID is accepted.
 @return FuturesOrder
 */
 func (a *FuturesApiService) CancelFuturesOrder(ctx context.Context, settle string, orderId string) (FuturesOrder, *http.Response, error) {

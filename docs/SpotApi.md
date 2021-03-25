@@ -23,6 +23,11 @@ Method | HTTP request | Description
 [**GetOrder**](SpotApi.md#GetOrder) | **Get** /spot/orders/{order_id} | Get a single order
 [**CancelOrder**](SpotApi.md#CancelOrder) | **Delete** /spot/orders/{order_id} | Cancel a single order
 [**ListMyTrades**](SpotApi.md#ListMyTrades) | **Get** /spot/my_trades | List personal trading history
+[**ListSpotPriceTriggeredOrders**](SpotApi.md#ListSpotPriceTriggeredOrders) | **Get** /spot/price_orders | Retrieve running auto order list
+[**CreateSpotPriceTriggeredOrder**](SpotApi.md#CreateSpotPriceTriggeredOrder) | **Post** /spot/price_orders | Create a price-triggered order
+[**CancelSpotPriceTriggeredOrderList**](SpotApi.md#CancelSpotPriceTriggeredOrderList) | **Delete** /spot/price_orders | Cancel all open orders
+[**GetSpotPriceTriggeredOrder**](SpotApi.md#GetSpotPriceTriggeredOrder) | **Get** /spot/price_orders/{order_id} | Get a single order
+[**CancelSpotPriceTriggeredOrder**](SpotApi.md#CancelSpotPriceTriggeredOrder) | **Delete** /spot/price_orders/{order_id} | Cancel a single order
 
 
 ## ListCurrencies
@@ -1181,7 +1186,7 @@ Get a single order
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orderId** | **string**| ID returned on order successfully being created | 
+**orderId** | **string**| Order ID returned, or user custom ID(i.e., &#x60;text&#x60; field). Operations based on custom ID are accepted only in the first 30 minutes after order creation.After that, only order ID is accepted. | 
 **currencyPair** | **string**| Currency pair | 
 
 ### Example
@@ -1207,7 +1212,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    orderId := "12345" // string - ID returned on order successfully being created
+    orderId := "12345" // string - Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID are accepted only in the first 30 minutes after order creation.After that, only order ID is accepted.
     currencyPair := "BTC_USDT" // string - Currency pair
     
     result, _, err := client.SpotApi.GetOrder(ctx, orderId, currencyPair)
@@ -1252,7 +1257,7 @@ Cancel a single order
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orderId** | **string**| ID returned on order successfully being created | 
+**orderId** | **string**| Order ID returned, or user custom ID(i.e., &#x60;text&#x60; field). Operations based on custom ID are accepted only in the first 30 minutes after order creation.After that, only order ID is accepted. | 
 **currencyPair** | **string**| Currency pair | 
 
 ### Example
@@ -1278,7 +1283,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    orderId := "12345" // string - ID returned on order successfully being created
+    orderId := "12345" // string - Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID are accepted only in the first 30 minutes after order creation.After that, only order ID is accepted.
     currencyPair := "BTC_USDT" // string - Currency pair
     
     result, _, err := client.SpotApi.CancelOrder(ctx, orderId, currencyPair)
@@ -1378,6 +1383,371 @@ func main() {
 ### Return type
 
 [**[]Trade**](Trade.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## ListSpotPriceTriggeredOrders
+
+> []SpotPriceTriggeredOrder ListSpotPriceTriggeredOrders(ctx, status, optional)
+
+Retrieve running auto order list
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**status** | **string**| List orders based on status | 
+**optional** | **ListSpotPriceTriggeredOrdersOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a ListSpotPriceTriggeredOrdersOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**market** | **optional.String**| 交易市场 | 
+**account** | **optional.String**| Trading account | 
+**limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v5"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    status := "status_example" // string - List orders based on status
+    
+    result, _, err := client.SpotApi.ListSpotPriceTriggeredOrders(ctx, status, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**[]SpotPriceTriggeredOrder**](SpotPriceTriggeredOrder.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## CreateSpotPriceTriggeredOrder
+
+> TriggerOrderResponse CreateSpotPriceTriggeredOrder(ctx, spotPriceTriggeredOrder)
+
+Create a price-triggered order
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**spotPriceTriggeredOrder** | [**SpotPriceTriggeredOrder**](SpotPriceTriggeredOrder.md)|  | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v5"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    spotPriceTriggeredOrder := gateapi.SpotPriceTriggeredOrder{} // SpotPriceTriggeredOrder - 
+    
+    result, _, err := client.SpotApi.CreateSpotPriceTriggeredOrder(ctx, spotPriceTriggeredOrder)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**TriggerOrderResponse**](TriggerOrderResponse.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## CancelSpotPriceTriggeredOrderList
+
+> []SpotPriceTriggeredOrder CancelSpotPriceTriggeredOrderList(ctx, optional)
+
+Cancel all open orders
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**optional** | **CancelSpotPriceTriggeredOrderListOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a CancelSpotPriceTriggeredOrderListOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**market** | **optional.String**| 交易市场 | 
+**account** | **optional.String**| Trading account | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v5"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    
+    result, _, err := client.SpotApi.CancelSpotPriceTriggeredOrderList(ctx, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**[]SpotPriceTriggeredOrder**](SpotPriceTriggeredOrder.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## GetSpotPriceTriggeredOrder
+
+> SpotPriceTriggeredOrder GetSpotPriceTriggeredOrder(ctx, orderId)
+
+Get a single order
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**orderId** | **string**| ID returned on order successfully being created | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v5"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    orderId := "orderId_example" // string - ID returned on order successfully being created
+    
+    result, _, err := client.SpotApi.GetSpotPriceTriggeredOrder(ctx, orderId)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**SpotPriceTriggeredOrder**](SpotPriceTriggeredOrder.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## CancelSpotPriceTriggeredOrder
+
+> SpotPriceTriggeredOrder CancelSpotPriceTriggeredOrder(ctx, orderId)
+
+Cancel a single order
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**orderId** | **string**| ID returned on order successfully being created | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v5"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    orderId := "orderId_example" // string - ID returned on order successfully being created
+    
+    result, _, err := client.SpotApi.CancelSpotPriceTriggeredOrder(ctx, orderId)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**SpotPriceTriggeredOrder**](SpotPriceTriggeredOrder.md)
 
 ### Authorization
 

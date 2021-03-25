@@ -1902,7 +1902,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
-**orderId** | **string**| ID returned on order successfully being created | 
+**orderId** | **string**| Order ID returned, or user custom ID(i.e., &#x60;text&#x60; field). Operations based on custom ID are accepted only in the first 30 minutes after order creation.After that, only order ID is accepted. | 
 
 ### Example
 
@@ -1928,7 +1928,7 @@ func main() {
                              }
                             )
     settle := "usdt" // string - Settle currency
-    orderId := "12345" // string - ID returned on order successfully being created
+    orderId := "12345" // string - Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID are accepted only in the first 30 minutes after order creation.After that, only order ID is accepted.
     
     result, _, err := client.FuturesApi.GetFuturesOrder(ctx, settle, orderId)
     if err != nil {
@@ -1973,7 +1973,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
-**orderId** | **string**| ID returned on order successfully being created | 
+**orderId** | **string**| Order ID returned, or user custom ID(i.e., &#x60;text&#x60; field). Operations based on custom ID are accepted only in the first 30 minutes after order creation.After that, only order ID is accepted. | 
 
 ### Example
 
@@ -1999,7 +1999,7 @@ func main() {
                              }
                             )
     settle := "usdt" // string - Settle currency
-    orderId := "12345" // string - ID returned on order successfully being created
+    orderId := "12345" // string - Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID are accepted only in the first 30 minutes after order creation.After that, only order ID is accepted.
     
     result, _, err := client.FuturesApi.CancelFuturesOrder(ctx, settle, orderId)
     if err != nil {

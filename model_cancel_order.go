@@ -13,6 +13,6 @@ package gateapi
 type CancelOrder struct {
 	// Order currency pair
 	CurrencyPair string `json:"currency_pair"`
-	// Order ID
+	// Order ID or user custom ID. Custom ID are accepted only within 30 minutes after order creation
 	Id string `json:"id"`
 }
