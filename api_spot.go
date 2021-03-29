@@ -1888,7 +1888,7 @@ ListSpotPriceTriggeredOrders Retrieve running auto order list
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param status List orders based on status
  * @param optional nil or *ListSpotPriceTriggeredOrdersOpts - Optional Parameters:
- * @param "Market" (optional.String) -  交易市场
+ * @param "Market" (optional.String) -  Currency pair
  * @param "Account" (optional.String) -  Trading account
  * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
  * @param "Offset" (optional.Int32) -  List offset, starting from 0
@@ -2093,7 +2093,7 @@ type CancelSpotPriceTriggeredOrderListOpts struct {
 CancelSpotPriceTriggeredOrderList Cancel all open orders
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *CancelSpotPriceTriggeredOrderListOpts - Optional Parameters:
- * @param "Market" (optional.String) -  交易市场
+ * @param "Market" (optional.String) -  Currency pair
  * @param "Account" (optional.String) -  Trading account
 @return []SpotPriceTriggeredOrder
 */

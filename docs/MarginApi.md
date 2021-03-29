@@ -1350,7 +1350,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    status := "true" // string - New auto repayment status. `on` - enabled, `off` - disabled
+    status := "on" // string - New auto repayment status. `on` - enabled, `off` - disabled
     
     result, _, err := client.MarginApi.SetAutoRepay(ctx, status)
     if err != nil {

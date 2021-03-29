@@ -1417,7 +1417,7 @@ Optional parameters are passed through a pointer to a ListSpotPriceTriggeredOrde
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**market** | **optional.String**| 交易市场 | 
+**market** | **optional.String**| Currency pair | 
 **account** | **optional.String**| Trading account | 
 **limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
@@ -1566,7 +1566,7 @@ Optional parameters are passed through a pointer to a CancelSpotPriceTriggeredOr
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**market** | **optional.String**| 交易市场 | 
+**market** | **optional.String**| Currency pair | 
 **account** | **optional.String**| Trading account | 
 
 ### Example

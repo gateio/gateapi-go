@@ -13,8 +13,8 @@ Name | Type | Description | Notes
 **AmountPrecision** | **int32** | Amount scale | [optional] 
 **Precision** | **int32** | Price scale | [optional] 
 **TradeStatus** | **string** | How currency pair can be traded  - untradable: cannot be bought or sold - buyable: can be bought - sellable: can be sold - tradable: can be bought or sold | [optional] 
-**SellStart** | **int64** | 允许卖出时间，秒级 Unix 时间戳 | [optional] 
-**BuyStart** | **int64** | 允许买入时间，秒级 Unix 时间戳 | [optional] 
+**SellStart** | **int64** | Sell start unix timestamp in seconds | [optional] 
+**BuyStart** | **int64** | Buy start unix timestamp in seconds | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
