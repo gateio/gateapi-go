@@ -25,6 +25,10 @@ type BatchOrder struct {
 	CreateTime string `json:"create_time,omitempty"`
 	// Order last modification time
 	UpdateTime string `json:"update_time,omitempty"`
+	// Order creation time in milliseconds
+	CreateTimeMs int64 `json:"create_time_ms,omitempty"`
+	// Order last modification time in milliseconds
+	UpdateTimeMs int64 `json:"update_time_ms,omitempty"`
 	// Order status  - `open`: to be filled - `closed`: filled - `cancelled`: cancelled
 	Status string `json:"status,omitempty"`
 	// Currency pair

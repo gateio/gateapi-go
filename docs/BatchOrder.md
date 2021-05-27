@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **Id** | **string** | Order ID | [optional] [readonly] 
 **CreateTime** | **string** | Order creation time | [optional] [readonly] 
 **UpdateTime** | **string** | Order last modification time | [optional] [readonly] 
+**CreateTimeMs** | **int64** | Order creation time in milliseconds | [optional] [readonly] 
+**UpdateTimeMs** | **int64** | Order last modification time in milliseconds | [optional] [readonly] 
 **Status** | **string** | Order status  - &#x60;open&#x60;: to be filled - &#x60;closed&#x60;: filled - &#x60;cancelled&#x60;: cancelled | [optional] [readonly] 
 **CurrencyPair** | **string** | Currency pair | [optional] 
 **Type** | **string** | Order type. limit - limit order | [optional] [default to TYPE_LIMIT]

@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **Text** | **string** | User defined information. If not empty, must follow the rules below:  1. prefixed with &#x60;t-&#x60; 2. no longer than 28 bytes without &#x60;t-&#x60; prefix 3. can only include 0-9, A-Z, a-z, underscore(_), hyphen(-) or dot(.)  | [optional] 
 **CreateTime** | **string** | Order creation time | [optional] [readonly] 
 **UpdateTime** | **string** | Order last modification time | [optional] [readonly] 
+**CreateTimeMs** | **int64** | Order creation time in milliseconds | [optional] [readonly] 
+**UpdateTimeMs** | **int64** | Order last modification time in milliseconds | [optional] [readonly] 
 **Status** | **string** | Order status  - &#x60;open&#x60;: to be filled - &#x60;closed&#x60;: filled - &#x60;cancelled&#x60;: cancelled | [optional] [readonly] 
 **CurrencyPair** | **string** | Currency pair | 
 **Type** | **string** | Order type. limit - limit order | [optional] [default to TYPE_LIMIT]
