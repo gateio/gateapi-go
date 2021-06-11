@@ -9,7 +9,7 @@
 
 package gateapi
 
-// Accounts available to transfer:  - `spot`: spot account - `margin`: margin account - `futures`: perpetual futures account - `delivery`: delivery futures account
+// Accounts available to transfer:  - `spot`: spot account - `margin`: margin account - `futures`: perpetual futures account - `delivery`: delivery futures account - `cross_margin`: cross margin account
 type Transfer struct {
 	// Transfer currency. For futures account, `currency` can be set to `POINT` or settle currency
 	Currency string `json:"currency"`

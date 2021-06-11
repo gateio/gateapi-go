@@ -37,7 +37,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -120,7 +120,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -202,7 +202,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -254,7 +254,7 @@ func main() {
 
 Transfer between trading accounts
 
-Transfer between different accounts. Currently support transfers between the following:  1. spot - margin 2. spot - futures(perpetual) 3. spot - delivery
+Transfer between different accounts. Currently support transfers between the following:  1. spot - margin 2. spot - futures(perpetual) 3. spot - delivery 4. spot - cross margin
 
 ### Required Parameters
 
@@ -272,7 +272,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -355,7 +355,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -425,7 +425,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -502,7 +502,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -578,7 +578,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -642,7 +642,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {

@@ -1074,17 +1074,19 @@ func (a *SpotApiService) CreateBatchOrders(ctx context.Context, order []Order) (
 
 // ListAllOpenOrdersOpts Optional parameters for the method 'ListAllOpenOrders'
 type ListAllOpenOrdersOpts struct {
-	Page  optional.Int32
-	Limit optional.Int32
+	Page    optional.Int32
+	Limit   optional.Int32
+	Account optional.String
 }
 
 /*
 ListAllOpenOrders List all open orders
-List open orders in all currency pairs.  Note that pagination parameters affect record number in each currency pair&#39;s open order list. No pagination is applied to the number of currency pairs returned. All currency pairs with open orders will be returned
+List open orders in all currency pairs.  Note that pagination parameters affect record number in each currency pair&#39;s open order list. No pagination is applied to the number of currency pairs returned. All currency pairs with open orders will be returned.  Spot and margin orders are returned by default. To list cross margin orders, &#x60;account&#x60; must be set to &#x60;cross_margin&#x60;
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *ListAllOpenOrdersOpts - Optional Parameters:
  * @param "Page" (optional.Int32) -  Page number
  * @param "Limit" (optional.Int32) -  Maximum number of records returned in one page in each currency pair
+ * @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account
 @return []OpenOrders
 */
 func (a *SpotApiService) ListAllOpenOrders(ctx context.Context, localVarOptionals *ListAllOpenOrdersOpts) ([]OpenOrders, *http.Response, error) {
@@ -1108,6 +1110,9 @@ func (a *SpotApiService) ListAllOpenOrders(ctx context.Context, localVarOptional
 	}
 	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
 		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Account.IsSet() {
+		localVarQueryParams.Add("account", parameterToString(localVarOptionals.Account.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1179,18 +1184,21 @@ func (a *SpotApiService) ListAllOpenOrders(ctx context.Context, localVarOptional
 
 // ListOrdersOpts Optional parameters for the method 'ListOrders'
 type ListOrdersOpts struct {
-	Page  optional.Int32
-	Limit optional.Int32
+	Page    optional.Int32
+	Limit   optional.Int32
+	Account optional.String
 }
 
 /*
 ListOrders List orders
+Spot and margin orders are returned by default. If cross margin orders are needed, &#x60;account&#x60; must be set to &#x60;cross_margin&#x60;
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param currencyPair Currency pair
  * @param status List orders based on status  `open` - order is waiting to be filled `finished` - order has been filled or cancelled
  * @param optional nil or *ListOrdersOpts - Optional Parameters:
  * @param "Page" (optional.Int32) -  Page number
  * @param "Limit" (optional.Int32) -  Maximum number of records returned. If `status` is `open`, maximum of `limit` is 100
+ * @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account
 @return []Order
 */
 func (a *SpotApiService) ListOrders(ctx context.Context, currencyPair string, status string, localVarOptionals *ListOrdersOpts) ([]Order, *http.Response, error) {
@@ -1216,6 +1224,9 @@ func (a *SpotApiService) ListOrders(ctx context.Context, currencyPair string, st
 	}
 	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
 		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Account.IsSet() {
+		localVarQueryParams.Add("account", parameterToString(localVarOptionals.Account.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1287,6 +1298,7 @@ func (a *SpotApiService) ListOrders(ctx context.Context, currencyPair string, st
 
 /*
 CreateOrder Create an order
+You can place orders with spot, margin or cross margin account through setting the &#x60;account &#x60;field. It defaults to &#x60;spot&#x60;, which means spot account is used to place orders.  When margin account is used, i.e., &#x60;account&#x60; is &#x60;margin&#x60;, &#x60;auto_borrow&#x60; field can be set to &#x60;true&#x60; to enable the server to borrow the amount lacked using &#x60;POST /margin/loans&#x60; when your account&#39;s balance is not enough. Whether margin orders&#39; fill will be used to repay margin loans automatically is determined by the auto repayment setting in your **margin account**, which can be updated or queried using &#x60;/margin/auto_repay&#x60; API.  When cross margin account is used, i.e., &#x60;account&#x60; is &#x60;cross_margin&#x60;, &#x60;auto_borrow&#x60; can also be enabled to achieve borrowing the insufficient amount automatically if cross account&#39;s balance is not enough. But it differs from margin account that automatic repayment is determined by order&#39;s &#x60;auto_repay&#x60; field and only current order&#39;s fill will be used to repay cross margin loans.  Automatic repayment will be triggered when the order is finished, i.e., its status is either &#x60;cancelled&#x60; or &#x60;closed&#x60;.  **Order status**  An order waiting to be filled is &#x60;open&#x60;, and it stays &#x60;open&#x60; until it is filled totally. If fully filled, order is finished and its status turns to &#x60;closed&#x60;.If the order is cancelled before it is totally filled, whether or not partially filled, its status is &#x60;cancelled&#x60;. **Iceberg order**  &#x60;iceberg&#x60; field can be used to set the amount shown. Set to &#x60;-1&#x60; to hide totally. Note that the hidden part&#39;s fee will be charged using taker&#39;s fee rate.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param order
 @return Order
@@ -1385,6 +1397,7 @@ type CancelOrdersOpts struct {
 
 /*
 CancelOrders Cancel all `open` orders in specified currency pair
+If &#x60;account&#x60; is not set, all open orders, including spot, margin and cross margin ones, will be cancelled.  You can set &#x60;account&#x60; to cancel only orders within the specified account
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param currencyPair Currency pair
  * @param optional nil or *CancelOrdersOpts - Optional Parameters:
@@ -1576,14 +1589,22 @@ func (a *SpotApiService) CancelBatchOrders(ctx context.Context, cancelOrder []Ca
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+// GetOrderOpts Optional parameters for the method 'GetOrder'
+type GetOrderOpts struct {
+	Account optional.String
+}
+
 /*
 GetOrder Get a single order
+Spot and margin orders are queried by default. If cross margin orders are needed, &#x60;account&#x60; must be set to &#x60;cross_margin&#x60;
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param orderId Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID are accepted only in the first 30 minutes after order creation.After that, only order ID is accepted.
  * @param currencyPair Currency pair
+ * @param optional nil or *GetOrderOpts - Optional Parameters:
+ * @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account
 @return Order
 */
-func (a *SpotApiService) GetOrder(ctx context.Context, orderId string, currencyPair string) (Order, *http.Response, error) {
+func (a *SpotApiService) GetOrder(ctx context.Context, orderId string, currencyPair string, localVarOptionals *GetOrderOpts) (Order, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -1602,6 +1623,9 @@ func (a *SpotApiService) GetOrder(ctx context.Context, orderId string, currencyP
 	localVarFormParams := url.Values{}
 
 	localVarQueryParams.Add("currency_pair", parameterToString(currencyPair, ""))
+	if localVarOptionals != nil && localVarOptionals.Account.IsSet() {
+		localVarQueryParams.Add("account", parameterToString(localVarOptionals.Account.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1670,14 +1694,22 @@ func (a *SpotApiService) GetOrder(ctx context.Context, orderId string, currencyP
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+// CancelOrderOpts Optional parameters for the method 'CancelOrder'
+type CancelOrderOpts struct {
+	Account optional.String
+}
+
 /*
 CancelOrder Cancel a single order
+Spot and margin orders are cancelled by default. If trying to cancel cross margin orders, &#x60;account&#x60; must be set to &#x60;cross_margin&#x60;
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param orderId Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID are accepted only in the first 30 minutes after order creation.After that, only order ID is accepted.
  * @param currencyPair Currency pair
+ * @param optional nil or *CancelOrderOpts - Optional Parameters:
+ * @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account
 @return Order
 */
-func (a *SpotApiService) CancelOrder(ctx context.Context, orderId string, currencyPair string) (Order, *http.Response, error) {
+func (a *SpotApiService) CancelOrder(ctx context.Context, orderId string, currencyPair string, localVarOptionals *CancelOrderOpts) (Order, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -1696,6 +1728,9 @@ func (a *SpotApiService) CancelOrder(ctx context.Context, orderId string, curren
 	localVarFormParams := url.Values{}
 
 	localVarQueryParams.Add("currency_pair", parameterToString(currencyPair, ""))
+	if localVarOptionals != nil && localVarOptionals.Account.IsSet() {
+		localVarQueryParams.Add("account", parameterToString(localVarOptionals.Account.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1769,16 +1804,19 @@ type ListMyTradesOpts struct {
 	Limit   optional.Int32
 	Page    optional.Int32
 	OrderId optional.String
+	Account optional.String
 }
 
 /*
 ListMyTrades List personal trading history
+Spot and margin trades are queried by default. If cross margin trades are needed, &#x60;account&#x60; must be set to &#x60;cross_margin&#x60;
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param currencyPair Currency pair
  * @param optional nil or *ListMyTradesOpts - Optional Parameters:
  * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
  * @param "Page" (optional.Int32) -  Page number
  * @param "OrderId" (optional.String) -  List all trades of specified order
+ * @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account
 @return []Trade
 */
 func (a *SpotApiService) ListMyTrades(ctx context.Context, currencyPair string, localVarOptionals *ListMyTradesOpts) ([]Trade, *http.Response, error) {
@@ -1806,6 +1844,9 @@ func (a *SpotApiService) ListMyTrades(ctx context.Context, currencyPair string, 
 	}
 	if localVarOptionals != nil && localVarOptionals.OrderId.IsSet() {
 		localVarQueryParams.Add("order_id", parameterToString(localVarOptionals.OrderId.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Account.IsSet() {
+		localVarQueryParams.Add("account", parameterToString(localVarOptionals.Account.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

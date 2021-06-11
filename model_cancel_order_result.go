@@ -21,4 +21,6 @@ type CancelOrderResult struct {
 	Label string `json:"label,omitempty"`
 	// Error message when failed to cancel the order; empty if succeeded
 	Message string `json:"message,omitempty"`
+	// Empty by default. If cancelled order is cross margin order, this field is set to `cross_margin`
+	Account string `json:"account,omitempty"`
 }

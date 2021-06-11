@@ -19,7 +19,7 @@ type DeliveryContract struct {
 	Cycle string `json:"cycle,omitempty"`
 	// Futures contract type
 	Type string `json:"type,omitempty"`
-	// Multiplier used in converting from invoicing to settlement currency in quanto futures
+	// Multiplier used in converting from invoicing to settlement currency
 	QuantoMultiplier string `json:"quanto_multiplier,omitempty"`
 	// Minimum leverage
 	LeverageMin string `json:"leverage_min,omitempty"`

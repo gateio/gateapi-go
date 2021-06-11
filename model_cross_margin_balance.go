@@ -9,14 +9,11 @@
 
 package gateapi
 
-// Account currency detail
-type MarginAccountCurrency struct {
-	// Currency name
-	Currency string `json:"currency,omitempty"`
-	// Amount suitable for margin trading.
+type CrossMarginBalance struct {
+	// Available amount
 	Available string `json:"available,omitempty"`
-	// Locked amount, used in margin trading
-	Locked string `json:"locked,omitempty"`
+	// Locked amount
+	Freeze string `json:"freeze,omitempty"`
 	// Borrowed amount
 	Borrowed string `json:"borrowed,omitempty"`
 	// Interests unpaid

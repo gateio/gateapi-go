@@ -15,4 +15,6 @@ type CancelOrder struct {
 	CurrencyPair string `json:"currency_pair"`
 	// Order ID or user custom ID. Custom ID are accepted only within 30 minutes after order creation
 	Id string `json:"id"`
+	// If cancelled order is cross margin order, this field must be set and can only be `cross_margin`
+	Account string `json:"account,omitempty"`
 }

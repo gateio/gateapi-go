@@ -63,7 +63,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -127,7 +127,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -205,7 +205,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -282,7 +282,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -361,7 +361,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -434,7 +434,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -507,7 +507,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -580,7 +580,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -655,7 +655,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -733,7 +733,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -796,7 +796,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -877,7 +877,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -946,7 +946,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -1016,7 +1016,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -1088,7 +1088,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -1139,7 +1139,7 @@ func main() {
 
 ## UpdatePositionLeverage
 
-> Position UpdatePositionLeverage(ctx, settle, contract, leverage)
+> Position UpdatePositionLeverage(ctx, settle, contract, leverage, optional)
 
 Update position leverage
 
@@ -1151,6 +1151,15 @@ Name | Type | Description  | Notes
 **settle** | **string**| Settle currency | 
 **contract** | **string**| Futures contract | 
 **leverage** | **string**| New position leverage | 
+**optional** | **UpdatePositionLeverageOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a UpdatePositionLeverageOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**crossLeverageLimit** | **optional.String**| Cross margin leverage(valid only when &#x60;leverage&#x60; is 0) | 
 
 ### Example
 
@@ -1161,7 +1170,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -1179,7 +1188,7 @@ func main() {
     contract := "BTC_USDT" // string - Futures contract
     leverage := "10" // string - New position leverage
     
-    result, _, err := client.FuturesApi.UpdatePositionLeverage(ctx, settle, contract, leverage)
+    result, _, err := client.FuturesApi.UpdatePositionLeverage(ctx, settle, contract, leverage, nil)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -1234,7 +1243,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -1308,7 +1317,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -1379,7 +1388,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -1429,7 +1438,7 @@ func main() {
 
 ## UpdateDualModePositionMargin
 
-> []Position UpdateDualModePositionMargin(ctx, settle, contract, change)
+> []Position UpdateDualModePositionMargin(ctx, settle, contract, change, dualSide)
 
 Update position margin in dual mode
 
@@ -1441,6 +1450,7 @@ Name | Type | Description  | Notes
 **settle** | **string**| Settle currency | 
 **contract** | **string**| Futures contract | 
 **change** | **string**| Margin change. Use positive number to increase margin, negative number otherwise. | 
+**dualSide** | **string**| Long or short position | 
 
 ### Example
 
@@ -1451,7 +1461,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -1468,8 +1478,9 @@ func main() {
     settle := "usdt" // string - Settle currency
     contract := "BTC_USDT" // string - Futures contract
     change := "0.01" // string - Margin change. Use positive number to increase margin, negative number otherwise.
+    dualSide := "dual_long" // string - Long or short position
     
-    result, _, err := client.FuturesApi.UpdateDualModePositionMargin(ctx, settle, contract, change)
+    result, _, err := client.FuturesApi.UpdateDualModePositionMargin(ctx, settle, contract, change, dualSide)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -1524,7 +1535,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -1597,7 +1608,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -1684,7 +1695,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -1758,7 +1769,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -1840,7 +1851,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -1913,7 +1924,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -1984,7 +1995,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -2068,7 +2079,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -2148,7 +2159,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -2228,7 +2239,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -2309,7 +2320,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -2380,7 +2391,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -2451,7 +2462,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -2522,7 +2533,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {
@@ -2593,7 +2604,7 @@ import (
     "context"
     "fmt"
 
-    "github.com/gateio/gateapi-go/v5"
+    "github.com/gateio/gateapi-go/v6"
 )
 
 func main() {

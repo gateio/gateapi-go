@@ -50,8 +50,10 @@ type Position struct {
 	// ADL ranking, range from 1 to 5
 	AdlRanking int32 `json:"adl_ranking,omitempty"`
 	// Current open orders
-	PendingOrders int32              `json:"pending_orders,omitempty"`
-	CloseOrder    PositionCloseOrder `json:"close_order,omitempty"`
+	PendingOrders int32               `json:"pending_orders,omitempty"`
+	CloseOrder    *PositionCloseOrder `json:"close_order,omitempty"`
 	// Position mode, including:  - `single`: dual mode is not enabled- `dual_long`: long position in dual mode- `dual_short`: short position in dual mode
 	Mode string `json:"mode,omitempty"`
+	// Cross margin leverage(valid only when `leverage` is 0)
+	CrossLeverageLimit string `json:"cross_leverage_limit,omitempty"`
 }

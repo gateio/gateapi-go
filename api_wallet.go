@@ -358,7 +358,7 @@ func (a *WalletApiService) ListDeposits(ctx context.Context, localVarOptionals *
 
 /*
 Transfer Transfer between trading accounts
-Transfer between different accounts. Currently support transfers between the following:  1. spot - margin 2. spot - futures(perpetual) 3. spot - delivery
+Transfer between different accounts. Currently support transfers between the following:  1. spot - margin 2. spot - futures(perpetual) 3. spot - delivery 4. spot - cross margin
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param transfer
 */

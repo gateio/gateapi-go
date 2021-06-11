@@ -9,16 +9,17 @@
 
 package gateapi
 
-// Account currency detail
-type MarginAccountCurrency struct {
+type CrossMarginRepayment struct {
+	// Loan record ID
+	Id string `json:"id,omitempty"`
+	// Repayment time
+	CreateTime int64 `json:"create_time,omitempty"`
+	// Borrow loan ID
+	LoanId string `json:"loan_id,omitempty"`
 	// Currency name
 	Currency string `json:"currency,omitempty"`
-	// Amount suitable for margin trading.
-	Available string `json:"available,omitempty"`
-	// Locked amount, used in margin trading
-	Locked string `json:"locked,omitempty"`
-	// Borrowed amount
-	Borrowed string `json:"borrowed,omitempty"`
-	// Interests unpaid
+	// Repaid principal
+	Principal string `json:"principal,omitempty"`
+	// Repaid interest
 	Interest string `json:"interest,omitempty"`
 }

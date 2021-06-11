@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Underlying** | **string** | Underlying | [optional] 
 **Cycle** | **string** | Cycle type, e.g. WEEKLY, QUARTERLY | [optional] 
 **Type** | **string** | Futures contract type | [optional] 
-**QuantoMultiplier** | **string** | Multiplier used in converting from invoicing to settlement currency in quanto futures | [optional] 
+**QuantoMultiplier** | **string** | Multiplier used in converting from invoicing to settlement currency | [optional] 
 **LeverageMin** | **string** | Minimum leverage | [optional] 
 **LeverageMax** | **string** | Maximum leverage | [optional] 
 **MaintenanceRate** | **string** | Maintenance rate of margin | [optional] 

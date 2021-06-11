@@ -1540,15 +1540,22 @@ func (a *FuturesApiService) UpdatePositionMargin(ctx context.Context, settle str
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+// UpdatePositionLeverageOpts Optional parameters for the method 'UpdatePositionLeverage'
+type UpdatePositionLeverageOpts struct {
+	CrossLeverageLimit optional.String
+}
+
 /*
 UpdatePositionLeverage Update position leverage
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
  * @param contract Futures contract
  * @param leverage New position leverage
+ * @param optional nil or *UpdatePositionLeverageOpts - Optional Parameters:
+ * @param "CrossLeverageLimit" (optional.String) -  Cross margin leverage(valid only when `leverage` is 0)
 @return Position
 */
-func (a *FuturesApiService) UpdatePositionLeverage(ctx context.Context, settle string, contract string, leverage string) (Position, *http.Response, error) {
+func (a *FuturesApiService) UpdatePositionLeverage(ctx context.Context, settle string, contract string, leverage string, localVarOptionals *UpdatePositionLeverageOpts) (Position, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1569,6 +1576,9 @@ func (a *FuturesApiService) UpdatePositionLeverage(ctx context.Context, settle s
 	localVarFormParams := url.Values{}
 
 	localVarQueryParams.Add("leverage", parameterToString(leverage, ""))
+	if localVarOptionals != nil && localVarOptionals.CrossLeverageLimit.IsSet() {
+		localVarQueryParams.Add("cross_leverage_limit", parameterToString(localVarOptionals.CrossLeverageLimit.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1930,9 +1940,10 @@ UpdateDualModePositionMargin Update position margin in dual mode
  * @param settle Settle currency
  * @param contract Futures contract
  * @param change Margin change. Use positive number to increase margin, negative number otherwise.
+ * @param dualSide Long or short position
 @return []Position
 */
-func (a *FuturesApiService) UpdateDualModePositionMargin(ctx context.Context, settle string, contract string, change string) ([]Position, *http.Response, error) {
+func (a *FuturesApiService) UpdateDualModePositionMargin(ctx context.Context, settle string, contract string, change string, dualSide string) ([]Position, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1953,6 +1964,7 @@ func (a *FuturesApiService) UpdateDualModePositionMargin(ctx context.Context, se
 	localVarFormParams := url.Values{}
 
 	localVarQueryParams.Add("change", parameterToString(change, ""))
+	localVarQueryParams.Add("dual_side", parameterToString(dualSide, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
