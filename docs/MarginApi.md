@@ -26,6 +26,7 @@ Method | HTTP request | Description
 [**ListCrossMarginCurrencies**](MarginApi.md#ListCrossMarginCurrencies) | **Get** /margin/cross/currencies | Currencies supported by cross margin.
 [**GetCrossMarginCurrency**](MarginApi.md#GetCrossMarginCurrency) | **Get** /margin/cross/currencies/{currency} | Retrieve detail of one single currency supported by cross margin
 [**GetCrossMarginAccount**](MarginApi.md#GetCrossMarginAccount) | **Get** /margin/cross/accounts | Retrieve cross margin account
+[**ListCrossMarginAccountBook**](MarginApi.md#ListCrossMarginAccountBook) | **Get** /margin/cross/account_book | Retrieve cross margin account change history
 [**ListCrossMarginLoans**](MarginApi.md#ListCrossMarginLoans) | **Get** /margin/cross/loans | List cross margin borrow history
 [**CreateCrossMarginLoan**](MarginApi.md#CreateCrossMarginLoan) | **Post** /margin/cross/loans | Create a cross margin borrow loan
 [**GetCrossMarginLoan**](MarginApi.md#GetCrossMarginLoan) | **Get** /margin/cross/loans/{loan_id} | Retrieve single borrow loan detail
@@ -299,7 +300,7 @@ func main() {
 
 List margin account balance change history
 
-Only transferring from or to margin account are provided for now. Time range allows 30 days at most
+Only transferals from and to margin account are provided for now. Time range allows 30 days at most
 
 ### Required Parameters
 
@@ -1562,6 +1563,89 @@ func main() {
 ### Return type
 
 [**CrossMarginAccount**](CrossMarginAccount.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## ListCrossMarginAccountBook
+
+> []CrossMarginAccountBook ListCrossMarginAccountBook(ctx, optional)
+
+Retrieve cross margin account change history
+
+Record time range cannot exceed 30 days
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**optional** | **ListCrossMarginAccountBookOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a ListCrossMarginAccountBookOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**currency** | **optional.String**| Filter by currency | 
+**from** | **optional.Int64**| Time range beginning, default to 7 days before current time | 
+**to** | **optional.Int64**| Time range ending, default to current time | 
+**page** | **optional.Int32**| Page number | [default to 1]
+**limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
+**type_** | **optional.String**| Filter by account change type. All types are returned if not specified. | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    
+    result, _, err := client.MarginApi.ListCrossMarginAccountBook(ctx, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**[]CrossMarginAccountBook**](CrossMarginAccountBook.md)
 
 ### Authorization
 

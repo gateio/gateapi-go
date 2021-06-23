@@ -12,6 +12,10 @@ package gateapi
 type FuturesOrderBook struct {
 	// Order Book ID. Increase by 1 on every order book change. Set `with_id=true` to include this field in response
 	Id int64 `json:"id,omitempty"`
+	// Response data generation timestamp
+	Current float64 `json:"current,omitempty"`
+	// Order book changed timestamp
+	Update float64 `json:"update,omitempty"`
 	// Asks order depth
 	Asks []FuturesOrderBookItem `json:"asks"`
 	// Bids order depth

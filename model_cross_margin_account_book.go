@@ -9,19 +9,17 @@
 
 package gateapi
 
-type MarginAccountBook struct {
+type CrossMarginAccountBook struct {
 	// Balance change record ID
 	Id string `json:"id,omitempty"`
-	// Balance changed timestamp
-	Time string `json:"time,omitempty"`
 	// Account changed timestamp in milliseconds
-	TimeMs int64 `json:"time_ms,omitempty"`
+	Time int64 `json:"time,omitempty"`
 	// Currency changed
 	Currency string `json:"currency,omitempty"`
-	// Account currency pair
-	CurrencyPair string `json:"currency_pair,omitempty"`
 	// Amount changed. Positive value means transferring in, while negative out
 	Change string `json:"change,omitempty"`
 	// Balance after change
 	Balance string `json:"balance,omitempty"`
+	// Account change type, including:  - in: transferals into cross margin account - out: transferals out from cross margin account - repay: loan repayment - borrow: borrowed loan - new_order: new order locked - order_fill: order fills - referral_fee: fee refund from referrals - order_fee: order fee generated from fills - unknown: unknown type
+	Type string `json:"type,omitempty"`
 }
