@@ -30,4 +30,6 @@ type WithdrawStatus struct {
 	WithdrawDayLimitRemain string `json:"withdraw_day_limit_remain,omitempty"`
 	// Maximum amount for each withdrawal
 	WithdrawEachtimeLimit string `json:"withdraw_eachtime_limit,omitempty"`
+	// Fixed withdrawal fee on multiple chains
+	WithdrawFixOnChains map[string]string `json:"withdraw_fix_on_chains,omitempty"`
 }

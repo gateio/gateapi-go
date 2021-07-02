@@ -2873,6 +2873,8 @@ type ListPositionCloseOpts struct {
 	Contract optional.String
 	Limit    optional.Int32
 	Offset   optional.Int32
+	From     optional.Int64
+	To       optional.Int64
 }
 
 /*
@@ -2883,6 +2885,8 @@ ListPositionClose List position close history
  * @param "Contract" (optional.String) -  Futures contract, return related data only if specified
  * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
  * @param "Offset" (optional.Int32) -  List offset, starting from 0
+ * @param "From" (optional.Int64) -  Start timestamp
+ * @param "To" (optional.Int64) -  End timestamp
 @return []PositionClose
 */
 func (a *FuturesApiService) ListPositionClose(ctx context.Context, settle string, localVarOptionals *ListPositionCloseOpts) ([]PositionClose, *http.Response, error) {
@@ -2911,6 +2915,12 @@ func (a *FuturesApiService) ListPositionClose(ctx context.Context, settle string
 	}
 	if localVarOptionals != nil && localVarOptionals.Offset.IsSet() {
 		localVarQueryParams.Add("offset", parameterToString(localVarOptionals.Offset.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.From.IsSet() {
+		localVarQueryParams.Add("from", parameterToString(localVarOptionals.From.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.To.IsSet() {
+		localVarQueryParams.Add("to", parameterToString(localVarOptionals.To.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

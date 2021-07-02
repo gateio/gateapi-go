@@ -2149,6 +2149,8 @@ Name | Type | Description  | Notes
 **contract** | **optional.String**| Futures contract, return related data only if specified | 
 **limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
+**from** | **optional.Int64**| Start timestamp | 
+**to** | **optional.Int64**| End timestamp | 
 
 ### Example
 

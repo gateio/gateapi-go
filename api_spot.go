@@ -1193,7 +1193,7 @@ type ListOrdersOpts struct {
 ListOrders List orders
 Spot and margin orders are returned by default. If cross margin orders are needed, &#x60;account&#x60; must be set to &#x60;cross_margin&#x60;
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param currencyPair Currency pair
+ * @param currencyPair Retrieve results with specified currency pair. It is required for open orders, but optional for finished ones.
  * @param status List orders based on status  `open` - order is waiting to be filled `finished` - order has been filled or cancelled
  * @param optional nil or *ListOrdersOpts - Optional Parameters:
  * @param "Page" (optional.Int32) -  Page number
@@ -1811,11 +1811,11 @@ type ListMyTradesOpts struct {
 ListMyTrades List personal trading history
 Spot and margin trades are queried by default. If cross margin trades are needed, &#x60;account&#x60; must be set to &#x60;cross_margin&#x60;
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param currencyPair Currency pair
+ * @param currencyPair Retrieve results with specified currency pair. It is required for open orders, but optional for finished ones.
  * @param optional nil or *ListMyTradesOpts - Optional Parameters:
  * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
  * @param "Page" (optional.Int32) -  Page number
- * @param "OrderId" (optional.String) -  List all trades of specified order
+ * @param "OrderId" (optional.String) -  Filter trades with specified order ID. `currency_pair` is also required if this field is present
  * @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account
 @return []Trade
 */

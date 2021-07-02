@@ -23,6 +23,7 @@ Method | HTTP request | Description
 [**UpdateLoanRecord**](MarginApi.md#UpdateLoanRecord) | **Patch** /margin/loan_records/{loan_record_id} | Modify a loan record
 [**GetAutoRepayStatus**](MarginApi.md#GetAutoRepayStatus) | **Get** /margin/auto_repay | Retrieve user auto repayment setting
 [**SetAutoRepay**](MarginApi.md#SetAutoRepay) | **Post** /margin/auto_repay | Update user&#39;s auto repayment setting
+[**GetMarginTransferable**](MarginApi.md#GetMarginTransferable) | **Get** /margin/transferable | Max transferable amount for specified margin currency
 [**ListCrossMarginCurrencies**](MarginApi.md#ListCrossMarginCurrencies) | **Get** /margin/cross/currencies | Currencies supported by cross margin.
 [**GetCrossMarginCurrency**](MarginApi.md#GetCrossMarginCurrency) | **Get** /margin/cross/currencies/{currency} | Retrieve detail of one single currency supported by cross margin
 [**GetCrossMarginAccount**](MarginApi.md#GetCrossMarginAccount) | **Get** /margin/cross/accounts | Retrieve cross margin account
@@ -32,6 +33,7 @@ Method | HTTP request | Description
 [**GetCrossMarginLoan**](MarginApi.md#GetCrossMarginLoan) | **Get** /margin/cross/loans/{loan_id} | Retrieve single borrow loan detail
 [**ListCrossMarginRepayments**](MarginApi.md#ListCrossMarginRepayments) | **Get** /margin/cross/repayments | Retrieve cross margin repayments
 [**RepayCrossMarginLoan**](MarginApi.md#RepayCrossMarginLoan) | **Post** /margin/cross/repayments | Repay cross margin loan
+[**GetCrossMarginTransferable**](MarginApi.md#GetCrossMarginTransferable) | **Get** /margin/cross/transferable | Max transferable amount for specified cross margin currency
 
 
 ## ListMarginCurrencyPairs
@@ -1392,6 +1394,84 @@ func main() {
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
+## GetMarginTransferable
+
+> MarginTransferable GetMarginTransferable(ctx, currency, optional)
+
+Max transferable amount for specified margin currency
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**currency** | **string**| Retrieved specified currency related data | 
+**optional** | **GetMarginTransferableOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a GetMarginTransferableOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**currencyPair** | **optional.String**| Currency pair | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    currency := "BTC" // string - Retrieved specified currency related data
+    
+    result, _, err := client.MarginApi.GetMarginTransferable(ctx, currency, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**MarginTransferable**](MarginTransferable.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
 ## ListCrossMarginCurrencies
 
 > []CrossMarginCurrency ListCrossMarginCurrencies(ctx, )
@@ -2028,6 +2108,75 @@ func main() {
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## GetCrossMarginTransferable
+
+> CrossMarginTransferable GetCrossMarginTransferable(ctx, currency)
+
+Max transferable amount for specified cross margin currency
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**currency** | **string**| Retrieved specified currency related data | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    currency := "BTC" // string - Retrieved specified currency related data
+    
+    result, _, err := client.MarginApi.GetCrossMarginTransferable(ctx, currency)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**CrossMarginTransferable**](CrossMarginTransferable.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

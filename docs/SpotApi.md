@@ -889,7 +889,7 @@ Spot and margin orders are returned by default. If cross margin orders are neede
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**currencyPair** | **string**| Currency pair | 
+**currencyPair** | **string**| Retrieve results with specified currency pair. It is required for open orders, but optional for finished ones. | 
 **status** | **string**| List orders based on status  &#x60;open&#x60; - order is waiting to be filled &#x60;finished&#x60; - order has been filled or cancelled  | 
 **optional** | **ListOrdersOpts** | optional parameters | nil if no parameters
 
@@ -926,7 +926,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    currencyPair := "BTC_USDT" // string - Currency pair
+    currencyPair := "BTC_USDT" // string - Retrieve results with specified currency pair. It is required for open orders, but optional for finished ones.
     status := "open" // string - List orders based on status  `open` - order is waiting to be filled `finished` - order has been filled or cancelled 
     
     result, _, err := client.SpotApi.ListOrders(ctx, currencyPair, status, nil)
@@ -1360,7 +1360,7 @@ Spot and margin trades are queried by default. If cross margin trades are needed
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**currencyPair** | **string**| Currency pair | 
+**currencyPair** | **string**| Retrieve results with specified currency pair. It is required for open orders, but optional for finished ones. | 
 **optional** | **ListMyTradesOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -1371,7 +1371,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
 **page** | **optional.Int32**| Page number | [default to 1]
-**orderId** | **optional.String**| List all trades of specified order | 
+**orderId** | **optional.String**| Filter trades with specified order ID. &#x60;currency_pair&#x60; is also required if this field is present | 
 **account** | **optional.String**| Specify operation account. Default to spot and margin account if not specified. Set to &#x60;cross_margin&#x60; to operate against margin account | 
 
 ### Example
@@ -1397,7 +1397,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    currencyPair := "BTC_USDT" // string - Currency pair
+    currencyPair := "BTC_USDT" // string - Retrieve results with specified currency pair. It is required for open orders, but optional for finished ones.
     
     result, _, err := client.SpotApi.ListMyTrades(ctx, currencyPair, nil)
     if err != nil {

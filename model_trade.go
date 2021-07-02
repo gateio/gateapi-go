@@ -16,6 +16,8 @@ type Trade struct {
 	CreateTime string `json:"create_time,omitempty"`
 	// Trading time, with millisecond precision
 	CreateTimeMs string `json:"create_time_ms,omitempty"`
+	// Currency pair
+	CurrencyPair string `json:"currency_pair,omitempty"`
 	// Order side
 	Side string `json:"side,omitempty"`
 	// Trade role
