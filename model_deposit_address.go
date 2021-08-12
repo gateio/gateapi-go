@@ -13,6 +13,6 @@ type DepositAddress struct {
 	// Currency detail
 	Currency string `json:"currency"`
 	// Deposit address
-	Address           string                  `json:"address"`
-	MultichainAddress []MultiChainAddressItem `json:"multichain_address,omitempty"`
+	Address             string                  `json:"address"`
+	MultichainAddresses []MultiChainAddressItem `json:"multichain_addresses,omitempty"`
 }
