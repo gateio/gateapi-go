@@ -42,6 +42,6 @@ type FuturesTicker struct {
 	FundingRateIndicative string `json:"funding_rate_indicative,omitempty"`
 	// Index price
 	IndexPrice string `json:"index_price,omitempty"`
-	// Exchange rate of base currency and settlement currency in Quanto contract. Not existed in contract of other types
+	// Exchange rate of base currency and settlement currency in Quanto contract. Does not exists in contracts of other types
 	QuantoBaseRate string `json:"quanto_base_rate,omitempty"`
 }

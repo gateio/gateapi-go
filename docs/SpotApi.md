@@ -4,10 +4,10 @@ All URIs are relative to *https://api.gateio.ws/api/v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ListCurrencies**](SpotApi.md#ListCurrencies) | **Get** /spot/currencies | List all currencies&#39; detail
-[**GetCurrency**](SpotApi.md#GetCurrency) | **Get** /spot/currencies/{currency} | Get detail of one particular currency
+[**ListCurrencies**](SpotApi.md#ListCurrencies) | **Get** /spot/currencies | List all currencies&#39; details
+[**GetCurrency**](SpotApi.md#GetCurrency) | **Get** /spot/currencies/{currency} | Get details of a specific currency
 [**ListCurrencyPairs**](SpotApi.md#ListCurrencyPairs) | **Get** /spot/currency_pairs | List all currency pairs supported
-[**GetCurrencyPair**](SpotApi.md#GetCurrencyPair) | **Get** /spot/currency_pairs/{currency_pair} | Get detail of one single order
+[**GetCurrencyPair**](SpotApi.md#GetCurrencyPair) | **Get** /spot/currency_pairs/{currency_pair} | Get details of a specifc order
 [**ListTickers**](SpotApi.md#ListTickers) | **Get** /spot/tickers | Retrieve ticker information
 [**ListOrderBook**](SpotApi.md#ListOrderBook) | **Get** /spot/order_book | Retrieve order book
 [**ListTrades**](SpotApi.md#ListTrades) | **Get** /spot/trades | Retrieve market trades
@@ -34,7 +34,7 @@ Method | HTTP request | Description
 
 > []Currency ListCurrencies(ctx, )
 
-List all currencies' detail
+List all currencies' details
 
 ### Required Parameters
 
@@ -92,7 +92,7 @@ No authorization required
 
 > Currency GetCurrency(ctx, currency)
 
-Get detail of one particular currency
+Get details of a specific currency
 
 ### Required Parameters
 
@@ -213,7 +213,7 @@ No authorization required
 
 > CurrencyPair GetCurrencyPair(ctx, currencyPair)
 
-Get detail of one single order
+Get details of a specifc order
 
 ### Required Parameters
 
@@ -350,7 +350,7 @@ No authorization required
 
 Retrieve order book
 
-Order book will be sorted by price from high to low on bids; reversed on asks
+Order book will be sorted by price from high to low on bids; low to high on asks
 
 ### Required Parameters
 
@@ -440,9 +440,9 @@ Optional parameters are passed through a pointer to a ListTradesOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **lastId** | **optional.String**| Specify list staring point using the &#x60;id&#x60; of last record in previous list-query results | 
-**reverse** | **optional.Bool**| Whether to retrieve records whose IDs are smaller than &#x60;last_id&#x60;&#39;s. Default to larger ones.  When &#x60;last_id&#x60; is specified. Set &#x60;reverse&#x60; to &#x60;true&#x60; to trace back trading history; &#x60;false&#x60; to retrieve latest tradings.  No effect if &#x60;last_id&#x60; is not specified. | [default to false]
+**reverse** | **optional.Bool**| Whether the id of records to be retrieved should be smaller than the last_id specified- true: Retrieve records where id is smaller than the specified last_id- false: Retrieve records where id is larger than the specified last_idDefault to false.  When &#x60;last_id&#x60; is specified. Set &#x60;reverse&#x60; to &#x60;true&#x60; to trace back trading history; &#x60;false&#x60; to retrieve latest tradings.  No effect if &#x60;last_id&#x60; is not specified. | [default to false]
 
 ### Example
 
@@ -500,7 +500,7 @@ No authorization required
 
 Market candlesticks
 
-Maximum of 1000 points are returned in one query. Be sure not to exceed the limit when specifying `from`, `to` and `interval`
+Maximum of 1000 points can be returned in a query. Be sure not to exceed the limit when specifying from, to and interval
 
 ### Required Parameters
 
@@ -516,7 +516,7 @@ Optional parameters are passed through a pointer to a ListCandlesticksOpts struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**limit** | **optional.Int32**| Maximum recent data points returned. &#x60;limit&#x60; is conflicted with &#x60;from&#x60; and &#x60;to&#x60;. If either &#x60;from&#x60; or &#x60;to&#x60; is specified, request will be rejected. | [default to 100]
+**limit** | **optional.Int32**| Maximum recent data points to return. &#x60;limit&#x60; is conflicted with &#x60;from&#x60; and &#x60;to&#x60;. If either &#x60;from&#x60; or &#x60;to&#x60; is specified, request will be rejected. | [default to 100]
 **from** | **optional.Int64**| Start time of candlesticks, formatted in Unix timestamp in seconds. Default to&#x60;to - 100 * interval&#x60; if not specified | 
 **to** | **optional.Int64**| End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time | 
 **interval** | **optional.String**| Interval time between data points | [default to 30m]
@@ -668,7 +668,7 @@ Optional parameters are passed through a pointer to a ListSpotAccountsOpts struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**currency** | **optional.String**| Retrieved specified currency related data | 
+**currency** | **optional.String**| Retrieve data of the specified currency | 
 
 ### Example
 
@@ -882,7 +882,7 @@ func main() {
 
 List orders
 
-Spot and margin orders are returned by default. If cross margin orders are needed, `account` must be set to `cross_margin`
+Spot and margin orders are returned by default. If cross margin orders are needed, `account` must be set to `cross_margin`  When `status` is `open`, i.e., listing open orders, only pagination parameters `page` and `limit` are supported and `limit` cannot be larger than 100. Query by `side` and time range parameters `from` and `to` are not supported.  When `status` is `finished`, i.e., listing finished orders, pagination parameters, time range parameters `from` and `to`, and `side` parameters are all supported.
 
 ### Required Parameters
 
@@ -900,8 +900,11 @@ Optional parameters are passed through a pointer to a ListOrdersOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **page** | **optional.Int32**| Page number | [default to 1]
-**limit** | **optional.Int32**| Maximum number of records returned. If &#x60;status&#x60; is &#x60;open&#x60;, maximum of &#x60;limit&#x60; is 100 | [default to 100]
+**limit** | **optional.Int32**| Maximum number of records to be returned. If &#x60;status&#x60; is &#x60;open&#x60;, maximum of &#x60;limit&#x60; is 100 | [default to 100]
 **account** | **optional.String**| Specify operation account. Default to spot and margin account if not specified. Set to &#x60;cross_margin&#x60; to operate against margin account | 
+**from** | **optional.Int64**| Time range beginning, default to 7 days before current time | 
+**to** | **optional.Int64**| Time range ending, default to current time | 
+**side** | **optional.String**| All bids or asks. Both included if not specified | 
 
 ### Example
 
@@ -966,7 +969,7 @@ func main() {
 
 Create an order
 
-You can place orders with spot, margin or cross margin account through setting the `account `field. It defaults to `spot`, which means spot account is used to place orders.  When margin account is used, i.e., `account` is `margin`, `auto_borrow` field can be set to `true` to enable the server to borrow the amount lacked using `POST /margin/loans` when your account's balance is not enough. Whether margin orders' fill will be used to repay margin loans automatically is determined by the auto repayment setting in your **margin account**, which can be updated or queried using `/margin/auto_repay` API.  When cross margin account is used, i.e., `account` is `cross_margin`, `auto_borrow` can also be enabled to achieve borrowing the insufficient amount automatically if cross account's balance is not enough. But it differs from margin account that automatic repayment is determined by order's `auto_repay` field and only current order's fill will be used to repay cross margin loans.  Automatic repayment will be triggered when the order is finished, i.e., its status is either `cancelled` or `closed`.  **Order status**  An order waiting to be filled is `open`, and it stays `open` until it is filled totally. If fully filled, order is finished and its status turns to `closed`.If the order is cancelled before it is totally filled, whether or not partially filled, its status is `cancelled`. **Iceberg order**  `iceberg` field can be used to set the amount shown. Set to `-1` to hide totally. Note that the hidden part's fee will be charged using taker's fee rate. 
+You can place orders with spot, margin or cross margin account through setting the `account `field. It defaults to `spot`, which means spot account is used to place orders.  When margin account is used, i.e., `account` is `margin`, `auto_borrow` field can be set to `true` to enable the server to borrow the amount lacked using `POST /margin/loans` when your account's balance is not enough. Whether margin orders' fill will be used to repay margin loans automatically is determined by the auto repayment setting in your **margin account**, which can be updated or queried using `/margin/auto_repay` API.  When cross margin account is used, i.e., `account` is `cross_margin`, `auto_borrow` can also be enabled to achieve borrowing the insufficient amount automatically if cross account's balance is not enough. But it differs from margin account that automatic repayment is determined by order's `auto_repay` field and only current order's fill will be used to repay cross margin loans.  Automatic repayment will be triggered when the order is finished, i.e., its status is either `cancelled` or `closed`.  **Order status**  An order waiting to be filled is `open`, and it stays `open` until it is filled totally. If fully filled, order is finished and its status turns to `closed`.If the order is cancelled before it is totally filled, whether or not partially filled, its status is `cancelled`. **Iceberg order**  `iceberg` field can be used to set the amount shown. Set to `-1` to hide the order completely. Note that the hidden part's fee will be charged using taker's fee rate. 
 
 ### Required Parameters
 
@@ -1053,7 +1056,7 @@ Optional parameters are passed through a pointer to a CancelOrdersOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**side** | **optional.String**| All bids or asks. Both included in not specified | 
+**side** | **optional.String**| All bids or asks. Both included if not specified | 
 **account** | **optional.String**| Specify account type. Default to all account types being included | 
 
 ### Example
@@ -1353,7 +1356,7 @@ func main() {
 
 List personal trading history
 
-Spot and margin trades are queried by default. If cross margin trades are needed, `account` must be set to `cross_margin`
+Spot and margin trades are queried by default. If cross margin trades are needed, `account` must be set to `cross_margin`  You can also set `from` and(or) `to` to query by time range
 
 ### Required Parameters
 
@@ -1369,10 +1372,12 @@ Optional parameters are passed through a pointer to a ListMyTradesOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **page** | **optional.Int32**| Page number | [default to 1]
 **orderId** | **optional.String**| Filter trades with specified order ID. &#x60;currency_pair&#x60; is also required if this field is present | 
 **account** | **optional.String**| Specify operation account. Default to spot and margin account if not specified. Set to &#x60;cross_margin&#x60; to operate against margin account | 
+**from** | **optional.Int64**| Time range beginning, default to 7 days before current time | 
+**to** | **optional.Int64**| Time range ending, default to current time | 
 
 ### Example
 
@@ -1441,7 +1446,7 @@ Retrieve running auto order list
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**status** | **string**| List orders based on status | 
+**status** | **string**| Only list the orders with this status | 
 **optional** | **ListSpotPriceTriggeredOrdersOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -1452,7 +1457,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **market** | **optional.String**| Currency pair | 
 **account** | **optional.String**| Trading account | 
-**limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
 
 ### Example
@@ -1478,7 +1483,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    status := "status_example" // string - List orders based on status
+    status := "status_example" // string - Only list the orders with this status
     
     result, _, err := client.SpotApi.ListSpotPriceTriggeredOrders(ctx, status, nil)
     if err != nil {
@@ -1668,7 +1673,7 @@ Get a single order
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orderId** | **string**| ID returned on order successfully being created | 
+**orderId** | **string**| Retrieve the data of the order with the specified ID | 
 
 ### Example
 
@@ -1693,7 +1698,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    orderId := "orderId_example" // string - ID returned on order successfully being created
+    orderId := "orderId_example" // string - Retrieve the data of the order with the specified ID
     
     result, _, err := client.SpotApi.GetSpotPriceTriggeredOrder(ctx, orderId)
     if err != nil {
@@ -1737,7 +1742,7 @@ Cancel a single order
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orderId** | **string**| ID returned on order successfully being created | 
+**orderId** | **string**| Retrieve the data of the order with the specified ID | 
 
 ### Example
 
@@ -1762,7 +1767,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    orderId := "orderId_example" // string - ID returned on order successfully being created
+    orderId := "orderId_example" // string - Retrieve the data of the order with the specified ID
     
     result, _, err := client.SpotApi.CancelSpotPriceTriggeredOrder(ctx, orderId)
     if err != nil {

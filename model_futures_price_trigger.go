@@ -10,7 +10,7 @@
 package gateapi
 
 type FuturesPriceTrigger struct {
-	// How the order will be triggered   - `0`: by price, which means order will be triggered on price condition satisfied  - `1`: by price gap, which means order will be triggered on gap of recent two prices of specified `price_type` satisfied.  Only `0` is supported currently
+	// How the order will be triggered   - `0`: by price, which means the order will be triggered if price condition is satisfied  - `1`: by price gap, which means the order will be triggered if gap of recent two prices of specified `price_type` are satisfied.  Only `0` is supported currently
 	StrategyType int32 `json:"strategy_type,omitempty"`
 	// Price type. 0 - latest deal price, 1 - mark price, 2 - index price
 	PriceType int32 `json:"price_type,omitempty"`
@@ -18,6 +18,6 @@ type FuturesPriceTrigger struct {
 	Price string `json:"price,omitempty"`
 	// Trigger condition type  - `1`: calculated price based on `strategy_type` and `price_type` >= `price` - `2`: calculated price based on `strategy_type` and `price_type` <= `price`
 	Rule int32 `json:"rule,omitempty"`
-	// How many seconds will the order wait for the condition being triggered. Order will be cancelled on timed out
+	// How long (in seconds) to wait for the condition to be triggered before cancelling the order.
 	Expiration int32 `json:"expiration,omitempty"`
 }

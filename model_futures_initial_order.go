@@ -22,7 +22,7 @@ type FuturesInitialOrder struct {
 	Tif string `json:"tif,omitempty"`
 	// How the order is created. Possible values are: web, api and app
 	Text string `json:"text,omitempty"`
-	// Set to true to create an reduce-only order
+	// Set to true to create a reduce-only order
 	ReduceOnly bool `json:"reduce_only,omitempty"`
 	// Is the order reduce-only
 	IsReduceOnly bool `json:"is_reduce_only,omitempty"`

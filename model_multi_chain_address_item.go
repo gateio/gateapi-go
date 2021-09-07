@@ -18,6 +18,6 @@ type MultiChainAddressItem struct {
 	PaymentId string `json:"payment_id,omitempty"`
 	// Note type, `Tag` or `Memo`
 	PaymentName string `json:"payment_name,omitempty"`
-	// Whether address is obtained. 0 means success. 1 is failure, which needs retries
+	// The obtain failed status- 0: address successfully obtained- 1: failed to obtain address
 	ObtainFailed int32 `json:"obtain_failed,omitempty"`
 }

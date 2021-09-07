@@ -16,7 +16,7 @@ type LoanPatch struct {
 	Side string `json:"side"`
 	// Auto renew
 	AutoRenew bool `json:"auto_renew"`
-	// Currency pair. Required for borrowing side
+	// Currency pair. Required if borrowing
 	CurrencyPair string `json:"currency_pair,omitempty"`
 	// Loan ID. Required for `LoanRecord` patching
 	LoanId string `json:"loan_id,omitempty"`

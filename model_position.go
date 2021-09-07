@@ -47,7 +47,7 @@ type Position struct {
 	RealisedPoint string `json:"realised_point,omitempty"`
 	// History realized POINT PNL
 	HistoryPoint string `json:"history_point,omitempty"`
-	// ADL ranking, range from 1 to 5
+	// ADL ranking, ranging from 1 to 5
 	AdlRanking int32 `json:"adl_ranking,omitempty"`
 	// Current open orders
 	PendingOrders int32               `json:"pending_orders,omitempty"`

@@ -28,6 +28,6 @@ type CrossMarginLoan struct {
 	Repaid string `json:"repaid,omitempty"`
 	// Repaid interest
 	RepaidInterest string `json:"repaid_interest,omitempty"`
-	// Interest not repaid
+	// Outstanding interest yet to be paid
 	UnpaidInterest string `json:"unpaid_interest,omitempty"`
 }

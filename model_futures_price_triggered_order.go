@@ -27,6 +27,6 @@ type FuturesPriceTriggeredOrder struct {
 	Status string `json:"status,omitempty"`
 	// How order is finished
 	FinishAs string `json:"finish_as,omitempty"`
-	// Extra messages of how order is finished
+	// Additional remarks on how the order was finished
 	Reason string `json:"reason,omitempty"`
 }

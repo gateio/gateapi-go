@@ -15,11 +15,11 @@ type FuturesOrder struct {
 	Id int64 `json:"id,omitempty"`
 	// User ID
 	User int32 `json:"user,omitempty"`
-	// Order creation time
+	// Creation time of order
 	CreateTime float64 `json:"create_time,omitempty"`
 	// Order finished time. Not returned if order is open
 	FinishTime float64 `json:"finish_time,omitempty"`
-	// How the order is finished.  - filled: all filled - cancelled: manually cancelled - liquidated: cancelled because of liquidation - ioc: time in force is `IOC`, finish immediately - auto_deleveraged: finished by ADL - reduce_only: cancelled because of increasing position while `reduce-only` set- position_closed: cancelled because of position close
+	// How the order was finished.  - filled: all filled - cancelled: manually cancelled - liquidated: cancelled because of liquidation - ioc: time in force is `IOC`, finish immediately - auto_deleveraged: finished by ADL - reduce_only: cancelled because of increasing position while `reduce-only` set- position_closed: cancelled because of position close
 	FinishAs string `json:"finish_as,omitempty"`
 	// Order status  - `open`: waiting to be traded - `finished`: finished
 	Status string `json:"status,omitempty"`
@@ -27,7 +27,7 @@ type FuturesOrder struct {
 	Contract string `json:"contract"`
 	// Order size. Specify positive number to make a bid, and negative number to ask
 	Size int64 `json:"size"`
-	// Display size for iceberg order. 0 for non-iceberg. Note that you would pay the taker fee for the hidden size
+	// Display size for iceberg order. 0 for non-iceberg. Note that you will have to pay the taker fee for the hidden size
 	Iceberg int64 `json:"iceberg,omitempty"`
 	// Order price. 0 for market order with `tif` set as `ioc`
 	Price string `json:"price,omitempty"`

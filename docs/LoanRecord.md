@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **AutoRenew** | **bool** | Whether the record will auto renew on expiration | [optional] [default to false]
 **Repaid** | **string** | Repaid amount | [optional] 
 **PaidInterest** | **string** | Repaid interest | [optional] [readonly] 
-**UnpaidInterest** | **string** | Interest not repaid | [optional] [readonly] 
+**UnpaidInterest** | **string** | Outstanding interest yet to be paid | [optional] [readonly] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

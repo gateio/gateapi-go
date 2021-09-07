@@ -14,7 +14,7 @@ type MarginAccountBook struct {
 	Id string `json:"id,omitempty"`
 	// Balance changed timestamp
 	Time string `json:"time,omitempty"`
-	// Account changed timestamp in milliseconds
+	// The timestamp of the change (in milliseconds)
 	TimeMs int64 `json:"time_ms,omitempty"`
 	// Currency changed
 	Currency string `json:"currency,omitempty"`

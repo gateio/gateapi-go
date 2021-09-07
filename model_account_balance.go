@@ -9,11 +9,10 @@
 
 package gateapi
 
-type FundingBookItem struct {
-	// Loan rate
-	Rate string `json:"rate,omitempty"`
-	// Borrowable amount
+// Total balances calculated with specified currency unit
+type AccountBalance struct {
+	// Account total balance amount
 	Amount string `json:"amount,omitempty"`
-	// The number of days till the loan repayment's dateline
-	Days int32 `json:"days,omitempty"`
+	// Currency
+	Currency string `json:"currency,omitempty"`
 }

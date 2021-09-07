@@ -12,7 +12,11 @@ package gateapi
 // Margin account detail. `base` refers to base currency, while `quotes to quote currency
 type MarginAccount struct {
 	// Currency pair
-	CurrencyPair string                `json:"currency_pair,omitempty"`
-	Base         MarginAccountCurrency `json:"base,omitempty"`
-	Quote        MarginAccountCurrency `json:"quote,omitempty"`
+	CurrencyPair string `json:"currency_pair,omitempty"`
+	// Whether account is locked
+	Locked bool `json:"locked,omitempty"`
+	// Current risk rate of margin account
+	Risk  string                `json:"risk,omitempty"`
+	Base  MarginAccountCurrency `json:"base,omitempty"`
+	Quote MarginAccountCurrency `json:"quote,omitempty"`
 }

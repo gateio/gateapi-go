@@ -187,7 +187,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **interval** | **optional.String**| Order depth. 0 means no aggregation is applied. default to 0 | [default to 0]
 **limit** | **optional.Int32**| Maximum number of order depth data in asks or bids | [default to 10]
-**withId** | **optional.Bool**| Whether order book update ID would be returned. This ID increments by 1 on every order book update | [default to false]
+**withId** | **optional.Bool**| Whether the order book update ID will be returned. This ID increases by 1 on every order book update | [default to false]
 
 ### Example
 
@@ -261,8 +261,8 @@ Optional parameters are passed through a pointer to a ListDeliveryTradesOpts str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
-**lastId** | **optional.String**| Specify list staring point using the id of last record in previous list-query results  This parameter is deprecated. Use &#x60;from&#x60; and &#x60;to&#x60; instead to limit time range | 
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
+**lastId** | **optional.String**| Specify the starting point for this list based on a previously retrieved id  This parameter is deprecated. Use &#x60;from&#x60; and &#x60;to&#x60; instead to limit time range | 
 **from** | **optional.Int64**| Specify starting time in Unix seconds. If not specified, &#x60;to&#x60; and &#x60;limit&#x60; will be used to limit response items. If items between &#x60;from&#x60; and &#x60;to&#x60; are more than &#x60;limit&#x60;, only &#x60;limit&#x60; number will be returned.  | 
 **to** | **optional.Int64**| Specify end time in Unix seconds, default to current time | 
 
@@ -342,7 +342,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **from** | **optional.Int64**| Start time of candlesticks, formatted in Unix timestamp in seconds. Default to&#x60;to - 100 * interval&#x60; if not specified | 
 **to** | **optional.Int64**| End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time | 
-**limit** | **optional.Int32**| Maximum recent data points returned. &#x60;limit&#x60; is conflicted with &#x60;from&#x60; and &#x60;to&#x60;. If either &#x60;from&#x60; or &#x60;to&#x60; is specified, request will be rejected. | [default to 100]
+**limit** | **optional.Int32**| Maximum recent data points to return. &#x60;limit&#x60; is conflicted with &#x60;from&#x60; and &#x60;to&#x60;. If either &#x60;from&#x60; or &#x60;to&#x60; is specified, request will be rejected. | [default to 100]
 **interval** | **optional.String**| Interval time between data points | [default to 5m]
 
 ### Example
@@ -488,7 +488,7 @@ Optional parameters are passed through a pointer to a ListDeliveryInsuranceLedge
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 
 ### Example
 
@@ -629,7 +629,7 @@ Optional parameters are passed through a pointer to a ListDeliveryAccountBookOpt
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **from** | **optional.Int64**| Start timestamp | 
 **to** | **optional.Int64**| End timestamp | 
 **type_** | **optional.String**| Changing Type: - dnw: Deposit &amp; Withdraw - pnl: Profit &amp; Loss by reducing position - fee: Trading fee - refr: Referrer rebate - fund: Funding - point_dnw: POINT Deposit &amp; Withdraw - point_fee: POINT Trading fee - point_refr: POINT Referrer rebate | 
@@ -1055,7 +1055,7 @@ func main() {
 
 List futures orders
 
-Zero-fill order cannot be retrieved 60 seconds after cancellation
+Zero-fill order cannot be retrieved for 60 seconds after cancellation
 
 ### Required Parameters
 
@@ -1063,7 +1063,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
-**status** | **string**| List orders based on status | 
+**status** | **string**| Only list the orders with this status | 
 **optional** | **ListDeliveryOrdersOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -1073,7 +1073,7 @@ Optional parameters are passed through a pointer to a ListDeliveryOrdersOpts str
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **contract** | **optional.String**| Futures contract | 
-**limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
 **lastId** | **optional.String**| Specify list staring point using the &#x60;id&#x60; of last record in previous list-query results | 
 **countTotal** | **optional.Int32**| Whether to return total number matched. Default to 0(no return) | [default to 0]
@@ -1102,7 +1102,7 @@ func main() {
                              }
                             )
     settle := "usdt" // string - Settle currency
-    status := "open" // string - List orders based on status
+    status := "open" // string - Only list the orders with this status
     
     result, _, err := client.DeliveryApi.ListDeliveryOrders(ctx, settle, status, nil)
     if err != nil {
@@ -1141,7 +1141,7 @@ func main() {
 
 Create a futures order
 
-Zero-fill order cannot be retrieved 60 seconds after cancellation
+Zero-fill order cannot be retrieved for 60 seconds after cancellation
 
 ### Required Parameters
 
@@ -1214,7 +1214,7 @@ func main() {
 
 Cancel all `open` orders matched
 
-Zero-fill order cannot be retrieved 60 seconds after cancellation
+Zero-fill order cannot be retrieved for 60 seconds after cancellation
 
 ### Required Parameters
 
@@ -1231,7 +1231,7 @@ Optional parameters are passed through a pointer to a CancelDeliveryOrdersOpts s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**side** | **optional.String**| All bids or asks. Both included in not specified | 
+**side** | **optional.String**| All bids or asks. Both included if not specified | 
 
 ### Example
 
@@ -1296,7 +1296,7 @@ func main() {
 
 Get a single order
 
-Zero-fill order cannot be retrieved 60 seconds after cancellation
+Zero-fill order cannot be retrieved for 60 seconds after cancellation
 
 ### Required Parameters
 
@@ -1304,7 +1304,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
-**orderId** | **string**| ID returned on order successfully being created | 
+**orderId** | **string**| Retrieve the data of the order with the specified ID | 
 
 ### Example
 
@@ -1330,7 +1330,7 @@ func main() {
                              }
                             )
     settle := "usdt" // string - Settle currency
-    orderId := "12345" // string - ID returned on order successfully being created
+    orderId := "12345" // string - Retrieve the data of the order with the specified ID
     
     result, _, err := client.DeliveryApi.GetDeliveryOrder(ctx, settle, orderId)
     if err != nil {
@@ -1375,7 +1375,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
-**orderId** | **string**| ID returned on order successfully being created | 
+**orderId** | **string**| Retrieve the data of the order with the specified ID | 
 
 ### Example
 
@@ -1401,7 +1401,7 @@ func main() {
                              }
                             )
     settle := "usdt" // string - Settle currency
-    orderId := "12345" // string - ID returned on order successfully being created
+    orderId := "12345" // string - Retrieve the data of the order with the specified ID
     
     result, _, err := client.DeliveryApi.CancelDeliveryOrder(ctx, settle, orderId)
     if err != nil {
@@ -1456,7 +1456,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **contract** | **optional.String**| Futures contract | 
 **order** | **optional.Int64**| Futures order ID, return related data only if specified | 
-**limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
 **lastId** | **optional.String**| Specify list staring point using the &#x60;id&#x60; of last record in previous list-query results | 
 **countTotal** | **optional.Int32**| Whether to return total number matched. Default to 0(no return) | [default to 0]
@@ -1538,7 +1538,7 @@ Optional parameters are passed through a pointer to a ListDeliveryPositionCloseO
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **contract** | **optional.String**| Futures contract | 
-**limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 
 ### Example
 
@@ -1617,7 +1617,7 @@ Optional parameters are passed through a pointer to a ListDeliveryLiquidatesOpts
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **contract** | **optional.String**| Futures contract | 
-**limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **at** | **optional.Int32**| Specify a liquidation timestamp | [default to 0]
 
 ### Example
@@ -1697,7 +1697,7 @@ Optional parameters are passed through a pointer to a ListDeliverySettlementsOpt
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **contract** | **optional.String**| Futures contract | 
-**limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **at** | **optional.Int32**| Specify a settlement timestamp | [default to 0]
 
 ### Example
@@ -1768,7 +1768,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
-**status** | **string**| List orders based on status | 
+**status** | **string**| Only list the orders with this status | 
 **optional** | **ListPriceTriggeredDeliveryOrdersOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -1778,7 +1778,7 @@ Optional parameters are passed through a pointer to a ListPriceTriggeredDelivery
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **contract** | **optional.String**| Futures contract, return related data only if specified | 
-**limit** | **optional.Int32**| Maximum number of records returned in one list | [default to 100]
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
 
 ### Example
@@ -1805,7 +1805,7 @@ func main() {
                              }
                             )
     settle := "usdt" // string - Settle currency
-    status := "status_example" // string - List orders based on status
+    status := "status_example" // string - Only list the orders with this status
     
     result, _, err := client.DeliveryApi.ListPriceTriggeredDeliveryOrders(ctx, settle, status, nil)
     if err != nil {
@@ -1992,7 +1992,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
-**orderId** | **string**| ID returned on order successfully being created | 
+**orderId** | **string**| Retrieve the data of the order with the specified ID | 
 
 ### Example
 
@@ -2018,7 +2018,7 @@ func main() {
                              }
                             )
     settle := "usdt" // string - Settle currency
-    orderId := "orderId_example" // string - ID returned on order successfully being created
+    orderId := "orderId_example" // string - Retrieve the data of the order with the specified ID
     
     result, _, err := client.DeliveryApi.GetPriceTriggeredDeliveryOrder(ctx, settle, orderId)
     if err != nil {
@@ -2063,7 +2063,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
-**orderId** | **string**| ID returned on order successfully being created | 
+**orderId** | **string**| Retrieve the data of the order with the specified ID | 
 
 ### Example
 
@@ -2089,7 +2089,7 @@ func main() {
                              }
                             )
     settle := "usdt" // string - Settle currency
-    orderId := "orderId_example" // string - ID returned on order successfully being created
+    orderId := "orderId_example" // string - Retrieve the data of the order with the specified ID
     
     result, _, err := client.DeliveryApi.CancelPriceTriggeredDeliveryOrder(ctx, settle, orderId)
     if err != nil {

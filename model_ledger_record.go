@@ -22,9 +22,9 @@ type LedgerRecord struct {
 	Currency string `json:"currency"`
 	// Withdrawal address. Required for withdrawals
 	Address string `json:"address,omitempty"`
-	// Extra withdrawal memo
+	// Additional remarks with regards to the withdrawal
 	Memo string `json:"memo,omitempty"`
-	// Record status.  - DONE: done - CANCEL: cancelled - REQUEST: requesting - MANUAL: waiting for manual approval - BCODE: GateCode operation
+	// Record status.  - DONE: done - CANCEL: cancelled - REQUEST: requesting - MANUAL: pending manual approval - BCODE: GateCode operation
 	Status string `json:"status,omitempty"`
 	// Name of the chain used in withdrawals
 	Chain string `json:"chain,omitempty"`

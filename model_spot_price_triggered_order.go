@@ -27,6 +27,6 @@ type SpotPriceTriggeredOrder struct {
 	FiredOrderId int64 `json:"fired_order_id,omitempty"`
 	// Status  - open: open - cancelled: being manually cancelled - finish: successfully executed - failed: failed to execute - expired - expired
 	Status string `json:"status,omitempty"`
-	// Extra messages of how order is finished
+	// Additional remarks on how the order was finished
 	Reason string `json:"reason,omitempty"`
 }

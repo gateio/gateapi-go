@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **OrderId** | **string** | Related order ID. No value in public endpoints | [optional] 
 **Fee** | **string** | Fee deducted. No value in public endpoints | [optional] 
 **FeeCurrency** | **string** | Fee currency unit. No value in public endpoints | [optional] 
-**PointFee** | **string** | Point used to deduct fee | [optional] 
+**PointFee** | **string** | Points used to deduct fee | [optional] 
 **GtFee** | **string** | GT used to deduct fee | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

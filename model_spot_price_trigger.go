@@ -14,6 +14,6 @@ type SpotPriceTrigger struct {
 	Price string `json:"price"`
 	// Price trigger condition  - >=: triggered when market price larger than or equal to `price` field - <=: triggered when market price less than or equal to `price` field
 	Rule string `json:"rule"`
-	// How many seconds will the order wait for the condition being triggered. Order will be cancelled on timed out
+	// How long (in seconds) to wait for the condition to be triggered before cancelling the order.
 	Expiration int32 `json:"expiration"`
 }

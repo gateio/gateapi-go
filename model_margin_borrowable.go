@@ -9,11 +9,11 @@
 
 package gateapi
 
-type FundingBookItem struct {
-	// Loan rate
-	Rate string `json:"rate,omitempty"`
-	// Borrowable amount
+type MarginBorrowable struct {
+	// Currency detail
+	Currency string `json:"currency,omitempty"`
+	// Currency pair
+	CurrencyPair string `json:"currency_pair,omitempty"`
+	// Max borrowable amount
 	Amount string `json:"amount,omitempty"`
-	// The number of days till the loan repayment's dateline
-	Days int32 `json:"days,omitempty"`
 }

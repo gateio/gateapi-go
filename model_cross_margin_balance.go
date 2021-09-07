@@ -16,6 +16,6 @@ type CrossMarginBalance struct {
 	Freeze string `json:"freeze,omitempty"`
 	// Borrowed amount
 	Borrowed string `json:"borrowed,omitempty"`
-	// Interests unpaid
+	// Unpaid interests
 	Interest string `json:"interest,omitempty"`
 }

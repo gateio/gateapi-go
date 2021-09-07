@@ -16,7 +16,7 @@ type TradeFee struct {
 	TakerFee string `json:"taker_fee,omitempty"`
 	// maker fee rate
 	MakerFee string `json:"maker_fee,omitempty"`
-	// Is GT deduction is enabled
+	// If GT deduction is enabled
 	GtDiscount bool `json:"gt_discount,omitempty"`
 	// Taker fee rate if using GT deduction. It will be 0 if GT deduction is disabled
 	GtTakerFee string `json:"gt_taker_fee,omitempty"`

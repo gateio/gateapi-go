@@ -13,9 +13,9 @@ package gateapi
 type Transfer struct {
 	// Transfer currency. For futures account, `currency` can be set to `POINT` or settle currency
 	Currency string `json:"currency"`
-	// Account transferred from
+	// Account to transfer from
 	From string `json:"from"`
-	// Account transferred to
+	// Account to transfer to
 	To string `json:"to"`
 	// Transfer amount
 	Amount string `json:"amount"`

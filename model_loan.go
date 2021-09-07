@@ -27,22 +27,24 @@ type Loan struct {
 	Rate string `json:"rate,omitempty"`
 	// Loan amount
 	Amount string `json:"amount"`
-	// Loan days
-	Days int32 `json:"days"`
-	// Auto renew the loan on expiration
+	// Loan days. Only 10 is supported for now
+	Days int32 `json:"days,omitempty"`
+	// Whether to auto renew the loan upon expiration
 	AutoRenew bool `json:"auto_renew,omitempty"`
-	// Currency pair. Required for borrowing side
+	// Currency pair. Required if borrowing
 	CurrencyPair string `json:"currency_pair,omitempty"`
-	// Amount not lending out
+	// Amount not lent out yet
 	Left string `json:"left,omitempty"`
 	// Repaid amount
 	Repaid string `json:"repaid,omitempty"`
 	// Repaid interest
 	PaidInterest string `json:"paid_interest,omitempty"`
-	// Interest not repaid
+	// Outstanding interest yet to be paid
 	UnpaidInterest string `json:"unpaid_interest,omitempty"`
 	// Loan fee rate
 	FeeRate string `json:"fee_rate,omitempty"`
-	// Original loan ID if the loan is auto-renewed. Equal to `id` if not
+	// Original loan ID of the loan if auto-renewed, otherwise equals to id
 	OrigId string `json:"orig_id,omitempty"`
+	// User defined custom ID
+	Text string `json:"text,omitempty"`
 }

@@ -32,7 +32,7 @@ type Trade struct {
 	Fee string `json:"fee,omitempty"`
 	// Fee currency unit. No value in public endpoints
 	FeeCurrency string `json:"fee_currency,omitempty"`
-	// Point used to deduct fee
+	// Points used to deduct fee
 	PointFee string `json:"point_fee,omitempty"`
 	// GT used to deduct fee
 	GtFee string `json:"gt_fee,omitempty"`

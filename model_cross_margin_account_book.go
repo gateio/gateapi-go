@@ -12,7 +12,7 @@ package gateapi
 type CrossMarginAccountBook struct {
 	// Balance change record ID
 	Id string `json:"id,omitempty"`
-	// Account changed timestamp in milliseconds
+	// The timestamp of the change (in milliseconds)
 	Time int64 `json:"time,omitempty"`
 	// Currency changed
 	Currency string `json:"currency,omitempty"`

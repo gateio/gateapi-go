@@ -5,6 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CurrencyPair** | **string** | Currency pair | [optional] 
+**Locked** | **bool** | Whether account is locked | [optional] 
+**Risk** | **string** | Current risk rate of margin account | [optional] 
 **Base** | [**MarginAccountCurrency**](MarginAccountCurrency.md) |  | [optional] 
 **Quote** | [**MarginAccountCurrency**](MarginAccountCurrency.md) |  | [optional] 
 

@@ -9,7 +9,7 @@
 
 package gateapi
 
-// Account currency detail
+// Account currency details
 type MarginAccountCurrency struct {
 	// Currency name
 	Currency string `json:"currency,omitempty"`
@@ -19,6 +19,6 @@ type MarginAccountCurrency struct {
 	Locked string `json:"locked,omitempty"`
 	// Borrowed amount
 	Borrowed string `json:"borrowed,omitempty"`
-	// Interests unpaid
+	// Unpaid interests
 	Interest string `json:"interest,omitempty"`
 }

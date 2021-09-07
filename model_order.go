@@ -15,13 +15,13 @@ type Order struct {
 	Id string `json:"id,omitempty"`
 	// User defined information. If not empty, must follow the rules below:  1. prefixed with `t-` 2. no longer than 28 bytes without `t-` prefix 3. can only include 0-9, A-Z, a-z, underscore(_), hyphen(-) or dot(.)
 	Text string `json:"text,omitempty"`
-	// Order creation time
+	// Creation time of order
 	CreateTime string `json:"create_time,omitempty"`
-	// Order last modification time
+	// Last modification time of order
 	UpdateTime string `json:"update_time,omitempty"`
-	// Order creation time in milliseconds
+	// Creation time of order (in milliseconds)
 	CreateTimeMs int64 `json:"create_time_ms,omitempty"`
-	// Order last modification time in milliseconds
+	// Last modification time of order (in milliseconds)
 	UpdateTimeMs int64 `json:"update_time_ms,omitempty"`
 	// Order status  - `open`: to be filled - `closed`: filled - `cancelled`: cancelled
 	Status string `json:"status,omitempty"`
@@ -39,7 +39,7 @@ type Order struct {
 	Price string `json:"price"`
 	// Time in force  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled, taker only - poc: PendingOrCancelled, makes a post-only order that always enjoys a maker fee
 	TimeInForce string `json:"time_in_force,omitempty"`
-	// Amount to display for the iceberg order. Null or 0 for normal orders. Set to -1 to hide the amount totally
+	// Amount to display for the iceberg order. Null or 0 for normal orders. Set to -1 to hide the order completely
 	Iceberg string `json:"iceberg,omitempty"`
 	// Used in margin or cross margin trading to allow automatic loan of insufficient amount if balance is not enough.
 	AutoBorrow bool `json:"auto_borrow,omitempty"`
@@ -55,7 +55,7 @@ type Order struct {
 	Fee string `json:"fee,omitempty"`
 	// Fee currency unit
 	FeeCurrency string `json:"fee_currency,omitempty"`
-	// Point used to deduct fee
+	// Points used to deduct fee
 	PointFee string `json:"point_fee,omitempty"`
 	// GT used to deduct fee
 	GtFee string `json:"gt_fee,omitempty"`

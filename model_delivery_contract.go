@@ -77,11 +77,11 @@ type DeliveryContract struct {
 	OrderbookId int64 `json:"orderbook_id,omitempty"`
 	// Current trade ID
 	TradeId int64 `json:"trade_id,omitempty"`
-	// Historical accumulation trade size
+	// Historical accumulated trade size
 	TradeSize int64 `json:"trade_size,omitempty"`
 	// Current total long position size
 	PositionSize int64 `json:"position_size,omitempty"`
-	// Configuration's last changed time
+	// Last changed time of configuration
 	ConfigChangeTime float64 `json:"config_change_time,omitempty"`
 	// Contract is delisting
 	InDelisting bool `json:"in_delisting,omitempty"`

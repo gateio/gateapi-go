@@ -133,7 +133,7 @@ Record time range cannot exceed 30 days
  * @param "Currency" (optional.String) -  Filter by currency. Return all currency records if not specified
  * @param "From" (optional.Int64) -  Time range beginning, default to 7 days before current time
  * @param "To" (optional.Int64) -  Time range ending, default to current time
- * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
+ * @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
  * @param "Offset" (optional.Int32) -  List offset, starting from 0
 @return []LedgerRecord
 */
@@ -253,7 +253,7 @@ Record time range cannot exceed 30 days
  * @param "Currency" (optional.String) -  Filter by currency. Return all currency records if not specified
  * @param "From" (optional.Int64) -  Time range beginning, default to 7 days before current time
  * @param "To" (optional.Int64) -  Time range ending, default to current time
- * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
+ * @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
  * @param "Offset" (optional.Int32) -  List offset, starting from 0
 @return []LedgerRecord
 */
@@ -448,14 +448,14 @@ type ListSubAccountTransfersOpts struct {
 }
 
 /*
-ListSubAccountTransfers Transfer records between main and sub accounts
+ListSubAccountTransfers Retrieve transfer records between main and sub accounts
 Record time range cannot exceed 30 days  &gt; Note: only records after 2020-04-10 can be retrieved
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *ListSubAccountTransfersOpts - Optional Parameters:
  * @param "SubUid" (optional.String) -  Sub account user ID. Return records related to all sub accounts if not specified
  * @param "From" (optional.Int64) -  Time range beginning, default to 7 days before current time
  * @param "To" (optional.Int64) -  Time range ending, default to current time
- * @param "Limit" (optional.Int32) -  Maximum number of records returned in one list
+ * @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
  * @param "Offset" (optional.Int32) -  List offset, starting from 0
 @return []SubAccountTransfer
 */
@@ -649,7 +649,7 @@ type ListWithdrawStatusOpts struct {
 ListWithdrawStatus Retrieve withdrawal status
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *ListWithdrawStatusOpts - Optional Parameters:
- * @param "Currency" (optional.String) -  Retrieved specified currency related data
+ * @param "Currency" (optional.String) -  Retrieve data of the specified currency
 @return []WithdrawStatus
 */
 func (a *WalletApiService) ListWithdrawStatus(ctx context.Context, localVarOptionals *ListWithdrawStatusOpts) ([]WithdrawStatus, *http.Response, error) {
@@ -838,12 +838,19 @@ func (a *WalletApiService) ListSubAccountBalances(ctx context.Context, localVarO
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+// GetTradeFeeOpts Optional parameters for the method 'GetTradeFee'
+type GetTradeFeeOpts struct {
+	CurrencyPair optional.String
+}
+
 /*
 GetTradeFee Retrieve personal trading fee
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *GetTradeFeeOpts - Optional Parameters:
+ * @param "CurrencyPair" (optional.String) -  Specify a currency pair to retrieve precise fee rate  This field is optional. In most cases, the fee rate is identical among all currency pairs
 @return TradeFee
 */
-func (a *WalletApiService) GetTradeFee(ctx context.Context) (TradeFee, *http.Response, error) {
+func (a *WalletApiService) GetTradeFee(ctx context.Context, localVarOptionals *GetTradeFeeOpts) (TradeFee, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -859,6 +866,108 @@ func (a *WalletApiService) GetTradeFee(ctx context.Context) (TradeFee, *http.Res
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.CurrencyPair.IsSet() {
+		localVarQueryParams.Add("currency_pair", parameterToString(localVarOptionals.CurrencyPair.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	if ctx.Value(ContextGateAPIV4) == nil {
+		// for compatibility, set configuration key and secret to context if ContextGateAPIV4 value is not present
+		ctx = context.WithValue(ctx, ContextGateAPIV4, GateAPIV4{
+			Key:    a.client.cfg.Key,
+			Secret: a.client.cfg.Secret,
+		})
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+// GetTotalBalanceOpts Optional parameters for the method 'GetTotalBalance'
+type GetTotalBalanceOpts struct {
+	Currency optional.String
+}
+
+/*
+GetTotalBalance Retrieve user's total balances
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *GetTotalBalanceOpts - Optional Parameters:
+ * @param "Currency" (optional.String) -  Currency unit used to calculate the balance amount. BTC, CNY, USD and USDT are allowed. USDT is the default.
+@return TotalBalance
+*/
+func (a *WalletApiService) GetTotalBalance(ctx context.Context, localVarOptionals *GetTotalBalanceOpts) (TotalBalance, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  TotalBalance
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/wallet/total_balance"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.Currency.IsSet() {
+		localVarQueryParams.Add("currency", parameterToString(localVarOptionals.Currency.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

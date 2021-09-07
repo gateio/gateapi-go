@@ -37,6 +37,6 @@ type LoanRecord struct {
 	Repaid string `json:"repaid,omitempty"`
 	// Repaid interest
 	PaidInterest string `json:"paid_interest,omitempty"`
-	// Interest not repaid
+	// Outstanding interest yet to be paid
 	UnpaidInterest string `json:"unpaid_interest,omitempty"`
 }
