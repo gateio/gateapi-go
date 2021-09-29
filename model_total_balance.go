@@ -9,7 +9,7 @@
 
 package gateapi
 
-// 用户总资产信息
+// User's balance in all accounts
 type TotalBalance struct {
 	Total AccountBalance `json:"total,omitempty"`
 	// Total balances in different accounts  - cross_margin: cross margin account - spot: spot account - finance: finance account - margin: margin account - quant: quant account - futures: futures account - delivery: delivery account - warrant: warrant account - cbbc: cbbc account

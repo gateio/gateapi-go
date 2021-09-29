@@ -55,4 +55,6 @@ type FuturesOrder struct {
 	Mkfr string `json:"mkfr,omitempty"`
 	// Reference user ID
 	Refu int32 `json:"refu,omitempty"`
+	// Set side to close dual-mode position. `close_long` closes the long side; while `close_short` the short one. Note `size` also needs to be set to 0
+	AutoSize string `json:"auto_size,omitempty"`
 }
