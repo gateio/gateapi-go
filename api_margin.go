@@ -396,7 +396,7 @@ Only transferals from and to margin account are provided for now. Time range all
  * @param optional nil or *ListMarginAccountBookOpts - Optional Parameters:
  * @param "Currency" (optional.String) -  List records related to specified currency only. If specified, `currency_pair` is also required.
  * @param "CurrencyPair" (optional.String) -  List records related to specified currency pair. Used in combination with `currency`. Ignored if `currency` is not provided
- * @param "From" (optional.Int64) -  Time range beginning, default to 7 days before current time
+ * @param "From" (optional.Int64) -  Start timestamp of the query
  * @param "To" (optional.Int64) -  Time range ending, default to current time
  * @param "Page" (optional.Int32) -  Page number
  * @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
@@ -2345,7 +2345,7 @@ Record time range cannot exceed 30 days
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *ListCrossMarginAccountBookOpts - Optional Parameters:
  * @param "Currency" (optional.String) -  Filter by currency
- * @param "From" (optional.Int64) -  Time range beginning, default to 7 days before current time
+ * @param "From" (optional.Int64) -  Start timestamp of the query
  * @param "To" (optional.Int64) -  Time range ending, default to current time
  * @param "Page" (optional.Int32) -  Page number
  * @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list

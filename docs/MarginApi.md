@@ -321,7 +321,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **currency** | **optional.String**| List records related to specified currency only. If specified, &#x60;currency_pair&#x60; is also required. | 
 **currencyPair** | **optional.String**| List records related to specified currency pair. Used in combination with &#x60;currency&#x60;. Ignored if &#x60;currency&#x60; is not provided | 
-**from** | **optional.Int64**| Time range beginning, default to 7 days before current time | 
+**from** | **optional.Int64**| Start timestamp of the query | 
 **to** | **optional.Int64**| Time range ending, default to current time | 
 **page** | **optional.Int32**| Page number | [default to 1]
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
@@ -1759,7 +1759,7 @@ Optional parameters are passed through a pointer to a ListCrossMarginAccountBook
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **currency** | **optional.String**| Filter by currency | 
-**from** | **optional.Int64**| Time range beginning, default to 7 days before current time | 
+**from** | **optional.Int64**| Start timestamp of the query | 
 **to** | **optional.Int64**| Time range ending, default to current time | 
 **page** | **optional.Int32**| Page number | [default to 1]
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]

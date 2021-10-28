@@ -426,6 +426,8 @@ No authorization required
 
 Retrieve market trades
 
+You can use `from` and `to` to query by time range, or use `last_id` by scrolling page. The default behavior is by time range.  Scrolling query using `last_id` is not recommended any more. If `last_id` is specified, time range query parameters will be ignored.
+
 ### Required Parameters
 
 Name | Type | Description  | Notes
@@ -443,6 +445,9 @@ Name | Type | Description  | Notes
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **lastId** | **optional.String**| Specify list staring point using the &#x60;id&#x60; of last record in previous list-query results | 
 **reverse** | **optional.Bool**| Whether the id of records to be retrieved should be smaller than the last_id specified- true: Retrieve records where id is smaller than the specified last_id- false: Retrieve records where id is larger than the specified last_idDefault to false.  When &#x60;last_id&#x60; is specified. Set &#x60;reverse&#x60; to &#x60;true&#x60; to trace back trading history; &#x60;false&#x60; to retrieve latest tradings.  No effect if &#x60;last_id&#x60; is not specified. | [default to false]
+**from** | **optional.Int64**| Start timestamp of the query | 
+**to** | **optional.Int64**| Time range ending, default to current time | 
+**page** | **optional.Int32**| Page number | [default to 1]
 
 ### Example
 
@@ -902,7 +907,7 @@ Name | Type | Description  | Notes
 **page** | **optional.Int32**| Page number | [default to 1]
 **limit** | **optional.Int32**| Maximum number of records to be returned. If &#x60;status&#x60; is &#x60;open&#x60;, maximum of &#x60;limit&#x60; is 100 | [default to 100]
 **account** | **optional.String**| Specify operation account. Default to spot and margin account if not specified. Set to &#x60;cross_margin&#x60; to operate against margin account | 
-**from** | **optional.Int64**| Time range beginning, default to 7 days before current time | 
+**from** | **optional.Int64**| Start timestamp of the query | 
 **to** | **optional.Int64**| Time range ending, default to current time | 
 **side** | **optional.String**| All bids or asks. Both included if not specified | 
 
@@ -1376,7 +1381,7 @@ Name | Type | Description  | Notes
 **page** | **optional.Int32**| Page number | [default to 1]
 **orderId** | **optional.String**| Filter trades with specified order ID. &#x60;currency_pair&#x60; is also required if this field is present | 
 **account** | **optional.String**| Specify operation account. Default to spot and margin account if not specified. Set to &#x60;cross_margin&#x60; to operate against margin account | 
-**from** | **optional.Int64**| Time range beginning, default to 7 days before current time | 
+**from** | **optional.Int64**| Start timestamp of the query | 
 **to** | **optional.Int64**| Time range ending, default to current time | 
 
 ### Example

@@ -569,16 +569,23 @@ type ListTradesOpts struct {
 	Limit   optional.Int32
 	LastId  optional.String
 	Reverse optional.Bool
+	From    optional.Int64
+	To      optional.Int64
+	Page    optional.Int32
 }
 
 /*
 ListTrades Retrieve market trades
+You can use &#x60;from&#x60; and &#x60;to&#x60; to query by time range, or use &#x60;last_id&#x60; by scrolling page. The default behavior is by time range.  Scrolling query using &#x60;last_id&#x60; is not recommended any more. If &#x60;last_id&#x60; is specified, time range query parameters will be ignored.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param currencyPair Currency pair
  * @param optional nil or *ListTradesOpts - Optional Parameters:
  * @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
  * @param "LastId" (optional.String) -  Specify list staring point using the `id` of last record in previous list-query results
  * @param "Reverse" (optional.Bool) -  Whether the id of records to be retrieved should be smaller than the last_id specified- true: Retrieve records where id is smaller than the specified last_id- false: Retrieve records where id is larger than the specified last_idDefault to false.  When `last_id` is specified. Set `reverse` to `true` to trace back trading history; `false` to retrieve latest tradings.  No effect if `last_id` is not specified.
+ * @param "From" (optional.Int64) -  Start timestamp of the query
+ * @param "To" (optional.Int64) -  Time range ending, default to current time
+ * @param "Page" (optional.Int32) -  Page number
 @return []Trade
 */
 func (a *SpotApiService) ListTrades(ctx context.Context, currencyPair string, localVarOptionals *ListTradesOpts) ([]Trade, *http.Response, error) {
@@ -606,6 +613,15 @@ func (a *SpotApiService) ListTrades(ctx context.Context, currencyPair string, lo
 	}
 	if localVarOptionals != nil && localVarOptionals.Reverse.IsSet() {
 		localVarQueryParams.Add("reverse", parameterToString(localVarOptionals.Reverse.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.From.IsSet() {
+		localVarQueryParams.Add("from", parameterToString(localVarOptionals.From.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.To.IsSet() {
+		localVarQueryParams.Add("to", parameterToString(localVarOptionals.To.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1202,7 +1218,7 @@ Spot and margin orders are returned by default. If cross margin orders are neede
  * @param "Page" (optional.Int32) -  Page number
  * @param "Limit" (optional.Int32) -  Maximum number of records to be returned. If `status` is `open`, maximum of `limit` is 100
  * @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account
- * @param "From" (optional.Int64) -  Time range beginning, default to 7 days before current time
+ * @param "From" (optional.Int64) -  Start timestamp of the query
  * @param "To" (optional.Int64) -  Time range ending, default to current time
  * @param "Side" (optional.String) -  All bids or asks. Both included if not specified
 @return []Order
@@ -1834,7 +1850,7 @@ Spot and margin trades are queried by default. If cross margin trades are needed
  * @param "Page" (optional.Int32) -  Page number
  * @param "OrderId" (optional.String) -  Filter trades with specified order ID. `currency_pair` is also required if this field is present
  * @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account
- * @param "From" (optional.Int64) -  Time range beginning, default to 7 days before current time
+ * @param "From" (optional.Int64) -  Start timestamp of the query
  * @param "To" (optional.Int64) -  Time range ending, default to current time
 @return []Trade
 */
