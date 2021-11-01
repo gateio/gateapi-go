@@ -20,9 +20,9 @@ type SpotPriceTriggeredOrder struct {
 	// Currency pair
 	Market string `json:"market"`
 	// Creation time
-	Ctime float64 `json:"ctime,omitempty"`
+	Ctime int64 `json:"ctime,omitempty"`
 	// Finished time
-	Ftime float64 `json:"ftime,omitempty"`
+	Ftime int64 `json:"ftime,omitempty"`
 	// ID of the newly created order on condition triggered
 	FiredOrderId int64 `json:"fired_order_id,omitempty"`
 	// Status  - open: open - cancelled: being manually cancelled - finish: successfully executed - failed: failed to execute - expired - expired
