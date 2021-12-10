@@ -4,6 +4,7 @@ All URIs are relative to *https://api.gateio.ws/api/v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**ListCurrencyChains**](WalletApi.md#ListCurrencyChains) | **Get** /wallet/currency_chains | List chains supported for specified currency
 [**GetDepositAddress**](WalletApi.md#GetDepositAddress) | **Get** /wallet/deposit_address | Generate currency deposit address
 [**ListWithdrawals**](WalletApi.md#ListWithdrawals) | **Get** /wallet/withdrawals | Retrieve withdrawal records
 [**ListDeposits**](WalletApi.md#ListDeposits) | **Get** /wallet/deposits | Retrieve deposit records
@@ -15,6 +16,69 @@ Method | HTTP request | Description
 [**GetTradeFee**](WalletApi.md#GetTradeFee) | **Get** /wallet/fee | Retrieve personal trading fee
 [**GetTotalBalance**](WalletApi.md#GetTotalBalance) | **Get** /wallet/total_balance | Retrieve user&#39;s total balances
 
+
+## ListCurrencyChains
+
+> []CurrencyChain ListCurrencyChains(ctx, currency)
+
+List chains supported for specified currency
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**currency** | **string**| Currency name | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.Background()
+    currency := "GT" // string - Currency name
+    
+    result, _, err := client.WalletApi.ListCurrencyChains(ctx, currency)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**[]CurrencyChain**](CurrencyChain.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 ## GetDepositAddress
 
@@ -255,7 +319,7 @@ func main() {
 
 Transfer between trading accounts
 
-Transfer between different accounts. Currently support transfers between the following:  1. spot - margin 2. spot - futures(perpetual) 3. spot - delivery 4. spot - cross margin
+Transfer between different accounts. Currently support transfers between the following:  1. spot - margin 2. spot - futures(perpetual) 3. spot - delivery 4. spot - cross margin 5. spot - options
 
 ### Required Parameters
 
@@ -706,6 +770,8 @@ func main() {
 > TotalBalance GetTotalBalance(ctx, optional)
 
 Retrieve user's total balances
+
+This endpoint returns an approximate sum of exchanged amount from all currencies to input currency for each account.The exchange rate and account balance could have been cached for at most 1 minute. It is not recommended to use its result for any trading calculation.  For trading calculation, use the corresponding account query endpoint for each account type. For example:   - `GET /spot/accounts` to query spot account balance - `GET /margin/accounts` to query margin account balance - `GET /futures/{settle}/accounts` to query futures account balance
 
 ### Required Parameters
 

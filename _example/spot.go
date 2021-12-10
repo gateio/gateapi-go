@@ -24,7 +24,7 @@ func SpotDemo(config *RunConfig) {
 		panicGateError(err)
 	}
 	logger.Printf("testing against currency pair: %s\n", cp.Id)
-	minAmount := cp.MinQuoteAmount
+	minAmount := cp.MinBaseAmount
 
 	tickers, _, err := client.SpotApi.ListTickers(ctx, &gateapi.ListTickersOpts{CurrencyPair: optional.NewString(cp.Id)})
 	if err != nil {

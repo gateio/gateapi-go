@@ -55,6 +55,8 @@ type APIClient struct {
 
 	MarginApi *MarginApiService
 
+	OptionsApi *OptionsApiService
+
 	SpotApi *SpotApiService
 
 	WalletApi *WalletApiService
@@ -81,6 +83,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.DeliveryApi = (*DeliveryApiService)(&c.common)
 	c.FuturesApi = (*FuturesApiService)(&c.common)
 	c.MarginApi = (*MarginApiService)(&c.common)
+	c.OptionsApi = (*OptionsApiService)(&c.common)
 	c.SpotApi = (*SpotApiService)(&c.common)
 	c.WalletApi = (*WalletApiService)(&c.common)
 	c.WithdrawalApi = (*WithdrawalApiService)(&c.common)

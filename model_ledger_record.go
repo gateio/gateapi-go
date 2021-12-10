@@ -24,7 +24,7 @@ type LedgerRecord struct {
 	Address string `json:"address,omitempty"`
 	// Additional remarks with regards to the withdrawal
 	Memo string `json:"memo,omitempty"`
-	// Record status.  - DONE: done - CANCEL: cancelled - REQUEST: requesting - MANUAL: pending manual approval - BCODE: GateCode operation - EXTPEND: pending confirm after sending - FAIL: pending confirm when fail
+	// Record status.  - DONE: done - CANCEL: cancelled - REQUEST: requesting - MANUAL: pending manual approval - BCODE: GateCode operation - EXTPEND: pending confirm after sending - FAIL: pending confirm when fail - INVALID: invalid order - VERIFY: verifying - PROCES: processing - PEND: pending
 	Status string `json:"status,omitempty"`
 	// Name of the chain used in withdrawals
 	Chain string `json:"chain,omitempty"`
