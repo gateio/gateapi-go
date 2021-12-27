@@ -37,7 +37,7 @@ type Order struct {
 	Amount string `json:"amount"`
 	// Order price
 	Price string `json:"price"`
-	// Time in force  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled, taker only - poc: PendingOrCancelled, makes a post-only order that always enjoys a maker fee
+	// Time in force  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled, taker only - poc: PendingOrCancelled, makes a post-only order that always enjoys a maker fee - fok: FillOrKill, fill either completely or none
 	TimeInForce string `json:"time_in_force,omitempty"`
 	// Amount to display for the iceberg order. Null or 0 for normal orders. Set to -1 to hide the order completely
 	Iceberg string `json:"iceberg,omitempty"`
