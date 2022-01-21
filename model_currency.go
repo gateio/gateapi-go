@@ -22,4 +22,6 @@ type Currency struct {
 	DepositDisabled bool `json:"deposit_disabled,omitempty"`
 	// Whether currency's trading is disabled
 	TradeDisabled bool `json:"trade_disabled,omitempty"`
+	// Fixed fee rate. Only for fixed rate currencies, not valid for normal currencies
+	FixedRate string `json:"fixed_rate,omitempty"`
 }

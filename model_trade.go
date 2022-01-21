@@ -20,7 +20,7 @@ type Trade struct {
 	CurrencyPair string `json:"currency_pair,omitempty"`
 	// Order side
 	Side string `json:"side,omitempty"`
-	// Trade role
+	// Trade role. No value in public endpoints
 	Role string `json:"role,omitempty"`
 	// Trade amount
 	Amount string `json:"amount,omitempty"`
@@ -32,8 +32,8 @@ type Trade struct {
 	Fee string `json:"fee,omitempty"`
 	// Fee currency unit. No value in public endpoints
 	FeeCurrency string `json:"fee_currency,omitempty"`
-	// Points used to deduct fee
+	// Points used to deduct fee. No value in public endpoints
 	PointFee string `json:"point_fee,omitempty"`
-	// GT used to deduct fee
+	// GT used to deduct fee. No value in public endpoints
 	GtFee string `json:"gt_fee,omitempty"`
 }

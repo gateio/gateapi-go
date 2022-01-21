@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **Memo** | **string** | Additional remarks with regards to the withdrawal | [optional] 
 **Status** | **string** | Record status.  - DONE: done - CANCEL: cancelled - REQUEST: requesting - MANUAL: pending manual approval - BCODE: GateCode operation - EXTPEND: pending confirm after sending - FAIL: pending confirm when fail - INVALID: invalid order - VERIFY: verifying - PROCES: processing - PEND: pending | [optional] [readonly] 
 **Chain** | **string** | Name of the chain used in withdrawals | [optional] 
+**Fee** | **string** | Fee | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
