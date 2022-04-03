@@ -441,7 +441,7 @@ Return specified contract candlesticks. If prefix &#x60;contract&#x60; with &#x6
  * @param "From" (optional.Int64) -  Start time of candlesticks, formatted in Unix timestamp in seconds. Default to`to - 100 * interval` if not specified
  * @param "To" (optional.Int64) -  End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time
  * @param "Limit" (optional.Int32) -  Maximum recent data points to return. `limit` is conflicted with `from` and `to`. If either `from` or `to` is specified, request will be rejected.
- * @param "Interval" (optional.String) -  Interval time between data points
+ * @param "Interval" (optional.String) -  Interval time between data points. Note that `1w` means natual week(Mon-Sun), while `7d` means every 7d since unix 0
 @return []FuturesCandlestick
 */
 func (a *DeliveryApiService) ListDeliveryCandlesticks(ctx context.Context, settle string, contract string, localVarOptionals *ListDeliveryCandlesticksOpts) ([]FuturesCandlestick, *http.Response, error) {
@@ -1427,7 +1427,7 @@ type ListDeliveryOrdersOpts struct {
 
 /*
 ListDeliveryOrders List futures orders
-Zero-fill order cannot be retrieved for 60 seconds after cancellation
+Zero-filled order cannot be retrieved 10 minutes after order cancellation
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
  * @param status Only list the orders with this status
@@ -1543,7 +1543,7 @@ func (a *DeliveryApiService) ListDeliveryOrders(ctx context.Context, settle stri
 
 /*
 CreateDeliveryOrder Create a futures order
-Zero-fill order cannot be retrieved for 60 seconds after cancellation
+Zero-filled order cannot be retrieved 10 minutes after order cancellation
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
  * @param futuresOrder
@@ -1644,7 +1644,7 @@ type CancelDeliveryOrdersOpts struct {
 
 /*
 CancelDeliveryOrders Cancel all `open` orders matched
-Zero-fill order cannot be retrieved for 60 seconds after cancellation
+Zero-filled order cannot be retrieved 10 minutes after order cancellation
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
  * @param contract Futures contract
@@ -1744,7 +1744,7 @@ func (a *DeliveryApiService) CancelDeliveryOrders(ctx context.Context, settle st
 
 /*
 GetDeliveryOrder Get a single order
-Zero-fill order cannot be retrieved for 60 seconds after cancellation
+Zero-filled order cannot be retrieved 10 minutes after order cancellation
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
  * @param orderId Retrieve the data of the order with the specified ID

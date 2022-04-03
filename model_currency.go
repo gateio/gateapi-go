@@ -24,4 +24,6 @@ type Currency struct {
 	TradeDisabled bool `json:"trade_disabled,omitempty"`
 	// Fixed fee rate. Only for fixed rate currencies, not valid for normal currencies
 	FixedRate string `json:"fixed_rate,omitempty"`
+	// Chain of currency
+	Chain string `json:"chain,omitempty"`
 }

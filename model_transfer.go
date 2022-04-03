@@ -21,6 +21,6 @@ type Transfer struct {
 	Amount string `json:"amount"`
 	// Margin currency pair. Required if transfer from or to margin account
 	CurrencyPair string `json:"currency_pair,omitempty"`
-	// Futures settle currency. Required if `currency` is `POINT`
+	// Futures settle currency. Required if transferring from or to futures account
 	Settle string `json:"settle,omitempty"`
 }

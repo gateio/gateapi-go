@@ -343,7 +343,7 @@ Name | Type | Description  | Notes
 **from** | **optional.Int64**| Start time of candlesticks, formatted in Unix timestamp in seconds. Default to&#x60;to - 100 * interval&#x60; if not specified | 
 **to** | **optional.Int64**| End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time | 
 **limit** | **optional.Int32**| Maximum recent data points to return. &#x60;limit&#x60; is conflicted with &#x60;from&#x60; and &#x60;to&#x60;. If either &#x60;from&#x60; or &#x60;to&#x60; is specified, request will be rejected. | [default to 100]
-**interval** | **optional.String**| Interval time between data points | [default to 5m]
+**interval** | **optional.String**| Interval time between data points. Note that &#x60;1w&#x60; means natual week(Mon-Sun), while &#x60;7d&#x60; means every 7d since unix 0 | [default to 5m]
 
 ### Example
 
@@ -1055,7 +1055,7 @@ func main() {
 
 List futures orders
 
-Zero-fill order cannot be retrieved for 60 seconds after cancellation
+Zero-filled order cannot be retrieved 10 minutes after order cancellation
 
 ### Required Parameters
 
@@ -1141,7 +1141,7 @@ func main() {
 
 Create a futures order
 
-Zero-fill order cannot be retrieved for 60 seconds after cancellation
+Zero-filled order cannot be retrieved 10 minutes after order cancellation
 
 ### Required Parameters
 
@@ -1214,7 +1214,7 @@ func main() {
 
 Cancel all `open` orders matched
 
-Zero-fill order cannot be retrieved for 60 seconds after cancellation
+Zero-filled order cannot be retrieved 10 minutes after order cancellation
 
 ### Required Parameters
 
@@ -1296,7 +1296,7 @@ func main() {
 
 Get a single order
 
-Zero-fill order cannot be retrieved for 60 seconds after cancellation
+Zero-filled order cannot be retrieved 10 minutes after order cancellation
 
 ### Required Parameters
 

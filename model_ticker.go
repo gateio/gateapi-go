@@ -14,15 +14,15 @@ type Ticker struct {
 	CurrencyPair string `json:"currency_pair,omitempty"`
 	// Last trading price
 	Last string `json:"last,omitempty"`
-	// Lowest ask
+	// Recent lowest ask
 	LowestAsk string `json:"lowest_ask,omitempty"`
-	// Highest bid
+	// Recent highest bid
 	HighestBid string `json:"highest_bid,omitempty"`
-	// Change percentage.
+	// Change percentage in the last 24h
 	ChangePercentage string `json:"change_percentage,omitempty"`
-	// Base currency trade volume
+	// Base currency trade volume in the last 24h
 	BaseVolume string `json:"base_volume,omitempty"`
-	// Quote currency trade volume
+	// Quote currency trade volume in the last 24h
 	QuoteVolume string `json:"quote_volume,omitempty"`
 	// Highest price in 24h
 	High24h string `json:"high_24h,omitempty"`

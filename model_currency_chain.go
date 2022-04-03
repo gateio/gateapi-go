@@ -18,4 +18,8 @@ type CurrencyChain struct {
 	NameEn string `json:"name_en,omitempty"`
 	// If it is disabled. 0 means NOT being disabled
 	IsDisabled int32 `json:"is_disabled,omitempty"`
+	// Is deposit disabled. 0 means not
+	IsDepositDisabled int32 `json:"is_deposit_disabled,omitempty"`
+	// Is withdrawal disabled. 0 means not
+	IsWithdrawDisabled int32 `json:"is_withdraw_disabled,omitempty"`
 }

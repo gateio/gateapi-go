@@ -441,7 +441,7 @@ Return specified contract candlesticks. If prefix &#x60;contract&#x60; with &#x6
  * @param "From" (optional.Int64) -  Start time of candlesticks, formatted in Unix timestamp in seconds. Default to`to - 100 * interval` if not specified
  * @param "To" (optional.Int64) -  End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time
  * @param "Limit" (optional.Int32) -  Maximum recent data points to return. `limit` is conflicted with `from` and `to`. If either `from` or `to` is specified, request will be rejected.
- * @param "Interval" (optional.String) -  Interval time between data points
+ * @param "Interval" (optional.String) -  Interval time between data points. Note that `1w` means natual week(Mon-Sun), while `7d` means every 7d since unix 0
 @return []FuturesCandlestick
 */
 func (a *FuturesApiService) ListFuturesCandlesticks(ctx context.Context, settle string, contract string, localVarOptionals *ListFuturesCandlesticksOpts) ([]FuturesCandlestick, *http.Response, error) {
@@ -2033,15 +2033,22 @@ func (a *FuturesApiService) UpdateDualModePositionMargin(ctx context.Context, se
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+// UpdateDualModePositionLeverageOpts Optional parameters for the method 'UpdateDualModePositionLeverage'
+type UpdateDualModePositionLeverageOpts struct {
+	CrossLeverageLimit optional.String
+}
+
 /*
 UpdateDualModePositionLeverage Update position leverage in dual mode
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
  * @param contract Futures contract
  * @param leverage New position leverage
+ * @param optional nil or *UpdateDualModePositionLeverageOpts - Optional Parameters:
+ * @param "CrossLeverageLimit" (optional.String) -  Cross margin leverage(valid only when `leverage` is 0)
 @return []Position
 */
-func (a *FuturesApiService) UpdateDualModePositionLeverage(ctx context.Context, settle string, contract string, leverage string) ([]Position, *http.Response, error) {
+func (a *FuturesApiService) UpdateDualModePositionLeverage(ctx context.Context, settle string, contract string, leverage string, localVarOptionals *UpdateDualModePositionLeverageOpts) ([]Position, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -2062,6 +2069,9 @@ func (a *FuturesApiService) UpdateDualModePositionLeverage(ctx context.Context, 
 	localVarFormParams := url.Values{}
 
 	localVarQueryParams.Add("leverage", parameterToString(leverage, ""))
+	if localVarOptionals != nil && localVarOptionals.CrossLeverageLimit.IsSet() {
+		localVarQueryParams.Add("cross_leverage_limit", parameterToString(localVarOptionals.CrossLeverageLimit.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2237,7 +2247,7 @@ type ListFuturesOrdersOpts struct {
 
 /*
 ListFuturesOrders List futures orders
-Zero-fill order cannot be retrieved for 60 seconds after cancellation
+Zero-filled order cannot be retrieved 10 minutes after order cancellation
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
  * @param contract Futures contract
@@ -2351,7 +2361,7 @@ func (a *FuturesApiService) ListFuturesOrders(ctx context.Context, settle string
 
 /*
 CreateFuturesOrder Create a futures order
-Zero-fill order cannot be retrieved for 60 seconds after cancellation
+- Creating futures orders requires &#x60;size&#x60;, which is number of contracts instead of currency amount. You can use &#x60;quanto_multiplier&#x60; in contract detail response to know how much currency 1 size contract represents - Zero-filled order cannot be retrieved 10 minutes after order cancellation. You will get a 404 not found for such orders - Set &#x60;reduce_only&#x60; to &#x60;true&#x60; can keep the position from changing side when reducing position size - In single position mode, to close a position, you need to set &#x60;size&#x60; to 0 and &#x60;close&#x60; to &#x60;true&#x60; - In dual position mode, to close one side position, you need to set &#x60;auto_size&#x60; side, &#x60;reduce_only&#x60; to true and &#x60;size&#x60; to 0
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
  * @param futuresOrder
@@ -2452,7 +2462,7 @@ type CancelFuturesOrdersOpts struct {
 
 /*
 CancelFuturesOrders Cancel all `open` orders matched
-Zero-fill order cannot be retrieved for 60 seconds after cancellation
+Zero-filled order cannot be retrieved 10 minutes after order cancellation
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
  * @param contract Futures contract
@@ -2552,7 +2562,7 @@ func (a *FuturesApiService) CancelFuturesOrders(ctx context.Context, settle stri
 
 /*
 GetFuturesOrder Get a single order
-Zero-fill order cannot be retrieved for 60 seconds after cancellation
+Zero-filled order cannot be retrieved 10 minutes after order cancellation
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
  * @param orderId Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID are accepted only in the first 30 minutes after order creation.After that, only order ID is accepted.
