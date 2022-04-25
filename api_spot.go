@@ -583,7 +583,7 @@ You can use &#x60;from&#x60; and &#x60;to&#x60; to query by time range, or use &
  * @param optional nil or *ListTradesOpts - Optional Parameters:
  * @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
  * @param "LastId" (optional.String) -  Specify list staring point using the `id` of last record in previous list-query results
- * @param "Reverse" (optional.Bool) -  Whether the id of records to be retrieved should be smaller than the last_id specified- true: Retrieve records where id is smaller than the specified last_id- false: Retrieve records where id is larger than the specified last_idDefault to false.  When `last_id` is specified. Set `reverse` to `true` to trace back trading history; `false` to retrieve latest tradings.  No effect if `last_id` is not specified.
+ * @param "Reverse" (optional.Bool) -  Whether the id of records to be retrieved should be less than the last_id specified. Default to false.  When `last_id` is specified. Set `reverse` to `true` to trace back trading history; `false` to retrieve latest tradings.  No effect if `last_id` is not specified.
  * @param "From" (optional.Int64) -  Start timestamp of the query
  * @param "To" (optional.Int64) -  Time range ending, default to current time
  * @param "Page" (optional.Int32) -  Page number
@@ -703,7 +703,7 @@ Maximum of 1000 points can be returned in a query. Be sure not to exceed the lim
  * @param "Limit" (optional.Int32) -  Maximum recent data points to return. `limit` is conflicted with `from` and `to`. If either `from` or `to` is specified, request will be rejected.
  * @param "From" (optional.Int64) -  Start time of candlesticks, formatted in Unix timestamp in seconds. Default to`to - 100 * interval` if not specified
  * @param "To" (optional.Int64) -  End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time
- * @param "Interval" (optional.String) -  Interval time between data points
+ * @param "Interval" (optional.String) -  Interval time between data points. Note that `30d` means 1 natual month, not 30 days
 @return [][]string
 */
 func (a *SpotApiService) ListCandlesticks(ctx context.Context, currencyPair string, localVarOptionals *ListCandlesticksOpts) ([][]string, *http.Response, error) {

@@ -446,7 +446,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **lastId** | **optional.String**| Specify list staring point using the &#x60;id&#x60; of last record in previous list-query results | 
-**reverse** | **optional.Bool**| Whether the id of records to be retrieved should be smaller than the last_id specified- true: Retrieve records where id is smaller than the specified last_id- false: Retrieve records where id is larger than the specified last_idDefault to false.  When &#x60;last_id&#x60; is specified. Set &#x60;reverse&#x60; to &#x60;true&#x60; to trace back trading history; &#x60;false&#x60; to retrieve latest tradings.  No effect if &#x60;last_id&#x60; is not specified. | [default to false]
+**reverse** | **optional.Bool**| Whether the id of records to be retrieved should be less than the last_id specified. Default to false.  When &#x60;last_id&#x60; is specified. Set &#x60;reverse&#x60; to &#x60;true&#x60; to trace back trading history; &#x60;false&#x60; to retrieve latest tradings.  No effect if &#x60;last_id&#x60; is not specified. | [default to false]
 **from** | **optional.Int64**| Start timestamp of the query | 
 **to** | **optional.Int64**| Time range ending, default to current time | 
 **page** | **optional.Int32**| Page number | [default to 1]
@@ -526,7 +526,7 @@ Name | Type | Description  | Notes
 **limit** | **optional.Int32**| Maximum recent data points to return. &#x60;limit&#x60; is conflicted with &#x60;from&#x60; and &#x60;to&#x60;. If either &#x60;from&#x60; or &#x60;to&#x60; is specified, request will be rejected. | [default to 100]
 **from** | **optional.Int64**| Start time of candlesticks, formatted in Unix timestamp in seconds. Default to&#x60;to - 100 * interval&#x60; if not specified | 
 **to** | **optional.Int64**| End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time | 
-**interval** | **optional.String**| Interval time between data points | [default to 30m]
+**interval** | **optional.String**| Interval time between data points. Note that &#x60;30d&#x60; means 1 natual month, not 30 days | [default to 30m]
 
 ### Example
 
