@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Tif** | **string** | Time in force. If using market price, only &#x60;ioc&#x60; is supported.  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled | [optional] [default to TIF_GTC]
 **Text** | **string** | How the order is created. Possible values are: web, api and app | [optional] 
 **ReduceOnly** | **bool** | Set to true to create a reduce-only order | [optional] [default to false]
+**AutoSize** | **string** | Set side to close dual-mode position. &#x60;close_long&#x60; closes the long side; while &#x60;close_short&#x60; the short one. Note &#x60;size&#x60; also needs to be set to 0 | [optional] 
 **IsReduceOnly** | **bool** | Is the order reduce-only | [optional] [readonly] 
 **IsClose** | **bool** | Is the order to close position | [optional] [readonly] 
 

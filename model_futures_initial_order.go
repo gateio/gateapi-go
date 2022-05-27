@@ -24,6 +24,8 @@ type FuturesInitialOrder struct {
 	Text string `json:"text,omitempty"`
 	// Set to true to create a reduce-only order
 	ReduceOnly bool `json:"reduce_only,omitempty"`
+	// Set side to close dual-mode position. `close_long` closes the long side; while `close_short` the short one. Note `size` also needs to be set to 0
+	AutoSize string `json:"auto_size,omitempty"`
 	// Is the order reduce-only
 	IsReduceOnly bool `json:"is_reduce_only,omitempty"`
 	// Is the order to close position
