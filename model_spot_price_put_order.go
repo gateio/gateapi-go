@@ -18,7 +18,7 @@ type SpotPricePutOrder struct {
 	Price string `json:"price"`
 	// Order amount
 	Amount string `json:"amount"`
-	// Trading type  - normal: spot trading - margin: margin trading
+	// Trading account type.  Portfolio margin account must set to `cross_margin`  - normal: spot trading - margin: margin trading - cross_margin: cross_margin trading
 	Account string `json:"account"`
 	// time_in_force  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled, taker only
 	TimeInForce string `json:"time_in_force,omitempty"`

@@ -1595,7 +1595,7 @@ Optional parameters are passed through a pointer to a ListSpotPriceTriggeredOrde
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **market** | **optional.String**| Currency pair | 
-**account** | **optional.String**| Trading account | 
+**account** | **optional.String**| Trading account type.  Portfolio margin account must set to &#x60;cross_margin&#x60; | 
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
 
@@ -1744,7 +1744,7 @@ Optional parameters are passed through a pointer to a CancelSpotPriceTriggeredOr
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **market** | **optional.String**| Currency pair | 
-**account** | **optional.String**| Trading account | 
+**account** | **optional.String**| Trading account type.  Portfolio margin account must set to &#x60;cross_margin&#x60; | 
 
 ### Example
 

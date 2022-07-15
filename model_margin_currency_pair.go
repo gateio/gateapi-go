@@ -24,4 +24,6 @@ type MarginCurrencyPair struct {
 	MinQuoteAmount string `json:"min_quote_amount,omitempty"`
 	// Maximum borrowable amount for quote currency. Base currency limit is calculated by quote maximum and market price. `null` means no limit
 	MaxQuoteAmount string `json:"max_quote_amount,omitempty"`
+	// Currency pair status   - `0`: disabled  - `1`: enabled
+	Status int32 `json:"status,omitempty"`
 }

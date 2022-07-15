@@ -2153,7 +2153,7 @@ ListSpotPriceTriggeredOrders Retrieve running auto order list
  * @param status Only list the orders with this status
  * @param optional nil or *ListSpotPriceTriggeredOrdersOpts - Optional Parameters:
  * @param "Market" (optional.String) -  Currency pair
- * @param "Account" (optional.String) -  Trading account
+ * @param "Account" (optional.String) -  Trading account type.  Portfolio margin account must set to `cross_margin`
  * @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
  * @param "Offset" (optional.Int32) -  List offset, starting from 0
 @return []SpotPriceTriggeredOrder
@@ -2358,7 +2358,7 @@ CancelSpotPriceTriggeredOrderList Cancel all open orders
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *CancelSpotPriceTriggeredOrderListOpts - Optional Parameters:
  * @param "Market" (optional.String) -  Currency pair
- * @param "Account" (optional.String) -  Trading account
+ * @param "Account" (optional.String) -  Trading account type.  Portfolio margin account must set to `cross_margin`
 @return []SpotPriceTriggeredOrder
 */
 func (a *SpotApiService) CancelSpotPriceTriggeredOrderList(ctx context.Context, localVarOptionals *CancelSpotPriceTriggeredOrderListOpts) ([]SpotPriceTriggeredOrder, *http.Response, error) {
