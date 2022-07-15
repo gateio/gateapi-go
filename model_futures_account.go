@@ -10,7 +10,7 @@
 package gateapi
 
 type FuturesAccount struct {
-	// Total assets, total = position_margin + order_margin + available
+	// total = position_margin + order_margin + available
 	Total string `json:"total,omitempty"`
 	// Unrealized PNL
 	UnrealisedPnl string `json:"unrealised_pnl,omitempty"`
@@ -18,7 +18,7 @@ type FuturesAccount struct {
 	PositionMargin string `json:"position_margin,omitempty"`
 	// Order margin of unfinished orders
 	OrderMargin string `json:"order_margin,omitempty"`
-	// Available balance to transfer out or trade
+	// The available balance for transferring or trading
 	Available string `json:"available,omitempty"`
 	// POINT amount
 	Point string `json:"point,omitempty"`
@@ -26,4 +26,13 @@ type FuturesAccount struct {
 	Currency string `json:"currency,omitempty"`
 	// Whether dual mode is enabled
 	InDualMode bool `json:"in_dual_mode,omitempty"`
+	// Whether portfolio margin account mode is enabled
+	EnableCredit bool `json:"enable_credit,omitempty"`
+	// Initial margin position, applicable to the portfolio margin account model
+	PositionInitialMargin string `json:"position_initial_margin,omitempty"`
+	// Maintenance margin position, applicable to the portfolio margin account model
+	MaintenanceMargin string `json:"maintenance_margin,omitempty"`
+	// Perpetual Contract Bonus
+	Bonus   string                `json:"bonus,omitempty"`
+	History FuturesAccountHistory `json:"history,omitempty"`
 }

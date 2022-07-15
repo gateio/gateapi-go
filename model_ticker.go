@@ -20,6 +20,10 @@ type Ticker struct {
 	HighestBid string `json:"highest_bid,omitempty"`
 	// Change percentage in the last 24h
 	ChangePercentage string `json:"change_percentage,omitempty"`
+	// utc0 timezone, the percentage change in the last 24 hours
+	ChangeUtc0 string `json:"change_utc0,omitempty"`
+	// utc8 timezone, the percentage change in the last 24 hours
+	ChangeUtc8 string `json:"change_utc8,omitempty"`
 	// Base currency trade volume in the last 24h
 	BaseVolume string `json:"base_volume,omitempty"`
 	// Quote currency trade volume in the last 24h

@@ -368,6 +368,7 @@ func (a *SpotApiService) GetCurrencyPair(ctx context.Context, currencyPair strin
 // ListTickersOpts Optional parameters for the method 'ListTickers'
 type ListTickersOpts struct {
 	CurrencyPair optional.String
+	Timezone     optional.String
 }
 
 /*
@@ -376,6 +377,7 @@ Return only related data if &#x60;currency_pair&#x60; is specified; otherwise re
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param optional nil or *ListTickersOpts - Optional Parameters:
  * @param "CurrencyPair" (optional.String) -  Currency pair
+ * @param "Timezone" (optional.String) -  Timezone
 @return []Ticker
 */
 func (a *SpotApiService) ListTickers(ctx context.Context, localVarOptionals *ListTickersOpts) ([]Ticker, *http.Response, error) {
@@ -396,6 +398,9 @@ func (a *SpotApiService) ListTickers(ctx context.Context, localVarOptionals *Lis
 
 	if localVarOptionals != nil && localVarOptionals.CurrencyPair.IsSet() {
 		localVarQueryParams.Add("currency_pair", parameterToString(localVarOptionals.CurrencyPair.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Timezone.IsSet() {
+		localVarQueryParams.Add("timezone", parameterToString(localVarOptionals.Timezone.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1103,7 +1108,7 @@ List open orders in all currency pairs.  Note that pagination parameters affect 
  * @param optional nil or *ListAllOpenOrdersOpts - Optional Parameters:
  * @param "Page" (optional.Int32) -  Page number
  * @param "Limit" (optional.Int32) -  Maximum number of records returned in one page in each currency pair
- * @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account
+ * @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account.  Portfolio margin account must set to `cross_margin` only
 @return []OpenOrders
 */
 func (a *SpotApiService) ListAllOpenOrders(ctx context.Context, localVarOptionals *ListAllOpenOrdersOpts) ([]OpenOrders, *http.Response, error) {
@@ -1199,6 +1204,99 @@ func (a *SpotApiService) ListAllOpenOrders(ctx context.Context, localVarOptional
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+/*
+CreateCrossLiquidateOrder close position when cross-currency is disabled
+Currently, only cross-margin accounts are supported to close position when cross currencies are disabled.  Maximum buy quantity &#x3D; (unpaid principal and interest - currency balance - the amount of the currency in the order book) / 0.998
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param liquidateOrder
+@return Order
+*/
+func (a *SpotApiService) CreateCrossLiquidateOrder(ctx context.Context, liquidateOrder LiquidateOrder) (Order, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  Order
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/spot/cross_liquidate_orders"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = &liquidateOrder
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	if ctx.Value(ContextGateAPIV4) == nil {
+		// for compatibility, set configuration key and secret to context if ContextGateAPIV4 value is not present
+		ctx = context.WithValue(ctx, ContextGateAPIV4, GateAPIV4{
+			Key:    a.client.cfg.Key,
+			Secret: a.client.cfg.Secret,
+		})
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 // ListOrdersOpts Optional parameters for the method 'ListOrders'
 type ListOrdersOpts struct {
 	Page    optional.Int32
@@ -1218,7 +1316,7 @@ Spot and margin orders are returned by default. If cross margin orders are neede
  * @param optional nil or *ListOrdersOpts - Optional Parameters:
  * @param "Page" (optional.Int32) -  Page number
  * @param "Limit" (optional.Int32) -  Maximum number of records to be returned. If `status` is `open`, maximum of `limit` is 100
- * @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account
+ * @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account.  Portfolio margin account must set to `cross_margin` only
  * @param "From" (optional.Int64) -  Start timestamp of the query
  * @param "To" (optional.Int64) -  Time range ending, default to current time
  * @param "Side" (optional.String) -  All bids or asks. Both included if not specified
@@ -1434,7 +1532,7 @@ If &#x60;account&#x60; is not set, all open orders, including spot, margin and c
  * @param currencyPair Currency pair
  * @param optional nil or *CancelOrdersOpts - Optional Parameters:
  * @param "Side" (optional.String) -  All bids or asks. Both included if not specified
- * @param "Account" (optional.String) -  Specify account type. Default to all account types being included
+ * @param "Account" (optional.String) -  Specify account type  - classic account：Default to all account types being included   - portfolio margin account：`cross_margin` only
 @return []Order
 */
 func (a *SpotApiService) CancelOrders(ctx context.Context, currencyPair string, localVarOptionals *CancelOrdersOpts) ([]Order, *http.Response, error) {
@@ -1628,12 +1726,12 @@ type GetOrderOpts struct {
 
 /*
 GetOrder Get a single order
-Spot and margin orders are queried by default. If cross margin orders are needed, &#x60;account&#x60; must be set to &#x60;cross_margin&#x60;
+Spot and margin orders are queried by default. If cross margin orders are needed or portfolio margin account are used, account must be set to cross_margin.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param orderId Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID are accepted only in the first 30 minutes after order creation.After that, only order ID is accepted.
  * @param currencyPair Currency pair
  * @param optional nil or *GetOrderOpts - Optional Parameters:
- * @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account
+ * @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account.  Portfolio margin account must set to `cross_margin` only
 @return Order
 */
 func (a *SpotApiService) GetOrder(ctx context.Context, orderId string, currencyPair string, localVarOptionals *GetOrderOpts) (Order, *http.Response, error) {
@@ -1733,12 +1831,12 @@ type CancelOrderOpts struct {
 
 /*
 CancelOrder Cancel a single order
-Spot and margin orders are cancelled by default. If trying to cancel cross margin orders, &#x60;account&#x60; must be set to &#x60;cross_margin&#x60;
+Spot and margin orders are cancelled by default. If trying to cancel cross margin orders or portfolio margin account are used, account must be set to cross_margin
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param orderId Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID are accepted only in the first 30 minutes after order creation.After that, only order ID is accepted.
  * @param currencyPair Currency pair
  * @param optional nil or *CancelOrderOpts - Optional Parameters:
- * @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account
+ * @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account.  Portfolio margin account must set to `cross_margin` only
 @return Order
 */
 func (a *SpotApiService) CancelOrder(ctx context.Context, orderId string, currencyPair string, localVarOptionals *CancelOrderOpts) (Order, *http.Response, error) {
@@ -1850,7 +1948,7 @@ Spot and margin trades are queried by default. If cross margin trades are needed
  * @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
  * @param "Page" (optional.Int32) -  Page number
  * @param "OrderId" (optional.String) -  Filter trades with specified order ID. `currency_pair` is also required if this field is present
- * @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account
+ * @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account.  Portfolio margin account must set to `cross_margin` only
  * @param "From" (optional.Int64) -  Start timestamp of the query
  * @param "To" (optional.Int64) -  Time range ending, default to current time
 @return []Trade
@@ -1917,6 +2015,89 @@ func (a *SpotApiService) ListMyTrades(ctx context.Context, currencyPair string, 
 			Secret: a.client.cfg.Secret,
 		})
 	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+/*
+GetSystemTime Get server current time
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@return SystemTime
+*/
+func (a *SpotApiService) GetSystemTime(ctx context.Context) (SystemTime, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  SystemTime
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/spot/time"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	ctx = context.WithValue(ctx, ContextPublic, true)
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -2363,7 +2544,7 @@ func (a *SpotApiService) GetSpotPriceTriggeredOrder(ctx context.Context, orderId
 }
 
 /*
-CancelSpotPriceTriggeredOrder Cancel a single order
+CancelSpotPriceTriggeredOrder cancel a price-triggered order
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param orderId Retrieve the data of the order with the specified ID
 @return SpotPriceTriggeredOrder

@@ -26,4 +26,6 @@ type CrossMarginCurrency struct {
 	TotalMaxBorrowAmount string `json:"total_max_borrow_amount,omitempty"`
 	// Price change between this currency and USDT
 	Price string `json:"price,omitempty"`
+	// status  - `0` : disable  - `1` : enable
+	Status int32 `json:"status,omitempty"`
 }

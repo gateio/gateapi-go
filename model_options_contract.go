@@ -13,7 +13,7 @@ package gateapi
 type OptionsContract struct {
 	// Futures contract
 	Name string `json:"name,omitempty"`
-	// 标记
+	// tag
 	Tag string `json:"tag,omitempty"`
 	// Creation time
 	CreateTime float64 `json:"create_time,omitempty"`

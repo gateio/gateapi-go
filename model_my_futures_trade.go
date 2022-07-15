@@ -24,4 +24,10 @@ type MyFuturesTrade struct {
 	Price string `json:"price,omitempty"`
 	// Trade role. Available values are `taker` and `maker`
 	Role string `json:"role,omitempty"`
+	// User defined information
+	Text string `json:"text,omitempty"`
+	// Fee deducted
+	Fee string `json:"fee,omitempty"`
+	// Points used to deduct fee
+	PointFee string `json:"point_fee,omitempty"`
 }

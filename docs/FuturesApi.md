@@ -40,7 +40,7 @@ Method | HTTP request | Description
 [**CreatePriceTriggeredOrder**](FuturesApi.md#CreatePriceTriggeredOrder) | **Post** /futures/{settle}/price_orders | Create a price-triggered order
 [**CancelPriceTriggeredOrderList**](FuturesApi.md#CancelPriceTriggeredOrderList) | **Delete** /futures/{settle}/price_orders | Cancel all open orders
 [**GetPriceTriggeredOrder**](FuturesApi.md#GetPriceTriggeredOrder) | **Get** /futures/{settle}/price_orders/{order_id} | Get a single order
-[**CancelPriceTriggeredOrder**](FuturesApi.md#CancelPriceTriggeredOrder) | **Delete** /futures/{settle}/price_orders/{order_id} | Cancel a single order
+[**CancelPriceTriggeredOrder**](FuturesApi.md#CancelPriceTriggeredOrder) | **Delete** /futures/{settle}/price_orders/{order_id} | cancel a price-triggered order
 
 
 ## ListFuturesContracts
@@ -2736,7 +2736,7 @@ func main() {
 
 > FuturesPriceTriggeredOrder CancelPriceTriggeredOrder(ctx, settle, orderId)
 
-Cancel a single order
+cancel a price-triggered order
 
 ### Required Parameters
 

@@ -31,7 +31,7 @@ Method | HTTP request | Description
 [**CreatePriceTriggeredDeliveryOrder**](DeliveryApi.md#CreatePriceTriggeredDeliveryOrder) | **Post** /delivery/{settle}/price_orders | Create a price-triggered order
 [**CancelPriceTriggeredDeliveryOrderList**](DeliveryApi.md#CancelPriceTriggeredDeliveryOrderList) | **Delete** /delivery/{settle}/price_orders | Cancel all open orders
 [**GetPriceTriggeredDeliveryOrder**](DeliveryApi.md#GetPriceTriggeredDeliveryOrder) | **Get** /delivery/{settle}/price_orders/{order_id} | Get a single order
-[**CancelPriceTriggeredDeliveryOrder**](DeliveryApi.md#CancelPriceTriggeredDeliveryOrder) | **Delete** /delivery/{settle}/price_orders/{order_id} | Cancel a single order
+[**CancelPriceTriggeredDeliveryOrder**](DeliveryApi.md#CancelPriceTriggeredDeliveryOrder) | **Delete** /delivery/{settle}/price_orders/{order_id} | cancel a price-triggered order
 
 
 ## ListDeliveryContracts
@@ -2055,7 +2055,7 @@ func main() {
 
 > FuturesPriceTriggeredOrder CancelPriceTriggeredDeliveryOrder(ctx, settle, orderId)
 
-Cancel a single order
+cancel a price-triggered order
 
 ### Required Parameters
 

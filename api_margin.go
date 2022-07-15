@@ -2877,7 +2877,7 @@ func (a *MarginApiService) ListCrossMarginRepayments(ctx context.Context, localV
 }
 
 /*
-RepayCrossMarginLoan Repay cross margin loan
+RepayCrossMarginLoan When the liquidity of the currency is insufficient and the transaction risk is high, the currency will be disabled, and funds cannot be transferred.When the available balance of cross-margin is insufficient, the balance of the spot account can be used for repayment. Please ensure that the balance of the spot account is sufficient, and system uses cross-margin account for repayment first
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param crossMarginRepayRequest
 @return []CrossMarginLoan

@@ -23,4 +23,16 @@ type CrossMarginAccount struct {
 	Interest string `json:"interest,omitempty"`
 	// Risk rate. When it belows 110%, liquidation will be triggered. Calculation formula: `total / (borrowed+interest)`
 	Risk string `json:"risk,omitempty"`
+	// Total initial margin
+	TotalInitialMargin string `json:"total_initial_margin,omitempty"`
+	// Total margin balance
+	TotalMarginBalance string `json:"total_margin_balance,omitempty"`
+	// Total maintenance margin
+	TotalMaintenanceMargin string `json:"total_maintenance_margin,omitempty"`
+	// Total initial margin rate
+	TotalInitialMarginRate string `json:"total_initial_margin_rate,omitempty"`
+	// Total maintenance margin rate
+	TotalMaintenanceMarginRate string `json:"total_maintenance_margin_rate,omitempty"`
+	// Total available margin
+	TotalAvailableMargin string `json:"total_available_margin,omitempty"`
 }

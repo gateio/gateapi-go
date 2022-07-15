@@ -29,7 +29,7 @@ type Order struct {
 	CurrencyPair string `json:"currency_pair"`
 	// Order type. limit - limit order
 	Type string `json:"type,omitempty"`
-	// Account type. spot - use spot account; margin - use margin account; cross_margin - use cross margin account
+	// Account type. spot - use spot account; margin - use margin account; cross_margin - use cross margin account. Portfolio margin account must set to `cross-margin`
 	Account string `json:"account,omitempty"`
 	// Order side
 	Side string `json:"side"`

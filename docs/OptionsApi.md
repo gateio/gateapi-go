@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**GetOptionsContract**](OptionsApi.md#GetOptionsContract) | **Get** /options/contracts/{contract} | Query specified contract detail
 [**ListOptionsSettlements**](OptionsApi.md#ListOptionsSettlements) | **Get** /options/settlements | List settlement history
 [**GetOptionsSettlement**](OptionsApi.md#GetOptionsSettlement) | **Get** /options/settlements/{contract} | Get specified contract&#39;s settlement
+[**ListMyOptionsSettlements**](OptionsApi.md#ListMyOptionsSettlements) | **Get** /options/my_settlements | List my options settlements
 [**ListOptionsOrderBook**](OptionsApi.md#ListOptionsOrderBook) | **Get** /options/order_book | Futures order book
 [**ListOptionsTickers**](OptionsApi.md#ListOptionsTickers) | **Get** /options/tickers | List tickers of options contracts
 [**ListOptionsUnderlyingTickers**](OptionsApi.md#ListOptionsUnderlyingTickers) | **Get** /options/underlying/tickers/{underlying} | Get underlying ticker
@@ -417,6 +418,88 @@ func main() {
 ### Authorization
 
 No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## ListMyOptionsSettlements
+
+> []OptionsMySettlements ListMyOptionsSettlements(ctx, underlying, optional)
+
+List my options settlements
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**underlying** | **string**| Underlying | 
+**optional** | **ListMyOptionsSettlementsOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a ListMyOptionsSettlementsOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**contract** | **optional.String**| Contract name | 
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
+**from** | **optional.Int64**| Start timestamp | 
+**to** | **optional.Int64**| End timestamp | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    underlying := "BTC_USDT" // string - Underlying
+    
+    result, _, err := client.OptionsApi.ListMyOptionsSettlements(ctx, underlying, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**[]OptionsMySettlements**](OptionsMySettlements.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
 
 ### HTTP request headers
 

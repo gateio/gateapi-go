@@ -16,6 +16,7 @@ Method | HTTP request | Description
 [**ListSpotAccounts**](SpotApi.md#ListSpotAccounts) | **Get** /spot/accounts | List spot accounts
 [**CreateBatchOrders**](SpotApi.md#CreateBatchOrders) | **Post** /spot/batch_orders | Create a batch of orders
 [**ListAllOpenOrders**](SpotApi.md#ListAllOpenOrders) | **Get** /spot/open_orders | List all open orders
+[**CreateCrossLiquidateOrder**](SpotApi.md#CreateCrossLiquidateOrder) | **Post** /spot/cross_liquidate_orders | close position when cross-currency is disabled
 [**ListOrders**](SpotApi.md#ListOrders) | **Get** /spot/orders | List orders
 [**CreateOrder**](SpotApi.md#CreateOrder) | **Post** /spot/orders | Create an order
 [**CancelOrders**](SpotApi.md#CancelOrders) | **Delete** /spot/orders | Cancel all &#x60;open&#x60; orders in specified currency pair
@@ -23,11 +24,12 @@ Method | HTTP request | Description
 [**GetOrder**](SpotApi.md#GetOrder) | **Get** /spot/orders/{order_id} | Get a single order
 [**CancelOrder**](SpotApi.md#CancelOrder) | **Delete** /spot/orders/{order_id} | Cancel a single order
 [**ListMyTrades**](SpotApi.md#ListMyTrades) | **Get** /spot/my_trades | List personal trading history
+[**GetSystemTime**](SpotApi.md#GetSystemTime) | **Get** /spot/time | Get server current time
 [**ListSpotPriceTriggeredOrders**](SpotApi.md#ListSpotPriceTriggeredOrders) | **Get** /spot/price_orders | Retrieve running auto order list
 [**CreateSpotPriceTriggeredOrder**](SpotApi.md#CreateSpotPriceTriggeredOrder) | **Post** /spot/price_orders | Create a price-triggered order
 [**CancelSpotPriceTriggeredOrderList**](SpotApi.md#CancelSpotPriceTriggeredOrderList) | **Delete** /spot/price_orders | Cancel all open orders
 [**GetSpotPriceTriggeredOrder**](SpotApi.md#GetSpotPriceTriggeredOrder) | **Get** /spot/price_orders/{order_id} | Get a single order
-[**CancelSpotPriceTriggeredOrder**](SpotApi.md#CancelSpotPriceTriggeredOrder) | **Delete** /spot/price_orders/{order_id} | Cancel a single order
+[**CancelSpotPriceTriggeredOrder**](SpotApi.md#CancelSpotPriceTriggeredOrder) | **Delete** /spot/price_orders/{order_id} | cancel a price-triggered order
 
 
 ## ListCurrencies
@@ -296,6 +298,7 @@ Optional parameters are passed through a pointer to a ListTickersOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **currencyPair** | **optional.String**| Currency pair | 
+**timezone** | **optional.String**| Timezone | 
 
 ### Example
 
@@ -826,7 +829,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **page** | **optional.Int32**| Page number | [default to 1]
 **limit** | **optional.Int32**| Maximum number of records returned in one page in each currency pair | [default to 100]
-**account** | **optional.String**| Specify operation account. Default to spot and margin account if not specified. Set to &#x60;cross_margin&#x60; to operate against margin account | 
+**account** | **optional.String**| Specify operation account. Default to spot and margin account if not specified. Set to &#x60;cross_margin&#x60; to operate against margin account.  Portfolio margin account must set to &#x60;cross_margin&#x60; only | 
 
 ### Example
 
@@ -883,6 +886,77 @@ func main() {
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
+## CreateCrossLiquidateOrder
+
+> Order CreateCrossLiquidateOrder(ctx, liquidateOrder)
+
+close position when cross-currency is disabled
+
+Currently, only cross-margin accounts are supported to close position when cross currencies are disabled.  Maximum buy quantity = (unpaid principal and interest - currency balance - the amount of the currency in the order book) / 0.998
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**liquidateOrder** | [**LiquidateOrder**](LiquidateOrder.md)|  | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    liquidateOrder := gateapi.LiquidateOrder{} // LiquidateOrder - 
+    
+    result, _, err := client.SpotApi.CreateCrossLiquidateOrder(ctx, liquidateOrder)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**Order**](Order.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
 ## ListOrders
 
 > []Order ListOrders(ctx, currencyPair, status, optional)
@@ -908,7 +982,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **page** | **optional.Int32**| Page number | [default to 1]
 **limit** | **optional.Int32**| Maximum number of records to be returned. If &#x60;status&#x60; is &#x60;open&#x60;, maximum of &#x60;limit&#x60; is 100 | [default to 100]
-**account** | **optional.String**| Specify operation account. Default to spot and margin account if not specified. Set to &#x60;cross_margin&#x60; to operate against margin account | 
+**account** | **optional.String**| Specify operation account. Default to spot and margin account if not specified. Set to &#x60;cross_margin&#x60; to operate against margin account.  Portfolio margin account must set to &#x60;cross_margin&#x60; only | 
 **from** | **optional.Int64**| Start timestamp of the query | 
 **to** | **optional.Int64**| Time range ending, default to current time | 
 **side** | **optional.String**| All bids or asks. Both included if not specified | 
@@ -1064,7 +1138,7 @@ Optional parameters are passed through a pointer to a CancelOrdersOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **side** | **optional.String**| All bids or asks. Both included if not specified | 
-**account** | **optional.String**| Specify account type. Default to all account types being included | 
+**account** | **optional.String**| Specify account type  - classic account：Default to all account types being included   - portfolio margin account：&#x60;cross_margin&#x60; only | 
 
 ### Example
 
@@ -1199,7 +1273,7 @@ func main() {
 
 Get a single order
 
-Spot and margin orders are queried by default. If cross margin orders are needed, `account` must be set to `cross_margin`
+Spot and margin orders are queried by default. If cross margin orders are needed or portfolio margin account are used, account must be set to cross_margin.
 
 ### Required Parameters
 
@@ -1216,7 +1290,7 @@ Optional parameters are passed through a pointer to a GetOrderOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**account** | **optional.String**| Specify operation account. Default to spot and margin account if not specified. Set to &#x60;cross_margin&#x60; to operate against margin account | 
+**account** | **optional.String**| Specify operation account. Default to spot and margin account if not specified. Set to &#x60;cross_margin&#x60; to operate against margin account.  Portfolio margin account must set to &#x60;cross_margin&#x60; only | 
 
 ### Example
 
@@ -1281,7 +1355,7 @@ func main() {
 
 Cancel a single order
 
-Spot and margin orders are cancelled by default. If trying to cancel cross margin orders, `account` must be set to `cross_margin`
+Spot and margin orders are cancelled by default. If trying to cancel cross margin orders or portfolio margin account are used, account must be set to cross_margin
 
 ### Required Parameters
 
@@ -1298,7 +1372,7 @@ Optional parameters are passed through a pointer to a CancelOrderOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**account** | **optional.String**| Specify operation account. Default to spot and margin account if not specified. Set to &#x60;cross_margin&#x60; to operate against margin account | 
+**account** | **optional.String**| Specify operation account. Default to spot and margin account if not specified. Set to &#x60;cross_margin&#x60; to operate against margin account.  Portfolio margin account must set to &#x60;cross_margin&#x60; only | 
 
 ### Example
 
@@ -1382,7 +1456,7 @@ Name | Type | Description  | Notes
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **page** | **optional.Int32**| Page number | [default to 1]
 **orderId** | **optional.String**| Filter trades with specified order ID. &#x60;currency_pair&#x60; is also required if this field is present | 
-**account** | **optional.String**| Specify operation account. Default to spot and margin account if not specified. Set to &#x60;cross_margin&#x60; to operate against margin account | 
+**account** | **optional.String**| Specify operation account. Default to spot and margin account if not specified. Set to &#x60;cross_margin&#x60; to operate against margin account.  Portfolio margin account must set to &#x60;cross_margin&#x60; only | 
 **from** | **optional.Int64**| Start timestamp of the query | 
 **to** | **optional.Int64**| Time range ending, default to current time | 
 
@@ -1432,6 +1506,64 @@ func main() {
 ### Authorization
 
 [apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## GetSystemTime
+
+> SystemTime GetSystemTime(ctx, )
+
+Get server current time
+
+### Required Parameters
+
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.Background()
+    
+    result, _, err := client.SpotApi.GetSystemTime(ctx)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**SystemTime**](SystemTime.md)
+
+### Authorization
+
+No authorization required
 
 ### HTTP request headers
 
@@ -1742,7 +1874,7 @@ func main() {
 
 > SpotPriceTriggeredOrder CancelSpotPriceTriggeredOrder(ctx, orderId)
 
-Cancel a single order
+cancel a price-triggered order
 
 ### Required Parameters
 

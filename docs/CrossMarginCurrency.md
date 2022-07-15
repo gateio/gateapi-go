@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **UserMaxBorrowAmount** | **string** | Maximum borrow value allowed per user, in USDT | [optional] 
 **TotalMaxBorrowAmount** | **string** | Maximum borrow value allowed for this currency, in USDT | [optional] 
 **Price** | **string** | Price change between this currency and USDT | [optional] 
+**Status** | **int32** | status  - &#x60;0&#x60; : disable  - &#x60;1&#x60; : enable | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

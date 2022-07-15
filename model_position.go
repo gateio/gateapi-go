@@ -35,6 +35,10 @@ type Position struct {
 	LiqPrice string `json:"liq_price,omitempty"`
 	// Current mark price
 	MarkPrice string `json:"mark_price,omitempty"`
+	// The initial margin occupied by the position, applicable to the portfolio margin account
+	InitialMargin string `json:"initial_margin,omitempty"`
+	// Maintenance margin required for the position, applicable to portfolio margin account
+	MaintenanceMargin string `json:"maintenance_margin,omitempty"`
 	// Unrealized PNL
 	UnrealisedPnl string `json:"unrealised_pnl,omitempty"`
 	// Realized PNL

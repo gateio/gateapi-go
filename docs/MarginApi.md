@@ -33,7 +33,7 @@ Method | HTTP request | Description
 [**CreateCrossMarginLoan**](MarginApi.md#CreateCrossMarginLoan) | **Post** /margin/cross/loans | Create a cross margin borrow loan
 [**GetCrossMarginLoan**](MarginApi.md#GetCrossMarginLoan) | **Get** /margin/cross/loans/{loan_id} | Retrieve single borrow loan detail
 [**ListCrossMarginRepayments**](MarginApi.md#ListCrossMarginRepayments) | **Get** /margin/cross/repayments | Retrieve cross margin repayments
-[**RepayCrossMarginLoan**](MarginApi.md#RepayCrossMarginLoan) | **Post** /margin/cross/repayments | Repay cross margin loan
+[**RepayCrossMarginLoan**](MarginApi.md#RepayCrossMarginLoan) | **Post** /margin/cross/repayments | When the liquidity of the currency is insufficient and the transaction risk is high, the currency will be disabled, and funds cannot be transferred.When the available balance of cross-margin is insufficient, the balance of the spot account can be used for repayment. Please ensure that the balance of the spot account is sufficient, and system uses cross-margin account for repayment first
 [**GetCrossMarginTransferable**](MarginApi.md#GetCrossMarginTransferable) | **Get** /margin/cross/transferable | Get the max transferable amount for a specific cross margin currency
 [**GetCrossMarginBorrowable**](MarginApi.md#GetCrossMarginBorrowable) | **Get** /margin/cross/borrowable | Get the max borrowable amount for a specific cross margin currency
 
@@ -2129,7 +2129,7 @@ func main() {
 
 > []CrossMarginLoan RepayCrossMarginLoan(ctx, crossMarginRepayRequest)
 
-Repay cross margin loan
+When the liquidity of the currency is insufficient and the transaction risk is high, the currency will be disabled, and funds cannot be transferred.When the available balance of cross-margin is insufficient, the balance of the spot account can be used for repayment. Please ensure that the balance of the spot account is sufficient, and system uses cross-margin account for repayment first
 
 ### Required Parameters
 

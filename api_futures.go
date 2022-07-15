@@ -3698,7 +3698,7 @@ func (a *FuturesApiService) GetPriceTriggeredOrder(ctx context.Context, settle s
 }
 
 /*
-CancelPriceTriggeredOrder Cancel a single order
+CancelPriceTriggeredOrder cancel a price-triggered order
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param settle Settle currency
  * @param orderId Retrieve the data of the order with the specified ID
