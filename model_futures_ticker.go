@@ -44,4 +44,8 @@ type FuturesTicker struct {
 	IndexPrice string `json:"index_price,omitempty"`
 	// Exchange rate of base currency and settlement currency in Quanto contract. Does not exists in contracts of other types
 	QuantoBaseRate string `json:"quanto_base_rate,omitempty"`
+	// Basis rate
+	BasisRate string `json:"basis_rate,omitempty"`
+	// Basis value
+	BasisValue string `json:"basis_value,omitempty"`
 }

@@ -12,7 +12,7 @@ package gateapi
 type OptionsPositionClose struct {
 	// Position close time
 	Time float64 `json:"time,omitempty"`
-	// Futures contract
+	// Options contract name
 	Contract string `json:"contract,omitempty"`
 	// Position side, long or short
 	Side string `json:"side,omitempty"`

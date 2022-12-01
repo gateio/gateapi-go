@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**Transfer**](WalletApi.md#Transfer) | **Post** /wallet/transfers | Transfer between trading accounts
 [**ListSubAccountTransfers**](WalletApi.md#ListSubAccountTransfers) | **Get** /wallet/sub_account_transfers | Retrieve transfer records between main and sub accounts
 [**TransferWithSubAccount**](WalletApi.md#TransferWithSubAccount) | **Post** /wallet/sub_account_transfers | Transfer between main and sub accounts
+[**SubAccountToSubAccount**](WalletApi.md#SubAccountToSubAccount) | **Post** /wallet/sub_account_to_sub_account | Sub-account transfers to sub-account
 [**ListWithdrawStatus**](WalletApi.md#ListWithdrawStatus) | **Get** /wallet/withdraw_status | Retrieve withdrawal status
 [**ListSubAccountBalances**](WalletApi.md#ListSubAccountBalances) | **Get** /wallet/sub_account_balances | Retrieve sub account balances
 [**ListSubAccountMarginBalances**](WalletApi.md#ListSubAccountMarginBalances) | **Get** /wallet/sub_account_margin_balances | Query sub accounts&#39; margin balances
@@ -409,7 +410,7 @@ Optional parameters are passed through a pointer to a ListSubAccountTransfersOpt
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**subUid** | **optional.String**| Sub account user ID. Return records related to all sub accounts if not specified | 
+**subUid** | **optional.String**| User ID of sub-account, you can query multiple records separated by &#x60;,&#x60;. If not specified, it will return the records of all sub accounts | 
 **from** | **optional.Int64**| Time range beginning, default to 7 days before current time | 
 **to** | **optional.Int64**| Time range ending, default to current time | 
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
@@ -541,6 +542,75 @@ func main() {
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
+## SubAccountToSubAccount
+
+> SubAccountToSubAccount(ctx, subAccountToSubAccount)
+
+Sub-account transfers to sub-account
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**subAccountToSubAccount** | [**SubAccountToSubAccount**](SubAccountToSubAccount.md)|  | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    subAccountToSubAccount := gateapi.SubAccountToSubAccount{} // SubAccountToSubAccount - 
+    
+    result, _, err := client.WalletApi.SubAccountToSubAccount(ctx, subAccountToSubAccount)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
 ## ListWithdrawStatus
 
 > []WithdrawStatus ListWithdrawStatus(ctx, optional)
@@ -636,7 +706,7 @@ Optional parameters are passed through a pointer to a ListSubAccountBalancesOpts
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**subUid** | **optional.String**| Sub account user ID. Return records related to all sub accounts if not specified | 
+**subUid** | **optional.String**| User ID of sub-account, you can query multiple records separated by &#x60;,&#x60;. If not specified, it will return the records of all sub accounts | 
 
 ### Example
 
@@ -712,7 +782,7 @@ Optional parameters are passed through a pointer to a ListSubAccountMarginBalanc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**subUid** | **optional.String**| Sub account user ID. Return records related to all sub accounts if not specified | 
+**subUid** | **optional.String**| User ID of sub-account, you can query multiple records separated by &#x60;,&#x60;. If not specified, it will return the records of all sub accounts | 
 
 ### Example
 
@@ -788,7 +858,7 @@ Optional parameters are passed through a pointer to a ListSubAccountFuturesBalan
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**subUid** | **optional.String**| Sub account user ID. Return records related to all sub accounts if not specified | 
+**subUid** | **optional.String**| User ID of sub-account, you can query multiple records separated by &#x60;,&#x60;. If not specified, it will return the records of all sub accounts | 
 **settle** | **optional.String**| Query only balances of specified settle currency | 
 
 ### Example
@@ -865,7 +935,7 @@ Optional parameters are passed through a pointer to a ListSubAccountCrossMarginB
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**subUid** | **optional.String**| Sub account user ID. Return records related to all sub accounts if not specified | 
+**subUid** | **optional.String**| User ID of sub-account, you can query multiple records separated by &#x60;,&#x60;. If not specified, it will return the records of all sub accounts | 
 
 ### Example
 
@@ -1021,6 +1091,7 @@ Optional parameters are passed through a pointer to a GetTradeFeeOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **currencyPair** | **optional.String**| Specify a currency pair to retrieve precise fee rate  This field is optional. In most cases, the fee rate is identical among all currency pairs | 
+**settle** | **optional.String**| Specify the settlement currency of the contract to get more accurate rate settings  This field is optional. Generally, the rate settings for all settlement currencies are the same. | 
 
 ### Example
 

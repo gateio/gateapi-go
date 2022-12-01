@@ -27,7 +27,7 @@ type LedgerRecord struct {
 	// Record status.  - DONE: done - CANCEL: cancelled - REQUEST: requesting - MANUAL: pending manual approval - BCODE: GateCode operation - EXTPEND: pending confirm after sending - FAIL: pending confirm when fail - INVALID: invalid order - VERIFY: verifying - PROCES: processing - PEND: pending - DMOVE: required manual approval - SPLITPEND: the order is automatically split due to large amount
 	Status string `json:"status,omitempty"`
 	// Name of the chain used in withdrawals
-	Chain string `json:"chain,omitempty"`
+	Chain string `json:"chain"`
 	// Fee
 	Fee string `json:"fee,omitempty"`
 }

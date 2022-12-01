@@ -28,7 +28,8 @@ type OptionsApiService service
 
 /*
 ListOptionsUnderlyings List all underlyings
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return []OptionsUnderlying
 */
 func (a *OptionsApiService) ListOptionsUnderlyings(ctx context.Context) ([]OptionsUnderlying, *http.Response, error) {
@@ -111,8 +112,9 @@ func (a *OptionsApiService) ListOptionsUnderlyings(ctx context.Context) ([]Optio
 
 /*
 ListOptionsExpirations List all expiration times
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param underlying Underlying
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param underlying Underlying (Obtained by listing underlying endpoint)
+
 @return []int64
 */
 func (a *OptionsApiService) ListOptionsExpirations(ctx context.Context, underlying string) ([]int64, *http.Response, error) {
@@ -201,10 +203,11 @@ type ListOptionsContractsOpts struct {
 
 /*
 ListOptionsContracts List all the contracts with specified underlying and expiration time
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param underlying Underlying
- * @param optional nil or *ListOptionsContractsOpts - Optional Parameters:
- * @param "Expiration" (optional.Int64) -  Unix timestamp of the expiration time
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param underlying Underlying (Obtained by listing underlying endpoint)
+  - @param optional nil or *ListOptionsContractsOpts - Optional Parameters:
+  - @param "Expiration" (optional.Int64) -  Unix timestamp of the expiration time
+
 @return []OptionsContract
 */
 func (a *OptionsApiService) ListOptionsContracts(ctx context.Context, underlying string, localVarOptionals *ListOptionsContractsOpts) ([]OptionsContract, *http.Response, error) {
@@ -291,8 +294,9 @@ func (a *OptionsApiService) ListOptionsContracts(ctx context.Context, underlying
 
 /*
 GetOptionsContract Query specified contract detail
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param contract
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param contract
+
 @return OptionsContract
 */
 func (a *OptionsApiService) GetOptionsContract(ctx context.Context, contract string) (OptionsContract, *http.Response, error) {
@@ -385,13 +389,14 @@ type ListOptionsSettlementsOpts struct {
 
 /*
 ListOptionsSettlements List settlement history
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param underlying Underlying
- * @param optional nil or *ListOptionsSettlementsOpts - Optional Parameters:
- * @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
- * @param "Offset" (optional.Int32) -  List offset, starting from 0
- * @param "From" (optional.Int64) -  Start timestamp
- * @param "To" (optional.Int64) -  End timestamp
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param underlying Underlying (Obtained by listing underlying endpoint)
+  - @param optional nil or *ListOptionsSettlementsOpts - Optional Parameters:
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0
+  - @param "From" (optional.Int64) -  Start timestamp
+  - @param "To" (optional.Int64) -  End timestamp
+
 @return []OptionsSettlement
 */
 func (a *OptionsApiService) ListOptionsSettlements(ctx context.Context, underlying string, localVarOptionals *ListOptionsSettlementsOpts) ([]OptionsSettlement, *http.Response, error) {
@@ -487,10 +492,11 @@ func (a *OptionsApiService) ListOptionsSettlements(ctx context.Context, underlyi
 
 /*
 GetOptionsSettlement Get specified contract's settlement
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param contract
- * @param underlying Underlying
- * @param at
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param contract
+  - @param underlying Underlying (Obtained by listing underlying endpoint)
+  - @param at
+
 @return OptionsSettlement
 */
 func (a *OptionsApiService) GetOptionsSettlement(ctx context.Context, contract string, underlying string, at int64) (OptionsSettlement, *http.Response, error) {
@@ -586,14 +592,15 @@ type ListMyOptionsSettlementsOpts struct {
 
 /*
 ListMyOptionsSettlements List my options settlements
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param underlying Underlying
- * @param optional nil or *ListMyOptionsSettlementsOpts - Optional Parameters:
- * @param "Contract" (optional.String) -  Contract name
- * @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
- * @param "Offset" (optional.Int32) -  List offset, starting from 0
- * @param "From" (optional.Int64) -  Start timestamp
- * @param "To" (optional.Int64) -  End timestamp
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param underlying Underlying (Obtained by listing underlying endpoint)
+  - @param optional nil or *ListMyOptionsSettlementsOpts - Optional Parameters:
+  - @param "Contract" (optional.String) -  Options contract name
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0
+  - @param "From" (optional.Int64) -  Start timestamp
+  - @param "To" (optional.Int64) -  End timestamp
+
 @return []OptionsMySettlements
 */
 func (a *OptionsApiService) ListMyOptionsSettlements(ctx context.Context, underlying string, localVarOptionals *ListMyOptionsSettlementsOpts) ([]OptionsMySettlements, *http.Response, error) {
@@ -704,14 +711,15 @@ type ListOptionsOrderBookOpts struct {
 }
 
 /*
-ListOptionsOrderBook Futures order book
+ListOptionsOrderBook Options order book
 Bids will be sorted by price from high to low, while asks sorted reversely
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param contract Futures contract
- * @param optional nil or *ListOptionsOrderBookOpts - Optional Parameters:
- * @param "Interval" (optional.String) -  Order depth. 0 means no aggregation is applied. default to 0
- * @param "Limit" (optional.Int32) -  Maximum number of order depth data in asks or bids
- * @param "WithId" (optional.Bool) -  Whether the order book update ID will be returned. This ID increases by 1 on every order book update
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param contract Options contract name
+  - @param optional nil or *ListOptionsOrderBookOpts - Optional Parameters:
+  - @param "Interval" (optional.String) -  Order depth. 0 means no aggregation is applied. default to 0
+  - @param "Limit" (optional.Int32) -  Maximum number of order depth data in asks or bids
+  - @param "WithId" (optional.Bool) -  Whether the order book update ID will be returned. This ID increases by 1 on every order book update
+
 @return FuturesOrderBook
 */
 func (a *OptionsApiService) ListOptionsOrderBook(ctx context.Context, contract string, localVarOptionals *ListOptionsOrderBookOpts) (FuturesOrderBook, *http.Response, error) {
@@ -804,8 +812,9 @@ func (a *OptionsApiService) ListOptionsOrderBook(ctx context.Context, contract s
 
 /*
 ListOptionsTickers List tickers of options contracts
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param underlying Underlying
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param underlying Underlying (Obtained by listing underlying endpoint)
+
 @return []OptionsTicker
 */
 func (a *OptionsApiService) ListOptionsTickers(ctx context.Context, underlying string) ([]OptionsTicker, *http.Response, error) {
@@ -889,8 +898,9 @@ func (a *OptionsApiService) ListOptionsTickers(ctx context.Context, underlying s
 
 /*
 ListOptionsUnderlyingTickers Get underlying ticker
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param underlying Underlying
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param underlying Underlying
+
 @return OptionsUnderlyingTicker
 */
 func (a *OptionsApiService) ListOptionsUnderlyingTickers(ctx context.Context, underlying string) (OptionsUnderlyingTicker, *http.Response, error) {
@@ -982,24 +992,25 @@ type ListOptionsCandlesticksOpts struct {
 }
 
 /*
-ListOptionsCandlesticks Get futures candlesticks
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param contract Futures contract
- * @param optional nil or *ListOptionsCandlesticksOpts - Optional Parameters:
- * @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
- * @param "From" (optional.Int64) -  Start timestamp
- * @param "To" (optional.Int64) -  End timestamp
- * @param "Interval" (optional.String) -  Interval time between data points
-@return []FuturesCandlestick
+ListOptionsCandlesticks Get options candlesticks
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param contract Options contract name
+  - @param optional nil or *ListOptionsCandlesticksOpts - Optional Parameters:
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "From" (optional.Int64) -  Start timestamp
+  - @param "To" (optional.Int64) -  End timestamp
+  - @param "Interval" (optional.String) -  Interval time between data points
+
+@return []OptionsCandlestick
 */
-func (a *OptionsApiService) ListOptionsCandlesticks(ctx context.Context, contract string, localVarOptionals *ListOptionsCandlesticksOpts) ([]FuturesCandlestick, *http.Response, error) {
+func (a *OptionsApiService) ListOptionsCandlesticks(ctx context.Context, contract string, localVarOptionals *ListOptionsCandlesticksOpts) ([]OptionsCandlestick, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []FuturesCandlestick
+		localVarReturnValue  []OptionsCandlestick
 	)
 
 	// create path and map variables
@@ -1093,13 +1104,14 @@ type ListOptionsUnderlyingCandlesticksOpts struct {
 
 /*
 ListOptionsUnderlyingCandlesticks Mark price candlesticks of an underlying
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param underlying Underlying
- * @param optional nil or *ListOptionsUnderlyingCandlesticksOpts - Optional Parameters:
- * @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
- * @param "From" (optional.Int64) -  Start timestamp
- * @param "To" (optional.Int64) -  End timestamp
- * @param "Interval" (optional.String) -  Interval time between data points
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param underlying Underlying (Obtained by listing underlying endpoint)
+  - @param optional nil or *ListOptionsUnderlyingCandlesticksOpts - Optional Parameters:
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "From" (optional.Int64) -  Start timestamp
+  - @param "To" (optional.Int64) -  End timestamp
+  - @param "Interval" (optional.String) -  Interval time between data points
+
 @return []FuturesCandlestick
 */
 func (a *OptionsApiService) ListOptionsUnderlyingCandlesticks(ctx context.Context, underlying string, localVarOptionals *ListOptionsUnderlyingCandlesticksOpts) ([]FuturesCandlestick, *http.Response, error) {
@@ -1205,14 +1217,15 @@ type ListOptionsTradesOpts struct {
 
 /*
 ListOptionsTrades Options trade history
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *ListOptionsTradesOpts - Optional Parameters:
- * @param "Contract" (optional.String) -  Contract name
- * @param "Type_" (optional.String) -  `C` is call, while `P` is put
- * @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
- * @param "Offset" (optional.Int32) -  List offset, starting from 0
- * @param "From" (optional.Int64) -  Start timestamp
- * @param "To" (optional.Int64) -  End timestamp
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param optional nil or *ListOptionsTradesOpts - Optional Parameters:
+  - @param "Contract" (optional.String) -  Options contract name
+  - @param "Type_" (optional.String) -  `C` is call, while `P` is put
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0
+  - @param "From" (optional.Int64) -  Start timestamp
+  - @param "To" (optional.Int64) -  End timestamp
+
 @return []FuturesTrade
 */
 func (a *OptionsApiService) ListOptionsTrades(ctx context.Context, localVarOptionals *ListOptionsTradesOpts) ([]FuturesTrade, *http.Response, error) {
@@ -1313,7 +1326,8 @@ func (a *OptionsApiService) ListOptionsTrades(ctx context.Context, localVarOptio
 
 /*
 ListOptionsAccount List options account
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return OptionsAccount
 */
 func (a *OptionsApiService) ListOptionsAccount(ctx context.Context) (OptionsAccount, *http.Response, error) {
@@ -1411,13 +1425,14 @@ type ListOptionsAccountBookOpts struct {
 
 /*
 ListOptionsAccountBook List account changing history
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *ListOptionsAccountBookOpts - Optional Parameters:
- * @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
- * @param "Offset" (optional.Int32) -  List offset, starting from 0
- * @param "From" (optional.Int64) -  Start timestamp
- * @param "To" (optional.Int64) -  End timestamp
- * @param "Type_" (optional.String) -  Changing Type: - dnw: Deposit & Withdraw - prem: Trading premium - fee: Trading fee - refr: Referrer rebate - set: settlement PNL
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param optional nil or *ListOptionsAccountBookOpts - Optional Parameters:
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0
+  - @param "From" (optional.Int64) -  Start timestamp
+  - @param "To" (optional.Int64) -  End timestamp
+  - @param "Type_" (optional.String) -  Changing Type: - dnw: Deposit & Withdraw - prem: Trading premium - fee: Trading fee - refr: Referrer rebate - set: settlement PNL
+
 @return []OptionsAccountBook
 */
 func (a *OptionsApiService) ListOptionsAccountBook(ctx context.Context, localVarOptionals *ListOptionsAccountBookOpts) ([]OptionsAccountBook, *http.Response, error) {
@@ -1526,9 +1541,10 @@ type ListOptionsPositionsOpts struct {
 
 /*
 ListOptionsPositions List user's positions of specified underlying
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *ListOptionsPositionsOpts - Optional Parameters:
- * @param "Underlying" (optional.String) -  Underlying
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param optional nil or *ListOptionsPositionsOpts - Optional Parameters:
+  - @param "Underlying" (optional.String) -  Underlying
+
 @return []OptionsPosition
 */
 func (a *OptionsApiService) ListOptionsPositions(ctx context.Context, localVarOptionals *ListOptionsPositionsOpts) ([]OptionsPosition, *http.Response, error) {
@@ -1620,8 +1636,9 @@ func (a *OptionsApiService) ListOptionsPositions(ctx context.Context, localVarOp
 
 /*
 GetOptionsPosition Get specified contract position
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param contract
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param contract
+
 @return OptionsPosition
 */
 func (a *OptionsApiService) GetOptionsPosition(ctx context.Context, contract string) (OptionsPosition, *http.Response, error) {
@@ -1717,10 +1734,11 @@ type ListOptionsPositionCloseOpts struct {
 
 /*
 ListOptionsPositionClose List user's liquidation history of specified underlying
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param underlying Underlying
- * @param optional nil or *ListOptionsPositionCloseOpts - Optional Parameters:
- * @param "Contract" (optional.String) -  Contract name
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param underlying Underlying (Obtained by listing underlying endpoint)
+  - @param optional nil or *ListOptionsPositionCloseOpts - Optional Parameters:
+  - @param "Contract" (optional.String) -  Options contract name
+
 @return []OptionsPositionClose
 */
 func (a *OptionsApiService) ListOptionsPositionClose(ctx context.Context, underlying string, localVarOptionals *ListOptionsPositionCloseOpts) ([]OptionsPositionClose, *http.Response, error) {
@@ -1822,16 +1840,17 @@ type ListOptionsOrdersOpts struct {
 }
 
 /*
-ListOptionsOrders List futures orders
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param status Only list the orders with this status
- * @param optional nil or *ListOptionsOrdersOpts - Optional Parameters:
- * @param "Contract" (optional.String) -  Contract name
- * @param "Underlying" (optional.String) -  Underlying
- * @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
- * @param "Offset" (optional.Int32) -  List offset, starting from 0
- * @param "From" (optional.Int64) -  Start timestamp
- * @param "To" (optional.Int64) -  End timestamp
+ListOptionsOrders List options orders
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param status Only list the orders with this status
+  - @param optional nil or *ListOptionsOrdersOpts - Optional Parameters:
+  - @param "Contract" (optional.String) -  Options contract name
+  - @param "Underlying" (optional.String) -  Underlying
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0
+  - @param "From" (optional.Int64) -  Start timestamp
+  - @param "To" (optional.Int64) -  End timestamp
+
 @return []OptionsOrder
 */
 func (a *OptionsApiService) ListOptionsOrders(ctx context.Context, status string, localVarOptionals *ListOptionsOrdersOpts) ([]OptionsOrder, *http.Response, error) {
@@ -1939,8 +1958,9 @@ func (a *OptionsApiService) ListOptionsOrders(ctx context.Context, status string
 
 /*
 CreateOptionsOrder Create an options order
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optionsOrder
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param optionsOrder
+
 @return OptionsOrder
 */
 func (a *OptionsApiService) CreateOptionsOrder(ctx context.Context, optionsOrder OptionsOrder) (OptionsOrder, *http.Response, error) {
@@ -2038,11 +2058,12 @@ type CancelOptionsOrdersOpts struct {
 
 /*
 CancelOptionsOrders Cancel all `open` orders matched
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *CancelOptionsOrdersOpts - Optional Parameters:
- * @param "Contract" (optional.String) -  Contract name
- * @param "Underlying" (optional.String) -  Underlying
- * @param "Side" (optional.String) -  All bids or asks. Both included if not specified
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param optional nil or *CancelOptionsOrdersOpts - Optional Parameters:
+  - @param "Contract" (optional.String) -  Options contract name
+  - @param "Underlying" (optional.String) -  Underlying
+  - @param "Side" (optional.String) -  All bids or asks. Both included if not specified
+
 @return []OptionsOrder
 */
 func (a *OptionsApiService) CancelOptionsOrders(ctx context.Context, localVarOptionals *CancelOptionsOrdersOpts) ([]OptionsOrder, *http.Response, error) {
@@ -2140,8 +2161,9 @@ func (a *OptionsApiService) CancelOptionsOrders(ctx context.Context, localVarOpt
 
 /*
 GetOptionsOrder Get a single order
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param orderId Order ID returned on successful order creation
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param orderId Order ID returned on successful order creation
+
 @return OptionsOrder
 */
 func (a *OptionsApiService) GetOptionsOrder(ctx context.Context, orderId int64) (OptionsOrder, *http.Response, error) {
@@ -2232,8 +2254,9 @@ func (a *OptionsApiService) GetOptionsOrder(ctx context.Context, orderId int64) 
 
 /*
 CancelOptionsOrder Cancel a single order
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param orderId Order ID returned on successful order creation
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param orderId Order ID returned on successful order creation
+
 @return OptionsOrder
 */
 func (a *OptionsApiService) CancelOptionsOrder(ctx context.Context, orderId int64) (OptionsOrder, *http.Response, error) {
@@ -2333,14 +2356,15 @@ type ListMyOptionsTradesOpts struct {
 
 /*
 ListMyOptionsTrades List personal trading history
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param underlying Underlying
- * @param optional nil or *ListMyOptionsTradesOpts - Optional Parameters:
- * @param "Contract" (optional.String) -  Contract name
- * @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
- * @param "Offset" (optional.Int32) -  List offset, starting from 0
- * @param "From" (optional.Int64) -  Start timestamp
- * @param "To" (optional.Int64) -  End timestamp
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param underlying Underlying (Obtained by listing underlying endpoint)
+  - @param optional nil or *ListMyOptionsTradesOpts - Optional Parameters:
+  - @param "Contract" (optional.String) -  Options contract name
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0
+  - @param "From" (optional.Int64) -  Start timestamp
+  - @param "To" (optional.Int64) -  End timestamp
+
 @return []OptionsMyTrade
 */
 func (a *OptionsApiService) ListMyOptionsTrades(ctx context.Context, underlying string, localVarOptionals *ListMyOptionsTradesOpts) ([]OptionsMyTrade, *http.Response, error) {

@@ -20,6 +20,6 @@ type FuturesTrade struct {
 	Contract string `json:"contract,omitempty"`
 	// Trading size
 	Size int64 `json:"size,omitempty"`
-	// Trading price
+	// Trading price (quote currency)
 	Price string `json:"price,omitempty"`
 }

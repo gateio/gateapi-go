@@ -27,8 +27,9 @@ type WithdrawalApiService service
 
 /*
 Withdraw Withdraw
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param ledgerRecord
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ledgerRecord
+
 @return LedgerRecord
 */
 func (a *WithdrawalApiService) Withdraw(ctx context.Context, ledgerRecord LedgerRecord) (LedgerRecord, *http.Response, error) {
@@ -119,8 +120,9 @@ func (a *WithdrawalApiService) Withdraw(ctx context.Context, ledgerRecord Ledger
 
 /*
 CancelWithdrawal Cancel withdrawal with specified ID
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param withdrawalId
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param withdrawalId
+
 @return LedgerRecord
 */
 func (a *WithdrawalApiService) CancelWithdrawal(ctx context.Context, withdrawalId string) (LedgerRecord, *http.Response, error) {

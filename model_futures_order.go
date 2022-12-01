@@ -41,7 +41,7 @@ type FuturesOrder struct {
 	IsReduceOnly bool `json:"is_reduce_only,omitempty"`
 	// Is the order for liquidation
 	IsLiq bool `json:"is_liq,omitempty"`
-	// Time in force  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled, taker only - poc: PendingOrCancelled, reduce-only
+	// Time in force  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled, taker only - poc: PendingOrCancelled, makes a post-only order that always enjoys a maker fee - fok: FillOrKill, fill either completely or none
 	Tif string `json:"tif,omitempty"`
 	// Size left to be traded
 	Left int64 `json:"left,omitempty"`

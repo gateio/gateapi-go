@@ -13,11 +13,11 @@ package gateapi
 type OptionsTicker struct {
 	// Options contract name
 	Name string `json:"name,omitempty"`
-	// Last trading price
+	// Last trading price (quote currency)
 	LastPrice string `json:"last_price,omitempty"`
-	// Current mark price
+	// Current mark price (quote currency)
 	MarkPrice string `json:"mark_price,omitempty"`
-	// Current index price
+	// Current index price (quote currency)
 	IndexPrice string `json:"index_price,omitempty"`
 	// Best ask size
 	Ask1Size int64 `json:"ask1_size,omitempty"`

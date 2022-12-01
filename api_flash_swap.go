@@ -28,7 +28,8 @@ type FlashSwapApiService service
 
 /*
 ListFlashSwapCurrencies List all supported currencies in flash swap
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return []FlashSwapCurrency
 */
 func (a *FlashSwapApiService) ListFlashSwapCurrencies(ctx context.Context) ([]FlashSwapCurrency, *http.Response, error) {
@@ -121,14 +122,15 @@ type ListFlashSwapOrdersOpts struct {
 
 /*
 ListFlashSwapOrders List all flash swap orders
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *ListFlashSwapOrdersOpts - Optional Parameters:
- * @param "Status" (optional.Int32) -  Flash swap order status  `1` - success `2` - failure
- * @param "SellCurrency" (optional.String) -  Currency to sell which can be retrieved from supported currency list API `GET /flash_swap/currencies`
- * @param "BuyCurrency" (optional.String) -  Currency to buy which can be retrieved from supported currency list API `GET /flash_swap/currencies`
- * @param "Reverse" (optional.Bool) -  If results are sorted by id in reverse order. Default to `true`  - `true`: sort by id in descending order(recent first) - `false`: sort by id in ascending order(oldest first)
- * @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
- * @param "Page" (optional.Int32) -  Page number
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param optional nil or *ListFlashSwapOrdersOpts - Optional Parameters:
+  - @param "Status" (optional.Int32) -  Flash swap order status  `1` - success `2` - failure
+  - @param "SellCurrency" (optional.String) -  Currency to sell which can be retrieved from supported currency list API `GET /flash_swap/currencies`
+  - @param "BuyCurrency" (optional.String) -  Currency to buy which can be retrieved from supported currency list API `GET /flash_swap/currencies`
+  - @param "Reverse" (optional.Bool) -  If results are sorted by id in reverse order. Default to `true`  - `true`: sort by id in descending order(recent first) - `false`: sort by id in ascending order(oldest first)
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Page" (optional.Int32) -  Page number
+
 @return []FlashSwapOrder
 */
 func (a *FlashSwapApiService) ListFlashSwapOrders(ctx context.Context, localVarOptionals *ListFlashSwapOrdersOpts) ([]FlashSwapOrder, *http.Response, error) {
@@ -236,8 +238,9 @@ func (a *FlashSwapApiService) ListFlashSwapOrders(ctx context.Context, localVarO
 /*
 CreateFlashSwapOrder Create a flash swap order
 Initiate a flash swap preview in advance because order creation requires a preview result
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param flashSwapOrderRequest
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param flashSwapOrderRequest
+
 @return FlashSwapOrder
 */
 func (a *FlashSwapApiService) CreateFlashSwapOrder(ctx context.Context, flashSwapOrderRequest FlashSwapOrderRequest) (FlashSwapOrder, *http.Response, error) {
@@ -328,8 +331,9 @@ func (a *FlashSwapApiService) CreateFlashSwapOrder(ctx context.Context, flashSwa
 
 /*
 GetFlashSwapOrder Get a single flash swap order's detail
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param orderId Flash swap order ID
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param orderId Flash swap order ID
+
 @return FlashSwapOrder
 */
 func (a *FlashSwapApiService) GetFlashSwapOrder(ctx context.Context, orderId int32) (FlashSwapOrder, *http.Response, error) {
@@ -420,8 +424,9 @@ func (a *FlashSwapApiService) GetFlashSwapOrder(ctx context.Context, orderId int
 
 /*
 PreviewFlashSwapOrder Initiate a flash swap order preview
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param flashSwapOrderRequest
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param flashSwapOrderRequest
+
 @return FlashSwapOrderPreview
 */
 func (a *FlashSwapApiService) PreviewFlashSwapOrder(ctx context.Context, flashSwapOrderRequest FlashSwapOrderRequest) (FlashSwapOrderPreview, *http.Response, error) {

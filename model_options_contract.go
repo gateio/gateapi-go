@@ -9,9 +9,9 @@
 
 package gateapi
 
-// Futures contract details
+// Options contract detail
 type OptionsContract struct {
-	// Futures contract
+	// Options contract name
 	Name string `json:"name,omitempty"`
 	// tag
 	Tag string `json:"tag,omitempty"`
@@ -25,13 +25,13 @@ type OptionsContract struct {
 	Multiplier string `json:"multiplier,omitempty"`
 	// Underlying
 	Underlying string `json:"underlying,omitempty"`
-	// Underlying price
+	// Underlying price (quote currency)
 	UnderlyingPrice string `json:"underlying_price,omitempty"`
 	// Last trading price
 	LastPrice string `json:"last_price,omitempty"`
-	// Current mark price
+	// Current mark price (quote currency)
 	MarkPrice string `json:"mark_price,omitempty"`
-	// Current index price
+	// Current index price (quote currency)
 	IndexPrice string `json:"index_price,omitempty"`
 	// Maker fee rate, where negative means rebate
 	MakerFeeRate string `json:"maker_fee_rate,omitempty"`

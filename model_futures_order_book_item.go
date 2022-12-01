@@ -10,7 +10,7 @@
 package gateapi
 
 type FuturesOrderBookItem struct {
-	// Price
+	// Price (quote currency)
 	P string `json:"p,omitempty"`
 	// Size
 	S int64 `json:"s,omitempty"`

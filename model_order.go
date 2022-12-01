@@ -27,17 +27,17 @@ type Order struct {
 	Status string `json:"status,omitempty"`
 	// Currency pair
 	CurrencyPair string `json:"currency_pair"`
-	// Order type. limit - limit order
+	// Order Type   - limit : Limit Order - market : Market Order
 	Type string `json:"type,omitempty"`
 	// Account type. spot - use spot account; margin - use margin account; cross_margin - use cross margin account. Portfolio margin account must set to `cross-margin`
 	Account string `json:"account,omitempty"`
 	// Order side
 	Side string `json:"side"`
-	// Trade amount
+	// When `type` is limit, it refers to base currency.  For instance, `BTC_USDT` means `BTC`  When `type` is `market`, it refers to different currency according to `side`  - `side` : `buy` means quote currency, `BTC_USDT` means `USDT` - `side` : `sell` means base currency，`BTC_USDT` means `BTC`
 	Amount string `json:"amount"`
-	// Order price
-	Price string `json:"price"`
-	// Time in force  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled, taker only - poc: PendingOrCancelled, makes a post-only order that always enjoys a maker fee - fok: FillOrKill, fill either completely or none
+	// Price can't be empty when `type`= `limit`
+	Price string `json:"price,omitempty"`
+	// Time in force  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled, taker only - poc: PendingOrCancelled, makes a post-only order that always enjoys a maker fee - fok: FillOrKill, fill either completely or none Only `ioc` and `fok` are supported when `type`=`market`
 	TimeInForce string `json:"time_in_force,omitempty"`
 	// Amount to display for the iceberg order. Null or 0 for normal orders. Set to -1 to hide the order completely
 	Iceberg string `json:"iceberg,omitempty"`
@@ -59,6 +59,10 @@ type Order struct {
 	PointFee string `json:"point_fee,omitempty"`
 	// GT used to deduct fee
 	GtFee string `json:"gt_fee,omitempty"`
+	// GT used to deduct maker fee
+	GtMakerFee string `json:"gt_maker_fee,omitempty"`
+	// GT used to deduct taker fee
+	GtTakerFee string `json:"gt_taker_fee,omitempty"`
 	// Whether GT fee discount is used
 	GtDiscount bool `json:"gt_discount,omitempty"`
 	// Rebated fee

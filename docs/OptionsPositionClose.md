@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Time** | **float64** | Position close time | [optional] [readonly] 
-**Contract** | **string** | Futures contract | [optional] [readonly] 
+**Contract** | **string** | Options contract name | [optional] [readonly] 
 **Side** | **string** | Position side, long or short | [optional] [readonly] 
 **Pnl** | **string** | PNL | [optional] [readonly] 
 **Text** | **string** | Text of close order | [optional] [readonly] 

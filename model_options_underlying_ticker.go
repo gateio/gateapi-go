@@ -15,6 +15,6 @@ type OptionsUnderlyingTicker struct {
 	TradePut int64 `json:"trade_put,omitempty"`
 	// Total call options trades amount in last 24h
 	TradeCall int64 `json:"trade_call,omitempty"`
-	// Index price
+	// Index price (quote currency)
 	IndexPrice string `json:"index_price,omitempty"`
 }

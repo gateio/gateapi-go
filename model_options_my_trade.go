@@ -14,15 +14,15 @@ type OptionsMyTrade struct {
 	Id int64 `json:"id,omitempty"`
 	// Trading time
 	CreateTime float64 `json:"create_time,omitempty"`
-	// Futures contract
+	// Options contract name
 	Contract string `json:"contract,omitempty"`
 	// Order ID related
 	OrderId int32 `json:"order_id,omitempty"`
 	// Trading size
 	Size int64 `json:"size,omitempty"`
-	// Trading price
+	// Trading price (quote currency)
 	Price string `json:"price,omitempty"`
-	// Underlying price
+	// Underlying price (quote currency)
 	UnderlyingPrice string `json:"underlying_price,omitempty"`
 	// Trade role. Available values are `taker` and `maker`
 	Role string `json:"role,omitempty"`

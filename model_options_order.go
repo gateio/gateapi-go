@@ -29,7 +29,7 @@ type OptionsOrder struct {
 	Size int64 `json:"size"`
 	// Display size for iceberg order. 0 for non-iceberg. Note that you will have to pay the taker fee for the hidden size
 	Iceberg int64 `json:"iceberg,omitempty"`
-	// Order price. 0 for market order with `tif` set as `ioc`
+	// Order price. 0 for market order with `tif` set as `ioc` (USDT)
 	Price string `json:"price,omitempty"`
 	// Set as `true` to close the position, with `size` set to 0
 	Close bool `json:"close,omitempty"`
@@ -41,7 +41,7 @@ type OptionsOrder struct {
 	IsReduceOnly bool `json:"is_reduce_only,omitempty"`
 	// Is the order for liquidation
 	IsLiq bool `json:"is_liq,omitempty"`
-	// Time in force  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled, taker only - poc: PendingOrCancelled, reduce-only
+	// Time in force  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled, taker only - poc: PendingOrCancelled, makes a post-only order that always enjoys a maker fee
 	Tif string `json:"tif,omitempty"`
 	// Size left to be traded
 	Left int64 `json:"left,omitempty"`
@@ -55,4 +55,6 @@ type OptionsOrder struct {
 	Mkfr string `json:"mkfr,omitempty"`
 	// Reference user ID
 	Refu int32 `json:"refu,omitempty"`
+	// Referrer rebate
+	Refr string `json:"refr,omitempty"`
 }

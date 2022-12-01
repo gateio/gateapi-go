@@ -29,7 +29,8 @@ type SpotApiService service
 /*
 ListCurrencies List all currencies' details
 Currency has two forms:  1. Only currency name, e.g., BTC, USDT 2. &#x60;&lt;currency&gt;_&lt;chain&gt;&#x60;, e.g., &#x60;HT_ETH&#x60;  The latter one occurs when one currency has multiple chains. Currency detail contains a &#x60;chain&#x60; field whatever the form is. To retrieve all chains of one currency, you can use use all the details which has the name of the currency or name starting with &#x60;&lt;currency&gt;_&#x60;.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return []Currency
 */
 func (a *SpotApiService) ListCurrencies(ctx context.Context) ([]Currency, *http.Response, error) {
@@ -112,8 +113,9 @@ func (a *SpotApiService) ListCurrencies(ctx context.Context) ([]Currency, *http.
 
 /*
 GetCurrency Get details of a specific currency
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param currency Currency name
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param currency Currency name
+
 @return Currency
 */
 func (a *SpotApiService) GetCurrency(ctx context.Context, currency string) (Currency, *http.Response, error) {
@@ -198,7 +200,8 @@ func (a *SpotApiService) GetCurrency(ctx context.Context, currency string) (Curr
 
 /*
 ListCurrencyPairs List all currency pairs supported
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return []CurrencyPair
 */
 func (a *SpotApiService) ListCurrencyPairs(ctx context.Context) ([]CurrencyPair, *http.Response, error) {
@@ -281,8 +284,9 @@ func (a *SpotApiService) ListCurrencyPairs(ctx context.Context) ([]CurrencyPair,
 
 /*
 GetCurrencyPair Get details of a specifc order
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param currencyPair Currency pair
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param currencyPair Currency pair
+
 @return CurrencyPair
 */
 func (a *SpotApiService) GetCurrencyPair(ctx context.Context, currencyPair string) (CurrencyPair, *http.Response, error) {
@@ -374,10 +378,11 @@ type ListTickersOpts struct {
 /*
 ListTickers Retrieve ticker information
 Return only related data if &#x60;currency_pair&#x60; is specified; otherwise return all of them
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *ListTickersOpts - Optional Parameters:
- * @param "CurrencyPair" (optional.String) -  Currency pair
- * @param "Timezone" (optional.String) -  Timezone
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param optional nil or *ListTickersOpts - Optional Parameters:
+  - @param "CurrencyPair" (optional.String) -  Currency pair
+  - @param "Timezone" (optional.String) -  Timezone
+
 @return []Ticker
 */
 func (a *SpotApiService) ListTickers(ctx context.Context, localVarOptionals *ListTickersOpts) ([]Ticker, *http.Response, error) {
@@ -474,12 +479,13 @@ type ListOrderBookOpts struct {
 /*
 ListOrderBook Retrieve order book
 Order book will be sorted by price from high to low on bids; low to high on asks
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param currencyPair Currency pair
- * @param optional nil or *ListOrderBookOpts - Optional Parameters:
- * @param "Interval" (optional.String) -  Order depth. 0 means no aggregation is applied. default to 0
- * @param "Limit" (optional.Int32) -  Maximum number of order depth data in asks or bids
- * @param "WithId" (optional.Bool) -  Return order book ID
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param currencyPair Currency pair
+  - @param optional nil or *ListOrderBookOpts - Optional Parameters:
+  - @param "Interval" (optional.String) -  Order depth. 0 means no aggregation is applied. default to 0
+  - @param "Limit" (optional.Int32) -  Maximum number of order depth data in asks or bids
+  - @param "WithId" (optional.Bool) -  Return order book ID
+
 @return OrderBook
 */
 func (a *SpotApiService) ListOrderBook(ctx context.Context, currencyPair string, localVarOptionals *ListOrderBookOpts) (OrderBook, *http.Response, error) {
@@ -583,15 +589,16 @@ type ListTradesOpts struct {
 /*
 ListTrades Retrieve market trades
 You can use &#x60;from&#x60; and &#x60;to&#x60; to query by time range, or use &#x60;last_id&#x60; by scrolling page. The default behavior is by time range.  Scrolling query using &#x60;last_id&#x60; is not recommended any more. If &#x60;last_id&#x60; is specified, time range query parameters will be ignored.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param currencyPair Currency pair
- * @param optional nil or *ListTradesOpts - Optional Parameters:
- * @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
- * @param "LastId" (optional.String) -  Specify list staring point using the `id` of last record in previous list-query results
- * @param "Reverse" (optional.Bool) -  Whether the id of records to be retrieved should be less than the last_id specified. Default to false.  When `last_id` is specified. Set `reverse` to `true` to trace back trading history; `false` to retrieve latest tradings.  No effect if `last_id` is not specified.
- * @param "From" (optional.Int64) -  Start timestamp of the query
- * @param "To" (optional.Int64) -  Time range ending, default to current time
- * @param "Page" (optional.Int32) -  Page number
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param currencyPair Currency pair
+  - @param optional nil or *ListTradesOpts - Optional Parameters:
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.  Default: 100, Minimum: 1, Maximum: 1000
+  - @param "LastId" (optional.String) -  Specify list staring point using the `id` of last record in previous list-query results
+  - @param "Reverse" (optional.Bool) -  Whether the id of records to be retrieved should be less than the last_id specified. Default to false.  When `last_id` is specified. Set `reverse` to `true` to trace back trading history; `false` to retrieve latest tradings.  No effect if `last_id` is not specified.
+  - @param "From" (optional.Int64) -  Start timestamp of the query
+  - @param "To" (optional.Int64) -  Time range ending, default to current time
+  - @param "Page" (optional.Int32) -  Page number
+
 @return []Trade
 */
 func (a *SpotApiService) ListTrades(ctx context.Context, currencyPair string, localVarOptionals *ListTradesOpts) ([]Trade, *http.Response, error) {
@@ -702,13 +709,14 @@ type ListCandlesticksOpts struct {
 /*
 ListCandlesticks Market candlesticks
 Maximum of 1000 points can be returned in a query. Be sure not to exceed the limit when specifying from, to and interval
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param currencyPair Currency pair
- * @param optional nil or *ListCandlesticksOpts - Optional Parameters:
- * @param "Limit" (optional.Int32) -  Maximum recent data points to return. `limit` is conflicted with `from` and `to`. If either `from` or `to` is specified, request will be rejected.
- * @param "From" (optional.Int64) -  Start time of candlesticks, formatted in Unix timestamp in seconds. Default to`to - 100 * interval` if not specified
- * @param "To" (optional.Int64) -  End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time
- * @param "Interval" (optional.String) -  Interval time between data points. Note that `30d` means 1 natual month, not 30 days
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param currencyPair Currency pair
+  - @param optional nil or *ListCandlesticksOpts - Optional Parameters:
+  - @param "Limit" (optional.Int32) -  Maximum recent data points to return. `limit` is conflicted with `from` and `to`. If either `from` or `to` is specified, request will be rejected.
+  - @param "From" (optional.Int64) -  Start time of candlesticks, formatted in Unix timestamp in seconds. Default to`to - 100 * interval` if not specified
+  - @param "To" (optional.Int64) -  End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time
+  - @param "Interval" (optional.String) -  Interval time between data points. Note that `30d` means 1 natual month, not 30 days
+
 @return [][]string
 */
 func (a *SpotApiService) ListCandlesticks(ctx context.Context, currencyPair string, localVarOptionals *ListCandlesticksOpts) ([][]string, *http.Response, error) {
@@ -810,9 +818,10 @@ type GetFeeOpts struct {
 /*
 GetFee Query user trading fee rates
 This API is deprecated in favour of new fee retrieving API &#x60;/wallet/fee&#x60;.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *GetFeeOpts - Optional Parameters:
- * @param "CurrencyPair" (optional.String) -  Specify a currency pair to retrieve precise fee rate  This field is optional. In most cases, the fee rate is identical among all currency pairs
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param optional nil or *GetFeeOpts - Optional Parameters:
+  - @param "CurrencyPair" (optional.String) -  Specify a currency pair to retrieve precise fee rate  This field is optional. In most cases, the fee rate is identical among all currency pairs
+
 @return TradeFee
 */
 func (a *SpotApiService) GetFee(ctx context.Context, localVarOptionals *GetFeeOpts) (TradeFee, *http.Response, error) {
@@ -909,9 +918,10 @@ type ListSpotAccountsOpts struct {
 
 /*
 ListSpotAccounts List spot accounts
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *ListSpotAccountsOpts - Optional Parameters:
- * @param "Currency" (optional.String) -  Retrieve data of the specified currency
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param optional nil or *ListSpotAccountsOpts - Optional Parameters:
+  - @param "Currency" (optional.String) -  Retrieve data of the specified currency
+
 @return []SpotAccount
 */
 func (a *SpotApiService) ListSpotAccounts(ctx context.Context, localVarOptionals *ListSpotAccountsOpts) ([]SpotAccount, *http.Response, error) {
@@ -1004,8 +1014,9 @@ func (a *SpotApiService) ListSpotAccounts(ctx context.Context, localVarOptionals
 /*
 CreateBatchOrders Create a batch of orders
 Batch orders requirements:  1. custom order field &#x60;text&#x60; is required 2. At most 4 currency pairs, maximum 10 orders each, are allowed in one request 3. No mixture of spot orders and margin orders, i.e. &#x60;account&#x60; must be identical for all orders
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param order
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param order
+
 @return []BatchOrder
 */
 func (a *SpotApiService) CreateBatchOrders(ctx context.Context, order []Order) ([]BatchOrder, *http.Response, error) {
@@ -1104,11 +1115,12 @@ type ListAllOpenOrdersOpts struct {
 /*
 ListAllOpenOrders List all open orders
 List open orders in all currency pairs.  Note that pagination parameters affect record number in each currency pair&#39;s open order list. No pagination is applied to the number of currency pairs returned. All currency pairs with open orders will be returned.  Spot and margin orders are returned by default. To list cross margin orders, &#x60;account&#x60; must be set to &#x60;cross_margin&#x60;
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *ListAllOpenOrdersOpts - Optional Parameters:
- * @param "Page" (optional.Int32) -  Page number
- * @param "Limit" (optional.Int32) -  Maximum number of records returned in one page in each currency pair
- * @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account.  Portfolio margin account must set to `cross_margin` only
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param optional nil or *ListAllOpenOrdersOpts - Optional Parameters:
+  - @param "Page" (optional.Int32) -  Page number
+  - @param "Limit" (optional.Int32) -  Maximum number of records returned in one page in each currency pair
+  - @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account.  Portfolio margin account must set to `cross_margin` only
+
 @return []OpenOrders
 */
 func (a *SpotApiService) ListAllOpenOrders(ctx context.Context, localVarOptionals *ListAllOpenOrdersOpts) ([]OpenOrders, *http.Response, error) {
@@ -1207,8 +1219,9 @@ func (a *SpotApiService) ListAllOpenOrders(ctx context.Context, localVarOptional
 /*
 CreateCrossLiquidateOrder close position when cross-currency is disabled
 Currently, only cross-margin accounts are supported to close position when cross currencies are disabled.  Maximum buy quantity &#x3D; (unpaid principal and interest - currency balance - the amount of the currency in the order book) / 0.998
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param liquidateOrder
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param liquidateOrder
+
 @return Order
 */
 func (a *SpotApiService) CreateCrossLiquidateOrder(ctx context.Context, liquidateOrder LiquidateOrder) (Order, *http.Response, error) {
@@ -1310,16 +1323,17 @@ type ListOrdersOpts struct {
 /*
 ListOrders List orders
 Spot and margin orders are returned by default. If cross margin orders are needed, &#x60;account&#x60; must be set to &#x60;cross_margin&#x60;  When &#x60;status&#x60; is &#x60;open&#x60;, i.e., listing open orders, only pagination parameters &#x60;page&#x60; and &#x60;limit&#x60; are supported and &#x60;limit&#x60; cannot be larger than 100. Query by &#x60;side&#x60; and time range parameters &#x60;from&#x60; and &#x60;to&#x60; are not supported.  When &#x60;status&#x60; is &#x60;finished&#x60;, i.e., listing finished orders, pagination parameters, time range parameters &#x60;from&#x60; and &#x60;to&#x60;, and &#x60;side&#x60; parameters are all supported. Time range parameters are handled as order finish time.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param currencyPair Retrieve results with specified currency pair. It is required for open orders, but optional for finished ones.
- * @param status List orders based on status  `open` - order is waiting to be filled `finished` - order has been filled or cancelled
- * @param optional nil or *ListOrdersOpts - Optional Parameters:
- * @param "Page" (optional.Int32) -  Page number
- * @param "Limit" (optional.Int32) -  Maximum number of records to be returned. If `status` is `open`, maximum of `limit` is 100
- * @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account.  Portfolio margin account must set to `cross_margin` only
- * @param "From" (optional.Int64) -  Start timestamp of the query
- * @param "To" (optional.Int64) -  Time range ending, default to current time
- * @param "Side" (optional.String) -  All bids or asks. Both included if not specified
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param currencyPair Retrieve results with specified currency pair. It is required for open orders, but optional for finished ones.
+  - @param status List orders based on status  `open` - order is waiting to be filled `finished` - order has been filled or cancelled
+  - @param optional nil or *ListOrdersOpts - Optional Parameters:
+  - @param "Page" (optional.Int32) -  Page number
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned. If `status` is `open`, maximum of `limit` is 100
+  - @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account.  Portfolio margin account must set to `cross_margin` only
+  - @param "From" (optional.Int64) -  Start timestamp of the query
+  - @param "To" (optional.Int64) -  Time range ending, default to current time
+  - @param "Side" (optional.String) -  All bids or asks. Both included if not specified
+
 @return []Order
 */
 func (a *SpotApiService) ListOrders(ctx context.Context, currencyPair string, status string, localVarOptionals *ListOrdersOpts) ([]Order, *http.Response, error) {
@@ -1429,8 +1443,9 @@ func (a *SpotApiService) ListOrders(ctx context.Context, currencyPair string, st
 /*
 CreateOrder Create an order
 You can place orders with spot, margin or cross margin account through setting the &#x60;account &#x60;field. It defaults to &#x60;spot&#x60;, which means spot account is used to place orders.  When margin account is used, i.e., &#x60;account&#x60; is &#x60;margin&#x60;, &#x60;auto_borrow&#x60; field can be set to &#x60;true&#x60; to enable the server to borrow the amount lacked using &#x60;POST /margin/loans&#x60; when your account&#39;s balance is not enough. Whether margin orders&#39; fill will be used to repay margin loans automatically is determined by the auto repayment setting in your **margin account**, which can be updated or queried using &#x60;/margin/auto_repay&#x60; API.  When cross margin account is used, i.e., &#x60;account&#x60; is &#x60;cross_margin&#x60;, &#x60;auto_borrow&#x60; can also be enabled to achieve borrowing the insufficient amount automatically if cross account&#39;s balance is not enough. But it differs from margin account that automatic repayment is determined by order&#39;s &#x60;auto_repay&#x60; field and only current order&#39;s fill will be used to repay cross margin loans.  Automatic repayment will be triggered when the order is finished, i.e., its status is either &#x60;cancelled&#x60; or &#x60;closed&#x60;.  **Order status**  An order waiting to be filled is &#x60;open&#x60;, and it stays &#x60;open&#x60; until it is filled totally. If fully filled, order is finished and its status turns to &#x60;closed&#x60;.If the order is cancelled before it is totally filled, whether or not partially filled, its status is &#x60;cancelled&#x60;. **Iceberg order**  &#x60;iceberg&#x60; field can be used to set the amount shown. Set to &#x60;-1&#x60; to hide the order completely. Note that the hidden part&#39;s fee will be charged using taker&#39;s fee rate.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param order
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param order
+
 @return Order
 */
 func (a *SpotApiService) CreateOrder(ctx context.Context, order Order) (Order, *http.Response, error) {
@@ -1528,11 +1543,12 @@ type CancelOrdersOpts struct {
 /*
 CancelOrders Cancel all `open` orders in specified currency pair
 If &#x60;account&#x60; is not set, all open orders, including spot, margin and cross margin ones, will be cancelled.  You can set &#x60;account&#x60; to cancel only orders within the specified account
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param currencyPair Currency pair
- * @param optional nil or *CancelOrdersOpts - Optional Parameters:
- * @param "Side" (optional.String) -  All bids or asks. Both included if not specified
- * @param "Account" (optional.String) -  Specify account type  - classic account：Default to all account types being included   - portfolio margin account：`cross_margin` only
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param currencyPair Currency pair
+  - @param optional nil or *CancelOrdersOpts - Optional Parameters:
+  - @param "Side" (optional.String) -  All bids or asks. Both included if not specified
+  - @param "Account" (optional.String) -  Specify account type  - classic account：Default to all account types being included   - portfolio margin account：`cross_margin` only
+
 @return []Order
 */
 func (a *SpotApiService) CancelOrders(ctx context.Context, currencyPair string, localVarOptionals *CancelOrdersOpts) ([]Order, *http.Response, error) {
@@ -1629,8 +1645,9 @@ func (a *SpotApiService) CancelOrders(ctx context.Context, currencyPair string, 
 /*
 CancelBatchOrders Cancel a batch of orders with an ID list
 Multiple currency pairs can be specified, but maximum 20 orders are allowed per request
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param cancelOrder
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param cancelOrder
+
 @return []CancelOrderResult
 */
 func (a *SpotApiService) CancelBatchOrders(ctx context.Context, cancelOrder []CancelOrder) ([]CancelOrderResult, *http.Response, error) {
@@ -1727,11 +1744,12 @@ type GetOrderOpts struct {
 /*
 GetOrder Get a single order
 Spot and margin orders are queried by default. If cross margin orders are needed or portfolio margin account are used, account must be set to cross_margin.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param orderId Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID are accepted only in the first 30 minutes after order creation.After that, only order ID is accepted.
- * @param currencyPair Currency pair
- * @param optional nil or *GetOrderOpts - Optional Parameters:
- * @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account.  Portfolio margin account must set to `cross_margin` only
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param orderId Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID can only be checked when the order is in orderbook.  When the order is finished, it can be checked within 1 hour after the end of the order.  After that, only order ID is accepted.
+  - @param currencyPair Currency pair
+  - @param optional nil or *GetOrderOpts - Optional Parameters:
+  - @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account.  Portfolio margin account must set to `cross_margin` only
+
 @return Order
 */
 func (a *SpotApiService) GetOrder(ctx context.Context, orderId string, currencyPair string, localVarOptionals *GetOrderOpts) (Order, *http.Response, error) {
@@ -1832,11 +1850,12 @@ type CancelOrderOpts struct {
 /*
 CancelOrder Cancel a single order
 Spot and margin orders are cancelled by default. If trying to cancel cross margin orders or portfolio margin account are used, account must be set to cross_margin
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param orderId Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID are accepted only in the first 30 minutes after order creation.After that, only order ID is accepted.
- * @param currencyPair Currency pair
- * @param optional nil or *CancelOrderOpts - Optional Parameters:
- * @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account.  Portfolio margin account must set to `cross_margin` only
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param orderId Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID can only be checked when the order is in orderbook.  When the order is finished, it can be checked within 1 hour after the end of the order.  After that, only order ID is accepted.
+  - @param currencyPair Currency pair
+  - @param optional nil or *CancelOrderOpts - Optional Parameters:
+  - @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account.  Portfolio margin account must set to `cross_margin` only
+
 @return Order
 */
 func (a *SpotApiService) CancelOrder(ctx context.Context, orderId string, currencyPair string, localVarOptionals *CancelOrderOpts) (Order, *http.Response, error) {
@@ -1931,29 +1950,31 @@ func (a *SpotApiService) CancelOrder(ctx context.Context, orderId string, curren
 
 // ListMyTradesOpts Optional parameters for the method 'ListMyTrades'
 type ListMyTradesOpts struct {
-	Limit   optional.Int32
-	Page    optional.Int32
-	OrderId optional.String
-	Account optional.String
-	From    optional.Int64
-	To      optional.Int64
+	CurrencyPair optional.String
+	Limit        optional.Int32
+	Page         optional.Int32
+	OrderId      optional.String
+	Account      optional.String
+	From         optional.Int64
+	To           optional.Int64
 }
 
 /*
 ListMyTrades List personal trading history
-Spot and margin trades are queried by default. If cross margin trades are needed, &#x60;account&#x60; must be set to &#x60;cross_margin&#x60;  You can also set &#x60;from&#x60; and(or) &#x60;to&#x60; to query by time range Time range parameters are handled as order finish time.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param currencyPair Retrieve results with specified currency pair. It is required for open orders, but optional for finished ones.
- * @param optional nil or *ListMyTradesOpts - Optional Parameters:
- * @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
- * @param "Page" (optional.Int32) -  Page number
- * @param "OrderId" (optional.String) -  Filter trades with specified order ID. `currency_pair` is also required if this field is present
- * @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account.  Portfolio margin account must set to `cross_margin` only
- * @param "From" (optional.Int64) -  Start timestamp of the query
- * @param "To" (optional.Int64) -  Time range ending, default to current time
+Spot and margin trades are queried by default. If cross margin trades are needed, &#x60;account&#x60; must be set to &#x60;cross_margin&#x60;  You can also set &#x60;from&#x60; and(or) &#x60;to&#x60; to query by time range. If you don&#39;t specify &#x60;from&#x60; and/or &#x60;to&#x60; parameters, only the last 7 days of data will be retured. The range of &#x60;from&#x60; and &#x60;to&#x60; is not alloed to exceed 30 days.  Time range parameters are handled as order finish time.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param optional nil or *ListMyTradesOpts - Optional Parameters:
+  - @param "CurrencyPair" (optional.String) -  Retrieve results with specified currency pair
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Page" (optional.Int32) -  Page number
+  - @param "OrderId" (optional.String) -  Filter trades with specified order ID. `currency_pair` is also required if this field is present
+  - @param "Account" (optional.String) -  Specify operation account. Default to spot and margin account if not specified. Set to `cross_margin` to operate against margin account.  Portfolio margin account must set to `cross_margin` only
+  - @param "From" (optional.Int64) -  Start timestamp of the query
+  - @param "To" (optional.Int64) -  Time range ending, default to current time
+
 @return []Trade
 */
-func (a *SpotApiService) ListMyTrades(ctx context.Context, currencyPair string, localVarOptionals *ListMyTradesOpts) ([]Trade, *http.Response, error) {
+func (a *SpotApiService) ListMyTrades(ctx context.Context, localVarOptionals *ListMyTradesOpts) ([]Trade, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -1969,7 +1990,9 @@ func (a *SpotApiService) ListMyTrades(ctx context.Context, currencyPair string, 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	localVarQueryParams.Add("currency_pair", parameterToString(currencyPair, ""))
+	if localVarOptionals != nil && localVarOptionals.CurrencyPair.IsSet() {
+		localVarQueryParams.Add("currency_pair", parameterToString(localVarOptionals.CurrencyPair.Value(), ""))
+	}
 	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
 		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
 	}
@@ -2058,7 +2081,8 @@ func (a *SpotApiService) ListMyTrades(ctx context.Context, currencyPair string, 
 
 /*
 GetSystemTime Get server current time
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return SystemTime
 */
 func (a *SpotApiService) GetSystemTime(ctx context.Context) (SystemTime, *http.Response, error) {
@@ -2139,6 +2163,100 @@ func (a *SpotApiService) GetSystemTime(ctx context.Context) (SystemTime, *http.R
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+/*
+CountdownCancelAllSpot Countdown cancel orders
+When the timeout set by the user is reached, if there is no cancel or set a new countdown, the related pending orders will be automatically cancelled.  This endpoint can be called repeatedly to set a new countdown or cancel the countdown. For example, call this endpoint at 30s intervals, each countdown&#x60;timeout&#x60; is set to 30s. If this endpoint is not called again within 30 seconds, all pending orders on the specified &#x60;market&#x60; will be automatically cancelled, if no &#x60;market&#x60; is specified, all market pending orders will be cancelled. If the &#x60;timeout&#x60; is set to 0 within 30 seconds, the countdown timer will expire and the cacnel function will be cancelled.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param countdownCancelAllSpotTask
+
+@return TriggerTime
+*/
+func (a *SpotApiService) CountdownCancelAllSpot(ctx context.Context, countdownCancelAllSpotTask CountdownCancelAllSpotTask) (TriggerTime, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  TriggerTime
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/spot/countdown_cancel_all"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = &countdownCancelAllSpotTask
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	if ctx.Value(ContextGateAPIV4) == nil {
+		// for compatibility, set configuration key and secret to context if ContextGateAPIV4 value is not present
+		ctx = context.WithValue(ctx, ContextGateAPIV4, GateAPIV4{
+			Key:    a.client.cfg.Key,
+			Secret: a.client.cfg.Secret,
+		})
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 // ListSpotPriceTriggeredOrdersOpts Optional parameters for the method 'ListSpotPriceTriggeredOrders'
 type ListSpotPriceTriggeredOrdersOpts struct {
 	Market  optional.String
@@ -2149,13 +2267,14 @@ type ListSpotPriceTriggeredOrdersOpts struct {
 
 /*
 ListSpotPriceTriggeredOrders Retrieve running auto order list
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param status Only list the orders with this status
- * @param optional nil or *ListSpotPriceTriggeredOrdersOpts - Optional Parameters:
- * @param "Market" (optional.String) -  Currency pair
- * @param "Account" (optional.String) -  Trading account type.  Portfolio margin account must set to `cross_margin`
- * @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
- * @param "Offset" (optional.Int32) -  List offset, starting from 0
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param status Only list the orders with this status
+  - @param optional nil or *ListSpotPriceTriggeredOrdersOpts - Optional Parameters:
+  - @param "Market" (optional.String) -  Currency pair
+  - @param "Account" (optional.String) -  Trading account type.  Portfolio margin account must set to `cross_margin`
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0
+
 @return []SpotPriceTriggeredOrder
 */
 func (a *SpotApiService) ListSpotPriceTriggeredOrders(ctx context.Context, status string, localVarOptionals *ListSpotPriceTriggeredOrdersOpts) ([]SpotPriceTriggeredOrder, *http.Response, error) {
@@ -2257,8 +2376,9 @@ func (a *SpotApiService) ListSpotPriceTriggeredOrders(ctx context.Context, statu
 
 /*
 CreateSpotPriceTriggeredOrder Create a price-triggered order
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param spotPriceTriggeredOrder
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param spotPriceTriggeredOrder
+
 @return TriggerOrderResponse
 */
 func (a *SpotApiService) CreateSpotPriceTriggeredOrder(ctx context.Context, spotPriceTriggeredOrder SpotPriceTriggeredOrder) (TriggerOrderResponse, *http.Response, error) {
@@ -2355,10 +2475,11 @@ type CancelSpotPriceTriggeredOrderListOpts struct {
 
 /*
 CancelSpotPriceTriggeredOrderList Cancel all open orders
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *CancelSpotPriceTriggeredOrderListOpts - Optional Parameters:
- * @param "Market" (optional.String) -  Currency pair
- * @param "Account" (optional.String) -  Trading account type.  Portfolio margin account must set to `cross_margin`
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param optional nil or *CancelSpotPriceTriggeredOrderListOpts - Optional Parameters:
+  - @param "Market" (optional.String) -  Currency pair
+  - @param "Account" (optional.String) -  Trading account type.  Portfolio margin account must set to `cross_margin`
+
 @return []SpotPriceTriggeredOrder
 */
 func (a *SpotApiService) CancelSpotPriceTriggeredOrderList(ctx context.Context, localVarOptionals *CancelSpotPriceTriggeredOrderListOpts) ([]SpotPriceTriggeredOrder, *http.Response, error) {
@@ -2452,9 +2573,10 @@ func (a *SpotApiService) CancelSpotPriceTriggeredOrderList(ctx context.Context, 
 }
 
 /*
-GetSpotPriceTriggeredOrder Get a single order
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param orderId Retrieve the data of the order with the specified ID
+GetSpotPriceTriggeredOrder Get a price-triggered order
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param orderId Retrieve the data of the order with the specified ID
+
 @return SpotPriceTriggeredOrder
 */
 func (a *SpotApiService) GetSpotPriceTriggeredOrder(ctx context.Context, orderId string) (SpotPriceTriggeredOrder, *http.Response, error) {
@@ -2545,8 +2667,9 @@ func (a *SpotApiService) GetSpotPriceTriggeredOrder(ctx context.Context, orderId
 
 /*
 CancelSpotPriceTriggeredOrder cancel a price-triggered order
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param orderId Retrieve the data of the order with the specified ID
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param orderId Retrieve the data of the order with the specified ID
+
 @return SpotPriceTriggeredOrder
 */
 func (a *SpotApiService) CancelSpotPriceTriggeredOrder(ctx context.Context, orderId string) (SpotPriceTriggeredOrder, *http.Response, error) {

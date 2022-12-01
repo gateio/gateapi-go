@@ -9,7 +9,7 @@
 
 package gateapi
 
-// Contract detail.  USD value per contract:  - USDT settled contracts： `quanto_multiplier x token price` - BTC settled contracts：`quanto_multiplier x BTC price x token price`
+// Futures contract details
 type Contract struct {
 	// Futures contract
 	Name string `json:"name,omitempty"`

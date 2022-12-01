@@ -11,10 +11,10 @@ Method | HTTP request | Description
 [**ListOptionsSettlements**](OptionsApi.md#ListOptionsSettlements) | **Get** /options/settlements | List settlement history
 [**GetOptionsSettlement**](OptionsApi.md#GetOptionsSettlement) | **Get** /options/settlements/{contract} | Get specified contract&#39;s settlement
 [**ListMyOptionsSettlements**](OptionsApi.md#ListMyOptionsSettlements) | **Get** /options/my_settlements | List my options settlements
-[**ListOptionsOrderBook**](OptionsApi.md#ListOptionsOrderBook) | **Get** /options/order_book | Futures order book
+[**ListOptionsOrderBook**](OptionsApi.md#ListOptionsOrderBook) | **Get** /options/order_book | Options order book
 [**ListOptionsTickers**](OptionsApi.md#ListOptionsTickers) | **Get** /options/tickers | List tickers of options contracts
 [**ListOptionsUnderlyingTickers**](OptionsApi.md#ListOptionsUnderlyingTickers) | **Get** /options/underlying/tickers/{underlying} | Get underlying ticker
-[**ListOptionsCandlesticks**](OptionsApi.md#ListOptionsCandlesticks) | **Get** /options/candlesticks | Get futures candlesticks
+[**ListOptionsCandlesticks**](OptionsApi.md#ListOptionsCandlesticks) | **Get** /options/candlesticks | Get options candlesticks
 [**ListOptionsUnderlyingCandlesticks**](OptionsApi.md#ListOptionsUnderlyingCandlesticks) | **Get** /options/underlying/candlesticks | Mark price candlesticks of an underlying
 [**ListOptionsTrades**](OptionsApi.md#ListOptionsTrades) | **Get** /options/trades | Options trade history
 [**ListOptionsAccount**](OptionsApi.md#ListOptionsAccount) | **Get** /options/accounts | List options account
@@ -22,7 +22,7 @@ Method | HTTP request | Description
 [**ListOptionsPositions**](OptionsApi.md#ListOptionsPositions) | **Get** /options/positions | List user&#39;s positions of specified underlying
 [**GetOptionsPosition**](OptionsApi.md#GetOptionsPosition) | **Get** /options/positions/{contract} | Get specified contract position
 [**ListOptionsPositionClose**](OptionsApi.md#ListOptionsPositionClose) | **Get** /options/position_close | List user&#39;s liquidation history of specified underlying
-[**ListOptionsOrders**](OptionsApi.md#ListOptionsOrders) | **Get** /options/orders | List futures orders
+[**ListOptionsOrders**](OptionsApi.md#ListOptionsOrders) | **Get** /options/orders | List options orders
 [**CreateOptionsOrder**](OptionsApi.md#CreateOptionsOrder) | **Post** /options/orders | Create an options order
 [**CancelOptionsOrders**](OptionsApi.md#CancelOptionsOrders) | **Delete** /options/orders | Cancel all &#x60;open&#x60; orders matched
 [**GetOptionsOrder**](OptionsApi.md#GetOptionsOrder) | **Get** /options/orders/{order_id} | Get a single order
@@ -99,7 +99,7 @@ List all expiration times
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**underlying** | **string**| Underlying | 
+**underlying** | **string**| Underlying (Obtained by listing underlying endpoint) | 
 
 ### Example
 
@@ -118,7 +118,7 @@ func main() {
     // uncomment the next line if your are testing against testnet
     // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
     ctx := context.Background()
-    underlying := "BTC_USDT" // string - Underlying
+    underlying := "BTC_USDT" // string - Underlying (Obtained by listing underlying endpoint)
     
     result, _, err := client.OptionsApi.ListOptionsExpirations(ctx, underlying)
     if err != nil {
@@ -162,7 +162,7 @@ List all the contracts with specified underlying and expiration time
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**underlying** | **string**| Underlying | 
+**underlying** | **string**| Underlying (Obtained by listing underlying endpoint) | 
 **optional** | **ListOptionsContractsOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -190,7 +190,7 @@ func main() {
     // uncomment the next line if your are testing against testnet
     // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
     ctx := context.Background()
-    underlying := "BTC_USDT" // string - Underlying
+    underlying := "BTC_USDT" // string - Underlying (Obtained by listing underlying endpoint)
     
     result, _, err := client.OptionsApi.ListOptionsContracts(ctx, underlying, nil)
     if err != nil {
@@ -297,7 +297,7 @@ List settlement history
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**underlying** | **string**| Underlying | 
+**underlying** | **string**| Underlying (Obtained by listing underlying endpoint) | 
 **optional** | **ListOptionsSettlementsOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -328,7 +328,7 @@ func main() {
     // uncomment the next line if your are testing against testnet
     // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
     ctx := context.Background()
-    underlying := "BTC_USDT" // string - Underlying
+    underlying := "BTC_USDT" // string - Underlying (Obtained by listing underlying endpoint)
     
     result, _, err := client.OptionsApi.ListOptionsSettlements(ctx, underlying, nil)
     if err != nil {
@@ -373,7 +373,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **contract** | **string**|  | 
-**underlying** | **string**| Underlying | 
+**underlying** | **string**| Underlying (Obtained by listing underlying endpoint) | 
 **at** | **int64**|  | 
 
 ### Example
@@ -394,7 +394,7 @@ func main() {
     // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
     ctx := context.Background()
     contract := "BTC_USDT-20211130-65000-C" // string - 
-    underlying := "BTC_USDT" // string - Underlying
+    underlying := "BTC_USDT" // string - Underlying (Obtained by listing underlying endpoint)
     at := 56 // int64 - 
     
     result, _, err := client.OptionsApi.GetOptionsSettlement(ctx, contract, underlying, at)
@@ -439,7 +439,7 @@ List my options settlements
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**underlying** | **string**| Underlying | 
+**underlying** | **string**| Underlying (Obtained by listing underlying endpoint) | 
 **optional** | **ListMyOptionsSettlementsOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -448,7 +448,7 @@ Optional parameters are passed through a pointer to a ListMyOptionsSettlementsOp
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**contract** | **optional.String**| Contract name | 
+**contract** | **optional.String**| Options contract name | 
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
 **from** | **optional.Int64**| Start timestamp | 
@@ -477,7 +477,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    underlying := "BTC_USDT" // string - Underlying
+    underlying := "BTC_USDT" // string - Underlying (Obtained by listing underlying endpoint)
     
     result, _, err := client.OptionsApi.ListMyOptionsSettlements(ctx, underlying, nil)
     if err != nil {
@@ -514,7 +514,7 @@ func main() {
 
 > FuturesOrderBook ListOptionsOrderBook(ctx, contract, optional)
 
-Futures order book
+Options order book
 
 Bids will be sorted by price from high to low, while asks sorted reversely
 
@@ -523,7 +523,7 @@ Bids will be sorted by price from high to low, while asks sorted reversely
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**contract** | **string**| Futures contract | 
+**contract** | **string**| Options contract name | 
 **optional** | **ListOptionsOrderBookOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -553,7 +553,7 @@ func main() {
     // uncomment the next line if your are testing against testnet
     // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
     ctx := context.Background()
-    contract := "BTC_USDT" // string - Futures contract
+    contract := "BTC_USDT-20210916-5000-C" // string - Options contract name
     
     result, _, err := client.OptionsApi.ListOptionsOrderBook(ctx, contract, nil)
     if err != nil {
@@ -597,7 +597,7 @@ List tickers of options contracts
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**underlying** | **string**| Underlying | 
+**underlying** | **string**| Underlying (Obtained by listing underlying endpoint) | 
 
 ### Example
 
@@ -616,7 +616,7 @@ func main() {
     // uncomment the next line if your are testing against testnet
     // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
     ctx := context.Background()
-    underlying := "BTC_USDT" // string - Underlying
+    underlying := "BTC_USDT" // string - Underlying (Obtained by listing underlying endpoint)
     
     result, _, err := client.OptionsApi.ListOptionsTickers(ctx, underlying)
     if err != nil {
@@ -714,16 +714,16 @@ No authorization required
 
 ## ListOptionsCandlesticks
 
-> []FuturesCandlestick ListOptionsCandlesticks(ctx, contract, optional)
+> []OptionsCandlestick ListOptionsCandlesticks(ctx, contract, optional)
 
-Get futures candlesticks
+Get options candlesticks
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**contract** | **string**| Futures contract | 
+**contract** | **string**| Options contract name | 
 **optional** | **ListOptionsCandlesticksOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -754,7 +754,7 @@ func main() {
     // uncomment the next line if your are testing against testnet
     // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
     ctx := context.Background()
-    contract := "BTC_USDT" // string - Futures contract
+    contract := "BTC_USDT-20210916-5000-C" // string - Options contract name
     
     result, _, err := client.OptionsApi.ListOptionsCandlesticks(ctx, contract, nil)
     if err != nil {
@@ -772,7 +772,7 @@ func main() {
 
 ### Return type
 
-[**[]FuturesCandlestick**](FuturesCandlestick.md)
+[**[]OptionsCandlestick**](OptionsCandlestick.md)
 
 ### Authorization
 
@@ -798,7 +798,7 @@ Mark price candlesticks of an underlying
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**underlying** | **string**| Underlying | 
+**underlying** | **string**| Underlying (Obtained by listing underlying endpoint) | 
 **optional** | **ListOptionsUnderlyingCandlesticksOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -829,7 +829,7 @@ func main() {
     // uncomment the next line if your are testing against testnet
     // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
     ctx := context.Background()
-    underlying := "BTC_USDT" // string - Underlying
+    underlying := "BTC_USDT" // string - Underlying (Obtained by listing underlying endpoint)
     
     result, _, err := client.OptionsApi.ListOptionsUnderlyingCandlesticks(ctx, underlying, nil)
     if err != nil {
@@ -881,7 +881,7 @@ Optional parameters are passed through a pointer to a ListOptionsTradesOpts stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**contract** | **optional.String**| Contract name | 
+**contract** | **optional.String**| Options contract name | 
 **type_** | **optional.String**| &#x60;C&#x60; is call, while &#x60;P&#x60; is put | 
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
@@ -1237,7 +1237,7 @@ List user's liquidation history of specified underlying
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**underlying** | **string**| Underlying | 
+**underlying** | **string**| Underlying (Obtained by listing underlying endpoint) | 
 **optional** | **ListOptionsPositionCloseOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -1246,7 +1246,7 @@ Optional parameters are passed through a pointer to a ListOptionsPositionCloseOp
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**contract** | **optional.String**| Contract name | 
+**contract** | **optional.String**| Options contract name | 
 
 ### Example
 
@@ -1271,7 +1271,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    underlying := "BTC_USDT" // string - Underlying
+    underlying := "BTC_USDT" // string - Underlying (Obtained by listing underlying endpoint)
     
     result, _, err := client.OptionsApi.ListOptionsPositionClose(ctx, underlying, nil)
     if err != nil {
@@ -1308,7 +1308,7 @@ func main() {
 
 > []OptionsOrder ListOptionsOrders(ctx, status, optional)
 
-List futures orders
+List options orders
 
 ### Required Parameters
 
@@ -1324,7 +1324,7 @@ Optional parameters are passed through a pointer to a ListOptionsOrdersOpts stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**contract** | **optional.String**| Contract name | 
+**contract** | **optional.String**| Options contract name | 
 **underlying** | **optional.String**| Underlying | 
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
@@ -1475,7 +1475,7 @@ Optional parameters are passed through a pointer to a CancelOptionsOrdersOpts st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**contract** | **optional.String**| Contract name | 
+**contract** | **optional.String**| Options contract name | 
 **underlying** | **optional.String**| Underlying | 
 **side** | **optional.String**| All bids or asks. Both included if not specified | 
 
@@ -1683,7 +1683,7 @@ List personal trading history
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**underlying** | **string**| Underlying | 
+**underlying** | **string**| Underlying (Obtained by listing underlying endpoint) | 
 **optional** | **ListMyOptionsTradesOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -1692,7 +1692,7 @@ Optional parameters are passed through a pointer to a ListMyOptionsTradesOpts st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**contract** | **optional.String**| Contract name | 
+**contract** | **optional.String**| Options contract name | 
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
 **from** | **optional.Int64**| Start timestamp | 
@@ -1721,7 +1721,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    underlying := "BTC_USDT" // string - Underlying
+    underlying := "BTC_USDT" // string - Underlying (Obtained by listing underlying endpoint)
     
     result, _, err := client.OptionsApi.ListMyOptionsTrades(ctx, underlying, nil)
     if err != nil {

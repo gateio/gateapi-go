@@ -14,18 +14,18 @@ type OptionsMySettlements struct {
 	Time float64 `json:"time,omitempty"`
 	// Underlying
 	Underlying string `json:"underlying,omitempty"`
-	// Futures contract
+	// Options contract name
 	Contract string `json:"contract,omitempty"`
-	// Strike price
+	// Strike price (quote currency)
 	StrikePrice string `json:"strike_price,omitempty"`
-	// settlement price
+	// Settlement price (quote currency)
 	SettlePrice string `json:"settle_price,omitempty"`
 	// Size
 	Size int64 `json:"size,omitempty"`
-	// Settlement profit
+	// Settlement profit (quote currency)
 	SettleProfit string `json:"settle_profit,omitempty"`
-	// Fee
+	// Fee (quote currency)
 	Fee string `json:"fee,omitempty"`
-	// The accumulated profit and loss of opening a position, including premium, fee, settlement profit, etc.
+	// The accumulated profit and loss of opening a position, including premium, fee, settlement profit, etc. (quote currency)
 	RealisedPnl string `json:"realised_pnl,omitempty"`
 }

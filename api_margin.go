@@ -28,7 +28,8 @@ type MarginApiService service
 
 /*
 ListMarginCurrencyPairs List all supported currency pairs supported in margin trading
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return []MarginCurrencyPair
 */
 func (a *MarginApiService) ListMarginCurrencyPairs(ctx context.Context) ([]MarginCurrencyPair, *http.Response, error) {
@@ -111,8 +112,9 @@ func (a *MarginApiService) ListMarginCurrencyPairs(ctx context.Context) ([]Margi
 
 /*
 GetMarginCurrencyPair Query one single margin currency pair
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param currencyPair Margin currency pair
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param currencyPair Margin currency pair
+
 @return MarginCurrencyPair
 */
 func (a *MarginApiService) GetMarginCurrencyPair(ctx context.Context, currencyPair string) (MarginCurrencyPair, *http.Response, error) {
@@ -197,8 +199,9 @@ func (a *MarginApiService) GetMarginCurrencyPair(ctx context.Context, currencyPa
 
 /*
 ListFundingBook Order book of lending loans
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param currency Retrieve data of the specified currency
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param currency Retrieve data of the specified currency
+
 @return []FundingBookItem
 */
 func (a *MarginApiService) ListFundingBook(ctx context.Context, currency string) ([]FundingBookItem, *http.Response, error) {
@@ -287,9 +290,10 @@ type ListMarginAccountsOpts struct {
 
 /*
 ListMarginAccounts Margin account list
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *ListMarginAccountsOpts - Optional Parameters:
- * @param "CurrencyPair" (optional.String) -  Currency pair
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param optional nil or *ListMarginAccountsOpts - Optional Parameters:
+  - @param "CurrencyPair" (optional.String) -  Currency pair
+
 @return []MarginAccount
 */
 func (a *MarginApiService) ListMarginAccounts(ctx context.Context, localVarOptionals *ListMarginAccountsOpts) ([]MarginAccount, *http.Response, error) {
@@ -392,14 +396,15 @@ type ListMarginAccountBookOpts struct {
 /*
 ListMarginAccountBook List margin account balance change history
 Only transferals from and to margin account are provided for now. Time range allows 30 days at most
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *ListMarginAccountBookOpts - Optional Parameters:
- * @param "Currency" (optional.String) -  List records related to specified currency only. If specified, `currency_pair` is also required.
- * @param "CurrencyPair" (optional.String) -  List records related to specified currency pair. Used in combination with `currency`. Ignored if `currency` is not provided
- * @param "From" (optional.Int64) -  Start timestamp of the query
- * @param "To" (optional.Int64) -  Time range ending, default to current time
- * @param "Page" (optional.Int32) -  Page number
- * @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param optional nil or *ListMarginAccountBookOpts - Optional Parameters:
+  - @param "Currency" (optional.String) -  List records related to specified currency only. If specified, `currency_pair` is also required.
+  - @param "CurrencyPair" (optional.String) -  List records related to specified currency pair. Used in combination with `currency`. Ignored if `currency` is not provided
+  - @param "From" (optional.Int64) -  Start timestamp of the query
+  - @param "To" (optional.Int64) -  Time range ending, default to current time
+  - @param "Page" (optional.Int32) -  Page number
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+
 @return []MarginAccountBook
 */
 func (a *MarginApiService) ListMarginAccountBook(ctx context.Context, localVarOptionals *ListMarginAccountBookOpts) ([]MarginAccountBook, *http.Response, error) {
@@ -511,9 +516,10 @@ type ListFundingAccountsOpts struct {
 
 /*
 ListFundingAccounts Funding account list
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *ListFundingAccountsOpts - Optional Parameters:
- * @param "Currency" (optional.String) -  Retrieve data of the specified currency
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param optional nil or *ListFundingAccountsOpts - Optional Parameters:
+  - @param "Currency" (optional.String) -  Retrieve data of the specified currency
+
 @return []FundingAccount
 */
 func (a *MarginApiService) ListFundingAccounts(ctx context.Context, localVarOptionals *ListFundingAccountsOpts) ([]FundingAccount, *http.Response, error) {
@@ -615,16 +621,17 @@ type ListLoansOpts struct {
 
 /*
 ListLoans List all loans
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param status Loan status
- * @param side Lend or borrow
- * @param optional nil or *ListLoansOpts - Optional Parameters:
- * @param "Currency" (optional.String) -  Retrieve data of the specified currency
- * @param "CurrencyPair" (optional.String) -  Currency pair
- * @param "SortBy" (optional.String) -  Specify which field is used to sort. `create_time` or `rate` is supported. Default to `create_time`
- * @param "ReverseSort" (optional.Bool) -  Whether to sort in descending order. Default to `true`
- * @param "Page" (optional.Int32) -  Page number
- * @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param status Loan status
+  - @param side Lend or borrow
+  - @param optional nil or *ListLoansOpts - Optional Parameters:
+  - @param "Currency" (optional.String) -  Retrieve data of the specified currency
+  - @param "CurrencyPair" (optional.String) -  Currency pair
+  - @param "SortBy" (optional.String) -  Specify which field is used to sort. `create_time` or `rate` is supported. Default to `create_time`
+  - @param "ReverseSort" (optional.Bool) -  Whether to sort in descending order. Default to `true`
+  - @param "Page" (optional.Int32) -  Page number
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+
 @return []Loan
 */
 func (a *MarginApiService) ListLoans(ctx context.Context, status string, side string, localVarOptionals *ListLoansOpts) ([]Loan, *http.Response, error) {
@@ -733,8 +740,9 @@ func (a *MarginApiService) ListLoans(ctx context.Context, status string, side st
 
 /*
 CreateLoan Lend or borrow
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param loan
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param loan
+
 @return Loan
 */
 func (a *MarginApiService) CreateLoan(ctx context.Context, loan Loan) (Loan, *http.Response, error) {
@@ -825,9 +833,10 @@ func (a *MarginApiService) CreateLoan(ctx context.Context, loan Loan) (Loan, *ht
 
 /*
 MergeLoans Merge multiple lending loans
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param currency Retrieve data of the specified currency
- * @param ids A comma-separated (,) list of IDs of the loans lent. Maximum of 20 IDs are allowed in a request
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param currency Retrieve data of the specified currency
+  - @param ids A comma-separated (,) list of IDs of the loans lent. Maximum of 20 IDs are allowed in a request
+
 @return Loan
 */
 func (a *MarginApiService) MergeLoans(ctx context.Context, currency string, ids string) (Loan, *http.Response, error) {
@@ -918,9 +927,10 @@ func (a *MarginApiService) MergeLoans(ctx context.Context, currency string, ids 
 
 /*
 GetLoan Retrieve one single loan detail
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param loanId Loan ID
- * @param side Lend or borrow
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param loanId Loan ID
+  - @param side Lend or borrow
+
 @return Loan
 */
 func (a *MarginApiService) GetLoan(ctx context.Context, loanId string, side string) (Loan, *http.Response, error) {
@@ -1013,9 +1023,10 @@ func (a *MarginApiService) GetLoan(ctx context.Context, loanId string, side stri
 /*
 CancelLoan Cancel lending loan
 Only lent loans can be cancelled
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param loanId Loan ID
- * @param currency Retrieve data of the specified currency
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param loanId Loan ID
+  - @param currency Retrieve data of the specified currency
+
 @return Loan
 */
 func (a *MarginApiService) CancelLoan(ctx context.Context, loanId string, currency string) (Loan, *http.Response, error) {
@@ -1108,9 +1119,10 @@ func (a *MarginApiService) CancelLoan(ctx context.Context, loanId string, curren
 /*
 UpdateLoan Modify a loan
 Only &#x60;auto_renew&#x60; modification is supported currently
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param loanId Loan ID
- * @param loanPatch
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param loanId Loan ID
+  - @param loanPatch
+
 @return Loan
 */
 func (a *MarginApiService) UpdateLoan(ctx context.Context, loanId string, loanPatch LoanPatch) (Loan, *http.Response, error) {
@@ -1203,8 +1215,9 @@ func (a *MarginApiService) UpdateLoan(ctx context.Context, loanId string, loanPa
 
 /*
 ListLoanRepayments List loan repayment records
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param loanId Loan ID
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param loanId Loan ID
+
 @return []Repayment
 */
 func (a *MarginApiService) ListLoanRepayments(ctx context.Context, loanId string) ([]Repayment, *http.Response, error) {
@@ -1295,9 +1308,10 @@ func (a *MarginApiService) ListLoanRepayments(ctx context.Context, loanId string
 
 /*
 RepayLoan Repay a loan
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param loanId Loan ID
- * @param repayRequest
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param loanId Loan ID
+  - @param repayRequest
+
 @return Loan
 */
 func (a *MarginApiService) RepayLoan(ctx context.Context, loanId string, repayRequest RepayRequest) (Loan, *http.Response, error) {
@@ -1397,12 +1411,13 @@ type ListLoanRecordsOpts struct {
 
 /*
 ListLoanRecords List repayment records of a specific loan
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param loanId Loan ID
- * @param optional nil or *ListLoanRecordsOpts - Optional Parameters:
- * @param "Status" (optional.String) -  Loan record status
- * @param "Page" (optional.Int32) -  Page number
- * @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param loanId Loan ID
+  - @param optional nil or *ListLoanRecordsOpts - Optional Parameters:
+  - @param "Status" (optional.String) -  Loan record status
+  - @param "Page" (optional.Int32) -  Page number
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+
 @return []LoanRecord
 */
 func (a *MarginApiService) ListLoanRecords(ctx context.Context, loanId string, localVarOptionals *ListLoanRecordsOpts) ([]LoanRecord, *http.Response, error) {
@@ -1501,9 +1516,10 @@ func (a *MarginApiService) ListLoanRecords(ctx context.Context, loanId string, l
 
 /*
 GetLoanRecord Get one single loan record
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param loanRecordId Loan record ID
- * @param loanId Loan ID
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param loanRecordId Loan record ID
+  - @param loanId Loan ID
+
 @return LoanRecord
 */
 func (a *MarginApiService) GetLoanRecord(ctx context.Context, loanRecordId string, loanId string) (LoanRecord, *http.Response, error) {
@@ -1596,9 +1612,10 @@ func (a *MarginApiService) GetLoanRecord(ctx context.Context, loanRecordId strin
 /*
 UpdateLoanRecord Modify a loan record
 Only &#x60;auto_renew&#x60; modification is supported currently
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param loanRecordId Loan record ID
- * @param loanPatch
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param loanRecordId Loan record ID
+  - @param loanPatch
+
 @return LoanRecord
 */
 func (a *MarginApiService) UpdateLoanRecord(ctx context.Context, loanRecordId string, loanPatch LoanPatch) (LoanRecord, *http.Response, error) {
@@ -1691,7 +1708,8 @@ func (a *MarginApiService) UpdateLoanRecord(ctx context.Context, loanRecordId st
 
 /*
 GetAutoRepayStatus Retrieve user auto repayment setting
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return AutoRepaySetting
 */
 func (a *MarginApiService) GetAutoRepayStatus(ctx context.Context) (AutoRepaySetting, *http.Response, error) {
@@ -1780,8 +1798,9 @@ func (a *MarginApiService) GetAutoRepayStatus(ctx context.Context) (AutoRepaySet
 
 /*
 SetAutoRepay Update user's auto repayment setting
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param status New auto repayment status. `on` - enabled, `off` - disabled
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param status New auto repayment status. `on` - enabled, `off` - disabled
+
 @return AutoRepaySetting
 */
 func (a *MarginApiService) SetAutoRepay(ctx context.Context, status string) (AutoRepaySetting, *http.Response, error) {
@@ -1876,10 +1895,11 @@ type GetMarginTransferableOpts struct {
 
 /*
 GetMarginTransferable Get the max transferable amount for a specific margin currency
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param currency Retrieve data of the specified currency
- * @param optional nil or *GetMarginTransferableOpts - Optional Parameters:
- * @param "CurrencyPair" (optional.String) -  Currency pair
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param currency Retrieve data of the specified currency
+  - @param optional nil or *GetMarginTransferableOpts - Optional Parameters:
+  - @param "CurrencyPair" (optional.String) -  Currency pair
+
 @return MarginTransferable
 */
 func (a *MarginApiService) GetMarginTransferable(ctx context.Context, currency string, localVarOptionals *GetMarginTransferableOpts) (MarginTransferable, *http.Response, error) {
@@ -1977,10 +1997,11 @@ type GetMarginBorrowableOpts struct {
 
 /*
 GetMarginBorrowable Get the max borrowable amount for a specific margin currency
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param currency Retrieve data of the specified currency
- * @param optional nil or *GetMarginBorrowableOpts - Optional Parameters:
- * @param "CurrencyPair" (optional.String) -  Currency pair
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param currency Retrieve data of the specified currency
+  - @param optional nil or *GetMarginBorrowableOpts - Optional Parameters:
+  - @param "CurrencyPair" (optional.String) -  Currency pair
+
 @return MarginBorrowable
 */
 func (a *MarginApiService) GetMarginBorrowable(ctx context.Context, currency string, localVarOptionals *GetMarginBorrowableOpts) (MarginBorrowable, *http.Response, error) {
@@ -2073,7 +2094,8 @@ func (a *MarginApiService) GetMarginBorrowable(ctx context.Context, currency str
 
 /*
 ListCrossMarginCurrencies Currencies supported by cross margin.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return []CrossMarginCurrency
 */
 func (a *MarginApiService) ListCrossMarginCurrencies(ctx context.Context) ([]CrossMarginCurrency, *http.Response, error) {
@@ -2156,8 +2178,9 @@ func (a *MarginApiService) ListCrossMarginCurrencies(ctx context.Context) ([]Cro
 
 /*
 GetCrossMarginCurrency Retrieve detail of one single currency supported by cross margin
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param currency Currency name
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param currency Currency name
+
 @return CrossMarginCurrency
 */
 func (a *MarginApiService) GetCrossMarginCurrency(ctx context.Context, currency string) (CrossMarginCurrency, *http.Response, error) {
@@ -2242,7 +2265,8 @@ func (a *MarginApiService) GetCrossMarginCurrency(ctx context.Context, currency 
 
 /*
 GetCrossMarginAccount Retrieve cross margin account
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+
 @return CrossMarginAccount
 */
 func (a *MarginApiService) GetCrossMarginAccount(ctx context.Context) (CrossMarginAccount, *http.Response, error) {
@@ -2342,14 +2366,15 @@ type ListCrossMarginAccountBookOpts struct {
 /*
 ListCrossMarginAccountBook Retrieve cross margin account change history
 Record time range cannot exceed 30 days
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *ListCrossMarginAccountBookOpts - Optional Parameters:
- * @param "Currency" (optional.String) -  Filter by currency
- * @param "From" (optional.Int64) -  Start timestamp of the query
- * @param "To" (optional.Int64) -  Time range ending, default to current time
- * @param "Page" (optional.Int32) -  Page number
- * @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
- * @param "Type_" (optional.String) -  Only retrieve changes of the specified type. All types will be returned if not specified.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param optional nil or *ListCrossMarginAccountBookOpts - Optional Parameters:
+  - @param "Currency" (optional.String) -  Filter by currency
+  - @param "From" (optional.Int64) -  Start timestamp of the query
+  - @param "To" (optional.Int64) -  Time range ending, default to current time
+  - @param "Page" (optional.Int32) -  Page number
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Type_" (optional.String) -  Only retrieve changes of the specified type. All types will be returned if not specified.
+
 @return []CrossMarginAccountBook
 */
 func (a *MarginApiService) ListCrossMarginAccountBook(ctx context.Context, localVarOptionals *ListCrossMarginAccountBookOpts) ([]CrossMarginAccountBook, *http.Response, error) {
@@ -2465,13 +2490,14 @@ type ListCrossMarginLoansOpts struct {
 /*
 ListCrossMarginLoans List cross margin borrow history
 Sort by creation time in descending order by default. Set &#x60;reverse&#x3D;false&#x60; to return ascending results.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param status Filter by status. Supported values are 2 and 3.
- * @param optional nil or *ListCrossMarginLoansOpts - Optional Parameters:
- * @param "Currency" (optional.String) -  Filter by currency
- * @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
- * @param "Offset" (optional.Int32) -  List offset, starting from 0
- * @param "Reverse" (optional.Bool) -  Whether to sort in descending order, which is the default. Set `reverse=false` to return ascending results
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param status Filter by status. Supported values are 2 and 3.
+  - @param optional nil or *ListCrossMarginLoansOpts - Optional Parameters:
+  - @param "Currency" (optional.String) -  Filter by currency
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0
+  - @param "Reverse" (optional.Bool) -  Whether to sort in descending order, which is the default. Set `reverse=false` to return ascending results
+
 @return []CrossMarginLoan
 */
 func (a *MarginApiService) ListCrossMarginLoans(ctx context.Context, status int32, localVarOptionals *ListCrossMarginLoansOpts) ([]CrossMarginLoan, *http.Response, error) {
@@ -2574,8 +2600,9 @@ func (a *MarginApiService) ListCrossMarginLoans(ctx context.Context, status int3
 /*
 CreateCrossMarginLoan Create a cross margin borrow loan
 Borrow amount cannot be less than currency minimum borrow amount
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param crossMarginLoan
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param crossMarginLoan
+
 @return CrossMarginLoan
 */
 func (a *MarginApiService) CreateCrossMarginLoan(ctx context.Context, crossMarginLoan CrossMarginLoan) (CrossMarginLoan, *http.Response, error) {
@@ -2666,8 +2693,9 @@ func (a *MarginApiService) CreateCrossMarginLoan(ctx context.Context, crossMargi
 
 /*
 GetCrossMarginLoan Retrieve single borrow loan detail
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param loanId Borrow loan ID
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param loanId Borrow loan ID
+
 @return CrossMarginLoan
 */
 func (a *MarginApiService) GetCrossMarginLoan(ctx context.Context, loanId string) (CrossMarginLoan, *http.Response, error) {
@@ -2768,13 +2796,14 @@ type ListCrossMarginRepaymentsOpts struct {
 /*
 ListCrossMarginRepayments Retrieve cross margin repayments
 Sort by creation time in descending order by default. Set &#x60;reverse&#x3D;false&#x60; to return ascending results.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param optional nil or *ListCrossMarginRepaymentsOpts - Optional Parameters:
- * @param "Currency" (optional.String) -
- * @param "LoanId" (optional.String) -
- * @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
- * @param "Offset" (optional.Int32) -  List offset, starting from 0
- * @param "Reverse" (optional.Bool) -  Whether to sort in descending order, which is the default. Set `reverse=false` to return ascending results
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param optional nil or *ListCrossMarginRepaymentsOpts - Optional Parameters:
+  - @param "Currency" (optional.String) -
+  - @param "LoanId" (optional.String) -
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0
+  - @param "Reverse" (optional.Bool) -  Whether to sort in descending order, which is the default. Set `reverse=false` to return ascending results
+
 @return []CrossMarginRepayment
 */
 func (a *MarginApiService) ListCrossMarginRepayments(ctx context.Context, localVarOptionals *ListCrossMarginRepaymentsOpts) ([]CrossMarginRepayment, *http.Response, error) {
@@ -2878,8 +2907,9 @@ func (a *MarginApiService) ListCrossMarginRepayments(ctx context.Context, localV
 
 /*
 RepayCrossMarginLoan When the liquidity of the currency is insufficient and the transaction risk is high, the currency will be disabled, and funds cannot be transferred.When the available balance of cross-margin is insufficient, the balance of the spot account can be used for repayment. Please ensure that the balance of the spot account is sufficient, and system uses cross-margin account for repayment first
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param crossMarginRepayRequest
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param crossMarginRepayRequest
+
 @return []CrossMarginLoan
 */
 func (a *MarginApiService) RepayCrossMarginLoan(ctx context.Context, crossMarginRepayRequest CrossMarginRepayRequest) ([]CrossMarginLoan, *http.Response, error) {
@@ -2970,8 +3000,9 @@ func (a *MarginApiService) RepayCrossMarginLoan(ctx context.Context, crossMargin
 
 /*
 GetCrossMarginTransferable Get the max transferable amount for a specific cross margin currency
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param currency Retrieve data of the specified currency
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param currency Retrieve data of the specified currency
+
 @return CrossMarginTransferable
 */
 func (a *MarginApiService) GetCrossMarginTransferable(ctx context.Context, currency string) (CrossMarginTransferable, *http.Response, error) {
@@ -3061,8 +3092,9 @@ func (a *MarginApiService) GetCrossMarginTransferable(ctx context.Context, curre
 
 /*
 GetCrossMarginBorrowable Get the max borrowable amount for a specific cross margin currency
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param currency Retrieve data of the specified currency
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param currency Retrieve data of the specified currency
+
 @return CrossMarginBorrowable
 */
 func (a *MarginApiService) GetCrossMarginBorrowable(ctx context.Context, currency string) (CrossMarginBorrowable, *http.Response, error) {

@@ -30,7 +30,7 @@ Method | HTTP request | Description
 [**ListPriceTriggeredDeliveryOrders**](DeliveryApi.md#ListPriceTriggeredDeliveryOrders) | **Get** /delivery/{settle}/price_orders | List all auto orders
 [**CreatePriceTriggeredDeliveryOrder**](DeliveryApi.md#CreatePriceTriggeredDeliveryOrder) | **Post** /delivery/{settle}/price_orders | Create a price-triggered order
 [**CancelPriceTriggeredDeliveryOrderList**](DeliveryApi.md#CancelPriceTriggeredDeliveryOrderList) | **Delete** /delivery/{settle}/price_orders | Cancel all open orders
-[**GetPriceTriggeredDeliveryOrder**](DeliveryApi.md#GetPriceTriggeredDeliveryOrder) | **Get** /delivery/{settle}/price_orders/{order_id} | Get a single order
+[**GetPriceTriggeredDeliveryOrder**](DeliveryApi.md#GetPriceTriggeredDeliveryOrder) | **Get** /delivery/{settle}/price_orders/{order_id} | Get a price-triggered order
 [**CancelPriceTriggeredDeliveryOrder**](DeliveryApi.md#CancelPriceTriggeredDeliveryOrder) | **Delete** /delivery/{settle}/price_orders/{order_id} | cancel a price-triggered order
 
 
@@ -1984,7 +1984,7 @@ func main() {
 
 > FuturesPriceTriggeredOrder GetPriceTriggeredDeliveryOrder(ctx, settle, orderId)
 
-Get a single order
+Get a price-triggered order
 
 ### Required Parameters
 

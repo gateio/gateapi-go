@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** | Futures contract | [optional] 
+**Name** | **string** | Options contract name | [optional] 
 **Tag** | **string** | tag | [optional] 
 **CreateTime** | **float64** | Creation time | [optional] 
 **ExpirationTime** | **float64** | Expiration time | [optional] 
 **IsCall** | **bool** | &#x60;true&#x60; means call options, while &#x60;false&#x60; is put options | [optional] 
 **Multiplier** | **string** | Multiplier used in converting from invoicing to settlement currency | [optional] 
 **Underlying** | **string** | Underlying | [optional] 
-**UnderlyingPrice** | **string** | Underlying price | [optional] 
+**UnderlyingPrice** | **string** | Underlying price (quote currency) | [optional] 
 **LastPrice** | **string** | Last trading price | [optional] 
-**MarkPrice** | **string** | Current mark price | [optional] 
-**IndexPrice** | **string** | Current index price | [optional] 
+**MarkPrice** | **string** | Current mark price (quote currency) | [optional] 
+**IndexPrice** | **string** | Current index price (quote currency) | [optional] 
 **MakerFeeRate** | **string** | Maker fee rate, where negative means rebate | [optional] 
 **TakerFeeRate** | **string** | Taker fee rate | [optional] 
 **OrderPriceRound** | **string** | Minimum order price increment | [optional] 
