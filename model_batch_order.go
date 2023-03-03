@@ -33,7 +33,7 @@ type BatchOrder struct {
 	Status string `json:"status,omitempty"`
 	// Currency pair
 	CurrencyPair string `json:"currency_pair,omitempty"`
-	// Order type. limit - limit order
+	// Order Type    - limit : Limit Order - market : Market Order
 	Type string `json:"type,omitempty"`
 	// Account type. spot - use spot account; margin - use margin account; cross_margin - use cross margin account
 	Account string `json:"account,omitempty"`
@@ -45,7 +45,7 @@ type BatchOrder struct {
 	Price string `json:"price,omitempty"`
 	// Time in force  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled, taker only - poc: PendingOrCancelled, makes a post-only order that always enjoys a maker fee - fok: FillOrKill, fill either completely or none
 	TimeInForce string `json:"time_in_force,omitempty"`
-	// Amount to display for the iceberg order. Null or 0 for normal orders. Set to -1 to hide the order completely
+	// Amount to display for the iceberg order. Null or 0 for normal orders.  Hiding all amount is not supported.
 	Iceberg string `json:"iceberg,omitempty"`
 	// Used in margin or cross margin trading to allow automatic loan of insufficient amount if balance is not enough.
 	AutoBorrow bool `json:"auto_borrow,omitempty"`

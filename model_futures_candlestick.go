@@ -23,4 +23,6 @@ type FuturesCandlestick struct {
 	L string `json:"l,omitempty"`
 	// Open price (quote currency)
 	O string `json:"o,omitempty"`
+	// Trading volume (unit: Quote currency)
+	Sum string `json:"sum,omitempty"`
 }

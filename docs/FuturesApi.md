@@ -36,8 +36,10 @@ Method | HTTP request | Description
 [**AmendFuturesOrder**](FuturesApi.md#AmendFuturesOrder) | **Put** /futures/{settle}/orders/{order_id} | Amend an order
 [**CancelFuturesOrder**](FuturesApi.md#CancelFuturesOrder) | **Delete** /futures/{settle}/orders/{order_id} | Cancel a single order
 [**GetMyTrades**](FuturesApi.md#GetMyTrades) | **Get** /futures/{settle}/my_trades | List personal trading history
+[**GetMyTradesWithTimeRange**](FuturesApi.md#GetMyTradesWithTimeRange) | **Get** /futures/{settle}/my_trades_timerange | List personal trading history by time range
 [**ListPositionClose**](FuturesApi.md#ListPositionClose) | **Get** /futures/{settle}/position_close | List position close history
 [**ListLiquidates**](FuturesApi.md#ListLiquidates) | **Get** /futures/{settle}/liquidates | List liquidation history
+[**ListAutoDeleverages**](FuturesApi.md#ListAutoDeleverages) | **Get** /futures/{settle}/auto_deleverages | List Auto-Deleveraging History
 [**CountdownCancelAllFutures**](FuturesApi.md#CountdownCancelAllFutures) | **Post** /futures/{settle}/countdown_cancel_all | Countdown cancel orders
 [**ListPriceTriggeredOrders**](FuturesApi.md#ListPriceTriggeredOrders) | **Get** /futures/{settle}/price_orders | List all auto orders
 [**CreatePriceTriggeredOrder**](FuturesApi.md#CreatePriceTriggeredOrder) | **Post** /futures/{settle}/price_orders | Create a price-triggered order
@@ -2429,6 +2431,88 @@ func main() {
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
+## GetMyTradesWithTimeRange
+
+> []MyFuturesTrade GetMyTradesWithTimeRange(ctx, settle, optional)
+
+List personal trading history by time range
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**settle** | **string**| Settle currency | 
+**optional** | **GetMyTradesWithTimeRangeOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a GetMyTradesWithTimeRangeOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**contract** | **optional.String**| Futures contract, return related data only if specified | 
+**from** | **optional.Int64**| Start timestamp | 
+**to** | **optional.Int64**| End timestamp | 
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    
+    result, _, err := client.FuturesApi.GetMyTradesWithTimeRange(ctx, settle, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**[]MyFuturesTrade**](MyFuturesTrade.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
 ## ListPositionClose
 
 > []PositionClose ListPositionClose(ctx, settle, optional)
@@ -2577,6 +2661,86 @@ func main() {
 ### Return type
 
 [**[]FuturesLiquidate**](FuturesLiquidate.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## ListAutoDeleverages
+
+> []FuturesAutoDeleverage ListAutoDeleverages(ctx, settle, optional)
+
+List Auto-Deleveraging History
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**settle** | **string**| Settle currency | 
+**optional** | **ListAutoDeleveragesOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a ListAutoDeleveragesOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**contract** | **optional.String**| Futures contract, return related data only if specified | 
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
+**at** | **optional.Int32**| Specify an auto-deleveraging timestamp | [default to 0]
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    
+    result, _, err := client.FuturesApi.ListAutoDeleverages(ctx, settle, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**[]FuturesAutoDeleverage**](FuturesAutoDeleverage.md)
 
 ### Authorization
 

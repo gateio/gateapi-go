@@ -36,6 +36,8 @@ Name | Type | Description | Notes
 **ConfigChangeTime** | **float64** | Last changed time of configuration | [optional] 
 **InDelisting** | **bool** | Contract is delisting | [optional] 
 **OrdersLimit** | **int32** | Maximum number of open orders | [optional] 
+**EnableBonus** | **bool** | Whether bouns is enabled | [optional] 
+**EnableCredit** | **bool** | Whether portfolio margin account is enabled | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

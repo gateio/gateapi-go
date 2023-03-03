@@ -75,4 +75,8 @@ type Contract struct {
 	InDelisting bool `json:"in_delisting,omitempty"`
 	// Maximum number of open orders
 	OrdersLimit int32 `json:"orders_limit,omitempty"`
+	// Whether bouns is enabled
+	EnableBonus bool `json:"enable_bonus,omitempty"`
+	// Whether portfolio margin account is enabled
+	EnableCredit bool `json:"enable_credit,omitempty"`
 }

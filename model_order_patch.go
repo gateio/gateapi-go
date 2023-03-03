@@ -9,11 +9,10 @@
 
 package gateapi
 
-type FundingBookItem struct {
-	// Loan rate (daily rate)
-	Rate string `json:"rate,omitempty"`
-	// Borrowable amount
+// Spot order details
+type OrderPatch struct {
+	// New order amount. `amount` and `price` must specify one of them
 	Amount string `json:"amount,omitempty"`
-	// The number of days till the loan repayment's dateline
-	Days int32 `json:"days,omitempty"`
+	// New order price. `amount` and `Price` must specify one of them\"
+	Price string `json:"price,omitempty"`
 }

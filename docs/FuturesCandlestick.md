@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **H** | **string** | Highest price (quote currency) | [optional] 
 **L** | **string** | Lowest price (quote currency) | [optional] 
 **O** | **string** | Open price (quote currency) | [optional] 
+**Sum** | **string** | Trading volume (unit: Quote currency) | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -13,7 +13,7 @@ package gateapi
 type Order struct {
 	// Order ID
 	Id string `json:"id,omitempty"`
-	// User defined information. If not empty, must follow the rules below:  1. prefixed with `t-` 2. no longer than 28 bytes without `t-` prefix 3. can only include 0-9, A-Z, a-z, underscore(_), hyphen(-) or dot(.)
+	// User defined information. If not empty, must follow the rules below:  1. prefixed with `t-` 2. no longer than 28 bytes without `t-` prefix 3. can only include 0-9, A-Z, a-z, underscore(_), hyphen(-) or dot(.)  Besides user defined information, reserved contents are listed below, denoting how the order is created:  - 101: from android - 102: from IOS - 103: from IPAD - 104: from webapp - 3: from web - 2: from apiv2 - apiv4: from apiv4
 	Text string `json:"text,omitempty"`
 	// Creation time of order
 	CreateTime string `json:"create_time,omitempty"`
@@ -27,7 +27,7 @@ type Order struct {
 	Status string `json:"status,omitempty"`
 	// Currency pair
 	CurrencyPair string `json:"currency_pair"`
-	// Order Type   - limit : Limit Order - market : Market Order
+	// Order Type    - limit : Limit Order - market : Market Order
 	Type string `json:"type,omitempty"`
 	// Account type. spot - use spot account; margin - use margin account; cross_margin - use cross margin account. Portfolio margin account must set to `cross-margin`
 	Account string `json:"account,omitempty"`
@@ -39,7 +39,7 @@ type Order struct {
 	Price string `json:"price,omitempty"`
 	// Time in force  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled, taker only - poc: PendingOrCancelled, makes a post-only order that always enjoys a maker fee - fok: FillOrKill, fill either completely or none Only `ioc` and `fok` are supported when `type`=`market`
 	TimeInForce string `json:"time_in_force,omitempty"`
-	// Amount to display for the iceberg order. Null or 0 for normal orders. Set to -1 to hide the order completely
+	// Amount to display for the iceberg order. Null or 0 for normal orders.  Hiding all amount is not supported.
 	Iceberg string `json:"iceberg,omitempty"`
 	// Used in margin or cross margin trading to allow automatic loan of insufficient amount if balance is not enough.
 	AutoBorrow bool `json:"auto_borrow,omitempty"`
@@ -51,6 +51,8 @@ type Order struct {
 	FillPrice string `json:"fill_price,omitempty"`
 	// Total filled in quote currency
 	FilledTotal string `json:"filled_total,omitempty"`
+	// Average fill price
+	AvgDealPrice string `json:"avg_deal_price,omitempty"`
 	// Fee deducted
 	Fee string `json:"fee,omitempty"`
 	// Fee currency unit

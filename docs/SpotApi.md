@@ -7,12 +7,13 @@ Method | HTTP request | Description
 [**ListCurrencies**](SpotApi.md#ListCurrencies) | **Get** /spot/currencies | List all currencies&#39; details
 [**GetCurrency**](SpotApi.md#GetCurrency) | **Get** /spot/currencies/{currency} | Get details of a specific currency
 [**ListCurrencyPairs**](SpotApi.md#ListCurrencyPairs) | **Get** /spot/currency_pairs | List all currency pairs supported
-[**GetCurrencyPair**](SpotApi.md#GetCurrencyPair) | **Get** /spot/currency_pairs/{currency_pair} | Get details of a specifc order
+[**GetCurrencyPair**](SpotApi.md#GetCurrencyPair) | **Get** /spot/currency_pairs/{currency_pair} | Get details of a specifc currency pair
 [**ListTickers**](SpotApi.md#ListTickers) | **Get** /spot/tickers | Retrieve ticker information
 [**ListOrderBook**](SpotApi.md#ListOrderBook) | **Get** /spot/order_book | Retrieve order book
 [**ListTrades**](SpotApi.md#ListTrades) | **Get** /spot/trades | Retrieve market trades
 [**ListCandlesticks**](SpotApi.md#ListCandlesticks) | **Get** /spot/candlesticks | Market candlesticks
 [**GetFee**](SpotApi.md#GetFee) | **Get** /spot/fee | Query user trading fee rates
+[**GetBatchSpotFee**](SpotApi.md#GetBatchSpotFee) | **Get** /spot/batch_fee | Query a batch of user trading fee rates
 [**ListSpotAccounts**](SpotApi.md#ListSpotAccounts) | **Get** /spot/accounts | List spot accounts
 [**CreateBatchOrders**](SpotApi.md#CreateBatchOrders) | **Post** /spot/batch_orders | Create a batch of orders
 [**ListAllOpenOrders**](SpotApi.md#ListAllOpenOrders) | **Get** /spot/open_orders | List all open orders
@@ -23,6 +24,7 @@ Method | HTTP request | Description
 [**CancelBatchOrders**](SpotApi.md#CancelBatchOrders) | **Post** /spot/cancel_batch_orders | Cancel a batch of orders with an ID list
 [**GetOrder**](SpotApi.md#GetOrder) | **Get** /spot/orders/{order_id} | Get a single order
 [**CancelOrder**](SpotApi.md#CancelOrder) | **Delete** /spot/orders/{order_id} | Cancel a single order
+[**AmendOrder**](SpotApi.md#AmendOrder) | **Patch** /spot/orders/{order_id} | Amend an order
 [**ListMyTrades**](SpotApi.md#ListMyTrades) | **Get** /spot/my_trades | List personal trading history
 [**GetSystemTime**](SpotApi.md#GetSystemTime) | **Get** /spot/time | Get server current time
 [**CountdownCancelAllSpot**](SpotApi.md#CountdownCancelAllSpot) | **Post** /spot/countdown_cancel_all | Countdown cancel orders
@@ -218,7 +220,7 @@ No authorization required
 
 > CurrencyPair GetCurrencyPair(ctx, currencyPair)
 
-Get details of a specifc order
+Get details of a specifc currency pair
 
 ### Required Parameters
 
@@ -646,6 +648,75 @@ func main() {
 ### Return type
 
 [**TradeFee**](TradeFee.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## GetBatchSpotFee
+
+> map[string]SpotFee GetBatchSpotFee(ctx, currencyPairs)
+
+Query a batch of user trading fee rates
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**currencyPairs** | **string**| A request can only query up to 50 currency pairs | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    currencyPairs := "BTC_USDT,ETH_USDT" // string - A request can only query up to 50 currency pairs
+    
+    result, _, err := client.SpotApi.GetBatchSpotFee(ctx, currencyPairs)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**map[string]SpotFee**](SpotFee.md)
 
 ### Authorization
 
@@ -1426,6 +1497,90 @@ func main() {
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## AmendOrder
+
+> Order AmendOrder(ctx, orderId, currencyPair, orderPatch, optional)
+
+Amend an order
+
+By default, the orders of spot and margin account are updated.  If you need to modify orders of the `cross-margin` account, you must specify account as `cross_margin`.  For portfolio margin account, only `cross_margin` account is supported.  Currently, only supports modification of `price` or `amount` fields.  Regarding rate limiting: modify order and create order sharing rate limiting rules. Regarding matching priority: only modifying the amount does not affect the priority. If the price is modified, the priority will be adjusted to the last of the new price. Note: If the modified amount is less than the fill amount, the order will be cancelled.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**orderId** | **string**| Order ID returned, or user custom ID(i.e., &#x60;text&#x60; field). Operations based on custom ID can only be checked when the order is in orderbook.  When the order is finished, it can be checked within 1 hour after the end of the order.  After that, only order ID is accepted. | 
+**currencyPair** | **string**| Currency pair | 
+**orderPatch** | [**OrderPatch**](OrderPatch.md)|  | 
+**optional** | **AmendOrderOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a AmendOrderOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**account** | **optional.String**| Specify operation account. Default to spot and margin account if not specified. Set to &#x60;cross_margin&#x60; to operate against margin account.  Portfolio margin account must set to &#x60;cross_margin&#x60; only | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    orderId := "12345" // string - Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID can only be checked when the order is in orderbook.  When the order is finished, it can be checked within 1 hour after the end of the order.  After that, only order ID is accepted.
+    currencyPair := "BTC_USDT" // string - Currency pair
+    orderPatch := gateapi.OrderPatch{} // OrderPatch - 
+    
+    result, _, err := client.SpotApi.AmendOrder(ctx, orderId, currencyPair, orderPatch, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**Order**](Order.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

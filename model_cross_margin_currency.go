@@ -12,7 +12,7 @@ package gateapi
 type CrossMarginCurrency struct {
 	// Currency name
 	Name string `json:"name,omitempty"`
-	// Loan rate
+	// Minimum lending rate (hourly rate)
 	Rate string `json:"rate,omitempty"`
 	// Currency precision
 	Prec string `json:"prec,omitempty"`

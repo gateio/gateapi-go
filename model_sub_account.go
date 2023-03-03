@@ -20,6 +20,8 @@ type SubAccount struct {
 	Email string `json:"email,omitempty"`
 	// State: 1-normal, 2-locked\"
 	State int32 `json:"state,omitempty"`
+	// Type: 1-Sub-account
+	Type int32 `json:"type,omitempty"`
 	// The user id of the sub-account
 	UserId int64 `json:"user_id,omitempty"`
 	// Created time

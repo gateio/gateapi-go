@@ -575,7 +575,7 @@ func main() {
 
 ## LockSubAccount
 
-> LockSubAccount(ctx, userId, body)
+> LockSubAccount(ctx, userId)
 
 Lock the sub-account
 
@@ -585,7 +585,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **userId** | **int64**| The user id of the sub-account | 
-**body** | **map[string]interface{}**|  | 
 
 ### Example
 
@@ -611,9 +610,8 @@ func main() {
                              }
                             )
     userId := 56 // int64 - The user id of the sub-account
-    body := nil // map[string]interface{} - 
     
-    result, _, err := client.SubAccountApi.LockSubAccount(ctx, userId, body)
+    result, _, err := client.SubAccountApi.LockSubAccount(ctx, userId)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -637,7 +635,7 @@ func main() {
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -646,7 +644,7 @@ func main() {
 
 ## UnlockSubAccount
 
-> UnlockSubAccount(ctx, userId, body)
+> UnlockSubAccount(ctx, userId)
 
 Unlock the sub-account
 
@@ -656,7 +654,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **userId** | **int64**| The user id of the sub-account | 
-**body** | **map[string]interface{}**|  | 
 
 ### Example
 
@@ -682,9 +679,8 @@ func main() {
                              }
                             )
     userId := 56 // int64 - The user id of the sub-account
-    body := nil // map[string]interface{} - 
     
-    result, _, err := client.SubAccountApi.UnlockSubAccount(ctx, userId, body)
+    result, _, err := client.SubAccountApi.UnlockSubAccount(ctx, userId)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -708,7 +704,7 @@ func main() {
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

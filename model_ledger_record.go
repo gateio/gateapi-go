@@ -14,6 +14,8 @@ type LedgerRecord struct {
 	Id string `json:"id,omitempty"`
 	// Hash record of the withdrawal
 	Txid string `json:"txid,omitempty"`
+	// Client order id, up to 32 length and can only include 0-9, A-Z, a-z, underscore(_), hyphen(-) or dot(.)
+	WithdrawOrderId string `json:"withdraw_order_id,omitempty"`
 	// Operation time
 	Timestamp string `json:"timestamp,omitempty"`
 	// Currency amount

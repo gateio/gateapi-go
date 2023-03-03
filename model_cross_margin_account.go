@@ -35,4 +35,6 @@ type CrossMarginAccount struct {
 	TotalMaintenanceMarginRate string `json:"total_maintenance_margin_rate,omitempty"`
 	// Total available margin
 	TotalAvailableMargin string `json:"total_available_margin,omitempty"`
+	// Total amount of the portfolio margin account
+	PortfolioMarginTotal string `json:"portfolio_margin_total,omitempty"`
 }

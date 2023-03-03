@@ -761,9 +761,8 @@ func (a *SubAccountApiService) DeleteSubAccountKeys(ctx context.Context, userId 
 LockSubAccount Lock the sub-account
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param userId The user id of the sub-account
-  - @param body
 */
-func (a *SubAccountApiService) LockSubAccount(ctx context.Context, userId int64, body map[string]interface{}) (*http.Response, error) {
+func (a *SubAccountApiService) LockSubAccount(ctx context.Context, userId int64) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -781,7 +780,7 @@ func (a *SubAccountApiService) LockSubAccount(ctx context.Context, userId int64,
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -797,8 +796,6 @@ func (a *SubAccountApiService) LockSubAccount(ctx context.Context, userId int64,
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = &body
 	if ctx == nil {
 		ctx = context.Background()
 	}
@@ -845,9 +842,8 @@ func (a *SubAccountApiService) LockSubAccount(ctx context.Context, userId int64,
 UnlockSubAccount Unlock the sub-account
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param userId The user id of the sub-account
-  - @param body
 */
-func (a *SubAccountApiService) UnlockSubAccount(ctx context.Context, userId int64, body map[string]interface{}) (*http.Response, error) {
+func (a *SubAccountApiService) UnlockSubAccount(ctx context.Context, userId int64) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -865,7 +861,7 @@ func (a *SubAccountApiService) UnlockSubAccount(ctx context.Context, userId int6
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -881,8 +877,6 @@ func (a *SubAccountApiService) UnlockSubAccount(ctx context.Context, userId int6
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = &body
 	if ctx == nil {
 		ctx = context.Background()
 	}

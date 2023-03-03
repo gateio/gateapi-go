@@ -59,6 +59,8 @@ type APIClient struct {
 
 	OptionsApi *OptionsApiService
 
+	RebateApi *RebateApiService
+
 	SpotApi *SpotApiService
 
 	SubAccountApi *SubAccountApiService
@@ -89,6 +91,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.FuturesApi = (*FuturesApiService)(&c.common)
 	c.MarginApi = (*MarginApiService)(&c.common)
 	c.OptionsApi = (*OptionsApiService)(&c.common)
+	c.RebateApi = (*RebateApiService)(&c.common)
 	c.SpotApi = (*SpotApiService)(&c.common)
 	c.SubAccountApi = (*SubAccountApiService)(&c.common)
 	c.WalletApi = (*WalletApiService)(&c.common)
