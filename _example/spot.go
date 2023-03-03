@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/antihax/optional"
-	"github.com/gateio/gateapi-go/v5"
+	"github.com/gateio/gateapi-go/v6"
 	"github.com/shopspring/decimal"
 )
 
@@ -62,12 +62,12 @@ func SpotDemo(config *RunConfig) {
 	}
 	logger.Printf("order created with ID: %s, status: %s\n", createdOrder.Id, createdOrder.Status)
 	if createdOrder.Status == "open" {
-		order, _, err := client.SpotApi.GetOrder(ctx, createdOrder.Id, createdOrder.CurrencyPair)
+		order, _, err := client.SpotApi.GetOrder(ctx, createdOrder.Id, createdOrder.CurrencyPair, nil)
 		if err != nil {
 			panicGateError(err)
 		}
 		logger.Printf("order %s filled: %s, left: %s\n", order.Id, order.FilledTotal, order.Left)
-		result, _, err := client.SpotApi.CancelOrder(ctx, createdOrder.Id, createdOrder.CurrencyPair)
+		result, _, err := client.SpotApi.CancelOrder(ctx, createdOrder.Id, createdOrder.CurrencyPair, nil)
 		if err != nil {
 			panicGateError(err)
 		}
@@ -76,8 +76,10 @@ func SpotDemo(config *RunConfig) {
 		}
 	} else {
 		// order finished
-		trades, _, err := client.SpotApi.ListMyTrades(ctx, createdOrder.CurrencyPair,
-			&gateapi.ListMyTradesOpts{OrderId: optional.NewString(createdOrder.Id)})
+		trades, _, err := client.SpotApi.ListMyTrades(ctx, &gateapi.ListMyTradesOpts{
+			CurrencyPair: optional.NewString(createdOrder.CurrencyPair),
+			OrderId:      optional.NewString(createdOrder.Id),
+		})
 		if err != nil {
 			panicGateError(err)
 		}
