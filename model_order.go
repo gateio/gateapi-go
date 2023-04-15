@@ -25,6 +25,8 @@ type Order struct {
 	UpdateTimeMs int64 `json:"update_time_ms,omitempty"`
 	// Order status  - `open`: to be filled - `closed`: filled - `cancelled`: cancelled
 	Status string `json:"status,omitempty"`
+	// FinishAs final status  - `open`: processing - `filled`: filled totally - `cancelled`: manually cancelled - `ioc`: time in force is IOC, finish immediately - `stp`: cancelled because self trade prevention
+	FinishAs string `json:"finish_as,omitempty"`
 	// Currency pair
 	CurrencyPair string `json:"currency_pair"`
 	// Order Type    - limit : Limit Order - market : Market Order
