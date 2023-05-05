@@ -292,7 +292,7 @@ func main() {
 
 ## PreviewFlashSwapOrder
 
-> FlashSwapOrderPreview PreviewFlashSwapOrder(ctx, flashSwapOrderRequest)
+> FlashSwapOrderPreview PreviewFlashSwapOrder(ctx, flashSwapPreviewRequest)
 
 Initiate a flash swap order preview
 
@@ -301,7 +301,7 @@ Initiate a flash swap order preview
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**flashSwapOrderRequest** | [**FlashSwapOrderRequest**](FlashSwapOrderRequest.md)|  | 
+**flashSwapPreviewRequest** | [**FlashSwapPreviewRequest**](FlashSwapPreviewRequest.md)|  | 
 
 ### Example
 
@@ -326,9 +326,9 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    flashSwapOrderRequest := gateapi.FlashSwapOrderRequest{} // FlashSwapOrderRequest - 
+    flashSwapPreviewRequest := gateapi.FlashSwapPreviewRequest{} // FlashSwapPreviewRequest - 
     
-    result, _, err := client.FlashSwapApi.PreviewFlashSwapOrder(ctx, flashSwapOrderRequest)
+    result, _, err := client.FlashSwapApi.PreviewFlashSwapOrder(ctx, flashSwapPreviewRequest)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())

@@ -2589,7 +2589,7 @@ func (a *FuturesApiService) ListFuturesOrders(ctx context.Context, settle string
 
 /*
 CreateFuturesOrder Create a futures order
-- Creating futures orders requires &#x60;size&#x60;, which is number of contracts instead of currency amount. You can use &#x60;quanto_multiplier&#x60; in contract detail response to know how much currency 1 size contract represents - Zero-filled order cannot be retrieved 10 minutes after order cancellation. You will get a 404 not found for such orders - Set &#x60;reduce_only&#x60; to &#x60;true&#x60; can keep the position from changing side when reducing position size - In single position mode, to close a position, you need to set &#x60;size&#x60; to 0 and &#x60;close&#x60; to &#x60;true&#x60; - In dual position mode, to close one side position, you need to set &#x60;auto_size&#x60; side, &#x60;reduce_only&#x60; to true and &#x60;size&#x60; to 0
+- Creating futures orders requires &#x60;size&#x60;, which is number of contracts instead of currency amount. You can use &#x60;quanto_multiplier&#x60; in contract detail response to know how much currency 1 size contract represents - Zero-filled order cannot be retrieved 10 minutes after order cancellation. You will get a 404 not found for such orders - Set &#x60;reduce_only&#x60; to &#x60;true&#x60; can keep the position from changing side when reducing position size - In single position mode, to close a position, you need to set &#x60;size&#x60; to 0 and &#x60;close&#x60; to &#x60;true&#x60; - In dual position mode, to close one side position, you need to set &#x60;auto_size&#x60; side, &#x60;reduce_only&#x60; to true and &#x60;size&#x60; to 0 - Set &#x60;stp_act&#x60; to decide the strategy of self-trade prevention. For detailed usage, refer to the &#x60;stp_act&#x60; parameter in request body
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param settle Settle currency
   - @param futuresOrder
@@ -3197,7 +3197,7 @@ GetMyTrades List personal trading history
   - @param "Order" (optional.Int64) -  Futures order ID, return related data only if specified
   - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
   - @param "Offset" (optional.Int32) -  List offset, starting from 0
-  - @param "LastId" (optional.String) -  Specify list staring point using the `id` of last record in previous list-query results
+  - @param "LastId" (optional.String) -  Specify the starting point for this list based on a previously retrieved id  This parameter is deprecated. If you need to iterate through and retrieve more records, we recommend using 'GET /futures/{settle}/my_trades_timerange'.
 
 @return []MyFuturesTrade
 */
@@ -3322,16 +3322,16 @@ GetMyTradesWithTimeRange List personal trading history by time range
   - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
   - @param "Offset" (optional.Int32) -  List offset, starting from 0
 
-@return []MyFuturesTrade
+@return []MyFuturesTradeTimeRange
 */
-func (a *FuturesApiService) GetMyTradesWithTimeRange(ctx context.Context, settle string, localVarOptionals *GetMyTradesWithTimeRangeOpts) ([]MyFuturesTrade, *http.Response, error) {
+func (a *FuturesApiService) GetMyTradesWithTimeRange(ctx context.Context, settle string, localVarOptionals *GetMyTradesWithTimeRangeOpts) ([]MyFuturesTradeTimeRange, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []MyFuturesTrade
+		localVarReturnValue  []MyFuturesTradeTimeRange
 	)
 
 	// create path and map variables

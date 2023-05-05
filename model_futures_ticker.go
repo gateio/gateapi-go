@@ -48,4 +48,8 @@ type FuturesTicker struct {
 	BasisRate string `json:"basis_rate,omitempty"`
 	// Basis value
 	BasisValue string `json:"basis_value,omitempty"`
+	// Recent lowest ask
+	LowestAsk string `json:"lowest_ask,omitempty"`
+	// Recent highest bid
+	HighestBid string `json:"highest_bid,omitempty"`
 }

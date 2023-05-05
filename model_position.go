@@ -51,7 +51,7 @@ type Position struct {
 	RealisedPoint string `json:"realised_point,omitempty"`
 	// History realized POINT PNL
 	HistoryPoint string `json:"history_point,omitempty"`
-	// ADL ranking, ranging from 1 to 5
+	// Ranking of auto deleveraging, a total of 1-5 grades, `1` is the highest, `5` is the lowest, and `6` is the special case when there is no position held or in liquidation
 	AdlRanking int32 `json:"adl_ranking,omitempty"`
 	// Current open orders
 	PendingOrders int32               `json:"pending_orders,omitempty"`

@@ -13,8 +13,8 @@ type SubCrossMarginAccount struct {
 	// User ID of the cross margin account. 0 means that the subaccount has not yet opened a cross margin account
 	UserId int64 `json:"user_id,omitempty"`
 	// Whether account is locked
-	Locked   bool                          `json:"locked,omitempty"`
-	Balances map[string]CrossMarginBalance `json:"balances,omitempty"`
+	Locked   bool                           `json:"locked,omitempty"`
+	Balances map[string]CrossMarginBalance1 `json:"balances,omitempty"`
 	// Total account value in USDT, i.e., the sum of all currencies' `(available+freeze)*price*discount`
 	Total string `json:"total,omitempty"`
 	// Total borrowed value in USDT, i.e., the sum of all currencies' `borrowed*price*discount`

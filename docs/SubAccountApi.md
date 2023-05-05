@@ -18,12 +18,24 @@ Method | HTTP request | Description
 
 ## ListSubAccounts
 
-> []SubAccount ListSubAccounts(ctx, )
+> []SubAccount ListSubAccounts(ctx, optional)
 
 List sub-accounts
 
 ### Required Parameters
 
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**optional** | **ListSubAccountsOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a ListSubAccountsOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**type_** | **optional.String**| &#x60;0&#x60; to list all types of sub-accounts (currently supporting cross margin accounts and sub-accounts).  &#x60;1&#x60; to list sub-accounts only. If no parameter is passed, only sub-accounts will be listed by default. | 
 
 ### Example
 
@@ -49,7 +61,7 @@ func main() {
                              }
                             )
     
-    result, _, err := client.SubAccountApi.ListSubAccounts(ctx)
+    result, _, err := client.SubAccountApi.ListSubAccounts(ctx, nil)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())

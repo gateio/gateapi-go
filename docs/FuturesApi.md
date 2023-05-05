@@ -1910,7 +1910,7 @@ func main() {
 
 Create a futures order
 
-- Creating futures orders requires `size`, which is number of contracts instead of currency amount. You can use `quanto_multiplier` in contract detail response to know how much currency 1 size contract represents - Zero-filled order cannot be retrieved 10 minutes after order cancellation. You will get a 404 not found for such orders - Set `reduce_only` to `true` can keep the position from changing side when reducing position size - In single position mode, to close a position, you need to set `size` to 0 and `close` to `true` - In dual position mode, to close one side position, you need to set `auto_size` side, `reduce_only` to true and `size` to 0
+- Creating futures orders requires `size`, which is number of contracts instead of currency amount. You can use `quanto_multiplier` in contract detail response to know how much currency 1 size contract represents - Zero-filled order cannot be retrieved 10 minutes after order cancellation. You will get a 404 not found for such orders - Set `reduce_only` to `true` can keep the position from changing side when reducing position size - In single position mode, to close a position, you need to set `size` to 0 and `close` to `true` - In dual position mode, to close one side position, you need to set `auto_size` side, `reduce_only` to true and `size` to 0 - Set `stp_act` to decide the strategy of self-trade prevention. For detailed usage, refer to the `stp_act` parameter in request body 
 
 ### Required Parameters
 
@@ -2373,7 +2373,7 @@ Name | Type | Description  | Notes
 **order** | **optional.Int64**| Futures order ID, return related data only if specified | 
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
-**lastId** | **optional.String**| Specify list staring point using the &#x60;id&#x60; of last record in previous list-query results | 
+**lastId** | **optional.String**| Specify the starting point for this list based on a previously retrieved id  This parameter is deprecated. If you need to iterate through and retrieve more records, we recommend using &#39;GET /futures/{settle}/my_trades_timerange&#39;. | 
 
 ### Example
 
@@ -2433,7 +2433,7 @@ func main() {
 
 ## GetMyTradesWithTimeRange
 
-> []MyFuturesTrade GetMyTradesWithTimeRange(ctx, settle, optional)
+> []MyFuturesTradeTimeRange GetMyTradesWithTimeRange(ctx, settle, optional)
 
 List personal trading history by time range
 
@@ -2498,7 +2498,7 @@ func main() {
 
 ### Return type
 
-[**[]MyFuturesTrade**](MyFuturesTrade.md)
+[**[]MyFuturesTradeTimeRange**](MyFuturesTradeTimeRange.md)
 
 ### Authorization
 

@@ -11,6 +11,7 @@ package gateapi
 
 import (
 	"context"
+	"github.com/antihax/optional"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -25,13 +26,20 @@ var (
 // SubAccountApiService SubAccountApi service
 type SubAccountApiService service
 
+// ListSubAccountsOpts Optional parameters for the method 'ListSubAccounts'
+type ListSubAccountsOpts struct {
+	Type_ optional.String
+}
+
 /*
 ListSubAccounts List sub-accounts
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param optional nil or *ListSubAccountsOpts - Optional Parameters:
+  - @param "Type_" (optional.String) -  `0` to list all types of sub-accounts (currently supporting cross margin accounts and sub-accounts).  `1` to list sub-accounts only. If no parameter is passed, only sub-accounts will be listed by default.
 
 @return []SubAccount
 */
-func (a *SubAccountApiService) ListSubAccounts(ctx context.Context) ([]SubAccount, *http.Response, error) {
+func (a *SubAccountApiService) ListSubAccounts(ctx context.Context, localVarOptionals *ListSubAccountsOpts) ([]SubAccount, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -47,6 +55,9 @@ func (a *SubAccountApiService) ListSubAccounts(ctx context.Context) ([]SubAccoun
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Type_.IsSet() {
+		localVarQueryParams.Add("type", parameterToString(localVarOptionals.Type_.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

@@ -12,13 +12,13 @@ package gateapi
 // Parameters of flash swap order creation
 type FlashSwapOrderRequest struct {
 	// Preview result ID
-	PreviewId string `json:"preview_id,omitempty"`
+	PreviewId string `json:"preview_id"`
 	// Currency to sell which can be retrieved from supported currency list API `GET /flash_swap/currencies`
 	SellCurrency string `json:"sell_currency"`
-	// Amount to sell. It is required to choose one parameter between `sell_amount` and `buy_amount`
-	SellAmount string `json:"sell_amount,omitempty"`
+	// Amount to sell (based on the preview result)
+	SellAmount string `json:"sell_amount"`
 	// Currency to buy which can be retrieved from supported currency list API `GET /flash_swap/currencies`
 	BuyCurrency string `json:"buy_currency"`
-	// Amount to buy. It is required to choose one parameter between `sell_amount` and `buy_amount`
-	BuyAmount string `json:"buy_amount,omitempty"`
+	// Amount to buy (based on the preview result)
+	BuyAmount string `json:"buy_amount"`
 }

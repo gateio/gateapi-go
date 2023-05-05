@@ -425,11 +425,11 @@ func (a *FlashSwapApiService) GetFlashSwapOrder(ctx context.Context, orderId int
 /*
 PreviewFlashSwapOrder Initiate a flash swap order preview
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param flashSwapOrderRequest
+  - @param flashSwapPreviewRequest
 
 @return FlashSwapOrderPreview
 */
-func (a *FlashSwapApiService) PreviewFlashSwapOrder(ctx context.Context, flashSwapOrderRequest FlashSwapOrderRequest) (FlashSwapOrderPreview, *http.Response, error) {
+func (a *FlashSwapApiService) PreviewFlashSwapOrder(ctx context.Context, flashSwapPreviewRequest FlashSwapPreviewRequest) (FlashSwapOrderPreview, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -463,7 +463,7 @@ func (a *FlashSwapApiService) PreviewFlashSwapOrder(ctx context.Context, flashSw
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = &flashSwapOrderRequest
+	localVarPostBody = &flashSwapPreviewRequest
 	if ctx == nil {
 		ctx = context.Background()
 	}

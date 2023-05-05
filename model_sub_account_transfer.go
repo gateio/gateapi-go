@@ -24,6 +24,6 @@ type SubAccountTransfer struct {
 	Timest string `json:"timest,omitempty"`
 	// Where the operation is initiated from
 	Source string `json:"source,omitempty"`
-	// Target sub user's account. `spot` - spot account, `futures` - perpetual contract account, `cross_margin` - cross margin account
+	// Target sub user's account. `spot` - spot account, `futures` - perpetual contract account, `cross_margin` - cross margin account, `delivery` - delivery account
 	SubAccountType string `json:"sub_account_type,omitempty"`
 }

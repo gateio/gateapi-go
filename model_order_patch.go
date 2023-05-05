@@ -15,4 +15,6 @@ type OrderPatch struct {
 	Amount string `json:"amount,omitempty"`
 	// New order price. `amount` and `Price` must specify one of them\"
 	Price string `json:"price,omitempty"`
+	// Custom info during amending order
+	AmendText string `json:"amend_text,omitempty"`
 }

@@ -10,7 +10,7 @@
 package gateapi
 
 type CrossMarginLoan struct {
-	// Borrow loan ID
+	// Loan record ID
 	Id string `json:"id,omitempty"`
 	// Creation timestamp, in milliseconds
 	CreateTime int64 `json:"create_time,omitempty"`

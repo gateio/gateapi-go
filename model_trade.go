@@ -36,4 +36,6 @@ type Trade struct {
 	PointFee string `json:"point_fee,omitempty"`
 	// GT used to deduct fee. No value in public endpoints
 	GtFee string `json:"gt_fee,omitempty"`
+	// The custom data that the user remarked when amending the order
+	AmendText string `json:"amend_text,omitempty"`
 }

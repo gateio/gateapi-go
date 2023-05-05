@@ -14,7 +14,7 @@ type CrossMarginRepayment struct {
 	Id string `json:"id,omitempty"`
 	// Repayment time
 	CreateTime int64 `json:"create_time,omitempty"`
-	// Borrow loan ID
+	// Loan record ID
 	LoanId string `json:"loan_id,omitempty"`
 	// Currency name
 	Currency string `json:"currency,omitempty"`

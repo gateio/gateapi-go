@@ -79,4 +79,6 @@ type Contract struct {
 	EnableBonus bool `json:"enable_bonus,omitempty"`
 	// Whether portfolio margin account is enabled
 	EnableCredit bool `json:"enable_credit,omitempty"`
+	// Created time of the contract
+	CreateTime float64 `json:"create_time,omitempty"`
 }
