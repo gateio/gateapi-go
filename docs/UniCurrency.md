@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Currency** | **string** | Currency name | [optional] [readonly] 
-**MinLendAmount** | **string** | Minimum lend amount | [optional] [readonly] 
-**MaxLendAmount** | **string** | Maximum lend amount | [optional] [readonly] 
+**MinLendAmount** | **string** | The minimum lending amount, in the unit of the currency. | [optional] [readonly] 
+**MaxLendAmount** | **string** | The total maximum lending amount, in USDT | [optional] [readonly] 
 **MaxRate** | **string** | Maximum rate (Hourly) | [optional] [readonly] 
 **MinRate** | **string** | Minimum rate (Hourly) | [optional] [readonly] 
 

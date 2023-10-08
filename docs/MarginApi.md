@@ -36,6 +36,7 @@ Method | HTTP request | Description
 [**RepayCrossMarginLoan**](MarginApi.md#RepayCrossMarginLoan) | **Post** /margin/cross/repayments | Cross margin repayments
 [**GetCrossMarginInterestRecords**](MarginApi.md#GetCrossMarginInterestRecords) | **Get** /margin/cross/interest_records | Interest records for the cross margin account
 [**GetCrossMarginTransferable**](MarginApi.md#GetCrossMarginTransferable) | **Get** /margin/cross/transferable | Get the max transferable amount for a specific cross margin currency
+[**GetCrossMarginEstimateRate**](MarginApi.md#GetCrossMarginEstimateRate) | **Get** /margin/cross/estimate_rate | Estimated interest rates
 [**GetCrossMarginBorrowable**](MarginApi.md#GetCrossMarginBorrowable) | **Get** /margin/cross/borrowable | Get the max borrowable amount for a specific cross margin currency
 
 
@@ -138,6 +139,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **currency** | **optional.String**| List records related to specified currency only. If specified, &#x60;currency_pair&#x60; is also required. | 
 **currencyPair** | **optional.String**| List records related to specified currency pair. Used in combination with &#x60;currency&#x60;. Ignored if &#x60;currency&#x60; is not provided | 
+**type_** | **optional.String**| Only retrieve changes of the specified type. All types will be returned if not specified. | 
 **from** | **optional.Int64**| Start timestamp of the query | 
 **to** | **optional.Int64**| Time range ending, default to current time | 
 **page** | **optional.Int32**| Page number | [default to 1]
@@ -1834,7 +1836,7 @@ Sort by creation time in descending order by default. Set `reverse=false` to ret
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**status** | **int32**| Filter by status. Supported values are 2 and 3. | 
+**status** | **int32**| Filter by status. Supported values are 2 and 3. (deprecated.) | 
 **optional** | **ListCrossMarginLoansOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -1871,7 +1873,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    status := 56 // int32 - Filter by status. Supported values are 2 and 3.
+    status := 56 // int32 - Filter by status. Supported values are 2 and 3. (deprecated.)
     
     result, _, err := client.MarginApi.ListCrossMarginLoans(ctx, status, nil)
     if err != nil {
@@ -2344,9 +2346,80 @@ func main() {
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
+## GetCrossMarginEstimateRate
+
+> map[string]string GetCrossMarginEstimateRate(ctx, currencies)
+
+Estimated interest rates
+
+Please note that the interest rates are subject to change based on the borrowing and lending demand, and therefore, the provided rates may not be entirely accurate.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**currencies** | [**[]string**](string.md)| An array of up to 10 specifying the currency name | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    currencies := []string{"[\"BTC\",\"GT\"]"} // []string - An array of up to 10 specifying the currency name
+    
+    result, _, err := client.MarginApi.GetCrossMarginEstimateRate(ctx, currencies)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+**map[string]string**
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
 ## GetCrossMarginBorrowable
 
-> CrossMarginBorrowable GetCrossMarginBorrowable(ctx, currency)
+> PortfolioBorrowable GetCrossMarginBorrowable(ctx, currency)
 
 Get the max borrowable amount for a specific cross margin currency
 
@@ -2398,7 +2471,7 @@ func main() {
 
 ### Return type
 
-[**CrossMarginBorrowable**](CrossMarginBorrowable.md)
+[**PortfolioBorrowable**](PortfolioBorrowable.md)
 
 ### Authorization
 

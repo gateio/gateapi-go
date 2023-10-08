@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Chain** | **string** | Chain name | [optional] 
 **NameCn** | **string** | Chain name in Chinese | [optional] 
 **NameEn** | **string** | Chain name in English | [optional] 
+**ContractAddress** | **string** | 币种智能合约地址，如果没有地址则为空字串 | [optional] 
 **IsDisabled** | **int32** | If it is disabled. 0 means NOT being disabled | [optional] 
 **IsDepositDisabled** | **int32** | Is deposit disabled. 0 means not | [optional] 
 **IsWithdrawDisabled** | **int32** | Is withdrawal disabled. 0 means not | [optional] 

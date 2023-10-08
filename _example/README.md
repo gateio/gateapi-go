@@ -1,6 +1,6 @@
 # Example Application
 
-This is a demo application using `gateapi` to show how Gate APIv4 works.
+This is a demo application using `gateapi` to show how Gate APIv4 works. 
 Instead of running it, it is recommended to read the source code to get a general idea of
 how this SDK is used. However, you can modify this code directly to implement your own logic.
 
@@ -15,7 +15,7 @@ mkdir gateapi-demo && cd gateapi-demo
 
 # install required dependency
 go mod init
-go get github.com/gateio/gateapi-go/v6
+go get github.com/gateio/gateapi-go/v5
 go get github.com/shopspring/decimal
 
 # build the demo application

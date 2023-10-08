@@ -20,6 +20,8 @@ type SubAccountTransfer struct {
 	Amount string `json:"amount"`
 	// Main account user ID
 	Uid string `json:"uid,omitempty"`
+	// The custom ID provided by the customer serves as a safeguard against duplicate transfers. It can be a combination of letters (case-sensitive), numbers, hyphens '-', and underscores '_', with a length ranging from 1 to 64 characters.
+	ClientOrderId string `json:"client_order_id,omitempty"`
 	// Transfer timestamp
 	Timest string `json:"timest,omitempty"`
 	// Where the operation is initiated from

@@ -447,10 +447,10 @@ Return specified contract candlesticks. If prefix &#x60;contract&#x60; with &#x6
   - @param settle Settle currency
   - @param contract Futures contract
   - @param optional nil or *ListFuturesCandlesticksOpts - Optional Parameters:
-  - @param "From" (optional.Int64) -  Start time of candlesticks, formatted in Unix timestamp in seconds. Default to`to - 100 * interval` if not specified
+  - @param "From" (optional.Int64) -  指定 K 线图的起始时间，注意时间格式为秒(s)精度的 Unix 时间戳，不指定则默认为 to - 100 * interval，即向前最多 100 个点的时间
   - @param "To" (optional.Int64) -  End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time
-  - @param "Limit" (optional.Int32) -  Maximum recent data points to return. `limit` is conflicted with `from` and `to`. If either `from` or `to` is specified, request will be rejected.
-  - @param "Interval" (optional.String) -  Interval time between data points. Note that `1w` means natual week(Mon-Sun), while `7d` means every 7d since unix 0
+  - @param "Limit" (optional.Int32) -  指定数据点的数量，适用于取最近 `limit` 数量的数据，该字段与 `from`, `to` 互斥，如果指定了 `from`, `to` 中的任意字段，该字段会被拒绝
+  - @param "Interval" (optional.String) -  数据点的时间间隔，注意 1w 代表一个自然周，7d 的时间是和 Unix 初始时间对齐, 30d 代表一个自然月
 
 @return []FuturesCandlestick
 */
@@ -562,9 +562,9 @@ Maximum of 1000 points can be returned in a query. Be sure not to exceed the lim
   - @param settle Settle currency
   - @param contract Futures contract
   - @param optional nil or *ListFuturesPremiumIndexOpts - Optional Parameters:
-  - @param "From" (optional.Int64) -  Start time of candlesticks, formatted in Unix timestamp in seconds. Default to`to - 100 * interval` if not specified
+  - @param "From" (optional.Int64) -  指定 K 线图的起始时间，注意时间格式为秒(s)精度的 Unix 时间戳，不指定则默认为 to - 100 * interval，即向前最多 100 个点的时间
   - @param "To" (optional.Int64) -  End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time
-  - @param "Limit" (optional.Int32) -  Maximum recent data points to return. `limit` is conflicted with `from` and `to`. If either `from` or `to` is specified, request will be rejected.
+  - @param "Limit" (optional.Int32) -  指定数据点的数量，适用于取最近 `limit` 数量的数据，该字段与 `from`, `to` 互斥，如果指定了 `from`, `to` 中的任意字段，该字段会被拒绝
   - @param "Interval" (optional.String) -  Interval time between data points
 
 @return []FuturesPremiumIndex
@@ -1173,16 +1173,16 @@ Interval between &#x60;from&#x60; and &#x60;to&#x60; cannot exceeds 3600. Some p
   - @param "To" (optional.Int64) -  End timestamp
   - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
 
-@return []FuturesLiquidate
+@return []FuturesLiqOrder
 */
-func (a *FuturesApiService) ListLiquidatedOrders(ctx context.Context, settle string, localVarOptionals *ListLiquidatedOrdersOpts) ([]FuturesLiquidate, *http.Response, error) {
+func (a *FuturesApiService) ListLiquidatedOrders(ctx context.Context, settle string, localVarOptionals *ListLiquidatedOrdersOpts) ([]FuturesLiqOrder, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []FuturesLiquidate
+		localVarReturnValue  []FuturesLiqOrder
 	)
 
 	// create path and map variables
@@ -1478,14 +1478,21 @@ func (a *FuturesApiService) ListFuturesAccountBook(ctx context.Context, settle s
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+// ListPositionsOpts Optional parameters for the method 'ListPositions'
+type ListPositionsOpts struct {
+	Holding optional.Bool
+}
+
 /*
 ListPositions List all positions of a user
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param settle Settle currency
+  - @param optional nil or *ListPositionsOpts - Optional Parameters:
+  - @param "Holding" (optional.Bool) -  只返回真实持仓-true,全部返回-false
 
 @return []Position
 */
-func (a *FuturesApiService) ListPositions(ctx context.Context, settle string) ([]Position, *http.Response, error) {
+func (a *FuturesApiService) ListPositions(ctx context.Context, settle string, localVarOptionals *ListPositionsOpts) ([]Position, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -1503,6 +1510,9 @@ func (a *FuturesApiService) ListPositions(ctx context.Context, settle string) ([
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Holding.IsSet() {
+		localVarQueryParams.Add("holding", parameterToString(localVarOptionals.Holding.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2471,9 +2481,10 @@ func (a *FuturesApiService) UpdateDualModePositionRiskLimit(ctx context.Context,
 
 // ListFuturesOrdersOpts Optional parameters for the method 'ListFuturesOrders'
 type ListFuturesOrdersOpts struct {
-	Limit  optional.Int32
-	Offset optional.Int32
-	LastId optional.String
+	Contract optional.String
+	Limit    optional.Int32
+	Offset   optional.Int32
+	LastId   optional.String
 }
 
 /*
@@ -2481,16 +2492,16 @@ ListFuturesOrders List futures orders
 Zero-filled order cannot be retrieved 10 minutes after order cancellation
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param settle Settle currency
-  - @param contract Futures contract
   - @param status Only list the orders with this status
   - @param optional nil or *ListFuturesOrdersOpts - Optional Parameters:
+  - @param "Contract" (optional.String) -  Futures contract, return related data only if specified
   - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
   - @param "Offset" (optional.Int32) -  List offset, starting from 0
   - @param "LastId" (optional.String) -  Specify list staring point using the `id` of last record in previous list-query results
 
 @return []FuturesOrder
 */
-func (a *FuturesApiService) ListFuturesOrders(ctx context.Context, settle string, contract string, status string, localVarOptionals *ListFuturesOrdersOpts) ([]FuturesOrder, *http.Response, error) {
+func (a *FuturesApiService) ListFuturesOrders(ctx context.Context, settle string, status string, localVarOptionals *ListFuturesOrdersOpts) ([]FuturesOrder, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -2508,7 +2519,9 @@ func (a *FuturesApiService) ListFuturesOrders(ctx context.Context, settle string
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	localVarQueryParams.Add("contract", parameterToString(contract, ""))
+	if localVarOptionals != nil && localVarOptionals.Contract.IsSet() {
+		localVarQueryParams.Add("contract", parameterToString(localVarOptionals.Contract.Value(), ""))
+	}
 	localVarQueryParams.Add("status", parameterToString(status, ""))
 	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
 		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
@@ -2721,6 +2734,129 @@ func (a *FuturesApiService) CancelFuturesOrders(ctx context.Context, settle stri
 	localVarQueryParams.Add("contract", parameterToString(contract, ""))
 	if localVarOptionals != nil && localVarOptionals.Side.IsSet() {
 		localVarQueryParams.Add("side", parameterToString(localVarOptionals.Side.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	if ctx.Value(ContextGateAPIV4) == nil {
+		// for compatibility, set configuration key and secret to context if ContextGateAPIV4 value is not present
+		ctx = context.WithValue(ctx, ContextGateAPIV4, GateAPIV4{
+			Key:    a.client.cfg.Key,
+			Secret: a.client.cfg.Secret,
+		})
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+// GetOrdersWithTimeRangeOpts Optional parameters for the method 'GetOrdersWithTimeRange'
+type GetOrdersWithTimeRangeOpts struct {
+	Contract optional.String
+	From     optional.Int64
+	To       optional.Int64
+	Limit    optional.Int32
+	Offset   optional.Int32
+}
+
+/*
+GetOrdersWithTimeRange List Futures Orders By Time Range
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param settle Settle currency
+  - @param optional nil or *GetOrdersWithTimeRangeOpts - Optional Parameters:
+  - @param "Contract" (optional.String) -  Futures contract, return related data only if specified
+  - @param "From" (optional.Int64) -  Start timestamp
+  - @param "To" (optional.Int64) -  End timestamp
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0
+
+@return []FuturesOrder
+*/
+func (a *FuturesApiService) GetOrdersWithTimeRange(ctx context.Context, settle string, localVarOptionals *GetOrdersWithTimeRangeOpts) ([]FuturesOrder, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []FuturesOrder
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/orders_timerange"
+	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", url.QueryEscape(parameterToString(settle, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.Contract.IsSet() {
+		localVarQueryParams.Add("contract", parameterToString(localVarOptionals.Contract.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.From.IsSet() {
+		localVarQueryParams.Add("from", parameterToString(localVarOptionals.From.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.To.IsSet() {
+		localVarQueryParams.Add("to", parameterToString(localVarOptionals.To.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
+		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Offset.IsSet() {
+		localVarQueryParams.Add("offset", parameterToString(localVarOptionals.Offset.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3309,6 +3445,7 @@ type GetMyTradesWithTimeRangeOpts struct {
 	To       optional.Int64
 	Limit    optional.Int32
 	Offset   optional.Int32
+	Role     optional.String
 }
 
 /*
@@ -3321,6 +3458,7 @@ GetMyTradesWithTimeRange List personal trading history by time range
   - @param "To" (optional.Int64) -  End timestamp
   - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
   - @param "Offset" (optional.Int32) -  List offset, starting from 0
+  - @param "Role" (optional.String) -  查询角色，Maker 或 Taker
 
 @return []MyFuturesTradeTimeRange
 */
@@ -3356,6 +3494,9 @@ func (a *FuturesApiService) GetMyTradesWithTimeRange(ctx context.Context, settle
 	}
 	if localVarOptionals != nil && localVarOptionals.Offset.IsSet() {
 		localVarQueryParams.Add("offset", parameterToString(localVarOptionals.Offset.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Role.IsSet() {
+		localVarQueryParams.Add("role", parameterToString(localVarOptionals.Role.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3432,6 +3573,8 @@ type ListPositionCloseOpts struct {
 	Offset   optional.Int32
 	From     optional.Int64
 	To       optional.Int64
+	Side     optional.String
+	Pnl      optional.String
 }
 
 /*
@@ -3444,6 +3587,8 @@ ListPositionClose List position close history
   - @param "Offset" (optional.Int32) -  List offset, starting from 0
   - @param "From" (optional.Int64) -  Start timestamp
   - @param "To" (optional.Int64) -  End timestamp
+  - @param "Side" (optional.String) -  方向筛选，做多(long)或做空(short)
+  - @param "Pnl" (optional.String) -  盈亏判断，盈利(profit)或亏损(loss)
 
 @return []PositionClose
 */
@@ -3479,6 +3624,12 @@ func (a *FuturesApiService) ListPositionClose(ctx context.Context, settle string
 	}
 	if localVarOptionals != nil && localVarOptionals.To.IsSet() {
 		localVarQueryParams.Add("to", parameterToString(localVarOptionals.To.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Side.IsSet() {
+		localVarQueryParams.Add("side", parameterToString(localVarOptionals.Side.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Pnl.IsSet() {
+		localVarQueryParams.Add("pnl", parameterToString(localVarOptionals.Pnl.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3820,6 +3971,109 @@ func (a *FuturesApiService) CountdownCancelAllFutures(ctx context.Context, settl
 	}
 	// body params
 	localVarPostBody = &countdownCancelAllFuturesTask
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	if ctx.Value(ContextGateAPIV4) == nil {
+		// for compatibility, set configuration key and secret to context if ContextGateAPIV4 value is not present
+		ctx = context.WithValue(ctx, ContextGateAPIV4, GateAPIV4{
+			Key:    a.client.cfg.Key,
+			Secret: a.client.cfg.Secret,
+		})
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+// GetFuturesFeeOpts Optional parameters for the method 'GetFuturesFee'
+type GetFuturesFeeOpts struct {
+	Contract optional.String
+}
+
+/*
+GetFuturesFee Query user trading fee rates
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param settle Settle currency
+  - @param optional nil or *GetFuturesFeeOpts - Optional Parameters:
+  - @param "Contract" (optional.String) -  Futures contract, return related data only if specified
+
+@return map[string]FuturesFee
+*/
+func (a *FuturesApiService) GetFuturesFee(ctx context.Context, settle string, localVarOptionals *GetFuturesFeeOpts) (map[string]FuturesFee, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  map[string]FuturesFee
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/fee"
+	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", url.QueryEscape(parameterToString(settle, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.Contract.IsSet() {
+		localVarQueryParams.Add("contract", parameterToString(localVarOptionals.Contract.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
 	if ctx == nil {
 		ctx = context.Background()
 	}

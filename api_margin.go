@@ -15,6 +15,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"reflect"
 	"strings"
 )
 
@@ -130,6 +131,7 @@ func (a *MarginApiService) ListMarginAccounts(ctx context.Context, localVarOptio
 type ListMarginAccountBookOpts struct {
 	Currency     optional.String
 	CurrencyPair optional.String
+	Type_        optional.String
 	From         optional.Int64
 	To           optional.Int64
 	Page         optional.Int32
@@ -143,6 +145,7 @@ Only transferals from and to margin account are provided for now. Time range all
   - @param optional nil or *ListMarginAccountBookOpts - Optional Parameters:
   - @param "Currency" (optional.String) -  List records related to specified currency only. If specified, `currency_pair` is also required.
   - @param "CurrencyPair" (optional.String) -  List records related to specified currency pair. Used in combination with `currency`. Ignored if `currency` is not provided
+  - @param "Type_" (optional.String) -  Only retrieve changes of the specified type. All types will be returned if not specified.
   - @param "From" (optional.Int64) -  Start timestamp of the query
   - @param "To" (optional.Int64) -  Time range ending, default to current time
   - @param "Page" (optional.Int32) -  Page number
@@ -171,6 +174,9 @@ func (a *MarginApiService) ListMarginAccountBook(ctx context.Context, localVarOp
 	}
 	if localVarOptionals != nil && localVarOptionals.CurrencyPair.IsSet() {
 		localVarQueryParams.Add("currency_pair", parameterToString(localVarOptionals.CurrencyPair.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Type_.IsSet() {
+		localVarQueryParams.Add("type", parameterToString(localVarOptionals.Type_.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.From.IsSet() {
 		localVarQueryParams.Add("from", parameterToString(localVarOptionals.From.Value(), ""))
@@ -2491,7 +2497,7 @@ type ListCrossMarginLoansOpts struct {
 ListCrossMarginLoans List cross margin borrow history
 Sort by creation time in descending order by default. Set &#x60;reverse&#x3D;false&#x60; to return ascending results.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param status Filter by status. Supported values are 2 and 3.
+  - @param status Filter by status. Supported values are 2 and 3. (deprecated.)
   - @param optional nil or *ListCrossMarginLoansOpts - Optional Parameters:
   - @param "Currency" (optional.String) -  Filter by currency
   - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
@@ -3202,20 +3208,129 @@ func (a *MarginApiService) GetCrossMarginTransferable(ctx context.Context, curre
 }
 
 /*
-GetCrossMarginBorrowable Get the max borrowable amount for a specific cross margin currency
+GetCrossMarginEstimateRate Estimated interest rates
+Please note that the interest rates are subject to change based on the borrowing and lending demand, and therefore, the provided rates may not be entirely accurate.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param currency Retrieve data of the specified currency
+  - @param currencies An array of up to 10 specifying the currency name
 
-@return CrossMarginBorrowable
+@return map[string]string
 */
-func (a *MarginApiService) GetCrossMarginBorrowable(ctx context.Context, currency string) (CrossMarginBorrowable, *http.Response, error) {
+func (a *MarginApiService) GetCrossMarginEstimateRate(ctx context.Context, currencies []string) (map[string]string, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  CrossMarginBorrowable
+		localVarReturnValue  map[string]string
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/margin/cross/estimate_rate"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if len(currencies) < 1 {
+		return localVarReturnValue, nil, reportError("currencies must have at least 1 elements")
+	}
+	if len(currencies) > 10 {
+		return localVarReturnValue, nil, reportError("currencies must have less than 10 elements")
+	}
+
+	{
+		t := currencies
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("currencies", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("currencies", parameterToString(t, "multi"))
+		}
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	if ctx.Value(ContextGateAPIV4) == nil {
+		// for compatibility, set configuration key and secret to context if ContextGateAPIV4 value is not present
+		ctx = context.WithValue(ctx, ContextGateAPIV4, GateAPIV4{
+			Key:    a.client.cfg.Key,
+			Secret: a.client.cfg.Secret,
+		})
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+/*
+GetCrossMarginBorrowable Get the max borrowable amount for a specific cross margin currency
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param currency Retrieve data of the specified currency
+
+@return PortfolioBorrowable
+*/
+func (a *MarginApiService) GetCrossMarginBorrowable(ctx context.Context, currency string) (PortfolioBorrowable, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  PortfolioBorrowable
 	)
 
 	// create path and map variables

@@ -11,9 +11,11 @@ package gateapi
 
 import (
 	"context"
+	"github.com/antihax/optional"
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"strings"
 )
 
 // Linger please
@@ -63,6 +65,489 @@ func (a *AccountApiService) GetAccountDetail(ctx context.Context) (AccountDetail
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	if ctx.Value(ContextGateAPIV4) == nil {
+		// for compatibility, set configuration key and secret to context if ContextGateAPIV4 value is not present
+		ctx = context.WithValue(ctx, ContextGateAPIV4, GateAPIV4{
+			Key:    a.client.cfg.Key,
+			Secret: a.client.cfg.Secret,
+		})
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+// ListSTPGroupsOpts Optional parameters for the method 'ListSTPGroups'
+type ListSTPGroupsOpts struct {
+	Name optional.String
+}
+
+/*
+ListSTPGroups List STP Groups
+Retrieve the list of STP groups created by the main account user only
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param optional nil or *ListSTPGroupsOpts - Optional Parameters:
+  - @param "Name" (optional.String) -  Perform a fuzzy search based on the name
+
+@return []StpGroup
+*/
+func (a *AccountApiService) ListSTPGroups(ctx context.Context, localVarOptionals *ListSTPGroupsOpts) ([]StpGroup, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []StpGroup
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/account/stp_groups"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.Name.IsSet() {
+		localVarQueryParams.Add("name", parameterToString(localVarOptionals.Name.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	if ctx.Value(ContextGateAPIV4) == nil {
+		// for compatibility, set configuration key and secret to context if ContextGateAPIV4 value is not present
+		ctx = context.WithValue(ctx, ContextGateAPIV4, GateAPIV4{
+			Key:    a.client.cfg.Key,
+			Secret: a.client.cfg.Secret,
+		})
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+/*
+CreateSTPGroup Create STP Group
+Only the main account is allowed to create a new STP user group
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param stpGroup
+
+@return StpGroup
+*/
+func (a *AccountApiService) CreateSTPGroup(ctx context.Context, stpGroup StpGroup) (StpGroup, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  StpGroup
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/account/stp_groups"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = &stpGroup
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	if ctx.Value(ContextGateAPIV4) == nil {
+		// for compatibility, set configuration key and secret to context if ContextGateAPIV4 value is not present
+		ctx = context.WithValue(ctx, ContextGateAPIV4, GateAPIV4{
+			Key:    a.client.cfg.Key,
+			Secret: a.client.cfg.Secret,
+		})
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+/*
+ListSTPGroupsUsers List users of the STP group
+Only the main account that created this STP group is allowed to list the user ID of the STP group
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param stpId STP Group ID
+
+@return []StpGroupUser
+*/
+func (a *AccountApiService) ListSTPGroupsUsers(ctx context.Context, stpId int64) ([]StpGroupUser, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []StpGroupUser
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/account/stp_groups/{stp_id}/users"
+	localVarPath = strings.Replace(localVarPath, "{"+"stp_id"+"}", url.QueryEscape(parameterToString(stpId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	if ctx.Value(ContextGateAPIV4) == nil {
+		// for compatibility, set configuration key and secret to context if ContextGateAPIV4 value is not present
+		ctx = context.WithValue(ctx, ContextGateAPIV4, GateAPIV4{
+			Key:    a.client.cfg.Key,
+			Secret: a.client.cfg.Secret,
+		})
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+/*
+AddSTPGroupUsers Add users to the STP group
+- Only the master account that created the STP user group is allowed to add users to the STP user group.- Only accounts under the main account are allowed to be added. Cross-account is not permitted
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param stpId STP Group ID
+  - @param requestBody User ID
+
+@return []StpGroupUser
+*/
+func (a *AccountApiService) AddSTPGroupUsers(ctx context.Context, stpId int64, requestBody []int64) ([]StpGroupUser, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []StpGroupUser
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/account/stp_groups/{stp_id}/users"
+	localVarPath = strings.Replace(localVarPath, "{"+"stp_id"+"}", url.QueryEscape(parameterToString(stpId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = &requestBody
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	if ctx.Value(ContextGateAPIV4) == nil {
+		// for compatibility, set configuration key and secret to context if ContextGateAPIV4 value is not present
+		ctx = context.WithValue(ctx, ContextGateAPIV4, GateAPIV4{
+			Key:    a.client.cfg.Key,
+			Secret: a.client.cfg.Secret,
+		})
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+/*
+DeleteSTPGroupUsers STP用户组中删除用户
+- 只允许创建此STP组的主账号删除STP用户组用户 - 只允许删除当前主账户下的账户，不允许跨主账户
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param stpId STP Group ID
+  - @param requestBody User ID
+
+@return []StpGroupUser
+*/
+func (a *AccountApiService) DeleteSTPGroupUsers(ctx context.Context, stpId int64, requestBody []int64) ([]StpGroupUser, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []StpGroupUser
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/account/stp_groups/{stp_id}/users"
+	localVarPath = strings.Replace(localVarPath, "{"+"stp_id"+"}", url.QueryEscape(parameterToString(stpId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = &requestBody
 	if ctx == nil {
 		ctx = context.Background()
 	}

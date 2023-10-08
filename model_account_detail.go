@@ -16,5 +16,6 @@ type AccountDetail struct {
 	// CurrencyPair whitelisting
 	CurrencyPairs []string `json:"currency_pairs,omitempty"`
 	// User ID
-	UserId int64 `json:"user_id,omitempty"`
+	UserId int64            `json:"user_id,omitempty"`
+	Key    AccountDetailKey `json:"key,omitempty"`
 }

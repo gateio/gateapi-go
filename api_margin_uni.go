@@ -15,6 +15,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"reflect"
 	"strings"
 )
 
@@ -156,6 +157,115 @@ func (a *MarginUniApiService) GetUniCurrencyPair(ctx context.Context, currencyPa
 		ctx = context.Background()
 	}
 	ctx = context.WithValue(ctx, ContextPublic, true)
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+/*
+GetMarginUniEstimateRate Estimate interest Rate
+Please note that the interest rates are subject to change based on the borrowing and lending demand, and therefore, the provided rates may not be entirely accurate.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param currencies An array of up to 10 specifying the currency name
+
+@return map[string]string
+*/
+func (a *MarginUniApiService) GetMarginUniEstimateRate(ctx context.Context, currencies []string) (map[string]string, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  map[string]string
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/margin/uni/estimate_rate"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if len(currencies) < 1 {
+		return localVarReturnValue, nil, reportError("currencies must have at least 1 elements")
+	}
+	if len(currencies) > 10 {
+		return localVarReturnValue, nil, reportError("currencies must have less than 10 elements")
+	}
+
+	{
+		t := currencies
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("currencies", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("currencies", parameterToString(t, "multi"))
+		}
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	if ctx.Value(ContextGateAPIV4) == nil {
+		// for compatibility, set configuration key and secret to context if ContextGateAPIV4 value is not present
+		ctx = context.WithValue(ctx, ContextGateAPIV4, GateAPIV4{
+			Key:    a.client.cfg.Key,
+			Secret: a.client.cfg.Secret,
+		})
+	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

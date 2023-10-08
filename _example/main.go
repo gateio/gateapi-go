@@ -8,7 +8,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/gateio/gateapi-go/v6"
+	"github.com/gateio/gateapi-go/v5"
 )
 
 var logger = log.New(flag.CommandLine.Output(), "", log.LstdFlags)

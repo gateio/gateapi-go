@@ -22,4 +22,6 @@ type CrossMarginRepayment struct {
 	Principal string `json:"principal,omitempty"`
 	// Repaid interest
 	Interest string `json:"interest,omitempty"`
+	// 还款类型 , none - 无还款类型, manual_repay - 手动还款 , auto_repay - 自动还款, cancel_auto_repay - 撤单后自动还款
+	RepaymentType string `json:"repayment_type,omitempty"`
 }

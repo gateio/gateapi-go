@@ -22,9 +22,9 @@ type CrossMarginBalance struct {
 	NegativeLiab string `json:"negative_liab,omitempty"`
 	// Borrowing to Open Positions in Futures
 	FuturesPosLiab string `json:"futures_pos_liab,omitempty"`
-	// Equity. Formula: available + freeze - borrowed + total + unrealized_pnl
+	// Equity. Formula: available + freeze - borrowed + futures account's total + unrealized_pnl
 	Equity string `json:"equity,omitempty"`
-	// Total freeze. Formula: position_initial_margin + order_margin
+	// Total freeze. Formula: freeze + position_initial_margin + order_margin
 	TotalFreeze string `json:"total_freeze,omitempty"`
 	// Total liabilities. Formula: Max[Abs[Min[quity - total_freeze,0], borrowed]] - futures_pos_liab
 	TotalLiab string `json:"total_liab,omitempty"`

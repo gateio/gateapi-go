@@ -30,6 +30,4 @@ type LedgerRecord struct {
 	Status string `json:"status,omitempty"`
 	// Name of the chain used in withdrawals
 	Chain string `json:"chain"`
-	// Fee
-	Fee string `json:"fee,omitempty"`
 }

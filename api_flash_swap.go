@@ -27,7 +27,7 @@ var (
 type FlashSwapApiService service
 
 /*
-ListFlashSwapCurrencies List all supported currencies in flash swap
+ListFlashSwapCurrencies List All Supported Currencies In Flash Swap (deprecated)
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 @return []FlashSwapCurrency
@@ -48,6 +48,101 @@ func (a *FlashSwapApiService) ListFlashSwapCurrencies(ctx context.Context) ([]Fl
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	ctx = context.WithValue(ctx, ContextPublic, true)
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+// ListFlashSwapCurrencyPairOpts Optional parameters for the method 'ListFlashSwapCurrencyPair'
+type ListFlashSwapCurrencyPairOpts struct {
+	Currency optional.String
+}
+
+/*
+ListFlashSwapCurrencyPair List All Supported Currency Pairs In Flash Swap
+&#x60;BTC_GT&#x60; represents selling BTC and buying GT. The limits for each currency may vary across different currency pairs.  It is not necessary that two currencies that can be swapped instantaneously can be exchanged with each other. For example, it is possible to sell BTC and buy GT, but it does not necessarily mean that GT can be sold to buy BTC.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param optional nil or *ListFlashSwapCurrencyPairOpts - Optional Parameters:
+  - @param "Currency" (optional.String) -  Retrieve data of the specified currency
+
+@return []FlashSwapCurrencyPair
+*/
+func (a *FlashSwapApiService) ListFlashSwapCurrencyPair(ctx context.Context, localVarOptionals *ListFlashSwapCurrencyPairOpts) ([]FlashSwapCurrencyPair, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []FlashSwapCurrencyPair
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/flash_swap/currency_pairs"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.Currency.IsSet() {
+		localVarQueryParams.Add("currency", parameterToString(localVarOptionals.Currency.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

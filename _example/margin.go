@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/antihax/optional"
-	"github.com/gateio/gateapi-go/v6"
+	"github.com/gateio/gateapi-go/v5"
 	"github.com/shopspring/decimal"
 )
 
@@ -116,11 +116,11 @@ func MarginDemo(config *RunConfig) {
 			Amount:       margin.Sub(available).Round(8).String(),
 			CurrencyPair: currencyPair,
 		}
-		tx, _, err := client.WalletApi.Transfer(ctx, transfer)
+		_, err := client.WalletApi.Transfer(ctx, transfer)
 		if err != nil {
 			panicGateError(err)
 		}
-		logger.Printf("transferred %s %s to margin account, transfer ID %d\n", transfer.Amount, transfer.Currency, tx.TxId)
+		logger.Printf("transferred %s %s to margin account\n", transfer.Amount, transfer.Amount)
 	}
 
 	// borrow with minimum amount

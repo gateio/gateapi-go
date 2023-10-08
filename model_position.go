@@ -60,4 +60,6 @@ type Position struct {
 	Mode string `json:"mode,omitempty"`
 	// Cross margin leverage(valid only when `leverage` is 0)
 	CrossLeverageLimit string `json:"cross_leverage_limit,omitempty"`
+	// Last update time
+	UpdateTime int64 `json:"update_time,omitempty"`
 }

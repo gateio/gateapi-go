@@ -744,6 +744,7 @@ func (a *WalletApiService) TransferWithSubAccount(ctx context.Context, subAccoun
 
 /*
 SubAccountToSubAccount Sub-account transfers to sub-account
+It is possible to perform balance transfers between two sub-accounts under the same main account. You can use either the API Key of the main account or the API Key of the sub-account to initiate the transfer.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param subAccountToSubAccount
 */

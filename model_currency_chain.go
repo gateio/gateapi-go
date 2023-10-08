@@ -16,6 +16,8 @@ type CurrencyChain struct {
 	NameCn string `json:"name_cn,omitempty"`
 	// Chain name in English
 	NameEn string `json:"name_en,omitempty"`
+	// 币种智能合约地址，如果没有地址则为空字串
+	ContractAddress string `json:"contract_address,omitempty"`
 	// If it is disabled. 0 means NOT being disabled
 	IsDisabled int32 `json:"is_disabled,omitempty"`
 	// Is deposit disabled. 0 means not

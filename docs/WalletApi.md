@@ -548,6 +548,8 @@ func main() {
 
 Sub-account transfers to sub-account
 
+It is possible to perform balance transfers between two sub-accounts under the same main account. You can use either the API Key of the main account or the API Key of the sub-account to initiate the transfer.
+
 ### Required Parameters
 
 Name | Type | Description  | Notes

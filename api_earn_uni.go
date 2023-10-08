@@ -476,6 +476,8 @@ type ListUniLendRecordsOpts struct {
 	Currency optional.String
 	Page     optional.Int32
 	Limit    optional.Int32
+	From     optional.Int64
+	To       optional.Int64
 	Type_    optional.String
 }
 
@@ -486,6 +488,8 @@ ListUniLendRecords List records of lending
   - @param "Currency" (optional.String) -  Retrieve data of the specified currency
   - @param "Page" (optional.Int32) -  Page number
   - @param "Limit" (optional.Int32) -  Maximum response items.  Default: 100, minimum: 1, Maximum: 100
+  - @param "From" (optional.Int64) -  Start timestamp
+  - @param "To" (optional.Int64) -  End timestamp
   - @param "Type_" (optional.String) -  type: lend - lend, redeem - redeem
 
 @return []UniLendRecord
@@ -514,6 +518,12 @@ func (a *EarnUniApiService) ListUniLendRecords(ctx context.Context, localVarOpti
 	}
 	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
 		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.From.IsSet() {
+		localVarQueryParams.Add("from", parameterToString(localVarOptionals.From.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.To.IsSet() {
+		localVarQueryParams.Add("to", parameterToString(localVarOptionals.To.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.Type_.IsSet() {
 		localVarQueryParams.Add("type", parameterToString(localVarOptionals.Type_.Value(), ""))

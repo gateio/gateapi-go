@@ -712,8 +712,8 @@ Maximum of 1000 points can be returned in a query. Be sure not to exceed the lim
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param currencyPair Currency pair
   - @param optional nil or *ListCandlesticksOpts - Optional Parameters:
-  - @param "Limit" (optional.Int32) -  Maximum recent data points to return. `limit` is conflicted with `from` and `to`. If either `from` or `to` is specified, request will be rejected.
-  - @param "From" (optional.Int64) -  Start time of candlesticks, formatted in Unix timestamp in seconds. Default to`to - 100 * interval` if not specified
+  - @param "Limit" (optional.Int32) -  指定数据点的数量，适用于取最近 `limit` 数量的数据，该字段与 `from`, `to` 互斥，如果指定了 `from`, `to` 中的任意字段，该字段会被拒绝
+  - @param "From" (optional.Int64) -  指定 K 线图的起始时间，注意时间格式为秒(s)精度的 Unix 时间戳，不指定则默认为 to - 100 * interval，即向前最多 100 个点的时间
   - @param "To" (optional.Int64) -  End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time
   - @param "Interval" (optional.String) -  Interval time between data points. Note that `30d` means 1 natual month, not 30 days
 
@@ -1034,6 +1034,132 @@ func (a *SpotApiService) ListSpotAccounts(ctx context.Context, localVarOptionals
 
 	if localVarOptionals != nil && localVarOptionals.Currency.IsSet() {
 		localVarQueryParams.Add("currency", parameterToString(localVarOptionals.Currency.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	if ctx.Value(ContextGateAPIV4) == nil {
+		// for compatibility, set configuration key and secret to context if ContextGateAPIV4 value is not present
+		ctx = context.WithValue(ctx, ContextGateAPIV4, GateAPIV4{
+			Key:    a.client.cfg.Key,
+			Secret: a.client.cfg.Secret,
+		})
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+// ListSpotAccountBookOpts Optional parameters for the method 'ListSpotAccountBook'
+type ListSpotAccountBookOpts struct {
+	Currency optional.String
+	From     optional.Int64
+	To       optional.Int64
+	Page     optional.Int32
+	Limit    optional.Int32
+	Type_    optional.String
+}
+
+/*
+ListSpotAccountBook Query account book
+Record time range cannot exceed 30 days
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param optional nil or *ListSpotAccountBookOpts - Optional Parameters:
+  - @param "Currency" (optional.String) -  Retrieve data of the specified currency
+  - @param "From" (optional.Int64) -  Start timestamp of the query
+  - @param "To" (optional.Int64) -  Time range ending, default to current time
+  - @param "Page" (optional.Int32) -  Page number
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Type_" (optional.String) -  Only retrieve changes of the specified type. All types will be returned if not specified.
+
+@return []SpotAccountBook
+*/
+func (a *SpotApiService) ListSpotAccountBook(ctx context.Context, localVarOptionals *ListSpotAccountBookOpts) ([]SpotAccountBook, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []SpotAccountBook
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/spot/account_book"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.Currency.IsSet() {
+		localVarQueryParams.Add("currency", parameterToString(localVarOptionals.Currency.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.From.IsSet() {
+		localVarQueryParams.Add("from", parameterToString(localVarOptionals.From.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.To.IsSet() {
+		localVarQueryParams.Add("to", parameterToString(localVarOptionals.To.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
+		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Type_.IsSet() {
+		localVarQueryParams.Add("type", parameterToString(localVarOptionals.Type_.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1534,7 +1660,7 @@ func (a *SpotApiService) ListOrders(ctx context.Context, currencyPair string, st
 
 /*
 CreateOrder Create an order
-You can place orders with spot, margin or cross margin account through setting the &#x60;account &#x60;field. It defaults to &#x60;spot&#x60;, which means spot account is used to place orders.  When margin account is used, i.e., &#x60;account&#x60; is &#x60;margin&#x60;, &#x60;auto_borrow&#x60; field can be set to &#x60;true&#x60; to enable the server to borrow the amount lacked using &#x60;POST /margin/loans&#x60; when your account&#39;s balance is not enough. Whether margin orders&#39; fill will be used to repay margin loans automatically is determined by the auto repayment setting in your **margin account**, which can be updated or queried using &#x60;/margin/auto_repay&#x60; API.  When cross margin account is used, i.e., &#x60;account&#x60; is &#x60;cross_margin&#x60;, &#x60;auto_borrow&#x60; can also be enabled to achieve borrowing the insufficient amount automatically if cross account&#39;s balance is not enough. But it differs from margin account that automatic repayment is determined by order&#39;s &#x60;auto_repay&#x60; field and only current order&#39;s fill will be used to repay cross margin loans.  Automatic repayment will be triggered when the order is finished, i.e., its status is either &#x60;cancelled&#x60; or &#x60;closed&#x60;.  **Order status**  An order waiting to be filled is &#x60;open&#x60;, and it stays &#x60;open&#x60; until it is filled totally. If fully filled, order is finished and its status turns to &#x60;closed&#x60;.If the order is cancelled before it is totally filled, whether or not partially filled, its status is &#x60;cancelled&#x60;. **Iceberg order**  &#x60;iceberg&#x60; field can be used to set the amount shown. Set to &#x60;-1&#x60; to hide the order completely. Note that the hidden part&#39;s fee will be charged using taker&#39;s fee rate. **Self Trade Prevention**  - Set &#x60;stp_act&#x60; to decide the strategy of self-trade prevention. For detailed usage, refer to the &#x60;stp_act&#x60; parameter in request body
+支持现货、杠杆、全仓杠杆下单。通过 &#x60;account&#x60; 字段来使用不同的账户，默认为 &#x60;spot&#x60; ，即使用现货账户下单。  使用杠杆账户交易，即 &#x60;account&#x60; 设置为 &#x60;margin&#x60; 的时候，可以设置 &#x60;auto_borrow&#x60; 为 &#x60;true&#x60;， 在账户余额不足的情况，由系统自动执行 &#x60;POST /margin/loans&#x60; 借入不足部分。 杠杆下单成交之后的获取到的资产是否自动用于归还逐仓杠杆账户的借入单，取决于用户逐仓杠杆**账户**的自动还款设置， 该账户自动还款设置可以通过 &#x60;/margin/auto_repay&#x60; 来查询和设置。  使用全仓杠杆账户交易，即 &#x60;account&#x60; 设置为 &#x60;cross_margin&#x60; 的时候，同样可以启用 &#x60;auto_borrow&#x60; 来实现自动借入不足部分，但是与逐仓杠杆账户不同的是，全仓杠杆账户的委托是否自动还款取决于下单时的 &#x60;auto_repay&#x60; 设置，该设置只对当前委托生效，即只有该委托成交之后获取到的资产会用来还款全仓杠杆账户的借入单。 全仓杠杆账户下单目前支持同时开启 &#x60;auto_borrow&#x60; 和 &#x60;auto_repay&#x60;。  自动还款会在订单结束时触发，即 &#x60;status&#x60; 为 &#x60;cancelled&#x60; 或者 &#x60;closed&#x60; 。  **委托状态**  挂单中的委托状态是 &#x60;open&#x60; ，在数量全部成交之前保持为 &#x60;open&#x60; 。如果被全部吃掉，则订单结束，状态变成 &#x60;closed&#x60; 。 假如全部成交之前，订单被撤销，不管是否有部分成交，状态都会变为 &#x60;cancelled&#x60;  **冰山委托**  &#x60;iceberg&#x60; 用来设置冰山委托显示的数量，如果需要完全隐藏，设置为 &#x60;-1&#x60; 。注意隐藏部分成交时按照 taker 的手续费率收取。  **限制用户自成交**  设置 &#x60;stp_act&#x60; 来决定使用限制用户自成交的策略
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param order
 
@@ -1738,11 +1864,11 @@ func (a *SpotApiService) CancelOrders(ctx context.Context, currencyPair string, 
 CancelBatchOrders Cancel a batch of orders with an ID list
 Multiple currency pairs can be specified, but maximum 20 orders are allowed per request
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param cancelOrder
+  - @param cancelBatchOrder
 
 @return []CancelOrderResult
 */
-func (a *SpotApiService) CancelBatchOrders(ctx context.Context, cancelOrder []CancelOrder) ([]CancelOrderResult, *http.Response, error) {
+func (a *SpotApiService) CancelBatchOrders(ctx context.Context, cancelBatchOrder []CancelBatchOrder) ([]CancelOrderResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1776,7 +1902,7 @@ func (a *SpotApiService) CancelBatchOrders(ctx context.Context, cancelOrder []Ca
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = &cancelOrder
+	localVarPostBody = &cancelBatchOrder
 	if ctx == nil {
 		ctx = context.Background()
 	}
@@ -2047,7 +2173,7 @@ type AmendOrderOpts struct {
 
 /*
 AmendOrder Amend an order
-By default, the orders of spot and margin account are updated.  If you need to modify orders of the &#x60;cross-margin&#x60; account, you must specify account as &#x60;cross_margin&#x60;.  For portfolio margin account, only &#x60;cross_margin&#x60; account is supported.  Currently, only supports modification of &#x60;price&#x60; or &#x60;amount&#x60; fields.  Regarding rate limiting: modify order and create order sharing rate limiting rules. Regarding matching priority: only modifying the amount does not affect the priority. If the price is modified, the priority will be adjusted to the last of the new price. Note: If the modified amount is less than the fill amount, the order will be cancelled.
+默认修改现货、逐仓杠杆账户的订单，如果需要修改全仓杠杆账户订单，必须指定 &#x60;account&#x60; 为 &#x60;cross_margin&#x60;，统一账户 &#x60;account&#x60; 只能指定为 &#x60;cross_margin&#x60;。   目前只支持修改价格或数量（二选一）  关于限速：修改订单和创建订单共享限速规则  关于匹配优先级：只修改数量变小不影响匹配优先级，修改价格或修改数量变大则优先级将调整到新价格最后面    注意事项:修改数量小于已成交数量会触发撤单操作
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param orderId Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID can only be checked when the order is in orderbook.  When the order is finished, it can be checked within 1 hour after the end of the order.  After that, only order ID is accepted.
   - @param currencyPair Currency pair

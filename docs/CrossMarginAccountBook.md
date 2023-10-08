@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Currency** | **string** | Currency changed | [optional] 
 **Change** | **string** | Amount changed. Positive value means transferring in, while negative out | [optional] 
 **Balance** | **string** | Balance after change | [optional] 
-**Type** | **string** | Account change type, including:  - in: transferals into cross margin account - out: transferals out from cross margin account - repay: loan repayment - borrow: borrowed loan - interest: interest - new_order: new order locked - order_fill: order fills - referral_fee: fee refund from referrals - order_fee: order fee generated from fills - futures_in: transfer into futures account - futures_out: transfer out of futures account - unknown: unknown type | [optional] 
+**Type** | **string** | Account book type.  Please refer to [account book type](#accountbook-type) for more detail | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

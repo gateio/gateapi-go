@@ -9,7 +9,7 @@
 
 package gateapi
 
-// Loan record
+// Loan records
 type UniLoanRecord struct {
 	// type: borrow - borrow, repay - repay
 	Type string `json:"type,omitempty"`

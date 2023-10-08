@@ -11,11 +11,11 @@ package gateapi
 
 // Parameters of flash swap order creation
 type FlashSwapPreviewRequest struct {
-	// Currency to sell which can be retrieved from supported currency list API `GET /flash_swap/currencies`
+	// 卖出的资产名称， 根据接口`查询支持闪兑的所有交易对列表 GET /flash_swap/currency_pairs`获取
 	SellCurrency string `json:"sell_currency"`
 	// Amount to sell. It is required to choose one parameter between `sell_amount` and `buy_amount`
 	SellAmount string `json:"sell_amount,omitempty"`
-	// Currency to buy which can be retrieved from supported currency list API `GET /flash_swap/currencies`
+	// 买入的资产名称， 根据接口`查询支持闪兑的所有交易对列表 GET /flash_swap/currency_pairs`获取
 	BuyCurrency string `json:"buy_currency"`
 	// Amount to buy. It is required to choose one parameter between `sell_amount` and `buy_amount`
 	BuyAmount string `json:"buy_amount,omitempty"`

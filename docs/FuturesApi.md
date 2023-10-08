@@ -31,6 +31,7 @@ Method | HTTP request | Description
 [**ListFuturesOrders**](FuturesApi.md#ListFuturesOrders) | **Get** /futures/{settle}/orders | List futures orders
 [**CreateFuturesOrder**](FuturesApi.md#CreateFuturesOrder) | **Post** /futures/{settle}/orders | Create a futures order
 [**CancelFuturesOrders**](FuturesApi.md#CancelFuturesOrders) | **Delete** /futures/{settle}/orders | Cancel all &#x60;open&#x60; orders matched
+[**GetOrdersWithTimeRange**](FuturesApi.md#GetOrdersWithTimeRange) | **Get** /futures/{settle}/orders_timerange | List Futures Orders By Time Range
 [**CreateBatchFuturesOrder**](FuturesApi.md#CreateBatchFuturesOrder) | **Post** /futures/{settle}/batch_orders | Create a batch of futures orders
 [**GetFuturesOrder**](FuturesApi.md#GetFuturesOrder) | **Get** /futures/{settle}/orders/{order_id} | Get a single order
 [**AmendFuturesOrder**](FuturesApi.md#AmendFuturesOrder) | **Put** /futures/{settle}/orders/{order_id} | Amend an order
@@ -41,6 +42,7 @@ Method | HTTP request | Description
 [**ListLiquidates**](FuturesApi.md#ListLiquidates) | **Get** /futures/{settle}/liquidates | List liquidation history
 [**ListAutoDeleverages**](FuturesApi.md#ListAutoDeleverages) | **Get** /futures/{settle}/auto_deleverages | List Auto-Deleveraging History
 [**CountdownCancelAllFutures**](FuturesApi.md#CountdownCancelAllFutures) | **Post** /futures/{settle}/countdown_cancel_all | Countdown cancel orders
+[**GetFuturesFee**](FuturesApi.md#GetFuturesFee) | **Get** /futures/{settle}/fee | Query user trading fee rates
 [**ListPriceTriggeredOrders**](FuturesApi.md#ListPriceTriggeredOrders) | **Get** /futures/{settle}/price_orders | List all auto orders
 [**CreatePriceTriggeredOrder**](FuturesApi.md#CreatePriceTriggeredOrder) | **Post** /futures/{settle}/price_orders | Create a price-triggered order
 [**CancelPriceTriggeredOrderList**](FuturesApi.md#CancelPriceTriggeredOrderList) | **Delete** /futures/{settle}/price_orders | Cancel all open orders
@@ -355,10 +357,10 @@ Optional parameters are passed through a pointer to a ListFuturesCandlesticksOpt
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**from** | **optional.Int64**| Start time of candlesticks, formatted in Unix timestamp in seconds. Default to&#x60;to - 100 * interval&#x60; if not specified | 
+**from** | **optional.Int64**| 指定 K 线图的起始时间，注意时间格式为秒(s)精度的 Unix 时间戳，不指定则默认为 to - 100 * interval，即向前最多 100 个点的时间 | 
 **to** | **optional.Int64**| End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time | 
-**limit** | **optional.Int32**| Maximum recent data points to return. &#x60;limit&#x60; is conflicted with &#x60;from&#x60; and &#x60;to&#x60;. If either &#x60;from&#x60; or &#x60;to&#x60; is specified, request will be rejected. | [default to 100]
-**interval** | **optional.String**| Interval time between data points. Note that &#x60;1w&#x60; means natual week(Mon-Sun), while &#x60;7d&#x60; means every 7d since unix 0 | [default to 5m]
+**limit** | **optional.Int32**| 指定数据点的数量，适用于取最近 &#x60;limit&#x60; 数量的数据，该字段与 &#x60;from&#x60;, &#x60;to&#x60; 互斥，如果指定了 &#x60;from&#x60;, &#x60;to&#x60; 中的任意字段，该字段会被拒绝 | [default to 100]
+**interval** | **optional.String**| 数据点的时间间隔，注意 1w 代表一个自然周，7d 的时间是和 Unix 初始时间对齐, 30d 代表一个自然月 | [default to 5m]
 
 ### Example
 
@@ -434,9 +436,9 @@ Optional parameters are passed through a pointer to a ListFuturesPremiumIndexOpt
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**from** | **optional.Int64**| Start time of candlesticks, formatted in Unix timestamp in seconds. Default to&#x60;to - 100 * interval&#x60; if not specified | 
+**from** | **optional.Int64**| 指定 K 线图的起始时间，注意时间格式为秒(s)精度的 Unix 时间戳，不指定则默认为 to - 100 * interval，即向前最多 100 个点的时间 | 
 **to** | **optional.Int64**| End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time | 
-**limit** | **optional.Int32**| Maximum recent data points to return. &#x60;limit&#x60; is conflicted with &#x60;from&#x60; and &#x60;to&#x60;. If either &#x60;from&#x60; or &#x60;to&#x60; is specified, request will be rejected. | [default to 100]
+**limit** | **optional.Int32**| 指定数据点的数量，适用于取最近 &#x60;limit&#x60; 数量的数据，该字段与 &#x60;from&#x60;, &#x60;to&#x60; 互斥，如果指定了 &#x60;from&#x60;, &#x60;to&#x60; 中的任意字段，该字段会被拒绝 | [default to 100]
 **interval** | **optional.String**| Interval time between data points | [default to 5m]
 
 ### Example
@@ -851,7 +853,7 @@ No authorization required
 
 ## ListLiquidatedOrders
 
-> []FuturesLiquidate ListLiquidatedOrders(ctx, settle, optional)
+> []FuturesLiqOrder ListLiquidatedOrders(ctx, settle, optional)
 
 Retrieve liquidation history
 
@@ -911,7 +913,7 @@ func main() {
 
 ### Return type
 
-[**[]FuturesLiquidate**](FuturesLiquidate.md)
+[**[]FuturesLiqOrder**](FuturesLiqOrder.md)
 
 ### Authorization
 
@@ -1078,7 +1080,7 @@ func main() {
 
 ## ListPositions
 
-> []Position ListPositions(ctx, settle)
+> []Position ListPositions(ctx, settle, optional)
 
 List all positions of a user
 
@@ -1088,6 +1090,15 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
+**optional** | **ListPositionsOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a ListPositionsOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**holding** | **optional.Bool**| 只返回真实持仓-true,全部返回-false | 
 
 ### Example
 
@@ -1114,7 +1125,7 @@ func main() {
                             )
     settle := "usdt" // string - Settle currency
     
-    result, _, err := client.FuturesApi.ListPositions(ctx, settle)
+    result, _, err := client.FuturesApi.ListPositions(ctx, settle, nil)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -1820,7 +1831,7 @@ func main() {
 
 ## ListFuturesOrders
 
-> []FuturesOrder ListFuturesOrders(ctx, settle, contract, status, optional)
+> []FuturesOrder ListFuturesOrders(ctx, settle, status, optional)
 
 List futures orders
 
@@ -1832,7 +1843,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
-**contract** | **string**| Futures contract | 
 **status** | **string**| Only list the orders with this status | 
 **optional** | **ListFuturesOrdersOpts** | optional parameters | nil if no parameters
 
@@ -1842,6 +1852,7 @@ Optional parameters are passed through a pointer to a ListFuturesOrdersOpts stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+**contract** | **optional.String**| Futures contract, return related data only if specified | 
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
 **lastId** | **optional.String**| Specify list staring point using the &#x60;id&#x60; of last record in previous list-query results | 
@@ -1870,10 +1881,9 @@ func main() {
                              }
                             )
     settle := "usdt" // string - Settle currency
-    contract := "BTC_USDT" // string - Futures contract
     status := "open" // string - Only list the orders with this status
     
-    result, _, err := client.FuturesApi.ListFuturesOrders(ctx, settle, contract, status, nil)
+    result, _, err := client.FuturesApi.ListFuturesOrders(ctx, settle, status, nil)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -2029,6 +2039,88 @@ func main() {
     contract := "BTC_USDT" // string - Futures contract
     
     result, _, err := client.FuturesApi.CancelFuturesOrders(ctx, settle, contract, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**[]FuturesOrder**](FuturesOrder.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## GetOrdersWithTimeRange
+
+> []FuturesOrder GetOrdersWithTimeRange(ctx, settle, optional)
+
+List Futures Orders By Time Range
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**settle** | **string**| Settle currency | 
+**optional** | **GetOrdersWithTimeRangeOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a GetOrdersWithTimeRangeOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**contract** | **optional.String**| Futures contract, return related data only if specified | 
+**from** | **optional.Int64**| Start timestamp | 
+**to** | **optional.Int64**| End timestamp | 
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    
+    result, _, err := client.FuturesApi.GetOrdersWithTimeRange(ctx, settle, nil)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -2456,6 +2548,7 @@ Name | Type | Description  | Notes
 **to** | **optional.Int64**| End timestamp | 
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
+**role** | **optional.String**| 查询角色，Maker 或 Taker | 
 
 ### Example
 
@@ -2538,6 +2631,8 @@ Name | Type | Description  | Notes
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
 **from** | **optional.Int64**| Start timestamp | 
 **to** | **optional.Int64**| End timestamp | 
+**side** | **optional.String**| 方向筛选，做多(long)或做空(short) | 
+**pnl** | **optional.String**| 盈亏判断，盈利(profit)或亏损(loss) | 
 
 ### Example
 
@@ -2822,6 +2917,84 @@ func main() {
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## GetFuturesFee
+
+> map[string]FuturesFee GetFuturesFee(ctx, settle, optional)
+
+Query user trading fee rates
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**settle** | **string**| Settle currency | 
+**optional** | **GetFuturesFeeOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a GetFuturesFeeOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**contract** | **optional.String**| Futures contract, return related data only if specified | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    
+    result, _, err := client.FuturesApi.GetFuturesFee(ctx, settle, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**map[string]FuturesFee**](FuturesFee.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

@@ -24,4 +24,6 @@ type MarginAccountBook struct {
 	Change string `json:"change,omitempty"`
 	// Balance after change
 	Balance string `json:"balance,omitempty"`
+	// Account book type.  Please refer to [account book type](#accountbook-type) for more detail
+	Type string `json:"type,omitempty"`
 }

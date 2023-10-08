@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/antihax/optional"
-	"github.com/gateio/gateapi-go/v6"
+	"github.com/gateio/gateapi-go/v5"
 	"github.com/shopspring/decimal"
 )
 
@@ -24,7 +24,7 @@ func FuturesDemo(config *RunConfig) {
 
 	// update position leverage
 	leverage := "3"
-	_, _, err := client.FuturesApi.UpdatePositionLeverage(ctx, settle, contract, leverage, nil)
+	_, _, err := client.FuturesApi.UpdatePositionLeverage(ctx, settle, contract, leverage)
 	if err != nil {
 		panicGateError(err)
 	}
@@ -102,13 +102,11 @@ func FuturesDemo(config *RunConfig) {
 			From:     "spot",
 			To:       "futures",
 			Amount:   margin.String(),
-			Settle:   settle,
 		}
-		tx, _, err := client.WalletApi.Transfer(ctx, transfer)
+		_, err := client.WalletApi.Transfer(ctx, transfer)
 		if err != nil {
 			panicGateError(err)
 		}
-		logger.Printf("transferred %s %s to futures %s account, transfer ID %d\n", transfer.Amount, transfer.Currency, transfer.Settle, tx.TxId)
 	}
 
 	// example to cancel all open orders in contract
