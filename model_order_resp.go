@@ -10,6 +10,6 @@
 package gateapi
 
 type OrderResp struct {
-	// 订单id
+	// Order ID
 	OrderId int64 `json:"order_id,omitempty"`
 }

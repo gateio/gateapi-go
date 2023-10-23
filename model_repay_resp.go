@@ -9,9 +9,9 @@
 
 package gateapi
 
-// 还款
+// Repay
 type RepayResp struct {
-	// 本金
+	// Principal
 	RepaidPrincipal string `json:"repaid_principal,omitempty"`
 	// Interest
 	RepaidInterest string `json:"repaid_interest,omitempty"`

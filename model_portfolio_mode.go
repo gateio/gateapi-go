@@ -10,8 +10,8 @@
 package gateapi
 
 type PortfolioMode struct {
-	// 保证金模式 - cross_margin : 现货全仓保证金
+	// Portfolio mode - cross_margin : cross margin
 	Mode string `json:"mode"`
-	// 是否启用
+	// Is it enabled?
 	Enabled bool `json:"enabled"`
 }

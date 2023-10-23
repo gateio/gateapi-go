@@ -35,10 +35,10 @@ type PortfolioAccount struct {
 	TotalMaintenanceMarginRate string `json:"total_maintenance_margin_rate,omitempty"`
 	// Total available margin
 	TotalAvailableMargin string `json:"total_available_margin,omitempty"`
-	// Total amount of the portfolio margin account
+	// Total margin balance of the account
 	PortfolioMarginTotal string `json:"portfolio_margin_total,omitempty"`
-	// Total liabilities of the portfolio margin account
+	// Total liabilities of the account
 	PortfolioMarginTotalLiab string `json:"portfolio_margin_total_liab,omitempty"`
-	// Total equity of the portfolio margin account
+	// Total equity of the account
 	PortfolioMarginTotalEquity string `json:"portfolio_margin_total_equity,omitempty"`
 }

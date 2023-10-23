@@ -12,6 +12,8 @@ Method | HTTP request | Description
 [**ListUniLendRecords**](EarnUniApi.md#ListUniLendRecords) | **Get** /earn/uni/lend_records | List records of lending
 [**GetUniInterest**](EarnUniApi.md#GetUniInterest) | **Get** /earn/uni/interests/{currency} | Get the user&#39;s total interest income of specified currency
 [**ListUniInterestRecords**](EarnUniApi.md#ListUniInterestRecords) | **Get** /earn/uni/interest_records | List interest records
+[**SwitchInterestReinvest**](EarnUniApi.md#SwitchInterestReinvest) | **Put** /earn/uni/interest_reinvest | Set interest reinvestment toggle
+[**GetUniInterestStatus**](EarnUniApi.md#GetUniInterestStatus) | **Get** /earn/uni/interest_status/{currency} | query currency interest compounding status
 
 
 ## ListUniCurrencies
@@ -569,6 +571,144 @@ func main() {
 ### Return type
 
 [**[]UniInterestRecord**](UniInterestRecord.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## SwitchInterestReinvest
+
+> SwitchInterestReinvest(ctx, uniInterestMode)
+
+Set interest reinvestment toggle
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**uniInterestMode** | [**UniInterestMode**](UniInterestMode.md)|  | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    uniInterestMode := gateapi.UniInterestMode{} // UniInterestMode - 
+    
+    result, _, err := client.EarnUniApi.SwitchInterestReinvest(ctx, uniInterestMode)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## GetUniInterestStatus
+
+> UniCurrencyInterest GetUniInterestStatus(ctx, currency)
+
+query currency interest compounding status
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**currency** | **string**| Currency | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    currency := "btc" // string - Currency
+    
+    result, _, err := client.EarnUniApi.GetUniInterestStatus(ctx, currency)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**UniCurrencyInterest**](UniCurrencyInterest.md)
 
 ### Authorization
 

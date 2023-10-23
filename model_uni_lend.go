@@ -23,6 +23,10 @@ type UniLend struct {
 	FrozenAmount string `json:"frozen_amount,omitempty"`
 	// Minimum interest rate
 	MinRate string `json:"min_rate,omitempty"`
+	// Interest status: interest_dividend - regular dividend, interest_reinvest - interest reinvestment
+	InterestStatus string `json:"interest_status,omitempty"`
+	// Amount not reinvested
+	ReinvestLeftAmount string `json:"reinvest_left_amount,omitempty"`
 	// Created time of the lending order
 	CreateTime int64 `json:"create_time,omitempty"`
 	// Upated time of the lending order

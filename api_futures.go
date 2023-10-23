@@ -447,10 +447,10 @@ Return specified contract candlesticks. If prefix &#x60;contract&#x60; with &#x6
   - @param settle Settle currency
   - @param contract Futures contract
   - @param optional nil or *ListFuturesCandlesticksOpts - Optional Parameters:
-  - @param "From" (optional.Int64) -  指定 K 线图的起始时间，注意时间格式为秒(s)精度的 Unix 时间戳，不指定则默认为 to - 100 * interval，即向前最多 100 个点的时间
+  - @param "From" (optional.Int64) -  Start time of candlesticks, formatted in Unix timestamp in seconds. Default to`to - 100 * interval` if not specified
   - @param "To" (optional.Int64) -  End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time
-  - @param "Limit" (optional.Int32) -  指定数据点的数量，适用于取最近 `limit` 数量的数据，该字段与 `from`, `to` 互斥，如果指定了 `from`, `to` 中的任意字段，该字段会被拒绝
-  - @param "Interval" (optional.String) -  数据点的时间间隔，注意 1w 代表一个自然周，7d 的时间是和 Unix 初始时间对齐, 30d 代表一个自然月
+  - @param "Limit" (optional.Int32) -  Maximum recent data points to return. `limit` is conflicted with `from` and `to`. If either `from` or `to` is specified, request will be rejected.
+  - @param "Interval" (optional.String) -  Interval time between data points. Note that `1w` means natual week(Mon-Sun), while `7d` means every 7d since unix 0.  Note that 30d means 1 natual month, not 30 days
 
 @return []FuturesCandlestick
 */
@@ -562,9 +562,9 @@ Maximum of 1000 points can be returned in a query. Be sure not to exceed the lim
   - @param settle Settle currency
   - @param contract Futures contract
   - @param optional nil or *ListFuturesPremiumIndexOpts - Optional Parameters:
-  - @param "From" (optional.Int64) -  指定 K 线图的起始时间，注意时间格式为秒(s)精度的 Unix 时间戳，不指定则默认为 to - 100 * interval，即向前最多 100 个点的时间
+  - @param "From" (optional.Int64) -  Start time of candlesticks, formatted in Unix timestamp in seconds. Default to`to - 100 * interval` if not specified
   - @param "To" (optional.Int64) -  End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time
-  - @param "Limit" (optional.Int32) -  指定数据点的数量，适用于取最近 `limit` 数量的数据，该字段与 `from`, `to` 互斥，如果指定了 `from`, `to` 中的任意字段，该字段会被拒绝
+  - @param "Limit" (optional.Int32) -  Maximum recent data points to return. `limit` is conflicted with `from` and `to`. If either `from` or `to` is specified, request will be rejected.
   - @param "Interval" (optional.String) -  Interval time between data points
 
 @return []FuturesPremiumIndex
@@ -1488,7 +1488,7 @@ ListPositions List all positions of a user
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param settle Settle currency
   - @param optional nil or *ListPositionsOpts - Optional Parameters:
-  - @param "Holding" (optional.Bool) -  只返回真实持仓-true,全部返回-false
+  - @param "Holding" (optional.Bool) -  Return only real positions - true, return all - false.
 
 @return []Position
 */
@@ -3458,7 +3458,7 @@ GetMyTradesWithTimeRange List personal trading history by time range
   - @param "To" (optional.Int64) -  End timestamp
   - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
   - @param "Offset" (optional.Int32) -  List offset, starting from 0
-  - @param "Role" (optional.String) -  查询角色，Maker 或 Taker
+  - @param "Role" (optional.String) -  Query role, maker or taker.
 
 @return []MyFuturesTradeTimeRange
 */
@@ -3587,8 +3587,8 @@ ListPositionClose List position close history
   - @param "Offset" (optional.Int32) -  List offset, starting from 0
   - @param "From" (optional.Int64) -  Start timestamp
   - @param "To" (optional.Int64) -  End timestamp
-  - @param "Side" (optional.String) -  方向筛选，做多(long)或做空(short)
-  - @param "Pnl" (optional.String) -  盈亏判断，盈利(profit)或亏损(loss)
+  - @param "Side" (optional.String) -  Query side.  long or shot
+  - @param "Pnl" (optional.String) -  Query profit or loss
 
 @return []PositionClose
 */

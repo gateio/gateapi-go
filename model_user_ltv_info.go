@@ -9,20 +9,20 @@
 
 package gateapi
 
-// 用户币种统计数据
+// User's currency statistics data
 type UserLtvInfo struct {
-	// 质押币种
+	// Collateral
 	CollateralCurrency string `json:"collateral_currency,omitempty"`
-	// 借款币种
+	// Borrowed currency
 	BorrowCurrency string `json:"borrow_currency,omitempty"`
-	// 初始质押率
+	// The initial collateralization rate
 	InitLtv string `json:"init_ltv,omitempty"`
-	// 预警质押率
+	// Warning collateralization ratio
 	AlertLtv string `json:"alert_ltv,omitempty"`
-	// 平仓质押率
+	// The liquidation collateralization rate
 	LiquidateLtv string `json:"liquidate_ltv,omitempty"`
-	// 借款币种的最小可借数量
+	// Minimum borrowable amount for the loan currency
 	MinBorrowAmount string `json:"min_borrow_amount,omitempty"`
-	// 借款币种的剩余可借数量
+	// Remaining borrowable amount for the loan currency
 	LeftBorrowableAmount string `json:"left_borrowable_amount,omitempty"`
 }

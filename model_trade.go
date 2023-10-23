@@ -38,4 +38,8 @@ type Trade struct {
 	GtFee string `json:"gt_fee,omitempty"`
 	// The custom data that the user remarked when amending the order
 	AmendText string `json:"amend_text,omitempty"`
+	// Represents a unique and consecutive trade ID within a single market. It is used to track and identify trades in the specific market
+	SequenceId string `json:"sequence_id,omitempty"`
+	// User defined information. No value in public endpoints
+	Text string `json:"text,omitempty"`
 }

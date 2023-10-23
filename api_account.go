@@ -503,8 +503,8 @@ func (a *AccountApiService) AddSTPGroupUsers(ctx context.Context, stpId int64, r
 }
 
 /*
-DeleteSTPGroupUsers STP用户组中删除用户
-- 只允许创建此STP组的主账号删除STP用户组用户 - 只允许删除当前主账户下的账户，不允许跨主账户
+DeleteSTPGroupUsers Delete the user in the STP group
+- Only the main account that created this STP group is allowed to delete users from the STP user group - Deletion is limited to accounts under the current main account; cross-account deletion is not permitted
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param stpId STP Group ID
   - @param requestBody User ID

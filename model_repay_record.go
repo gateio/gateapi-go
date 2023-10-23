@@ -9,32 +9,32 @@
 
 package gateapi
 
-// 还款记录
+// Repayment record
 type RepayRecord struct {
-	// 订单id
+	// Order ID
 	OrderId int64 `json:"order_id,omitempty"`
-	// 还款记录 id
+	// Repayment record ID
 	RecordId int64 `json:"record_id,omitempty"`
 	// Repayment amount
 	RepaidAmount string `json:"repaid_amount,omitempty"`
-	// 借款币种
+	// Borrowed currency
 	BorrowCurrency string `json:"borrow_currency,omitempty"`
-	// 质押币种
+	// Collateral
 	CollateralCurrency string `json:"collateral_currency,omitempty"`
-	// 初始质押率
+	// The initial collateralization rate
 	InitLtv string `json:"init_ltv,omitempty"`
-	// 借款时间，时间戳
+	// Borrowing time, timestamp
 	BorrowTime int64 `json:"borrow_time,omitempty"`
-	// 还款时间，时间戳
+	// Repayment time, timestamp
 	RepayTime int64 `json:"repay_time,omitempty"`
-	// 总计息
+	// Total interest
 	TotalInterest string `json:"total_interest,omitempty"`
-	// 还款前待还本金
+	// Principal to be repaid before repayment
 	BeforeLeftPrincipal string `json:"before_left_principal,omitempty"`
-	// 还款后待还本金
+	// Principal to be repaid after repayment
 	AfterLeftPrincipal string `json:"after_left_principal,omitempty"`
-	// 还款前质押物数量
+	// Collateral quantity before repayment
 	BeforeLeftCollateral string `json:"before_left_collateral,omitempty"`
-	// 还款后质押物数量
+	// Collateral quantity after repayment
 	AfterLeftCollateral string `json:"after_left_collateral,omitempty"`
 }

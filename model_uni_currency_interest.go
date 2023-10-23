@@ -9,10 +9,9 @@
 
 package gateapi
 
-// Supported borrowing and collateral currencies
-type CollateralLoanCurrency struct {
-	// Borrowed currency
-	LoanCurrency string `json:"loan_currency,omitempty"`
-	// List of supported collateral currencies
-	CollateralCurrency []string `json:"collateral_currency,omitempty"`
+type UniCurrencyInterest struct {
+	// Currency
+	Currency string `json:"currency,omitempty"`
+	// Interest status: interest_dividend - regular dividend, interest_reinvest - interest reinvestment
+	InterestStatus string `json:"interest_status,omitempty"`
 }

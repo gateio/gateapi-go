@@ -17,9 +17,9 @@ Name | Type | Description | Notes
 **TotalInitialMarginRate** | **string** | Total initial margin rate | [optional] 
 **TotalMaintenanceMarginRate** | **string** | Total maintenance margin rate | [optional] 
 **TotalAvailableMargin** | **string** | Total available margin | [optional] 
-**PortfolioMarginTotal** | **string** | Total amount of the portfolio margin account | [optional] 
-**PortfolioMarginTotalLiab** | **string** | Total liabilities of the portfolio margin account | [optional] 
-**PortfolioMarginTotalEquity** | **string** | Total equity of the portfolio margin account | [optional] 
+**PortfolioMarginTotal** | **string** | Total margin balance of the account | [optional] 
+**PortfolioMarginTotalLiab** | **string** | Total liabilities of the account | [optional] 
+**PortfolioMarginTotalEquity** | **string** | Total equity of the account | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

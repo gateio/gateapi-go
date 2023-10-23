@@ -9,10 +9,10 @@
 
 package gateapi
 
-// Supported borrowing and collateral currencies
-type CollateralLoanCurrency struct {
-	// Borrowed currency
-	LoanCurrency string `json:"loan_currency,omitempty"`
-	// List of supported collateral currencies
-	CollateralCurrency []string `json:"collateral_currency,omitempty"`
+// 余币宝利息复投开关
+type UniInterestMode struct {
+	// Currency
+	Currency string `json:"currency"`
+	// Interest toggle settings, true - interest reinvestment, false - regular dividend
+	Status bool `json:"status"`
 }

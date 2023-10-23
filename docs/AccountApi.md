@@ -9,7 +9,7 @@ Method | HTTP request | Description
 [**CreateSTPGroup**](AccountApi.md#CreateSTPGroup) | **Post** /account/stp_groups | Create STP Group
 [**ListSTPGroupsUsers**](AccountApi.md#ListSTPGroupsUsers) | **Get** /account/stp_groups/{stp_id}/users | List users of the STP group
 [**AddSTPGroupUsers**](AccountApi.md#AddSTPGroupUsers) | **Post** /account/stp_groups/{stp_id}/users | Add users to the STP group
-[**DeleteSTPGroupUsers**](AccountApi.md#DeleteSTPGroupUsers) | **Delete** /account/stp_groups/{stp_id}/users | STP用户组中删除用户
+[**DeleteSTPGroupUsers**](AccountApi.md#DeleteSTPGroupUsers) | **Delete** /account/stp_groups/{stp_id}/users | Delete the user in the STP group
 
 
 ## GetAccountDetail
@@ -373,9 +373,9 @@ func main() {
 
 > []StpGroupUser DeleteSTPGroupUsers(ctx, stpId, requestBody)
 
-STP用户组中删除用户
+Delete the user in the STP group
 
-- 只允许创建此STP组的主账号删除STP用户组用户 - 只允许删除当前主账户下的账户，不允许跨主账户
+- Only the main account that created this STP group is allowed to delete users from the STP user group - Deletion is limited to accounts under the current main account; cross-account deletion is not permitted
 
 ### Required Parameters
 

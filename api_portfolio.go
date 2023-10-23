@@ -128,7 +128,7 @@ func (a *PortfolioApiService) ListPortfolioAccounts(ctx context.Context, localVa
 
 /*
 ListAccountPortfolioMode Retrieve the account's portfolio mode
-cross_margin - 现货全仓保证金
+cross_margin - cross margin
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 @return map[string]bool

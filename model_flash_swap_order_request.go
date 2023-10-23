@@ -13,11 +13,11 @@ package gateapi
 type FlashSwapOrderRequest struct {
 	// Preview result ID
 	PreviewId string `json:"preview_id"`
-	// 卖出的资产名称， 根据接口`查询支持闪兑的所有交易对列表 GET /flash_swap/currency_pairs`获取
+	// The name of the asset being sold, as obtained from the \"GET /flash_swap/currency_pairs\" API, which retrieves a list of supported flash swap currency pairs.
 	SellCurrency string `json:"sell_currency"`
 	// Amount to sell (based on the preview result)
 	SellAmount string `json:"sell_amount"`
-	// 买入的资产名称， 根据接口`查询支持闪兑的所有交易对列表 GET /flash_swap/currency_pairs`获取
+	// The name of the asset being purchased, as obtained from the \"GET /flash_swap/currency_pairs\" API, which provides a list of supported flash swap currency pairs.
 	BuyCurrency string `json:"buy_currency"`
 	// Amount to buy (based on the preview result)
 	BuyAmount string `json:"buy_amount"`

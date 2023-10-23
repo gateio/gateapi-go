@@ -10,12 +10,12 @@
 package gateapi
 
 type CollateralAlign struct {
-	// 订单id
+	// Order ID
 	OrderId int64 `json:"order_id"`
-	// 质押币种
+	// Collateral
 	CollateralCurrency string `json:"collateral_currency"`
-	// 质押数量
+	// Collateral amount
 	CollateralAmount string `json:"collateral_amount"`
-	// 操作类型, append - 补充 , redeem - 提取
+	// Operation types: append - for adding collateral, redeem - for withdrawing collateral
 	Type string `json:"type"`
 }

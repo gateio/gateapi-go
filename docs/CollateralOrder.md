@@ -4,22 +4,22 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OrderId** | **int64** | 订单id | [optional] 
-**CollateralCurrency** | **string** | 质押币种 | [optional] 
-**CollateralAmount** | **string** | 质押数量 | [optional] 
-**BorrowCurrency** | **string** | 借款币种 | [optional] 
-**BorrowAmount** | **string** | 借款数量 | [optional] 
-**RepaidAmount** | **string** | 已还款数量 | [optional] 
-**RepaidPrincipal** | **string** | 已还本金 | [optional] 
-**RepaidInterest** | **string** | 已还利息 | [optional] 
-**InitLtv** | **string** | 初始质押率 | [optional] 
-**CurrentLtv** | **string** | 当前质押率 | [optional] 
-**LiquidateLtv** | **string** | 平仓质押率 | [optional] 
-**Status** | **string** | 订单状态: - initial: 下单初始状态 - collateral_deducted: 扣除质押物成功 - collateral_returning: 放款失败-待退回质押物 - lent: 放款成功 - repaying: 还款中 - liquidating: 平仓中 - finished: 已完成 - closed_liquidated: 已结束-平仓还款结束 | [optional] 
-**BorrowTime** | **int64** | 借款时间，时间戳，单位秒 | [optional] 
-**LeftRepayTotal** | **string** | 待还本息（待还本金+待还利息） | [optional] 
-**LeftRepayPrincipal** | **string** | 待还本金 | [optional] 
-**LeftRepayInterest** | **string** | 待还利息 | [optional] 
+**OrderId** | **int64** | Order ID | [optional] 
+**CollateralCurrency** | **string** | Collateral | [optional] 
+**CollateralAmount** | **string** | Collateral amount | [optional] 
+**BorrowCurrency** | **string** | Borrowed currency | [optional] 
+**BorrowAmount** | **string** | Borrowing amount | [optional] 
+**RepaidAmount** | **string** | Repaid amount | [optional] 
+**RepaidPrincipal** | **string** | Repaid principal | [optional] 
+**RepaidInterest** | **string** | Repaid interest | [optional] 
+**InitLtv** | **string** | The initial collateralization rate | [optional] 
+**CurrentLtv** | **string** | The current collateralization rate | [optional] 
+**LiquidateLtv** | **string** | The liquidation collateralization rate | [optional] 
+**Status** | **string** | Order status: - initial: Initial state after placing the order - collateral_deducted: Collateral deduction successful - collateral_returning: Loan failed - Collateral return pending - lent: Loan successful - repaying: Repayment in progress - liquidating: Liquidation in progress - finished: Order completed - closed_liquidated: Liquidation and repayment completed | [optional] 
+**BorrowTime** | **int64** | Borrowing time, timestamp in seconds | [optional] 
+**LeftRepayTotal** | **string** | Outstanding principal and interest (outstanding principal + outstanding interest) | [optional] 
+**LeftRepayPrincipal** | **string** | outstanding principal | [optional] 
+**LeftRepayInterest** | **string** | outstanding interest | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

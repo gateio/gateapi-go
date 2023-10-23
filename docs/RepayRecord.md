@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OrderId** | **int64** | 订单id | [optional] 
-**RecordId** | **int64** | 还款记录 id | [optional] 
+**OrderId** | **int64** | Order ID | [optional] 
+**RecordId** | **int64** | Repayment record ID | [optional] 
 **RepaidAmount** | **string** | Repayment amount | [optional] 
-**BorrowCurrency** | **string** | 借款币种 | [optional] 
-**CollateralCurrency** | **string** | 质押币种 | [optional] 
-**InitLtv** | **string** | 初始质押率 | [optional] 
-**BorrowTime** | **int64** | 借款时间，时间戳 | [optional] 
-**RepayTime** | **int64** | 还款时间，时间戳 | [optional] 
-**TotalInterest** | **string** | 总计息 | [optional] 
-**BeforeLeftPrincipal** | **string** | 还款前待还本金 | [optional] 
-**AfterLeftPrincipal** | **string** | 还款后待还本金 | [optional] 
-**BeforeLeftCollateral** | **string** | 还款前质押物数量 | [optional] 
-**AfterLeftCollateral** | **string** | 还款后质押物数量 | [optional] 
+**BorrowCurrency** | **string** | Borrowed currency | [optional] 
+**CollateralCurrency** | **string** | Collateral | [optional] 
+**InitLtv** | **string** | The initial collateralization rate | [optional] 
+**BorrowTime** | **int64** | Borrowing time, timestamp | [optional] 
+**RepayTime** | **int64** | Repayment time, timestamp | [optional] 
+**TotalInterest** | **string** | Total interest | [optional] 
+**BeforeLeftPrincipal** | **string** | Principal to be repaid before repayment | [optional] 
+**AfterLeftPrincipal** | **string** | Principal to be repaid after repayment | [optional] 
+**BeforeLeftCollateral** | **string** | Collateral quantity before repayment | [optional] 
+**AfterLeftCollateral** | **string** | Collateral quantity after repayment | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

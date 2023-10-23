@@ -19,6 +19,8 @@ type UniInterestRecord struct {
 	ActualRate string `json:"actual_rate,omitempty"`
 	// Interest
 	Interest string `json:"interest,omitempty"`
+	// Interest status: interest_dividend - regular dividend, interest_reinvest - interest reinvestment
+	InterestStatus string `json:"interest_status,omitempty"`
 	// Created time
 	CreateTime int64 `json:"create_time,omitempty"`
 }

@@ -10,12 +10,12 @@
 package gateapi
 
 type CreateCollateralOrder struct {
-	// 质押数量
+	// Collateral amount
 	CollateralAmount string `json:"collateral_amount"`
-	// 质押币种
+	// Collateral
 	CollateralCurrency string `json:"collateral_currency"`
-	// 借款数量
+	// Borrowing amount
 	BorrowAmount string `json:"borrow_amount"`
-	// 借款币种
+	// Borrowed currency
 	BorrowCurrency string `json:"borrow_currency"`
 }

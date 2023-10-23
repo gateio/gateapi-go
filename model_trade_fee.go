@@ -30,8 +30,8 @@ type TradeFee struct {
 	FuturesTakerFee string `json:"futures_taker_fee,omitempty"`
 	// Future trading maker fee
 	FuturesMakerFee string `json:"futures_maker_fee,omitempty"`
-	// 交割合约 taker 费率
+	// Delivery trading taker fee
 	DeliveryTakerFee string `json:"delivery_taker_fee,omitempty"`
-	// 交割合约 maker 费率
+	// Delivery trading maker fee
 	DeliveryMakerFee string `json:"delivery_maker_fee,omitempty"`
 }

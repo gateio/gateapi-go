@@ -22,4 +22,6 @@ type SpotAccountBook struct {
 	Balance string `json:"balance,omitempty"`
 	// Account book type.  Please refer to [account book type](#accountbook-type) for more detail
 	Type string `json:"type,omitempty"`
+	// Additional information
+	Text string `json:"text,omitempty"`
 }

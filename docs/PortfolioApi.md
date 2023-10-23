@@ -99,7 +99,7 @@ func main() {
 
 Retrieve the account's portfolio mode
 
-cross_margin - 现货全仓保证金
+cross_margin - cross margin
 
 ### Required Parameters
 

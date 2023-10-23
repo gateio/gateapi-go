@@ -9,10 +9,10 @@
 
 package gateapi
 
-// 用户总借贷與质押金额
+// Total borrowed amount and pledged collateral amount by the user
 type UserTotalAmount struct {
-	// 借贷总额，以 USDT 计算
+	// Total borrowing amount, calculated in USDT
 	BorrowAmount string `json:"borrow_amount,omitempty"`
-	// 质押总额，以 USDT 计算
+	// Total collateral amount, calculated in USDT
 	CollateralAmount string `json:"collateral_amount,omitempty"`
 }

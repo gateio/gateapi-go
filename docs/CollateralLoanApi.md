@@ -4,23 +4,23 @@ All URIs are relative to *https://api.gateio.ws/api/v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ListCollateralLoanOrders**](CollateralLoanApi.md#ListCollateralLoanOrders) | **Get** /loan/collateral/orders | 查询抵押借币订单列表
-[**CreateCollateralLoan**](CollateralLoanApi.md#CreateCollateralLoan) | **Post** /loan/collateral/orders | 抵押借币借贷下单
+[**ListCollateralLoanOrders**](CollateralLoanApi.md#ListCollateralLoanOrders) | **Get** /loan/collateral/orders | List Orders
+[**CreateCollateralLoan**](CollateralLoanApi.md#CreateCollateralLoan) | **Post** /loan/collateral/orders | Place order
 [**GetCollateralLoanOrderDetail**](CollateralLoanApi.md#GetCollateralLoanOrderDetail) | **Get** /loan/collateral/orders/{order_id} | Get a single order
-[**RepayCollateralLoan**](CollateralLoanApi.md#RepayCollateralLoan) | **Post** /loan/collateral/repay | 抵押借币还款
-[**ListRepayRecords**](CollateralLoanApi.md#ListRepayRecords) | **Get** /loan/collateral/repay_records | 查询抵押借币还款记录
-[**ListCollateralRecords**](CollateralLoanApi.md#ListCollateralRecords) | **Get** /loan/collateral/collaterals | 查询质押物调整记录
-[**OperateCollateral**](CollateralLoanApi.md#OperateCollateral) | **Post** /loan/collateral/collaterals | 增加或赎回质押物
-[**GetUserTotalAmount**](CollateralLoanApi.md#GetUserTotalAmount) | **Get** /loan/collateral/total_amount | 查询用户总借贷与质押数量
-[**GetUserLtvInfo**](CollateralLoanApi.md#GetUserLtvInfo) | **Get** /loan/collateral/ltv | 查询用户质押率和可借剩余币种
-[**ListCollateralCurrencies**](CollateralLoanApi.md#ListCollateralCurrencies) | **Get** /loan/collateral/currencies | 查询支持的借款币种和抵押币种
+[**RepayCollateralLoan**](CollateralLoanApi.md#RepayCollateralLoan) | **Post** /loan/collateral/repay | Repayment
+[**ListRepayRecords**](CollateralLoanApi.md#ListRepayRecords) | **Get** /loan/collateral/repay_records | Repayment history
+[**ListCollateralRecords**](CollateralLoanApi.md#ListCollateralRecords) | **Get** /loan/collateral/collaterals | Query collateral adjustment records
+[**OperateCollateral**](CollateralLoanApi.md#OperateCollateral) | **Post** /loan/collateral/collaterals | Increase or redeem collateral
+[**GetUserTotalAmount**](CollateralLoanApi.md#GetUserTotalAmount) | **Get** /loan/collateral/total_amount | Query the total borrowing and collateral amount for the user
+[**GetUserLtvInfo**](CollateralLoanApi.md#GetUserLtvInfo) | **Get** /loan/collateral/ltv | Query user&#39;s collateralization ratio
+[**ListCollateralCurrencies**](CollateralLoanApi.md#ListCollateralCurrencies) | **Get** /loan/collateral/currencies | Query supported borrowing and collateral currencies
 
 
 ## ListCollateralLoanOrders
 
 > []CollateralOrder ListCollateralLoanOrders(ctx, optional)
 
-查询抵押借币订单列表
+List Orders
 
 ### Required Parameters
 
@@ -37,8 +37,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **page** | **optional.Int32**| Page number | [default to 1]
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
-**collateralCurrency** | **optional.String**| 质押币种 | 
-**borrowCurrency** | **optional.String**| 借款币种 | 
+**collateralCurrency** | **optional.String**| Collateral | 
+**borrowCurrency** | **optional.String**| Borrowed currency | 
 
 ### Example
 
@@ -99,7 +99,7 @@ func main() {
 
 > OrderResp CreateCollateralLoan(ctx, createCollateralOrder)
 
-抵押借币借贷下单
+Place order
 
 ### Required Parameters
 
@@ -237,7 +237,7 @@ func main() {
 
 > RepayResp RepayCollateralLoan(ctx, repayLoan)
 
-抵押借币还款
+Repayment
 
 ### Required Parameters
 
@@ -306,14 +306,14 @@ func main() {
 
 > []RepayRecord ListRepayRecords(ctx, source, optional)
 
-查询抵押借币还款记录
+Repayment history
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**source** | **string**| 操作类型 ;  repay - 普通还款, liquidate - 平仓 | 
+**source** | **string**| Operation type: repay - Regular repayment, liquidate - Liquidation | 
 **optional** | **ListRepayRecordsOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -322,8 +322,8 @@ Optional parameters are passed through a pointer to a ListRepayRecordsOpts struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**borrowCurrency** | **optional.String**| 借款币种 | 
-**collateralCurrency** | **optional.String**| 质押币种 | 
+**borrowCurrency** | **optional.String**| Borrowed currency | 
+**collateralCurrency** | **optional.String**| Collateral | 
 **page** | **optional.Int32**| Page number | [default to 1]
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **from** | **optional.Int64**| Start timestamp of the query | 
@@ -352,7 +352,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    source := "repay" // string - 操作类型 ;  repay - 普通还款, liquidate - 平仓
+    source := "repay" // string - Operation type: repay - Regular repayment, liquidate - Liquidation
     
     result, _, err := client.CollateralLoanApi.ListRepayRecords(ctx, source, nil)
     if err != nil {
@@ -389,7 +389,7 @@ func main() {
 
 > []CollateralRecord ListCollateralRecords(ctx, optional)
 
-查询质押物调整记录
+Query collateral adjustment records
 
 ### Required Parameters
 
@@ -408,8 +408,8 @@ Name | Type | Description  | Notes
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **from** | **optional.Int64**| Start timestamp of the query | 
 **to** | **optional.Int64**| Time range ending, default to current time | 
-**borrowCurrency** | **optional.String**| 借款币种 | 
-**collateralCurrency** | **optional.String**| 质押币种 | 
+**borrowCurrency** | **optional.String**| Borrowed currency | 
+**collateralCurrency** | **optional.String**| Collateral | 
 
 ### Example
 
@@ -470,7 +470,7 @@ func main() {
 
 > OperateCollateral(ctx, collateralAlign)
 
-增加或赎回质押物
+Increase or redeem collateral
 
 ### Required Parameters
 
@@ -539,7 +539,7 @@ func main() {
 
 > UserTotalAmount GetUserTotalAmount(ctx, )
 
-查询用户总借贷与质押数量
+Query the total borrowing and collateral amount for the user
 
 ### Required Parameters
 
@@ -603,15 +603,15 @@ func main() {
 
 > UserLtvInfo GetUserLtvInfo(ctx, collateralCurrency, borrowCurrency)
 
-查询用户质押率和可借剩余币种
+Query user's collateralization ratio
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**collateralCurrency** | **string**| 质押币种 | 
-**borrowCurrency** | **string**| 借款币种 | 
+**collateralCurrency** | **string**| Collateral | 
+**borrowCurrency** | **string**| Borrowed currency | 
 
 ### Example
 
@@ -636,8 +636,8 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    collateralCurrency := "BTC" // string - 质押币种
-    borrowCurrency := "USDT" // string - 借款币种
+    collateralCurrency := "BTC" // string - Collateral
+    borrowCurrency := "USDT" // string - Borrowed currency
     
     result, _, err := client.CollateralLoanApi.GetUserLtvInfo(ctx, collateralCurrency, borrowCurrency)
     if err != nil {
@@ -674,7 +674,7 @@ func main() {
 
 > []CollateralLoanCurrency ListCollateralCurrencies(ctx, optional)
 
-查询支持的借款币种和抵押币种
+Query supported borrowing and collateral currencies
 
 ### Required Parameters
 
@@ -689,7 +689,7 @@ Optional parameters are passed through a pointer to a ListCollateralCurrenciesOp
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**loanCurrency** | **optional.String**| 借款币种参数,当loan_currency没传时会返回支持的所有借款币种,当传loan_currency时会查询该借款币种支持的抵押币种数组 | 
+**loanCurrency** | **optional.String**| The parameter loan_currency is used to specify the borrowing currency. If loan_currency is not provided, the API will return all supported borrowing currencies. If loan_currency is provided, the API will return an array of collateral currencies supported for the specified borrowing currency. | 
 
 ### Example
 

@@ -9,38 +9,38 @@
 
 package gateapi
 
-// 抵押借币订单
+// Collateral Order
 type CollateralOrder struct {
-	// 订单id
+	// Order ID
 	OrderId int64 `json:"order_id,omitempty"`
-	// 质押币种
+	// Collateral
 	CollateralCurrency string `json:"collateral_currency,omitempty"`
-	// 质押数量
+	// Collateral amount
 	CollateralAmount string `json:"collateral_amount,omitempty"`
-	// 借款币种
+	// Borrowed currency
 	BorrowCurrency string `json:"borrow_currency,omitempty"`
-	// 借款数量
+	// Borrowing amount
 	BorrowAmount string `json:"borrow_amount,omitempty"`
-	// 已还款数量
+	// Repaid amount
 	RepaidAmount string `json:"repaid_amount,omitempty"`
-	// 已还本金
+	// Repaid principal
 	RepaidPrincipal string `json:"repaid_principal,omitempty"`
-	// 已还利息
+	// Repaid interest
 	RepaidInterest string `json:"repaid_interest,omitempty"`
-	// 初始质押率
+	// The initial collateralization rate
 	InitLtv string `json:"init_ltv,omitempty"`
-	// 当前质押率
+	// The current collateralization rate
 	CurrentLtv string `json:"current_ltv,omitempty"`
-	// 平仓质押率
+	// The liquidation collateralization rate
 	LiquidateLtv string `json:"liquidate_ltv,omitempty"`
-	// 订单状态: - initial: 下单初始状态 - collateral_deducted: 扣除质押物成功 - collateral_returning: 放款失败-待退回质押物 - lent: 放款成功 - repaying: 还款中 - liquidating: 平仓中 - finished: 已完成 - closed_liquidated: 已结束-平仓还款结束
+	// Order status: - initial: Initial state after placing the order - collateral_deducted: Collateral deduction successful - collateral_returning: Loan failed - Collateral return pending - lent: Loan successful - repaying: Repayment in progress - liquidating: Liquidation in progress - finished: Order completed - closed_liquidated: Liquidation and repayment completed
 	Status string `json:"status,omitempty"`
-	// 借款时间，时间戳，单位秒
+	// Borrowing time, timestamp in seconds
 	BorrowTime int64 `json:"borrow_time,omitempty"`
-	// 待还本息（待还本金+待还利息）
+	// Outstanding principal and interest (outstanding principal + outstanding interest)
 	LeftRepayTotal string `json:"left_repay_total,omitempty"`
-	// 待还本金
+	// outstanding principal
 	LeftRepayPrincipal string `json:"left_repay_principal,omitempty"`
-	// 待还利息
+	// outstanding interest
 	LeftRepayInterest string `json:"left_repay_interest,omitempty"`
 }

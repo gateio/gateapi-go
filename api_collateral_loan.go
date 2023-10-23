@@ -35,13 +35,13 @@ type ListCollateralLoanOrdersOpts struct {
 }
 
 /*
-ListCollateralLoanOrders 查询抵押借币订单列表
+ListCollateralLoanOrders List Orders
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListCollateralLoanOrdersOpts - Optional Parameters:
   - @param "Page" (optional.Int32) -  Page number
   - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
-  - @param "CollateralCurrency" (optional.String) -  质押币种
-  - @param "BorrowCurrency" (optional.String) -  借款币种
+  - @param "CollateralCurrency" (optional.String) -  Collateral
+  - @param "BorrowCurrency" (optional.String) -  Borrowed currency
 
 @return []CollateralOrder
 */
@@ -142,7 +142,7 @@ func (a *CollateralLoanApiService) ListCollateralLoanOrders(ctx context.Context,
 }
 
 /*
-CreateCollateralLoan 抵押借币借贷下单
+CreateCollateralLoan Place order
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param createCollateralOrder
 
@@ -328,7 +328,7 @@ func (a *CollateralLoanApiService) GetCollateralLoanOrderDetail(ctx context.Cont
 }
 
 /*
-RepayCollateralLoan 抵押借币还款
+RepayCollateralLoan Repayment
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param repayLoan
 
@@ -431,12 +431,12 @@ type ListRepayRecordsOpts struct {
 }
 
 /*
-ListRepayRecords 查询抵押借币还款记录
+ListRepayRecords Repayment history
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param source 操作类型 ;  repay - 普通还款, liquidate - 平仓
+  - @param source Operation type: repay - Regular repayment, liquidate - Liquidation
   - @param optional nil or *ListRepayRecordsOpts - Optional Parameters:
-  - @param "BorrowCurrency" (optional.String) -  借款币种
-  - @param "CollateralCurrency" (optional.String) -  质押币种
+  - @param "BorrowCurrency" (optional.String) -  Borrowed currency
+  - @param "CollateralCurrency" (optional.String) -  Collateral
   - @param "Page" (optional.Int32) -  Page number
   - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
   - @param "From" (optional.Int64) -  Start timestamp of the query
@@ -558,15 +558,15 @@ type ListCollateralRecordsOpts struct {
 }
 
 /*
-ListCollateralRecords 查询质押物调整记录
+ListCollateralRecords Query collateral adjustment records
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListCollateralRecordsOpts - Optional Parameters:
   - @param "Page" (optional.Int32) -  Page number
   - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
   - @param "From" (optional.Int64) -  Start timestamp of the query
   - @param "To" (optional.Int64) -  Time range ending, default to current time
-  - @param "BorrowCurrency" (optional.String) -  借款币种
-  - @param "CollateralCurrency" (optional.String) -  质押币种
+  - @param "BorrowCurrency" (optional.String) -  Borrowed currency
+  - @param "CollateralCurrency" (optional.String) -  Collateral
 
 @return []CollateralRecord
 */
@@ -673,7 +673,7 @@ func (a *CollateralLoanApiService) ListCollateralRecords(ctx context.Context, lo
 }
 
 /*
-OperateCollateral 增加或赎回质押物
+OperateCollateral Increase or redeem collateral
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param collateralAlign
 */
@@ -754,7 +754,7 @@ func (a *CollateralLoanApiService) OperateCollateral(ctx context.Context, collat
 }
 
 /*
-GetUserTotalAmount 查询用户总借贷与质押数量
+GetUserTotalAmount Query the total borrowing and collateral amount for the user
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 @return UserTotalAmount
@@ -844,10 +844,10 @@ func (a *CollateralLoanApiService) GetUserTotalAmount(ctx context.Context) (User
 }
 
 /*
-GetUserLtvInfo 查询用户质押率和可借剩余币种
+GetUserLtvInfo Query user's collateralization ratio
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param collateralCurrency 质押币种
-  - @param borrowCurrency 借款币种
+  - @param collateralCurrency Collateral
+  - @param borrowCurrency Borrowed currency
 
 @return UserLtvInfo
 */
@@ -943,10 +943,10 @@ type ListCollateralCurrenciesOpts struct {
 }
 
 /*
-ListCollateralCurrencies 查询支持的借款币种和抵押币种
+ListCollateralCurrencies Query supported borrowing and collateral currencies
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListCollateralCurrenciesOpts - Optional Parameters:
-  - @param "LoanCurrency" (optional.String) -  借款币种参数,当loan_currency没传时会返回支持的所有借款币种,当传loan_currency时会查询该借款币种支持的抵押币种数组
+  - @param "LoanCurrency" (optional.String) -  The parameter loan_currency is used to specify the borrowing currency. If loan_currency is not provided, the API will return all supported borrowing currencies. If loan_currency is provided, the API will return an array of collateral currencies supported for the specified borrowing currency.
 
 @return []CollateralLoanCurrency
 */

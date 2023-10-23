@@ -16,7 +16,7 @@ type CurrencyChain struct {
 	NameCn string `json:"name_cn,omitempty"`
 	// Chain name in English
 	NameEn string `json:"name_en,omitempty"`
-	// 币种智能合约地址，如果没有地址则为空字串
+	// Smart contract address for the currency; if no address is available, it will be an empty string
 	ContractAddress string `json:"contract_address,omitempty"`
 	// If it is disabled. 0 means NOT being disabled
 	IsDisabled int32 `json:"is_disabled,omitempty"`

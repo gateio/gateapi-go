@@ -357,10 +357,10 @@ Optional parameters are passed through a pointer to a ListFuturesCandlesticksOpt
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**from** | **optional.Int64**| 指定 K 线图的起始时间，注意时间格式为秒(s)精度的 Unix 时间戳，不指定则默认为 to - 100 * interval，即向前最多 100 个点的时间 | 
+**from** | **optional.Int64**| Start time of candlesticks, formatted in Unix timestamp in seconds. Default to&#x60;to - 100 * interval&#x60; if not specified | 
 **to** | **optional.Int64**| End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time | 
-**limit** | **optional.Int32**| 指定数据点的数量，适用于取最近 &#x60;limit&#x60; 数量的数据，该字段与 &#x60;from&#x60;, &#x60;to&#x60; 互斥，如果指定了 &#x60;from&#x60;, &#x60;to&#x60; 中的任意字段，该字段会被拒绝 | [default to 100]
-**interval** | **optional.String**| 数据点的时间间隔，注意 1w 代表一个自然周，7d 的时间是和 Unix 初始时间对齐, 30d 代表一个自然月 | [default to 5m]
+**limit** | **optional.Int32**| Maximum recent data points to return. &#x60;limit&#x60; is conflicted with &#x60;from&#x60; and &#x60;to&#x60;. If either &#x60;from&#x60; or &#x60;to&#x60; is specified, request will be rejected. | [default to 100]
+**interval** | **optional.String**| Interval time between data points. Note that &#x60;1w&#x60; means natual week(Mon-Sun), while &#x60;7d&#x60; means every 7d since unix 0.  Note that 30d means 1 natual month, not 30 days | [default to 5m]
 
 ### Example
 
@@ -436,9 +436,9 @@ Optional parameters are passed through a pointer to a ListFuturesPremiumIndexOpt
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**from** | **optional.Int64**| 指定 K 线图的起始时间，注意时间格式为秒(s)精度的 Unix 时间戳，不指定则默认为 to - 100 * interval，即向前最多 100 个点的时间 | 
+**from** | **optional.Int64**| Start time of candlesticks, formatted in Unix timestamp in seconds. Default to&#x60;to - 100 * interval&#x60; if not specified | 
 **to** | **optional.Int64**| End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time | 
-**limit** | **optional.Int32**| 指定数据点的数量，适用于取最近 &#x60;limit&#x60; 数量的数据，该字段与 &#x60;from&#x60;, &#x60;to&#x60; 互斥，如果指定了 &#x60;from&#x60;, &#x60;to&#x60; 中的任意字段，该字段会被拒绝 | [default to 100]
+**limit** | **optional.Int32**| Maximum recent data points to return. &#x60;limit&#x60; is conflicted with &#x60;from&#x60; and &#x60;to&#x60;. If either &#x60;from&#x60; or &#x60;to&#x60; is specified, request will be rejected. | [default to 100]
 **interval** | **optional.String**| Interval time between data points | [default to 5m]
 
 ### Example
@@ -1098,7 +1098,7 @@ Optional parameters are passed through a pointer to a ListPositionsOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**holding** | **optional.Bool**| 只返回真实持仓-true,全部返回-false | 
+**holding** | **optional.Bool**| Return only real positions - true, return all - false. | 
 
 ### Example
 
@@ -2548,7 +2548,7 @@ Name | Type | Description  | Notes
 **to** | **optional.Int64**| End timestamp | 
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
-**role** | **optional.String**| 查询角色，Maker 或 Taker | 
+**role** | **optional.String**| Query role, maker or taker. | 
 
 ### Example
 
@@ -2631,8 +2631,8 @@ Name | Type | Description  | Notes
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
 **from** | **optional.Int64**| Start timestamp | 
 **to** | **optional.Int64**| End timestamp | 
-**side** | **optional.String**| 方向筛选，做多(long)或做空(short) | 
-**pnl** | **optional.String**| 盈亏判断，盈利(profit)或亏损(loss) | 
+**side** | **optional.String**| Query side.  long or shot | 
+**pnl** | **optional.String**| Query profit or loss | 
 
 ### Example
 
