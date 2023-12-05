@@ -10,13 +10,13 @@
 package gateapi
 
 type SpotPricePutOrder struct {
-	// Order type, default to `limit`
+	// Order type，default to `limit`  - limit : Limit Order - market : Market Order
 	Type string `json:"type,omitempty"`
 	// Order side  - buy: buy side - sell: sell side
 	Side string `json:"side"`
 	// Order price
 	Price string `json:"price"`
-	// Order amount
+	// When `type` is limit, it refers to base currency.  For instance, `BTC_USDT` means `BTC`  When `type` is `market`, it refers to different currency according to `side`  - `side` : `buy` means quote currency, `BTC_USDT` means `USDT` - `side` : `sell` means base currency，`BTC_USDT` means `BTC`
 	Amount string `json:"amount"`
 	// Trading account type.  Portfolio margin account must set to `cross_margin`  - normal: spot trading - margin: margin trading - cross_margin: cross_margin trading
 	Account string `json:"account"`

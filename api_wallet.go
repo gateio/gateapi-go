@@ -223,16 +223,16 @@ Record time range cannot exceed 30 days
   - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
   - @param "Offset" (optional.Int32) -  List offset, starting from 0
 
-@return []LedgerRecord
+@return []WithdrawalRecord
 */
-func (a *WalletApiService) ListWithdrawals(ctx context.Context, localVarOptionals *ListWithdrawalsOpts) ([]LedgerRecord, *http.Response, error) {
+func (a *WalletApiService) ListWithdrawals(ctx context.Context, localVarOptionals *ListWithdrawalsOpts) ([]WithdrawalRecord, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []LedgerRecord
+		localVarReturnValue  []WithdrawalRecord
 	)
 
 	// create path and map variables

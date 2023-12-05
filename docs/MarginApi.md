@@ -2419,7 +2419,7 @@ func main() {
 
 ## GetCrossMarginBorrowable
 
-> PortfolioBorrowable GetCrossMarginBorrowable(ctx, currency)
+> UnifiedBorrowable GetCrossMarginBorrowable(ctx, currency)
 
 Get the max borrowable amount for a specific cross margin currency
 
@@ -2471,7 +2471,7 @@ func main() {
 
 ### Return type
 
-[**PortfolioBorrowable**](PortfolioBorrowable.md)
+[**UnifiedBorrowable**](UnifiedBorrowable.md)
 
 ### Authorization
 

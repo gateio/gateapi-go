@@ -20,4 +20,8 @@ type FuturesAccountBook struct {
 	Type string `json:"type,omitempty"`
 	// Comment
 	Text string `json:"text,omitempty"`
+	// Futures contract, the field is only available for data after 2023-10-30.
+	Contract string `json:"contract,omitempty"`
+	// trade id
+	TradeId string `json:"trade_id,omitempty"`
 }

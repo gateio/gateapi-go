@@ -1003,6 +1003,8 @@ func main() {
 
 Query account book
 
+If the `contract` field is provided, it can only filter records that include this field after 2023-10-30.
+
 ### Required Parameters
 
 Name | Type | Description  | Notes
@@ -1017,6 +1019,7 @@ Optional parameters are passed through a pointer to a ListFuturesAccountBookOpts
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+**contract** | **optional.String**| Futures contract, return related data only if specified | 
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **from** | **optional.Int64**| Start timestamp | 
 **to** | **optional.Int64**| End timestamp | 
@@ -1835,7 +1838,7 @@ func main() {
 
 List futures orders
 
-Zero-filled order cannot be retrieved 10 minutes after order cancellation
+- Zero-fill order cannot be retrieved for 10 minutes after cancellation - Historical orders, by default, only data within the past 6 months is supported.  If you need to query data for a longer period, please use `GET /futures/{settle}/orders_timerange`.
 
 ### Required Parameters
 
@@ -2230,7 +2233,7 @@ func main() {
 
 Get a single order
 
-Zero-filled order cannot be retrieved 10 minutes after order cancellation
+- Zero-fill order cannot be retrieved for 10 minutes after cancellation - Historical orders, by default, only data within the past 6 months is supported.  
 
 ### Required Parameters
 
@@ -2446,6 +2449,8 @@ func main() {
 > []MyFuturesTrade GetMyTrades(ctx, settle, optional)
 
 List personal trading history
+
+By default, only data within the past 6 months is supported.  If you need to query data for a longer period, please use `GET /futures/{settle}/my_trades_timerange`.
 
 ### Required Parameters
 

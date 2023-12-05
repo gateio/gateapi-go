@@ -156,7 +156,7 @@ func main() {
 
 ## ListWithdrawals
 
-> []LedgerRecord ListWithdrawals(ctx, optional)
+> []WithdrawalRecord ListWithdrawals(ctx, optional)
 
 Retrieve withdrawal records
 
@@ -221,7 +221,7 @@ func main() {
 
 ### Return type
 
-[**[]LedgerRecord**](LedgerRecord.md)
+[**[]WithdrawalRecord**](WithdrawalRecord.md)
 
 ### Authorization
 

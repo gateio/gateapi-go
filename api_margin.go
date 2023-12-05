@@ -3321,16 +3321,16 @@ GetCrossMarginBorrowable Get the max borrowable amount for a specific cross marg
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param currency Retrieve data of the specified currency
 
-@return PortfolioBorrowable
+@return UnifiedBorrowable
 */
-func (a *MarginApiService) GetCrossMarginBorrowable(ctx context.Context, currency string) (PortfolioBorrowable, *http.Response, error) {
+func (a *MarginApiService) GetCrossMarginBorrowable(ctx context.Context, currency string) (UnifiedBorrowable, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  PortfolioBorrowable
+		localVarReturnValue  UnifiedBorrowable
 	)
 
 	// create path and map variables

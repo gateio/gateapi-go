@@ -23,6 +23,10 @@ type CurrencyPair struct {
 	MinBaseAmount string `json:"min_base_amount,omitempty"`
 	// Minimum amount of quote currency to trade, `null` means no limit
 	MinQuoteAmount string `json:"min_quote_amount,omitempty"`
+	// Maximum amount of base currency to trade, `null` means no limit
+	MaxBaseAmount string `json:"max_base_amount,omitempty"`
+	// Maximum amount of quote currency to trade, `null` means no limit
+	MaxQuoteAmount string `json:"max_quote_amount,omitempty"`
 	// Amount scale
 	AmountPrecision int32 `json:"amount_precision,omitempty"`
 	// Price scale

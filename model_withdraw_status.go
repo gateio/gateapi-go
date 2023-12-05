@@ -32,4 +32,6 @@ type WithdrawStatus struct {
 	WithdrawEachtimeLimit string `json:"withdraw_eachtime_limit,omitempty"`
 	// Fixed withdrawal fee on multiple chains
 	WithdrawFixOnChains map[string]string `json:"withdraw_fix_on_chains,omitempty"`
+	// Percentage withdrawal fee on multiple chains
+	WithdrawPercentOnChains map[string]string `json:"withdraw_percent_on_chains,omitempty"`
 }

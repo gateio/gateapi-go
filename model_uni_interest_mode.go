@@ -9,7 +9,7 @@
 
 package gateapi
 
-// 余币宝利息复投开关
+// Lend & Earn interest reinvestment toggle
 type UniInterestMode struct {
 	// Currency
 	Currency string `json:"currency"`

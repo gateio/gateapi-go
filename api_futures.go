@@ -1362,17 +1362,20 @@ func (a *FuturesApiService) ListFuturesAccounts(ctx context.Context, settle stri
 
 // ListFuturesAccountBookOpts Optional parameters for the method 'ListFuturesAccountBook'
 type ListFuturesAccountBookOpts struct {
-	Limit optional.Int32
-	From  optional.Int64
-	To    optional.Int64
-	Type_ optional.String
+	Contract optional.String
+	Limit    optional.Int32
+	From     optional.Int64
+	To       optional.Int64
+	Type_    optional.String
 }
 
 /*
 ListFuturesAccountBook Query account book
+If the &#x60;contract&#x60; field is provided, it can only filter records that include this field after 2023-10-30.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param settle Settle currency
   - @param optional nil or *ListFuturesAccountBookOpts - Optional Parameters:
+  - @param "Contract" (optional.String) -  Futures contract, return related data only if specified
   - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
   - @param "From" (optional.Int64) -  Start timestamp
   - @param "To" (optional.Int64) -  End timestamp
@@ -1398,6 +1401,9 @@ func (a *FuturesApiService) ListFuturesAccountBook(ctx context.Context, settle s
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Contract.IsSet() {
+		localVarQueryParams.Add("contract", parameterToString(localVarOptionals.Contract.Value(), ""))
+	}
 	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
 		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
 	}
@@ -2489,7 +2495,7 @@ type ListFuturesOrdersOpts struct {
 
 /*
 ListFuturesOrders List futures orders
-Zero-filled order cannot be retrieved 10 minutes after order cancellation
+- Zero-fill order cannot be retrieved for 10 minutes after cancellation - Historical orders, by default, only data within the past 6 months is supported.  If you need to query data for a longer period, please use &#x60;GET /futures/{settle}/orders_timerange&#x60;.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param settle Settle currency
   - @param status Only list the orders with this status
@@ -3025,7 +3031,7 @@ func (a *FuturesApiService) CreateBatchFuturesOrder(ctx context.Context, settle 
 
 /*
 GetFuturesOrder Get a single order
-Zero-filled order cannot be retrieved 10 minutes after order cancellation
+- Zero-fill order cannot be retrieved for 10 minutes after cancellation - Historical orders, by default, only data within the past 6 months is supported.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param settle Settle currency
   - @param orderId Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID can only be checked when the order is in orderbook.  When the order is finished, it can be checked within 60 seconds after the end of the order.  After that, only order ID is accepted.
@@ -3326,6 +3332,7 @@ type GetMyTradesOpts struct {
 
 /*
 GetMyTrades List personal trading history
+By default, only data within the past 6 months is supported.  If you need to query data for a longer period, please use &#x60;GET /futures/{settle}/my_trades_timerange&#x60;.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param settle Settle currency
   - @param optional nil or *GetMyTradesOpts - Optional Parameters:

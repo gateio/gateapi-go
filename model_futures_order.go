@@ -63,4 +63,6 @@ type FuturesOrder struct {
 	StpAct string `json:"stp_act,omitempty"`
 	// The custom data that the user remarked when amending the order
 	AmendText string `json:"amend_text,omitempty"`
+	// Additional information
+	BizInfo string `json:"biz_info,omitempty"`
 }

@@ -25,6 +25,6 @@ type AmendOrderResult struct {
 	Label string `json:"label,omitempty"`
 	// Error description for failed modifications; empty when successful
 	Message string `json:"message,omitempty"`
-	// Account types， spot - spot account, margin - margin account, portfolio - portfolio margin account, cross_margin - cross margin account.Portfolio margin accounts can only be set to `cross_margin`
+	// Account types， spot - spot account, margin - margin account, unified - unified account, cross_margin - cross margin account.Portfolio margin accounts can only be set to `cross_margin`
 	Account string `json:"account,omitempty"`
 }
