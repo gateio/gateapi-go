@@ -371,7 +371,7 @@ func main() {
 
 ## DeleteSTPGroupUsers
 
-> []StpGroupUser DeleteSTPGroupUsers(ctx, stpId, requestBody)
+> []StpGroupUser DeleteSTPGroupUsers(ctx, stpId, userId)
 
 Delete the user in the STP group
 
@@ -383,7 +383,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **stpId** | **int64**| STP Group ID | 
-**requestBody** | [**[]int64**](int64.md)| User ID | 
+**userId** | **int64**| STP user ID, multiple can be separated by commas | 
 
 ### Example
 
@@ -409,9 +409,9 @@ func main() {
                              }
                             )
     stpId := 1 // int64 - STP Group ID
-    requestBody := []int64{[1,2,3]} // []int64 - User ID
+    userId := 1 // int64 - STP user ID, multiple can be separated by commas
     
-    result, _, err := client.AccountApi.DeleteSTPGroupUsers(ctx, stpId, requestBody)
+    result, _, err := client.AccountApi.DeleteSTPGroupUsers(ctx, stpId, userId)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -435,7 +435,7 @@ func main() {
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

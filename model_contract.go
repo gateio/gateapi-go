@@ -45,11 +45,11 @@ type Contract struct {
 	FundingInterval int32 `json:"funding_interval,omitempty"`
 	// Next funding time
 	FundingNextApply float64 `json:"funding_next_apply,omitempty"`
-	// Risk limit base
+	// Risk limit base,deprecated
 	RiskLimitBase string `json:"risk_limit_base,omitempty"`
-	// Step of adjusting risk limit
+	// Step of adjusting risk limit,deprecated
 	RiskLimitStep string `json:"risk_limit_step,omitempty"`
-	// Maximum risk limit the contract allowed
+	// Maximum risk limit the contract allowed,deprecated,It is recommended to use /futures/{settle}/risk_limit_tiers to query risk limits.
 	RiskLimitMax string `json:"risk_limit_max,omitempty"`
 	// Minimum order size the contract allowed
 	OrderSizeMin int64 `json:"order_size_min,omitempty"`

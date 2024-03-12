@@ -507,11 +507,11 @@ DeleteSTPGroupUsers Delete the user in the STP group
 - Only the main account that created this STP group is allowed to delete users from the STP user group - Deletion is limited to accounts under the current main account; cross-account deletion is not permitted
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param stpId STP Group ID
-  - @param requestBody User ID
+  - @param userId STP user ID, multiple can be separated by commas
 
 @return []StpGroupUser
 */
-func (a *AccountApiService) DeleteSTPGroupUsers(ctx context.Context, stpId int64, requestBody []int64) ([]StpGroupUser, *http.Response, error) {
+func (a *AccountApiService) DeleteSTPGroupUsers(ctx context.Context, stpId int64, userId int64) ([]StpGroupUser, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -529,8 +529,9 @@ func (a *AccountApiService) DeleteSTPGroupUsers(ctx context.Context, stpId int64
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	localVarQueryParams.Add("user_id", parameterToString(userId, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -546,8 +547,6 @@ func (a *AccountApiService) DeleteSTPGroupUsers(ctx context.Context, stpId int64
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-	localVarPostBody = &requestBody
 	if ctx == nil {
 		ctx = context.Background()
 	}

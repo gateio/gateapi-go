@@ -588,7 +588,7 @@ No authorization required
 
 ## GetFee
 
-> TradeFee GetFee(ctx, optional)
+> SpotFee GetFee(ctx, optional)
 
 Query user trading fee rates
 
@@ -649,7 +649,7 @@ func main() {
 
 ### Return type
 
-[**TradeFee**](TradeFee.md)
+[**SpotFee**](SpotFee.md)
 
 ### Authorization
 
@@ -1296,6 +1296,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **side** | **optional.String**| All bids or asks. Both included if not specified | 
 **account** | **optional.String**| Specify account type  - classic account：Default to all account types being included   - portfolio margin account：&#x60;cross_margin&#x60; only | 
+**actionMode** | **optional.String**| Processing Mode  When placing an order, different fields are returned based on the action_mode  - ACK: Asynchronous mode, returns only key order fields - RESULT: No clearing information - FULL: Full mode (default) | 
 
 ### Example
 
@@ -1530,6 +1531,7 @@ Optional parameters are passed through a pointer to a CancelOrderOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **account** | **optional.String**| Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to &#x60;cross_margin&#x60; to operate against margin account.  Portfolio margin account must set to &#x60;cross_margin&#x60; only | 
+**actionMode** | **optional.String**| Processing Mode  When placing an order, different fields are returned based on the action_mode  - ACK: Asynchronous mode, returns only key order fields - RESULT: No clearing information - FULL: Full mode (default) | 
 
 ### Example
 
@@ -1887,7 +1889,7 @@ func main() {
 
 ## AmendBatchOrders
 
-> []AmendOrderResult AmendBatchOrders(ctx, batchAmendItem)
+> []BatchOrder AmendBatchOrders(ctx, batchAmendItem)
 
 Batch modification of orders
 
@@ -1941,7 +1943,7 @@ func main() {
 
 ### Return type
 
-[**[]AmendOrderResult**](AmendOrderResult.md)
+[**[]BatchOrder**](BatchOrder.md)
 
 ### Authorization
 

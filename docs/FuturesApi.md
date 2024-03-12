@@ -43,6 +43,8 @@ Method | HTTP request | Description
 [**ListAutoDeleverages**](FuturesApi.md#ListAutoDeleverages) | **Get** /futures/{settle}/auto_deleverages | List Auto-Deleveraging History
 [**CountdownCancelAllFutures**](FuturesApi.md#CountdownCancelAllFutures) | **Post** /futures/{settle}/countdown_cancel_all | Countdown cancel orders
 [**GetFuturesFee**](FuturesApi.md#GetFuturesFee) | **Get** /futures/{settle}/fee | Query user trading fee rates
+[**ListRiskLimitTiers**](FuturesApi.md#ListRiskLimitTiers) | **Get** /futures/{settle}/risk_limit_tiers | List risk limit tiers
+[**CancelBatchFutureOrders**](FuturesApi.md#CancelBatchFutureOrders) | **Post** /futures/{settle}/batch_cancel_orders | Cancel a batch of orders with an ID list
 [**ListPriceTriggeredOrders**](FuturesApi.md#ListPriceTriggeredOrders) | **Get** /futures/{settle}/price_orders | List all auto orders
 [**CreatePriceTriggeredOrder**](FuturesApi.md#CreatePriceTriggeredOrder) | **Post** /futures/{settle}/price_orders | Create a price-triggered order
 [**CancelPriceTriggeredOrderList**](FuturesApi.md#CancelPriceTriggeredOrderList) | **Delete** /futures/{settle}/price_orders | Cancel all open orders
@@ -52,7 +54,7 @@ Method | HTTP request | Description
 
 ## ListFuturesContracts
 
-> []Contract ListFuturesContracts(ctx, settle)
+> []Contract ListFuturesContracts(ctx, settle, optional)
 
 List all futures contracts
 
@@ -62,6 +64,16 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
+**optional** | **ListFuturesContractsOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a ListFuturesContractsOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
 
 ### Example
 
@@ -82,7 +94,7 @@ func main() {
     ctx := context.Background()
     settle := "usdt" // string - Settle currency
     
-    result, _, err := client.FuturesApi.ListFuturesContracts(ctx, settle)
+    result, _, err := client.FuturesApi.ListFuturesContracts(ctx, settle, nil)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -1021,9 +1033,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **contract** | **optional.String**| Futures contract, return related data only if specified | 
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
 **from** | **optional.Int64**| Start timestamp | 
 **to** | **optional.Int64**| End timestamp | 
-**type_** | **optional.String**| Changing Type: - dnw: Deposit &amp; Withdraw - pnl: Profit &amp; Loss by reducing position - fee: Trading fee - refr: Referrer rebate - fund: Funding - point_dnw: POINT Deposit &amp; Withdraw - point_fee: POINT Trading fee - point_refr: POINT Referrer rebate | 
+**type_** | **optional.String**| Changing Type：  - dnw: Deposit &amp; Withdraw - pnl: Profit &amp; Loss by reducing position - fee: Trading fee - refr: Referrer rebate - fund: Funding - point_dnw: POINT Deposit &amp; Withdraw - point_fee: POINT Trading fee - point_refr: POINT Referrer rebate - bonus_offset: bouns deduction | 
 
 ### Example
 
@@ -1102,6 +1115,8 @@ Optional parameters are passed through a pointer to a ListPositionsOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **holding** | **optional.Bool**| Return only real positions - true, return all - false. | 
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
 
 ### Example
 
@@ -3000,6 +3015,150 @@ func main() {
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## ListRiskLimitTiers
+
+> []FuturesLimitRiskTiers ListRiskLimitTiers(ctx, settle, contract)
+
+List risk limit tiers
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**settle** | **string**| Settle currency | 
+**contract** | **string**| Futures contract | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    contract := "BTC_USDT" // string - Futures contract
+    
+    result, _, err := client.FuturesApi.ListRiskLimitTiers(ctx, settle, contract)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**[]FuturesLimitRiskTiers**](FuturesLimitRiskTiers.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## CancelBatchFutureOrders
+
+> []FutureCancelOrderResult CancelBatchFutureOrders(ctx, settle, requestBody)
+
+Cancel a batch of orders with an ID list
+
+Multiple distinct order ID list can be specified。Each request can cancel a maximum of 20 records.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**settle** | **string**| Settle currency | 
+**requestBody** | [**[]string**](string.md)|  | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    requestBody := []string{"requestBody_example"} // []string - 
+    
+    result, _, err := client.FuturesApi.CancelBatchFutureOrders(ctx, settle, requestBody)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**[]FutureCancelOrderResult**](FutureCancelOrderResult.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

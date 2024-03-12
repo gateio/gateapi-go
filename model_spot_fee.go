@@ -28,4 +28,6 @@ type SpotFee struct {
 	PointType string `json:"point_type,omitempty"`
 	// Currency pair
 	CurrencyPair string `json:"currency_pair,omitempty"`
+	// Deduction types for rates, 1 - GT deduction, 2 - Point card deduction, 3 - VIP rates
+	DebitFee int32 `json:"debit_fee,omitempty"`
 }

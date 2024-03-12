@@ -13,6 +13,7 @@ Method | HTTP request | Description
 [**CreateUnifiedLoan**](UnifiedApi.md#CreateUnifiedLoan) | **Post** /unified/loans | Borrow or repay
 [**ListUnifiedLoanRecords**](UnifiedApi.md#ListUnifiedLoanRecords) | **Get** /unified/loan_records | Get load records
 [**ListUnifiedLoanInterestRecords**](UnifiedApi.md#ListUnifiedLoanInterestRecords) | **Get** /unified/interest_records | List interest records
+[**GetUnifiedEstimateRate**](UnifiedApi.md#GetUnifiedEstimateRate) | **Get** /unified/estimate_rate | Get unified estimate rate
 
 
 ## ListUnifiedAccounts
@@ -658,6 +659,77 @@ func main() {
 ### Return type
 
 [**[]UniLoanInterestRecord**](UniLoanInterestRecord.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## GetUnifiedEstimateRate
+
+> map[string]string GetUnifiedEstimateRate(ctx, currencies)
+
+Get unified estimate rate
+
+Due to fluctuations in lending depth, hourly interest rates may vary, and thus, I cannot provide exact rates. When a currency is not supported, the interest rate returned will be an empty string.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**currencies** | [**[]string**](string.md)| Specify the currency names for querying in an array, separated by commas, with a maximum of 10 currencies. | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    currencies := []string{"[\"BTC\",\"GT\"]"} // []string - Specify the currency names for querying in an array, separated by commas, with a maximum of 10 currencies.
+    
+    result, _, err := client.UnifiedApi.GetUnifiedEstimateRate(ctx, currencies)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+**map[string]string**
 
 ### Authorization
 

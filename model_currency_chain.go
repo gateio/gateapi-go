@@ -24,4 +24,6 @@ type CurrencyChain struct {
 	IsDepositDisabled int32 `json:"is_deposit_disabled,omitempty"`
 	// Is withdrawal disabled. 0 means not
 	IsWithdrawDisabled int32 `json:"is_withdraw_disabled,omitempty"`
+	// Withdrawal precision
+	Decimal string `json:"decimal,omitempty"`
 }

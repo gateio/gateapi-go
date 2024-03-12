@@ -11,6 +11,10 @@ package gateapi
 
 // Batch order details
 type BatchOrder struct {
+	// Order ID
+	OrderId string `json:"order_id,omitempty"`
+	// The custom data that the user remarked when amending the order
+	AmendText string `json:"amend_text,omitempty"`
 	// User defined information. If not empty, must follow the rules below:  1. prefixed with `t-` 2. no longer than 28 bytes without `t-` prefix 3. can only include 0-9, A-Z, a-z, underscore(_), hyphen(-) or dot(.)
 	Text string `json:"text,omitempty"`
 	// Whether the batch of orders succeeded
@@ -53,10 +57,14 @@ type BatchOrder struct {
 	AutoRepay bool `json:"auto_repay,omitempty"`
 	// Amount left to fill
 	Left string `json:"left,omitempty"`
+	// Amount traded to fill
+	FilledAmount string `json:"filled_amount,omitempty"`
 	// Total filled in quote currency. Deprecated in favor of `filled_total`
 	FillPrice string `json:"fill_price,omitempty"`
 	// Total filled in quote currency
 	FilledTotal string `json:"filled_total,omitempty"`
+	// Average fill price
+	AvgDealPrice string `json:"avg_deal_price,omitempty"`
 	// Fee deducted
 	Fee string `json:"fee,omitempty"`
 	// Fee currency unit

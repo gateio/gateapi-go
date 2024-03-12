@@ -822,16 +822,16 @@ This API is deprecated in favour of new fee retrieving API &#x60;/wallet/fee&#x6
   - @param optional nil or *GetFeeOpts - Optional Parameters:
   - @param "CurrencyPair" (optional.String) -  Specify a currency pair to retrieve precise fee rate  This field is optional. In most cases, the fee rate is identical among all currency pairs
 
-@return TradeFee
+@return SpotFee
 */
-func (a *SpotApiService) GetFee(ctx context.Context, localVarOptionals *GetFeeOpts) (TradeFee, *http.Response, error) {
+func (a *SpotApiService) GetFee(ctx context.Context, localVarOptionals *GetFeeOpts) (SpotFee, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  TradeFee
+		localVarReturnValue  SpotFee
 	)
 
 	// create path and map variables
@@ -1754,8 +1754,9 @@ func (a *SpotApiService) CreateOrder(ctx context.Context, order Order) (Order, *
 
 // CancelOrdersOpts Optional parameters for the method 'CancelOrders'
 type CancelOrdersOpts struct {
-	Side    optional.String
-	Account optional.String
+	Side       optional.String
+	Account    optional.String
+	ActionMode optional.String
 }
 
 /*
@@ -1766,6 +1767,7 @@ If &#x60;account&#x60; is not set, all open orders, including spot, portfolio, m
   - @param optional nil or *CancelOrdersOpts - Optional Parameters:
   - @param "Side" (optional.String) -  All bids or asks. Both included if not specified
   - @param "Account" (optional.String) -  Specify account type  - classic account：Default to all account types being included   - portfolio margin account：`cross_margin` only
+  - @param "ActionMode" (optional.String) -  Processing Mode  When placing an order, different fields are returned based on the action_mode  - ACK: Asynchronous mode, returns only key order fields - RESULT: No clearing information - FULL: Full mode (default)
 
 @return []Order
 */
@@ -1791,6 +1793,9 @@ func (a *SpotApiService) CancelOrders(ctx context.Context, currencyPair string, 
 	}
 	if localVarOptionals != nil && localVarOptionals.Account.IsSet() {
 		localVarQueryParams.Add("account", parameterToString(localVarOptionals.Account.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.ActionMode.IsSet() {
+		localVarQueryParams.Add("action_mode", parameterToString(localVarOptionals.ActionMode.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2062,7 +2067,8 @@ func (a *SpotApiService) GetOrder(ctx context.Context, orderId string, currencyP
 
 // CancelOrderOpts Optional parameters for the method 'CancelOrder'
 type CancelOrderOpts struct {
-	Account optional.String
+	Account    optional.String
+	ActionMode optional.String
 }
 
 /*
@@ -2073,6 +2079,7 @@ Spot,portfolio and margin orders are cancelled by default. If trying to cancel c
   - @param currencyPair Currency pair
   - @param optional nil or *CancelOrderOpts - Optional Parameters:
   - @param "Account" (optional.String) -  Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to `cross_margin` to operate against margin account.  Portfolio margin account must set to `cross_margin` only
+  - @param "ActionMode" (optional.String) -  Processing Mode  When placing an order, different fields are returned based on the action_mode  - ACK: Asynchronous mode, returns only key order fields - RESULT: No clearing information - FULL: Full mode (default)
 
 @return Order
 */
@@ -2097,6 +2104,9 @@ func (a *SpotApiService) CancelOrder(ctx context.Context, orderId string, curren
 	localVarQueryParams.Add("currency_pair", parameterToString(currencyPair, ""))
 	if localVarOptionals != nil && localVarOptionals.Account.IsSet() {
 		localVarQueryParams.Add("account", parameterToString(localVarOptionals.Account.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.ActionMode.IsSet() {
+		localVarQueryParams.Add("action_mode", parameterToString(localVarOptionals.ActionMode.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -2590,16 +2600,16 @@ Default modification of orders for spot, portfolio, and margin accounts. To modi
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param batchAmendItem
 
-@return []AmendOrderResult
+@return []BatchOrder
 */
-func (a *SpotApiService) AmendBatchOrders(ctx context.Context, batchAmendItem []BatchAmendItem) ([]AmendOrderResult, *http.Response, error) {
+func (a *SpotApiService) AmendBatchOrders(ctx context.Context, batchAmendItem []BatchAmendItem) ([]BatchOrder, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []AmendOrderResult
+		localVarReturnValue  []BatchOrder
 	)
 
 	// create path and map variables

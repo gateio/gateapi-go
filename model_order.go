@@ -49,6 +49,8 @@ type Order struct {
 	AutoRepay bool `json:"auto_repay,omitempty"`
 	// Amount left to fill
 	Left string `json:"left,omitempty"`
+	// Amount traded to fill
+	FilledAmount string `json:"filled_amount,omitempty"`
 	// Total filled in quote currency. Deprecated in favor of `filled_total`
 	FillPrice string `json:"fill_price,omitempty"`
 	// Total filled in quote currency
@@ -79,4 +81,6 @@ type Order struct {
 	StpAct string `json:"stp_act,omitempty"`
 	// How the order was finished.  - open: processing - filled: filled totally - cancelled: manually cancelled - ioc: time in force is `IOC`, finish immediately - stp: cancelled because self trade prevention
 	FinishAs string `json:"finish_as,omitempty"`
+	// Processing Mode: When placing an order, different fields are returned based on action_mode. This field is only valid during the request and is not included in the response result ACK: Asynchronous mode, only returns key order fields RESULT: No clearing information FULL: Full mode (default)
+	ActionMode string `json:"action_mode,omitempty"`
 }

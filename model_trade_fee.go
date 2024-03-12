@@ -34,4 +34,6 @@ type TradeFee struct {
 	DeliveryTakerFee string `json:"delivery_taker_fee,omitempty"`
 	// Delivery trading maker fee
 	DeliveryMakerFee string `json:"delivery_maker_fee,omitempty"`
+	// Deduction types for rates, 1 - GT deduction, 2 - Point card deduction, 3 - VIP rates
+	DebitFee int32 `json:"debit_fee,omitempty"`
 }

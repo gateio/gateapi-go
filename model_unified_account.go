@@ -17,9 +17,9 @@ type UnifiedAccount struct {
 	// Whether account is locked
 	Locked   bool                      `json:"locked,omitempty"`
 	Balances map[string]UnifiedBalance `json:"balances,omitempty"`
-	// The total asset value in USDT. Sum of `(available + freeze) * price`
+	// The total asset value in USD, calculated as the sum of the product of `(available + freeze) * price` for all currencies.
 	Total string `json:"total,omitempty"`
-	// The total borrowed amount in USDT equivalent. Sum of `borrowed * price`
+	// The total borrowed amount in USD, calculated as the sum of the product of `borrowed * price` for all currencies (excluding points cards).
 	Borrowed string `json:"borrowed,omitempty"`
 	// Total initial margin
 	TotalInitialMargin string `json:"total_initial_margin,omitempty"`

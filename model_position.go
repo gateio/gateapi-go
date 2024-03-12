@@ -62,4 +62,6 @@ type Position struct {
 	CrossLeverageLimit string `json:"cross_leverage_limit,omitempty"`
 	// Last update time
 	UpdateTime int64 `json:"update_time,omitempty"`
+	// First Open Time
+	OpenTime int64 `json:"open_time,omitempty"`
 }

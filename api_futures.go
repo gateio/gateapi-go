@@ -26,14 +26,23 @@ var (
 // FuturesApiService FuturesApi service
 type FuturesApiService service
 
+// ListFuturesContractsOpts Optional parameters for the method 'ListFuturesContracts'
+type ListFuturesContractsOpts struct {
+	Limit  optional.Int32
+	Offset optional.Int32
+}
+
 /*
 ListFuturesContracts List all futures contracts
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param settle Settle currency
+  - @param optional nil or *ListFuturesContractsOpts - Optional Parameters:
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0
 
 @return []Contract
 */
-func (a *FuturesApiService) ListFuturesContracts(ctx context.Context, settle string) ([]Contract, *http.Response, error) {
+func (a *FuturesApiService) ListFuturesContracts(ctx context.Context, settle string, localVarOptionals *ListFuturesContractsOpts) ([]Contract, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -51,6 +60,12 @@ func (a *FuturesApiService) ListFuturesContracts(ctx context.Context, settle str
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
+		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Offset.IsSet() {
+		localVarQueryParams.Add("offset", parameterToString(localVarOptionals.Offset.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1364,6 +1379,7 @@ func (a *FuturesApiService) ListFuturesAccounts(ctx context.Context, settle stri
 type ListFuturesAccountBookOpts struct {
 	Contract optional.String
 	Limit    optional.Int32
+	Offset   optional.Int32
 	From     optional.Int64
 	To       optional.Int64
 	Type_    optional.String
@@ -1377,9 +1393,10 @@ If the &#x60;contract&#x60; field is provided, it can only filter records that i
   - @param optional nil or *ListFuturesAccountBookOpts - Optional Parameters:
   - @param "Contract" (optional.String) -  Futures contract, return related data only if specified
   - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0
   - @param "From" (optional.Int64) -  Start timestamp
   - @param "To" (optional.Int64) -  End timestamp
-  - @param "Type_" (optional.String) -  Changing Type: - dnw: Deposit & Withdraw - pnl: Profit & Loss by reducing position - fee: Trading fee - refr: Referrer rebate - fund: Funding - point_dnw: POINT Deposit & Withdraw - point_fee: POINT Trading fee - point_refr: POINT Referrer rebate
+  - @param "Type_" (optional.String) -  Changing Type：  - dnw: Deposit & Withdraw - pnl: Profit & Loss by reducing position - fee: Trading fee - refr: Referrer rebate - fund: Funding - point_dnw: POINT Deposit & Withdraw - point_fee: POINT Trading fee - point_refr: POINT Referrer rebate - bonus_offset: bouns deduction
 
 @return []FuturesAccountBook
 */
@@ -1406,6 +1423,9 @@ func (a *FuturesApiService) ListFuturesAccountBook(ctx context.Context, settle s
 	}
 	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
 		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Offset.IsSet() {
+		localVarQueryParams.Add("offset", parameterToString(localVarOptionals.Offset.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.From.IsSet() {
 		localVarQueryParams.Add("from", parameterToString(localVarOptionals.From.Value(), ""))
@@ -1487,6 +1507,8 @@ func (a *FuturesApiService) ListFuturesAccountBook(ctx context.Context, settle s
 // ListPositionsOpts Optional parameters for the method 'ListPositions'
 type ListPositionsOpts struct {
 	Holding optional.Bool
+	Limit   optional.Int32
+	Offset  optional.Int32
 }
 
 /*
@@ -1495,6 +1517,8 @@ ListPositions List all positions of a user
   - @param settle Settle currency
   - @param optional nil or *ListPositionsOpts - Optional Parameters:
   - @param "Holding" (optional.Bool) -  Return only real positions - true, return all - false.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0
 
 @return []Position
 */
@@ -1518,6 +1542,12 @@ func (a *FuturesApiService) ListPositions(ctx context.Context, settle string, lo
 
 	if localVarOptionals != nil && localVarOptionals.Holding.IsSet() {
 		localVarQueryParams.Add("holding", parameterToString(localVarOptionals.Holding.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
+		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Offset.IsSet() {
+		localVarQueryParams.Add("offset", parameterToString(localVarOptionals.Offset.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4081,6 +4111,198 @@ func (a *FuturesApiService) GetFuturesFee(ctx context.Context, settle string, lo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	if ctx.Value(ContextGateAPIV4) == nil {
+		// for compatibility, set configuration key and secret to context if ContextGateAPIV4 value is not present
+		ctx = context.WithValue(ctx, ContextGateAPIV4, GateAPIV4{
+			Key:    a.client.cfg.Key,
+			Secret: a.client.cfg.Secret,
+		})
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+/*
+ListRiskLimitTiers List risk limit tiers
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param settle Settle currency
+  - @param contract Futures contract
+
+@return []FuturesLimitRiskTiers
+*/
+func (a *FuturesApiService) ListRiskLimitTiers(ctx context.Context, settle string, contract string) ([]FuturesLimitRiskTiers, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []FuturesLimitRiskTiers
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/risk_limit_tiers"
+	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", url.QueryEscape(parameterToString(settle, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	localVarQueryParams.Add("contract", parameterToString(contract, ""))
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	if ctx.Value(ContextGateAPIV4) == nil {
+		// for compatibility, set configuration key and secret to context if ContextGateAPIV4 value is not present
+		ctx = context.WithValue(ctx, ContextGateAPIV4, GateAPIV4{
+			Key:    a.client.cfg.Key,
+			Secret: a.client.cfg.Secret,
+		})
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+/*
+CancelBatchFutureOrders Cancel a batch of orders with an ID list
+Multiple distinct order ID list can be specified。Each request can cancel a maximum of 20 records.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param settle Settle currency
+  - @param requestBody
+
+@return []FutureCancelOrderResult
+*/
+func (a *FuturesApiService) CancelBatchFutureOrders(ctx context.Context, settle string, requestBody []string) ([]FutureCancelOrderResult, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []FutureCancelOrderResult
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/batch_cancel_orders"
+	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", url.QueryEscape(parameterToString(settle, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = &requestBody
 	if ctx == nil {
 		ctx = context.Background()
 	}

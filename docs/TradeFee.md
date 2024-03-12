@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **FuturesMakerFee** | **string** | Future trading maker fee | [optional] 
 **DeliveryTakerFee** | **string** | Delivery trading taker fee | [optional] 
 **DeliveryMakerFee** | **string** | Delivery trading maker fee | [optional] 
+**DebitFee** | **int32** | Deduction types for rates, 1 - GT deduction, 2 - Point card deduction, 3 - VIP rates | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

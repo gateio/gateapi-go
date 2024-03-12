@@ -694,6 +694,8 @@ type ListUniInterestRecordsOpts struct {
 	Currency optional.String
 	Page     optional.Int32
 	Limit    optional.Int32
+	From     optional.Int64
+	To       optional.Int64
 }
 
 /*
@@ -703,6 +705,8 @@ ListUniInterestRecords List interest records
   - @param "Currency" (optional.String) -  Retrieve data of the specified currency
   - @param "Page" (optional.Int32) -  Page number
   - @param "Limit" (optional.Int32) -  Maximum response items.  Default: 100, minimum: 1, Maximum: 100
+  - @param "From" (optional.Int64) -  Start timestamp
+  - @param "To" (optional.Int64) -  End timestamp
 
 @return []UniInterestRecord
 */
@@ -730,6 +734,12 @@ func (a *EarnUniApiService) ListUniInterestRecords(ctx context.Context, localVar
 	}
 	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
 		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.From.IsSet() {
+		localVarQueryParams.Add("from", parameterToString(localVarOptionals.From.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.To.IsSet() {
+		localVarQueryParams.Add("to", parameterToString(localVarOptionals.To.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

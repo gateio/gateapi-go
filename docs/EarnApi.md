@@ -8,7 +8,6 @@ Method | HTTP request | Description
 [**ListDualInvestmentPlans**](EarnApi.md#ListDualInvestmentPlans) | **Get** /earn/dual/investment_plan | Dual Investment product list
 [**ListDualOrders**](EarnApi.md#ListDualOrders) | **Get** /earn/dual/orders | Dual Investment order list
 [**PlaceDualOrder**](EarnApi.md#PlaceDualOrder) | **Post** /earn/dual/orders | Place Dual Investment order
-[**CancelDualOrder**](EarnApi.md#CancelDualOrder) | **Delete** /earn/dual/orders/{order_id} | Cancel Dual Investment order
 [**ListStructuredProducts**](EarnApi.md#ListStructuredProducts) | **Get** /earn/structured/products | Structured Product List
 [**ListStructuredOrders**](EarnApi.md#ListStructuredOrders) | **Get** /earn/structured/orders | Structured Product Order List
 [**PlaceStructuredOrder**](EarnApi.md#PlaceStructuredOrder) | **Post** /earn/structured/orders | Place Structured Product Order
@@ -274,78 +273,9 @@ func main() {
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
-## CancelDualOrder
-
-> CancelDualOrder(ctx, orderId)
-
-Cancel Dual Investment order
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orderId** | **int32**| Order ID | 
-
-### Example
-
-```golang
-package main
-
-import (
-    "context"
-    "fmt"
-
-    "github.com/gateio/gateapi-go/v6"
-)
-
-func main() {
-    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-    // uncomment the next line if your are testing against testnet
-    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
-    ctx := context.WithValue(context.Background(),
-                             gateapi.ContextGateAPIV4,
-                             gateapi.GateAPIV4{
-                                 Key:    "YOUR_API_KEY",
-                                 Secret: "YOUR_API_SECRET",
-                             }
-                            )
-    orderId := 1 // int32 - Order ID
-    
-    result, _, err := client.EarnApi.CancelDualOrder(ctx, orderId)
-    if err != nil {
-        if e, ok := err.(gateapi.GateAPIError); ok {
-            fmt.Printf("gate api error: %s\n", e.Error())
-        } else {
-            fmt.Printf("generic error: %s\n", err.Error())
-        }
-    } else {
-        fmt.Println(result)
-    }
-}
-```
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[apiv4](../README.md#apiv4)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: Not defined
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
 ## ListStructuredProducts
 
-> []StructuredGetProjectList ListStructuredProducts(ctx, structuredGetProjectListRequest)
+> []StructuredGetProjectList ListStructuredProducts(ctx, status, optional)
 
 Structured Product List
 
@@ -354,7 +284,18 @@ Structured Product List
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**structuredGetProjectListRequest** | [**StructuredGetProjectListRequest**](StructuredGetProjectListRequest.md)|  | 
+**status** | **string**| Status (default: all)  &#x60;in_process&#x60;-processing  &#x60;will_begin&#x60;-unstarted  &#x60;wait_settlement&#x60;-unsettled  &#x60;done&#x60;-finish | 
+**optional** | **ListStructuredProductsOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a ListStructuredProductsOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**type_** | **optional.String**| Product Type (default all)  &#x60;SharkFin2.0&#x60;-SharkFin  &#x60;BullishSharkFin&#x60;-BullishSharkFin  &#x60;BearishSharkFin&#x60;-BearishSharkFin &#x60;DoubleNoTouch&#x60;-DoubleNoTouch &#x60;RangeAccrual&#x60;-RangeAccrual &#x60;SnowBall&#x60;-SnowBall | 
+**page** | **optional.Int32**| Page number | [default to 1]
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 
 ### Example
 
@@ -373,9 +314,9 @@ func main() {
     // uncomment the next line if your are testing against testnet
     // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
     ctx := context.Background()
-    structuredGetProjectListRequest := gateapi.StructuredGetProjectListRequest{} // StructuredGetProjectListRequest - 
+    status := "in_process" // string - Status (default: all)  `in_process`-processing  `will_begin`-unstarted  `wait_settlement`-unsettled  `done`-finish
     
-    result, _, err := client.EarnApi.ListStructuredProducts(ctx, structuredGetProjectListRequest)
+    result, _, err := client.EarnApi.ListStructuredProducts(ctx, status, nil)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -399,7 +340,7 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -408,7 +349,7 @@ No authorization required
 
 ## ListStructuredOrders
 
-> []StructuredOrderList ListStructuredOrders(ctx, structuredOrderListRequest)
+> []StructuredOrderList ListStructuredOrders(ctx, optional)
 
 Structured Product Order List
 
@@ -417,7 +358,18 @@ Structured Product Order List
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**structuredOrderListRequest** | [**StructuredOrderListRequest**](StructuredOrderListRequest.md)|  | 
+**optional** | **ListStructuredOrdersOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a ListStructuredOrdersOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**from** | **optional.Int64**| Start timestamp | 
+**to** | **optional.Int64**| End timestamp | 
+**page** | **optional.Int32**| Page number | [default to 1]
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 
 ### Example
 
@@ -442,9 +394,8 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    structuredOrderListRequest := gateapi.StructuredOrderListRequest{} // StructuredOrderListRequest - 
     
-    result, _, err := client.EarnApi.ListStructuredOrders(ctx, structuredOrderListRequest)
+    result, _, err := client.EarnApi.ListStructuredOrders(ctx, nil)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -468,7 +419,7 @@ func main() {
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

@@ -2221,6 +2221,8 @@ Name | Type | Description  | Notes
 **currency** | **optional.String**| Retrieve data of the specified currency | 
 **page** | **optional.Int32**| Page number | [default to 1]
 **limit** | **optional.Int32**| Maximum response items.  Default: 100, minimum: 1, Maximum: 100 | [default to 100]
+**from** | **optional.Int64**| Start timestamp | 
+**to** | **optional.Int64**| End timestamp | 
 
 ### Example
 
