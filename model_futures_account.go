@@ -18,7 +18,7 @@ type FuturesAccount struct {
 	PositionMargin string `json:"position_margin,omitempty"`
 	// Order margin of unfinished orders
 	OrderMargin string `json:"order_margin,omitempty"`
-	// The available balance for transferring or trading(including bonus.  Bonus can't be be withdrawn. The transfer amount needs to deduct the bonus)
+	// The available balance for transferring or trading(including bonus.  Bonus can't be withdrawn. The transfer amount needs to deduct the bonus)
 	Available string `json:"available,omitempty"`
 	// POINT amount
 	Point string `json:"point,omitempty"`

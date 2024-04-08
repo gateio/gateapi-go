@@ -17,7 +17,7 @@ type CancelOrderResult struct {
 	Id string `json:"id,omitempty"`
 	// Whether cancellation succeeded
 	Succeeded bool `json:"succeeded,omitempty"`
-	// Error label when failed to cancel the order; emtpy if succeeded
+	// Error label when failed to cancel the order; empty if succeeded
 	Label string `json:"label,omitempty"`
 	// Error message when failed to cancel the order; empty if succeeded
 	Message string `json:"message,omitempty"`

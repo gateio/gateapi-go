@@ -14,6 +14,6 @@ type AgencyCommissionHistory struct {
 	CurrencyPair string `json:"currency_pair,omitempty"`
 	// Total
 	Total int64 `json:"total,omitempty"`
-	// List of comission history
+	// List of commission history
 	List []AgencyCommission `json:"list,omitempty"`
 }
