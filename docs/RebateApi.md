@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**AgencyCommissionsHistory**](RebateApi.md#AgencyCommissionsHistory) | **Get** /rebate/agency/commission_history | The agency obtains the commission history of the recommended user
 [**RebateBrokerCommissionHistory**](RebateApi.md#RebateBrokerCommissionHistory) | **Get** /rebate/broker/commission_history | The broker obtains the user&#39;s commission rebate records
 [**RebateBrokerTransactionHistory**](RebateApi.md#RebateBrokerTransactionHistory) | **Get** /rebate/broker/transaction_history | The broker obtains the user&#39;s trading history
+[**RebateUserInfo**](RebateApi.md#RebateUserInfo) | **Get** /api/v4/rebate/user/info | User retrieves rebate information
 
 
 ## AgencyTransactionHistory
@@ -322,6 +323,70 @@ func main() {
 ### Return type
 
 [**[]BrokerTransaction**](BrokerTransaction.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## RebateUserInfo
+
+> []RebateUserInfo RebateUserInfo(ctx, )
+
+User retrieves rebate information
+
+### Required Parameters
+
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    
+    result, _, err := client.RebateApi.RebateUserInfo(ctx)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**[]RebateUserInfo**](RebateUserInfo.md)
 
 ### Authorization
 

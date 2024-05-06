@@ -15,8 +15,8 @@ type SubAccountKey struct {
 	// Mode: 1 - classic 2 - portfolio account
 	Mode int32 `json:"mode,omitempty"`
 	// API key name
-	Name  string         `json:"name,omitempty"`
-	Perms []ApiV4KeyPerm `json:"perms,omitempty"`
+	Name  string               `json:"name,omitempty"`
+	Perms []SubAccountKeyPerms `json:"perms,omitempty"`
 	// ip white list (list will be removed if no value is passed)
 	IpWhitelist []string `json:"ip_whitelist,omitempty"`
 	// API Key

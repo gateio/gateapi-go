@@ -5,15 +5,20 @@ All URIs are relative to *https://api.gateio.ws/api/v4*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ListUnifiedAccounts**](UnifiedApi.md#ListUnifiedAccounts) | **Get** /unified/accounts | Get unified account information
-[**ListUnifiedAccountMode**](UnifiedApi.md#ListUnifiedAccountMode) | **Get** /unified/account_mode | Query mode of the unified account
-[**SetUnifiedAccountMode**](UnifiedApi.md#SetUnifiedAccountMode) | **Post** /unified/account_mode | Set mode of the unified account
+[**ListUnifiedAccountMode**](UnifiedApi.md#ListUnifiedAccountMode) | **Get** /unified/account_mode | Inquire about unified account mode (deprecated)
+[**SetUnifiedAccountMode**](UnifiedApi.md#SetUnifiedAccountMode) | **Post** /unified/account_mode | Set unified account mode (deprecated)
 [**GetUnifiedBorrowable**](UnifiedApi.md#GetUnifiedBorrowable) | **Get** /unified/borrowable | Query about the maximum borrowing for the unified account
 [**GetUnifiedTransferable**](UnifiedApi.md#GetUnifiedTransferable) | **Get** /unified/transferable | Query about the maximum transferable for the unified account
 [**ListUnifiedLoans**](UnifiedApi.md#ListUnifiedLoans) | **Get** /unified/loans | List loans
 [**CreateUnifiedLoan**](UnifiedApi.md#CreateUnifiedLoan) | **Post** /unified/loans | Borrow or repay
 [**ListUnifiedLoanRecords**](UnifiedApi.md#ListUnifiedLoanRecords) | **Get** /unified/loan_records | Get load records
 [**ListUnifiedLoanInterestRecords**](UnifiedApi.md#ListUnifiedLoanInterestRecords) | **Get** /unified/interest_records | List interest records
+[**GetUnifiedRiskUnits**](UnifiedApi.md#GetUnifiedRiskUnits) | **Get** /unified/risk_units | Retrieve user risk unit details, only valid in portfolio margin mode
+[**GetUnifiedMode**](UnifiedApi.md#GetUnifiedMode) | **Get** /unified/unified_mode | Query mode of the unified account
+[**SetUnifiedMode**](UnifiedApi.md#SetUnifiedMode) | **Put** /unified/unified_mode | Set mode of the unified account
 [**GetUnifiedEstimateRate**](UnifiedApi.md#GetUnifiedEstimateRate) | **Get** /unified/estimate_rate | Get unified estimate rate
+[**ListCurrencyDiscountTiers**](UnifiedApi.md#ListCurrencyDiscountTiers) | **Get** /unified/currency_discount_tiers | list currency discount tiers
+[**CalculatePortfolioMargin**](UnifiedApi.md#CalculatePortfolioMargin) | **Post** /unified/portfolio_calculator | portfolio margin calculator
 
 
 ## ListUnifiedAccounts
@@ -98,9 +103,9 @@ func main() {
 
 > map[string]bool ListUnifiedAccountMode(ctx, )
 
-Query mode of the unified account
+Inquire about unified account mode (deprecated)
 
-cross_margin - cross margin, usdt_futures - usdt futures
+cross_margin - Spot full-margin trading, usdt_futures - USDT perpetual futures
 
 ### Required Parameters
 
@@ -164,7 +169,7 @@ func main() {
 
 > map[string]bool SetUnifiedAccountMode(ctx, unifiedMode)
 
-Set mode of the unified account
+Set unified account mode (deprecated)
 
 ### Required Parameters
 
@@ -389,6 +394,7 @@ Name | Type | Description  | Notes
 **currency** | **optional.String**| Retrieve data of the specified currency | 
 **page** | **optional.Int32**| Page number | [default to 1]
 **limit** | **optional.Int32**| Maximum response items.  Default: 100, minimum: 1, Maximum: 100 | [default to 100]
+**type_** | **optional.String**| Loan type, platform - platform, margin - margin | 
 
 ### Example
 
@@ -617,6 +623,7 @@ Name | Type | Description  | Notes
 **currency** | **optional.String**| Retrieve data of the specified currency | 
 **page** | **optional.Int32**| Page number | [default to 1]
 **limit** | **optional.Int32**| Maximum response items.  Default: 100, minimum: 1, Maximum: 100 | [default to 100]
+**type_** | **optional.String**| Loan type, platform - platform, margin - margin | 
 
 ### Example
 
@@ -668,6 +675,207 @@ func main() {
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## GetUnifiedRiskUnits
+
+> UnifiedRiskUnits GetUnifiedRiskUnits(ctx, )
+
+Retrieve user risk unit details, only valid in portfolio margin mode
+
+### Required Parameters
+
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    
+    result, _, err := client.UnifiedApi.GetUnifiedRiskUnits(ctx)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**UnifiedRiskUnits**](UnifiedRiskUnits.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## GetUnifiedMode
+
+> UnifiedModeSet GetUnifiedMode(ctx, )
+
+Query mode of the unified account
+
+Unified account mode： - `classic`: Classic account mode - `multi_currency`: Multi-currency margin mode - `portfolio`: Portfolio margin mode
+
+### Required Parameters
+
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    
+    result, _, err := client.UnifiedApi.GetUnifiedMode(ctx)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**UnifiedModeSet**](UnifiedModeSet.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## SetUnifiedMode
+
+> SetUnifiedMode(ctx, unifiedModeSet)
+
+Set mode of the unified account
+
+Switching between different account modes requires only passing the parameters n\\corresponding to the target account mode. It also supports opening or closing configuration switches for the corresponding account mode when switching- When enabling classic account mode,mode=classic ```     PUT /unified/unified_mode     {       \"mode\": \"classic\"     } ``` - When enabling multi-currency margin mode, mode=multi_currency ```     PUT /unified/unified_mode     {       \"mode\": \"multi_currency\",       \"settings\": {          \"usdt_futures\": true       }     } ``` - When enabling portfolio margin mode,mode=portfolio ```     PUT /unified/unified_mode     {       \"mode\": \"portfolio\",       \"settings\": {          \"spot_hedge\": true       }     } ```
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**unifiedModeSet** | [**UnifiedModeSet**](UnifiedModeSet.md)|  | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    unifiedModeSet := gateapi.UnifiedModeSet{} // UnifiedModeSet - 
+    
+    result, _, err := client.UnifiedApi.SetUnifiedMode(ctx, unifiedModeSet)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -738,6 +946,129 @@ func main() {
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## ListCurrencyDiscountTiers
+
+> []UnifiedDiscount ListCurrencyDiscountTiers(ctx, )
+
+list currency discount tiers
+
+### Required Parameters
+
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.Background()
+    
+    result, _, err := client.UnifiedApi.ListCurrencyDiscountTiers(ctx)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**[]UnifiedDiscount**](UnifiedDiscount.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## CalculatePortfolioMargin
+
+> UnifiedPortfolioOutput CalculatePortfolioMargin(ctx, unifiedPortfolioInput)
+
+portfolio margin calculator
+
+组合保证金计算器 当输入为模拟仓位组合时，每个仓位包括仓位名和持有量，只支持市场范围：BTC、ETH的永续合约、期权、现货 当输入为模拟挂单时，每个挂单包括市场标识、挂单价、挂单量，只支持市场范围：BTC、ETH的永续合约、期权、现货。挂单不包括市价单
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**unifiedPortfolioInput** | [**UnifiedPortfolioInput**](UnifiedPortfolioInput.md)|  | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.Background()
+    unifiedPortfolioInput := gateapi.UnifiedPortfolioInput{} // UnifiedPortfolioInput - 
+    
+    result, _, err := client.UnifiedApi.CalculatePortfolioMargin(ctx, unifiedPortfolioInput)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**UnifiedPortfolioOutput**](UnifiedPortfolioOutput.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

@@ -41,4 +41,8 @@ type UnifiedAccount struct {
 	UnifiedAccountTotalEquity string `json:"unified_account_total_equity,omitempty"`
 	// Leverage
 	Leverage string `json:"leverage,omitempty"`
+	// Total order loss, in USDT
+	SpotOrderLoss string `json:"spot_order_loss,omitempty"`
+	// Spot hedging status, true - enabled, false - not enabled.
+	SpotHedge bool `json:"spot_hedge,omitempty"`
 }

@@ -43,6 +43,12 @@ type Position struct {
 	UnrealisedPnl string `json:"unrealised_pnl,omitempty"`
 	// Realized PNL
 	RealisedPnl string `json:"realised_pnl,omitempty"`
+	// Realized PNL - Position P/L
+	PnlPnl string `json:"pnl_pnl,omitempty"`
+	// Realized PNL -  Funding Fees
+	PnlFund string `json:"pnl_fund,omitempty"`
+	// Realized PNL - Transaction Fees
+	PnlFee string `json:"pnl_fee,omitempty"`
 	// History realized PNL
 	HistoryPnl string `json:"history_pnl,omitempty"`
 	// PNL of last position close

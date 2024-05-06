@@ -16,6 +16,7 @@ Method | HTTP request | Description
 [**ListContractStats**](FuturesApi.md#ListContractStats) | **Get** /futures/{settle}/contract_stats | Futures stats
 [**GetIndexConstituents**](FuturesApi.md#GetIndexConstituents) | **Get** /futures/{settle}/index_constituents/{index} | Get index constituents
 [**ListLiquidatedOrders**](FuturesApi.md#ListLiquidatedOrders) | **Get** /futures/{settle}/liq_orders | Retrieve liquidation history
+[**ListRiskLimitTiers**](FuturesApi.md#ListRiskLimitTiers) | **Get** /futures/{settle}/risk_limit_tiers | List risk limit tiers
 [**ListFuturesAccounts**](FuturesApi.md#ListFuturesAccounts) | **Get** /futures/{settle}/accounts | Query futures account
 [**ListFuturesAccountBook**](FuturesApi.md#ListFuturesAccountBook) | **Get** /futures/{settle}/account_book | Query account book
 [**ListPositions**](FuturesApi.md#ListPositions) | **Get** /futures/{settle}/positions | List all positions of a user
@@ -43,7 +44,6 @@ Method | HTTP request | Description
 [**ListAutoDeleverages**](FuturesApi.md#ListAutoDeleverages) | **Get** /futures/{settle}/auto_deleverages | List Auto-Deleveraging History
 [**CountdownCancelAllFutures**](FuturesApi.md#CountdownCancelAllFutures) | **Post** /futures/{settle}/countdown_cancel_all | Countdown cancel orders
 [**GetFuturesFee**](FuturesApi.md#GetFuturesFee) | **Get** /futures/{settle}/fee | Query user trading fee rates
-[**ListRiskLimitTiers**](FuturesApi.md#ListRiskLimitTiers) | **Get** /futures/{settle}/risk_limit_tiers | List risk limit tiers
 [**CancelBatchFutureOrders**](FuturesApi.md#CancelBatchFutureOrders) | **Post** /futures/{settle}/batch_cancel_orders | Cancel a batch of orders with an ID list
 [**ListPriceTriggeredOrders**](FuturesApi.md#ListPriceTriggeredOrders) | **Get** /futures/{settle}/price_orders | List all auto orders
 [**CreatePriceTriggeredOrder**](FuturesApi.md#CreatePriceTriggeredOrder) | **Post** /futures/{settle}/price_orders | Create a price-triggered order
@@ -926,6 +926,71 @@ func main() {
 ### Return type
 
 [**[]FuturesLiqOrder**](FuturesLiqOrder.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## ListRiskLimitTiers
+
+> []FuturesLimitRiskTiers ListRiskLimitTiers(ctx, settle, contract)
+
+List risk limit tiers
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**settle** | **string**| Settle currency | 
+**contract** | **string**| Futures contract | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.Background()
+    settle := "usdt" // string - Settle currency
+    contract := "BTC_USDT" // string - Futures contract
+    
+    result, _, err := client.FuturesApi.ListRiskLimitTiers(ctx, settle, contract)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**[]FuturesLimitRiskTiers**](FuturesLimitRiskTiers.md)
 
 ### Authorization
 
@@ -3007,77 +3072,6 @@ func main() {
 ### Return type
 
 [**map[string]FuturesFee**](FuturesFee.md)
-
-### Authorization
-
-[apiv4](../README.md#apiv4)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-## ListRiskLimitTiers
-
-> []FuturesLimitRiskTiers ListRiskLimitTiers(ctx, settle, contract)
-
-List risk limit tiers
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**settle** | **string**| Settle currency | 
-**contract** | **string**| Futures contract | 
-
-### Example
-
-```golang
-package main
-
-import (
-    "context"
-    "fmt"
-
-    "github.com/gateio/gateapi-go/v6"
-)
-
-func main() {
-    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-    // uncomment the next line if your are testing against testnet
-    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
-    ctx := context.WithValue(context.Background(),
-                             gateapi.ContextGateAPIV4,
-                             gateapi.GateAPIV4{
-                                 Key:    "YOUR_API_KEY",
-                                 Secret: "YOUR_API_SECRET",
-                             }
-                            )
-    settle := "usdt" // string - Settle currency
-    contract := "BTC_USDT" // string - Futures contract
-    
-    result, _, err := client.FuturesApi.ListRiskLimitTiers(ctx, settle, contract)
-    if err != nil {
-        if e, ok := err.(gateapi.GateAPIError); ok {
-            fmt.Printf("gate api error: %s\n", e.Error())
-        } else {
-            fmt.Printf("generic error: %s\n", err.Error())
-        }
-    } else {
-        fmt.Println(result)
-    }
-}
-```
-
-
-### Return type
-
-[**[]FuturesLimitRiskTiers**](FuturesLimitRiskTiers.md)
 
 ### Authorization
 

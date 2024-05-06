@@ -17,6 +17,8 @@ type UniLoan struct {
 	CurrencyPair string `json:"currency_pair,omitempty"`
 	// amount
 	Amount string `json:"amount,omitempty"`
+	// Loan type, platform - platform, margin - margin
+	Type string `json:"type,omitempty"`
 	// Created time
 	CreateTime int64 `json:"create_time,omitempty"`
 	// Updated time

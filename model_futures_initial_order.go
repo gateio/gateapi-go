@@ -20,7 +20,7 @@ type FuturesInitialOrder struct {
 	Close bool `json:"close,omitempty"`
 	// Time in force. If using market price, only `ioc` is supported.  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled
 	Tif string `json:"tif,omitempty"`
-	// How the order is created. Possible values are: web, api and app
+	// The source of the order, including: - web: web - api: api - app: app
 	Text string `json:"text,omitempty"`
 	// Set to true to create a reduce-only order
 	ReduceOnly bool `json:"reduce_only,omitempty"`

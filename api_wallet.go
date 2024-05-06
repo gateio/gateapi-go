@@ -341,7 +341,7 @@ Record time range cannot exceed 30 days
   - @param "Currency" (optional.String) -  Filter by currency. Return all currency records if not specified
   - @param "From" (optional.Int64) -  Time range beginning, default to 7 days before current time
   - @param "To" (optional.Int64) -  Time range ending, default to current time
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Limit" (optional.Int32) -  The maximum number of entries returned in the list is limited to 500 transactions.
   - @param "Offset" (optional.Int32) -  List offset, starting from 0
 
 @return []LedgerRecord
@@ -1333,6 +1333,7 @@ func (a *WalletApiService) ListSubAccountCrossMarginBalances(ctx context.Context
 type ListSavedAddressOpts struct {
 	Chain optional.String
 	Limit optional.String
+	Page  optional.Int32
 }
 
 /*
@@ -1342,6 +1343,7 @@ ListSavedAddress Query saved address
   - @param optional nil or *ListSavedAddressOpts - Optional Parameters:
   - @param "Chain" (optional.String) -  Chain name
   - @param "Limit" (optional.String) -  Maximum number returned, 100 at most
+  - @param "Page" (optional.Int32) -  Page number
 
 @return []SavedAddress
 */
@@ -1367,6 +1369,9 @@ func (a *WalletApiService) ListSavedAddress(ctx context.Context, currency string
 	}
 	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
 		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

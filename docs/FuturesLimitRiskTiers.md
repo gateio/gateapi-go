@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Tier** | **int32** | tier | [optional] 
+**Tier** | **int32** | Tier | [optional] 
 **RiskLimit** | **string** | Position risk limit | [optional] 
 **InitialRate** | **string** | Initial margin rate | [optional] 
 **MaintenanceRate** | **string** | Maintenance margin rate | [optional] 

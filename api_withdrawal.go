@@ -27,6 +27,7 @@ type WithdrawalApiService service
 
 /*
 Withdraw Withdraw
+Withdrawals to Gate addresses do not incur transaction fees.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param ledgerRecord
 

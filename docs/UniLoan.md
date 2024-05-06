@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Currency** | **string** | Currency | [optional] [readonly] 
 **CurrencyPair** | **string** | Currency pair | [optional] [readonly] 
 **Amount** | **string** | amount | [optional] [readonly] 
+**Type** | **string** | Loan type, platform - platform, margin - margin | [optional] [readonly] 
 **CreateTime** | **int64** | Created time | [optional] [readonly] 
 **UpdateTime** | **int64** | Updated time | [optional] [readonly] 
 

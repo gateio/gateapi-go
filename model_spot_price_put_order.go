@@ -22,4 +22,6 @@ type SpotPricePutOrder struct {
 	Account string `json:"account"`
 	// time_in_force  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled, taker only
 	TimeInForce string `json:"time_in_force,omitempty"`
+	// The source of the order, including: - web: web - api: api - app: app
+	Text string `json:"text,omitempty"`
 }

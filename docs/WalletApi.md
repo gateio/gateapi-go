@@ -263,7 +263,7 @@ Name | Type | Description  | Notes
 **currency** | **optional.String**| Filter by currency. Return all currency records if not specified | 
 **from** | **optional.Int64**| Time range beginning, default to 7 days before current time | 
 **to** | **optional.Int64**| Time range ending, default to current time | 
-**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
+**limit** | **optional.Int32**| The maximum number of entries returned in the list is limited to 500 transactions. | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
 
 ### Example
@@ -1019,6 +1019,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **chain** | **optional.String**| Chain name | [default to ]
 **limit** | **optional.String**| Maximum number returned, 100 at most | [default to 50]
+**page** | **optional.Int32**| Page number | [default to 1]
 
 ### Example
 

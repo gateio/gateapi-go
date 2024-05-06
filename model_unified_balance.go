@@ -26,4 +26,6 @@ type UnifiedBalance struct {
 	TotalFreeze string `json:"total_freeze,omitempty"`
 	// Total liabilities
 	TotalLiab string `json:"total_liab,omitempty"`
+	// Spot hedging utilization
+	SpotInUse string `json:"spot_in_use,omitempty"`
 }

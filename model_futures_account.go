@@ -33,6 +33,8 @@ type FuturesAccount struct {
 	// Maintenance margin position, applicable to the portfolio margin account model
 	MaintenanceMargin string `json:"maintenance_margin,omitempty"`
 	// Perpetual Contract Bonus
-	Bonus   string                `json:"bonus,omitempty"`
-	History FuturesAccountHistory `json:"history,omitempty"`
+	Bonus string `json:"bonus,omitempty"`
+	// Classic account margin mode, true - enable new mode, false - revert to old mode.
+	EnableEvolvedClassic bool                  `json:"enable_evolved_classic,omitempty"`
+	History              FuturesAccountHistory `json:"history,omitempty"`
 }

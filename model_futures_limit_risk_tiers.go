@@ -11,7 +11,7 @@ package gateapi
 
 // Retrieve risk limit configurations for different tiers under a specified contract.
 type FuturesLimitRiskTiers struct {
-	// tier
+	// Tier
 	Tier int32 `json:"tier,omitempty"`
 	// Position risk limit
 	RiskLimit string `json:"risk_limit,omitempty"`

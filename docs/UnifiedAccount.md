@@ -20,6 +20,8 @@ Name | Type | Description | Notes
 **UnifiedAccountTotalLiab** | **string** | Total liabilities of the portfolio margin account | [optional] 
 **UnifiedAccountTotalEquity** | **string** | Total equity of the portfolio margin account | [optional] 
 **Leverage** | **string** | Leverage | [optional] [readonly] 
+**SpotOrderLoss** | **string** | Total order loss, in USDT | [optional] 
+**SpotHedge** | **bool** | Spot hedging status, true - enabled, false - not enabled. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -14,6 +14,8 @@ Method | HTTP request | Description
 
 Withdraw
 
+Withdrawals to Gate addresses do not incur transaction fees.
+
 ### Required Parameters
 
 Name | Type | Description  | Notes

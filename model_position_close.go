@@ -18,6 +18,12 @@ type PositionClose struct {
 	Side string `json:"side,omitempty"`
 	// PNL
 	Pnl string `json:"pnl,omitempty"`
+	// PNL - Position P/L
+	PnlPnl string `json:"pnl_pnl,omitempty"`
+	// PNL - Funding Fees
+	PnlFund string `json:"pnl_fund,omitempty"`
+	// PNL - Transaction Fees
+	PnlFee string `json:"pnl_fee,omitempty"`
 	// Text of close order
 	Text string `json:"text,omitempty"`
 	// Max Trade Size

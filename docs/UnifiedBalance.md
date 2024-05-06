@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **Equity** | **string** | Equity | [optional] 
 **TotalFreeze** | **string** | Total freeze | [optional] 
 **TotalLiab** | **string** | Total liabilities | [optional] 
+**SpotInUse** | **string** | Spot hedging utilization | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
