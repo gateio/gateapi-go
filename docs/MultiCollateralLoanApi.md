@@ -15,6 +15,7 @@ Method | HTTP request | Description
 [**ListMultiCollateralCurrencies**](MultiCollateralLoanApi.md#ListMultiCollateralCurrencies) | **Get** /loan/multi_collateral/currencies | Query supported borrowing and collateral currencies in Multi-Collateral 
 [**GetMultiCollateralLtv**](MultiCollateralLoanApi.md#GetMultiCollateralLtv) | **Get** /loan/multi_collateral/ltv | Get Multi-Collateral ratio
 [**GetMultiCollateralFixRate**](MultiCollateralLoanApi.md#GetMultiCollateralFixRate) | **Get** /loan/multi_collateral/fixed_rate | Query fixed interest rates for the currency for 7 days and 30 days
+[**GetMultiCollateralCurrentRate**](MultiCollateralLoanApi.md#GetMultiCollateralCurrentRate) | **Get** /loan/multi_collateral/current_rate | Query the current interest rate of the currency
 
 
 ## ListMultiCollateralOrders
@@ -767,6 +768,80 @@ func main() {
 ### Return type
 
 [**[]CollateralFixRate**](CollateralFixRate.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## GetMultiCollateralCurrentRate
+
+> []CollateralCurrentRate GetMultiCollateralCurrentRate(ctx, currencies, optional)
+
+Query the current interest rate of the currency
+
+Query the current interest rate of the currency in the last hour. The current interest rate is updated every hour.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**currencies** | [**[]string**](string.md)| Specify the currency name to query the array. The array is separated by commas and has a maximum of 100 items. | 
+**optional** | **GetMultiCollateralCurrentRateOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a GetMultiCollateralCurrentRateOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**vipLevel** | **optional.String**| VIP level, defaults to 0 if not transferred | [default to 0]
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.Background()
+    currencies := []string{"[\"BTC\",\"GT\"]"} // []string - Specify the currency name to query the array. The array is separated by commas and has a maximum of 100 items.
+    
+    result, _, err := client.MultiCollateralLoanApi.GetMultiCollateralCurrentRate(ctx, currencies, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**[]CollateralCurrentRate**](CollateralCurrentRate.md)
 
 ### Authorization
 

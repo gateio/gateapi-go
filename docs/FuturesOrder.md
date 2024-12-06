@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **User** | **int32** | User ID | [optional] [readonly] 
 **CreateTime** | **float64** | Creation time of order | [optional] [readonly] 
 **FinishTime** | **float64** | Order finished time. Not returned if order is open | [optional] [readonly] 
-**FinishAs** | **string** | How the order was finished.  - filled: all filled - cancelled: manually cancelled - liquidated: cancelled because of liquidation - ioc: time in force is &#x60;IOC&#x60;, finish immediately - auto_deleveraged: finished by ADL - reduce_only: cancelled because of increasing position while &#x60;reduce-only&#x60; set- position_closed: cancelled because of position close - stp: cancelled because self trade prevention  | [optional] [readonly] 
+**FinishAs** | **string** | How the order was finished.  - filled: all filled - cancelled: manually cancelled - liquidated: cancelled because of liquidation - ioc: time in force is &#x60;IOC&#x60;, finish immediately - auto_deleveraged: finished by ADL - reduce_only: cancelled because of increasing position while &#x60;reduce-only&#x60; set- position_closed: cancelled because of position close - position_closed: canceled because the position was closed - reduce_out: only reduce positions by excluding hard-to-fill orders - stp: cancelled because self trade prevention  | [optional] [readonly] 
 **Status** | **string** | Order status  - &#x60;open&#x60;: waiting to be traded - &#x60;finished&#x60;: finished | [optional] [readonly] 
 **Contract** | **string** | Futures contract | 
 **Size** | **int64** | Order size. Specify positive number to make a bid, and negative number to ask | 

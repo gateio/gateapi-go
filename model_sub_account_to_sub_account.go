@@ -16,11 +16,11 @@ type SubAccountToSubAccount struct {
 	SubAccountType string `json:"sub_account_type,omitempty"`
 	// Transfer from the user id of the sub-account
 	SubAccountFrom string `json:"sub_account_from"`
-	// The sub-account's outgoing trading account, spot - spot account, futures - perpetual contract account, delivery - delivery contract account, cross_margin - cross-margin account.\"
+	// The sub-account's outgoing trading account, spot - spot account, futures - perpetual contract account, delivery - delivery contract account.
 	SubAccountFromType string `json:"sub_account_from_type"`
 	// Transfer to the user id of the sub-account
 	SubAccountTo string `json:"sub_account_to"`
-	// The sub-account's incoming trading account, spot - spot account, futures - perpetual contract account, delivery - delivery contract account, cross_margin - cross-margin account.
+	// The sub-account's incoming trading account, spot - spot account, futures - perpetual contract account, delivery - delivery contract account
 	SubAccountToType string `json:"sub_account_to_type"`
 	// Transfer amount
 	Amount string `json:"amount"`

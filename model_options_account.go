@@ -11,11 +11,21 @@ package gateapi
 
 type OptionsAccount struct {
 	// User ID
-	User int32 `json:"user,omitempty"`
-	// Total account balance
+	User int64 `json:"user,omitempty"`
+	// 账户余额
 	Total string `json:"total,omitempty"`
+	// 仓位价值，做多仓位价值为正，做空仓位价值为负
+	PositionValue string `json:"position_value,omitempty"`
+	// 账户权益，账户余额与仓位价值的和
+	Equity string `json:"equity,omitempty"`
 	// If the account is allowed to short
 	ShortEnabled bool `json:"short_enabled,omitempty"`
+	// 是否启用MMP
+	MmpEnabled bool `json:"mmp_enabled,omitempty"`
+	// 是否触发仓位强平
+	LiqTriggered bool `json:"liq_triggered,omitempty"`
+	// ｜ 保证金模式： - 0：经典现货保证金模式 - 1：跨币种保证金模式 - 2：组合保证金模式
+	MarginMode int32 `json:"margin_mode,omitempty"`
 	// Unrealized PNL
 	UnrealisedPnl string `json:"unrealised_pnl,omitempty"`
 	// Initial position margin
@@ -24,10 +34,18 @@ type OptionsAccount struct {
 	MaintMargin string `json:"maint_margin,omitempty"`
 	// Order margin of unfinished orders
 	OrderMargin string `json:"order_margin,omitempty"`
+	// 未完成卖单的保证金
+	AskOrderMargin string `json:"ask_order_margin,omitempty"`
+	// 未完成买单的保证金
+	BidOrderMargin string `json:"bid_order_margin,omitempty"`
 	// Available balance to transfer out or trade
 	Available string `json:"available,omitempty"`
 	// POINT amount
 	Point string `json:"point,omitempty"`
 	// Settle currency
 	Currency string `json:"currency,omitempty"`
+	// 未完成订单数量上限
+	OrdersLimit int32 `json:"orders_limit,omitempty"`
+	// 名义价值上限，包含仓位以及未完成订单的名义价值
+	PositionNotionalLimit int64 `json:"position_notional_limit,omitempty"`
 }

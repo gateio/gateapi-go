@@ -777,6 +777,8 @@ func (a *FuturesApiService) ListFuturesTickers(ctx context.Context, settle strin
 // ListFuturesFundingRateHistoryOpts Optional parameters for the method 'ListFuturesFundingRateHistory'
 type ListFuturesFundingRateHistoryOpts struct {
 	Limit optional.Int32
+	From  optional.Int64
+	To    optional.Int64
 }
 
 /*
@@ -786,6 +788,8 @@ ListFuturesFundingRateHistory Funding rate history
   - @param contract Futures contract
   - @param optional nil or *ListFuturesFundingRateHistoryOpts - Optional Parameters:
   - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "From" (optional.Int64) -  Start timestamp
+  - @param "To" (optional.Int64) -  End timestamp
 
 @return []FundingRateRecord
 */
@@ -810,6 +814,12 @@ func (a *FuturesApiService) ListFuturesFundingRateHistory(ctx context.Context, s
 	localVarQueryParams.Add("contract", parameterToString(contract, ""))
 	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
 		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.From.IsSet() {
+		localVarQueryParams.Add("from", parameterToString(localVarOptionals.From.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.To.IsSet() {
+		localVarQueryParams.Add("to", parameterToString(localVarOptionals.To.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1282,15 +1292,26 @@ func (a *FuturesApiService) ListLiquidatedOrders(ctx context.Context, settle str
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+// ListFuturesRiskLimitTiersOpts Optional parameters for the method 'ListFuturesRiskLimitTiers'
+type ListFuturesRiskLimitTiersOpts struct {
+	Contract optional.String
+	Limit    optional.Int32
+	Offset   optional.Int32
+}
+
 /*
-ListRiskLimitTiers List risk limit tiers
+ListFuturesRiskLimitTiers List risk limit tiers
+When the &#39;contract&#39; parameter is not passed, the default is to query the risk limits for the top 100 markets.&#39;Limit&#39; and &#39;offset&#39; correspond to pagination queries at the market level, not to the length of the returned array. This only takes effect when the &#39;contract&#39; parameter is empty.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param settle Settle currency
-  - @param contract Futures contract
+  - @param optional nil or *ListFuturesRiskLimitTiersOpts - Optional Parameters:
+  - @param "Contract" (optional.String) -  Futures contract, return related data only if specified
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0
 
 @return []FuturesLimitRiskTiers
 */
-func (a *FuturesApiService) ListRiskLimitTiers(ctx context.Context, settle string, contract string) ([]FuturesLimitRiskTiers, *http.Response, error) {
+func (a *FuturesApiService) ListFuturesRiskLimitTiers(ctx context.Context, settle string, localVarOptionals *ListFuturesRiskLimitTiersOpts) ([]FuturesLimitRiskTiers, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -1308,7 +1329,15 @@ func (a *FuturesApiService) ListRiskLimitTiers(ctx context.Context, settle strin
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	localVarQueryParams.Add("contract", parameterToString(contract, ""))
+	if localVarOptionals != nil && localVarOptionals.Contract.IsSet() {
+		localVarQueryParams.Add("contract", parameterToString(localVarOptionals.Contract.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
+		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Offset.IsSet() {
+		localVarQueryParams.Add("offset", parameterToString(localVarOptionals.Offset.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -2013,7 +2042,7 @@ UpdatePositionRiskLimit Update position risk limit
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param settle Settle currency
   - @param contract Futures contract
-  - @param riskLimit New position risk limit
+  - @param riskLimit New Risk Limit Value
 
 @return Position
 */
@@ -2511,7 +2540,7 @@ UpdateDualModePositionRiskLimit Update position risk limit in dual mode
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param settle Settle currency
   - @param contract Futures contract
-  - @param riskLimit New position risk limit
+  - @param riskLimit New Risk Limit Value
 
 @return []Position
 */
@@ -2725,16 +2754,23 @@ func (a *FuturesApiService) ListFuturesOrders(ctx context.Context, settle string
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+// CreateFuturesOrderOpts Optional parameters for the method 'CreateFuturesOrder'
+type CreateFuturesOrderOpts struct {
+	XGateExptime optional.Int64
+}
+
 /*
 CreateFuturesOrder Create a futures order
 - Creating futures orders requires &#x60;size&#x60;, which is number of contracts instead of currency amount. You can use &#x60;quanto_multiplier&#x60; in contract detail response to know how much currency 1 size contract represents - Zero-filled order cannot be retrieved 10 minutes after order cancellation. You will get a 404 not found for such orders - Set &#x60;reduce_only&#x60; to &#x60;true&#x60; can keep the position from changing side when reducing position size - In single position mode, to close a position, you need to set &#x60;size&#x60; to 0 and &#x60;close&#x60; to &#x60;true&#x60; - In dual position mode, to close one side position, you need to set &#x60;auto_size&#x60; side, &#x60;reduce_only&#x60; to true and &#x60;size&#x60; to 0 - Set &#x60;stp_act&#x60; to decide the strategy of self-trade prevention. For detailed usage, refer to the &#x60;stp_act&#x60; parameter in request body
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param settle Settle currency
   - @param futuresOrder
+  - @param optional nil or *CreateFuturesOrderOpts - Optional Parameters:
+  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
 
 @return FuturesOrder
 */
-func (a *FuturesApiService) CreateFuturesOrder(ctx context.Context, settle string, futuresOrder FuturesOrder) (FuturesOrder, *http.Response, error) {
+func (a *FuturesApiService) CreateFuturesOrder(ctx context.Context, settle string, futuresOrder FuturesOrder, localVarOptionals *CreateFuturesOrderOpts) (FuturesOrder, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -2768,6 +2804,9 @@ func (a *FuturesApiService) CreateFuturesOrder(ctx context.Context, settle strin
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if localVarOptionals != nil && localVarOptionals.XGateExptime.IsSet() {
+		localVarHeaderParams["x-gate-exptime"] = parameterToString(localVarOptionals.XGateExptime.Value(), "")
 	}
 	// body params
 	localVarPostBody = &futuresOrder
@@ -2824,7 +2863,8 @@ func (a *FuturesApiService) CreateFuturesOrder(ctx context.Context, settle strin
 
 // CancelFuturesOrdersOpts Optional parameters for the method 'CancelFuturesOrders'
 type CancelFuturesOrdersOpts struct {
-	Side optional.String
+	XGateExptime optional.Int64
+	Side         optional.String
 }
 
 /*
@@ -2834,6 +2874,7 @@ Zero-filled order cannot be retrieved 10 minutes after order cancellation
   - @param settle Settle currency
   - @param contract Futures contract
   - @param optional nil or *CancelFuturesOrdersOpts - Optional Parameters:
+  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
   - @param "Side" (optional.String) -  All bids or asks. Both included if not specified
 
 @return []FuturesOrder
@@ -2876,6 +2917,9 @@ func (a *FuturesApiService) CancelFuturesOrders(ctx context.Context, settle stri
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if localVarOptionals != nil && localVarOptionals.XGateExptime.IsSet() {
+		localVarHeaderParams["x-gate-exptime"] = parameterToString(localVarOptionals.XGateExptime.Value(), "")
 	}
 	if ctx == nil {
 		ctx = context.Background()
@@ -3051,16 +3095,23 @@ func (a *FuturesApiService) GetOrdersWithTimeRange(ctx context.Context, settle s
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+// CreateBatchFuturesOrderOpts Optional parameters for the method 'CreateBatchFuturesOrder'
+type CreateBatchFuturesOrderOpts struct {
+	XGateExptime optional.Int64
+}
+
 /*
 CreateBatchFuturesOrder Create a batch of futures orders
 - Up to 10 orders per request - If any of the order&#39;s parameters are missing or in the wrong format, all of them will not be executed, and a http status 400 error will be returned directly - If the parameters are checked and passed, all are executed. Even if there is a business logic error in the middle (such as insufficient funds), it will not affect other execution orders - The returned result is in array format, and the order corresponds to the orders in the request body - In the returned result, the &#x60;succeeded&#x60; field of type bool indicates whether the execution was successful or not - If the execution is successful, the normal order content is included; if the execution fails, the &#x60;label&#x60; field is included to indicate the cause of the error - In the rate limiting, each order is counted individually
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param settle Settle currency
   - @param futuresOrder
+  - @param optional nil or *CreateBatchFuturesOrderOpts - Optional Parameters:
+  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
 
 @return []BatchFuturesOrder
 */
-func (a *FuturesApiService) CreateBatchFuturesOrder(ctx context.Context, settle string, futuresOrder []FuturesOrder) ([]BatchFuturesOrder, *http.Response, error) {
+func (a *FuturesApiService) CreateBatchFuturesOrder(ctx context.Context, settle string, futuresOrder []FuturesOrder, localVarOptionals *CreateBatchFuturesOrderOpts) ([]BatchFuturesOrder, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -3094,6 +3145,9 @@ func (a *FuturesApiService) CreateBatchFuturesOrder(ctx context.Context, settle 
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if localVarOptionals != nil && localVarOptionals.XGateExptime.IsSet() {
+		localVarHeaderParams["x-gate-exptime"] = parameterToString(localVarOptionals.XGateExptime.Value(), "")
 	}
 	// body params
 	localVarPostBody = &futuresOrder
@@ -3245,16 +3299,23 @@ func (a *FuturesApiService) GetFuturesOrder(ctx context.Context, settle string, 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+// AmendFuturesOrderOpts Optional parameters for the method 'AmendFuturesOrder'
+type AmendFuturesOrderOpts struct {
+	XGateExptime optional.Int64
+}
+
 /*
 AmendFuturesOrder Amend an order
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param settle Settle currency
   - @param orderId Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID can only be checked when the order is in orderbook.  When the order is finished, it can be checked within 60 seconds after the end of the order.  After that, only order ID is accepted.
   - @param futuresOrderAmendment
+  - @param optional nil or *AmendFuturesOrderOpts - Optional Parameters:
+  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
 
 @return FuturesOrder
 */
-func (a *FuturesApiService) AmendFuturesOrder(ctx context.Context, settle string, orderId string, futuresOrderAmendment FuturesOrderAmendment) (FuturesOrder, *http.Response, error) {
+func (a *FuturesApiService) AmendFuturesOrder(ctx context.Context, settle string, orderId string, futuresOrderAmendment FuturesOrderAmendment, localVarOptionals *AmendFuturesOrderOpts) (FuturesOrder, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -3290,6 +3351,9 @@ func (a *FuturesApiService) AmendFuturesOrder(ctx context.Context, settle string
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if localVarOptionals != nil && localVarOptionals.XGateExptime.IsSet() {
+		localVarHeaderParams["x-gate-exptime"] = parameterToString(localVarOptionals.XGateExptime.Value(), "")
 	}
 	// body params
 	localVarPostBody = &futuresOrderAmendment
@@ -3344,15 +3408,22 @@ func (a *FuturesApiService) AmendFuturesOrder(ctx context.Context, settle string
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+// CancelFuturesOrderOpts Optional parameters for the method 'CancelFuturesOrder'
+type CancelFuturesOrderOpts struct {
+	XGateExptime optional.Int64
+}
+
 /*
 CancelFuturesOrder Cancel a single order
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param settle Settle currency
   - @param orderId Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID can only be checked when the order is in orderbook.  When the order is finished, it can be checked within 60 seconds after the end of the order.  After that, only order ID is accepted.
+  - @param optional nil or *CancelFuturesOrderOpts - Optional Parameters:
+  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
 
 @return FuturesOrder
 */
-func (a *FuturesApiService) CancelFuturesOrder(ctx context.Context, settle string, orderId string) (FuturesOrder, *http.Response, error) {
+func (a *FuturesApiService) CancelFuturesOrder(ctx context.Context, settle string, orderId string, localVarOptionals *CancelFuturesOrderOpts) (FuturesOrder, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -3388,6 +3459,9 @@ func (a *FuturesApiService) CancelFuturesOrder(ctx context.Context, settle strin
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if localVarOptionals != nil && localVarOptionals.XGateExptime.IsSet() {
+		localVarHeaderParams["x-gate-exptime"] = parameterToString(localVarOptionals.XGateExptime.Value(), "")
 	}
 	if ctx == nil {
 		ctx = context.Background()
@@ -4251,16 +4325,23 @@ func (a *FuturesApiService) GetFuturesFee(ctx context.Context, settle string, lo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+// CancelBatchFutureOrdersOpts Optional parameters for the method 'CancelBatchFutureOrders'
+type CancelBatchFutureOrdersOpts struct {
+	XGateExptime optional.Int64
+}
+
 /*
 CancelBatchFutureOrders Cancel a batch of orders with an ID list
 Multiple distinct order ID list can be specified。Each request can cancel a maximum of 20 records.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param settle Settle currency
   - @param requestBody
+  - @param optional nil or *CancelBatchFutureOrdersOpts - Optional Parameters:
+  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
 
 @return []FutureCancelOrderResult
 */
-func (a *FuturesApiService) CancelBatchFutureOrders(ctx context.Context, settle string, requestBody []string) ([]FutureCancelOrderResult, *http.Response, error) {
+func (a *FuturesApiService) CancelBatchFutureOrders(ctx context.Context, settle string, requestBody []string, localVarOptionals *CancelBatchFutureOrdersOpts) ([]FutureCancelOrderResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -4295,8 +4376,118 @@ func (a *FuturesApiService) CancelBatchFutureOrders(ctx context.Context, settle 
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if localVarOptionals != nil && localVarOptionals.XGateExptime.IsSet() {
+		localVarHeaderParams["x-gate-exptime"] = parameterToString(localVarOptionals.XGateExptime.Value(), "")
+	}
 	// body params
 	localVarPostBody = &requestBody
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	if ctx.Value(ContextGateAPIV4) == nil {
+		// for compatibility, set configuration key and secret to context if ContextGateAPIV4 value is not present
+		ctx = context.WithValue(ctx, ContextGateAPIV4, GateAPIV4{
+			Key:    a.client.cfg.Key,
+			Secret: a.client.cfg.Secret,
+		})
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+// AmendBatchFutureOrdersOpts Optional parameters for the method 'AmendBatchFutureOrders'
+type AmendBatchFutureOrdersOpts struct {
+	XGateExptime optional.Int64
+}
+
+/*
+AmendBatchFutureOrders Batch modify orders with specified IDs
+You can specify multiple different order IDs. You can only modify up to 10 orders in one request.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param settle Settle currency
+  - @param batchAmendOrderReq
+  - @param optional nil or *AmendBatchFutureOrdersOpts - Optional Parameters:
+  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
+
+@return []BatchFuturesOrder
+*/
+func (a *FuturesApiService) AmendBatchFutureOrders(ctx context.Context, settle string, batchAmendOrderReq []BatchAmendOrderReq, localVarOptionals *AmendBatchFutureOrdersOpts) ([]BatchFuturesOrder, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []BatchFuturesOrder
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/futures/{settle}/batch_amend_orders"
+	localVarPath = strings.Replace(localVarPath, "{"+"settle"+"}", url.QueryEscape(parameterToString(settle, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if localVarOptionals != nil && localVarOptionals.XGateExptime.IsSet() {
+		localVarHeaderParams["x-gate-exptime"] = parameterToString(localVarOptionals.XGateExptime.Value(), "")
+	}
+	// body params
+	localVarPostBody = &batchAmendOrderReq
 	if ctx == nil {
 		ctx = context.Background()
 	}
@@ -4559,15 +4750,21 @@ func (a *FuturesApiService) CreatePriceTriggeredOrder(ctx context.Context, settl
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+// CancelPriceTriggeredOrderListOpts Optional parameters for the method 'CancelPriceTriggeredOrderList'
+type CancelPriceTriggeredOrderListOpts struct {
+	Contract optional.String
+}
+
 /*
 CancelPriceTriggeredOrderList Cancel all open orders
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param settle Settle currency
-  - @param contract Futures contract
+  - @param optional nil or *CancelPriceTriggeredOrderListOpts - Optional Parameters:
+  - @param "Contract" (optional.String) -  Futures contract, return related data only if specified
 
 @return []FuturesPriceTriggeredOrder
 */
-func (a *FuturesApiService) CancelPriceTriggeredOrderList(ctx context.Context, settle string, contract string) ([]FuturesPriceTriggeredOrder, *http.Response, error) {
+func (a *FuturesApiService) CancelPriceTriggeredOrderList(ctx context.Context, settle string, localVarOptionals *CancelPriceTriggeredOrderListOpts) ([]FuturesPriceTriggeredOrder, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -4585,7 +4782,9 @@ func (a *FuturesApiService) CancelPriceTriggeredOrderList(ctx context.Context, s
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	localVarQueryParams.Add("contract", parameterToString(contract, ""))
+	if localVarOptionals != nil && localVarOptionals.Contract.IsSet() {
+		localVarQueryParams.Add("contract", parameterToString(localVarOptionals.Contract.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

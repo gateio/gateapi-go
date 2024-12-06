@@ -10,8 +10,12 @@
 package gateapi
 
 type UnifiedSettings struct {
-	// USDT contract switch. This parameter is required when the mode is multi-currency margin mode
+	// USDT contract switch. If not transmitted, the current switch value is used. If not transmitted for the first time, the default value is off.
 	UsdtFutures bool `json:"usdt_futures,omitempty"`
-	// Spot hedging switch. This parameter is required when the mode is portfolio margin mode
+	// Spot hedging switch. If not transmitted, the current switch value is used. If not transmitted for the first time, the default value is off.
 	SpotHedge bool `json:"spot_hedge,omitempty"`
+	// When the mode is set to combined margin mode, will funds be used as margin
+	UseFunding bool `json:"use_funding,omitempty"`
+	// Option switch. If not transmitted, the current switch value is used. If not transmitted for the first time, the default value is off.
+	Options bool `json:"options,omitempty"`
 }

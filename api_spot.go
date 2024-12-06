@@ -588,7 +588,7 @@ type ListTradesOpts struct {
 
 /*
 ListTrades Retrieve market trades
-You can use &#x60;from&#x60; and &#x60;to&#x60; to query by time range, or use &#x60;last_id&#x60; by scrolling page. The default behavior is by time range.  Scrolling query using &#x60;last_id&#x60; is not recommended any more. If &#x60;last_id&#x60; is specified, time range query parameters will be ignored.
+You can use &#x60;from&#x60; and &#x60;to&#x60; to query by time range, or use &#x60;last_id&#x60; by scrolling page. The default behavior is by time range, The query range is the last 30 days.  Scrolling query using &#x60;last_id&#x60; is not recommended any more. If &#x60;last_id&#x60; is specified, time range query parameters will be ignored.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param currencyPair Currency pair
   - @param optional nil or *ListTradesOpts - Optional Parameters:
@@ -1229,15 +1229,22 @@ func (a *SpotApiService) ListSpotAccountBook(ctx context.Context, localVarOption
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+// CreateBatchOrdersOpts Optional parameters for the method 'CreateBatchOrders'
+type CreateBatchOrdersOpts struct {
+	XGateExptime optional.Int64
+}
+
 /*
 CreateBatchOrders Create a batch of orders
 Batch orders requirements:  1. custom order field &#x60;text&#x60; is required 2. At most 4 currency pairs, maximum 10 orders each, are allowed in one request 3. No mixture of spot orders and margin orders, i.e. &#x60;account&#x60; must be identical for all orders
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param order
+  - @param optional nil or *CreateBatchOrdersOpts - Optional Parameters:
+  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
 
 @return []BatchOrder
 */
-func (a *SpotApiService) CreateBatchOrders(ctx context.Context, order []Order) ([]BatchOrder, *http.Response, error) {
+func (a *SpotApiService) CreateBatchOrders(ctx context.Context, order []Order, localVarOptionals *CreateBatchOrdersOpts) ([]BatchOrder, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1269,6 +1276,9 @@ func (a *SpotApiService) CreateBatchOrders(ctx context.Context, order []Order) (
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if localVarOptionals != nil && localVarOptionals.XGateExptime.IsSet() {
+		localVarHeaderParams["x-gate-exptime"] = parameterToString(localVarOptionals.XGateExptime.Value(), "")
 	}
 	// body params
 	localVarPostBody = &order
@@ -1658,15 +1668,22 @@ func (a *SpotApiService) ListOrders(ctx context.Context, currencyPair string, st
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+// CreateOrderOpts Optional parameters for the method 'CreateOrder'
+type CreateOrderOpts struct {
+	XGateExptime optional.Int64
+}
+
 /*
 CreateOrder Create an order
 You can place orders with spot, portfolio, margin or cross margin account through setting the &#x60;account &#x60;field. It defaults to &#x60;spot&#x60;, which means spot account is used to place orders.  If the user is using unified account, it defaults to the unified account.  When margin account is used, i.e., &#x60;account&#x60; is &#x60;margin&#x60;, &#x60;auto_borrow&#x60; field can be set to &#x60;true&#x60; to enable the server to borrow the amount lacked using &#x60;POST /margin/loans&#x60; when your account&#39;s balance is not enough. Whether margin orders&#39; fill will be used to repay margin loans automatically is determined by the auto repayment setting in your **margin account**, which can be updated or queried using &#x60;/margin/auto_repay&#x60; API.  When cross margin account is used, i.e., &#x60;account&#x60; is &#x60;cross_margin&#x60;, &#x60;auto_borrow&#x60; can also be enabled to achieve borrowing the insufficient amount automatically if cross account&#39;s balance is not enough. But it differs from margin account that automatic repayment is determined by order&#39;s &#x60;auto_repay&#x60; field and only current order&#39;s fill will be used to repay cross margin loans.  Automatic repayment will be triggered when the order is finished, i.e., its status is either &#x60;cancelled&#x60; or &#x60;closed&#x60;.  **Order status**  An order waiting to be filled is &#x60;open&#x60;, and it stays &#x60;open&#x60; until it is filled totally. If fully filled, order is finished and its status turns to &#x60;closed&#x60;.If the order is cancelled before it is totally filled, whether or not partially filled, its status is &#x60;cancelled&#x60;. **Iceberg order**  &#x60;iceberg&#x60; field can be used to set the amount shown. Set to &#x60;-1&#x60; to hide the order completely. Note that the hidden part&#39;s fee will be charged using taker&#39;s fee rate. **Self Trade Prevention**  - Set &#x60;stp_act&#x60; to decide the strategy of self-trade prevention. For detailed usage, refer to the &#x60;stp_act&#x60; parameter in request body
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param order
+  - @param optional nil or *CreateOrderOpts - Optional Parameters:
+  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
 
 @return Order
 */
-func (a *SpotApiService) CreateOrder(ctx context.Context, order Order) (Order, *http.Response, error) {
+func (a *SpotApiService) CreateOrder(ctx context.Context, order Order, localVarOptionals *CreateOrderOpts) (Order, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1698,6 +1715,9 @@ func (a *SpotApiService) CreateOrder(ctx context.Context, order Order) (Order, *
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if localVarOptionals != nil && localVarOptionals.XGateExptime.IsSet() {
+		localVarHeaderParams["x-gate-exptime"] = parameterToString(localVarOptionals.XGateExptime.Value(), "")
 	}
 	// body params
 	localVarPostBody = &order
@@ -1754,31 +1774,34 @@ func (a *SpotApiService) CreateOrder(ctx context.Context, order Order) (Order, *
 
 // CancelOrdersOpts Optional parameters for the method 'CancelOrders'
 type CancelOrdersOpts struct {
-	Side       optional.String
-	Account    optional.String
-	ActionMode optional.String
+	CurrencyPair optional.String
+	Side         optional.String
+	Account      optional.String
+	ActionMode   optional.String
+	XGateExptime optional.Int64
 }
 
 /*
 CancelOrders Cancel all `open` orders in specified currency pair
-If &#x60;account&#x60; is not set, all open orders, including spot, portfolio, margin and cross margin ones, will be cancelled.  You can set &#x60;account&#x60; to cancel only orders within the specified account
+If &#x60;account&#x60; is not set, all open orders, including spot, portfolio, margin and cross margin ones, will be cancelled. If &#x60;currency_pair&#x60; is not specified, all pending orders for trading pairs will be cancelled. You can set &#x60;account&#x60; to cancel only orders within the specified account
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param currencyPair Currency pair
   - @param optional nil or *CancelOrdersOpts - Optional Parameters:
+  - @param "CurrencyPair" (optional.String) -  Currency pair
   - @param "Side" (optional.String) -  All bids or asks. Both included if not specified
-  - @param "Account" (optional.String) -  Specify account type  - classic account：Default to all account types being included   - portfolio margin account：`cross_margin` only
+  - @param "Account" (optional.String) -  Specify account type:  - Classic account: Includes all if not specified - Unified account: Specify `unified` - Unified account (legacy): Can only specify `cross_margin`
   - @param "ActionMode" (optional.String) -  Processing Mode  When placing an order, different fields are returned based on the action_mode  - ACK: Asynchronous mode, returns only key order fields - RESULT: No clearing information - FULL: Full mode (default)
+  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
 
-@return []Order
+@return []OrderCancel
 */
-func (a *SpotApiService) CancelOrders(ctx context.Context, currencyPair string, localVarOptionals *CancelOrdersOpts) ([]Order, *http.Response, error) {
+func (a *SpotApiService) CancelOrders(ctx context.Context, localVarOptionals *CancelOrdersOpts) ([]OrderCancel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []Order
+		localVarReturnValue  []OrderCancel
 	)
 
 	// create path and map variables
@@ -1787,7 +1810,9 @@ func (a *SpotApiService) CancelOrders(ctx context.Context, currencyPair string, 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	localVarQueryParams.Add("currency_pair", parameterToString(currencyPair, ""))
+	if localVarOptionals != nil && localVarOptionals.CurrencyPair.IsSet() {
+		localVarQueryParams.Add("currency_pair", parameterToString(localVarOptionals.CurrencyPair.Value(), ""))
+	}
 	if localVarOptionals != nil && localVarOptionals.Side.IsSet() {
 		localVarQueryParams.Add("side", parameterToString(localVarOptionals.Side.Value(), ""))
 	}
@@ -1813,6 +1838,9 @@ func (a *SpotApiService) CancelOrders(ctx context.Context, currencyPair string, 
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if localVarOptionals != nil && localVarOptionals.XGateExptime.IsSet() {
+		localVarHeaderParams["x-gate-exptime"] = parameterToString(localVarOptionals.XGateExptime.Value(), "")
 	}
 	if ctx == nil {
 		ctx = context.Background()
@@ -1865,15 +1893,22 @@ func (a *SpotApiService) CancelOrders(ctx context.Context, currencyPair string, 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+// CancelBatchOrdersOpts Optional parameters for the method 'CancelBatchOrders'
+type CancelBatchOrdersOpts struct {
+	XGateExptime optional.Int64
+}
+
 /*
 CancelBatchOrders Cancel a batch of orders with an ID list
 Multiple currency pairs can be specified, but maximum 20 orders are allowed per request
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param cancelBatchOrder
+  - @param optional nil or *CancelBatchOrdersOpts - Optional Parameters:
+  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
 
 @return []CancelOrderResult
 */
-func (a *SpotApiService) CancelBatchOrders(ctx context.Context, cancelBatchOrder []CancelBatchOrder) ([]CancelOrderResult, *http.Response, error) {
+func (a *SpotApiService) CancelBatchOrders(ctx context.Context, cancelBatchOrder []CancelBatchOrder, localVarOptionals *CancelBatchOrdersOpts) ([]CancelOrderResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1905,6 +1940,9 @@ func (a *SpotApiService) CancelBatchOrders(ctx context.Context, cancelBatchOrder
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if localVarOptionals != nil && localVarOptionals.XGateExptime.IsSet() {
+		localVarHeaderParams["x-gate-exptime"] = parameterToString(localVarOptionals.XGateExptime.Value(), "")
 	}
 	// body params
 	localVarPostBody = &cancelBatchOrder
@@ -1969,7 +2007,7 @@ GetOrder Get a single order
 Spot, portfolio and margin orders are queried by default. If cross margin orders are needed or portfolio margin account are used, account must be set to cross_margin.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param orderId Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID can only be checked when the order is in orderbook.  When the order is finished, it can be checked within 1 hour after the end of the order.  After that, only order ID is accepted.
-  - @param currencyPair Currency pair
+  - @param currencyPair Specify the transaction pair to query. If you are querying pending order records, this field is required. If you are querying traded records, this field can be left blank.
   - @param optional nil or *GetOrderOpts - Optional Parameters:
   - @param "Account" (optional.String) -  Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to `cross_margin` to operate against margin account.  Portfolio margin account must set to `cross_margin` only
 
@@ -2067,8 +2105,9 @@ func (a *SpotApiService) GetOrder(ctx context.Context, orderId string, currencyP
 
 // CancelOrderOpts Optional parameters for the method 'CancelOrder'
 type CancelOrderOpts struct {
-	Account    optional.String
-	ActionMode optional.String
+	Account      optional.String
+	ActionMode   optional.String
+	XGateExptime optional.Int64
 }
 
 /*
@@ -2080,6 +2119,7 @@ Spot,portfolio and margin orders are cancelled by default. If trying to cancel c
   - @param optional nil or *CancelOrderOpts - Optional Parameters:
   - @param "Account" (optional.String) -  Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to `cross_margin` to operate against margin account.  Portfolio margin account must set to `cross_margin` only
   - @param "ActionMode" (optional.String) -  Processing Mode  When placing an order, different fields are returned based on the action_mode  - ACK: Asynchronous mode, returns only key order fields - RESULT: No clearing information - FULL: Full mode (default)
+  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
 
 @return Order
 */
@@ -2124,6 +2164,9 @@ func (a *SpotApiService) CancelOrder(ctx context.Context, orderId string, curren
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if localVarOptionals != nil && localVarOptionals.XGateExptime.IsSet() {
+		localVarHeaderParams["x-gate-exptime"] = parameterToString(localVarOptionals.XGateExptime.Value(), "")
 	}
 	if ctx == nil {
 		ctx = context.Background()
@@ -2178,22 +2221,25 @@ func (a *SpotApiService) CancelOrder(ctx context.Context, orderId string, curren
 
 // AmendOrderOpts Optional parameters for the method 'AmendOrder'
 type AmendOrderOpts struct {
-	Account optional.String
+	CurrencyPair optional.String
+	Account      optional.String
+	XGateExptime optional.Int64
 }
 
 /*
 AmendOrder Amend an order
-By default, the orders of spot, portfolio and margin account are updated.  If you need to modify orders of the &#x60;cross-margin&#x60; account, you must specify account as &#x60;cross_margin&#x60;.  For portfolio margin account, only &#x60;cross_margin&#x60; account is supported.  Currently, only supports modification of &#x60;price&#x60; or &#x60;amount&#x60; fields.  Regarding rate limiting: modify order and create order sharing rate limiting rules. Regarding matching priority: Only reducing the quantity without modifying the priority of matching, altering the price or increasing the quantity will adjust the priority to the new price at the end Note: If the modified amount is less than the fill amount, the order will be cancelled.
+By default, the orders of spot, portfolio and margin account are updated.  If you need to modify orders of the &#x60;cross-margin&#x60; account, you must specify account as &#x60;cross_margin&#x60;.  For portfolio margin account, only &#x60;cross_margin&#x60; account is supported.  Currently, both request body and query support currency_pair and account parameter passing, but request body has higher priority  Currently, only supports modification of &#x60;price&#x60; or &#x60;amount&#x60; fields.  Regarding rate limiting: modify order and create order sharing rate limiting rules. Regarding matching priority: Only reducing the quantity without modifying the priority of matching, altering the price or increasing the quantity will adjust the priority to the new price at the end Note: If the modified amount is less than the fill amount, the order will be cancelled.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param orderId Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID can only be checked when the order is in orderbook.  When the order is finished, it can be checked within 1 hour after the end of the order.  After that, only order ID is accepted.
-  - @param currencyPair Currency pair
   - @param orderPatch
   - @param optional nil or *AmendOrderOpts - Optional Parameters:
+  - @param "CurrencyPair" (optional.String) -  Currency pair
   - @param "Account" (optional.String) -  Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to `cross_margin` to operate against margin account.  Portfolio margin account must set to `cross_margin` only
+  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
 
 @return Order
 */
-func (a *SpotApiService) AmendOrder(ctx context.Context, orderId string, currencyPair string, orderPatch OrderPatch, localVarOptionals *AmendOrderOpts) (Order, *http.Response, error) {
+func (a *SpotApiService) AmendOrder(ctx context.Context, orderId string, orderPatch OrderPatch, localVarOptionals *AmendOrderOpts) (Order, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
@@ -2211,7 +2257,9 @@ func (a *SpotApiService) AmendOrder(ctx context.Context, orderId string, currenc
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	localVarQueryParams.Add("currency_pair", parameterToString(currencyPair, ""))
+	if localVarOptionals != nil && localVarOptionals.CurrencyPair.IsSet() {
+		localVarQueryParams.Add("currency_pair", parameterToString(localVarOptionals.CurrencyPair.Value(), ""))
+	}
 	if localVarOptionals != nil && localVarOptionals.Account.IsSet() {
 		localVarQueryParams.Add("account", parameterToString(localVarOptionals.Account.Value(), ""))
 	}
@@ -2231,6 +2279,9 @@ func (a *SpotApiService) AmendOrder(ctx context.Context, orderId string, currenc
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if localVarOptionals != nil && localVarOptionals.XGateExptime.IsSet() {
+		localVarHeaderParams["x-gate-exptime"] = parameterToString(localVarOptionals.XGateExptime.Value(), "")
 	}
 	// body params
 	localVarPostBody = &orderPatch
@@ -2302,7 +2353,7 @@ Spot,portfolio and margin trades are queried by default. If cross margin trades 
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListMyTradesOpts - Optional Parameters:
   - @param "CurrencyPair" (optional.String) -  Retrieve results with specified currency pair
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.  Default: 100, Minimum: 1, Maximum: 1000
   - @param "Page" (optional.Int32) -  Page number
   - @param "OrderId" (optional.String) -  Filter trades with specified order ID. `currency_pair` is also required if this field is present
   - @param "Account" (optional.String) -  Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to `cross_margin` to operate against margin account.  Portfolio margin account must set to `cross_margin` only
@@ -2594,15 +2645,22 @@ func (a *SpotApiService) CountdownCancelAllSpot(ctx context.Context, countdownCa
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+// AmendBatchOrdersOpts Optional parameters for the method 'AmendBatchOrders'
+type AmendBatchOrdersOpts struct {
+	XGateExptime optional.Int64
+}
+
 /*
 AmendBatchOrders Batch modification of orders
 Default modification of orders for spot, portfolio, and margin accounts. To modify orders for a cross margin account, the &#x60;account&#x60; parameter must be specified as &#x60;cross_margin&#x60;.  For portfolio margin accounts, the &#x60;account&#x60; parameter can only be specified as &#x60;cross_margin&#x60;. Currently, only modifications to price or quantity (choose one) are supported. When modifying unfinished orders, a maximum of 5 orders can be batch-modified in one request. The request parameters should be passed in an array format. During batch modification, if one order modification fails, the modification process will continue with the next order. After execution, the response will include corresponding failure information for the failed orders. The sequence of calling for batch order modification should be consistent with the order in the order list. The response content order for batch order modification will also be consistent with the order in the order list.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param batchAmendItem
+  - @param optional nil or *AmendBatchOrdersOpts - Optional Parameters:
+  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
 
 @return []BatchOrder
 */
-func (a *SpotApiService) AmendBatchOrders(ctx context.Context, batchAmendItem []BatchAmendItem) ([]BatchOrder, *http.Response, error) {
+func (a *SpotApiService) AmendBatchOrders(ctx context.Context, batchAmendItem []BatchAmendItem, localVarOptionals *AmendBatchOrdersOpts) ([]BatchOrder, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -2634,6 +2692,9 @@ func (a *SpotApiService) AmendBatchOrders(ctx context.Context, batchAmendItem []
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if localVarOptionals != nil && localVarOptionals.XGateExptime.IsSet() {
+		localVarHeaderParams["x-gate-exptime"] = parameterToString(localVarOptionals.XGateExptime.Value(), "")
 	}
 	// body params
 	localVarPostBody = &batchAmendItem

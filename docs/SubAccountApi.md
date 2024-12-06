@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**DeleteSubAccountKeys**](SubAccountApi.md#DeleteSubAccountKeys) | **Delete** /sub_accounts/{user_id}/keys/{key} | Delete API key of the sub-account
 [**LockSubAccount**](SubAccountApi.md#LockSubAccount) | **Post** /sub_accounts/{user_id}/lock | Lock the sub-account
 [**UnlockSubAccount**](SubAccountApi.md#UnlockSubAccount) | **Post** /sub_accounts/{user_id}/unlock | Unlock the sub-account
+[**ListUnifiedMode**](SubAccountApi.md#ListUnifiedMode) | **Get** /sub_accounts/unified_mode | Get sub-account mode
 
 
 ## ListSubAccounts
@@ -718,6 +719,72 @@ func main() {
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## ListUnifiedMode
+
+> []SubUserMode ListUnifiedMode(ctx, )
+
+Get sub-account mode
+
+Unified account mode： - `classic`: Classic account mode - `multi_currency`: Multi-currency margin mode - `portfolio`: Portfolio margin mode
+
+### Required Parameters
+
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    
+    result, _, err := client.SubAccountApi.ListUnifiedMode(ctx)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**[]SubUserMode**](SubUserMode.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

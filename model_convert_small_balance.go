@@ -13,4 +13,6 @@ package gateapi
 type ConvertSmallBalance struct {
 	// Currency
 	Currency []string `json:"currency,omitempty"`
+	// Whether to exchange all
+	IsAll bool `json:"is_all,omitempty"`
 }

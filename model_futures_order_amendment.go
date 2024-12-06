@@ -16,4 +16,8 @@ type FuturesOrderAmendment struct {
 	Price string `json:"price,omitempty"`
 	// Custom info during amending order
 	AmendText string `json:"amend_text,omitempty"`
+	// Users can annotate this modification with information.
+	BizInfo string `json:"biz_info,omitempty"`
+	// Users are able to modify the offer price manually.
+	Bbo string `json:"bbo,omitempty"`
 }

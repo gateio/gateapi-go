@@ -436,7 +436,7 @@ No authorization required
 
 Retrieve market trades
 
-You can use `from` and `to` to query by time range, or use `last_id` by scrolling page. The default behavior is by time range.  Scrolling query using `last_id` is not recommended any more. If `last_id` is specified, time range query parameters will be ignored.
+You can use `from` and `to` to query by time range, or use `last_id` by scrolling page. The default behavior is by time range, The query range is the last 30 days.  Scrolling query using `last_id` is not recommended any more. If `last_id` is specified, time range query parameters will be ignored.
 
 ### Required Parameters
 
@@ -894,7 +894,7 @@ func main() {
 
 ## CreateBatchOrders
 
-> []BatchOrder CreateBatchOrders(ctx, order)
+> []BatchOrder CreateBatchOrders(ctx, order, optional)
 
 Create a batch of orders
 
@@ -906,6 +906,15 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **order** | [**[]Order**](Order.md)|  | 
+**optional** | **CreateBatchOrdersOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a CreateBatchOrdersOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
 ### Example
 
@@ -932,7 +941,7 @@ func main() {
                             )
     order := []gateapi.Order{gateapi.Order{}} // []Order - 
     
-    result, _, err := client.SpotApi.CreateBatchOrders(ctx, order)
+    result, _, err := client.SpotApi.CreateBatchOrders(ctx, order, nil)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -1203,7 +1212,7 @@ func main() {
 
 ## CreateOrder
 
-> Order CreateOrder(ctx, order)
+> Order CreateOrder(ctx, order, optional)
 
 Create an order
 
@@ -1215,6 +1224,15 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **order** | [**Order**](Order.md)|  | 
+**optional** | **CreateOrderOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a CreateOrderOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
 ### Example
 
@@ -1241,7 +1259,7 @@ func main() {
                             )
     order := gateapi.Order{} // Order - 
     
-    result, _, err := client.SpotApi.CreateOrder(ctx, order)
+    result, _, err := client.SpotApi.CreateOrder(ctx, order, nil)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -1274,18 +1292,17 @@ func main() {
 
 ## CancelOrders
 
-> []Order CancelOrders(ctx, currencyPair, optional)
+> []OrderCancel CancelOrders(ctx, optional)
 
 Cancel all `open` orders in specified currency pair
 
-If `account` is not set, all open orders, including spot, portfolio, margin and cross margin ones, will be cancelled.  You can set `account` to cancel only orders within the specified account
+If `account` is not set, all open orders, including spot, portfolio, margin and cross margin ones, will be cancelled. If `currency_pair` is not specified, all pending orders for trading pairs will be cancelled. You can set `account` to cancel only orders within the specified account
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**currencyPair** | **string**| Currency pair | 
 **optional** | **CancelOrdersOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -1294,9 +1311,11 @@ Optional parameters are passed through a pointer to a CancelOrdersOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+**currencyPair** | **optional.String**| Currency pair | 
 **side** | **optional.String**| All bids or asks. Both included if not specified | 
-**account** | **optional.String**| Specify account type  - classic account：Default to all account types being included   - portfolio margin account：&#x60;cross_margin&#x60; only | 
+**account** | **optional.String**| Specify account type:  - Classic account: Includes all if not specified - Unified account: Specify &#x60;unified&#x60; - Unified account (legacy): Can only specify &#x60;cross_margin&#x60; | 
 **actionMode** | **optional.String**| Processing Mode  When placing an order, different fields are returned based on the action_mode  - ACK: Asynchronous mode, returns only key order fields - RESULT: No clearing information - FULL: Full mode (default) | 
+**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
 ### Example
 
@@ -1321,9 +1340,8 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    currencyPair := "BTC_USDT" // string - Currency pair
     
-    result, _, err := client.SpotApi.CancelOrders(ctx, currencyPair, nil)
+    result, _, err := client.SpotApi.CancelOrders(ctx, nil)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -1339,7 +1357,7 @@ func main() {
 
 ### Return type
 
-[**[]Order**](Order.md)
+[**[]OrderCancel**](OrderCancel.md)
 
 ### Authorization
 
@@ -1356,7 +1374,7 @@ func main() {
 
 ## CancelBatchOrders
 
-> []CancelOrderResult CancelBatchOrders(ctx, cancelBatchOrder)
+> []CancelOrderResult CancelBatchOrders(ctx, cancelBatchOrder, optional)
 
 Cancel a batch of orders with an ID list
 
@@ -1368,6 +1386,15 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **cancelBatchOrder** | [**[]CancelBatchOrder**](CancelBatchOrder.md)|  | 
+**optional** | **CancelBatchOrdersOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a CancelBatchOrdersOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
 ### Example
 
@@ -1394,7 +1421,7 @@ func main() {
                             )
     cancelBatchOrder := []gateapi.CancelBatchOrder{gateapi.CancelBatchOrder{}} // []CancelBatchOrder - 
     
-    result, _, err := client.SpotApi.CancelBatchOrders(ctx, cancelBatchOrder)
+    result, _, err := client.SpotApi.CancelBatchOrders(ctx, cancelBatchOrder, nil)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -1439,7 +1466,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **orderId** | **string**| Order ID returned, or user custom ID(i.e., &#x60;text&#x60; field). Operations based on custom ID can only be checked when the order is in orderbook.  When the order is finished, it can be checked within 1 hour after the end of the order.  After that, only order ID is accepted. | 
-**currencyPair** | **string**| Currency pair | 
+**currencyPair** | **string**| Specify the transaction pair to query. If you are querying pending order records, this field is required. If you are querying traded records, this field can be left blank. | 
 **optional** | **GetOrderOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -1474,7 +1501,7 @@ func main() {
                              }
                             )
     orderId := "12345" // string - Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID can only be checked when the order is in orderbook.  When the order is finished, it can be checked within 1 hour after the end of the order.  After that, only order ID is accepted.
-    currencyPair := "BTC_USDT" // string - Currency pair
+    currencyPair := "BTC_USDT" // string - Specify the transaction pair to query. If you are querying pending order records, this field is required. If you are querying traded records, this field can be left blank.
     
     result, _, err := client.SpotApi.GetOrder(ctx, orderId, currencyPair, nil)
     if err != nil {
@@ -1532,6 +1559,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **account** | **optional.String**| Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to &#x60;cross_margin&#x60; to operate against margin account.  Portfolio margin account must set to &#x60;cross_margin&#x60; only | 
 **actionMode** | **optional.String**| Processing Mode  When placing an order, different fields are returned based on the action_mode  - ACK: Asynchronous mode, returns only key order fields - RESULT: No clearing information - FULL: Full mode (default) | 
+**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
 ### Example
 
@@ -1592,11 +1620,11 @@ func main() {
 
 ## AmendOrder
 
-> Order AmendOrder(ctx, orderId, currencyPair, orderPatch, optional)
+> Order AmendOrder(ctx, orderId, orderPatch, optional)
 
 Amend an order
 
-By default, the orders of spot, portfolio and margin account are updated.  If you need to modify orders of the `cross-margin` account, you must specify account as `cross_margin`.  For portfolio margin account, only `cross_margin` account is supported.  Currently, only supports modification of `price` or `amount` fields.  Regarding rate limiting: modify order and create order sharing rate limiting rules. Regarding matching priority: Only reducing the quantity without modifying the priority of matching, altering the price or increasing the quantity will adjust the priority to the new price at the end Note: If the modified amount is less than the fill amount, the order will be cancelled.
+By default, the orders of spot, portfolio and margin account are updated.  If you need to modify orders of the `cross-margin` account, you must specify account as `cross_margin`.  For portfolio margin account, only `cross_margin` account is supported.  Currently, both request body and query support currency_pair and account parameter passing, but request body has higher priority  Currently, only supports modification of `price` or `amount` fields.  Regarding rate limiting: modify order and create order sharing rate limiting rules. Regarding matching priority: Only reducing the quantity without modifying the priority of matching, altering the price or increasing the quantity will adjust the priority to the new price at the end Note: If the modified amount is less than the fill amount, the order will be cancelled.
 
 ### Required Parameters
 
@@ -1604,7 +1632,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **orderId** | **string**| Order ID returned, or user custom ID(i.e., &#x60;text&#x60; field). Operations based on custom ID can only be checked when the order is in orderbook.  When the order is finished, it can be checked within 1 hour after the end of the order.  After that, only order ID is accepted. | 
-**currencyPair** | **string**| Currency pair | 
 **orderPatch** | [**OrderPatch**](OrderPatch.md)|  | 
 **optional** | **AmendOrderOpts** | optional parameters | nil if no parameters
 
@@ -1614,7 +1641,9 @@ Optional parameters are passed through a pointer to a AmendOrderOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+**currencyPair** | **optional.String**| Currency pair | 
 **account** | **optional.String**| Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to &#x60;cross_margin&#x60; to operate against margin account.  Portfolio margin account must set to &#x60;cross_margin&#x60; only | 
+**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
 ### Example
 
@@ -1640,10 +1669,9 @@ func main() {
                              }
                             )
     orderId := "12345" // string - Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID can only be checked when the order is in orderbook.  When the order is finished, it can be checked within 1 hour after the end of the order.  After that, only order ID is accepted.
-    currencyPair := "BTC_USDT" // string - Currency pair
     orderPatch := gateapi.OrderPatch{} // OrderPatch - 
     
-    result, _, err := client.SpotApi.AmendOrder(ctx, orderId, currencyPair, orderPatch, nil)
+    result, _, err := client.SpotApi.AmendOrder(ctx, orderId, orderPatch, nil)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -1696,7 +1724,7 @@ Optional parameters are passed through a pointer to a ListMyTradesOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **currencyPair** | **optional.String**| Retrieve results with specified currency pair | 
-**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list.  Default: 100, Minimum: 1, Maximum: 1000 | [default to 100]
 **page** | **optional.Int32**| Page number | [default to 1]
 **orderId** | **optional.String**| Filter trades with specified order ID. &#x60;currency_pair&#x60; is also required if this field is present | 
 **account** | **optional.String**| Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to &#x60;cross_margin&#x60; to operate against margin account.  Portfolio margin account must set to &#x60;cross_margin&#x60; only | 
@@ -1889,7 +1917,7 @@ func main() {
 
 ## AmendBatchOrders
 
-> []BatchOrder AmendBatchOrders(ctx, batchAmendItem)
+> []BatchOrder AmendBatchOrders(ctx, batchAmendItem, optional)
 
 Batch modification of orders
 
@@ -1901,6 +1929,15 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **batchAmendItem** | [**[]BatchAmendItem**](BatchAmendItem.md)|  | 
+**optional** | **AmendBatchOrdersOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a AmendBatchOrdersOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
 ### Example
 
@@ -1927,7 +1964,7 @@ func main() {
                             )
     batchAmendItem := []gateapi.BatchAmendItem{gateapi.BatchAmendItem{}} // []BatchAmendItem - 
     
-    result, _, err := client.SpotApi.AmendBatchOrders(ctx, batchAmendItem)
+    result, _, err := client.SpotApi.AmendBatchOrders(ctx, batchAmendItem, nil)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())

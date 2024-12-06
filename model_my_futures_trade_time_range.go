@@ -20,6 +20,8 @@ type MyFuturesTradeTimeRange struct {
 	OrderId string `json:"order_id,omitempty"`
 	// Trading size
 	Size int64 `json:"size,omitempty"`
+	// Number of closed positions:  close_size=0 && size＞0       Open long position close_size=0 && size＜0       Open short position close_size>0 && size>0 && size <= close_size Close short postion close_size>0 && size>0 && size > close_size Close short position and open long position close_size<0 && size<0 && size >= close_size Close long postion close_size<0 && size<0 && size < close_size Close long position and open short position
+	CloseSize int64 `json:"close_size,omitempty"`
 	// Trading price
 	Price string `json:"price,omitempty"`
 	// Trade role. Available values are `taker` and `maker`

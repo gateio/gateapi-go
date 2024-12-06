@@ -28,6 +28,8 @@ type PositionClose struct {
 	Text string `json:"text,omitempty"`
 	// Max Trade Size
 	MaxSize string `json:"max_size,omitempty"`
+	// Cumulative closed position volume
+	AccumSize string `json:"accum_size,omitempty"`
 	// First Open Time
 	FirstOpenTime int64 `json:"first_open_time,omitempty"`
 	// When 'side' is 'long,' it indicates the opening average price; when 'side' is 'short,' it indicates the closing average price.

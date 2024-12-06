@@ -18,4 +18,6 @@ type UnifiedDiscountTiers struct {
 	LowerLimit string `json:"lower_limit,omitempty"`
 	// Upper limit,＋ indicates positive infinity
 	UpperLimit string `json:"upper_limit,omitempty"`
+	// Position leverage
+	Leverage string `json:"leverage,omitempty"`
 }

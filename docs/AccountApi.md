@@ -5,11 +5,14 @@ All URIs are relative to *https://api.gateio.ws/api/v4*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetAccountDetail**](AccountApi.md#GetAccountDetail) | **Get** /account/detail | Get account detail
+[**GetAccountRateLimit**](AccountApi.md#GetAccountRateLimit) | **Get** /account/rate_limit | Get user transaction rate limit information
 [**ListSTPGroups**](AccountApi.md#ListSTPGroups) | **Get** /account/stp_groups | List STP Groups
 [**CreateSTPGroup**](AccountApi.md#CreateSTPGroup) | **Post** /account/stp_groups | Create STP Group
 [**ListSTPGroupsUsers**](AccountApi.md#ListSTPGroupsUsers) | **Get** /account/stp_groups/{stp_id}/users | List users of the STP group
 [**AddSTPGroupUsers**](AccountApi.md#AddSTPGroupUsers) | **Post** /account/stp_groups/{stp_id}/users | Add users to the STP group
 [**DeleteSTPGroupUsers**](AccountApi.md#DeleteSTPGroupUsers) | **Delete** /account/stp_groups/{stp_id}/users | Delete the user in the STP group
+[**GetDebitFee**](AccountApi.md#GetDebitFee) | **Get** /account/debit_fee | Query GT deduction configuration.
+[**SetDebitFee**](AccountApi.md#SetDebitFee) | **Post** /account/debit_fee | Set GT deduction.
 
 
 ## GetAccountDetail
@@ -62,6 +65,70 @@ func main() {
 ### Return type
 
 [**AccountDetail**](AccountDetail.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## GetAccountRateLimit
+
+> []AccountRateLimit GetAccountRateLimit(ctx, )
+
+Get user transaction rate limit information
+
+### Required Parameters
+
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    
+    result, _, err := client.AccountApi.GetAccountRateLimit(ctx)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**[]AccountRateLimit**](AccountRateLimit.md)
 
 ### Authorization
 
@@ -437,6 +504,143 @@ func main() {
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## GetDebitFee
+
+> InlineResponse2001 GetDebitFee(ctx, )
+
+Query GT deduction configuration.
+
+Query the current GT deduction configuration for the account.
+
+### Required Parameters
+
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    
+    result, _, err := client.AccountApi.GetDebitFee(ctx)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**InlineResponse2001**](inline_response_200_1.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## SetDebitFee
+
+> SetDebitFee(ctx, inlineObject)
+
+Set GT deduction.
+
+Enable or disable GT deduction for the current account.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**inlineObject** | [**InlineObject**](InlineObject.md)|  | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    inlineObject := gateapi.InlineObject{} // InlineObject - 
+    
+    result, _, err := client.AccountApi.SetDebitFee(ctx, inlineObject)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

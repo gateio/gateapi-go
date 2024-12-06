@@ -13,6 +13,10 @@ package gateapi
 type PlaceDualInvestmentOrder struct {
 	// Plan ID
 	PlanId string `json:"plan_id"`
-	// Copies
-	Copies string `json:"copies"`
+	// The number of copies is mutually exclusive with the amount field and will be deprecated soon. It is recommended to use the amount parameter.
+	Copies string `json:"copies,omitempty"`
+	// Whether to purchase at the maximum. Mutually exclusive with the amount field. Will be deprecated soon. It is recommended to use the amount parameter.
+	IsMax int32 `json:"is_max,omitempty"`
+	// Subscription amount, mutually exclusive with the copies field
+	Amount string `json:"amount"`
 }

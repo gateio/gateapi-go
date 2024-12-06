@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **PnlFee** | **string** | PNL - Transaction Fees | [optional] [readonly] 
 **Text** | **string** | Text of close order | [optional] [readonly] 
 **MaxSize** | **string** | Max Trade Size | [optional] [readonly] 
+**AccumSize** | **string** | Cumulative closed position volume | [optional] [readonly] 
 **FirstOpenTime** | **int64** | First Open Time | [optional] [readonly] 
 **LongPrice** | **string** | When &#39;side&#39; is &#39;long,&#39; it indicates the opening average price; when &#39;side&#39; is &#39;short,&#39; it indicates the closing average price. | [optional] [readonly] 
 **ShortPrice** | **string** | When &#39;side&#39; is &#39;long,&#39; it indicates the opening average price; when &#39;side&#39; is &#39;short,&#39; it indicates the closing average price | [optional] [readonly] 

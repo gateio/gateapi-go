@@ -15,6 +15,8 @@ type CancelOrderResult struct {
 	CurrencyPair string `json:"currency_pair,omitempty"`
 	// Order ID
 	Id string `json:"id,omitempty"`
+	// Custom order information
+	Text string `json:"text,omitempty"`
 	// Whether cancellation succeeded
 	Succeeded bool `json:"succeeded,omitempty"`
 	// Error label when failed to cancel the order; emtpy if succeeded

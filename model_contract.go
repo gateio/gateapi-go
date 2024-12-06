@@ -71,7 +71,7 @@ type Contract struct {
 	PositionSize int64 `json:"position_size,omitempty"`
 	// Last changed time of configuration
 	ConfigChangeTime float64 `json:"config_change_time,omitempty"`
-	// Contract is delisting
+	// `in_delisting=true` And when position_size>0, it means the contract is in the offline transition period `in_delisting=true` And when position_size=0, it means the contract is offline
 	InDelisting bool `json:"in_delisting,omitempty"`
 	// Maximum number of open orders
 	OrdersLimit int32 `json:"orders_limit,omitempty"`

@@ -14,6 +14,8 @@ type WithdrawalRecord struct {
 	Id string `json:"id,omitempty"`
 	// Hash record of the withdrawal
 	Txid string `json:"txid,omitempty"`
+	// 区块编号
+	BlockNumber string `json:"block_number,omitempty"`
 	// Client order id, up to 32 length and can only include 0-9, A-Z, a-z, underscore(_), hyphen(-) or dot(.)
 	WithdrawOrderId string `json:"withdraw_order_id,omitempty"`
 	// Operation time
@@ -28,7 +30,7 @@ type WithdrawalRecord struct {
 	Address string `json:"address,omitempty"`
 	// Additional remarks with regards to the withdrawal
 	Memo string `json:"memo,omitempty"`
-	// Record status.  - DONE: done - CANCEL: cancelled - REQUEST: requesting - MANUAL: pending manual approval - BCODE: GateCode operation - EXTPEND: pending confirm after sending - FAIL: pending confirm when fail - INVALID: invalid order - VERIFY: verifying - PROCES: processing - PEND: pending - DMOVE: required manual approval - SPLITPEND: the order is automatically split due to large amount
+	// 交易状态  - DONE: 完成 (block_number > 0 才算真的上链完成) - CANCEL: 已取消 - REQUEST: 请求中 - MANUAL: 待人工审核 - BCODE: 充值码操作 - EXTPEND: 已经发送等待确认 - FAIL: 链上失败等待确认 - INVALID: 无效订单 - VERIFY: 验证中 - PROCES: 处理中 - PEND: 处理中 - DMOVE: 待人工审核 - SPLITPEND: cny提现大于5w,自动分单
 	Status string `json:"status,omitempty"`
 	// Name of the chain used in withdrawals
 	Chain string `json:"chain"`

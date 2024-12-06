@@ -16,8 +16,12 @@ type Ticker struct {
 	Last string `json:"last,omitempty"`
 	// Recent lowest ask
 	LowestAsk string `json:"lowest_ask,omitempty"`
+	// The latest seller's lowest price quantity; does not exist for batch query; exists for single query, and is empty if there is no data
+	LowestSize string `json:"lowest_size,omitempty"`
 	// Recent highest bid
 	HighestBid string `json:"highest_bid,omitempty"`
+	// The latest buyer's highest price quantity; does not exist for batch query; exists for single query, and is empty if there is no data
+	HighestSize string `json:"highest_size,omitempty"`
 	// Change percentage in the last 24h
 	ChangePercentage string `json:"change_percentage,omitempty"`
 	// utc0 timezone, the percentage change in the last 24 hours

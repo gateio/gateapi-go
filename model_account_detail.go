@@ -20,4 +20,6 @@ type AccountDetail struct {
 	// User VIP level
 	Tier int64            `json:"tier,omitempty"`
 	Key  AccountDetailKey `json:"key,omitempty"`
+	// User role: 0 - Ordinary user 1 - Order leader 2 - Follower 3 - Order leader and follower
+	CopyTradingRole int32 `json:"copy_trading_role,omitempty"`
 }

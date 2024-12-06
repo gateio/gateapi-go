@@ -17,7 +17,7 @@ type UnifiedAccount struct {
 	// Whether account is locked
 	Locked   bool                      `json:"locked,omitempty"`
 	Balances map[string]UnifiedBalance `json:"balances,omitempty"`
-	// The total asset value in USD, calculated as the sum of the product of `(available + freeze) * price` for all currencies.
+	// Total account assets converted to USD, i.e. the sum of `(available + freeze) * price`  in all currencies (deprecated, to be deprecated, replaced by unified_account_total)
 	Total string `json:"total,omitempty"`
 	// The total borrowed amount in USD, calculated as the sum of the product of `borrowed * price` for all currencies (excluding points cards).
 	Borrowed string `json:"borrowed,omitempty"`
@@ -45,4 +45,6 @@ type UnifiedAccount struct {
 	SpotOrderLoss string `json:"spot_order_loss,omitempty"`
 	// Spot hedging status, true - enabled, false - not enabled.
 	SpotHedge bool `json:"spot_hedge,omitempty"`
+	// Whether to use funds as margin
+	UseFunding bool `json:"use_funding,omitempty"`
 }

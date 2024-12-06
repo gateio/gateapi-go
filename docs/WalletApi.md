@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**ListSubAccountTransfers**](WalletApi.md#ListSubAccountTransfers) | **Get** /wallet/sub_account_transfers | Retrieve transfer records between main and sub accounts
 [**TransferWithSubAccount**](WalletApi.md#TransferWithSubAccount) | **Post** /wallet/sub_account_transfers | Transfer between main and sub accounts
 [**SubAccountToSubAccount**](WalletApi.md#SubAccountToSubAccount) | **Post** /wallet/sub_account_to_sub_account | Sub-account transfers to sub-account
+[**GetTransferOrderStatus**](WalletApi.md#GetTransferOrderStatus) | **Get** /wallet/order_status | Transfer status query
 [**ListWithdrawStatus**](WalletApi.md#ListWithdrawStatus) | **Get** /wallet/withdraw_status | Retrieve withdrawal status
 [**ListSubAccountBalances**](WalletApi.md#ListSubAccountBalances) | **Get** /wallet/sub_account_balances | Retrieve sub account balances
 [**ListSubAccountMarginBalances**](WalletApi.md#ListSubAccountMarginBalances) | **Get** /wallet/sub_account_margin_balances | Query sub accounts&#39; margin balances
@@ -23,6 +24,7 @@ Method | HTTP request | Description
 [**ListSmallBalance**](WalletApi.md#ListSmallBalance) | **Get** /wallet/small_balance | List small balance
 [**ConvertSmallBalance**](WalletApi.md#ConvertSmallBalance) | **Post** /wallet/small_balance | Convert small balance
 [**ListSmallBalanceHistory**](WalletApi.md#ListSmallBalanceHistory) | **Get** /wallet/small_balance_history | List small balance history
+[**ListPushOrders**](WalletApi.md#ListPushOrders) | **Get** /wallet/push | Retrieve the UID transfer history
 
 
 ## ListCurrencyChains
@@ -327,7 +329,7 @@ func main() {
 
 Transfer between trading accounts
 
-Transfer between different accounts. Currently support transfers between the following:  1. spot - margin 2. spot - futures(perpetual) 3. spot - delivery 4. spot - cross margin 5. spot - options
+Transfer between different accounts. Currently support transfers between the following:  1. spot - margin 2. spot - futures(perpetual) 3. spot - delivery 4. spot - options
 
 ### Required Parameters
 
@@ -476,7 +478,7 @@ func main() {
 
 ## TransferWithSubAccount
 
-> TransferWithSubAccount(ctx, subAccountTransfer)
+> TransactionId TransferWithSubAccount(ctx, subAccountTransfer)
 
 Transfer between main and sub accounts
 
@@ -530,7 +532,7 @@ func main() {
 
 ### Return type
 
- (empty response body)
+[**TransactionId**](TransactionID.md)
 
 ### Authorization
 
@@ -539,7 +541,7 @@ func main() {
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -547,7 +549,7 @@ func main() {
 
 ## SubAccountToSubAccount
 
-> SubAccountToSubAccount(ctx, subAccountToSubAccount)
+> TransactionId SubAccountToSubAccount(ctx, subAccountToSubAccount)
 
 Sub-account transfers to sub-account
 
@@ -601,7 +603,7 @@ func main() {
 
 ### Return type
 
- (empty response body)
+[**TransactionId**](TransactionID.md)
 
 ### Authorization
 
@@ -610,7 +612,86 @@ func main() {
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## GetTransferOrderStatus
+
+> InlineResponse200 GetTransferOrderStatus(ctx, optional)
+
+Transfer status query
+
+Support querying transfer status based on user-defined client_order_id or tx_id returned by the transfer interface
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**optional** | **GetTransferOrderStatusOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a GetTransferOrderStatusOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**clientOrderId** | **optional.String**| The custom ID provided by the customer serves as a safeguard against duplicate transfers. It can be a combination of letters (case-sensitive), numbers, hyphens &#39;-&#39;, and underscores &#39;_&#39;, with a length ranging from 1 to 64 characters. | 
+**txId** | **optional.String**| The transfer operation number and client_order_id cannot be empty at the same time | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    
+    result, _, err := client.WalletApi.GetTransferOrderStatus(ctx, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**InlineResponse200**](inline_response_200.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -1234,7 +1315,7 @@ func main() {
 
 ## ListSmallBalance
 
-> SmallBalance ListSmallBalance(ctx, )
+> []SmallBalance ListSmallBalance(ctx, )
 
 List small balance
 
@@ -1281,7 +1362,7 @@ func main() {
 
 ### Return type
 
-[**SmallBalance**](SmallBalance.md)
+[**[]SmallBalance**](SmallBalance.md)
 
 ### Authorization
 
@@ -1367,7 +1448,7 @@ func main() {
 
 ## ListSmallBalanceHistory
 
-> SmallBalanceHistory ListSmallBalanceHistory(ctx, optional)
+> []SmallBalanceHistory ListSmallBalanceHistory(ctx, optional)
 
 List small balance history
 
@@ -1428,7 +1509,87 @@ func main() {
 
 ### Return type
 
-[**SmallBalanceHistory**](SmallBalanceHistory.md)
+[**[]SmallBalanceHistory**](SmallBalanceHistory.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## ListPushOrders
+
+> []UidPushOrder ListPushOrders(ctx, optional)
+
+Retrieve the UID transfer history
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**optional** | **ListPushOrdersOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a ListPushOrdersOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**id** | **optional.Int32**| Order ID | 
+**from** | **optional.Int32**| The start time of the query record. If not specified, it defaults to 7 days forward from the current time, in seconds Unix timestamp | 
+**to** | **optional.Int32**| The end time of the query record. If not specified, the default is the current time, which is a Unix timestamp in seconds. | 
+**limit** | **optional.Int32**| The maximum number of items returned in the list, the default value is 100 | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    
+    result, _, err := client.WalletApi.ListPushOrders(ctx, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**[]UidPushOrder**](UidPushOrder.md)
 
 ### Authorization
 

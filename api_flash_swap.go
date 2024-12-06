@@ -113,6 +113,8 @@ func (a *FlashSwapApiService) ListFlashSwapCurrencies(ctx context.Context) ([]Fl
 // ListFlashSwapCurrencyPairOpts Optional parameters for the method 'ListFlashSwapCurrencyPair'
 type ListFlashSwapCurrencyPairOpts struct {
 	Currency optional.String
+	Page     optional.Int32
+	Limit    optional.Int32
 }
 
 /*
@@ -121,6 +123,8 @@ ListFlashSwapCurrencyPair List All Supported Currency Pairs In Flash Swap
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListFlashSwapCurrencyPairOpts - Optional Parameters:
   - @param "Currency" (optional.String) -  Retrieve data of the specified currency
+  - @param "Page" (optional.Int32) -  Page number
+  - @param "Limit" (optional.Int32) -  Maximum response items.  Default: 100, minimum: 1, Maximum: 1000
 
 @return []FlashSwapCurrencyPair
 */
@@ -142,6 +146,12 @@ func (a *FlashSwapApiService) ListFlashSwapCurrencyPair(ctx context.Context, loc
 
 	if localVarOptionals != nil && localVarOptionals.Currency.IsSet() {
 		localVarQueryParams.Add("currency", parameterToString(localVarOptionals.Currency.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
+		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

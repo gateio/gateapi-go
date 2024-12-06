@@ -50,6 +50,10 @@ type FuturesTicker struct {
 	BasisValue string `json:"basis_value,omitempty"`
 	// Recent lowest ask
 	LowestAsk string `json:"lowest_ask,omitempty"`
+	// The latest seller's lowest price order quantity
+	LowestSize string `json:"lowest_size,omitempty"`
 	// Recent highest bid
 	HighestBid string `json:"highest_bid,omitempty"`
+	// The latest buyer's highest price order volume
+	HighestSize string `json:"highest_size,omitempty"`
 }

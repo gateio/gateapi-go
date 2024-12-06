@@ -17,6 +17,8 @@ type UnifiedLoanRecord struct {
 	Type string `json:"type,omitempty"`
 	// Repayment type: none - no repayment type, manual_repay - manual repayment, auto_repay - automatic repayment, cancel_auto_repay - automatic repayment after cancellation
 	RepaymentType string `json:"repayment_type,omitempty"`
+	// Loan type, returned when querying loan records. manual_borrow - Manual repayment , auto_borrow - Automatic repayment
+	BorrowType string `json:"borrow_type,omitempty"`
 	// Currency pair
 	CurrencyPair string `json:"currency_pair,omitempty"`
 	// Currency

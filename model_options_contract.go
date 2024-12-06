@@ -45,7 +45,7 @@ type OptionsContract struct {
 	OrderSizeMin int64 `json:"order_size_min,omitempty"`
 	// Maximum order size the contract allowed
 	OrderSizeMax int64 `json:"order_size_max,omitempty"`
-	// deviation between order price and current index price. If price of an order is denoted as order_price, it must meet the following condition:      abs(order_price - mark_price) <= mark_price * order_price_deviate
+	// The positive and negative offset allowed between the order price and the current mark price, that is, the order price `order_price` must meet the following conditions:   order_price is within the range of mark_price +/- order_price_deviate * underlying_price  and does not distinguish between buy and sell orders
 	OrderPriceDeviate string `json:"order_price_deviate,omitempty"`
 	// Referral fee rate discount
 	RefDiscountRate string `json:"ref_discount_rate,omitempty"`

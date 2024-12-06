@@ -24,7 +24,9 @@ Name | Type | Description | Notes
 **BasisRate** | **string** | Basis rate | [optional] 
 **BasisValue** | **string** | Basis value | [optional] 
 **LowestAsk** | **string** | Recent lowest ask | [optional] 
+**LowestSize** | **string** | The latest seller&#39;s lowest price order quantity | [optional] 
 **HighestBid** | **string** | Recent highest bid | [optional] 
+**HighestSize** | **string** | The latest buyer&#39;s highest price order volume | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -15,8 +15,6 @@ type CancelBatchOrder struct {
 	CurrencyPair string `json:"currency_pair"`
 	// Order ID or user custom ID. Custom ID are accepted only within 30 minutes after order creation
 	Id string `json:"id"`
-	// If cancelled order is cross margin order or is portfolio margin account's API key, this field must be set and can only be `cross_margin`If cancelled order is cross margin order, this field must be set and can only be `cross_margin`
-	Account string `json:"account,omitempty"`
 	// Processing Mode: When placing an order, different fields are returned based on action_mode. This field is only valid during the request and is not included in the response result ACK: Asynchronous mode, only returns key order fields RESULT: No clearing information FULL: Full mode (default)
 	ActionMode string `json:"action_mode,omitempty"`
 }

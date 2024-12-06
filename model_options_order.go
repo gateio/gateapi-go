@@ -19,7 +19,7 @@ type OptionsOrder struct {
 	CreateTime float64 `json:"create_time,omitempty"`
 	// Order finished time. Not returned if order is open
 	FinishTime float64 `json:"finish_time,omitempty"`
-	// How the order was finished.  - filled: all filled - cancelled: manually cancelled - liquidated: cancelled because of liquidation - ioc: time in force is `IOC`, finish immediately - auto_deleveraged: finished by ADL - reduce_only: cancelled because of increasing position while `reduce-only` set- position_closed: cancelled because of position close
+	// 结束方式，包括：  - filled: 完全成交 - cancelled: 用户撤销 - liquidated: 强制平仓撤销 - ioc: 未立即完全成交，因为tif设置为ioc - auto_deleveraged: 自动减仓撤销 - reduce_only: 增持仓位撤销，因为设置reduce_only或平仓 - position_closed: 因为仓位平掉了，所以挂单被撤掉 - reduce_out: 只减仓被排除的不容易成交的挂单 - mmp_cancelled: MMP撤销
 	FinishAs string `json:"finish_as,omitempty"`
 	// Order status  - `open`: waiting to be traded - `finished`: finished
 	Status string `json:"status,omitempty"`
@@ -41,6 +41,10 @@ type OptionsOrder struct {
 	IsReduceOnly bool `json:"is_reduce_only,omitempty"`
 	// Is the order for liquidation
 	IsLiq bool `json:"is_liq,omitempty"`
+	// 设置为 true 的时候，为MMP委托
+	Mmp bool `json:"mmp,omitempty"`
+	// 是否为MMP委托。对应请求中的`mmp`。
+	IsMmp bool `json:"is_mmp,omitempty"`
 	// Time in force  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled, taker only - poc: PendingOrCancelled, makes a post-only order that always enjoys a maker fee
 	Tif string `json:"tif,omitempty"`
 	// Size left to be traded

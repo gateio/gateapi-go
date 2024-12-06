@@ -18,14 +18,18 @@ type UnifiedBalance struct {
 	Borrowed string `json:"borrowed,omitempty"`
 	// Negative Liabilities
 	NegativeLiab string `json:"negative_liab,omitempty"`
-	// Borrowing to Open Positions in Futures
+	// Contract opening position borrowing currency (abandoned, to be offline field)
 	FuturesPosLiab string `json:"futures_pos_liab,omitempty"`
 	// Equity
 	Equity string `json:"equity,omitempty"`
-	// Total freeze
+	// Total occupancy (discarded, to be offline field)
 	TotalFreeze string `json:"total_freeze,omitempty"`
 	// Total liabilities
 	TotalLiab string `json:"total_liab,omitempty"`
 	// Spot hedging utilization
 	SpotInUse string `json:"spot_in_use,omitempty"`
+	// Quantity of funding
+	Funding string `json:"funding,omitempty"`
+	// Funding version
+	FundingVersion string `json:"funding_version,omitempty"`
 }

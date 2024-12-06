@@ -27,6 +27,7 @@ Method | HTTP request | Description
 [**ListDeliveryPositionClose**](DeliveryApi.md#ListDeliveryPositionClose) | **Get** /delivery/{settle}/position_close | List position close history
 [**ListDeliveryLiquidates**](DeliveryApi.md#ListDeliveryLiquidates) | **Get** /delivery/{settle}/liquidates | List liquidation history
 [**ListDeliverySettlements**](DeliveryApi.md#ListDeliverySettlements) | **Get** /delivery/{settle}/settlements | List settlement history
+[**ListDeliveryRiskLimitTiers**](DeliveryApi.md#ListDeliveryRiskLimitTiers) | **Get** /delivery/{settle}/risk_limit_tiers | List risk limit tiers
 [**ListPriceTriggeredDeliveryOrders**](DeliveryApi.md#ListPriceTriggeredDeliveryOrders) | **Get** /delivery/{settle}/price_orders | List all auto orders
 [**CreatePriceTriggeredDeliveryOrder**](DeliveryApi.md#CreatePriceTriggeredDeliveryOrder) | **Post** /delivery/{settle}/price_orders | Create a price-triggered order
 [**CancelPriceTriggeredDeliveryOrderList**](DeliveryApi.md#CancelPriceTriggeredDeliveryOrderList) | **Delete** /delivery/{settle}/price_orders | Cancel all open orders
@@ -1746,6 +1747,82 @@ func main() {
 ### Authorization
 
 [apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## ListDeliveryRiskLimitTiers
+
+> []FuturesLimitRiskTiers ListDeliveryRiskLimitTiers(ctx, settle, optional)
+
+List risk limit tiers
+
+When the 'contract' parameter is not passed, the default is to query the risk limits for the top 100 markets.'Limit' and 'offset' correspond to pagination queries at the market level, not to the length of the returned array. This only takes effect when the 'contract' parameter is empty.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**settle** | **string**| Settle currency | 
+**optional** | **ListDeliveryRiskLimitTiersOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a ListDeliveryRiskLimitTiersOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**contract** | **optional.String**| Futures contract | 
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.Background()
+    settle := "usdt" // string - Settle currency
+    
+    result, _, err := client.DeliveryApi.ListDeliveryRiskLimitTiers(ctx, settle, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**[]FuturesLimitRiskTiers**](FuturesLimitRiskTiers.md)
+
+### Authorization
+
+No authorization required
 
 ### HTTP request headers
 

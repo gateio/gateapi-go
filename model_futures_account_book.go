@@ -24,4 +24,6 @@ type FuturesAccountBook struct {
 	Contract string `json:"contract,omitempty"`
 	// trade id
 	TradeId string `json:"trade_id,omitempty"`
+	// 账户变更记录 id
+	Id string `json:"id,omitempty"`
 }

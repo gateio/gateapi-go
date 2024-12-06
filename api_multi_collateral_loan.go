@@ -15,6 +15,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"reflect"
 	"strings"
 )
 
@@ -1040,6 +1041,119 @@ func (a *MultiCollateralLoanApiService) GetMultiCollateralFixRate(ctx context.Co
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	ctx = context.WithValue(ctx, ContextPublic, true)
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+// GetMultiCollateralCurrentRateOpts Optional parameters for the method 'GetMultiCollateralCurrentRate'
+type GetMultiCollateralCurrentRateOpts struct {
+	VipLevel optional.String
+}
+
+/*
+GetMultiCollateralCurrentRate Query the current interest rate of the currency
+Query the current interest rate of the currency in the last hour. The current interest rate is updated every hour.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param currencies Specify the currency name to query the array. The array is separated by commas and has a maximum of 100 items.
+  - @param optional nil or *GetMultiCollateralCurrentRateOpts - Optional Parameters:
+  - @param "VipLevel" (optional.String) -  VIP level, defaults to 0 if not transferred
+
+@return []CollateralCurrentRate
+*/
+func (a *MultiCollateralLoanApiService) GetMultiCollateralCurrentRate(ctx context.Context, currencies []string, localVarOptionals *GetMultiCollateralCurrentRateOpts) ([]CollateralCurrentRate, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []CollateralCurrentRate
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/loan/multi_collateral/current_rate"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if len(currencies) < 1 {
+		return localVarReturnValue, nil, reportError("currencies must have at least 1 elements")
+	}
+	if len(currencies) > 100 {
+		return localVarReturnValue, nil, reportError("currencies must have less than 100 elements")
+	}
+
+	{
+		t := currencies
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("currencies", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("currencies", parameterToString(t, "multi"))
+		}
+	}
+	if localVarOptionals != nil && localVarOptionals.VipLevel.IsSet() {
+		localVarQueryParams.Add("vip_level", parameterToString(localVarOptionals.VipLevel.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

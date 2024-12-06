@@ -16,7 +16,7 @@ Method | HTTP request | Description
 [**ListContractStats**](FuturesApi.md#ListContractStats) | **Get** /futures/{settle}/contract_stats | Futures stats
 [**GetIndexConstituents**](FuturesApi.md#GetIndexConstituents) | **Get** /futures/{settle}/index_constituents/{index} | Get index constituents
 [**ListLiquidatedOrders**](FuturesApi.md#ListLiquidatedOrders) | **Get** /futures/{settle}/liq_orders | Retrieve liquidation history
-[**ListRiskLimitTiers**](FuturesApi.md#ListRiskLimitTiers) | **Get** /futures/{settle}/risk_limit_tiers | List risk limit tiers
+[**ListFuturesRiskLimitTiers**](FuturesApi.md#ListFuturesRiskLimitTiers) | **Get** /futures/{settle}/risk_limit_tiers | List risk limit tiers
 [**ListFuturesAccounts**](FuturesApi.md#ListFuturesAccounts) | **Get** /futures/{settle}/accounts | Query futures account
 [**ListFuturesAccountBook**](FuturesApi.md#ListFuturesAccountBook) | **Get** /futures/{settle}/account_book | Query account book
 [**ListPositions**](FuturesApi.md#ListPositions) | **Get** /futures/{settle}/positions | List all positions of a user
@@ -45,6 +45,7 @@ Method | HTTP request | Description
 [**CountdownCancelAllFutures**](FuturesApi.md#CountdownCancelAllFutures) | **Post** /futures/{settle}/countdown_cancel_all | Countdown cancel orders
 [**GetFuturesFee**](FuturesApi.md#GetFuturesFee) | **Get** /futures/{settle}/fee | Query user trading fee rates
 [**CancelBatchFutureOrders**](FuturesApi.md#CancelBatchFutureOrders) | **Post** /futures/{settle}/batch_cancel_orders | Cancel a batch of orders with an ID list
+[**AmendBatchFutureOrders**](FuturesApi.md#AmendBatchFutureOrders) | **Post** /futures/{settle}/batch_amend_orders | Batch modify orders with specified IDs
 [**ListPriceTriggeredOrders**](FuturesApi.md#ListPriceTriggeredOrders) | **Get** /futures/{settle}/price_orders | List all auto orders
 [**CreatePriceTriggeredOrder**](FuturesApi.md#CreatePriceTriggeredOrder) | **Post** /futures/{settle}/price_orders | Create a price-triggered order
 [**CancelPriceTriggeredOrderList**](FuturesApi.md#CancelPriceTriggeredOrderList) | **Delete** /futures/{settle}/price_orders | Cancel all open orders
@@ -598,6 +599,8 @@ Optional parameters are passed through a pointer to a ListFuturesFundingRateHist
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
+**from** | **optional.Int64**| Start timestamp | 
+**to** | **optional.Int64**| End timestamp | 
 
 ### Example
 
@@ -940,11 +943,13 @@ No authorization required
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
-## ListRiskLimitTiers
+## ListFuturesRiskLimitTiers
 
-> []FuturesLimitRiskTiers ListRiskLimitTiers(ctx, settle, contract)
+> []FuturesLimitRiskTiers ListFuturesRiskLimitTiers(ctx, settle, optional)
 
 List risk limit tiers
+
+When the 'contract' parameter is not passed, the default is to query the risk limits for the top 100 markets.'Limit' and 'offset' correspond to pagination queries at the market level, not to the length of the returned array. This only takes effect when the 'contract' parameter is empty.
 
 ### Required Parameters
 
@@ -952,7 +957,17 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
-**contract** | **string**| Futures contract | 
+**optional** | **ListFuturesRiskLimitTiersOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a ListFuturesRiskLimitTiersOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**contract** | **optional.String**| Futures contract, return related data only if specified | 
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
 
 ### Example
 
@@ -972,9 +987,8 @@ func main() {
     // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
     ctx := context.Background()
     settle := "usdt" // string - Settle currency
-    contract := "BTC_USDT" // string - Futures contract
     
-    result, _, err := client.FuturesApi.ListRiskLimitTiers(ctx, settle, contract)
+    result, _, err := client.FuturesApi.ListFuturesRiskLimitTiers(ctx, settle, nil)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -1478,7 +1492,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
 **contract** | **string**| Futures contract | 
-**riskLimit** | **string**| New position risk limit | 
+**riskLimit** | **string**| New Risk Limit Value | 
 
 ### Example
 
@@ -1505,7 +1519,7 @@ func main() {
                             )
     settle := "usdt" // string - Settle currency
     contract := "BTC_USDT" // string - Futures contract
-    riskLimit := "10" // string - New position risk limit
+    riskLimit := "1000000" // string - New Risk Limit Value
     
     result, _, err := client.FuturesApi.UpdatePositionRiskLimit(ctx, settle, contract, riskLimit)
     if err != nil {
@@ -1852,7 +1866,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
 **contract** | **string**| Futures contract | 
-**riskLimit** | **string**| New position risk limit | 
+**riskLimit** | **string**| New Risk Limit Value | 
 
 ### Example
 
@@ -1879,7 +1893,7 @@ func main() {
                             )
     settle := "usdt" // string - Settle currency
     contract := "BTC_USDT" // string - Futures contract
-    riskLimit := "10" // string - New position risk limit
+    riskLimit := "1000000" // string - New Risk Limit Value
     
     result, _, err := client.FuturesApi.UpdateDualModePositionRiskLimit(ctx, settle, contract, riskLimit)
     if err != nil {
@@ -1999,7 +2013,7 @@ func main() {
 
 ## CreateFuturesOrder
 
-> FuturesOrder CreateFuturesOrder(ctx, settle, futuresOrder)
+> FuturesOrder CreateFuturesOrder(ctx, settle, futuresOrder, optional)
 
 Create a futures order
 
@@ -2012,6 +2026,15 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
 **futuresOrder** | [**FuturesOrder**](FuturesOrder.md)|  | 
+**optional** | **CreateFuturesOrderOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a CreateFuturesOrderOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
 ### Example
 
@@ -2039,7 +2062,7 @@ func main() {
     settle := "usdt" // string - Settle currency
     futuresOrder := gateapi.FuturesOrder{} // FuturesOrder - 
     
-    result, _, err := client.FuturesApi.CreateFuturesOrder(ctx, settle, futuresOrder)
+    result, _, err := client.FuturesApi.CreateFuturesOrder(ctx, settle, futuresOrder, nil)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -2093,6 +2116,7 @@ Optional parameters are passed through a pointer to a CancelFuturesOrdersOpts st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 **side** | **optional.String**| All bids or asks. Both included if not specified | 
 
 ### Example
@@ -2236,7 +2260,7 @@ func main() {
 
 ## CreateBatchFuturesOrder
 
-> []BatchFuturesOrder CreateBatchFuturesOrder(ctx, settle, futuresOrder)
+> []BatchFuturesOrder CreateBatchFuturesOrder(ctx, settle, futuresOrder, optional)
 
 Create a batch of futures orders
 
@@ -2249,6 +2273,15 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
 **futuresOrder** | [**[]FuturesOrder**](FuturesOrder.md)|  | 
+**optional** | **CreateBatchFuturesOrderOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a CreateBatchFuturesOrderOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
 ### Example
 
@@ -2276,7 +2309,7 @@ func main() {
     settle := "usdt" // string - Settle currency
     futuresOrder := []gateapi.FuturesOrder{gateapi.FuturesOrder{}} // []FuturesOrder - 
     
-    result, _, err := client.FuturesApi.CreateBatchFuturesOrder(ctx, settle, futuresOrder)
+    result, _, err := client.FuturesApi.CreateBatchFuturesOrder(ctx, settle, futuresOrder, nil)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -2382,7 +2415,7 @@ func main() {
 
 ## AmendFuturesOrder
 
-> FuturesOrder AmendFuturesOrder(ctx, settle, orderId, futuresOrderAmendment)
+> FuturesOrder AmendFuturesOrder(ctx, settle, orderId, futuresOrderAmendment, optional)
 
 Amend an order
 
@@ -2394,6 +2427,15 @@ Name | Type | Description  | Notes
 **settle** | **string**| Settle currency | 
 **orderId** | **string**| Order ID returned, or user custom ID(i.e., &#x60;text&#x60; field). Operations based on custom ID can only be checked when the order is in orderbook.  When the order is finished, it can be checked within 60 seconds after the end of the order.  After that, only order ID is accepted. | 
 **futuresOrderAmendment** | [**FuturesOrderAmendment**](FuturesOrderAmendment.md)|  | 
+**optional** | **AmendFuturesOrderOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a AmendFuturesOrderOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
 ### Example
 
@@ -2422,7 +2464,7 @@ func main() {
     orderId := "12345" // string - Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID can only be checked when the order is in orderbook.  When the order is finished, it can be checked within 60 seconds after the end of the order.  After that, only order ID is accepted.
     futuresOrderAmendment := gateapi.FuturesOrderAmendment{} // FuturesOrderAmendment - 
     
-    result, _, err := client.FuturesApi.AmendFuturesOrder(ctx, settle, orderId, futuresOrderAmendment)
+    result, _, err := client.FuturesApi.AmendFuturesOrder(ctx, settle, orderId, futuresOrderAmendment, nil)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -2455,7 +2497,7 @@ func main() {
 
 ## CancelFuturesOrder
 
-> FuturesOrder CancelFuturesOrder(ctx, settle, orderId)
+> FuturesOrder CancelFuturesOrder(ctx, settle, orderId, optional)
 
 Cancel a single order
 
@@ -2466,6 +2508,15 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
 **orderId** | **string**| Order ID returned, or user custom ID(i.e., &#x60;text&#x60; field). Operations based on custom ID can only be checked when the order is in orderbook.  When the order is finished, it can be checked within 60 seconds after the end of the order.  After that, only order ID is accepted. | 
+**optional** | **CancelFuturesOrderOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a CancelFuturesOrderOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
 ### Example
 
@@ -2493,7 +2544,7 @@ func main() {
     settle := "usdt" // string - Settle currency
     orderId := "12345" // string - Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID can only be checked when the order is in orderbook.  When the order is finished, it can be checked within 60 seconds after the end of the order.  After that, only order ID is accepted.
     
-    result, _, err := client.FuturesApi.CancelFuturesOrder(ctx, settle, orderId)
+    result, _, err := client.FuturesApi.CancelFuturesOrder(ctx, settle, orderId, nil)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -3088,7 +3139,7 @@ func main() {
 
 ## CancelBatchFutureOrders
 
-> []FutureCancelOrderResult CancelBatchFutureOrders(ctx, settle, requestBody)
+> []FutureCancelOrderResult CancelBatchFutureOrders(ctx, settle, requestBody, optional)
 
 Cancel a batch of orders with an ID list
 
@@ -3101,6 +3152,15 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
 **requestBody** | [**[]string**](string.md)|  | 
+**optional** | **CancelBatchFutureOrdersOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a CancelBatchFutureOrdersOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
 ### Example
 
@@ -3128,7 +3188,7 @@ func main() {
     settle := "usdt" // string - Settle currency
     requestBody := []string{"requestBody_example"} // []string - 
     
-    result, _, err := client.FuturesApi.CancelBatchFutureOrders(ctx, settle, requestBody)
+    result, _, err := client.FuturesApi.CancelBatchFutureOrders(ctx, settle, requestBody, nil)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -3145,6 +3205,88 @@ func main() {
 ### Return type
 
 [**[]FutureCancelOrderResult**](FutureCancelOrderResult.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## AmendBatchFutureOrders
+
+> []BatchFuturesOrder AmendBatchFutureOrders(ctx, settle, batchAmendOrderReq, optional)
+
+Batch modify orders with specified IDs
+
+You can specify multiple different order IDs. You can only modify up to 10 orders in one request.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**settle** | **string**| Settle currency | 
+**batchAmendOrderReq** | [**[]BatchAmendOrderReq**](BatchAmendOrderReq.md)|  | 
+**optional** | **AmendBatchFutureOrdersOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a AmendBatchFutureOrdersOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency
+    batchAmendOrderReq := []gateapi.BatchAmendOrderReq{gateapi.BatchAmendOrderReq{}} // []BatchAmendOrderReq - 
+    
+    result, _, err := client.FuturesApi.AmendBatchFutureOrders(ctx, settle, batchAmendOrderReq, nil)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**[]BatchFuturesOrder**](BatchFuturesOrder.md)
 
 ### Authorization
 
@@ -3314,7 +3456,7 @@ func main() {
 
 ## CancelPriceTriggeredOrderList
 
-> []FuturesPriceTriggeredOrder CancelPriceTriggeredOrderList(ctx, settle, contract)
+> []FuturesPriceTriggeredOrder CancelPriceTriggeredOrderList(ctx, settle, optional)
 
 Cancel all open orders
 
@@ -3324,7 +3466,15 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
-**contract** | **string**| Futures contract | 
+**optional** | **CancelPriceTriggeredOrderListOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a CancelPriceTriggeredOrderListOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**contract** | **optional.String**| Futures contract, return related data only if specified | 
 
 ### Example
 
@@ -3350,9 +3500,8 @@ func main() {
                              }
                             )
     settle := "usdt" // string - Settle currency
-    contract := "BTC_USDT" // string - Futures contract
     
-    result, _, err := client.FuturesApi.CancelPriceTriggeredOrderList(ctx, settle, contract)
+    result, _, err := client.FuturesApi.CancelPriceTriggeredOrderList(ctx, settle, nil)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())

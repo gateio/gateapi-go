@@ -21,4 +21,6 @@ type FuturesLimitRiskTiers struct {
 	MaintenanceRate string `json:"maintenance_rate,omitempty"`
 	// Maximum leverage
 	LeverageMax string `json:"leverage_max,omitempty"`
+	// Markets, visible only during market pagination requests
+	Contract string `json:"contract,omitempty"`
 }

@@ -92,6 +92,8 @@ Optional parameters are passed through a pointer to a ListFlashSwapCurrencyPairO
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **currency** | **optional.String**| Retrieve data of the specified currency | 
+**page** | **optional.Int32**| Page number | [default to 1]
+**limit** | **optional.Int32**| Maximum response items.  Default: 100, minimum: 1, Maximum: 1000 | [default to 1000]
 
 ### Example
 
