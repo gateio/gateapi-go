@@ -4,71 +4,12 @@ All URIs are relative to *https://api.gateio.ws/api/v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ListFlashSwapCurrencies**](FlashSwapApi.md#ListFlashSwapCurrencies) | **Get** /flash_swap/currencies | List All Supported Currencies In Flash Swap (deprecated)
 [**ListFlashSwapCurrencyPair**](FlashSwapApi.md#ListFlashSwapCurrencyPair) | **Get** /flash_swap/currency_pairs | List All Supported Currency Pairs In Flash Swap
 [**ListFlashSwapOrders**](FlashSwapApi.md#ListFlashSwapOrders) | **Get** /flash_swap/orders | List all flash swap orders
 [**CreateFlashSwapOrder**](FlashSwapApi.md#CreateFlashSwapOrder) | **Post** /flash_swap/orders | Create a flash swap order
 [**GetFlashSwapOrder**](FlashSwapApi.md#GetFlashSwapOrder) | **Get** /flash_swap/orders/{order_id} | Get a single flash swap order&#39;s detail
 [**PreviewFlashSwapOrder**](FlashSwapApi.md#PreviewFlashSwapOrder) | **Post** /flash_swap/orders/preview | Initiate a flash swap order preview
 
-
-## ListFlashSwapCurrencies
-
-> []FlashSwapCurrency ListFlashSwapCurrencies(ctx, )
-
-List All Supported Currencies In Flash Swap (deprecated)
-
-### Required Parameters
-
-
-### Example
-
-```golang
-package main
-
-import (
-    "context"
-    "fmt"
-
-    "github.com/gateio/gateapi-go/v6"
-)
-
-func main() {
-    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-    // uncomment the next line if your are testing against testnet
-    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
-    ctx := context.Background()
-    
-    result, _, err := client.FlashSwapApi.ListFlashSwapCurrencies(ctx)
-    if err != nil {
-        if e, ok := err.(gateapi.GateAPIError); ok {
-            fmt.Printf("gate api error: %s\n", e.Error())
-        } else {
-            fmt.Printf("generic error: %s\n", err.Error())
-        }
-    } else {
-        fmt.Println(result)
-    }
-}
-```
-
-
-### Return type
-
-[**[]FlashSwapCurrency**](FlashSwapCurrency.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 ## ListFlashSwapCurrencyPair
 

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **User** | **int32** | User ID | [optional] [readonly] 
 **CreateTime** | **float64** | Creation time of order | [optional] [readonly] 
 **FinishTime** | **float64** | Order finished time. Not returned if order is open | [optional] [readonly] 
-**FinishAs** | **string** | 结束方式，包括：  - filled: 完全成交 - cancelled: 用户撤销 - liquidated: 强制平仓撤销 - ioc: 未立即完全成交，因为tif设置为ioc - auto_deleveraged: 自动减仓撤销 - reduce_only: 增持仓位撤销，因为设置reduce_only或平仓 - position_closed: 因为仓位平掉了，所以挂单被撤掉 - reduce_out: 只减仓被排除的不容易成交的挂单 - mmp_cancelled: MMP撤销 | [optional] [readonly] 
+**FinishAs** | **string** | Ending method, including:  - filled: fully completed - canceled: user canceled - liquidated: forced liquidation cancellation - ioc: Not fully filled immediately because tif is set to ioc - auto_deleveraged: automatic deleveraging cancel - reduce_only: Increased position is cancelled, because reduce_only is set or the position is closed - position_closed: Because the position was closed, the pending order was canceled - reduce_out: Only reduce the excluded pending orders that are not easy to be filled - mmp_cancelled: MMP canceled | [optional] [readonly] 
 **Status** | **string** | Order status  - &#x60;open&#x60;: waiting to be traded - &#x60;finished&#x60;: finished | [optional] [readonly] 
 **Contract** | **string** | Contract name | 
 **Size** | **int64** | Order size. Specify positive number to make a bid, and negative number to ask | 
@@ -19,8 +19,8 @@ Name | Type | Description | Notes
 **ReduceOnly** | **bool** | Set as &#x60;true&#x60; to be reduce-only order | [optional] [default to false]
 **IsReduceOnly** | **bool** | Is the order reduce-only | [optional] [readonly] 
 **IsLiq** | **bool** | Is the order for liquidation | [optional] [readonly] 
-**Mmp** | **bool** | 设置为 true 的时候，为MMP委托 | [optional] [default to false]
-**IsMmp** | **bool** | 是否为MMP委托。对应请求中的&#x60;mmp&#x60;。 | [optional] [readonly] 
+**Mmp** | **bool** | When set to true, delegate to MMP | [optional] [default to false]
+**IsMmp** | **bool** | Whether it is MMP delegation. Corresponds to &#x60;mmp&#x60; in the request. | [optional] [readonly] 
 **Tif** | **string** | Time in force  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled, taker only - poc: PendingOrCancelled, makes a post-only order that always enjoys a maker fee | [optional] [default to TIF_GTC]
 **Left** | **int64** | Size left to be traded | [optional] [readonly] 
 **FillPrice** | **string** | Fill price of the order | [optional] [readonly] 

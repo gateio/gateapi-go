@@ -5,8 +5,6 @@ All URIs are relative to *https://api.gateio.ws/api/v4*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ListUnifiedAccounts**](UnifiedApi.md#ListUnifiedAccounts) | **Get** /unified/accounts | Get unified account information
-[**ListUnifiedAccountMode**](UnifiedApi.md#ListUnifiedAccountMode) | **Get** /unified/account_mode | Inquire about unified account mode (deprecated)
-[**SetUnifiedAccountMode**](UnifiedApi.md#SetUnifiedAccountMode) | **Post** /unified/account_mode | Set unified account mode (deprecated)
 [**GetUnifiedBorrowable**](UnifiedApi.md#GetUnifiedBorrowable) | **Get** /unified/borrowable | Query about the maximum borrowing for the unified account
 [**GetUnifiedTransferable**](UnifiedApi.md#GetUnifiedTransferable) | **Get** /unified/transferable | Query about the maximum transferable for the unified account
 [**ListUnifiedLoans**](UnifiedApi.md#ListUnifiedLoans) | **Get** /unified/loans | List loans
@@ -98,141 +96,6 @@ func main() {
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-## ListUnifiedAccountMode
-
-> map[string]bool ListUnifiedAccountMode(ctx, )
-
-Inquire about unified account mode (deprecated)
-
-cross_margin - Spot full-margin trading, usdt_futures - USDT perpetual futures
-
-### Required Parameters
-
-
-### Example
-
-```golang
-package main
-
-import (
-    "context"
-    "fmt"
-
-    "github.com/gateio/gateapi-go/v6"
-)
-
-func main() {
-    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-    // uncomment the next line if your are testing against testnet
-    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
-    ctx := context.WithValue(context.Background(),
-                             gateapi.ContextGateAPIV4,
-                             gateapi.GateAPIV4{
-                                 Key:    "YOUR_API_KEY",
-                                 Secret: "YOUR_API_SECRET",
-                             }
-                            )
-    
-    result, _, err := client.UnifiedApi.ListUnifiedAccountMode(ctx)
-    if err != nil {
-        if e, ok := err.(gateapi.GateAPIError); ok {
-            fmt.Printf("gate api error: %s\n", e.Error())
-        } else {
-            fmt.Printf("generic error: %s\n", err.Error())
-        }
-    } else {
-        fmt.Println(result)
-    }
-}
-```
-
-
-### Return type
-
-**map[string]bool**
-
-### Authorization
-
-[apiv4](../README.md#apiv4)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-## SetUnifiedAccountMode
-
-> map[string]bool SetUnifiedAccountMode(ctx, unifiedMode)
-
-Set unified account mode (deprecated)
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**unifiedMode** | [**UnifiedMode**](UnifiedMode.md)|  | 
-
-### Example
-
-```golang
-package main
-
-import (
-    "context"
-    "fmt"
-
-    "github.com/gateio/gateapi-go/v6"
-)
-
-func main() {
-    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-    // uncomment the next line if your are testing against testnet
-    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
-    ctx := context.WithValue(context.Background(),
-                             gateapi.ContextGateAPIV4,
-                             gateapi.GateAPIV4{
-                                 Key:    "YOUR_API_KEY",
-                                 Secret: "YOUR_API_SECRET",
-                             }
-                            )
-    unifiedMode := gateapi.UnifiedMode{} // UnifiedMode - 
-    
-    result, _, err := client.UnifiedApi.SetUnifiedAccountMode(ctx, unifiedMode)
-    if err != nil {
-        if e, ok := err.(gateapi.GateAPIError); ok {
-            fmt.Printf("gate api error: %s\n", e.Error())
-        } else {
-            fmt.Printf("generic error: %s\n", err.Error())
-        }
-    } else {
-        fmt.Println(result)
-    }
-}
-```
-
-
-### Return type
-
-**map[string]bool**
-
-### Authorization
-
-[apiv4](../README.md#apiv4)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -823,7 +686,7 @@ func main() {
 
 Set mode of the unified account
 
-每种账户模式的切换只需要传对应账户模式的参数，同时支持在切换账户模式时打开或关闭对应账户模式下的配置开关   - 开通经典账户模式时，mode=classic ```     PUT /unified/unified_mode     {       \"mode\": \"classic\"     } ``` - 开通跨币种保证金模式，mode=multi_currency ```     PUT /unified/unified_mode     {       \"mode\": \"multi_currency\",       \"settings\": {          \"usdt_futures\": true       }     } ``` - 开通组合保证金模式时，mode=portfolio ```     PUT /unified/unified_mode     {       \"mode\": \"portfolio\",       \"settings\": {          \"spot_hedge\": true       }     } ``` - 开通组合保证金模式时，mode=single_currency ```     PUT /unified/unified_mode     {       \"mode\": \"single_currency\"     } ```
+Switching each account mode only requires passing the parameters of the corresponding account mode, and supports turning on or off the configuration switch in the corresponding account mode when switching the account mode  - When opening the classic account mode, mode=classic ```  PUT /unified/unified_mode  {  \"mode\": \"classic\"  } ``` - Open the cross-currency margin mode, mode=multi_currency ```  PUT /unified/unified_mode  {  \"mode\": \"multi_currency\",  \"settings\": {  \"usdt_futures\": true  }  } ``` - When the portfolio margin mode is enabled, mode=portfolio ```  PUT /unified/unified_mode  {  \"mode\": \"portfolio\",  \"settings\": {  \"spot_hedge\": true  }  } ``` - When the portfolio margin mode is enabled, mode=single_currency ```  PUT /unified/unified_mode  {  \"mode\": \"single_currency\"  } ```
 
 ### Required Parameters
 

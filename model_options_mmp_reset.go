@@ -13,16 +13,16 @@ package gateapi
 type OptionsMmpReset struct {
 	// Underlying
 	Underlying string `json:"underlying"`
-	// 时间窗口（毫秒），1-5000之间，0表示停用MMP
+	// Time window (milliseconds), between 1-5000, 0 means disabling MMP
 	Window int32 `json:"window,omitempty"`
-	// 冻结时长（毫秒），0表示一直冻结，需要调用重置API解冻
+	// Freeze duration (milliseconds), 0 means always frozen, need to call reset API to unfreeze
 	FrozenPeriod int32 `json:"frozen_period,omitempty"`
-	// 成交量上限（正数，至多2位小数）
+	// Trading volume upper limit (positive number, up to 2 decimal places)
 	QtyLimit string `json:"qty_limit,omitempty"`
-	// 净delta值上限（正数，至多2位小数）
+	// Upper limit of net delta value (positive number, up to 2 decimal places)
 	DeltaLimit string `json:"delta_limit,omitempty"`
-	// 触发冻结时间（毫秒），0表示没有触发冻结
+	// Trigger freeze time (milliseconds), 0 means no freeze is triggered
 	TriggerTimeMs int64 `json:"trigger_time_ms,omitempty"`
-	// 解冻时间（毫秒），如果未配置冻结时长，触发冻结后无解冻时间
+	// Unfreeze time (milliseconds). If the freeze duration is not configured, there will be no unfreeze time after the freeze is triggered.
 	FrozenUntilMs int64 `json:"frozen_until_ms,omitempty"`
 }

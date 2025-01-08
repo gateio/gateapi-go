@@ -13,7 +13,7 @@ package gateapi
 type OrderPatch struct {
 	// Currency pair
 	CurrencyPair string `json:"currency_pair,omitempty"`
-	// 指定查询账户。
+	// Specify query account.
 	Account string `json:"account,omitempty"`
 	// New order amount. `amount` and `price` must specify one of them
 	Amount string `json:"amount,omitempty"`

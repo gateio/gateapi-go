@@ -12,7 +12,7 @@ package gateapi
 type UnifiedSettings struct {
 	// USDT contract switch. In cross-currency margin mode, it can only be turned on and not off
 	UsdtFutures bool `json:"usdt_futures,omitempty"`
-	// 现货对冲开关。
+	// Spot hedging switch.
 	SpotHedge bool `json:"spot_hedge,omitempty"`
 	// When the mode is set to combined margin mode, will funds be used as margin
 	UseFunding bool `json:"use_funding,omitempty"`

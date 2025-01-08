@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **UsdtFutures** | **bool** | USDT contract switch. In cross-currency margin mode, it can only be turned on and not off | [optional] 
-**SpotHedge** | **bool** | 现货对冲开关。 | [optional] 
+**SpotHedge** | **bool** | Spot hedging switch.  | [optional] 
 **UseFunding** | **bool** | When the mode is set to combined margin mode, will funds be used as margin | [optional] 
 **Options** | **bool** | Option switch. In cross-currency margin mode, it can only be turned on and not off | [optional] 
 
