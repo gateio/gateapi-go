@@ -28,7 +28,7 @@ type UnifiedBalance struct {
 	TotalLiab string `json:"total_liab,omitempty"`
 	// The amount of spot hedging is valid in the combined margin mode, and is 0 in other margin modes such as single currency and cross-currency margin modes
 	SpotInUse string `json:"spot_in_use,omitempty"`
-	// Yubibao financial management amount, effective when Yubibao financial management is turned on as a unified account margin switch
+	// Uniloan financial management amount, effective when Uniloan financial management is turned on as a unified account margin switch
 	Funding string `json:"funding,omitempty"`
 	// Funding version
 	FundingVersion string `json:"funding_version,omitempty"`

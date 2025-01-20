@@ -37,4 +37,6 @@ type CurrencyPair struct {
 	SellStart int64 `json:"sell_start,omitempty"`
 	// Buy start unix timestamp in seconds
 	BuyStart int64 `json:"buy_start,omitempty"`
+	// Trading pair type, normal: normal, premarket: pre-market
+	Type string `json:"type,omitempty"`
 }

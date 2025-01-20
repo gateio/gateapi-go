@@ -14,7 +14,7 @@ type UnifiedSettings struct {
 	UsdtFutures bool `json:"usdt_futures,omitempty"`
 	// Spot hedging switch.
 	SpotHedge bool `json:"spot_hedge,omitempty"`
-	// When the mode is set to combined margin mode, will funds be used as margin
+	// switch, when the mode is cross-currency margin mode, whether to use Uniloan financial funds as margin
 	UseFunding bool `json:"use_funding,omitempty"`
 	// Option switch. In cross-currency margin mode, it can only be turned on and not off
 	Options bool `json:"options,omitempty"`

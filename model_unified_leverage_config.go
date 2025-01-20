@@ -22,6 +22,6 @@ type UnifiedLeverageConfig struct {
 	AvailableMargin string `json:"available_margin,omitempty"`
 	// The current leverage you can choose is
 	Borrowable string `json:"borrowable,omitempty"`
-	// The maximum amount of margin that can be borrowed and the maximum amount of Yubibao that can be borrowed, whichever is smaller
+	// The maximum amount of margin that can be borrowed and the maximum amount of Uniloan that can be borrowed, whichever is smaller
 	ExceptLeverageBorrowable string `json:"except_leverage_borrowable,omitempty"`
 }

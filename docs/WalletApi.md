@@ -1548,6 +1548,7 @@ Name | Type | Description  | Notes
 **to** | **optional.Int32**| The end time of the query record. If not specified, the default is the current time, which is a Unix timestamp in seconds. | 
 **limit** | **optional.Int32**| The maximum number of items returned in the list, the default value is 100 | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
+**transactionType** | **optional.String**| The list returns the order type &#x60;withdraw&#x60;, &#x60;deposit&#x60;, the default is &#x60;withdraw&#x60;. | [default to withdraw]
 
 ### Example
 

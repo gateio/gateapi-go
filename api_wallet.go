@@ -2060,11 +2060,12 @@ func (a *WalletApiService) ListSmallBalanceHistory(ctx context.Context, localVar
 
 // ListPushOrdersOpts Optional parameters for the method 'ListPushOrders'
 type ListPushOrdersOpts struct {
-	Id     optional.Int32
-	From   optional.Int32
-	To     optional.Int32
-	Limit  optional.Int32
-	Offset optional.Int32
+	Id              optional.Int32
+	From            optional.Int32
+	To              optional.Int32
+	Limit           optional.Int32
+	Offset          optional.Int32
+	TransactionType optional.String
 }
 
 /*
@@ -2076,6 +2077,7 @@ ListPushOrders Retrieve the UID transfer history
   - @param "To" (optional.Int32) -  The end time of the query record. If not specified, the default is the current time, which is a Unix timestamp in seconds.
   - @param "Limit" (optional.Int32) -  The maximum number of items returned in the list, the default value is 100
   - @param "Offset" (optional.Int32) -  List offset, starting from 0
+  - @param "TransactionType" (optional.String) -  The list returns the order type `withdraw`, `deposit`, the default is `withdraw`.
 
 @return []UidPushOrder
 */
@@ -2109,6 +2111,9 @@ func (a *WalletApiService) ListPushOrders(ctx context.Context, localVarOptionals
 	}
 	if localVarOptionals != nil && localVarOptionals.Offset.IsSet() {
 		localVarQueryParams.Add("offset", parameterToString(localVarOptionals.Offset.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.TransactionType.IsSet() {
+		localVarQueryParams.Add("transaction_type", parameterToString(localVarOptionals.TransactionType.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

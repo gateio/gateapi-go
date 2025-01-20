@@ -26,4 +26,6 @@ type UidPushOrder struct {
 	Status string `json:"status,omitempty"`
 	// PENDING Reason Tips
 	Message string `json:"message,omitempty"`
+	// Order Type
+	TransactionType string `json:"transaction_type,omitempty"`
 }

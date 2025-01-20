@@ -1377,7 +1377,7 @@ func (a *UnifiedApiService) CalculatePortfolioMargin(ctx context.Context, unifie
 }
 
 /*
-GetUserLeverageCurrencyConfig The maximum and minimum leverage multiples that users can set for a currency type are:
+GetUserLeverageCurrencyConfig Minimum currency leverage that can be set
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param currency Currency
 

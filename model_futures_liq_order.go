@@ -16,6 +16,8 @@ type FuturesLiqOrder struct {
 	Contract string `json:"contract,omitempty"`
 	// User position size
 	Size int64 `json:"size,omitempty"`
+	// Number of forced liquidation orders
+	OrderSize int64 `json:"order_size,omitempty"`
 	// Liquidation order price
 	OrderPrice string `json:"order_price,omitempty"`
 	// Liquidation order average taker price

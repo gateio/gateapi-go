@@ -2038,13 +2038,7 @@ func main() {
     client := gateapi.NewAPIClient(gateapi.NewConfiguration())
     // uncomment the next line if your are testing against testnet
     // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
-    ctx := context.WithValue(context.Background(),
-                             gateapi.ContextGateAPIV4,
-                             gateapi.GateAPIV4{
-                                 Key:    "YOUR_API_KEY",
-                                 Secret: "YOUR_API_SECRET",
-                             }
-                            )
+    ctx := context.Background()
     business := "margin" // string - Leverage business, margin - position by position; unified - unified account
     currency := "BTC" // string - Currency
     from := 1547706332 // int64 - Start timestamp, seconds
@@ -2070,7 +2064,7 @@ func main() {
 
 ### Authorization
 
-[apiv4](../README.md#apiv4)
+No authorization required
 
 ### HTTP request headers
 

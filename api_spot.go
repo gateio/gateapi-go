@@ -2814,13 +2814,7 @@ func (a *SpotApiService) GetSpotInsuranceHistory(ctx context.Context, business s
 	if ctx == nil {
 		ctx = context.Background()
 	}
-	if ctx.Value(ContextGateAPIV4) == nil {
-		// for compatibility, set configuration key and secret to context if ContextGateAPIV4 value is not present
-		ctx = context.WithValue(ctx, ContextGateAPIV4, GateAPIV4{
-			Key:    a.client.cfg.Key,
-			Secret: a.client.cfg.Secret,
-		})
-	}
+	ctx = context.WithValue(ctx, ContextPublic, true)
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
