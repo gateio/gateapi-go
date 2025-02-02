@@ -66,7 +66,7 @@ func main() {
                              gateapi.GateAPIV4{
                                  Key:    "YOUR_API_KEY",
                                  Secret: "YOUR_API_SECRET",
-                             }
+                             },
                             )
     
     result, _, err := client.AccountApi.GetAccountDetail(ctx)
