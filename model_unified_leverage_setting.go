@@ -9,9 +9,10 @@
 
 package gateapi
 
+// Loan currency leverage
 type UnifiedLeverageSetting struct {
 	// Currency name
-	Currency string `json:"currency,omitempty"`
+	Currency string `json:"currency"`
 	// multiple
-	Leverage string `json:"leverage,omitempty"`
+	Leverage string `json:"leverage"`
 }

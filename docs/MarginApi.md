@@ -10,19 +10,19 @@ Method | HTTP request | Description
 [**GetAutoRepayStatus**](MarginApi.md#GetAutoRepayStatus) | **Get** /margin/auto_repay | Retrieve user auto repayment setting
 [**SetAutoRepay**](MarginApi.md#SetAutoRepay) | **Post** /margin/auto_repay | Update user&#39;s auto repayment setting
 [**GetMarginTransferable**](MarginApi.md#GetMarginTransferable) | **Get** /margin/transferable | Get the max transferable amount for a specific margin currency
-[**ListCrossMarginCurrencies**](MarginApi.md#ListCrossMarginCurrencies) | **Get** /margin/cross/currencies | Currencies supported by cross margin.
-[**GetCrossMarginCurrency**](MarginApi.md#GetCrossMarginCurrency) | **Get** /margin/cross/currencies/{currency} | Retrieve detail of one single currency supported by cross margin
-[**GetCrossMarginAccount**](MarginApi.md#GetCrossMarginAccount) | **Get** /margin/cross/accounts | Retrieve cross margin account
-[**ListCrossMarginAccountBook**](MarginApi.md#ListCrossMarginAccountBook) | **Get** /margin/cross/account_book | Retrieve cross margin account change history
-[**ListCrossMarginLoans**](MarginApi.md#ListCrossMarginLoans) | **Get** /margin/cross/loans | List cross margin borrow history
-[**CreateCrossMarginLoan**](MarginApi.md#CreateCrossMarginLoan) | **Post** /margin/cross/loans | Create a cross margin borrow loan
-[**GetCrossMarginLoan**](MarginApi.md#GetCrossMarginLoan) | **Get** /margin/cross/loans/{loan_id} | Retrieve single borrow loan detail
-[**ListCrossMarginRepayments**](MarginApi.md#ListCrossMarginRepayments) | **Get** /margin/cross/repayments | Retrieve cross margin repayments
-[**RepayCrossMarginLoan**](MarginApi.md#RepayCrossMarginLoan) | **Post** /margin/cross/repayments | Cross margin repayments
-[**GetCrossMarginInterestRecords**](MarginApi.md#GetCrossMarginInterestRecords) | **Get** /margin/cross/interest_records | Interest records for the cross margin account
-[**GetCrossMarginTransferable**](MarginApi.md#GetCrossMarginTransferable) | **Get** /margin/cross/transferable | Get the max transferable amount for a specific cross margin currency
-[**GetCrossMarginEstimateRate**](MarginApi.md#GetCrossMarginEstimateRate) | **Get** /margin/cross/estimate_rate | Estimated interest rates
-[**GetCrossMarginBorrowable**](MarginApi.md#GetCrossMarginBorrowable) | **Get** /margin/cross/borrowable | Get the max borrowable amount for a specific cross margin currency
+[**ListCrossMarginCurrencies**](MarginApi.md#ListCrossMarginCurrencies) | **Get** /margin/cross/currencies | Currencies supported by cross margin.(deprecated)
+[**GetCrossMarginCurrency**](MarginApi.md#GetCrossMarginCurrency) | **Get** /margin/cross/currencies/{currency} | Retrieve detail of one single currency supported by cross margin. (deprecated)
+[**GetCrossMarginAccount**](MarginApi.md#GetCrossMarginAccount) | **Get** /margin/cross/accounts | Retrieve cross margin account. (deprecated)
+[**ListCrossMarginAccountBook**](MarginApi.md#ListCrossMarginAccountBook) | **Get** /margin/cross/account_book | Retrieve cross margin account change history. (deprecated)
+[**ListCrossMarginLoans**](MarginApi.md#ListCrossMarginLoans) | **Get** /margin/cross/loans | List cross margin borrow history. (deprecated)
+[**CreateCrossMarginLoan**](MarginApi.md#CreateCrossMarginLoan) | **Post** /margin/cross/loans | Create a cross margin borrow loan. (deprecated)
+[**GetCrossMarginLoan**](MarginApi.md#GetCrossMarginLoan) | **Get** /margin/cross/loans/{loan_id} | Retrieve single borrow loan detail. (deprecated)
+[**ListCrossMarginRepayments**](MarginApi.md#ListCrossMarginRepayments) | **Get** /margin/cross/repayments | Retrieve cross margin repayments. (deprecated)
+[**RepayCrossMarginLoan**](MarginApi.md#RepayCrossMarginLoan) | **Post** /margin/cross/repayments | Cross margin repayments. (deprecated)
+[**GetCrossMarginInterestRecords**](MarginApi.md#GetCrossMarginInterestRecords) | **Get** /margin/cross/interest_records | Interest records for the cross margin account. (deprecated)
+[**GetCrossMarginTransferable**](MarginApi.md#GetCrossMarginTransferable) | **Get** /margin/cross/transferable | Get the max transferable amount for a specific cross margin currency. (deprecated)
+[**GetCrossMarginEstimateRate**](MarginApi.md#GetCrossMarginEstimateRate) | **Get** /margin/cross/estimate_rate | Estimated interest rates. (deprecated)
+[**GetCrossMarginBorrowable**](MarginApi.md#GetCrossMarginBorrowable) | **Get** /margin/cross/borrowable | Get the max borrowable amount for a specific cross margin currency. (deprecated)
 
 
 ## ListMarginAccounts
@@ -476,7 +476,7 @@ func main() {
 
 > []CrossMarginCurrency ListCrossMarginCurrencies(ctx, )
 
-Currencies supported by cross margin.
+Currencies supported by cross margin.(deprecated)
 
 ### Required Parameters
 
@@ -534,7 +534,7 @@ No authorization required
 
 > CrossMarginCurrency GetCrossMarginCurrency(ctx, currency)
 
-Retrieve detail of one single currency supported by cross margin
+Retrieve detail of one single currency supported by cross margin. (deprecated)
 
 ### Required Parameters
 
@@ -597,7 +597,7 @@ No authorization required
 
 > CrossMarginAccount GetCrossMarginAccount(ctx, )
 
-Retrieve cross margin account
+Retrieve cross margin account. (deprecated)
 
 ### Required Parameters
 
@@ -661,7 +661,7 @@ func main() {
 
 > []CrossMarginAccountBook ListCrossMarginAccountBook(ctx, optional)
 
-Retrieve cross margin account change history
+Retrieve cross margin account change history. (deprecated)
 
 The record query time range is not allowed to exceed 30 days.  When using the limit&page paging function to retrieve data, the maximum number of pages is 100,000, that is, (limit page - 1) <= 100000.
 
@@ -744,7 +744,7 @@ func main() {
 
 > []CrossMarginLoan ListCrossMarginLoans(ctx, status, optional)
 
-List cross margin borrow history
+List cross margin borrow history. (deprecated)
 
 Sort by creation time in descending order by default. Set `reverse=false` to return ascending results.
 
@@ -827,7 +827,7 @@ func main() {
 
 > CrossMarginLoan CreateCrossMarginLoan(ctx, crossMarginLoan)
 
-Create a cross margin borrow loan
+Create a cross margin borrow loan. (deprecated)
 
 Borrow amount cannot be less than currency minimum borrow amount
 
@@ -898,7 +898,7 @@ func main() {
 
 > CrossMarginLoan GetCrossMarginLoan(ctx, loanId)
 
-Retrieve single borrow loan detail
+Retrieve single borrow loan detail. (deprecated)
 
 ### Required Parameters
 
@@ -967,7 +967,7 @@ func main() {
 
 > []CrossMarginRepayment ListCrossMarginRepayments(ctx, optional)
 
-Retrieve cross margin repayments
+Retrieve cross margin repayments. (deprecated)
 
 Sort by creation time in descending order by default. Set `reverse=false` to return ascending results.
 
@@ -1049,7 +1049,7 @@ func main() {
 
 > []CrossMarginLoan RepayCrossMarginLoan(ctx, crossMarginRepayRequest)
 
-Cross margin repayments
+Cross margin repayments. (deprecated)
 
 When the liquidity of the currency is insufficient and the transaction risk is high, the currency will be disabled, and funds cannot be transferred.When the available balance of cross-margin is insufficient, the balance of the spot account can be used for repayment. Please ensure that the balance of the spot account is sufficient, and system uses cross-margin account for repayment first
 
@@ -1120,7 +1120,7 @@ func main() {
 
 > []UniLoanInterestRecord GetCrossMarginInterestRecords(ctx, optional)
 
-Interest records for the cross margin account
+Interest records for the cross margin account. (deprecated)
 
 ### Required Parameters
 
@@ -1200,7 +1200,7 @@ func main() {
 
 > CrossMarginTransferable GetCrossMarginTransferable(ctx, currency)
 
-Get the max transferable amount for a specific cross margin currency
+Get the max transferable amount for a specific cross margin currency. (deprecated)
 
 ### Required Parameters
 
@@ -1269,7 +1269,7 @@ func main() {
 
 > map[string]string GetCrossMarginEstimateRate(ctx, currencies)
 
-Estimated interest rates
+Estimated interest rates. (deprecated)
 
 Please note that the interest rates are subject to change based on the borrowing and lending demand, and therefore, the provided rates may not be entirely accurate.
 
@@ -1340,7 +1340,7 @@ func main() {
 
 > UnifiedBorrowable GetCrossMarginBorrowable(ctx, currency)
 
-Get the max borrowable amount for a specific cross margin currency
+Get the max borrowable amount for a specific cross margin currency. (deprecated)
 
 ### Required Parameters
 

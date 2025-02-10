@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **Volume24hSettle** | **string** | Trade volume in recent 24h, in settle currency | [optional] 
 **MarkPrice** | **string** | Recent mark price | [optional] 
 **FundingRate** | **string** | Funding rate | [optional] 
-**FundingRateIndicative** | **string** | Indicative Funding rate in next period | [optional] 
+**FundingRateIndicative** | **string** | Indicative Funding rate in next period. (deprecated. use &#x60;funding_rate&#x60;) | [optional] 
 **IndexPrice** | **string** | Index price | [optional] 
 **QuantoBaseRate** | **string** | Exchange rate of base currency and settlement currency in Quanto contract. Does not exists in contracts of other types | [optional] 
 **BasisRate** | **string** | Basis rate | [optional] 

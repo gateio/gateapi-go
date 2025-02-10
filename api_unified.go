@@ -749,7 +749,8 @@ func (a *UnifiedApiService) ListUnifiedLoanInterestRecords(ctx context.Context, 
 }
 
 /*
-GetUnifiedRiskUnits Retrieve user risk unit details, only valid in portfolio margin mode
+GetUnifiedRiskUnits Get user risk unit details
+Retrieve user risk unit details, only valid in portfolio margin mode
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 @return UnifiedRiskUnits
@@ -931,7 +932,7 @@ func (a *UnifiedApiService) GetUnifiedMode(ctx context.Context) (UnifiedModeSet,
 
 /*
 SetUnifiedMode Set mode of the unified account
-Switching each account mode only requires passing the parameters of the corresponding account mode, and supports turning on or off the configuration switch in the corresponding account mode when switching the account mode  - When opening the classic account mode, mode&#x3D;classic &#x60;&#x60;&#x60;  PUT /unified/unified_mode  {  \&quot;mode\&quot;: \&quot;classic\&quot;  } &#x60;&#x60;&#x60; - Open the cross-currency margin mode, mode&#x3D;multi_currency &#x60;&#x60;&#x60;  PUT /unified/unified_mode  {  \&quot;mode\&quot;: \&quot;multi_currency\&quot;,  \&quot;settings\&quot;: {  \&quot;usdt_futures\&quot;: true  }  } &#x60;&#x60;&#x60; - When the portfolio margin mode is enabled, mode&#x3D;portfolio &#x60;&#x60;&#x60;  PUT /unified/unified_mode  {  \&quot;mode\&quot;: \&quot;portfolio\&quot;,  \&quot;settings\&quot;: {  \&quot;spot_hedge\&quot;: true  }  } &#x60;&#x60;&#x60; - When the portfolio margin mode is enabled, mode&#x3D;single_currency &#x60;&#x60;&#x60;  PUT /unified/unified_mode  {  \&quot;mode\&quot;: \&quot;single_currency\&quot;  } &#x60;&#x60;&#x60;
+Switching each account mode only requires passing the parameters of the corresponding account mode, and supports turning on or off the configuration switch in the corresponding account mode when switching the account mode  - When opening the classic account mode, mode&#x3D;classic &#x60;&#x60;&#x60;  PUT /unified/unified_mode  {  \&quot;mode\&quot;: \&quot;classic\&quot;  } &#x60;&#x60;&#x60; - Open the cross-currency margin mode, mode&#x3D;multi_currency &#x60;&#x60;&#x60;  PUT /unified/unified_mode  {  \&quot;mode\&quot;: \&quot;multi_currency\&quot;,  \&quot;settings\&quot;: {  \&quot;usdt_futures\&quot;: true  }  } &#x60;&#x60;&#x60; - When the portfolio margin mode is enabled, mode&#x3D;portfolio &#x60;&#x60;&#x60;  PUT /unified/unified_mode  {  \&quot;mode\&quot;: \&quot;portfolio\&quot;,  \&quot;settings\&quot;: {  \&quot;spot_hedge\&quot;: true  }  } &#x60;&#x60;&#x60; - When opening a single currency margin mode, mode&#x3D;single_currency &#x60;&#x60;&#x60;  PUT /unified/unified_mode  {  \&quot;mode\&quot;: \&quot;single_currency\&quot;  } &#x60;&#x60;&#x60;
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param unifiedModeSet
 */
@@ -1474,7 +1475,8 @@ type GetUserLeverageCurrencySettingOpts struct {
 }
 
 /*
-GetUserLeverageCurrencySetting Get the user's currency leverage. If currency is not passed, query all currencies.
+GetUserLeverageCurrencySetting Get the leverage multiple of the user currency
+Get the user&#39;s currency leverage. If currency is not passed, query all currencies.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *GetUserLeverageCurrencySettingOpts - Optional Parameters:
   - @param "Currency" (optional.String) -  Currency
@@ -1568,18 +1570,12 @@ func (a *UnifiedApiService) GetUserLeverageCurrencySetting(ctx context.Context, 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-// SetUserLeverageCurrencySettingOpts Optional parameters for the method 'SetUserLeverageCurrencySetting'
-type SetUserLeverageCurrencySettingOpts struct {
-	UnifiedLeverageSetting optional.Interface
-}
-
 /*
 SetUserLeverageCurrencySetting Set the loan currency leverage
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param optional nil or *SetUserLeverageCurrencySettingOpts - Optional Parameters:
-  - @param "UnifiedLeverageSetting" (optional.Interface of UnifiedLeverageSetting) -
+  - @param unifiedLeverageSetting
 */
-func (a *UnifiedApiService) SetUserLeverageCurrencySetting(ctx context.Context, localVarOptionals *SetUserLeverageCurrencySettingOpts) (*http.Response, error) {
+func (a *UnifiedApiService) SetUserLeverageCurrencySetting(ctx context.Context, unifiedLeverageSetting UnifiedLeverageSetting) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -1612,14 +1608,7 @@ func (a *UnifiedApiService) SetUserLeverageCurrencySetting(ctx context.Context, 
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	if localVarOptionals != nil && localVarOptionals.UnifiedLeverageSetting.IsSet() {
-		localVarOptionalUnifiedLeverageSetting, localVarOptionalUnifiedLeverageSettingok := localVarOptionals.UnifiedLeverageSetting.Value().(UnifiedLeverageSetting)
-		if !localVarOptionalUnifiedLeverageSettingok {
-			return nil, reportError("unifiedLeverageSetting should be UnifiedLeverageSetting")
-		}
-		localVarPostBody = &localVarOptionalUnifiedLeverageSetting
-	}
-
+	localVarPostBody = &unifiedLeverageSetting
 	if ctx == nil {
 		ctx = context.Background()
 	}

@@ -862,16 +862,16 @@ Support querying transfer status based on user-defined client_order_id or tx_id 
   - @param "ClientOrderId" (optional.String) -  The custom ID provided by the customer serves as a safeguard against duplicate transfers. It can be a combination of letters (case-sensitive), numbers, hyphens '-', and underscores '_', with a length ranging from 1 to 64 characters.
   - @param "TxId" (optional.String) -  The transfer operation number and client_order_id cannot be empty at the same time
 
-@return InlineResponse200
+@return TransferOrderStatus
 */
-func (a *WalletApiService) GetTransferOrderStatus(ctx context.Context, localVarOptionals *GetTransferOrderStatusOpts) (InlineResponse200, *http.Response, error) {
+func (a *WalletApiService) GetTransferOrderStatus(ctx context.Context, localVarOptionals *GetTransferOrderStatusOpts) (TransferOrderStatus, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  InlineResponse200
+		localVarReturnValue  TransferOrderStatus
 	)
 
 	// create path and map variables

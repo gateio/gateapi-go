@@ -643,7 +643,7 @@ func (a *MarginApiService) GetMarginTransferable(ctx context.Context, currency s
 }
 
 /*
-ListCrossMarginCurrencies Currencies supported by cross margin.
+ListCrossMarginCurrencies Currencies supported by cross margin.(deprecated)
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 @return []CrossMarginCurrency
@@ -727,7 +727,7 @@ func (a *MarginApiService) ListCrossMarginCurrencies(ctx context.Context) ([]Cro
 }
 
 /*
-GetCrossMarginCurrency Retrieve detail of one single currency supported by cross margin
+GetCrossMarginCurrency Retrieve detail of one single currency supported by cross margin. (deprecated)
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param currency Currency name
 
@@ -814,7 +814,7 @@ func (a *MarginApiService) GetCrossMarginCurrency(ctx context.Context, currency 
 }
 
 /*
-GetCrossMarginAccount Retrieve cross margin account
+GetCrossMarginAccount Retrieve cross margin account. (deprecated)
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 @return CrossMarginAccount
@@ -914,7 +914,7 @@ type ListCrossMarginAccountBookOpts struct {
 }
 
 /*
-ListCrossMarginAccountBook Retrieve cross margin account change history
+ListCrossMarginAccountBook Retrieve cross margin account change history. (deprecated)
 The record query time range is not allowed to exceed 30 days.  When using the limit&amp;page paging function to retrieve data, the maximum number of pages is 100,000, that is, (limit page - 1) &lt;&#x3D; 100000.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListCrossMarginAccountBookOpts - Optional Parameters:
@@ -1038,7 +1038,7 @@ type ListCrossMarginLoansOpts struct {
 }
 
 /*
-ListCrossMarginLoans List cross margin borrow history
+ListCrossMarginLoans List cross margin borrow history. (deprecated)
 Sort by creation time in descending order by default. Set &#x60;reverse&#x3D;false&#x60; to return ascending results.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param status Filter by status. Supported values are 2 and 3. (deprecated.)
@@ -1148,7 +1148,7 @@ func (a *MarginApiService) ListCrossMarginLoans(ctx context.Context, status int3
 }
 
 /*
-CreateCrossMarginLoan Create a cross margin borrow loan
+CreateCrossMarginLoan Create a cross margin borrow loan. (deprecated)
 Borrow amount cannot be less than currency minimum borrow amount
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param crossMarginLoan
@@ -1242,7 +1242,7 @@ func (a *MarginApiService) CreateCrossMarginLoan(ctx context.Context, crossMargi
 }
 
 /*
-GetCrossMarginLoan Retrieve single borrow loan detail
+GetCrossMarginLoan Retrieve single borrow loan detail. (deprecated)
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param loanId Borrow loan ID
 
@@ -1344,7 +1344,7 @@ type ListCrossMarginRepaymentsOpts struct {
 }
 
 /*
-ListCrossMarginRepayments Retrieve cross margin repayments
+ListCrossMarginRepayments Retrieve cross margin repayments. (deprecated)
 Sort by creation time in descending order by default. Set &#x60;reverse&#x3D;false&#x60; to return ascending results.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListCrossMarginRepaymentsOpts - Optional Parameters:
@@ -1456,7 +1456,7 @@ func (a *MarginApiService) ListCrossMarginRepayments(ctx context.Context, localV
 }
 
 /*
-RepayCrossMarginLoan Cross margin repayments
+RepayCrossMarginLoan Cross margin repayments. (deprecated)
 When the liquidity of the currency is insufficient and the transaction risk is high, the currency will be disabled, and funds cannot be transferred.When the available balance of cross-margin is insufficient, the balance of the spot account can be used for repayment. Please ensure that the balance of the spot account is sufficient, and system uses cross-margin account for repayment first
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param crossMarginRepayRequest
@@ -1559,7 +1559,7 @@ type GetCrossMarginInterestRecordsOpts struct {
 }
 
 /*
-GetCrossMarginInterestRecords Interest records for the cross margin account
+GetCrossMarginInterestRecords Interest records for the cross margin account. (deprecated)
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *GetCrossMarginInterestRecordsOpts - Optional Parameters:
   - @param "Currency" (optional.String) -  Retrieve data of the specified currency
@@ -1670,7 +1670,7 @@ func (a *MarginApiService) GetCrossMarginInterestRecords(ctx context.Context, lo
 }
 
 /*
-GetCrossMarginTransferable Get the max transferable amount for a specific cross margin currency
+GetCrossMarginTransferable Get the max transferable amount for a specific cross margin currency. (deprecated)
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param currency Retrieve data of the specified currency
 
@@ -1762,7 +1762,7 @@ func (a *MarginApiService) GetCrossMarginTransferable(ctx context.Context, curre
 }
 
 /*
-GetCrossMarginEstimateRate Estimated interest rates
+GetCrossMarginEstimateRate Estimated interest rates. (deprecated)
 Please note that the interest rates are subject to change based on the borrowing and lending demand, and therefore, the provided rates may not be entirely accurate.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param currencies An array of up to 10 specifying the currency name
@@ -1871,7 +1871,7 @@ func (a *MarginApiService) GetCrossMarginEstimateRate(ctx context.Context, curre
 }
 
 /*
-GetCrossMarginBorrowable Get the max borrowable amount for a specific cross margin currency
+GetCrossMarginBorrowable Get the max borrowable amount for a specific cross margin currency. (deprecated)
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param currency Retrieve data of the specified currency
 

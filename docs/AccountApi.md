@@ -511,7 +511,7 @@ func main() {
 
 ## GetDebitFee
 
-> InlineResponse2001 GetDebitFee(ctx, )
+> DebitFee GetDebitFee(ctx, )
 
 Query GT deduction configuration.
 
@@ -560,7 +560,7 @@ func main() {
 
 ### Return type
 
-[**InlineResponse2001**](inline_response_200_1.md)
+[**DebitFee**](DebitFee.md)
 
 ### Authorization
 
@@ -577,7 +577,7 @@ func main() {
 
 ## SetDebitFee
 
-> SetDebitFee(ctx, inlineObject)
+> SetDebitFee(ctx, debitFee)
 
 Set GT deduction.
 
@@ -588,7 +588,7 @@ Enable or disable GT deduction for the current account.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**inlineObject** | [**InlineObject**](InlineObject.md)|  | 
+**debitFee** | [**DebitFee**](DebitFee.md)|  | 
 
 ### Example
 
@@ -613,9 +613,9 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    inlineObject := gateapi.InlineObject{} // InlineObject - 
+    debitFee := gateapi.DebitFee{} // DebitFee - 
     
-    result, _, err := client.AccountApi.SetDebitFee(ctx, inlineObject)
+    result, _, err := client.AccountApi.SetDebitFee(ctx, debitFee)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())

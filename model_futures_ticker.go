@@ -38,7 +38,7 @@ type FuturesTicker struct {
 	MarkPrice string `json:"mark_price,omitempty"`
 	// Funding rate
 	FundingRate string `json:"funding_rate,omitempty"`
-	// Indicative Funding rate in next period
+	// Indicative Funding rate in next period. (deprecated. use `funding_rate`)
 	FundingRateIndicative string `json:"funding_rate_indicative,omitempty"`
 	// Index price
 	IndexPrice string `json:"index_price,omitempty"`

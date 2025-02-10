@@ -620,7 +620,7 @@ func main() {
 
 ## GetTransferOrderStatus
 
-> InlineResponse200 GetTransferOrderStatus(ctx, optional)
+> TransferOrderStatus GetTransferOrderStatus(ctx, optional)
 
 Transfer status query
 
@@ -682,7 +682,7 @@ func main() {
 
 ### Return type
 
-[**InlineResponse200**](inline_response_200.md)
+[**TransferOrderStatus**](TransferOrderStatus.md)
 
 ### Authorization
 

@@ -9,7 +9,7 @@
 
 package gateapi
 
-type InlineResponse2001 struct {
+type DebitFee struct {
 	// Whether GT fee discount is used
-	Enabled bool `json:"enabled,omitempty"`
+	Enabled bool `json:"enabled"`
 }

@@ -693,16 +693,16 @@ GetDebitFee Query GT deduction configuration.
 Query the current GT deduction configuration for the account.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
-@return InlineResponse2001
+@return DebitFee
 */
-func (a *AccountApiService) GetDebitFee(ctx context.Context) (InlineResponse2001, *http.Response, error) {
+func (a *AccountApiService) GetDebitFee(ctx context.Context) (DebitFee, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  InlineResponse2001
+		localVarReturnValue  DebitFee
 	)
 
 	// create path and map variables
@@ -783,9 +783,9 @@ func (a *AccountApiService) GetDebitFee(ctx context.Context) (InlineResponse2001
 SetDebitFee Set GT deduction.
 Enable or disable GT deduction for the current account.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param inlineObject
+  - @param debitFee
 */
-func (a *AccountApiService) SetDebitFee(ctx context.Context, inlineObject InlineObject) (*http.Response, error) {
+func (a *AccountApiService) SetDebitFee(ctx context.Context, debitFee DebitFee) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -818,7 +818,7 @@ func (a *AccountApiService) SetDebitFee(ctx context.Context, inlineObject Inline
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = &inlineObject
+	localVarPostBody = &debitFee
 	if ctx == nil {
 		ctx = context.Background()
 	}
