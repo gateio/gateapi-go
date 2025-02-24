@@ -17,5 +17,5 @@ type SpotAccount struct {
 	// Locked amount, used in trading
 	Locked string `json:"locked,omitempty"`
 	// Version number
-	UpdateId int32 `json:"update_id,omitempty"`
+	UpdateId int64 `json:"update_id,omitempty"`
 }

@@ -31,7 +31,7 @@ type Order struct {
 	CurrencyPair string `json:"currency_pair"`
 	// Order Type    - limit : Limit Order - market : Market Order
 	Type string `json:"type,omitempty"`
-	// Account types， spot - spot account, margin - margin account, unified - unified account, cross_margin - cross margin account.  Portfolio margin accounts can only be set to `cross_margin`
+	// Account type, spot - spot account, margin - leveraged account, unified - unified account
 	Account string `json:"account,omitempty"`
 	// Order side
 	Side string `json:"side"`

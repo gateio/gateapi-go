@@ -46,6 +46,7 @@ Optional parameters are passed through a pointer to a ListUnifiedAccountsOpts st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **currency** | **optional.String**| Retrieve data of the specified currency | 
+**subUid** | **optional.String**| Sub account user ID | 
 
 ### Example
 

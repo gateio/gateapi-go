@@ -437,7 +437,7 @@ No authorization required
 
 Retrieve market trades
 
-Supports specifying `from` and `to` to query by time range or paging query based on `last_id`. The default query is by time range, and the query range is the last 30 days.  The query method based on `last_id` paging is no longer recommended. If `last_id` is specified, the time range query parameter will be ignored.  When using the limit&page paging function to retrieve data, the maximum number of pages is 100,000, that is, (limit page - 1) <= 100000.
+Supports `from` and `to` by time range query or page-turn query based on `last_id`. By default, query by time range is the last 30 days.  The query method based on `last_id` page turn is no longer recommended. If `last_id` is specified, the time range query parameters will be ignored.  The maximum number of pages when searching data using limit&page paging function is 100,000, that is, limit * (page - 1) <= 100,000.
 
 ### Required Parameters
 
@@ -816,7 +816,7 @@ func main() {
 
 Query account book
 
-The record query time range is not allowed to exceed 30 days.  When using the limit&page paging function to retrieve data, the maximum number of pages is 100,000, that is, (limit page - 1) <= 100000.
+Record query time range is not allowed to exceed 30 days.  The maximum number of pages when searching data using limit&page paging function is 100,000, that is, limit * (page - 1) <= 100,000.
 
 ### Required Parameters
 
@@ -979,7 +979,7 @@ func main() {
 
 List all open orders
 
-List open orders in all currency pairs.  Note that pagination parameters affect record number in each currency pair's open order list. No pagination is applied to the number of currency pairs returned. All currency pairs with open orders will be returned.  Spot,portfolio and margin orders are returned by default. To list cross margin orders, `account` must be set to `cross_margin`
+Query the current order list of all trading pairs. Please note that the paging parameter controls the number of pending orders in each trading pair. There is no paging control for the number of trading pairs. All trading pairs with pending orders will be returned.
 
 ### Required Parameters
 
@@ -996,7 +996,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **page** | **optional.Int32**| Page number | [default to 1]
 **limit** | **optional.Int32**| Maximum number of records returned in one page in each currency pair | [default to 100]
-**account** | **optional.String**| Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to &#x60;cross_margin&#x60; to operate against margin account.  Portfolio margin account must set to &#x60;cross_margin&#x60; only | 
+**account** | **optional.String**| Specify query account. | 
 
 ### Example
 
@@ -1130,7 +1130,7 @@ func main() {
 
 List orders
 
-Spot, portfolio and margin orders are returned by default. If cross margin orders are needed, `account` must be set to `cross_margin`  When `status` is `open`, i.e., listing open orders, only pagination parameters `page` and `limit` are supported and `limit` cannot be larger than 100. Query by `side` and time range parameters `from` and `to` are not supported.  When `status` is `finished`, i.e., listing finished orders, pagination parameters, time range parameters `from` and `to`, and `side` parameters are all supported. Time range parameters are handled as order finish time.
+Note that the query results are spot order lists for spot, unified account and warehouse-by-site leverage accounts by default.  `status` is set to `open`, that is, when querying the pending order list, only pagination control of `page` and `limit` is supported. `limit` Maximum setting is only allowed to 100 . The `side` and `from`, `to` parameters for time range query are not supported.  `status` is set to `finished`, that is, when querying historical delegations, in addition to pagination queries, `from` and `to` are also supported by time range queries. In addition, it supports setting the `side` parameter to filter one-side history.  The parameters of the time range filtering are processed according to the order end time.
 
 ### Required Parameters
 
@@ -1149,7 +1149,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **page** | **optional.Int32**| Page number | [default to 1]
 **limit** | **optional.Int32**| Maximum number of records to be returned. If &#x60;status&#x60; is &#x60;open&#x60;, maximum of &#x60;limit&#x60; is 100 | [default to 100]
-**account** | **optional.String**| Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to &#x60;cross_margin&#x60; to operate against margin account.  Portfolio margin account must set to &#x60;cross_margin&#x60; only | 
+**account** | **optional.String**| Specify query account. | 
 **from** | **optional.Int64**| Start timestamp of the query | 
 **to** | **optional.Int64**| Time range ending, default to current time | 
 **side** | **optional.String**| All bids or asks. Both included if not specified | 
@@ -1217,7 +1217,7 @@ func main() {
 
 Create an order
 
-Supports spot, margin, leverage, and cross margin orders. Use different accounts through the `account` field, the default is `spot`, that is, use the spot account to place orders, if the user is `unified` account, the default is to use the unified account to place orders  When using margin account trading, that is, when `account` is set to `margin`, you can set `auto_borrow` to `true`, When the account balance is insufficient, the system automatically executes `POST marginuniloans` to borrow the insufficient amount. Whether the assets obtained after placing a margin order are automatically used to return the borrowing order of the isolated margin account depends on the automatic repayment settings of the user's isolated margin account, The automatic repayment settings of this account can be queried and set through `marginauto_repay`.  When using cross margin account trading, that is, when `account` is set to `cross_margin`, `auto_borrow` To realize the automatic borrowing of the insufficient part, but unlike the isolated margin account, whether the entrustment of the cross margin account is automatically repaid depends on the time when the order is placed `auto_repay` setting, this setting only takes effect for the current order, that is, only the assets obtained after the order is completed will be used to repay the borrowing order of the cross margin account. Placing orders on cross margin accounts currently supports enabling `auto_borrow` and `auto_repay` at the same time.  Automatic repayment will be triggered when the order ends, that is, the `status` is `cancelled` or `closed`.  Delegation status  The order status in the pending order is `open` and remains `open` until all the quantities are filled. If all are filled, the order ends and the status becomes `closed`. If the order is canceled before all transactions are completed, the status will change to `cancelled` regardless of whether there is partial execution or not.  Iceberg Commission  `iceberg` is used to set the number of iceberg orders displayed. If you need to hide it completely, set it to `-1`. Note that when hiding partial transactions, follow the instructions The taker's handling fee is charged.  Restrict users to self-transact  Set `stp_act` to decide to use a strategy that limits users' self-transactions
+Support spot, margin, leverage, and full-position leverage orders. Use different accounts through the `account` field, default is `spot`, that is, use the spot account to place an order if the user is `unified` account, default is to place an order with a unified account  When using leveraged account trading, that is, when `account` is set to `margin`, you can set `auto_borrow` to `true`, In the case of insufficient account balance, the system will automatically execute the `POST /margin/uni/loans` to borrow the insufficient part. Whether the assets obtained after the leveraged order is automatically used to return the borrowing orders of the leveraged account in a position-by-store leverage account depends on the automatic repayment settings of the user's position-by-store leverage account**, The account automatic repayment settings can be queried and set through `/margin/auto_repay`.  Use unified account transactions, that is, when `account` is set to `unified`, `auto_borrow` \" can also be enableTo realize the insufficient part of automatic borrowing, but unlike the leverage account, whether the entrustment of a unified account is automatically repayable depends on the   when placing an order`auto_repay` setting, this setting is only effective for the current entrustment, that is, only the assets obtained after the entrustment transaction will be used to repay the borrowing orders of the full-position leverage account. Unified account ordering currently supports `auto_borrow` and `auto_repay` at the same time.  Auto repayment will be triggered at the end of the order, i.e. `status` is `cancelled` or `closed` .  **Delegation Status**  The entrustment status in the pending order is `open`, which remains at `open` until all the quantity is traded. If it is eaten, the order ends and the status becomes `closed`. If the order is cancelled before all transactions are completed, regardless of whether there are partial transactions, the status will become `cancelled`  **Iceberg Entrustment**  `iceberg` is used to set the number of iceberg delegations displayed, and does not support complete hiding. Note that when hidden part of the transaction is charged according to the taker's handling rate.  **Restrict user transactions**  Set `stp_act` to decide to use strategies that limit user transactions
 
 ### Required Parameters
 
@@ -1297,7 +1297,7 @@ func main() {
 
 Cancel all `open` orders in specified currency pair
 
-If `account` is not set, all open orders, including spot, portfolio, margin and cross margin ones, will be cancelled. If `currency_pair` is not specified, all pending orders for trading pairs will be cancelled. You can set `account` to cancel only orders within the specified account
+When the `account` parameter is not specified, all pending orders including spot, unified account, and position-by-position leverage will be cancelled. When `currency_pair` is not specified, all transaction pairs are revoked You can specify a certain account separately to cancel all orders under the specified account
 
 ### Required Parameters
 
@@ -1314,7 +1314,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **currencyPair** | **optional.String**| Currency pair | 
 **side** | **optional.String**| All bids or asks. Both included if not specified | 
-**account** | **optional.String**| Specify account type:  - Classic account: Includes all if not specified - Unified account: Specify &#x60;unified&#x60; - Unified account (legacy): Can only specify &#x60;cross_margin&#x60; | 
+**account** | **optional.String**| Specify Account Type  - Classic Account: If not specified, all include  - Unified Account: Specify &#x60;unified&#x60; | 
 **actionMode** | **optional.String**| Processing Mode  When placing an order, different fields are returned based on the action_mode  - ACK: Asynchronous mode, returns only key order fields - RESULT: No clearing information - FULL: Full mode (default) | 
 **xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
@@ -1459,14 +1459,14 @@ func main() {
 
 Get a single order
 
-Spot, portfolio and margin orders are queried by default. If cross margin orders are needed or portfolio margin account are used, account must be set to cross_margin.
+By default, orders for spot, unified account and warehouse-by-site leverage account are checked.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orderId** | **string**| Order ID returned, or user custom ID(i.e., &#x60;text&#x60; field). Operations based on custom ID can only be checked when the order is in orderbook.  When the order is finished, it can be checked within 1 hour after the end of the order.  After that, only order ID is accepted. | 
+**orderId** | **string**| The order ID returned when the order was successfully created or the custom ID specified by the user&#39;s creation (i.e. the &#x60;text&#x60; field). Operations based on custom IDs can only be checked in pending orders. Only order ID can be used after the order is finished (transaction/cancel) | 
 **currencyPair** | **string**| Specify the transaction pair to query. If you are querying pending order records, this field is required. If you are querying traded records, this field can be left blank. | 
 **optional** | **GetOrderOpts** | optional parameters | nil if no parameters
 
@@ -1476,7 +1476,7 @@ Optional parameters are passed through a pointer to a GetOrderOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**account** | **optional.String**| Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to &#x60;cross_margin&#x60; to operate against margin account.  Portfolio margin account must set to &#x60;cross_margin&#x60; only | 
+**account** | **optional.String**| Specify query account. | 
 
 ### Example
 
@@ -1501,7 +1501,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    orderId := "12345" // string - Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID can only be checked when the order is in orderbook.  When the order is finished, it can be checked within 1 hour after the end of the order.  After that, only order ID is accepted.
+    orderId := "12345" // string - The order ID returned when the order was successfully created or the custom ID specified by the user's creation (i.e. the `text` field). Operations based on custom IDs can only be checked in pending orders. Only order ID can be used after the order is finished (transaction/cancel)
     currencyPair := "BTC_USDT" // string - Specify the transaction pair to query. If you are querying pending order records, this field is required. If you are querying traded records, this field can be left blank.
     
     result, _, err := client.SpotApi.GetOrder(ctx, orderId, currencyPair, nil)
@@ -1541,14 +1541,14 @@ func main() {
 
 Cancel a single order
 
-Spot,portfolio and margin orders are cancelled by default. If trying to cancel cross margin orders or portfolio margin account are used, account must be set to cross_margin
+By default, orders for spot, unified accounts and leveraged accounts are revoked.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orderId** | **string**| Order ID returned, or user custom ID(i.e., &#x60;text&#x60; field). Operations based on custom ID can only be checked when the order is in orderbook.  When the order is finished, it can be checked within 1 hour after the end of the order.  After that, only order ID is accepted. | 
+**orderId** | **string**| The order ID returned when the order was successfully created or the custom ID specified by the user&#39;s creation (i.e. the &#x60;text&#x60; field). Operations based on custom IDs can only be checked in pending orders. Only order ID can be used after the order is finished (transaction/cancel) | 
 **currencyPair** | **string**| Currency pair | 
 **optional** | **CancelOrderOpts** | optional parameters | nil if no parameters
 
@@ -1558,7 +1558,7 @@ Optional parameters are passed through a pointer to a CancelOrderOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**account** | **optional.String**| Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to &#x60;cross_margin&#x60; to operate against margin account.  Portfolio margin account must set to &#x60;cross_margin&#x60; only | 
+**account** | **optional.String**| Specify query account. | 
 **actionMode** | **optional.String**| Processing Mode  When placing an order, different fields are returned based on the action_mode  - ACK: Asynchronous mode, returns only key order fields - RESULT: No clearing information - FULL: Full mode (default) | 
 **xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
@@ -1585,7 +1585,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    orderId := "12345" // string - Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID can only be checked when the order is in orderbook.  When the order is finished, it can be checked within 1 hour after the end of the order.  After that, only order ID is accepted.
+    orderId := "12345" // string - The order ID returned when the order was successfully created or the custom ID specified by the user's creation (i.e. the `text` field). Operations based on custom IDs can only be checked in pending orders. Only order ID can be used after the order is finished (transaction/cancel)
     currencyPair := "BTC_USDT" // string - Currency pair
     
     result, _, err := client.SpotApi.CancelOrder(ctx, orderId, currencyPair, nil)
@@ -1625,14 +1625,14 @@ func main() {
 
 Amend an order
 
-By default, orders for spot, margin and isolated margin accounts are modified. If you need to modify orders for cross margin accounts, you must specify `account` as `cross_margin` and unify the account.`account` can only be specified as `cross_margin`.  Currently both the request body and query support currency_pair and account parameters, but the request body has a higher priority  currency_pair must be filled in either the request body or query  Currently only supports modifying price or quantity (choose one of the two)  About speed limit: Modify orders and create orders to share speed limit rules  About matching priority: only modifying the quantity to make it smaller will not affect the matching priority. If you modify the price or modify the quantity to become larger, the priority will be adjusted to the end of the new price  Note: The modified quantity is smaller than the completed quantity, which will trigger the order cancellation operation
+By default modify orders for spot, unified account and leverage account.  At present, both the request body and query support currency_pair and account parameters, but the request body has higher priority  currency_pair must be filled in the request body or query   Currently, only the price or quantity modification (choose one of two)  About speed limit: Modify orders and create orders to share speed limit rules  About matching priority: Only modifying the quantity will become smaller and will not affect the priority of matching. If the price is modified or the quantity is modified, the priority will be adjusted to the end of the new price   Precautions: Modification quantity is less than the transaction quantity will trigger the order cancellation operation
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**orderId** | **string**| Order ID returned, or user custom ID(i.e., &#x60;text&#x60; field). Operations based on custom ID can only be checked when the order is in orderbook.  When the order is finished, it can be checked within 1 hour after the end of the order.  After that, only order ID is accepted. | 
+**orderId** | **string**| The order ID returned when the order was successfully created or the custom ID specified by the user&#39;s creation (i.e. the &#x60;text&#x60; field). Operations based on custom IDs can only be checked in pending orders. Only order ID can be used after the order is finished (transaction/cancel) | 
 **orderPatch** | [**OrderPatch**](OrderPatch.md)|  | 
 **optional** | **AmendOrderOpts** | optional parameters | nil if no parameters
 
@@ -1643,7 +1643,7 @@ Optional parameters are passed through a pointer to a AmendOrderOpts struct
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **currencyPair** | **optional.String**| Currency pair | 
-**account** | **optional.String**| Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to &#x60;cross_margin&#x60; to operate against margin account.  Portfolio margin account must set to &#x60;cross_margin&#x60; only | 
+**account** | **optional.String**| Specify query account. | 
 **xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
 ### Example
@@ -1669,7 +1669,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    orderId := "12345" // string - Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID can only be checked when the order is in orderbook.  When the order is finished, it can be checked within 1 hour after the end of the order.  After that, only order ID is accepted.
+    orderId := "12345" // string - The order ID returned when the order was successfully created or the custom ID specified by the user's creation (i.e. the `text` field). Operations based on custom IDs can only be checked in pending orders. Only order ID can be used after the order is finished (transaction/cancel)
     orderPatch := gateapi.OrderPatch{} // OrderPatch - 
     
     result, _, err := client.SpotApi.AmendOrder(ctx, orderId, orderPatch, nil)
@@ -1709,7 +1709,7 @@ func main() {
 
 List personal trading history
 
-Spot,portfolio and margin trades are queried by default. If cross margin trades are needed, `account` must be set to `cross_margin`  You can also set `from` and(or) `to` to query by time range. If you don't specify `from` and/or `to` parameters, only the last 7 days of data will be retured. The range of `from` and `to` is not alloed to exceed 30 days.  Time range parameters are handled as order finish time. When using the limit&page paging function to retrieve data, the maximum number of pages is 100,000, that is, (limit * page - 1) <= 100000.
+By default query of transaction records for spot, unified account and warehouse-by-site leverage accounts.  The history within a specified time range can be queried by specifying `from` or (and) `to`.  - If no time parameters are specified, only data for the last 7 days can be obtained. - If only any parameter of `from` or `to` is specified, only 7-day data from the start (or end) of the specified time is returned. - The range of `from` and `to` is not allowed to exceed 30 days.  The parameters of the time range filter are processed according to the order end time.  The maximum number of pages when searching data using limit&page paging function is 100,000, that is, limit * (page - 1) <= 100,000.
 
 ### Required Parameters
 
@@ -1728,7 +1728,7 @@ Name | Type | Description  | Notes
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list.  Default: 100, Minimum: 1, Maximum: 1000 | [default to 100]
 **page** | **optional.Int32**| Page number | [default to 1]
 **orderId** | **optional.String**| Filter trades with specified order ID. &#x60;currency_pair&#x60; is also required if this field is present | 
-**account** | **optional.String**| Specify operation account. Default to spot ,portfolio and margin account if not specified. Set to &#x60;cross_margin&#x60; to operate against margin account.  Portfolio margin account must set to &#x60;cross_margin&#x60; only | 
+**account** | **optional.String**| Specify query account. | 
 **from** | **optional.Int64**| Start timestamp of the query | 
 **to** | **optional.Int64**| Time range ending, default to current time | 
 
@@ -1922,7 +1922,7 @@ func main() {
 
 Batch modification of orders
 
-Default modification of orders for spot, portfolio, and margin accounts. To modify orders for a cross margin account, the `account` parameter must be specified as `cross_margin`.  For portfolio margin accounts, the `account` parameter can only be specified as `cross_margin`. Currently, only modifications to price or quantity (choose one) are supported. When modifying unfinished orders, a maximum of 5 orders can be batch-modified in one request. The request parameters should be passed in an array format. During batch modification, if one order modification fails, the modification process will continue with the next order. After execution, the response will include corresponding failure information for the failed orders. The sequence of calling for batch order modification should be consistent with the order in the order list. The response content order for batch order modification will also be consistent with the order in the order list.
+By default modify orders for spot, unified account and leverage account. Currently, only the price or quantity modification (choose one of two) Modify unfinished orders, up to 5 orders can be modified in batches at a time. The request parameters should be passed in array format. When the order modification fails during batch modification, the modification of the order will continue to be executed. After execution, the failure information of the corresponding order will be carried The order of calling the batch modification order is consistent with the order list The order of return content of batch modification orders is consistent with the order list
 
 ### Required Parameters
 
@@ -2096,7 +2096,7 @@ Optional parameters are passed through a pointer to a ListSpotPriceTriggeredOrde
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **market** | **optional.String**| Currency pair | 
-**account** | **optional.String**| Trading account type.  Portfolio margin account must set to &#x60;cross_margin&#x60; | 
+**account** | **optional.String**| Trading account type.  Portfolio margin account must set to &#x60;unified&#x60; | 
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
 
@@ -2245,7 +2245,7 @@ Optional parameters are passed through a pointer to a CancelSpotPriceTriggeredOr
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **market** | **optional.String**| Currency pair | 
-**account** | **optional.String**| Trading account type.  Portfolio margin account must set to &#x60;cross_margin&#x60; | 
+**account** | **optional.String**| Trading account type.  Portfolio margin account must set to &#x60;unified&#x60; | 
 
 ### Example
 

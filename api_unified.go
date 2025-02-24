@@ -29,6 +29,7 @@ type UnifiedApiService service
 // ListUnifiedAccountsOpts Optional parameters for the method 'ListUnifiedAccounts'
 type ListUnifiedAccountsOpts struct {
 	Currency optional.String
+	SubUid   optional.String
 }
 
 /*
@@ -37,6 +38,7 @@ The assets of each currency in the account will be adjusted according to their l
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListUnifiedAccountsOpts - Optional Parameters:
   - @param "Currency" (optional.String) -  Retrieve data of the specified currency
+  - @param "SubUid" (optional.String) -  Sub account user ID
 
 @return UnifiedAccount
 */
@@ -58,6 +60,9 @@ func (a *UnifiedApiService) ListUnifiedAccounts(ctx context.Context, localVarOpt
 
 	if localVarOptionals != nil && localVarOptionals.Currency.IsSet() {
 		localVarQueryParams.Add("currency", parameterToString(localVarOptionals.Currency.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.SubUid.IsSet() {
+		localVarQueryParams.Add("sub_uid", parameterToString(localVarOptionals.SubUid.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

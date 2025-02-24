@@ -39,7 +39,7 @@ type BatchOrder struct {
 	CurrencyPair string `json:"currency_pair,omitempty"`
 	// Order Type    - limit : Limit Order - market : Market Order
 	Type string `json:"type,omitempty"`
-	// Account type. spot - use spot account; margin - use margin account; cross_margin - use cross margin account, unified - unified account
+	// Account type, spot - spot account, margin - leveraged account, unified - unified account
 	Account string `json:"account,omitempty"`
 	// Order side
 	Side string `json:"side,omitempty"`

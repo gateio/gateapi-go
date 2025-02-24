@@ -10,8 +10,10 @@
 package gateapi
 
 type Currency struct {
-	// Currency name
+	// Currency symbol
 	Currency string `json:"currency,omitempty"`
+	// Currency name
+	Name string `json:"name,omitempty"`
 	// Whether currency is de-listed
 	Delisted bool `json:"delisted,omitempty"`
 	// Whether currency's withdrawal is disabled

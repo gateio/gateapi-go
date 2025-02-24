@@ -15,8 +15,12 @@ type CurrencyPair struct {
 	Id string `json:"id,omitempty"`
 	// Base currency
 	Base string `json:"base,omitempty"`
+	// Transaction currency name
+	BaseName string `json:"base_name,omitempty"`
 	// Quote currency
 	Quote string `json:"quote,omitempty"`
+	// Name of the denominated currency
+	QuoteName string `json:"quote_name,omitempty"`
 	// Trading fee
 	Fee string `json:"fee,omitempty"`
 	// Minimum amount of base currency to trade, `null` means no limit
