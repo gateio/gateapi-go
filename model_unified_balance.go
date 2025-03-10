@@ -38,7 +38,7 @@ type UnifiedBalance struct {
 	IsoBalance string `json:"iso_balance,omitempty"`
 	// Full-position initial margin is valid in single-currency margin mode and is 0 in other modes such as cross-currency margin/combined margin mode
 	Im string `json:"im,omitempty"`
-	// Full-position maintenance margin rate is valid in single-currency margin mode and is 0 in other modes such as cross-currency margin/combined margin mode
+	// The full position maintains margin, which is valid in the single currency margin mode, and other cross-currency margin combination margin mode is 0.
 	Mm string `json:"mm,omitempty"`
 	// Full-position initial margin rate is valid in single-currency margin mode and is 0 in other modes such as cross-currency margin/combined margin mode
 	Imr string `json:"imr,omitempty"`

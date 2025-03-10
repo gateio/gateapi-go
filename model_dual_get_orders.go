@@ -42,4 +42,6 @@ type DualGetOrders struct {
 	ApySettlement string `json:"apy_settlement,omitempty"`
 	// Settlement time
 	DeliveryTime int32 `json:"delivery_time,omitempty"`
+	// Custom order information
+	Text string `json:"text,omitempty"`
 }
