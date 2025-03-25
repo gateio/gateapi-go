@@ -46,9 +46,9 @@ Method | HTTP request | Description
 [**GetFuturesFee**](FuturesApi.md#GetFuturesFee) | **Get** /futures/{settle}/fee | Query user trading fee rates
 [**CancelBatchFutureOrders**](FuturesApi.md#CancelBatchFutureOrders) | **Post** /futures/{settle}/batch_cancel_orders | Cancel a batch of orders with an ID list
 [**AmendBatchFutureOrders**](FuturesApi.md#AmendBatchFutureOrders) | **Post** /futures/{settle}/batch_amend_orders | Batch modify orders with specified IDs
-[**ListPriceTriggeredOrders**](FuturesApi.md#ListPriceTriggeredOrders) | **Get** /futures/{settle}/price_orders | List all auto orders
+[**ListPriceTriggeredOrders**](FuturesApi.md#ListPriceTriggeredOrders) | **Get** /futures/{settle}/price_orders | List All Price-triggered Orders
 [**CreatePriceTriggeredOrder**](FuturesApi.md#CreatePriceTriggeredOrder) | **Post** /futures/{settle}/price_orders | Create a price-triggered order
-[**CancelPriceTriggeredOrderList**](FuturesApi.md#CancelPriceTriggeredOrderList) | **Delete** /futures/{settle}/price_orders | Cancel all open orders
+[**CancelPriceTriggeredOrderList**](FuturesApi.md#CancelPriceTriggeredOrderList) | **Delete** /futures/{settle}/price_orders | Cancel All Price-triggered Orders
 [**GetPriceTriggeredOrder**](FuturesApi.md#GetPriceTriggeredOrder) | **Get** /futures/{settle}/price_orders/{order_id} | Get a price-triggered order
 [**CancelPriceTriggeredOrder**](FuturesApi.md#CancelPriceTriggeredOrder) | **Delete** /futures/{settle}/price_orders/{order_id} | cancel a price-triggered order
 
@@ -3305,7 +3305,7 @@ func main() {
 
 > []FuturesPriceTriggeredOrder ListPriceTriggeredOrders(ctx, settle, status, optional)
 
-List all auto orders
+List All Price-triggered Orders
 
 ### Required Parameters
 
@@ -3458,7 +3458,7 @@ func main() {
 
 > []FuturesPriceTriggeredOrder CancelPriceTriggeredOrderList(ctx, settle, optional)
 
-Cancel all open orders
+Cancel All Price-triggered Orders
 
 ### Required Parameters
 

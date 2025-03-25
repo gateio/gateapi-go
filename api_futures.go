@@ -4547,7 +4547,7 @@ type ListPriceTriggeredOrdersOpts struct {
 }
 
 /*
-ListPriceTriggeredOrders List all auto orders
+ListPriceTriggeredOrders List All Price-triggered Orders
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param settle Settle currency
   - @param status Only list the orders with this status
@@ -4756,7 +4756,7 @@ type CancelPriceTriggeredOrderListOpts struct {
 }
 
 /*
-CancelPriceTriggeredOrderList Cancel all open orders
+CancelPriceTriggeredOrderList Cancel All Price-triggered Orders
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param settle Settle currency
   - @param optional nil or *CancelPriceTriggeredOrderListOpts - Optional Parameters:

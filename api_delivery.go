@@ -2530,7 +2530,7 @@ type ListPriceTriggeredDeliveryOrdersOpts struct {
 }
 
 /*
-ListPriceTriggeredDeliveryOrders List all auto orders
+ListPriceTriggeredDeliveryOrders List All Price-triggered Orders
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param settle Settle currency
   - @param status Only list the orders with this status
@@ -2734,7 +2734,7 @@ func (a *DeliveryApiService) CreatePriceTriggeredDeliveryOrder(ctx context.Conte
 }
 
 /*
-CancelPriceTriggeredDeliveryOrderList Cancel all open orders
+CancelPriceTriggeredDeliveryOrderList Cancel All Price-triggered Orders
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param settle Settle currency
   - @param contract Futures contract

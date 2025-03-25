@@ -3073,7 +3073,7 @@ type CancelSpotPriceTriggeredOrderListOpts struct {
 }
 
 /*
-CancelSpotPriceTriggeredOrderList Cancel all open orders
+CancelSpotPriceTriggeredOrderList Cancel All Price-triggered Orders
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *CancelSpotPriceTriggeredOrderListOpts - Optional Parameters:
   - @param "Market" (optional.String) -  Currency pair

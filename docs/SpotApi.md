@@ -33,7 +33,7 @@ Method | HTTP request | Description
 [**GetSpotInsuranceHistory**](SpotApi.md#GetSpotInsuranceHistory) | **Get** /spot/insurance_history | Query spot insurance fund historical data
 [**ListSpotPriceTriggeredOrders**](SpotApi.md#ListSpotPriceTriggeredOrders) | **Get** /spot/price_orders | Retrieve running auto order list
 [**CreateSpotPriceTriggeredOrder**](SpotApi.md#CreateSpotPriceTriggeredOrder) | **Post** /spot/price_orders | Create a price-triggered order
-[**CancelSpotPriceTriggeredOrderList**](SpotApi.md#CancelSpotPriceTriggeredOrderList) | **Delete** /spot/price_orders | Cancel all open orders
+[**CancelSpotPriceTriggeredOrderList**](SpotApi.md#CancelSpotPriceTriggeredOrderList) | **Delete** /spot/price_orders | Cancel All Price-triggered Orders
 [**GetSpotPriceTriggeredOrder**](SpotApi.md#GetSpotPriceTriggeredOrder) | **Get** /spot/price_orders/{order_id} | Get a price-triggered order
 [**CancelSpotPriceTriggeredOrder**](SpotApi.md#CancelSpotPriceTriggeredOrder) | **Delete** /spot/price_orders/{order_id} | cancel a price-triggered order
 
@@ -2229,7 +2229,7 @@ func main() {
 
 > []SpotPriceTriggeredOrder CancelSpotPriceTriggeredOrderList(ctx, optional)
 
-Cancel all open orders
+Cancel All Price-triggered Orders
 
 ### Required Parameters
 
