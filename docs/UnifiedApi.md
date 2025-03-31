@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**ListUnifiedAccounts**](UnifiedApi.md#ListUnifiedAccounts) | **Get** /unified/accounts | Get unified account information
 [**GetUnifiedBorrowable**](UnifiedApi.md#GetUnifiedBorrowable) | **Get** /unified/borrowable | Query about the maximum borrowing for the unified account
 [**GetUnifiedTransferable**](UnifiedApi.md#GetUnifiedTransferable) | **Get** /unified/transferable | Query about the maximum transferable for the unified account
+[**GetUnifiedTransferables**](UnifiedApi.md#GetUnifiedTransferables) | **Get** /unified/transferables | Batch query can be transferred out at most for unified accounts; each currency is the maximum value. After the user withdraws the currency, the amount of transferable currency will be changed.
 [**ListUnifiedLoans**](UnifiedApi.md#ListUnifiedLoans) | **Get** /unified/loans | List loans
 [**CreateUnifiedLoan**](UnifiedApi.md#CreateUnifiedLoan) | **Post** /unified/loans | Borrow or repay
 [**ListUnifiedLoanRecords**](UnifiedApi.md#ListUnifiedLoanRecords) | **Get** /unified/loan_records | Get load records
@@ -228,6 +229,75 @@ func main() {
 ### Return type
 
 [**UnifiedTransferable**](UnifiedTransferable.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## GetUnifiedTransferables
+
+> []TransferablesResult GetUnifiedTransferables(ctx, currencies)
+
+Batch query can be transferred out at most for unified accounts; each currency is the maximum value. After the user withdraws the currency, the amount of transferable currency will be changed.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**currencies** | **string**| Specify the currency name to query in batches, and support up to 100 pass parameters at a time. | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    currencies := "BTC,ETH" // string - Specify the currency name to query in batches, and support up to 100 pass parameters at a time.
+    
+    result, _, err := client.UnifiedApi.GetUnifiedTransferables(ctx, currencies)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**[]TransferablesResult**](TransferablesResult.md)
 
 ### Authorization
 

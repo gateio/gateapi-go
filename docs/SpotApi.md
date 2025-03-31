@@ -837,6 +837,7 @@ Name | Type | Description  | Notes
 **page** | **optional.Int32**| Page number | [default to 1]
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **type_** | **optional.String**| Only retrieve changes of the specified type. All types will be returned if not specified. | 
+**code** | **optional.String**| Specify account change code query, if not specified, all change types are included, and the priority is higher than &#x60;type&#x60; | 
 
 ### Example
 

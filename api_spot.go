@@ -1111,6 +1111,7 @@ type ListSpotAccountBookOpts struct {
 	Page     optional.Int32
 	Limit    optional.Int32
 	Type_    optional.String
+	Code     optional.String
 }
 
 /*
@@ -1124,6 +1125,7 @@ Record query time range is not allowed to exceed 30 days.  The maximum number of
   - @param "Page" (optional.Int32) -  Page number
   - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
   - @param "Type_" (optional.String) -  Only retrieve changes of the specified type. All types will be returned if not specified.
+  - @param "Code" (optional.String) -  Specify account change code query, if not specified, all change types are included, and the priority is higher than `type`
 
 @return []SpotAccountBook
 */
@@ -1160,6 +1162,9 @@ func (a *SpotApiService) ListSpotAccountBook(ctx context.Context, localVarOption
 	}
 	if localVarOptionals != nil && localVarOptionals.Type_.IsSet() {
 		localVarQueryParams.Add("type", parameterToString(localVarOptionals.Type_.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Code.IsSet() {
+		localVarQueryParams.Add("code", parameterToString(localVarOptionals.Code.Value(), ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
