@@ -11,11 +11,12 @@ package gateapi
 
 import (
 	"context"
-	"github.com/antihax/optional"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -1676,6 +1677,7 @@ func (a *SpotApiService) ListOrders(ctx context.Context, currencyPair string, st
 // CreateOrderOpts Optional parameters for the method 'CreateOrder'
 type CreateOrderOpts struct {
 	XGateExptime optional.Int64
+	ChannelID    optional.String // rebates for API broker
 }
 
 /*
@@ -1721,8 +1723,13 @@ func (a *SpotApiService) CreateOrder(ctx context.Context, order Order, localVarO
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	if localVarOptionals != nil && localVarOptionals.XGateExptime.IsSet() {
-		localVarHeaderParams["x-gate-exptime"] = parameterToString(localVarOptionals.XGateExptime.Value(), "")
+	if localVarOptionals != nil {
+		if localVarOptionals.XGateExptime.IsSet() {
+			localVarHeaderParams["x-gate-exptime"] = parameterToString(localVarOptionals.XGateExptime.Value(), "")
+		}
+		if localVarOptionals.ChannelID.IsSet() {
+			localVarHeaderParams["X-Gate-Channel-Id"] = parameterToString(localVarOptionals.ChannelID.Value(), "")
+		}
 	}
 	// body params
 	localVarPostBody = &order
