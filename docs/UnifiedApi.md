@@ -393,7 +393,7 @@ func main() {
 
 ## CreateUnifiedLoan
 
-> CreateUnifiedLoan(ctx, unifiedLoan)
+> UnifiedLoanResult CreateUnifiedLoan(ctx, unifiedLoan)
 
 Borrow or repay
 
@@ -447,7 +447,7 @@ func main() {
 
 ### Return type
 
- (empty response body)
+[**UnifiedLoanResult**](UnifiedLoanResult.md)
 
 ### Authorization
 
@@ -456,7 +456,7 @@ func main() {
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

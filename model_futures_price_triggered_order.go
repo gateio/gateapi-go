@@ -29,7 +29,7 @@ type FuturesPriceTriggeredOrder struct {
 	FinishAs string `json:"finish_as,omitempty"`
 	// Additional remarks on how the order was finished
 	Reason string `json:"reason,omitempty"`
-	// Take-profit/stop-loss types, which include:  - `close-long-order`: order take-profit/stop-loss, close long position - `close-short-order`: order take-profit/stop-loss, close short position - `close-long-position`: position take-profit/stop-loss, close long position - `close-short-position`: position take-profit/stop-loss, close short position - `plan-close-long-position`: position planned take-profit/stop-loss, close long position - `plan-close-short-position`: position planned take-profit/stop-loss, close short position  The order take-profit/stop-loss can not be passed by request. These two types are read only.
+	// Types of stop-profit and stop-loss, including:  - `close-long-order`: Entrusting order stop profit and stop loss, flat long position - `close-short-order`: Entrusted order stop profit and stop loss, short position  - `close-long-position`: Position stop-profit stop loss, used to close long positions - `close-short-position`: Position stop-profit stop loss, used to close all short positions - `plan-close-long-position`: Position plan take profit and stop loss, used to close long positions in all or part of long positions - `plan-close-short-position`: Position plan stop-profit and stop loss, used to close all short positions or partially close short positions  The two types of entrusted order stop-profit and stop-loss are read-only and cannot be passed in through requests
 	OrderType string `json:"order_type,omitempty"`
 	// Corresponding order ID of order take-profit/stop-loss.
 	MeOrderId int64 `json:"me_order_id,omitempty"`

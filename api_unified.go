@@ -528,14 +528,17 @@ CreateUnifiedLoan Borrow or repay
 When borrowing, it is essential to ensure that the borrowed amount is not below the minimum borrowing threshold for the specific cryptocurrency and does not exceed the maximum borrowing limit set by the platform and the user.  The interest on the loan will be automatically deducted from the account at regular intervals. It is the user&#39;s responsibility to manage the repayment of the borrowed amount.  For repayment, the option to repay the entire borrowed amount is available by setting the parameter &#x60;repaid_all&#x3D;true&#x60;
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param unifiedLoan
+
+@return UnifiedLoanResult
 */
-func (a *UnifiedApiService) CreateUnifiedLoan(ctx context.Context, unifiedLoan UnifiedLoan) (*http.Response, error) {
+func (a *UnifiedApiService) CreateUnifiedLoan(ctx context.Context, unifiedLoan UnifiedLoan) (UnifiedLoanResult, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		localVarReturnValue  UnifiedLoanResult
 	)
 
 	// create path and map variables
@@ -554,7 +557,7 @@ func (a *UnifiedApiService) CreateUnifiedLoan(ctx context.Context, unifiedLoan U
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -575,18 +578,18 @@ func (a *UnifiedApiService) CreateUnifiedLoan(ctx context.Context, unifiedLoan U
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(r)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	if err != nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -597,12 +600,21 @@ func (a *UnifiedApiService) CreateUnifiedLoan(ctx context.Context, unifiedLoan U
 		var gateErr GateAPIError
 		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
 			gateErr.APIError = newErr
-			return localVarHTTPResponse, gateErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
 		}
-		return localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 // ListUnifiedLoanRecordsOpts Optional parameters for the method 'ListUnifiedLoanRecords'

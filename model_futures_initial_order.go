@@ -12,19 +12,19 @@ package gateapi
 type FuturesInitialOrder struct {
 	// Futures contract
 	Contract string `json:"contract"`
-	// Order size. Positive size means to buy, while negative one means to sell. Set to 0 to close the position
+	// Represents the number of contracts that need to be closed, full closing: size=0 Partial closing: plan-close-short-position size>0  Partial closing: plan-close-long-position size<0
 	Size int64 `json:"size,omitempty"`
 	// Order price. Set to 0 to use market price
 	Price string `json:"price"`
-	// Set to true if trying to close the position
+	// When all positions are closed in a single position mode, it must be set to true to perform the closing operation When partially closed positions in single-store mode/double-store mode, you can not set close, or close=false
 	Close bool `json:"close,omitempty"`
-	// Time in force. If using market price, only `ioc` is supported.  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled
+	// Time in force strategy, default is gtc, market order currently only supports ioc mode Market order currently only supports ioc mode  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled
 	Tif string `json:"tif,omitempty"`
 	// The source of the order, including: - web: web - api: api - app: app
 	Text string `json:"text,omitempty"`
-	// Set to true to create a reduce-only order
+	// When set to true, perform automatic position reduction operation. Set to true to ensure that the order will not open a new position, and is only used to close or reduce positions
 	ReduceOnly bool `json:"reduce_only,omitempty"`
-	// Set side to close dual-mode position. `close_long` closes the long side; while `close_short` the short one. Note `size` also needs to be set to 0
+	// Do not set auto_size When the dual-position mode is closed all positions (size=0), auto_size, close_long, close_short, short When the double-storey mode partially closes the position (size ≠ 0), there is no need to set auto_size
 	AutoSize string `json:"auto_size,omitempty"`
 	// Is the order reduce-only
 	IsReduceOnly bool `json:"is_reduce_only,omitempty"`

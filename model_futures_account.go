@@ -46,6 +46,12 @@ type FuturesAccount struct {
 	CrossUnrealisedPnl string `json:"cross_unrealised_pnl,omitempty"`
 	// Full warehouse available amount, suitable for the new classic account margin model
 	CrossAvailable string `json:"cross_available,omitempty"`
+	// Full margin balance, suitable for the new classic account margin model
+	CrossMarginBalance string `json:"cross_margin_balance,omitempty"`
+	// Maintain margin ratio for the full position, suitable for the new classic account margin model
+	CrossMmr string `json:"cross_mmr,omitempty"`
+	// The initial margin rate of the full position is suitable for the new classic account margin model
+	CrossImr string `json:"cross_imr,omitempty"`
 	// Ware -position margin, suitable for the new classic account margin model
 	IsolatedPositionMargin string `json:"isolated_position_margin,omitempty"`
 	// Whether to open a new two-way position mode

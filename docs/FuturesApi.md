@@ -2034,7 +2034,7 @@ Optional parameters are passed through a pointer to a CreateFuturesOrderOpts str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
+**xGateExptime** | **optional.String**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
 ### Example
 
@@ -2116,8 +2116,8 @@ Optional parameters are passed through a pointer to a CancelFuturesOrdersOpts st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
-**side** | **optional.String**| All bids or asks. Both included if not specified | 
+**xGateExptime** | **optional.String**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
+**side** | **optional.String**| Specify all buy orders or all sell orders, if not specify them, both are included. Revoke all buy orders and revoke all sell orders and make ask | 
 
 ### Example
 
@@ -2281,7 +2281,7 @@ Optional parameters are passed through a pointer to a CreateBatchFuturesOrderOpt
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
+**xGateExptime** | **optional.String**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
 ### Example
 
@@ -2435,7 +2435,7 @@ Optional parameters are passed through a pointer to a AmendFuturesOrderOpts stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
+**xGateExptime** | **optional.String**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
 ### Example
 
@@ -2516,7 +2516,7 @@ Optional parameters are passed through a pointer to a CancelFuturesOrderOpts str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
+**xGateExptime** | **optional.String**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
 ### Example
 
@@ -3160,7 +3160,7 @@ Optional parameters are passed through a pointer to a CancelBatchFutureOrdersOpt
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
+**xGateExptime** | **optional.String**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
 ### Example
 
@@ -3242,7 +3242,7 @@ Optional parameters are passed through a pointer to a AmendBatchFutureOrdersOpts
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
+**xGateExptime** | **optional.String**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
 ### Example
 

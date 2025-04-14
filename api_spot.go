@@ -1236,7 +1236,7 @@ func (a *SpotApiService) ListSpotAccountBook(ctx context.Context, localVarOption
 
 // CreateBatchOrdersOpts Optional parameters for the method 'CreateBatchOrders'
 type CreateBatchOrdersOpts struct {
-	XGateExptime optional.Int64
+	XGateExptime optional.String
 }
 
 /*
@@ -1245,7 +1245,7 @@ Batch orders requirements:  1. custom order field &#x60;text&#x60; is required 2
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param order
   - @param optional nil or *CreateBatchOrdersOpts - Optional Parameters:
-  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
+  - @param "XGateExptime" (optional.String) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
 
 @return []BatchOrder
 */
@@ -1675,7 +1675,7 @@ func (a *SpotApiService) ListOrders(ctx context.Context, currencyPair string, st
 
 // CreateOrderOpts Optional parameters for the method 'CreateOrder'
 type CreateOrderOpts struct {
-	XGateExptime optional.Int64
+	XGateExptime optional.String
 }
 
 /*
@@ -1684,7 +1684,7 @@ Support spot, margin, leverage, and full-position leverage orders. Use different
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param order
   - @param optional nil or *CreateOrderOpts - Optional Parameters:
-  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
+  - @param "XGateExptime" (optional.String) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
 
 @return Order
 */
@@ -1783,7 +1783,7 @@ type CancelOrdersOpts struct {
 	Side         optional.String
 	Account      optional.String
 	ActionMode   optional.String
-	XGateExptime optional.Int64
+	XGateExptime optional.String
 }
 
 /*
@@ -1795,7 +1795,7 @@ When the &#x60;account&#x60; parameter is not specified, all pending orders incl
   - @param "Side" (optional.String) -  All bids or asks. Both included if not specified
   - @param "Account" (optional.String) -  Specify Account Type  - Classic Account: If not specified, all include  - Unified Account: Specify `unified`
   - @param "ActionMode" (optional.String) -  Processing Mode  When placing an order, different fields are returned based on the action_mode  - ACK: Asynchronous mode, returns only key order fields - RESULT: No clearing information - FULL: Full mode (default)
-  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
+  - @param "XGateExptime" (optional.String) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
 
 @return []OrderCancel
 */
@@ -1900,7 +1900,7 @@ func (a *SpotApiService) CancelOrders(ctx context.Context, localVarOptionals *Ca
 
 // CancelBatchOrdersOpts Optional parameters for the method 'CancelBatchOrders'
 type CancelBatchOrdersOpts struct {
-	XGateExptime optional.Int64
+	XGateExptime optional.String
 }
 
 /*
@@ -1909,7 +1909,7 @@ Multiple currency pairs can be specified, but maximum 20 orders are allowed per 
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param cancelBatchOrder
   - @param optional nil or *CancelBatchOrdersOpts - Optional Parameters:
-  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
+  - @param "XGateExptime" (optional.String) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
 
 @return []CancelOrderResult
 */
@@ -2112,7 +2112,7 @@ func (a *SpotApiService) GetOrder(ctx context.Context, orderId string, currencyP
 type CancelOrderOpts struct {
 	Account      optional.String
 	ActionMode   optional.String
-	XGateExptime optional.Int64
+	XGateExptime optional.String
 }
 
 /*
@@ -2124,7 +2124,7 @@ By default, orders for spot, unified accounts and leveraged accounts are revoked
   - @param optional nil or *CancelOrderOpts - Optional Parameters:
   - @param "Account" (optional.String) -  Specify query account.
   - @param "ActionMode" (optional.String) -  Processing Mode  When placing an order, different fields are returned based on the action_mode  - ACK: Asynchronous mode, returns only key order fields - RESULT: No clearing information - FULL: Full mode (default)
-  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
+  - @param "XGateExptime" (optional.String) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
 
 @return Order
 */
@@ -2228,7 +2228,7 @@ func (a *SpotApiService) CancelOrder(ctx context.Context, orderId string, curren
 type AmendOrderOpts struct {
 	CurrencyPair optional.String
 	Account      optional.String
-	XGateExptime optional.Int64
+	XGateExptime optional.String
 }
 
 /*
@@ -2240,7 +2240,7 @@ By default modify orders for spot, unified account and leverage account.  At pre
   - @param optional nil or *AmendOrderOpts - Optional Parameters:
   - @param "CurrencyPair" (optional.String) -  Currency pair
   - @param "Account" (optional.String) -  Specify query account.
-  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
+  - @param "XGateExptime" (optional.String) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
 
 @return Order
 */
@@ -2652,7 +2652,7 @@ func (a *SpotApiService) CountdownCancelAllSpot(ctx context.Context, countdownCa
 
 // AmendBatchOrdersOpts Optional parameters for the method 'AmendBatchOrders'
 type AmendBatchOrdersOpts struct {
-	XGateExptime optional.Int64
+	XGateExptime optional.String
 }
 
 /*
@@ -2661,7 +2661,7 @@ By default modify orders for spot, unified account and leverage account. Current
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param batchAmendItem
   - @param optional nil or *AmendBatchOrdersOpts - Optional Parameters:
-  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
+  - @param "XGateExptime" (optional.String) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
 
 @return []BatchOrder
 */

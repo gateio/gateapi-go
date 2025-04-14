@@ -2756,7 +2756,7 @@ func (a *FuturesApiService) ListFuturesOrders(ctx context.Context, settle string
 
 // CreateFuturesOrderOpts Optional parameters for the method 'CreateFuturesOrder'
 type CreateFuturesOrderOpts struct {
-	XGateExptime optional.Int64
+	XGateExptime optional.String
 }
 
 /*
@@ -2766,7 +2766,7 @@ CreateFuturesOrder Create a futures order
   - @param settle Settle currency
   - @param futuresOrder
   - @param optional nil or *CreateFuturesOrderOpts - Optional Parameters:
-  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
+  - @param "XGateExptime" (optional.String) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
 
 @return FuturesOrder
 */
@@ -2863,7 +2863,7 @@ func (a *FuturesApiService) CreateFuturesOrder(ctx context.Context, settle strin
 
 // CancelFuturesOrdersOpts Optional parameters for the method 'CancelFuturesOrders'
 type CancelFuturesOrdersOpts struct {
-	XGateExptime optional.Int64
+	XGateExptime optional.String
 	Side         optional.String
 }
 
@@ -2874,8 +2874,8 @@ Zero-filled order cannot be retrieved 10 minutes after order cancellation
   - @param settle Settle currency
   - @param contract Futures contract
   - @param optional nil or *CancelFuturesOrdersOpts - Optional Parameters:
-  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
-  - @param "Side" (optional.String) -  All bids or asks. Both included if not specified
+  - @param "XGateExptime" (optional.String) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
+  - @param "Side" (optional.String) -  Specify all buy orders or all sell orders, if not specify them, both are included. Revoke all buy orders and revoke all sell orders and make ask
 
 @return []FuturesOrder
 */
@@ -3097,7 +3097,7 @@ func (a *FuturesApiService) GetOrdersWithTimeRange(ctx context.Context, settle s
 
 // CreateBatchFuturesOrderOpts Optional parameters for the method 'CreateBatchFuturesOrder'
 type CreateBatchFuturesOrderOpts struct {
-	XGateExptime optional.Int64
+	XGateExptime optional.String
 }
 
 /*
@@ -3107,7 +3107,7 @@ CreateBatchFuturesOrder Create a batch of futures orders
   - @param settle Settle currency
   - @param futuresOrder
   - @param optional nil or *CreateBatchFuturesOrderOpts - Optional Parameters:
-  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
+  - @param "XGateExptime" (optional.String) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
 
 @return []BatchFuturesOrder
 */
@@ -3301,7 +3301,7 @@ func (a *FuturesApiService) GetFuturesOrder(ctx context.Context, settle string, 
 
 // AmendFuturesOrderOpts Optional parameters for the method 'AmendFuturesOrder'
 type AmendFuturesOrderOpts struct {
-	XGateExptime optional.Int64
+	XGateExptime optional.String
 }
 
 /*
@@ -3311,7 +3311,7 @@ AmendFuturesOrder Amend an order
   - @param orderId Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID can only be checked when the order is in orderbook.  When the order is finished, it can be checked within 60 seconds after the end of the order.  After that, only order ID is accepted.
   - @param futuresOrderAmendment
   - @param optional nil or *AmendFuturesOrderOpts - Optional Parameters:
-  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
+  - @param "XGateExptime" (optional.String) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
 
 @return FuturesOrder
 */
@@ -3410,7 +3410,7 @@ func (a *FuturesApiService) AmendFuturesOrder(ctx context.Context, settle string
 
 // CancelFuturesOrderOpts Optional parameters for the method 'CancelFuturesOrder'
 type CancelFuturesOrderOpts struct {
-	XGateExptime optional.Int64
+	XGateExptime optional.String
 }
 
 /*
@@ -3419,7 +3419,7 @@ CancelFuturesOrder Cancel a single order
   - @param settle Settle currency
   - @param orderId Order ID returned, or user custom ID(i.e., `text` field). Operations based on custom ID can only be checked when the order is in orderbook.  When the order is finished, it can be checked within 60 seconds after the end of the order.  After that, only order ID is accepted.
   - @param optional nil or *CancelFuturesOrderOpts - Optional Parameters:
-  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
+  - @param "XGateExptime" (optional.String) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
 
 @return FuturesOrder
 */
@@ -4327,7 +4327,7 @@ func (a *FuturesApiService) GetFuturesFee(ctx context.Context, settle string, lo
 
 // CancelBatchFutureOrdersOpts Optional parameters for the method 'CancelBatchFutureOrders'
 type CancelBatchFutureOrdersOpts struct {
-	XGateExptime optional.Int64
+	XGateExptime optional.String
 }
 
 /*
@@ -4337,7 +4337,7 @@ Multiple distinct order ID list can be specified。Each request can cancel a max
   - @param settle Settle currency
   - @param requestBody
   - @param optional nil or *CancelBatchFutureOrdersOpts - Optional Parameters:
-  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
+  - @param "XGateExptime" (optional.String) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
 
 @return []FutureCancelOrderResult
 */
@@ -4434,7 +4434,7 @@ func (a *FuturesApiService) CancelBatchFutureOrders(ctx context.Context, settle 
 
 // AmendBatchFutureOrdersOpts Optional parameters for the method 'AmendBatchFutureOrders'
 type AmendBatchFutureOrdersOpts struct {
-	XGateExptime optional.Int64
+	XGateExptime optional.String
 }
 
 /*
@@ -4444,7 +4444,7 @@ You can specify multiple different order IDs. You can only modify up to 10 order
   - @param settle Settle currency
   - @param batchAmendOrderReq
   - @param optional nil or *AmendBatchFutureOrdersOpts - Optional Parameters:
-  - @param "XGateExptime" (optional.Int64) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
+  - @param "XGateExptime" (optional.String) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
 
 @return []BatchFuturesOrder
 */

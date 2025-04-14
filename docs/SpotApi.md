@@ -916,7 +916,7 @@ Optional parameters are passed through a pointer to a CreateBatchOrdersOpts stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
+**xGateExptime** | **optional.String**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
 ### Example
 
@@ -1234,7 +1234,7 @@ Optional parameters are passed through a pointer to a CreateOrderOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
+**xGateExptime** | **optional.String**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
 ### Example
 
@@ -1317,7 +1317,7 @@ Name | Type | Description  | Notes
 **side** | **optional.String**| All bids or asks. Both included if not specified | 
 **account** | **optional.String**| Specify Account Type  - Classic Account: If not specified, all include  - Unified Account: Specify &#x60;unified&#x60; | 
 **actionMode** | **optional.String**| Processing Mode  When placing an order, different fields are returned based on the action_mode  - ACK: Asynchronous mode, returns only key order fields - RESULT: No clearing information - FULL: Full mode (default) | 
-**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
+**xGateExptime** | **optional.String**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
 ### Example
 
@@ -1396,7 +1396,7 @@ Optional parameters are passed through a pointer to a CancelBatchOrdersOpts stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
+**xGateExptime** | **optional.String**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
 ### Example
 
@@ -1561,7 +1561,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **account** | **optional.String**| Specify query account. | 
 **actionMode** | **optional.String**| Processing Mode  When placing an order, different fields are returned based on the action_mode  - ACK: Asynchronous mode, returns only key order fields - RESULT: No clearing information - FULL: Full mode (default) | 
-**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
+**xGateExptime** | **optional.String**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
 ### Example
 
@@ -1645,7 +1645,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **currencyPair** | **optional.String**| Currency pair | 
 **account** | **optional.String**| Specify query account. | 
-**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
+**xGateExptime** | **optional.String**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
 ### Example
 
@@ -1939,7 +1939,7 @@ Optional parameters are passed through a pointer to a AmendBatchOrdersOpts struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**xGateExptime** | **optional.Int64**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
+**xGateExptime** | **optional.String**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
 
 ### Example
 
