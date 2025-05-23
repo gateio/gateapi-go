@@ -399,7 +399,7 @@ No authorization required
 
 ## ListDeliveryTickers
 
-> []FuturesTicker ListDeliveryTickers(ctx, settle, optional)
+> []DeliveryTicker ListDeliveryTickers(ctx, settle, optional)
 
 List futures tickers
 
@@ -454,7 +454,7 @@ func main() {
 
 ### Return type
 
-[**[]FuturesTicker**](FuturesTicker.md)
+[**[]DeliveryTicker**](DeliveryTicker.md)
 
 ### Authorization
 
