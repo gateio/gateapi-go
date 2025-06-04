@@ -10,22 +10,24 @@
 package gateapi
 
 type SubAccountTransfer struct {
-	// Transfer currency name
-	Currency string `json:"currency"`
-	// Sub account user ID
-	SubAccount string `json:"sub_account"`
-	// Transfer direction. to - transfer into sub account; from - transfer out from sub account
-	Direction string `json:"direction"`
-	// Transfer amount
-	Amount string `json:"amount"`
-	// Main account user ID
-	Uid string `json:"uid,omitempty"`
-	// The custom ID provided by the customer serves as a safeguard against duplicate transfers. It can be a combination of letters (case-sensitive), numbers, hyphens '-', and underscores '_', with a length ranging from 1 to 64 characters.
-	ClientOrderId string `json:"client_order_id,omitempty"`
 	// Transfer timestamp
 	Timest string `json:"timest,omitempty"`
-	// Where the operation is initiated from
-	Source string `json:"source,omitempty"`
+	// Main account user ID
+	Uid string `json:"uid,omitempty"`
+	// Sub account user ID
+	SubAccount string `json:"sub_account"`
 	// Target sub user's account. `spot` - spot account, `futures` - perpetual contract account, `delivery` - delivery account
 	SubAccountType string `json:"sub_account_type,omitempty"`
+	// Transfer currency name
+	Currency string `json:"currency"`
+	// Transfer amount
+	Amount string `json:"amount"`
+	// Transfer direction. to - transfer into sub account; from - transfer out from sub account
+	Direction string `json:"direction"`
+	// Where the operation is initiated from
+	Source string `json:"source,omitempty"`
+	// The custom ID provided by the customer serves as a safeguard against duplicate transfers. It can be a combination of letters (case-sensitive), numbers, hyphens '-', and underscores '_', with a length ranging from 1 to 64 characters.
+	ClientOrderId string `json:"client_order_id,omitempty"`
+	// Sub-account transfer record status, currently only success
+	Status string `json:"status,omitempty"`
 }

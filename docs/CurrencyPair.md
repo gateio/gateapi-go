@@ -19,7 +19,9 @@ Name | Type | Description | Notes
 **TradeStatus** | **string** | How currency pair can be traded  - untradable: cannot be bought or sold - buyable: can be bought - sellable: can be sold - tradable: can be bought or sold | [optional] 
 **SellStart** | **int64** | Sell start unix timestamp in seconds | [optional] 
 **BuyStart** | **int64** | Buy start unix timestamp in seconds | [optional] 
+**DelistingTime** | **int64** | Expected time to remove the shelves, Unix timestamp in seconds | [optional] 
 **Type** | **string** | Trading pair type, normal: normal, premarket: pre-market | [optional] 
+**TradeUrl** | **string** | Transaction link | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -26,7 +26,7 @@ type WithdrawalRecord struct {
 	Fee string `json:"fee,omitempty"`
 	// Currency name
 	Currency string `json:"currency"`
-	// 提现地址
+	// Withdrawal address
 	Address string `json:"address,omitempty"`
 	// The reason for withdrawal failure is that there is a value when status = CANCEL, and the rest of the state is empty
 	FailReason string `json:"fail_reason,omitempty"`

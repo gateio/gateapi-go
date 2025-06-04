@@ -1473,13 +1473,7 @@ func main() {
     client := gateapi.NewAPIClient(gateapi.NewConfiguration())
     // uncomment the next line if your are testing against testnet
     // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
-    ctx := context.WithValue(context.Background(),
-                             gateapi.ContextGateAPIV4,
-                             gateapi.GateAPIV4{
-                                 Key:    "YOUR_API_KEY",
-                                 Secret: "YOUR_API_SECRET",
-                             }
-                            )
+    ctx := context.Background()
     currency := "USDT" // string - Currency
     
     result, _, err := client.UnifiedApi.GetHistoryLoanRate(ctx, currency, nil)
@@ -1502,7 +1496,7 @@ func main() {
 
 ### Authorization
 
-[apiv4](../README.md#apiv4)
+No authorization required
 
 ### HTTP request headers
 

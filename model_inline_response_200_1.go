@@ -9,7 +9,8 @@
 
 package gateapi
 
-type InlineResponse200 struct {
-	Time  int64  `json:"time,omitempty"`
-	Value string `json:"value,omitempty"`
+type InlineResponse2001 struct {
+	Currency string `json:"currency,omitempty"`
+	// Unconverted percentage
+	EstRate string `json:"est_rate,omitempty"`
 }
