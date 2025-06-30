@@ -11,11 +11,12 @@ package gateapi
 
 import (
 	"context"
-	"github.com/antihax/optional"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -413,14 +414,14 @@ CreateSubAccountKeys Create API Key of the sub-account
 
 @return []SubAccountKey
 */
-func (a *SubAccountApiService) CreateSubAccountKeys(ctx context.Context, userId int64, subAccountKey SubAccountKey) ([]SubAccountKey, *http.Response, error) {
+func (a *SubAccountApiService) CreateSubAccountKeys(ctx context.Context, userId int64, subAccountKey SubAccountKey) (SubAccountKey, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []SubAccountKey
+		localVarReturnValue  SubAccountKey
 	)
 
 	// create path and map variables
