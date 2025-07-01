@@ -21,6 +21,8 @@ type SubAccountKey struct {
 	IpWhitelist []string `json:"ip_whitelist,omitempty"`
 	// API Key
 	Key string `json:"key,omitempty"`
+	// API Secret Key
+	Secret string `json:"secret,omitempty"`
 	// State 1 - normal 2 - locked 3 - frozen
 	State int32 `json:"state,omitempty"`
 	// Creation time
