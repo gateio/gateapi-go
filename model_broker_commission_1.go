@@ -27,5 +27,6 @@ type BrokerCommission1 struct {
 	// Rebate Type: Spot、Futures、Options
 	Source string `json:"source,omitempty"`
 	// Currency pair
-	CurrencyPair string `json:"currency_pair,omitempty"`
+	CurrencyPair  string                        `json:"currency_pair,omitempty"`
+	SubBrokerInfo BrokerCommissionSubBrokerInfo `json:"sub_broker_info,omitempty"`
 }

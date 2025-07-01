@@ -15,8 +15,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
-	"reflect"
-	"strings"
 )
 
 // Linger please
@@ -24,221 +22,32 @@ var (
 	_ context.Context
 )
 
-// MarginUniApiService MarginUniApi service
-type MarginUniApiService service
+// AlphaApiService AlphaApi service
+type AlphaApiService service
 
 /*
-ListUniCurrencyPairs List lending markets
+ListAlphaAccounts API for Alpha Accounts
+Query Position Assets
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
-@return []UniCurrencyPair
+@return []AccountsResponse
 */
-func (a *MarginUniApiService) ListUniCurrencyPairs(ctx context.Context) ([]UniCurrencyPair, *http.Response, error) {
+func (a *AlphaApiService) ListAlphaAccounts(ctx context.Context) ([]AccountsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []UniCurrencyPair
+		localVarReturnValue  []AccountsResponse
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/margin/uni/currency_pairs"
+	localVarPath := a.client.cfg.BasePath + "/alpha/accounts"
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if ctx == nil {
-		ctx = context.Background()
-	}
-	ctx = context.WithValue(ctx, ContextPublic, true)
-	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(r)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
-		}
-		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
-			gateErr.APIError = newErr
-			return localVarReturnValue, localVarHTTPResponse, gateErr
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-/*
-GetUniCurrencyPair Get detail of lending market
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param currencyPair Currency pair
-
-@return UniCurrencyPair
-*/
-func (a *MarginUniApiService) GetUniCurrencyPair(ctx context.Context, currencyPair string) (UniCurrencyPair, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  UniCurrencyPair
-	)
-
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/margin/uni/currency_pairs/{currency_pair}"
-	localVarPath = strings.Replace(localVarPath, "{"+"currency_pair"+"}", url.QueryEscape(parameterToString(currencyPair, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if ctx == nil {
-		ctx = context.Background()
-	}
-	ctx = context.WithValue(ctx, ContextPublic, true)
-	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(r)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
-		}
-		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
-			gateErr.APIError = newErr
-			return localVarReturnValue, localVarHTTPResponse, gateErr
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-/*
-GetMarginUniEstimateRate Estimate interest Rate
-Please note that the interest rates are subject to change based on the borrowing and lending demand, and therefore, the provided rates may not be entirely accurate.
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param currencies An array of up to 10 specifying the currency name
-
-@return map[string]string
-*/
-func (a *MarginUniApiService) GetMarginUniEstimateRate(ctx context.Context, currencies []string) (map[string]string, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  map[string]string
-	)
-
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/margin/uni/estimate_rate"
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if len(currencies) < 1 {
-		return localVarReturnValue, nil, reportError("currencies must have at least 1 elements")
-	}
-	if len(currencies) > 10 {
-		return localVarReturnValue, nil, reportError("currencies must have less than 10 elements")
-	}
-
-	{
-		t := currencies
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("currencies", parameterToString(s.Index(i), "multi"))
-			}
-		} else {
-			localVarQueryParams.Add("currencies", parameterToString(t, "multi"))
-		}
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -307,46 +116,44 @@ func (a *MarginUniApiService) GetMarginUniEstimateRate(ctx context.Context, curr
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-// ListUniLoansOpts Optional parameters for the method 'ListUniLoans'
-type ListUniLoansOpts struct {
-	CurrencyPair optional.String
-	Currency     optional.String
-	Page         optional.Int32
-	Limit        optional.Int32
+// ListAlphaAccountBookOpts Optional parameters for the method 'ListAlphaAccountBook'
+type ListAlphaAccountBookOpts struct {
+	To    optional.Int64
+	Page  optional.Int32
+	Limit optional.Int32
 }
 
 /*
-ListUniLoans List loans
+ListAlphaAccountBook Alpha Asset Transaction API
+Query Asset Transactions
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param optional nil or *ListUniLoansOpts - Optional Parameters:
-  - @param "CurrencyPair" (optional.String) -  Currency pair
-  - @param "Currency" (optional.String) -  Retrieve data of the specified currency
+  - @param from Start timestamp of the query
+  - @param optional nil or *ListAlphaAccountBookOpts - Optional Parameters:
+  - @param "To" (optional.Int64) -  Time range ending, default to current time
   - @param "Page" (optional.Int32) -  Page number
-  - @param "Limit" (optional.Int32) -  Maximum response items.  Default: 100, minimum: 1, Maximum: 100
+  - @param "Limit" (optional.Int32) -  The maximum number of items per page is 100
 
-@return []UniLoan
+@return []AccountBookResponse
 */
-func (a *MarginUniApiService) ListUniLoans(ctx context.Context, localVarOptionals *ListUniLoansOpts) ([]UniLoan, *http.Response, error) {
+func (a *AlphaApiService) ListAlphaAccountBook(ctx context.Context, from int64, localVarOptionals *ListAlphaAccountBookOpts) ([]AccountBookResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []UniLoan
+		localVarReturnValue  []AccountBookResponse
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/margin/uni/loans"
+	localVarPath := a.client.cfg.BasePath + "/alpha/account_book"
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if localVarOptionals != nil && localVarOptionals.CurrencyPair.IsSet() {
-		localVarQueryParams.Add("currency_pair", parameterToString(localVarOptionals.CurrencyPair.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Currency.IsSet() {
-		localVarQueryParams.Add("currency", parameterToString(localVarOptionals.Currency.Value(), ""))
+	localVarQueryParams.Add("from", parameterToString(from, ""))
+	if localVarOptionals != nil && localVarOptionals.To.IsSet() {
+		localVarQueryParams.Add("to", parameterToString(localVarOptionals.To.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
 		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
@@ -423,21 +230,25 @@ func (a *MarginUniApiService) ListUniLoans(ctx context.Context, localVarOptional
 }
 
 /*
-CreateUniLoan Borrow or repay
+QuoteAlphaOrder Alpha Quotation API
+The quote_id returned by the quotation API is valid for one minute.You must place the order within this time window;otherwise, the quote will expire and a new quotation request is required
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param createUniLoan
+  - @param quoteRequest
+
+@return QuoteResponse
 */
-func (a *MarginUniApiService) CreateUniLoan(ctx context.Context, createUniLoan CreateUniLoan) (*http.Response, error) {
+func (a *AlphaApiService) QuoteAlphaOrder(ctx context.Context, quoteRequest QuoteRequest) (QuoteResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		localVarReturnValue  QuoteResponse
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/margin/uni/loans"
+	localVarPath := a.client.cfg.BasePath + "/alpha/quote"
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
@@ -452,7 +263,7 @@ func (a *MarginUniApiService) CreateUniLoan(ctx context.Context, createUniLoan C
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -460,118 +271,7 @@ func (a *MarginUniApiService) CreateUniLoan(ctx context.Context, createUniLoan C
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = &createUniLoan
-	if ctx == nil {
-		ctx = context.Background()
-	}
-	if ctx.Value(ContextGateAPIV4) == nil {
-		// for compatibility, set configuration key and secret to context if ContextGateAPIV4 value is not present
-		ctx = context.WithValue(ctx, ContextGateAPIV4, GateAPIV4{
-			Key:    a.client.cfg.Key,
-			Secret: a.client.cfg.Secret,
-		})
-	}
-	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(r)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	if err != nil {
-		return localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
-		}
-		var gateErr GateAPIError
-		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
-			gateErr.APIError = newErr
-			return localVarHTTPResponse, gateErr
-		}
-		return localVarHTTPResponse, newErr
-	}
-
-	return localVarHTTPResponse, nil
-}
-
-// ListUniLoanRecordsOpts Optional parameters for the method 'ListUniLoanRecords'
-type ListUniLoanRecordsOpts struct {
-	Type_        optional.String
-	Currency     optional.String
-	CurrencyPair optional.String
-	Page         optional.Int32
-	Limit        optional.Int32
-}
-
-/*
-ListUniLoanRecords Get load records
-  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param optional nil or *ListUniLoanRecordsOpts - Optional Parameters:
-  - @param "Type_" (optional.String) -  type: borrow - borrow, repay - repay
-  - @param "Currency" (optional.String) -  Retrieve data of the specified currency
-  - @param "CurrencyPair" (optional.String) -  Currency pair
-  - @param "Page" (optional.Int32) -  Page number
-  - @param "Limit" (optional.Int32) -  Maximum response items.  Default: 100, minimum: 1, Maximum: 100
-
-@return []UniLoanRecord
-*/
-func (a *MarginUniApiService) ListUniLoanRecords(ctx context.Context, localVarOptionals *ListUniLoanRecordsOpts) ([]UniLoanRecord, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  []UniLoanRecord
-	)
-
-	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/margin/uni/loan_records"
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if localVarOptionals != nil && localVarOptionals.Type_.IsSet() {
-		localVarQueryParams.Add("type", parameterToString(localVarOptionals.Type_.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Currency.IsSet() {
-		localVarQueryParams.Add("currency", parameterToString(localVarOptionals.Currency.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.CurrencyPair.IsSet() {
-		localVarQueryParams.Add("currency_pair", parameterToString(localVarOptionals.CurrencyPair.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
-		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
-		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
+	localVarPostBody = &quoteRequest
 	if ctx == nil {
 		ctx = context.Background()
 	}
@@ -623,63 +323,59 @@ func (a *MarginUniApiService) ListUniLoanRecords(ctx context.Context, localVarOp
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-// ListUniLoanInterestRecordsOpts Optional parameters for the method 'ListUniLoanInterestRecords'
-type ListUniLoanInterestRecordsOpts struct {
-	CurrencyPair optional.String
-	Currency     optional.String
-	Page         optional.Int32
-	Limit        optional.Int32
-	From         optional.Int64
-	To           optional.Int64
+// ListAlphaOrderOpts Optional parameters for the method 'ListAlphaOrder'
+type ListAlphaOrderOpts struct {
+	From  optional.Int64
+	To    optional.Int64
+	Limit optional.Int32
+	Page  optional.Int32
 }
 
 /*
-ListUniLoanInterestRecords List interest records
+ListAlphaOrder Alpha 查询订单列表接口
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param optional nil or *ListUniLoanInterestRecordsOpts - Optional Parameters:
-  - @param "CurrencyPair" (optional.String) -  Currency pair
-  - @param "Currency" (optional.String) -  Retrieve data of the specified currency
+  - @param currency Trading Symbol
+  - @param side 买单或者卖单 - buy - sell
+  - @param status Order Status - `0` : All - `1` : Processing - `2` : Successful - `3` : Failed - `4` : Canceled - `5` : Buy order placed but transfer not completed - `6` : Cancelled order with transfer not complete
+  - @param optional nil or *ListAlphaOrderOpts - Optional Parameters:
+  - @param "From" (optional.Int64) -  查询订单的起始时间
+  - @param "To" (optional.Int64) -  查询订单的结束时间，不指定则默认为当前时间
+  - @param "Limit" (optional.Int32) -  Maximum response items.  Default: 100, minimum: 1, Maximum: 100
   - @param "Page" (optional.Int32) -  Page number
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
-  - @param "From" (optional.Int64) -  Start timestamp
-  - @param "To" (optional.Int64) -  End timestamp
 
-@return []UniLoanInterestRecord
+@return []OrderResponse
 */
-func (a *MarginUniApiService) ListUniLoanInterestRecords(ctx context.Context, localVarOptionals *ListUniLoanInterestRecordsOpts) ([]UniLoanInterestRecord, *http.Response, error) {
+func (a *AlphaApiService) ListAlphaOrder(ctx context.Context, currency string, side string, status int32, localVarOptionals *ListAlphaOrderOpts) ([]OrderResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []UniLoanInterestRecord
+		localVarReturnValue  []OrderResponse
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/margin/uni/interest_records"
+	localVarPath := a.client.cfg.BasePath + "/alpha/orders"
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if localVarOptionals != nil && localVarOptionals.CurrencyPair.IsSet() {
-		localVarQueryParams.Add("currency_pair", parameterToString(localVarOptionals.CurrencyPair.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Currency.IsSet() {
-		localVarQueryParams.Add("currency", parameterToString(localVarOptionals.Currency.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
-		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
-	}
-	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
-		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
-	}
+	localVarQueryParams.Add("currency", parameterToString(currency, ""))
+	localVarQueryParams.Add("side", parameterToString(side, ""))
+	localVarQueryParams.Add("status", parameterToString(status, ""))
 	if localVarOptionals != nil && localVarOptionals.From.IsSet() {
 		localVarQueryParams.Add("from", parameterToString(localVarOptionals.From.Value(), ""))
 	}
 	if localVarOptionals != nil && localVarOptionals.To.IsSet() {
 		localVarQueryParams.Add("to", parameterToString(localVarOptionals.To.Value(), ""))
 	}
+	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
+		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -749,31 +445,122 @@ func (a *MarginUniApiService) ListUniLoanInterestRecords(ctx context.Context, lo
 }
 
 /*
-GetUniBorrowable Get maximum borrowable
+PlaceAlphaOrder Alpha Order Placement API
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param currency Retrieve data of the specified currency
-  - @param currencyPair Currency pair
+  - @param placeOrderRequest
 
-@return MaxUniBorrowable
+@return PlaceOrderResponse
 */
-func (a *MarginUniApiService) GetUniBorrowable(ctx context.Context, currency string, currencyPair string) (MaxUniBorrowable, *http.Response, error) {
+func (a *AlphaApiService) PlaceAlphaOrder(ctx context.Context, placeOrderRequest PlaceOrderRequest) (PlaceOrderResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  PlaceOrderResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/alpha/orders"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = &placeOrderRequest
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	if ctx.Value(ContextGateAPIV4) == nil {
+		// for compatibility, set configuration key and secret to context if ContextGateAPIV4 value is not present
+		ctx = context.WithValue(ctx, ContextGateAPIV4, GateAPIV4{
+			Key:    a.client.cfg.Key,
+			Secret: a.client.cfg.Secret,
+		})
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+/*
+GetAlphaOrder Alpha 查询单个订单接口
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param orderId Order ID
+
+@return OrderResponse
+*/
+func (a *AlphaApiService) GetAlphaOrder(ctx context.Context, orderId string) (OrderResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  MaxUniBorrowable
+		localVarReturnValue  OrderResponse
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/margin/uni/borrowable"
+	localVarPath := a.client.cfg.BasePath + "/alpha/order"
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	localVarQueryParams.Add("currency", parameterToString(currency, ""))
-	localVarQueryParams.Add("currency_pair", parameterToString(currencyPair, ""))
+	localVarQueryParams.Add("order_id", parameterToString(orderId, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -801,6 +588,216 @@ func (a *MarginUniApiService) GetUniBorrowable(ctx context.Context, currency str
 			Secret: a.client.cfg.Secret,
 		})
 	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+// ListAlphaCurrenciesOpts Optional parameters for the method 'ListAlphaCurrencies'
+type ListAlphaCurrenciesOpts struct {
+	Currency optional.String
+	Limit    optional.Int32
+	Page     optional.Int32
+}
+
+/*
+ListAlphaCurrencies 查询币种信息
+When the currency parameter is provided, query and return information for the specified currency. When the currency parameter is not provided, return a paginated list of currencies.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param optional nil or *ListAlphaCurrenciesOpts - Optional Parameters:
+  - @param "Currency" (optional.String) -  根据币种符号查询币种信息
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Page" (optional.Int32) -  Page number
+
+@return []Currency2
+*/
+func (a *AlphaApiService) ListAlphaCurrencies(ctx context.Context, localVarOptionals *ListAlphaCurrenciesOpts) ([]Currency2, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []Currency2
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/alpha/currencies"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.Currency.IsSet() {
+		localVarQueryParams.Add("currency", parameterToString(localVarOptionals.Currency.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
+		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	ctx = context.WithValue(ctx, ContextPublic, true)
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status + ", " + string(localVarBody),
+		}
+		var gateErr GateAPIError
+		if e := a.client.decode(&gateErr, localVarBody, localVarHTTPResponse.Header.Get("Content-Type")); e == nil && gateErr.Label != "" {
+			gateErr.APIError = newErr
+			return localVarReturnValue, localVarHTTPResponse, gateErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+// ListAlphaTickersOpts Optional parameters for the method 'ListAlphaTickers'
+type ListAlphaTickersOpts struct {
+	Currency optional.String
+	Limit    optional.Int32
+	Page     optional.Int32
+}
+
+/*
+ListAlphaTickers 查询币种ticker
+When the currency parameter is provided, query and return information for the specified ticker, When the currency parameter is not provided, return a paginated list of tickers.
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param optional nil or *ListAlphaTickersOpts - Optional Parameters:
+  - @param "Currency" (optional.String) -  Retrieve data of the specified currency
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Page" (optional.Int32) -  Page number
+
+@return []Ticker2
+*/
+func (a *AlphaApiService) ListAlphaTickers(ctx context.Context, localVarOptionals *ListAlphaTickersOpts) ([]Ticker2, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  []Ticker2
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/alpha/tickers"
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if localVarOptionals != nil && localVarOptionals.Currency.IsSet() {
+		localVarQueryParams.Add("currency", parameterToString(localVarOptionals.Currency.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Limit.IsSet() {
+		localVarQueryParams.Add("limit", parameterToString(localVarOptionals.Limit.Value(), ""))
+	}
+	if localVarOptionals != nil && localVarOptionals.Page.IsSet() {
+		localVarQueryParams.Add("page", parameterToString(localVarOptionals.Page.Value(), ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	ctx = context.WithValue(ctx, ContextPublic, true)
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

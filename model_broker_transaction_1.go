@@ -25,5 +25,6 @@ type BrokerTransaction1 struct {
 	// Fee currency
 	FeeAsset string `json:"fee_asset,omitempty"`
 	// Rebate Type: Spot、Futures、Options
-	Source string `json:"source,omitempty"`
+	Source        string                        `json:"source,omitempty"`
+	SubBrokerInfo BrokerCommissionSubBrokerInfo `json:"sub_broker_info,omitempty"`
 }

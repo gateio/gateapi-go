@@ -1482,7 +1482,7 @@ func main() {
 
 ## UpdatePositionCrossMode
 
-> Position UpdatePositionCrossMode(ctx, settle, inlineObject)
+> Position UpdatePositionCrossMode(ctx, settle, futuresPositionCrossMode)
 
 Switch to the full position-by-store mode
 
@@ -1492,7 +1492,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
-**inlineObject** | [**InlineObject**](InlineObject.md)|  | 
+**futuresPositionCrossMode** | [**FuturesPositionCrossMode**](FuturesPositionCrossMode.md)|  | 
 
 ### Example
 
@@ -1518,9 +1518,9 @@ func main() {
                              }
                             )
     settle := "usdt" // string - Settle currency
-    inlineObject := gateapi.InlineObject{} // InlineObject - 
+    futuresPositionCrossMode := gateapi.FuturesPositionCrossMode{} // FuturesPositionCrossMode - 
     
-    result, _, err := client.FuturesApi.UpdatePositionCrossMode(ctx, settle, inlineObject)
+    result, _, err := client.FuturesApi.UpdatePositionCrossMode(ctx, settle, futuresPositionCrossMode)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())

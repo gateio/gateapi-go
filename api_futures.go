@@ -2041,11 +2041,11 @@ func (a *FuturesApiService) UpdatePositionLeverage(ctx context.Context, settle s
 UpdatePositionCrossMode Switch to the full position-by-store mode
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param settle Settle currency
-  - @param inlineObject
+  - @param futuresPositionCrossMode
 
 @return Position
 */
-func (a *FuturesApiService) UpdatePositionCrossMode(ctx context.Context, settle string, inlineObject InlineObject) (Position, *http.Response, error) {
+func (a *FuturesApiService) UpdatePositionCrossMode(ctx context.Context, settle string, futuresPositionCrossMode FuturesPositionCrossMode) (Position, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -2081,7 +2081,7 @@ func (a *FuturesApiService) UpdatePositionCrossMode(ctx context.Context, settle 
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = &inlineObject
+	localVarPostBody = &futuresPositionCrossMode
 	if ctx == nil {
 		ctx = context.Background()
 	}

@@ -40,6 +40,8 @@ Name | Type | Description | Notes
 **EnableCredit** | **bool** | Whether portfolio margin account is enabled | [optional] 
 **CreateTime** | **float64** | Created time of the contract | [optional] 
 **FundingCapRatio** | **string** | The factor for the maximum of the funding rate. Maximum of funding rate &#x3D; (1/market maximum leverage - maintenance margin rate) * funding_cap_ratio | [optional] 
+**Status** | **string** | Contract Status Types include:  prelaunch,  trading, delisting,  delisted  | [optional] 
+**LaunchTime** | **int64** | 合约开盘时间 | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

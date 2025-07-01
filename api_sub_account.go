@@ -411,16 +411,16 @@ CreateSubAccountKeys Create API Key of the sub-account
   - @param userId Sub-account user id
   - @param subAccountKey
 
-@return []SubAccountKey
+@return SubAccountKey
 */
-func (a *SubAccountApiService) CreateSubAccountKeys(ctx context.Context, userId int64, subAccountKey SubAccountKey) ([]SubAccountKey, *http.Response, error) {
+func (a *SubAccountApiService) CreateSubAccountKeys(ctx context.Context, userId int64, subAccountKey SubAccountKey) (SubAccountKey, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []SubAccountKey
+		localVarReturnValue  SubAccountKey
 	)
 
 	// create path and map variables

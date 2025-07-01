@@ -9,9 +9,9 @@
 
 package gateapi
 
-type InlineObject struct {
-	// Full position-by-position model, ISOLATED-by-position, CROSS-full position
-	Mode string `json:"mode"`
-	// Contract Market
-	Contract string `json:"contract"`
+type FindCoin struct {
+	// Currency
+	Coin string `json:"coin,omitempty"`
+	// Coin Type  swap-Voucher  lock-Locked
+	Cointype string `json:"cointype,omitempty"`
 }

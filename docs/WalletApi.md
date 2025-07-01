@@ -399,7 +399,7 @@ func main() {
 
 ## ListSubAccountTransfers
 
-> []SubAccountTransfer ListSubAccountTransfers(ctx, optional)
+> []SubAccountTransferRecordItem ListSubAccountTransfers(ctx, optional)
 
 Retrieve transfer records between main and sub accounts
 
@@ -464,7 +464,7 @@ func main() {
 
 ### Return type
 
-[**[]SubAccountTransfer**](SubAccountTransfer.md)
+[**[]SubAccountTransferRecordItem**](SubAccountTransferRecordItem.md)
 
 ### Authorization
 

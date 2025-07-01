@@ -574,16 +574,16 @@ Record time range cannot exceed 30 days  &gt; Note: only records after 2020-04-1
   - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
   - @param "Offset" (optional.Int32) -  List offset, starting from 0
 
-@return []SubAccountTransfer
+@return []SubAccountTransferRecordItem
 */
-func (a *WalletApiService) ListSubAccountTransfers(ctx context.Context, localVarOptionals *ListSubAccountTransfersOpts) ([]SubAccountTransfer, *http.Response, error) {
+func (a *WalletApiService) ListSubAccountTransfers(ctx context.Context, localVarOptionals *ListSubAccountTransfersOpts) ([]SubAccountTransferRecordItem, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  []SubAccountTransfer
+		localVarReturnValue  []SubAccountTransferRecordItem
 	)
 
 	// create path and map variables

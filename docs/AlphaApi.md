@@ -1,42 +1,110 @@
-# SubAccountApi
+# AlphaApi
 
 All URIs are relative to *https://api.gateio.ws/api/v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ListSubAccounts**](SubAccountApi.md#ListSubAccounts) | **Get** /sub_accounts | List sub-accounts
-[**CreateSubAccounts**](SubAccountApi.md#CreateSubAccounts) | **Post** /sub_accounts | Create a new sub-account
-[**GetSubAccount**](SubAccountApi.md#GetSubAccount) | **Get** /sub_accounts/{user_id} | Get the sub-account
-[**ListSubAccountKeys**](SubAccountApi.md#ListSubAccountKeys) | **Get** /sub_accounts/{user_id}/keys | List all API Key of the sub-account
-[**CreateSubAccountKeys**](SubAccountApi.md#CreateSubAccountKeys) | **Post** /sub_accounts/{user_id}/keys | Create API Key of the sub-account
-[**GetSubAccountKey**](SubAccountApi.md#GetSubAccountKey) | **Get** /sub_accounts/{user_id}/keys/{key} | Get the API Key of the sub-account
-[**UpdateSubAccountKeys**](SubAccountApi.md#UpdateSubAccountKeys) | **Put** /sub_accounts/{user_id}/keys/{key} | Update API key of the sub-account
-[**DeleteSubAccountKeys**](SubAccountApi.md#DeleteSubAccountKeys) | **Delete** /sub_accounts/{user_id}/keys/{key} | Delete API key of the sub-account
-[**LockSubAccount**](SubAccountApi.md#LockSubAccount) | **Post** /sub_accounts/{user_id}/lock | Lock the sub-account
-[**UnlockSubAccount**](SubAccountApi.md#UnlockSubAccount) | **Post** /sub_accounts/{user_id}/unlock | Unlock the sub-account
-[**ListUnifiedMode**](SubAccountApi.md#ListUnifiedMode) | **Get** /sub_accounts/unified_mode | Get sub-account mode
+[**ListAlphaAccounts**](AlphaApi.md#ListAlphaAccounts) | **Get** /alpha/accounts | API for Alpha Accounts
+[**ListAlphaAccountBook**](AlphaApi.md#ListAlphaAccountBook) | **Get** /alpha/account_book | Alpha Asset Transaction API
+[**QuoteAlphaOrder**](AlphaApi.md#QuoteAlphaOrder) | **Post** /alpha/quote | Alpha Quotation API
+[**ListAlphaOrder**](AlphaApi.md#ListAlphaOrder) | **Get** /alpha/orders | Alpha 查询订单列表接口
+[**PlaceAlphaOrder**](AlphaApi.md#PlaceAlphaOrder) | **Post** /alpha/orders | Alpha Order Placement API
+[**GetAlphaOrder**](AlphaApi.md#GetAlphaOrder) | **Get** /alpha/order | Alpha 查询单个订单接口
+[**ListAlphaCurrencies**](AlphaApi.md#ListAlphaCurrencies) | **Get** /alpha/currencies | 查询币种信息
+[**ListAlphaTickers**](AlphaApi.md#ListAlphaTickers) | **Get** /alpha/tickers | 查询币种ticker
 
 
-## ListSubAccounts
+## ListAlphaAccounts
 
-> []SubAccount ListSubAccounts(ctx, optional)
+> []AccountsResponse ListAlphaAccounts(ctx, )
 
-List sub-accounts
+API for Alpha Accounts
+
+Query Position Assets
+
+### Required Parameters
+
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    
+    result, _, err := client.AlphaApi.ListAlphaAccounts(ctx)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**[]AccountsResponse**](AccountsResponse.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## ListAlphaAccountBook
+
+> []AccountBookResponse ListAlphaAccountBook(ctx, from, optional)
+
+Alpha Asset Transaction API
+
+Query Asset Transactions
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**optional** | **ListSubAccountsOpts** | optional parameters | nil if no parameters
+**from** | **int64**| Start timestamp of the query | 
+**optional** | **ListAlphaAccountBookOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
 
-Optional parameters are passed through a pointer to a ListSubAccountsOpts struct
+Optional parameters are passed through a pointer to a ListAlphaAccountBookOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**type_** | **optional.String**| &#x60;0&#x60; to list all types of sub-accounts (currently supporting cross margin accounts and sub-accounts).  &#x60;1&#x60; to list sub-accounts only. If no parameter is passed, only sub-accounts will be listed by default. | 
+**to** | **optional.Int64**| Time range ending, default to current time | 
+**page** | **optional.Int32**| Page number | 
+**limit** | **optional.Int32**| The maximum number of items per page is 100 | 
 
 ### Example
 
@@ -61,8 +129,9 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
+    from := 56 // int64 - Start timestamp of the query
     
-    result, _, err := client.SubAccountApi.ListSubAccounts(ctx, nil)
+    result, _, err := client.AlphaApi.ListAlphaAccountBook(ctx, from, nil)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -78,7 +147,7 @@ func main() {
 
 ### Return type
 
-[**[]SubAccount**](SubAccount.md)
+[**[]AccountBookResponse**](AccountBookResponse.md)
 
 ### Authorization
 
@@ -93,18 +162,20 @@ func main() {
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
-## CreateSubAccounts
+## QuoteAlphaOrder
 
-> SubAccount CreateSubAccounts(ctx, subAccount)
+> QuoteResponse QuoteAlphaOrder(ctx, quoteRequest)
 
-Create a new sub-account
+Alpha Quotation API
+
+The quote_id returned by the quotation API is valid for one minute.You must place the order within this time window;otherwise, the quote will expire and a new quotation request is required
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**subAccount** | [**SubAccount**](SubAccount.md)|  | 
+**quoteRequest** | [**QuoteRequest**](QuoteRequest.md)|  | 
 
 ### Example
 
@@ -129,9 +200,9 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    subAccount := gateapi.SubAccount{} // SubAccount - 
+    quoteRequest := gateapi.QuoteRequest{} // QuoteRequest - 
     
-    result, _, err := client.SubAccountApi.CreateSubAccounts(ctx, subAccount)
+    result, _, err := client.AlphaApi.QuoteAlphaOrder(ctx, quoteRequest)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -147,7 +218,7 @@ func main() {
 
 ### Return type
 
-[**SubAccount**](SubAccount.md)
+[**QuoteResponse**](QuoteResponse.md)
 
 ### Authorization
 
@@ -162,18 +233,32 @@ func main() {
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
-## GetSubAccount
+## ListAlphaOrder
 
-> SubAccount GetSubAccount(ctx, userId)
+> []OrderResponse ListAlphaOrder(ctx, currency, side, status, optional)
 
-Get the sub-account
+Alpha 查询订单列表接口
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | **int64**| Sub-account user id | 
+**currency** | **string**| Trading Symbol | 
+**side** | **string**| 买单或者卖单 - buy - sell | 
+**status** | **int32**| Order Status - &#x60;0&#x60; : All - &#x60;1&#x60; : Processing - &#x60;2&#x60; : Successful - &#x60;3&#x60; : Failed - &#x60;4&#x60; : Canceled - &#x60;5&#x60; : Buy order placed but transfer not completed - &#x60;6&#x60; : Cancelled order with transfer not complete | 
+**optional** | **ListAlphaOrderOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a ListAlphaOrderOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**from** | **optional.Int64**| 查询订单的起始时间 | 
+**to** | **optional.Int64**| 查询订单的结束时间，不指定则默认为当前时间 | 
+**limit** | **optional.Int32**| Maximum response items.  Default: 100, minimum: 1, Maximum: 100 | [default to 100]
+**page** | **optional.Int32**| Page number | [default to 1]
 
 ### Example
 
@@ -198,9 +283,11 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    userId := 56 // int64 - Sub-account user id
+    currency := "memeboxsst" // string - Trading Symbol
+    side := "buy" // string - 买单或者卖单 - buy - sell
+    status := 2 // int32 - Order Status - `0` : All - `1` : Processing - `2` : Successful - `3` : Failed - `4` : Canceled - `5` : Buy order placed but transfer not completed - `6` : Cancelled order with transfer not complete
     
-    result, _, err := client.SubAccountApi.GetSubAccount(ctx, userId)
+    result, _, err := client.AlphaApi.ListAlphaOrder(ctx, currency, side, status, nil)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -216,7 +303,7 @@ func main() {
 
 ### Return type
 
-[**SubAccount**](SubAccount.md)
+[**[]OrderResponse**](OrderResponse.md)
 
 ### Authorization
 
@@ -231,18 +318,18 @@ func main() {
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
-## ListSubAccountKeys
+## PlaceAlphaOrder
 
-> []SubAccountKey ListSubAccountKeys(ctx, userId)
+> PlaceOrderResponse PlaceAlphaOrder(ctx, placeOrderRequest)
 
-List all API Key of the sub-account
+Alpha Order Placement API
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | **int32**| Sub-account user id | 
+**placeOrderRequest** | [**PlaceOrderRequest**](PlaceOrderRequest.md)|  | 
 
 ### Example
 
@@ -267,9 +354,9 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    userId := 56 // int32 - Sub-account user id
+    placeOrderRequest := gateapi.PlaceOrderRequest{} // PlaceOrderRequest - 
     
-    result, _, err := client.SubAccountApi.ListSubAccountKeys(ctx, userId)
+    result, _, err := client.AlphaApi.PlaceAlphaOrder(ctx, placeOrderRequest)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -285,78 +372,7 @@ func main() {
 
 ### Return type
 
-[**[]SubAccountKey**](SubAccountKey.md)
-
-### Authorization
-
-[apiv4](../README.md#apiv4)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-## CreateSubAccountKeys
-
-> SubAccountKey CreateSubAccountKeys(ctx, userId, subAccountKey)
-
-Create API Key of the sub-account
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | **int64**| Sub-account user id | 
-**subAccountKey** | [**SubAccountKey**](SubAccountKey.md)|  | 
-
-### Example
-
-```golang
-package main
-
-import (
-    "context"
-    "fmt"
-
-    "github.com/gateio/gateapi-go/v6"
-)
-
-func main() {
-    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-    // uncomment the next line if your are testing against testnet
-    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
-    ctx := context.WithValue(context.Background(),
-                             gateapi.ContextGateAPIV4,
-                             gateapi.GateAPIV4{
-                                 Key:    "YOUR_API_KEY",
-                                 Secret: "YOUR_API_SECRET",
-                             }
-                            )
-    userId := 56 // int64 - Sub-account user id
-    subAccountKey := gateapi.SubAccountKey{} // SubAccountKey - 
-    
-    result, _, err := client.SubAccountApi.CreateSubAccountKeys(ctx, userId, subAccountKey)
-    if err != nil {
-        if e, ok := err.(gateapi.GateAPIError); ok {
-            fmt.Printf("gate api error: %s\n", e.Error())
-        } else {
-            fmt.Printf("generic error: %s\n", err.Error())
-        }
-    } else {
-        fmt.Println(result)
-    }
-}
-```
-
-
-### Return type
-
-[**SubAccountKey**](SubAccountKey.md)
+[**PlaceOrderResponse**](PlaceOrderResponse.md)
 
 ### Authorization
 
@@ -371,19 +387,18 @@ func main() {
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
-## GetSubAccountKey
+## GetAlphaOrder
 
-> SubAccountKey GetSubAccountKey(ctx, userId, key)
+> OrderResponse GetAlphaOrder(ctx, orderId)
 
-Get the API Key of the sub-account
+Alpha 查询单个订单接口
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | **int32**| Sub-account user id | 
-**key** | **string**| The API Key of the sub-account | 
+**orderId** | **string**| Order ID | 
 
 ### Example
 
@@ -408,10 +423,9 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    userId := 56 // int32 - Sub-account user id
-    key := "key_example" // string - The API Key of the sub-account
+    orderId := "fdaf12321" // string - Order ID
     
-    result, _, err := client.SubAccountApi.GetSubAccountKey(ctx, userId, key)
+    result, _, err := client.AlphaApi.GetAlphaOrder(ctx, orderId)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -427,7 +441,7 @@ func main() {
 
 ### Return type
 
-[**SubAccountKey**](SubAccountKey.md)
+[**OrderResponse**](OrderResponse.md)
 
 ### Authorization
 
@@ -442,20 +456,30 @@ func main() {
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
-## UpdateSubAccountKeys
+## ListAlphaCurrencies
 
-> UpdateSubAccountKeys(ctx, userId, key, subAccountKey)
+> []Currency2 ListAlphaCurrencies(ctx, optional)
 
-Update API key of the sub-account
+查询币种信息
+
+When the currency parameter is provided, query and return information for the specified currency. When the currency parameter is not provided, return a paginated list of currencies.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | **int32**| Sub-account user id | 
-**key** | **string**| The API Key of the sub-account | 
-**subAccountKey** | [**SubAccountKey**](SubAccountKey.md)|  | 
+**optional** | **ListAlphaCurrenciesOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+
+Optional parameters are passed through a pointer to a ListAlphaCurrenciesOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**currency** | **optional.String**| 根据币种符号查询币种信息 | 
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
+**page** | **optional.Int32**| Page number | [default to 1]
 
 ### Example
 
@@ -473,18 +497,9 @@ func main() {
     client := gateapi.NewAPIClient(gateapi.NewConfiguration())
     // uncomment the next line if your are testing against testnet
     // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
-    ctx := context.WithValue(context.Background(),
-                             gateapi.ContextGateAPIV4,
-                             gateapi.GateAPIV4{
-                                 Key:    "YOUR_API_KEY",
-                                 Secret: "YOUR_API_SECRET",
-                             }
-                            )
-    userId := 56 // int32 - Sub-account user id
-    key := "key_example" // string - The API Key of the sub-account
-    subAccountKey := gateapi.SubAccountKey{} // SubAccountKey - 
+    ctx := context.Background()
     
-    result, _, err := client.SubAccountApi.UpdateSubAccountKeys(ctx, userId, key, subAccountKey)
+    result, _, err := client.AlphaApi.ListAlphaCurrencies(ctx, nil)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -500,173 +515,45 @@ func main() {
 
 ### Return type
 
- (empty response body)
+[**[]Currency2**](Currency_2.md)
 
 ### Authorization
 
-[apiv4](../README.md#apiv4)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: Not defined
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-## DeleteSubAccountKeys
-
-> DeleteSubAccountKeys(ctx, userId, key)
-
-Delete API key of the sub-account
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | **int32**| Sub-account user id | 
-**key** | **string**| The API Key of the sub-account | 
-
-### Example
-
-```golang
-package main
-
-import (
-    "context"
-    "fmt"
-
-    "github.com/gateio/gateapi-go/v6"
-)
-
-func main() {
-    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-    // uncomment the next line if your are testing against testnet
-    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
-    ctx := context.WithValue(context.Background(),
-                             gateapi.ContextGateAPIV4,
-                             gateapi.GateAPIV4{
-                                 Key:    "YOUR_API_KEY",
-                                 Secret: "YOUR_API_SECRET",
-                             }
-                            )
-    userId := 56 // int32 - Sub-account user id
-    key := "key_example" // string - The API Key of the sub-account
-    
-    result, _, err := client.SubAccountApi.DeleteSubAccountKeys(ctx, userId, key)
-    if err != nil {
-        if e, ok := err.(gateapi.GateAPIError); ok {
-            fmt.Printf("gate api error: %s\n", e.Error())
-        } else {
-            fmt.Printf("generic error: %s\n", err.Error())
-        }
-    } else {
-        fmt.Println(result)
-    }
-}
-```
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[apiv4](../README.md#apiv4)
+No authorization required
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
-## LockSubAccount
+## ListAlphaTickers
 
-> LockSubAccount(ctx, userId)
+> []Ticker2 ListAlphaTickers(ctx, optional)
 
-Lock the sub-account
+查询币种ticker
+
+When the currency parameter is provided, query and return information for the specified ticker, When the currency parameter is not provided, return a paginated list of tickers.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | **int64**| The user id of the sub-account | 
+**optional** | **ListAlphaTickersOpts** | optional parameters | nil if no parameters
 
-### Example
+### Optional Parameters
 
-```golang
-package main
-
-import (
-    "context"
-    "fmt"
-
-    "github.com/gateio/gateapi-go/v6"
-)
-
-func main() {
-    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-    // uncomment the next line if your are testing against testnet
-    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
-    ctx := context.WithValue(context.Background(),
-                             gateapi.ContextGateAPIV4,
-                             gateapi.GateAPIV4{
-                                 Key:    "YOUR_API_KEY",
-                                 Secret: "YOUR_API_SECRET",
-                             }
-                            )
-    userId := 56 // int64 - The user id of the sub-account
-    
-    result, _, err := client.SubAccountApi.LockSubAccount(ctx, userId)
-    if err != nil {
-        if e, ok := err.(gateapi.GateAPIError); ok {
-            fmt.Printf("gate api error: %s\n", e.Error())
-        } else {
-            fmt.Printf("generic error: %s\n", err.Error())
-        }
-    } else {
-        fmt.Println(result)
-    }
-}
-```
-
-
-### Return type
-
- (empty response body)
-
-### Authorization
-
-[apiv4](../README.md#apiv4)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: Not defined
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-## UnlockSubAccount
-
-> UnlockSubAccount(ctx, userId)
-
-Unlock the sub-account
-
-### Required Parameters
+Optional parameters are passed through a pointer to a ListAlphaTickersOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | **int64**| The user id of the sub-account | 
+**currency** | **optional.String**| Retrieve data of the specified currency | 
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
+**page** | **optional.Int32**| Page number | [default to 1]
 
 ### Example
 
@@ -684,16 +571,9 @@ func main() {
     client := gateapi.NewAPIClient(gateapi.NewConfiguration())
     // uncomment the next line if your are testing against testnet
     // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
-    ctx := context.WithValue(context.Background(),
-                             gateapi.ContextGateAPIV4,
-                             gateapi.GateAPIV4{
-                                 Key:    "YOUR_API_KEY",
-                                 Secret: "YOUR_API_SECRET",
-                             }
-                            )
-    userId := 56 // int64 - The user id of the sub-account
+    ctx := context.Background()
     
-    result, _, err := client.SubAccountApi.UnlockSubAccount(ctx, userId)
+    result, _, err := client.AlphaApi.ListAlphaTickers(ctx, nil)
     if err != nil {
         if e, ok := err.(gateapi.GateAPIError); ok {
             fmt.Printf("gate api error: %s\n", e.Error())
@@ -709,77 +589,11 @@ func main() {
 
 ### Return type
 
- (empty response body)
+[**[]Ticker2**](Ticker_2.md)
 
 ### Authorization
 
-[apiv4](../README.md#apiv4)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: Not defined
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-## ListUnifiedMode
-
-> []SubUserMode ListUnifiedMode(ctx, )
-
-Get sub-account mode
-
-Unified account mode： - `classic`: Classic account mode - `multi_currency`: Multi-currency margin mode - `portfolio`: Portfolio margin mode
-
-### Required Parameters
-
-
-### Example
-
-```golang
-package main
-
-import (
-    "context"
-    "fmt"
-
-    "github.com/gateio/gateapi-go/v6"
-)
-
-func main() {
-    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
-    // uncomment the next line if your are testing against testnet
-    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
-    ctx := context.WithValue(context.Background(),
-                             gateapi.ContextGateAPIV4,
-                             gateapi.GateAPIV4{
-                                 Key:    "YOUR_API_KEY",
-                                 Secret: "YOUR_API_SECRET",
-                             }
-                            )
-    
-    result, _, err := client.SubAccountApi.ListUnifiedMode(ctx)
-    if err != nil {
-        if e, ok := err.(gateapi.GateAPIError); ok {
-            fmt.Printf("gate api error: %s\n", e.Error())
-        } else {
-            fmt.Printf("generic error: %s\n", err.Error())
-        }
-    } else {
-        fmt.Println(result)
-    }
-}
-```
-
-
-### Return type
-
-[**[]SubUserMode**](SubUserMode.md)
-
-### Authorization
-
-[apiv4](../README.md#apiv4)
+No authorization required
 
 ### HTTP request headers
 
