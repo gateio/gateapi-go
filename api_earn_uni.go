@@ -904,7 +904,7 @@ func (a *EarnUniApiService) GetUniInterestStatus(ctx context.Context, currency s
 
 /*
 ListUniChart UniLoan currency annualized trend chart
-Project-Id-Version: GateApiTools 1.0.0 Report-Msgid-Bugs-To: EMAIL@ADDRESS POT-Creation-Date: 2025-07-02 10:39+0000 PO-Revision-Date: 2019-01-02 17:30+0800 Last-Translator: FULL NAME &lt;EMAIL@ADDRESS&gt; Language: en Language-Team: en &lt;LL@li.org&gt; Plural-Forms: nplurals&#x3D;2; plural&#x3D;(n !&#x3D; 1) MIME-Version: 1.0 Content-Type: text/plain; charset&#x3D;utf-8 Content-Transfer-Encoding: 8bit Generated-By: Babel 2.8.0
+Project-Id-Version: GateApiTools 1.0.0 Report-Msgid-Bugs-To: EMAIL@ADDRESS POT-Creation-Date: 2025-07-02 10:51+0000 PO-Revision-Date: 2019-01-02 17:30+0800 Last-Translator: FULL NAME &lt;EMAIL@ADDRESS&gt; Language: en Language-Team: en &lt;LL@li.org&gt; Plural-Forms: nplurals&#x3D;2; plural&#x3D;(n !&#x3D; 1) MIME-Version: 1.0 Content-Type: text/plain; charset&#x3D;utf-8 Content-Transfer-Encoding: 8bit Generated-By: Babel 2.8.0
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param from Start timestamp, unit s, maximum span of 30 days
   - @param to End timestamp, unit s, maximum span of 30 days
@@ -1001,7 +1001,7 @@ func (a *EarnUniApiService) ListUniChart(ctx context.Context, from int64, to int
 
 /*
 ListUniRate Currency estimate annualized interest rate
-Project-Id-Version: GateApiTools 1.0.0 Report-Msgid-Bugs-To: EMAIL@ADDRESS POT-Creation-Date: 2025-07-02 10:39+0000 PO-Revision-Date: 2019-01-02 17:30+0800 Last-Translator: FULL NAME &lt;EMAIL@ADDRESS&gt; Language: en Language-Team: en &lt;LL@li.org&gt; Plural-Forms: nplurals&#x3D;2; plural&#x3D;(n !&#x3D; 1) MIME-Version: 1.0 Content-Type: text/plain; charset&#x3D;utf-8 Content-Transfer-Encoding: 8bit Generated-By: Babel 2.8.0
+Project-Id-Version: GateApiTools 1.0.0 Report-Msgid-Bugs-To: EMAIL@ADDRESS POT-Creation-Date: 2025-07-02 10:51+0000 PO-Revision-Date: 2019-01-02 17:30+0800 Last-Translator: FULL NAME &lt;EMAIL@ADDRESS&gt; Language: en Language-Team: en &lt;LL@li.org&gt; Plural-Forms: nplurals&#x3D;2; plural&#x3D;(n !&#x3D; 1) MIME-Version: 1.0 Content-Type: text/plain; charset&#x3D;utf-8 Content-Transfer-Encoding: 8bit Generated-By: Babel 2.8.0
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 @return []InlineResponse2001
