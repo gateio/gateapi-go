@@ -9,16 +9,8 @@
 
 package gateapi
 
-// Quotation Response
-type AccountBookResponse struct {
-	// Order ID
-	Id int64 `json:"id,omitempty"`
-	// 操作时间戳
-	Time int64 `json:"time,omitempty"`
-	// Currency name
-	Currency string `json:"currency,omitempty"`
-	// Change amount
-	Change string `json:"change,omitempty"`
-	// 变更后余额
-	Balance string `json:"balance,omitempty"`
+// 统一账户抵押模式设置返回
+type UnifiedCollateralRes struct {
+	// 是否设置成功
+	IsSuccess bool `json:"is_success,omitempty"`
 }

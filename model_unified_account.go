@@ -47,4 +47,6 @@ type UnifiedAccount struct {
 	SpotHedge bool `json:"spot_hedge,omitempty"`
 	// Whether to use funds as margin
 	UseFunding bool `json:"use_funding,omitempty"`
+	// 是否所有币种均作为保证金，true - 所有币种作为保证金，false - 否
+	IsAllCollateral bool `json:"is_all_collateral,omitempty"`
 }

@@ -48,4 +48,6 @@ type UnifiedBalance struct {
 	MarginBalance string `json:"margin_balance,omitempty"`
 	// Full margin available for full position is valid in single currency margin mode, and is 0 in other modes such as cross-currency margin/combined margin mode
 	AvailableMargin string `json:"available_margin,omitempty"`
+	// 币种开启作为保证金，true - 启用，false - 未启用
+	EnabledCollateral bool `json:"enabled_collateral,omitempty"`
 }

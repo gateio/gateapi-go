@@ -18,6 +18,4 @@ type SpotAccount struct {
 	Locked string `json:"locked,omitempty"`
 	// Version number
 	UpdateId int64 `json:"update_id,omitempty"`
-	// Asset Refresh Time (ms)
-	RefreshTime int64 `json:"refresh_time,omitempty"`
 }
