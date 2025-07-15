@@ -47,6 +47,7 @@ Method | HTTP request | Description
 [**GetFuturesFee**](FuturesApi.md#GetFuturesFee) | **Get** /futures/{settle}/fee | Query user trading fee rates
 [**CancelBatchFutureOrders**](FuturesApi.md#CancelBatchFutureOrders) | **Post** /futures/{settle}/batch_cancel_orders | Cancel a batch of orders with an ID list
 [**AmendBatchFutureOrders**](FuturesApi.md#AmendBatchFutureOrders) | **Post** /futures/{settle}/batch_amend_orders | Batch modify orders with specified IDs
+[**GetFuturesRiskLimitTable**](FuturesApi.md#GetFuturesRiskLimitTable) | **Get** /futures/{settle}/risk_limit_table | Query risk limit table by table_id
 [**ListPriceTriggeredOrders**](FuturesApi.md#ListPriceTriggeredOrders) | **Get** /futures/{settle}/price_orders | List All Price-triggered Orders
 [**CreatePriceTriggeredOrder**](FuturesApi.md#CreatePriceTriggeredOrder) | **Post** /futures/{settle}/price_orders | Create a price-triggered order
 [**CancelPriceTriggeredOrderList**](FuturesApi.md#CancelPriceTriggeredOrderList) | **Delete** /futures/{settle}/price_orders | Cancel All Price-triggered Orders
@@ -217,7 +218,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **interval** | **optional.String**| Order depth. 0 means no aggregation is applied. default to 0 | [default to 0]
 **limit** | **optional.Int32**| Maximum number of order depth data in asks or bids | [default to 10]
-**withId** | **optional.Bool**| Whether the order book update ID will be returned. This ID increases by 1 on every order book update | [default to false]
+**withId** | **optional.Bool**| Whether to return depth update ID. This ID increments by 1 each time. | [default to false]
 
 ### Example
 
@@ -372,7 +373,7 @@ Optional parameters are passed through a pointer to a ListFuturesCandlesticksOpt
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **from** | **optional.Int64**| Start time of candlesticks, formatted in Unix timestamp in seconds. Default to&#x60;to - 100 * interval&#x60; if not specified | 
-**to** | **optional.Int64**| End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time | 
+**to** | **optional.Int64**| Specify the end time of the K-line chart, defaults to current time if not specified, note that the time format is Unix timestamp with second  | 
 **limit** | **optional.Int32**| Maximum recent data points to return. &#x60;limit&#x60; is conflicted with &#x60;from&#x60; and &#x60;to&#x60;. If either &#x60;from&#x60; or &#x60;to&#x60; is specified, request will be rejected. | [default to 100]
 **interval** | **optional.String**| Interval time between data points. Note that &#x60;1w&#x60; means natual week(Mon-Sun), while &#x60;7d&#x60; means every 7d since unix 0.  Note that 30d means 1 natual month, not 30 days | [default to 5m]
 
@@ -451,7 +452,7 @@ Optional parameters are passed through a pointer to a ListFuturesPremiumIndexOpt
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **from** | **optional.Int64**| Start time of candlesticks, formatted in Unix timestamp in seconds. Default to&#x60;to - 100 * interval&#x60; if not specified | 
-**to** | **optional.Int64**| End time of candlesticks, formatted in Unix timestamp in seconds. Default to current time | 
+**to** | **optional.Int64**| Specify the end time of the K-line chart, defaults to current time if not specified, note that the time format is Unix timestamp with second  | 
 **limit** | **optional.Int32**| Maximum recent data points to return. &#x60;limit&#x60; is conflicted with &#x60;from&#x60; and &#x60;to&#x60;. If either &#x60;from&#x60; or &#x60;to&#x60; is specified, request will be rejected. | [default to 100]
 **interval** | **optional.String**| Interval time between data points | [default to 5m]
 
@@ -600,8 +601,8 @@ Optional parameters are passed through a pointer to a ListFuturesFundingRateHist
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
-**from** | **optional.Int64**| Start timestamp | 
-**to** | **optional.Int64**| End timestamp | 
+**from** | **optional.Int64**| Start timestamp  Specify start time, time format is Unix timestamp. If not specified, it defaults to (the data start time of the time range actually returned by to and limit) | 
+**to** | **optional.Int64**| Termination Timestamp  Specify the end time. If not specified, it defaults to the current time, and the time format is a Unix timestamp | 
 
 ### Example
 
@@ -873,7 +874,7 @@ No authorization required
 
 Retrieve liquidation history
 
-Interval between `from` and `to` cannot exceeds 3600. Some private fields will not be returned in public endpoints. Refer to field description for detail.
+The maximum time interval between `from` and `to` is **3600 seconds**. Certain private fields will **not be returned** in public endpoints; refer to individual field descriptions for details.
 
 ### Required Parameters
 
@@ -890,8 +891,8 @@ Optional parameters are passed through a pointer to a ListLiquidatedOrdersOpts s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **contract** | **optional.String**| Futures contract, return related data only if specified | 
-**from** | **optional.Int64**| Start timestamp | 
-**to** | **optional.Int64**| End timestamp | 
+**from** | **optional.Int64**| Start timestamp  Specify start time, time format is Unix timestamp. If not specified, it defaults to (the data start time of the time range actually returned by to and limit) | 
+**to** | **optional.Int64**| Termination Timestamp  Specify the end time. If not specified, it defaults to the current time, and the time format is a Unix timestamp | 
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 
 ### Example
@@ -1095,7 +1096,7 @@ func main() {
 
 Query account book
 
-If the `contract` field is provided, it can only filter records that include this field after 2023-10-30.
+If the contract field is passed, only records containing this field after 2023-10-30 can be filtered。 2023-10-30 can be filtered。 2023-10-30 can be filtered。 
 
 ### Required Parameters
 
@@ -1114,8 +1115,8 @@ Name | Type | Description  | Notes
 **contract** | **optional.String**| Futures contract, return related data only if specified | 
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
-**from** | **optional.Int64**| Start timestamp | 
-**to** | **optional.Int64**| End timestamp | 
+**from** | **optional.Int64**| Start timestamp  Specify start time, time format is Unix timestamp. If not specified, it defaults to (the data start time of the time range actually returned by to and limit) | 
+**to** | **optional.Int64**| Termination Timestamp  Specify the end time. If not specified, it defaults to the current time, and the time format is a Unix timestamp | 
 **type_** | **optional.String**| Changing Type：  - dnw: Deposit &amp; Withdraw - pnl: Profit &amp; Loss by reducing position - fee: Trading fee - refr: Referrer rebate - fund: Funding - point_dnw: POINT Deposit &amp; Withdraw - point_fee: POINT Trading fee - point_refr: POINT Referrer rebate - bonus_offset: bouns deduction | 
 
 ### Example
@@ -1338,7 +1339,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
 **contract** | **string**| Futures contract | 
-**change** | **string**| Margin change. Use positive number to increase margin, negative number otherwise. | 
+**change** | **string**| Margin change amount, positive number increases, negative number  | 
 
 ### Example
 
@@ -1365,7 +1366,7 @@ func main() {
                             )
     settle := "usdt" // string - Settle currency
     contract := "BTC_USDT" // string - Futures contract
-    change := "0.01" // string - Margin change. Use positive number to increase margin, negative number otherwise.
+    change := "0.01" // string - Margin change amount, positive number increases, negative number 
     
     result, _, err := client.FuturesApi.UpdatePositionMargin(ctx, settle, contract, change)
     if err != nil {
@@ -1630,7 +1631,7 @@ func main() {
 
 Enable or disable dual mode
 
-Before setting dual mode, make sure all positions are closed and no orders are open
+The prerequisite for changing mode is that all positions have no holdings
 
 ### Required Parameters
 
@@ -1781,7 +1782,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **settle** | **string**| Settle currency | 
 **contract** | **string**| Futures contract | 
-**change** | **string**| Margin change. Use positive number to increase margin, negative number otherwise. | 
+**change** | **string**| Margin change amount, positive number increases, negative number  | 
 **dualSide** | **string**| Long or short position | 
 
 ### Example
@@ -1809,7 +1810,7 @@ func main() {
                             )
     settle := "usdt" // string - Settle currency
     contract := "BTC_USDT" // string - Futures contract
-    change := "0.01" // string - Margin change. Use positive number to increase margin, negative number otherwise.
+    change := "0.01" // string - Margin change amount, positive number increases, negative number 
     dualSide := "dual_long" // string - Long or short position
     
     result, _, err := client.FuturesApi.UpdateDualModePositionMargin(ctx, settle, contract, change, dualSide)
@@ -2024,7 +2025,7 @@ Name | Type | Description  | Notes
 **contract** | **optional.String**| Futures contract, return related data only if specified | 
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
-**lastId** | **optional.String**| Specify list staring point using the &#x60;id&#x60; of last record in previous list-query results | 
+**lastId** | **optional.String**| Specify the currency name to query in batches, and support up to 100 pass parameters at a time. | 
 
 ### Example
 
@@ -2189,7 +2190,7 @@ Optional parameters are passed through a pointer to a CancelFuturesOrdersOpts st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **xGateExptime** | **optional.String**| Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected | 
-**side** | **optional.String**| Specify all buy orders or all sell orders, if not specify them, both are included. Revoke all buy orders and revoke all sell orders and make ask | 
+**side** | **optional.String**| Specify all buy orders or all sell orders, both are included if not specified. Set to bid to cancel all buy orders, set to ask to cancel all sell ordersspecified. Set to bid to cancel all buy orders, set to ask to cancel all  | 
 
 ### Example
 
@@ -2269,8 +2270,8 @@ Optional parameters are passed through a pointer to a GetOrdersWithTimeRangeOpts
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **contract** | **optional.String**| Futures contract, return related data only if specified | 
-**from** | **optional.Int64**| Start timestamp | 
-**to** | **optional.Int64**| End timestamp | 
+**from** | **optional.Int64**| Start timestamp  Specify start time, time format is Unix timestamp. If not specified, it defaults to (the data start time of the time range actually returned by to and limit) | 
+**to** | **optional.Int64**| Termination Timestamp  Specify the end time. If not specified, it defaults to the current time, and the time format is a Unix timestamp | 
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
 
@@ -2752,8 +2753,8 @@ Optional parameters are passed through a pointer to a GetMyTradesWithTimeRangeOp
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **contract** | **optional.String**| Futures contract, return related data only if specified | 
-**from** | **optional.Int64**| Start timestamp | 
-**to** | **optional.Int64**| End timestamp | 
+**from** | **optional.Int64**| Start timestamp  Specify start time, time format is Unix timestamp. If not specified, it defaults to (the data start time of the time range actually returned by to and limit) | 
+**to** | **optional.Int64**| Termination Timestamp  Specify the end time. If not specified, it defaults to the current time, and the time format is a Unix timestamp | 
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
 **role** | **optional.String**| Query role, maker or taker. | 
@@ -2837,8 +2838,8 @@ Name | Type | Description  | Notes
 **contract** | **optional.String**| Futures contract, return related data only if specified | 
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
-**from** | **optional.Int64**| Start timestamp | 
-**to** | **optional.Int64**| End timestamp | 
+**from** | **optional.Int64**| Start timestamp  Specify start time, time format is Unix timestamp. If not specified, it defaults to (the data start time of the time range actually returned by to and limit) | 
+**to** | **optional.Int64**| Termination Timestamp  Specify the end time. If not specified, it defaults to the current time, and the time format is a Unix timestamp | 
 **side** | **optional.String**| Query side.  long or shot | 
 **pnl** | **optional.String**| Query profit or loss | 
 
@@ -3064,7 +3065,7 @@ func main() {
 
 Countdown cancel orders
 
-When the timeout set by the user is reached, if there is no cancel or set a new countdown, the related pending orders will be automatically cancelled.  This endpoint can be called repeatedly to set a new countdown or cancel the countdown. For example, call this endpoint at 30s intervals, each countdown`timeout` is set to 30s. If this endpoint is not called again within 30 seconds, all pending orders on the specified `market` will be automatically cancelled, if no `market` is specified, all market pending orders will be cancelled. If the `timeout` is set to 0 within 30 seconds, the countdown timer will expire and the cacnel function will be cancelled.
+Heartbeat detection for contract orders: When the user-set `timeout` time is reached, if neither the existing countdown is canceled nor a new countdown is set, the relevant contract orders will be automatically canceled. This API can be called repeatedly to set a new countdown or cancel the countdown. Usage example: Repeatedly call this API at 30-second intervals, setting the `timeout` to 30 (seconds) each time. If this API is not called again within 30 seconds, all open orders on your specified `market` will be automatically canceled. If the `timeout` is set to 0 within 30 seconds, the countdown timer will terminate, and the automatic order cancellation function will be disabled.
 
 ### Required Parameters
 
@@ -3215,7 +3216,7 @@ func main() {
 
 Cancel a batch of orders with an ID list
 
-Multiple distinct order ID list can be specified。Each request can cancel a maximum of 20 records.
+Multiple different order IDs can be specified. A maximum of 20 records 
 
 ### Required Parameters
 
@@ -3297,7 +3298,7 @@ func main() {
 
 Batch modify orders with specified IDs
 
-You can specify multiple different order IDs. You can only modify up to 10 orders in one request.
+Multiple different order IDs can be specified. A maximum of 10 orders can
 
 ### Required Parameters
 
@@ -3367,6 +3368,73 @@ func main() {
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+## GetFuturesRiskLimitTable
+
+> []FuturesRiskLimitTier GetFuturesRiskLimitTable(ctx, settle, tableId)
+
+Query risk limit table by table_id
+
+Just pass table_id.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**settle** | **string**| Settle currency | 
+**tableId** | **string**| Risk limit table ID | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.Background()
+    settle := "usdt" // string - Settle currency
+    tableId := "CYBER_USDT_20241122" // string - Risk limit table ID
+    
+    result, _, err := client.FuturesApi.GetFuturesRiskLimitTable(ctx, settle, tableId)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**[]FuturesRiskLimitTier**](FuturesRiskLimitTier.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

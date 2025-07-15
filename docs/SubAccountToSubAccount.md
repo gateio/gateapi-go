@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **SubAccountFrom** | **string** | Transfer from the user id of the sub-account | 
 **SubAccountFromType** | **string** | The sub-account&#39;s outgoing trading account, spot - spot account, futures - perpetual contract account, delivery - delivery contract account. | 
 **SubAccountTo** | **string** | Transfer to the user id of the sub-account | 
-**SubAccountToType** | **string** | The sub-account&#39;s incoming trading account, spot - spot account, futures - perpetual contract account, delivery - delivery contract account | 
+**SubAccountToType** | **string** | Transferred sub-account trading account: spot - spot account, futures - perpetual contract account, delivery - delivery contract account | 
 **Amount** | **string** | Transfer amount | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

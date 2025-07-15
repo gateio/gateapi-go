@@ -12,7 +12,7 @@ Method | HTTP request | Description
 [**ListStructuredProducts**](EarnApi.md#ListStructuredProducts) | **Get** /earn/structured/products | Structured Product List
 [**ListStructuredOrders**](EarnApi.md#ListStructuredOrders) | **Get** /earn/structured/orders | Structured Product Order List
 [**PlaceStructuredOrder**](EarnApi.md#PlaceStructuredOrder) | **Post** /earn/structured/orders | Place Structured Product Order
-[**FindCoin**](EarnApi.md#FindCoin) | **Get** /earn/staking/coins | 链上赚币币种
+[**FindCoin**](EarnApi.md#FindCoin) | **Get** /earn/staking/coins | Staking Coins
 [**SwapStakingCoin**](EarnApi.md#SwapStakingCoin) | **Post** /earn/staking/swap | On-chain Token Swap for Earned Coins
 
 
@@ -380,7 +380,7 @@ Structured Product List
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**status** | **string**| Status (default: all)  &#x60;in_process&#x60;-processing  &#x60;will_begin&#x60;-unstarted  &#x60;wait_settlement&#x60;-unsettled  &#x60;done&#x60;-finish | 
+**status** | **string**| Status (Default empty to query all)  &#x60;in_process&#x60;-In progress &#x60;will_begin&#x60;-Not started &#x60;wait_settlement&#x60;-Pending settlement &#x60;done&#x60;-Completed  | 
 **optional** | **ListStructuredProductsOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -389,7 +389,7 @@ Optional parameters are passed through a pointer to a ListStructuredProductsOpts
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**type_** | **optional.String**| Product Type (default all)  &#x60;SharkFin2.0&#x60;-SharkFin  &#x60;BullishSharkFin&#x60;-BullishSharkFin  &#x60;BearishSharkFin&#x60;-BearishSharkFin &#x60;DoubleNoTouch&#x60;-DoubleNoTouch &#x60;RangeAccrual&#x60;-RangeAccrual &#x60;SnowBall&#x60;-SnowBall | 
+**type_** | **optional.String**| Product Type (Default empty to query all)  &#x60;SharkFin2.0&#x60;-Shark Fin &#x60;BullishSharkFin&#x60;-Bullish Treasure &#x60;BearishSharkFin&#x60;-Bearish Treasure &#x60;DoubleNoTouch&#x60;-Volatility Treasure &#x60;RangeAccrual&#x60;-Range Smart Yield &#x60;SnowBall&#x60;-Snowball  | 
 **page** | **optional.Int32**| Page number | [default to 1]
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 
@@ -410,7 +410,7 @@ func main() {
     // uncomment the next line if your are testing against testnet
     // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
     ctx := context.Background()
-    status := "in_process" // string - Status (default: all)  `in_process`-processing  `will_begin`-unstarted  `wait_settlement`-unsettled  `done`-finish
+    status := "in_process" // string - Status (Default empty to query all)  `in_process`-In progress `will_begin`-Not started `wait_settlement`-Pending settlement `done`-Completed 
     
     result, _, err := client.EarnApi.ListStructuredProducts(ctx, status, nil)
     if err != nil {
@@ -462,8 +462,8 @@ Optional parameters are passed through a pointer to a ListStructuredOrdersOpts s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**from** | **optional.Int64**| Start timestamp | 
-**to** | **optional.Int64**| End timestamp | 
+**from** | **optional.Int64**| Start timestamp  Specify start time, time format is Unix timestamp. If not specified, it defaults to (the data start time of the time range actually returned by to and limit) | 
+**to** | **optional.Int64**| Termination Timestamp  Specify the end time. If not specified, it defaults to the current time, and the time format is a Unix timestamp | 
 **page** | **optional.Int32**| Page number | [default to 1]
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 
@@ -595,7 +595,7 @@ func main() {
 
 > []string FindCoin(ctx, findCoin)
 
-链上赚币币种
+Staking Coins
 
 ### Required Parameters
 
@@ -662,7 +662,7 @@ func main() {
 
 ## SwapStakingCoin
 
-> SwapStakingCoin(ctx, swapCoin)
+> SwapCoinStruct SwapStakingCoin(ctx, swapCoin)
 
 On-chain Token Swap for Earned Coins
 
@@ -714,7 +714,7 @@ func main() {
 
 ### Return type
 
- (empty response body)
+[**SwapCoinStruct**](SwapCoinStruct.md)
 
 ### Authorization
 
@@ -723,7 +723,7 @@ func main() {
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

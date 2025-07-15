@@ -25,7 +25,7 @@ Method | HTTP request | Description
 [**SetUserLeverageCurrencySetting**](UnifiedApi.md#SetUserLeverageCurrencySetting) | **Post** /unified/leverage/user_currency_setting | Set the loan currency leverage
 [**ListUnifiedCurrencies**](UnifiedApi.md#ListUnifiedCurrencies) | **Get** /unified/currencies | List of loan currencies supported by unified account
 [**GetHistoryLoanRate**](UnifiedApi.md#GetHistoryLoanRate) | **Get** /unified/history_loan_rate | get historical lending rates
-[**SetUnifiedCollateral**](UnifiedApi.md#SetUnifiedCollateral) | **Post** /unified/collateral_currencies | 设置抵押币种
+[**SetUnifiedCollateral**](UnifiedApi.md#SetUnifiedCollateral) | **Post** /unified/collateral_currencies | Set Collateral Currency
 
 
 ## ListUnifiedAccounts
@@ -831,7 +831,7 @@ func main() {
 
 Set mode of the unified account
 
-每种账户模式的切换只需要传对应账户模式的参数，同时支持在切换账户模式时打开或关闭对应账户模式下的配置开关 - 开通经典账户模式时，mode=classic ```     PUT /unified/unified_mode     {       \"mode\": \"classic\"     } ``` - 开通跨币种保证金模式，mode=multi_currency ```     PUT /unified/unified_mode     {       \"mode\": \"multi_currency\",       \"settings\": {          \"usdt_futures\": true       }     } ``` - 开通组合保证金模式时，mode=portfolio ```     PUT /unified/unified_mode     {       \"mode\": \"portfolio\",       \"settings\": {          \"spot_hedge\": true       }     } ``` - 开通单币种保证金模式时，mode=single_currency ```     PUT /unified/unified_mode     {       \"mode\": \"single_currency\"     } ```
+Each account mode switch only requires passing the corresponding account mode parameter, and also supports turning on or off the configuration switches under the corresponding account mode during the switch. - When enabling the classic account mode, mode=classic ```     PUT /unified/unified_mode     {       \"mode\": \"classic\"     } ``` - When enabling the cross-currency margin mode, mode=multi_currency ```     PUT /unified/unified_mode     {       \"mode\": \"multi_currency\",       \"settings\": {          \"usdt_futures\": true       }     } ``` - When enabling the portfolio margin mode, mode=portfolio ```     PUT /unified/unified_mode     {       \"mode\": \"portfolio\",       \"settings\": {          \"spot_hedge\": true       }     } ``` - When enabling the single-currency margin mode, mode=single_currency ```     PUT /unified/unified_mode     {       \"mode\": \"single_currency\"     } ```
 
 ### Required Parameters
 
@@ -1512,7 +1512,7 @@ No authorization required
 
 > UnifiedCollateralRes SetUnifiedCollateral(ctx, unifiedCollateralReq)
 
-设置抵押币种
+Set Collateral Currency
 
 ### Required Parameters
 

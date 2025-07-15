@@ -16,9 +16,9 @@ Name | Type | Description | Notes
 **UpdateTimeMs** | **int64** | Last modification time of order (in milliseconds) | [optional] [readonly] 
 **Status** | **string** | Order status  - &#x60;open&#x60;: to be filled - &#x60;closed&#x60;: filled - &#x60;cancelled&#x60;: cancelled | [optional] [readonly] 
 **CurrencyPair** | **string** | Currency pair | 
-**Type** | **string** | Order Type    - limit : Limit Order - market : Market Order | [optional] [default to TYPE_LIMIT]
+**Type** | **string** | Order Type   - limit : Limit Order - market : Market Order | [optional] [default to TYPE_LIMIT]
 **Account** | **string** | Account type, spot - spot account, margin - leveraged account, unified - unified account | [optional] [default to spot]
-**Side** | **string** | Order side | 
+**Side** | **string** | Buy or sell order | 
 **Amount** | **string** | When &#x60;type&#x60; is limit, it refers to base currency.  For instance, &#x60;BTC_USDT&#x60; means &#x60;BTC&#x60;  When &#x60;type&#x60; is &#x60;market&#x60;, it refers to different currency according to &#x60;side&#x60;  - &#x60;side&#x60; : &#x60;buy&#x60; means quote currency, &#x60;BTC_USDT&#x60; means &#x60;USDT&#x60; - &#x60;side&#x60; : &#x60;sell&#x60; means base currency，&#x60;BTC_USDT&#x60; means &#x60;BTC&#x60;  | 
 **Price** | **string** | Price can&#39;t be empty when &#x60;type&#x60;&#x3D; &#x60;limit&#x60; | [optional] 
 **TimeInForce** | **string** | Time in force  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled, taker only - poc: PendingOrCancelled, makes a post-only order that always enjoys a maker fee - fok: FillOrKill, fill either completely or none Only &#x60;ioc&#x60; and &#x60;fok&#x60; are supported when &#x60;type&#x60;&#x3D;&#x60;market&#x60; | [optional] [default to TIME_IN_FORCE_GTC]

@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 **SpotOrderLoss** | **string** | Total pending order loss, in USDT, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode | [optional] 
 **SpotHedge** | **bool** | Spot hedging status, true - enabled, false - not enabled. | [optional] 
 **UseFunding** | **bool** | Whether to use funds as margin | [optional] 
-**IsAllCollateral** | **bool** | 是否所有币种均作为保证金，true - 所有币种作为保证金，false - 否 | [optional] 
+**IsAllCollateral** | **bool** | Whether all currencies are used as margin, true - All currencies are used as margin, false - No | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

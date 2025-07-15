@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **LentAmount** | **string** | Lent amount | [optional] [readonly] 
 **FrozenAmount** | **string** | Frozen amount | [optional] [readonly] 
 **MinRate** | **string** | Minimum interest rate | [optional] [readonly] 
-**InterestStatus** | **string** | Interest status: interest_dividend - regular dividend, interest_reinvest - interest reinvestment | [optional] [readonly] 
+**InterestStatus** | **string** | Interest status: interest_dividend - Normal dividend, interest_reinvest - Interest reinvestment Interest reinvestment | [optional] [readonly] 
 **ReinvestLeftAmount** | **string** | Amount not reinvested | [optional] [readonly] 
 **CreateTime** | **int64** | Created time of the lending order | [optional] [readonly] 
 **UpdateTime** | **int64** | Upated time of the lending order | [optional] [readonly] 

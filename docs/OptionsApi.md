@@ -312,8 +312,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
-**from** | **optional.Int64**| Start timestamp | 
-**to** | **optional.Int64**| End timestamp | 
+**from** | **optional.Int64**| Start timestamp  Specify start time, time format is Unix timestamp. If not specified, it defaults to (the data start time of the time range actually returned by to and limit) | 
+**to** | **optional.Int64**| Termination Timestamp  Specify the end time. If not specified, it defaults to the current time, and the time format is a Unix timestamp | 
 
 ### Example
 
@@ -455,8 +455,8 @@ Name | Type | Description  | Notes
 **contract** | **optional.String**| Options contract name | 
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
-**from** | **optional.Int64**| Start timestamp | 
-**to** | **optional.Int64**| End timestamp | 
+**from** | **optional.Int64**| Start timestamp  Specify start time, time format is Unix timestamp. If not specified, it defaults to (the data start time of the time range actually returned by to and limit) | 
+**to** | **optional.Int64**| Termination Timestamp  Specify the end time. If not specified, it defaults to the current time, and the time format is a Unix timestamp | 
 
 ### Example
 
@@ -538,7 +538,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **interval** | **optional.String**| Order depth. 0 means no aggregation is applied. default to 0 | [default to 0]
 **limit** | **optional.Int32**| Maximum number of order depth data in asks or bids | [default to 10]
-**withId** | **optional.Bool**| Whether the order book update ID will be returned. This ID increases by 1 on every order book update | [default to false]
+**withId** | **optional.Bool**| Whether to return depth update ID. This ID increments by 1 each time. | [default to false]
 
 ### Example
 
@@ -737,8 +737,8 @@ Optional parameters are passed through a pointer to a ListOptionsCandlesticksOpt
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
-**from** | **optional.Int64**| Start timestamp | 
-**to** | **optional.Int64**| End timestamp | 
+**from** | **optional.Int64**| Start timestamp  Specify start time, time format is Unix timestamp. If not specified, it defaults to (the data start time of the time range actually returned by to and limit) | 
+**to** | **optional.Int64**| Termination Timestamp  Specify the end time. If not specified, it defaults to the current time, and the time format is a Unix timestamp | 
 **interval** | **optional.String**| Interval time between data points | [default to 5m]
 
 ### Example
@@ -812,8 +812,8 @@ Optional parameters are passed through a pointer to a ListOptionsUnderlyingCandl
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
-**from** | **optional.Int64**| Start timestamp | 
-**to** | **optional.Int64**| End timestamp | 
+**from** | **optional.Int64**| Start timestamp  Specify start time, time format is Unix timestamp. If not specified, it defaults to (the data start time of the time range actually returned by to and limit) | 
+**to** | **optional.Int64**| Termination Timestamp  Specify the end time. If not specified, it defaults to the current time, and the time format is a Unix timestamp | 
 **interval** | **optional.String**| Interval time between data points | [default to 5m]
 
 ### Example
@@ -889,8 +889,8 @@ Name | Type | Description  | Notes
 **type_** | **optional.String**| &#x60;C&#x60; is call, while &#x60;P&#x60; is put | 
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
-**from** | **optional.Int64**| Start timestamp | 
-**to** | **optional.Int64**| End timestamp | 
+**from** | **optional.Int64**| Start timestamp  Specify start time, time format is Unix timestamp. If not specified, it defaults to (the data start time of the time range actually returned by to and limit) | 
+**to** | **optional.Int64**| Termination Timestamp  Specify the end time. If not specified, it defaults to the current time, and the time format is a Unix timestamp | 
 
 ### Example
 
@@ -1026,8 +1026,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
-**from** | **optional.Int64**| Start timestamp | 
-**to** | **optional.Int64**| End timestamp | 
+**from** | **optional.Int64**| Start timestamp  Specify start time, time format is Unix timestamp. If not specified, it defaults to (the data start time of the time range actually returned by to and limit) | 
+**to** | **optional.Int64**| Termination Timestamp  Specify the end time. If not specified, it defaults to the current time, and the time format is a Unix timestamp | 
 **type_** | **optional.String**| Changing Type: - dnw: Deposit &amp; Withdraw - prem: Trading premium - fee: Trading fee - refr: Referrer rebate - set: settlement PNL  | 
 
 ### Example
@@ -1332,8 +1332,8 @@ Name | Type | Description  | Notes
 **underlying** | **optional.String**| Underlying | 
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
-**from** | **optional.Int64**| Start timestamp | 
-**to** | **optional.Int64**| End timestamp | 
+**from** | **optional.Int64**| Start timestamp  Specify start time, time format is Unix timestamp. If not specified, it defaults to (the data start time of the time range actually returned by to and limit) | 
+**to** | **optional.Int64**| Termination Timestamp  Specify the end time. If not specified, it defaults to the current time, and the time format is a Unix timestamp | 
 
 ### Example
 
@@ -1770,8 +1770,8 @@ Name | Type | Description  | Notes
 **contract** | **optional.String**| Options contract name | 
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
 **offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
-**from** | **optional.Int64**| Start timestamp | 
-**to** | **optional.Int64**| End timestamp | 
+**from** | **optional.Int64**| Start timestamp  Specify start time, time format is Unix timestamp. If not specified, it defaults to (the data start time of the time range actually returned by to and limit) | 
+**to** | **optional.Int64**| Termination Timestamp  Specify the end time. If not specified, it defaults to the current time, and the time format is a Unix timestamp | 
 
 ### Example
 

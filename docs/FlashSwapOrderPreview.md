@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PreviewId** | **string** | Preview result ID | [optional] 
-**SellCurrency** | **string** | Currency to sell which can be retrieved from supported currency list API &#x60;GET /flash_swap/currencies&#x60; | [optional] 
+**SellCurrency** | **string** | Name of the sold asset,  Refer to the interface Query the list of currencies supported for flash swap GET /flash_swap/currenciesto obtain | [optional] 
 **SellAmount** | **string** | Amount to sell | [optional] 
-**BuyCurrency** | **string** | Currency to buy which can be retrieved from supported currency list API &#x60;GET /flash_swap/currencies&#x60; | [optional] 
+**BuyCurrency** | **string** | Name of the purchased asset,  Refer to the interface Query the list of currencies supported for flash swap GET /flash_swap/currenciesto obtain | [optional] 
 **BuyAmount** | **string** | Amount to buy | [optional] 
 **Price** | **string** | Price | [optional] 
 

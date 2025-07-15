@@ -689,7 +689,7 @@ Optional parameters are passed through a pointer to a ListCollateralCurrenciesOp
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**loanCurrency** | **optional.String**| The parameter loan_currency is used to specify the borrowing currency. If loan_currency is not provided, the API will return all supported borrowing currencies. If loan_currency is provided, the API will return an array of collateral currencies supported for the specified borrowing currency. | 
+**loanCurrency** | **optional.String**| The parameter loan_currency is used to specify the borrowing currency. If loan_currency is not provided, the API will return all supported borrowing currencies. | 
 
 ### Example
 

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **int64** | id | [optional] [readonly] 
+**Id** | **int64** | ID | [optional] [readonly] 
 **Type** | **string** | type: borrow - borrow, repay - repay | [optional] [readonly] 
 **RepaymentType** | **string** | Repayment type, none - No repayment type, manual_repay - Manual repayment, auto_repay - Automatic repayment, cancel_auto_repay - Automatic repayment after withdrawal, different_currencies_repayment - Different currency repayment | [optional] [readonly] 
 **BorrowType** | **string** | Loan type, returned when querying loan records. manual_borrow - Manual repayment , auto_borrow - Automatic repayment | [optional] 

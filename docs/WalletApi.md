@@ -403,7 +403,7 @@ func main() {
 
 Retrieve transfer records between main and sub accounts
 
-Record time range cannot exceed 30 days  > Note: only records after 2020-04-10 can be retrieved
+Record time range cannot exceed 30 days  > Note: only records after 20-04-10can be retrieved
 
 ### Required Parameters
 

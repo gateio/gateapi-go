@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **UserId** | **int64** | User ID | [optional] 
 **Tier** | **int64** | User VIP level | [optional] 
 **Key** | [**AccountDetailKey**](AccountDetail_key.md) |  | [optional] 
-**CopyTradingRole** | **int32** | User role: 0 - Ordinary user 1 - Order leader 2 - Follower 3 - Order leader and follower | [optional] 
+**CopyTradingRole** | **int32** | User role: 0 - Normal user 1 - Copy trading leader 2 - Copy trading follower 3 - Both leader and follower  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

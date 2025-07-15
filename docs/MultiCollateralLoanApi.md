@@ -39,8 +39,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **page** | **optional.Int32**| Page number | [default to 1]
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 10]
-**sort** | **optional.String**| Sort types: time_desc - default sorting by creation time in descending order, ltv_asc - ascending order of ltv, ltv_desc - descending order of ltv. | 
-**orderType** | **optional.String**| Order type, current - query current orders, fixed - query fixed orders. If not specified, default to querying current orders | 
+**sort** | **optional.String**| Query the current interest rate of the currency in the previous hour | 
+**orderType** | **optional.String**| Order type: current - Query current orders, fixed - Query fixed orders, defaults to current orders if not specified | 
 
 ### Example
 
@@ -546,8 +546,8 @@ List User Currency Quota
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**type_** | **string**| Currency types: collateral - collateral currency, borrow - borrowing currency. | 
-**currency** | **string**| When specifying collateral currencies, you can use commas to separate multiple currencies; for borrowing currencies, only one currency can be provided. | 
+**type_** | **string**| Currency type: collateral - Collateral currency, borrow - Borrowing  | 
+**currency** | **string**| When it is a collateral currency, multiple currencies can be passed separated by commas;when it is a borrowing currency, only one currenc | 
 
 ### Example
 
@@ -572,8 +572,8 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    type_ := "collateral" // string - Currency types: collateral - collateral currency, borrow - borrowing currency.
-    currency := "BTC" // string - When specifying collateral currencies, you can use commas to separate multiple currencies; for borrowing currencies, only one currency can be provided.
+    type_ := "collateral" // string - Currency type: collateral - Collateral currency, borrow - Borrowing 
+    currency := "BTC" // string - When it is a collateral currency, multiple currencies can be passed separated by commas;when it is a borrowing currency, only one currenc
     
     result, _, err := client.MultiCollateralLoanApi.ListUserCurrencyQuota(ctx, type_, currency)
     if err != nil {
@@ -788,14 +788,14 @@ No authorization required
 
 Query the current interest rate of the currency
 
-Query the current interest rate of the currency in the last hour. The current interest rate is updated every hour.
+Query the current interest rate of the currency in the previous hour.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**currencies** | [**[]string**](string.md)| Specify the currency name to query the array. The array is separated by commas and has a maximum of 100 items. | 
+**currencies** | [**[]string**](string.md)| Specify currency name query array, separated by commas, maximum 100items. | 
 **optional** | **GetMultiCollateralCurrentRateOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -823,7 +823,7 @@ func main() {
     // uncomment the next line if your are testing against testnet
     // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
     ctx := context.Background()
-    currencies := []string{"[\"BTC\",\"GT\"]"} // []string - Specify the currency name to query the array. The array is separated by commas and has a maximum of 100 items.
+    currencies := []string{"[\"BTC\",\"GT\"]"} // []string - Specify currency name query array, separated by commas, maximum 100items.
     
     result, _, err := client.MultiCollateralLoanApi.GetMultiCollateralCurrentRate(ctx, currencies, nil)
     if err != nil {

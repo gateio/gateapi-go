@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Timest** | **string** | Transfer timestamp | [optional] [readonly] 
 **Uid** | **string** | Main account user ID | [optional] [readonly] 
 **SubAccount** | **string** | Sub account user ID | 
-**SubAccountType** | **string** | 操作的子账号交易账户， spot - 现货账户， futures - 永续合约账户， delivery - 交割合约账户, options - 期权账户 | [optional] [default to spot]
+**SubAccountType** | **string** | Target sub user&#39;s account. &#x60;spot&#x60; - spot account, &#x60;futures&#x60; - perpetual contract account, &#x60;delivery&#x60; - delivery account | [optional] [default to spot]
 **Currency** | **string** | Transfer currency name | 
 **Amount** | **string** | Transfer amount | 
 **Direction** | **string** | Transfer direction. to - transfer into sub account; from - transfer out from sub account | 

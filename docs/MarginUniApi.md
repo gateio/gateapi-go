@@ -457,8 +457,8 @@ Name | Type | Description  | Notes
 **currency** | **optional.String**| Retrieve data of the specified currency | 
 **page** | **optional.Int32**| Page number | [default to 1]
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
-**from** | **optional.Int64**| Start timestamp | 
-**to** | **optional.Int64**| End timestamp | 
+**from** | **optional.Int64**| Start timestamp  Specify start time, time format is Unix timestamp. If not specified, it defaults to (the data start time of the time range actually returned by to and limit) | 
+**to** | **optional.Int64**| Termination Timestamp  Specify the end time. If not specified, it defaults to the current time, and the time format is a Unix timestamp | 
 
 ### Example
 
