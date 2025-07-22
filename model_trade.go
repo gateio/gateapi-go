@@ -10,36 +10,36 @@
 package gateapi
 
 type Trade struct {
-	// Trade ID
+	// Trade ID.
 	Id string `json:"id,omitempty"`
-	// Trading time
+	// Trading time.
 	CreateTime string `json:"create_time,omitempty"`
-	// Trading time, with millisecond precision
+	// Trading time, with millisecond precision.
 	CreateTimeMs string `json:"create_time_ms,omitempty"`
-	// Currency pair
+	// Currency pair.
 	CurrencyPair string `json:"currency_pair,omitempty"`
-	// Buy or sell order
+	// Buy or sell order.
 	Side string `json:"side,omitempty"`
-	// Trade role. No value in public endpoints
+	// Trade role. No value in public endpoints.
 	Role string `json:"role,omitempty"`
-	// Trade amount
+	// Trade amount.
 	Amount string `json:"amount,omitempty"`
-	// Order price
+	// Order price.
 	Price string `json:"price,omitempty"`
-	// Related order ID. No value in public endpoints
+	// Related order ID. No value in public endpoints.
 	OrderId string `json:"order_id,omitempty"`
-	// Fee deducted. No value in public endpoints
+	// Fee deducted. No value in public endpoints.
 	Fee string `json:"fee,omitempty"`
-	// Fee currency unit. No value in public endpoints
+	// Fee currency unit. No value in public endpoints.
 	FeeCurrency string `json:"fee_currency,omitempty"`
-	// Points used to deduct fee. No value in public endpoints
+	// Points used to deduct fee. No value in public endpoints.
 	PointFee string `json:"point_fee,omitempty"`
-	// GT used to deduct fee. No value in public endpoints
+	// GT used to deduct fee. No value in public endpoints.
 	GtFee string `json:"gt_fee,omitempty"`
-	// The custom data that the user remarked when amending the order
+	// The custom data that the user remarked when amending the order.
 	AmendText string `json:"amend_text,omitempty"`
 	// Represents a unique and consecutive trade ID within a single market. It is used to track and identify trades in the specific market
 	SequenceId string `json:"sequence_id,omitempty"`
-	// User defined information. No value in public endpoints
+	// User defined information. No value in public endpoints.
 	Text string `json:"text,omitempty"`
 }

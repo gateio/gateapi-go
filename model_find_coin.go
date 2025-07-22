@@ -10,8 +10,8 @@
 package gateapi
 
 type FindCoin struct {
-	// Currency
+	// Currency.
 	Coin string `json:"coin,omitempty"`
-	// Coin Type  swap-Voucher  lock-Locked
+	// Coin Type swap-Voucher lock-Locked.
 	Cointype string `json:"cointype,omitempty"`
 }

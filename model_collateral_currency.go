@@ -10,8 +10,8 @@
 package gateapi
 
 type CollateralCurrency struct {
-	// Currency
+	// Currency.
 	Currency string `json:"currency,omitempty"`
-	// Size
+	// Size.
 	Amount string `json:"amount,omitempty"`
 }

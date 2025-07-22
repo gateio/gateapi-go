@@ -10,13 +10,13 @@
 package gateapi
 
 type CollateralCurrencyRes struct {
-	// Update success status
+	// Update success status.
 	Succeeded bool `json:"succeeded,omitempty"`
 	// Error identifier for unsuccessful operations; empty for successful.
 	Label string `json:"label,omitempty"`
 	// Error description in case of operation failure; empty when successful.
 	Message string `json:"message,omitempty"`
-	// Currency
+	// Currency.
 	Currency string `json:"currency,omitempty"`
 	// Quantity of successful collateral operation; 0 if the operation fails.
 	Amount string `json:"amount,omitempty"`

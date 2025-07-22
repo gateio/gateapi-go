@@ -9,10 +9,10 @@
 
 package gateapi
 
-// Total borrowed amount and pledged collateral amount by the user
+// Total borrowed amount and pledged collateral amount by the user.
 type UserTotalAmount struct {
-	// Total borrowing amount, calculated in USDT
+	// Total borrowing amount, calculated in USDT.
 	BorrowAmount string `json:"borrow_amount,omitempty"`
-	// Total collateral amount, calculated in USDT
+	// Total collateral amount, calculated in USDT.
 	CollateralAmount string `json:"collateral_amount,omitempty"`
 }

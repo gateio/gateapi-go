@@ -10,6 +10,6 @@
 package gateapi
 
 type TransactionId struct {
-	// Order id
+	// Order id.
 	TxId int64 `json:"tx_id,omitempty"`
 }

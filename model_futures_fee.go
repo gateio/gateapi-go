@@ -9,10 +9,10 @@
 
 package gateapi
 
-// The returned result is a map type, where the key represents the market and the value represents the taker and maker fee rates.
+// The returned result is a map type, where the key represents the market and taker and maker fee rates.
 type FuturesFee struct {
-	// Taker fee
+	// Taker fee.
 	TakerFee string `json:"taker_fee,omitempty"`
-	// maker fee
+	// maker fee.
 	MakerFee string `json:"maker_fee,omitempty"`
 }

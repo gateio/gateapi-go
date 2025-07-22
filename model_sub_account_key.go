@@ -10,23 +10,23 @@
 package gateapi
 
 type SubAccountKey struct {
-	// User ID
+	// User ID.
 	UserId int64 `json:"user_id,omitempty"`
-	// Mode: 1 - classic 2 - portfolio account
+	// Mode: 1 - classic 2 - portfolio account.
 	Mode int32 `json:"mode,omitempty"`
-	// API key name
+	// API key name.
 	Name  string               `json:"name,omitempty"`
 	Perms []SubAccountKeyPerms `json:"perms,omitempty"`
-	// ip white list (list will be removed if no value is passed)
+	// ip white list (list will be removed if no value is passed).
 	IpWhitelist []string `json:"ip_whitelist,omitempty"`
-	// API Key
+	// API Key.
 	Key string `json:"key,omitempty"`
-	// State 1 - normal 2 - locked 3 - frozen
+	// State 1 - normal 2 - locked 3 - frozen.
 	State int32 `json:"state,omitempty"`
-	// Creation time
+	// Creation time.
 	CreatedAt int64 `json:"created_at,omitempty"`
-	// Last update time
+	// Last update time.
 	UpdatedAt int64 `json:"updated_at,omitempty"`
-	// Last access time
+	// Last access time.
 	LastAccess int64 `json:"last_access,omitempty"`
 }

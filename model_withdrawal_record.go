@@ -10,32 +10,32 @@
 package gateapi
 
 type WithdrawalRecord struct {
-	// Record ID
+	// Record ID.
 	Id string `json:"id,omitempty"`
-	// Hash record of the withdrawal
+	// Hash record of the withdrawal.
 	Txid string `json:"txid,omitempty"`
-	// Block Number
+	// Block Number.
 	BlockNumber string `json:"block_number,omitempty"`
 	// Client order id, up to 32 length and can only include 0-9, A-Z, a-z, underscore(_), hyphen(-) or dot(.)
 	WithdrawOrderId string `json:"withdraw_order_id,omitempty"`
-	// Operation time
+	// Operation time.
 	Timestamp string `json:"timestamp,omitempty"`
-	// Currency amount
+	// Currency amount.
 	Amount string `json:"amount"`
-	// fee
+	// fee.
 	Fee string `json:"fee,omitempty"`
-	// Currency name
+	// Currency name.
 	Currency string `json:"currency"`
-	// Withdrawal address
+	// Withdrawal address.
 	Address string `json:"address,omitempty"`
 	// The reason for withdrawal failure is that there is a value when status = CANCEL, and the rest of the state is empty
 	FailReason string `json:"fail_reason,omitempty"`
-	// The withdrawal end time, i.e.: withdrawal cancel time or withdrawal success time When status = CANCEL, the corresponding cancel time When status = DONE and block_number > 0, it is the time to withdrawal success
+	// The withdrawal end time, i.e.: withdrawal cancel time or withdrawal success time When status = CANCEL, the corresponding cancel time When status = DONE and block_number > 0, it is the
 	Timestamp2 string `json:"timestamp2,omitempty"`
-	// Additional remarks with regards to the withdrawal
+	// Additional remarks with regards to the withdrawal.
 	Memo string `json:"memo,omitempty"`
 	// Transaction status  - DONE: Completed (block_number > 0 is considered to be truly completed) - CANCEL: Canceled - REQUEST: Requesting - MANUAL: Pending manual review - BCODE: Recharge code operation - EXTPEND: Sent awaiting confirmation - FAIL: Failure on the chain awaiting confirmation - INVALID: Invalid order - VERIFY: Verifying - PROCES: Processing - PEND: Processing - DMOVE: pending manual review - REVIEW: Under review
 	Status string `json:"status,omitempty"`
-	// Name of the chain used in withdrawals
+	// Name of the chain used in withdrawals.
 	Chain string `json:"chain"`
 }

@@ -10,20 +10,20 @@
 package gateapi
 
 type OptionsMyTrade struct {
-	// Trade ID
+	// Trade ID.
 	Id int64 `json:"id,omitempty"`
-	// Trading time
+	// Trading time.
 	CreateTime float64 `json:"create_time,omitempty"`
-	// Options contract name
+	// Options contract name.
 	Contract string `json:"contract,omitempty"`
-	// Order ID related
+	// Order ID related.
 	OrderId int32 `json:"order_id,omitempty"`
-	// Trading size
+	// Trading size.
 	Size int64 `json:"size,omitempty"`
-	// Trading price (quote currency)
+	// Trading price (quote currency).
 	Price string `json:"price,omitempty"`
-	// Underlying price (quote currency)
+	// Underlying price (quote currency).
 	UnderlyingPrice string `json:"underlying_price,omitempty"`
-	// Trade role. Available values are `taker` and `maker`
+	// Trade role. Available values are `taker` and `maker`.
 	Role string `json:"role,omitempty"`
 }

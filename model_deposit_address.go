@@ -10,9 +10,9 @@
 package gateapi
 
 type DepositAddress struct {
-	// Currency detail
+	// Currency detail.
 	Currency string `json:"currency"`
-	// Deposit address
+	// Deposit address.
 	Address             string                  `json:"address"`
 	MultichainAddresses []MultiChainAddressItem `json:"multichain_addresses,omitempty"`
 }

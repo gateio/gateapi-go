@@ -10,24 +10,24 @@
 package gateapi
 
 type Currency struct {
-	// Currency symbol
+	// Currency symbol.
 	Currency string `json:"currency,omitempty"`
-	// Currency name
+	// Currency name.
 	Name string `json:"name,omitempty"`
-	// Whether currency is de-listed
+	// Whether currency is de-listed.
 	Delisted bool `json:"delisted,omitempty"`
-	// Whether currency's withdrawal is disabled (deprecated)
+	// Whether currency's withdrawal is disabled (deprecated).
 	WithdrawDisabled bool `json:"withdraw_disabled,omitempty"`
-	// Whether currency's withdrawal is delayed (deprecated)
+	// Whether currency's withdrawal is delayed (deprecated).
 	WithdrawDelayed bool `json:"withdraw_delayed,omitempty"`
-	// Whether currency's deposit is disabled (deprecated)
+	// Whether currency's deposit is disabled (deprecated).
 	DepositDisabled bool `json:"deposit_disabled,omitempty"`
-	// Whether currency's trading is disabled
+	// Whether currency's trading is disabled.
 	TradeDisabled bool `json:"trade_disabled,omitempty"`
 	// Fixed fee rate. Only for fixed rate currencies, not valid for normal currencies
 	FixedRate string `json:"fixed_rate,omitempty"`
-	// The main chain corresponding to the coin
+	// The main chain corresponding to the coin.
 	Chain string `json:"chain,omitempty"`
-	// All links corresponding to coins
+	// All links corresponding to coins.
 	Chains []SpotCurrencyChain `json:"chains,omitempty"`
 }

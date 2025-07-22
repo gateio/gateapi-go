@@ -10,10 +10,10 @@
 package gateapi
 
 type MaxUniBorrowable struct {
-	// Currency
+	// Currency.
 	Currency string `json:"currency"`
-	// Currency pair
+	// Currency pair.
 	CurrencyPair string `json:"currency_pair,omitempty"`
-	// Maximum borrowable
+	// Maximum borrowable.
 	Borrowable string `json:"borrowable"`
 }

@@ -9,18 +9,18 @@
 
 package gateapi
 
-// Loan
+// Loan.
 type UniLoan struct {
-	// Currency
+	// Currency.
 	Currency string `json:"currency,omitempty"`
-	// Currency pair
+	// Currency pair.
 	CurrencyPair string `json:"currency_pair,omitempty"`
-	// amount
+	// amount.
 	Amount string `json:"amount,omitempty"`
-	// Loan type, platform - platform, margin - margin
+	// Loan type, platform - platform, margin - margin.
 	Type string `json:"type,omitempty"`
-	// Created time
+	// Created time.
 	CreateTime int64 `json:"create_time,omitempty"`
-	// Updated time
+	// Updated time.
 	UpdateTime int64 `json:"update_time,omitempty"`
 }

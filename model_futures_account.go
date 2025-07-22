@@ -12,29 +12,29 @@ package gateapi
 type FuturesAccount struct {
 	// total is the balance after the user's accumulated deposit, withdraw, profit and loss (including realized profit and loss, fund, fee and referral rebate), excluding unrealized profit and loss.  total = SUM(history_dnw, history_pnl, history_fee, history_refr, history_fund)
 	Total string `json:"total,omitempty"`
-	// Unrealized PNL
+	// Unrealized PNL.
 	UnrealisedPnl string `json:"unrealised_pnl,omitempty"`
-	// Position margin
+	// Position margin.
 	PositionMargin string `json:"position_margin,omitempty"`
-	// Order margin of unfinished orders
+	// Order margin of unfinished orders.
 	OrderMargin string `json:"order_margin,omitempty"`
-	// The available balance for transferring or trading(including bonus.  Bonus can't be be withdrawn. The transfer amount needs to deduct the bonus)
+	// The available balance for transferring or trading(including bonus. Bonus can't be withdrawn. The transfer amount needs to deduct the bonus)
 	Available string `json:"available,omitempty"`
-	// POINT amount
+	// POINT amount.
 	Point string `json:"point,omitempty"`
-	// Settle currency
+	// Settle currency.
 	Currency string `json:"currency,omitempty"`
-	// Whether dual mode is enabled
+	// Whether dual mode is enabled.
 	InDualMode bool `json:"in_dual_mode,omitempty"`
-	// Whether portfolio margin account mode is enabled
+	// Whether portfolio margin account mode is enabled.
 	EnableCredit bool `json:"enable_credit,omitempty"`
-	// Initial margin position, applicable to the portfolio margin account model
+	// Initial margin position, applicable to the portfolio margin account model.
 	PositionInitialMargin string `json:"position_initial_margin,omitempty"`
 	// The maintenance deposit occupied by the position is suitable for the new classic account margin model and unified account model
 	MaintenanceMargin string `json:"maintenance_margin,omitempty"`
-	// Perpetual Contract Bonus
+	// Perpetual Contract Bonus.
 	Bonus string `json:"bonus,omitempty"`
-	// Classic account margin mode, true-new mode, false-old mode
+	// Classic account margin mode, true-new mode, false-old mode.
 	EnableEvolvedClassic bool `json:"enable_evolved_classic,omitempty"`
 	// Full -warehouse hanging order deposit, suitable for the new classic account margin model
 	CrossOrderMargin string `json:"cross_order_margin,omitempty"`
@@ -46,19 +46,19 @@ type FuturesAccount struct {
 	CrossUnrealisedPnl string `json:"cross_unrealised_pnl,omitempty"`
 	// Full warehouse available amount, suitable for the new classic account margin model
 	CrossAvailable string `json:"cross_available,omitempty"`
-	// Full margin balance, suitable for the new classic account margin model
+	// Full margin balance, suitable for the new classic account margin model.
 	CrossMarginBalance string `json:"cross_margin_balance,omitempty"`
 	// Maintain margin ratio for the full position, suitable for the new classic account margin model
 	CrossMmr string `json:"cross_mmr,omitempty"`
 	// The initial margin rate of the full position is suitable for the new classic account margin model
 	CrossImr string `json:"cross_imr,omitempty"`
-	// Ware -position margin, suitable for the new classic account margin model
+	// Ware -position margin, suitable for the new classic account margin model.
 	IsolatedPositionMargin string `json:"isolated_position_margin,omitempty"`
-	// Whether to open a new two-way position mode
+	// Whether to open a new two-way position mode.
 	EnableNewDualMode bool `json:"enable_new_dual_mode,omitempty"`
 	// Margin mode, 0-classic margin mode, 1-cross-currency margin mode, 2-combined margin mode
 	MarginMode int32 `json:"margin_mode,omitempty"`
-	// Whether to enable tiered maintenance margin calculation
+	// Whether to enable tiered maintenance margin calculation.
 	EnableTieredMm bool                  `json:"enable_tiered_mm,omitempty"`
 	History        FuturesAccountHistory `json:"history,omitempty"`
 }

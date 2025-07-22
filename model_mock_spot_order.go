@@ -9,11 +9,11 @@
 
 package gateapi
 
-// Spot orders
+// Spot orders.
 type MockSpotOrder struct {
-	// Currency pair
+	// Currency pair.
 	CurrencyPairs string `json:"currency_pairs"`
-	// Price
+	// Price.
 	OrderPrice string `json:"order_price"`
 	// Initial order quantity for spot trading pairs, not involved in actual calculation.  Currently only supports three currencies: BTC, ETH.
 	Count string `json:"count,omitempty"`

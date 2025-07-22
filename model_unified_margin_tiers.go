@@ -9,10 +9,10 @@
 
 package gateapi
 
-// Unified margin tiers
+// Unified margin tiers.
 type UnifiedMarginTiers struct {
-	// Currency name
+	// Currency name.
 	Currency string `json:"currency,omitempty"`
-	// Margin tiers
+	// Margin tiers.
 	MarginTiers []MarginTiers `json:"margin_tiers,omitempty"`
 }

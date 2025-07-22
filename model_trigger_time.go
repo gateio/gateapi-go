@@ -10,6 +10,6 @@
 package gateapi
 
 type TriggerTime struct {
-	// Timestamp of the end of the countdown, in milliseconds
+	// Timestamp of the end of the countdown, in milliseconds.
 	TriggerTime int64 `json:"triggerTime,omitempty"`
 }

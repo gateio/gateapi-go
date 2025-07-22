@@ -9,82 +9,82 @@
 
 package gateapi
 
-// Futures contract details
+// Futures contract details.
 type Contract struct {
-	// Futures contract
+	// Futures contract.
 	Name string `json:"name,omitempty"`
-	// Futures contract type
+	// Futures contract type.
 	Type string `json:"type,omitempty"`
-	// Multiplier used in converting from invoicing to settlement currency
+	// Multiplier used in converting from invoicing to settlement currency.
 	QuantoMultiplier string `json:"quanto_multiplier,omitempty"`
-	// Minimum leverage
+	// Minimum leverage.
 	LeverageMin string `json:"leverage_min,omitempty"`
-	// Maximum leverage
+	// Maximum leverage.
 	LeverageMax string `json:"leverage_max,omitempty"`
-	// Maintenance rate of margin
+	// Maintenance rate of margin.
 	MaintenanceRate string `json:"maintenance_rate,omitempty"`
-	// Mark price type, internal - based on internal trading, index - based on external index price
+	// Mark price type, internal - based on internal trading, external index price
 	MarkType string `json:"mark_type,omitempty"`
-	// Current mark price
+	// Current mark price.
 	MarkPrice string `json:"mark_price,omitempty"`
-	// Current index price
+	// Current index price.
 	IndexPrice string `json:"index_price,omitempty"`
-	// Last trading price
+	// Last trading price.
 	LastPrice string `json:"last_price,omitempty"`
-	// Maker fee rate, where negative means rebate
+	// Maker fee rate, where negative means rebate.
 	MakerFeeRate string `json:"maker_fee_rate,omitempty"`
-	// Taker fee rate
+	// Taker fee rate.
 	TakerFeeRate string `json:"taker_fee_rate,omitempty"`
-	// Minimum order price increment
+	// Minimum order price increment.
 	OrderPriceRound string `json:"order_price_round,omitempty"`
-	// Minimum mark price increment
+	// Minimum mark price increment.
 	MarkPriceRound string `json:"mark_price_round,omitempty"`
-	// Current funding rate
+	// Current funding rate.
 	FundingRate string `json:"funding_rate,omitempty"`
-	// Funding application interval, unit in seconds
+	// Funding application interval, unit in seconds.
 	FundingInterval int32 `json:"funding_interval,omitempty"`
-	// Next funding time
+	// Next funding time.
 	FundingNextApply float64 `json:"funding_next_apply,omitempty"`
-	// Risk limit base,deprecated
+	// Risk limit base,deprecated.
 	RiskLimitBase string `json:"risk_limit_base,omitempty"`
-	// Step of adjusting risk limit,deprecated
+	// Step of adjusting risk limit,deprecated.
 	RiskLimitStep string `json:"risk_limit_step,omitempty"`
 	// Maximum risk limit the contract allowed,deprecated,It is recommended to use /futures/{settle}/risk_limit_tiers to query risk limits.
 	RiskLimitMax string `json:"risk_limit_max,omitempty"`
-	// Minimum order size the contract allowed
+	// Minimum order size the contract allowed.
 	OrderSizeMin int64 `json:"order_size_min,omitempty"`
-	// Maximum order size the contract allowed
+	// Maximum order size the contract allowed.
 	OrderSizeMax int64 `json:"order_size_max,omitempty"`
 	// deviation between order price and current index price. If price of an order is denoted as order_price, it must meet the following condition:   abs(order_price - mark_price) <= mark_price * order_price_deviate
 	OrderPriceDeviate string `json:"order_price_deviate,omitempty"`
-	// Referral fee rate discount
+	// Referral fee rate discount.
 	RefDiscountRate string `json:"ref_discount_rate,omitempty"`
-	// Referrer commission rate
+	// Referrer commission rate.
 	RefRebateRate string `json:"ref_rebate_rate,omitempty"`
-	// Current orderbook ID
+	// Current orderbook ID.
 	OrderbookId int64 `json:"orderbook_id,omitempty"`
-	// Current trade ID
+	// Current trade ID.
 	TradeId int64 `json:"trade_id,omitempty"`
-	// Historical accumulated trade size
+	// Historical accumulated trade size.
 	TradeSize int64 `json:"trade_size,omitempty"`
-	// Current total long position size
+	// Current total long position size.
 	PositionSize int64 `json:"position_size,omitempty"`
-	// Last changed time of configuration
+	// Last changed time of configuration.
 	ConfigChangeTime float64 `json:"config_change_time,omitempty"`
-	// `in_delisting=true` And when position_size>0, it means the contract is in the offline transition period `in_delisting=true` And when position_size=0, it means the contract is offline
+	// `in_delisting=true` And when position_size>0, it means the contract is in the offline transition period `in_delisting=true` contract is offline
 	InDelisting bool `json:"in_delisting,omitempty"`
-	// Maximum number of open orders
+	// Maximum number of open orders.
 	OrdersLimit int32 `json:"orders_limit,omitempty"`
-	// Whether bouns is enabled
+	// Whether bouns is enabled.
 	EnableBonus bool `json:"enable_bonus,omitempty"`
-	// Whether portfolio margin account is enabled
+	// Whether portfolio margin account is enabled.
 	EnableCredit bool `json:"enable_credit,omitempty"`
-	// Created time of the contract
+	// Created time of the contract.
 	CreateTime float64 `json:"create_time,omitempty"`
 	// The factor for the maximum of the funding rate. Maximum of funding rate = (1/market maximum leverage - maintenance margin rate) * funding_cap_ratio
 	FundingCapRatio string `json:"funding_cap_ratio,omitempty"`
-	// Contract Status Types include:  prelaunch,  trading, delisting,  delisted
+	// Contract Status Types include: prelaunch, trading, delisting, delisted.
 	Status string `json:"status,omitempty"`
-	// Contract expiry timestamp
+	// Contract expiry timestamp.
 	LaunchTime int64 `json:"launch_time,omitempty"`
 }

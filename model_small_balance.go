@@ -9,14 +9,14 @@
 
 package gateapi
 
-// Convert Small Balance
+// Convert Small Balance.
 type SmallBalance struct {
-	// Currency
+	// Currency.
 	Currency string `json:"currency,omitempty"`
-	// Available balance
+	// Available balance.
 	AvailableBalance string `json:"available_balance,omitempty"`
-	// Estimated as BTC
+	// Estimated as BTC.
 	EstimatedAsBtc string `json:"estimated_as_btc,omitempty"`
-	// Estimated conversion to GT
+	// Estimated conversion to GT.
 	ConvertibleToGt string `json:"convertible_to_gt,omitempty"`
 }

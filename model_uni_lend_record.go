@@ -9,20 +9,20 @@
 
 package gateapi
 
-// Interest Record
+// Interest Record.
 type UniLendRecord struct {
-	// Currency name
+	// Currency name.
 	Currency string `json:"currency,omitempty"`
-	// current amount
+	// current amount.
 	Amount string `json:"amount,omitempty"`
-	// Last wallet amount
+	// Last wallet amount.
 	LastWalletAmount string `json:"last_wallet_amount,omitempty"`
-	// Last lent amount
+	// Last lent amount.
 	LastLentAmount string `json:"last_lent_amount,omitempty"`
-	// Last frozen amount
+	// Last frozen amount.
 	LastFrozenAmount string `json:"last_frozen_amount,omitempty"`
-	// Record type: lend - lend, redeem - redeem
+	// Record type: lend - lend, redeem - redeem.
 	Type string `json:"type,omitempty"`
-	// Created time
+	// Created time.
 	CreateTime int64 `json:"create_time,omitempty"`
 }

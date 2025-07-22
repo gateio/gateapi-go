@@ -9,13 +9,13 @@
 
 package gateapi
 
-// Lend or redeem
+// Lend or redeem.
 type CreateUniLend struct {
-	// Currency name
+	// Currency name.
 	Currency string `json:"currency"`
-	// The amount of currency could be lent
+	// The amount of currency could be lent.
 	Amount string `json:"amount"`
-	// type: lend - lend, redeem - redeem
+	// type: lend - lend, redeem - redeem.
 	Type string `json:"type"`
 	// The minimum interest rate. If the value is too high, it might lead to the unsuccessful lending and no profit will be gained for that hour.
 	MinRate string `json:"min_rate,omitempty"`

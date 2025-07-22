@@ -9,12 +9,12 @@
 
 package gateapi
 
-// Repay
+// Repay.
 type RepayLoan struct {
-	// Order ID
+	// Order ID.
 	OrderId int64 `json:"order_id"`
-	// Repayment amount, it is mandatory when making partial repayments
+	// Repayment amount, it is mandatory when making partial repayments.
 	RepayAmount string `json:"repay_amount"`
-	// Repayment method, set to `true` for full repayment, and `false` for partial repayment; When set to false for partial repayment, the repay_amount parameter cannot be greater than the remaining amount to be repaid by the user.
+	// Repayment method, set to `true` for full repayment, and `false` for partial repayment; When partial repayment, the repay_amount parameter cannot be greater than the remaining amount to be repaid by the user.
 	RepaidAll bool `json:"repaid_all"`
 }

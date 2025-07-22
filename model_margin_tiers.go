@@ -10,14 +10,14 @@
 package gateapi
 
 type MarginTiers struct {
-	// Tier
+	// Tier.
 	Tier string `json:"tier,omitempty"`
-	// Discount
+	// Discount.
 	MarginRate string `json:"margin_rate,omitempty"`
-	// Lower limit
+	// Lower limit.
 	LowerLimit string `json:"lower_limit,omitempty"`
-	// Upper limit, \"\" indicates greater than (the last tier)
+	// Upper limit, \"\" indicates greater than (the last tier).
 	UpperLimit string `json:"upper_limit,omitempty"`
-	// Position leverage
+	// Position leverage.
 	Leverage string `json:"leverage,omitempty"`
 }

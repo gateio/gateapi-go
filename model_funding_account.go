@@ -10,14 +10,14 @@
 package gateapi
 
 type FundingAccount struct {
-	// Currency name
+	// Currency name.
 	Currency string `json:"currency,omitempty"`
-	// Available assets to lend, which is identical to spot account `available`
+	// Available assets to lend, which is identical to spot account `available`.
 	Available string `json:"available,omitempty"`
-	// Locked amount. i.e. amount in `open` loans
+	// Locked amount. i.e. amount in `open` loans.
 	Locked string `json:"locked,omitempty"`
-	// Outstanding loan amount yet to be repaid
+	// Outstanding loan amount yet to be repaid.
 	Lent string `json:"lent,omitempty"`
-	// Amount used for lending. total_lent = lent + locked
+	// Amount used for lending. total_lent = lent + locked.
 	TotalLent string `json:"total_lent,omitempty"`
 }

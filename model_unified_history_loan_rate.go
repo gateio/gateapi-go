@@ -10,11 +10,11 @@
 package gateapi
 
 type UnifiedHistoryLoanRate struct {
-	// Currency name
+	// Currency name.
 	Currency string `json:"currency,omitempty"`
-	// The VIP level of the floating rate required
+	// The VIP level of the floating rate required.
 	Tier string `json:"tier,omitempty"`
-	// VIP level corresponding floating rate
+	// VIP level corresponding floating rate.
 	TierUpRate string `json:"tier_up_rate,omitempty"`
 	// Historical interest rate information, one data per hour, the array size is determined by the page and limit parameters provided by the interface request parameters, sorted from recent to far in time
 	Rates []UnifiedHistoryLoanRateRates `json:"rates,omitempty"`

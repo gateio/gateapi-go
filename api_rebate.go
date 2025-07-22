@@ -36,16 +36,16 @@ type AgencyTransactionHistoryOpts struct {
 }
 
 /*
-AgencyTransactionHistory The agency obtains the transaction history of the recommended user
-Record time range cannot exceed 30 days
+AgencyTransactionHistory The agency obtains the transaction history of the recommended user.
+Record time range cannot exceed 30 days.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *AgencyTransactionHistoryOpts - Optional Parameters:
-  - @param "CurrencyPair" (optional.String) -  Specify the currency pair, if not specified, return all currency pairs
-  - @param "UserId" (optional.Int64) -  User ID. If not specified, all user records will be returned
-  - @param "From" (optional.Int64) -  Time range beginning, default to 7 days before current time
-  - @param "To" (optional.Int64) -  Time range ending, default to current time
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
-  - @param "Offset" (optional.Int32) -  List offset, starting from 0
+  - @param "CurrencyPair" (optional.String) -  Specify the currency pair, if not specified, return all currency pairs.
+  - @param "UserId" (optional.Int64) -  User ID. If not specified, all user records will be returned.
+  - @param "From" (optional.Int64) -  Time range beginning, default to 7 days before current time.
+  - @param "To" (optional.Int64) -  Time range ending, default to current time.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0.
 
 @return []AgencyTransactionHistory
 */
@@ -162,16 +162,16 @@ type AgencyCommissionsHistoryOpts struct {
 }
 
 /*
-AgencyCommissionsHistory The agency obtains the commission history of the recommended user
-Record time range cannot exceed 30 days
+AgencyCommissionsHistory The agency obtains the commission history of the recommended user.
+Record time range cannot exceed 30 days.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *AgencyCommissionsHistoryOpts - Optional Parameters:
-  - @param "Currency" (optional.String) -  Filter by currency. Return all currency records if not specified
-  - @param "UserId" (optional.Int64) -  User ID. If not specified, all user records will be returned
-  - @param "From" (optional.Int64) -  Time range beginning, default to 7 days before current time
-  - @param "To" (optional.Int64) -  Time range ending, default to current time
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
-  - @param "Offset" (optional.Int32) -  List offset, starting from 0
+  - @param "Currency" (optional.String) -  Filter by currency. Return all currency records if not specified.
+  - @param "UserId" (optional.Int64) -  User ID. If not specified, all user records will be returned.
+  - @param "From" (optional.Int64) -  Time range beginning, default to 7 days before current time.
+  - @param "To" (optional.Int64) -  Time range ending, default to current time.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0.
 
 @return []AgencyCommissionHistory
 */
@@ -288,16 +288,16 @@ type PartnerTransactionHistoryOpts struct {
 }
 
 /*
-PartnerTransactionHistory Partner obtains transaction records of recommended users
-Record time range cannot exceed 30 days
+PartnerTransactionHistory Partner obtains transaction records of recommended users.
+Record time range cannot exceed 30 days.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *PartnerTransactionHistoryOpts - Optional Parameters:
-  - @param "CurrencyPair" (optional.String) -  Specify the currency pair, if not specified, return all currency pairs
-  - @param "UserId" (optional.Int64) -  User ID. If not specified, all user records will be returned
-  - @param "From" (optional.Int64) -  Time range beginning, default to 7 days before current time
-  - @param "To" (optional.Int64) -  Time range ending, default to current time
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
-  - @param "Offset" (optional.Int32) -  List offset, starting from 0
+  - @param "CurrencyPair" (optional.String) -  Specify the currency pair, if not specified, return all currency pairs.
+  - @param "UserId" (optional.Int64) -  User ID. If not specified, all user records will be returned.
+  - @param "From" (optional.Int64) -  Time range beginning, default to 7 days before current time.
+  - @param "To" (optional.Int64) -  Time range ending, default to current time.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0.
 
 @return PartnerTransactionHistory
 */
@@ -414,16 +414,16 @@ type PartnerCommissionsHistoryOpts struct {
 }
 
 /*
-PartnerCommissionsHistory Partner obtains commission records of recommended users
-Record time range cannot exceed 30 days
+PartnerCommissionsHistory Partner obtains commission records of recommended users.
+Record time range cannot exceed 30 days.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *PartnerCommissionsHistoryOpts - Optional Parameters:
-  - @param "Currency" (optional.String) -  Filter by currency. Return all currency records if not specified
-  - @param "UserId" (optional.Int64) -  User ID. If not specified, all user records will be returned
-  - @param "From" (optional.Int64) -  Time range beginning, default to 7 days before current time
-  - @param "To" (optional.Int64) -  Time range ending, default to current time
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
-  - @param "Offset" (optional.Int32) -  List offset, starting from 0
+  - @param "Currency" (optional.String) -  Filter by currency. Return all currency records if not specified.
+  - @param "UserId" (optional.Int64) -  User ID. If not specified, all user records will be returned.
+  - @param "From" (optional.Int64) -  Time range beginning, default to 7 days before current time.
+  - @param "To" (optional.Int64) -  Time range ending, default to current time.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0.
 
 @return PartnerCommissionHistory
 */
@@ -537,13 +537,13 @@ type PartnerSubListOpts struct {
 }
 
 /*
-PartnerSubList Partner subordinate list
-Including sub-agents, direct customers, indirect customers
+PartnerSubList Partner subordinate list.
+Including sub-agents, direct customers, indirect customers.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *PartnerSubListOpts - Optional Parameters:
-  - @param "UserId" (optional.Int64) -  User ID. If not specified, all user records will be returned
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
-  - @param "Offset" (optional.Int32) -  List offset, starting from 0
+  - @param "UserId" (optional.Int64) -  User ID. If not specified, all user records will be returned.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0.
 
 @return PartnerSubList
 */
@@ -650,15 +650,15 @@ type RebateBrokerCommissionHistoryOpts struct {
 }
 
 /*
-RebateBrokerCommissionHistory The broker obtains the user's commission rebate records
-Record time range cannot exceed 30 days
+RebateBrokerCommissionHistory The broker obtains the user's commission rebate records.
+Record time range cannot exceed 30 days.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *RebateBrokerCommissionHistoryOpts - Optional Parameters:
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
-  - @param "Offset" (optional.Int32) -  List offset, starting from 0
-  - @param "UserId" (optional.Int64) -  User ID. If not specified, all user records will be returned
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0.
+  - @param "UserId" (optional.Int64) -  User ID. If not specified, all user records will be returned.
   - @param "From" (optional.Int64) -  The start time of the query record. If not specified, the default is to push forward 30 days from the current time.
-  - @param "To" (optional.Int64) -  Time range ending, default to current time
+  - @param "To" (optional.Int64) -  Time range ending, default to current time.
 
 @return []BrokerCommission
 */
@@ -771,15 +771,15 @@ type RebateBrokerTransactionHistoryOpts struct {
 }
 
 /*
-RebateBrokerTransactionHistory The broker obtains the user's trading history
-Record time range cannot exceed 30 days
+RebateBrokerTransactionHistory The broker obtains the user's trading history.
+Record time range cannot exceed 30 days.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *RebateBrokerTransactionHistoryOpts - Optional Parameters:
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
-  - @param "Offset" (optional.Int32) -  List offset, starting from 0
-  - @param "UserId" (optional.Int64) -  User ID. If not specified, all user records will be returned
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0.
+  - @param "UserId" (optional.Int64) -  User ID. If not specified, all user records will be returned.
   - @param "From" (optional.Int64) -  The start time of the query record. If not specified, the default is to push forward 30 days from the current time.
-  - @param "To" (optional.Int64) -  Time range ending, default to current time
+  - @param "To" (optional.Int64) -  Time range ending, default to current time.
 
 @return []BrokerTransaction
 */
@@ -883,7 +883,7 @@ func (a *RebateApiService) RebateBrokerTransactionHistory(ctx context.Context, l
 }
 
 /*
-RebateUserInfo User retrieves rebate information
+RebateUserInfo User retrieves rebate information.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 @return []RebateUserInfo
@@ -973,10 +973,10 @@ func (a *RebateApiService) RebateUserInfo(ctx context.Context) ([]RebateUserInfo
 }
 
 /*
-UserSubRelation User-subordinate relationship
-Query whether the specified user is in the system
+UserSubRelation User-subordinate relationship.
+Query whether the specified user is in the system.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param userIdList Query the user's ID list, split by,, if there are more than 100, take 100
+  - @param userIdList Query the user's ID list, split by,, if there are more than 100, take 100.
 
 @return UserSubRelation
 */

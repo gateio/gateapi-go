@@ -9,10 +9,10 @@
 
 package gateapi
 
-// Batch query unified account can be borrowed up to a maximum of results
+// Batch query unified account can be borrowed up to a maximum of results.
 type UnifiedBorrowable1 struct {
-	// Currency detail
+	// Currency detail.
 	Currency string `json:"currency,omitempty"`
-	// The maximum amount to borrow
+	// The maximum amount to borrow.
 	Amount string `json:"amount,omitempty"`
 }

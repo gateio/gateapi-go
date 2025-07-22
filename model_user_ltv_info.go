@@ -9,20 +9,20 @@
 
 package gateapi
 
-// User's currency statistics data
+// User's currency statistics data.
 type UserLtvInfo struct {
-	// Collateral
+	// Collateral.
 	CollateralCurrency string `json:"collateral_currency,omitempty"`
-	// Borrowed currency
+	// Borrowed currency.
 	BorrowCurrency string `json:"borrow_currency,omitempty"`
-	// The initial collateralization rate
+	// The initial collateralization rate.
 	InitLtv string `json:"init_ltv,omitempty"`
-	// Warning collateralization ratio
+	// Warning collateralization ratio.
 	AlertLtv string `json:"alert_ltv,omitempty"`
-	// The liquidation collateralization rate
+	// The liquidation collateralization rate.
 	LiquidateLtv string `json:"liquidate_ltv,omitempty"`
-	// Minimum borrowable amount for the loan currency
+	// Minimum borrowable amount for the loan currency.
 	MinBorrowAmount string `json:"min_borrow_amount,omitempty"`
-	// Remaining borrowable amount for the loan currency
+	// Remaining borrowable amount for the loan currency.
 	LeftBorrowableAmount string `json:"left_borrowable_amount,omitempty"`
 }

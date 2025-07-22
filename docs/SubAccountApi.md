@@ -4,24 +4,24 @@ All URIs are relative to *https://api.gateio.ws/api/v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ListSubAccounts**](SubAccountApi.md#ListSubAccounts) | **Get** /sub_accounts | List sub-accounts
-[**CreateSubAccounts**](SubAccountApi.md#CreateSubAccounts) | **Post** /sub_accounts | Create a new sub-account
-[**GetSubAccount**](SubAccountApi.md#GetSubAccount) | **Get** /sub_accounts/{user_id} | Get the sub-account
-[**ListSubAccountKeys**](SubAccountApi.md#ListSubAccountKeys) | **Get** /sub_accounts/{user_id}/keys | List all API Key of the sub-account
-[**CreateSubAccountKeys**](SubAccountApi.md#CreateSubAccountKeys) | **Post** /sub_accounts/{user_id}/keys | Create API Key of the sub-account
-[**GetSubAccountKey**](SubAccountApi.md#GetSubAccountKey) | **Get** /sub_accounts/{user_id}/keys/{key} | Get the API Key of the sub-account
-[**UpdateSubAccountKeys**](SubAccountApi.md#UpdateSubAccountKeys) | **Put** /sub_accounts/{user_id}/keys/{key} | Update API key of the sub-account
-[**DeleteSubAccountKeys**](SubAccountApi.md#DeleteSubAccountKeys) | **Delete** /sub_accounts/{user_id}/keys/{key} | Delete API key of the sub-account
-[**LockSubAccount**](SubAccountApi.md#LockSubAccount) | **Post** /sub_accounts/{user_id}/lock | Lock the sub-account
-[**UnlockSubAccount**](SubAccountApi.md#UnlockSubAccount) | **Post** /sub_accounts/{user_id}/unlock | Unlock the sub-account
-[**ListUnifiedMode**](SubAccountApi.md#ListUnifiedMode) | **Get** /sub_accounts/unified_mode | Get sub-account mode
+[**ListSubAccounts**](SubAccountApi.md#ListSubAccounts) | **Get** /sub_accounts | List sub-accounts.
+[**CreateSubAccounts**](SubAccountApi.md#CreateSubAccounts) | **Post** /sub_accounts | Create a new sub-account.
+[**GetSubAccount**](SubAccountApi.md#GetSubAccount) | **Get** /sub_accounts/{user_id} | Get the sub-account.
+[**ListSubAccountKeys**](SubAccountApi.md#ListSubAccountKeys) | **Get** /sub_accounts/{user_id}/keys | List all API Key of the sub-account.
+[**CreateSubAccountKeys**](SubAccountApi.md#CreateSubAccountKeys) | **Post** /sub_accounts/{user_id}/keys | Create API Key of the sub-account.
+[**GetSubAccountKey**](SubAccountApi.md#GetSubAccountKey) | **Get** /sub_accounts/{user_id}/keys/{key} | Get the API Key of the sub-account.
+[**UpdateSubAccountKeys**](SubAccountApi.md#UpdateSubAccountKeys) | **Put** /sub_accounts/{user_id}/keys/{key} | Update API key of the sub-account.
+[**DeleteSubAccountKeys**](SubAccountApi.md#DeleteSubAccountKeys) | **Delete** /sub_accounts/{user_id}/keys/{key} | Delete API key of the sub-account.
+[**LockSubAccount**](SubAccountApi.md#LockSubAccount) | **Post** /sub_accounts/{user_id}/lock | Lock the sub-account.
+[**UnlockSubAccount**](SubAccountApi.md#UnlockSubAccount) | **Post** /sub_accounts/{user_id}/unlock | Unlock the sub-account.
+[**ListUnifiedMode**](SubAccountApi.md#ListUnifiedMode) | **Get** /sub_accounts/unified_mode | Get sub-account mode.
 
 
 ## ListSubAccounts
 
 > []SubAccount ListSubAccounts(ctx, optional)
 
-List sub-accounts
+List sub-accounts.
 
 ### Required Parameters
 
@@ -97,7 +97,7 @@ func main() {
 
 > SubAccount CreateSubAccounts(ctx, subAccount)
 
-Create a new sub-account
+Create a new sub-account.
 
 ### Required Parameters
 
@@ -166,14 +166,14 @@ func main() {
 
 > SubAccount GetSubAccount(ctx, userId)
 
-Get the sub-account
+Get the sub-account.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | **int64**| Sub-account user id | 
+**userId** | **int64**| Sub-account user id. | 
 
 ### Example
 
@@ -198,7 +198,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    userId := 56 // int64 - Sub-account user id
+    userId := 56 // int64 - Sub-account user id.
     
     result, _, err := client.SubAccountApi.GetSubAccount(ctx, userId)
     if err != nil {
@@ -235,14 +235,14 @@ func main() {
 
 > []SubAccountKey ListSubAccountKeys(ctx, userId)
 
-List all API Key of the sub-account
+List all API Key of the sub-account.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | **int32**| Sub-account user id | 
+**userId** | **int32**| Sub-account user id. | 
 
 ### Example
 
@@ -267,7 +267,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    userId := 56 // int32 - Sub-account user id
+    userId := 56 // int32 - Sub-account user id.
     
     result, _, err := client.SubAccountApi.ListSubAccountKeys(ctx, userId)
     if err != nil {
@@ -304,14 +304,14 @@ func main() {
 
 > SubAccountKey CreateSubAccountKeys(ctx, userId, subAccountKey)
 
-Create API Key of the sub-account
+Create API Key of the sub-account.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | **int64**| Sub-account user id | 
+**userId** | **int64**| Sub-account user id. | 
 **subAccountKey** | [**SubAccountKey**](SubAccountKey.md)|  | 
 
 ### Example
@@ -337,7 +337,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    userId := 56 // int64 - Sub-account user id
+    userId := 56 // int64 - Sub-account user id.
     subAccountKey := gateapi.SubAccountKey{} // SubAccountKey - 
     
     result, _, err := client.SubAccountApi.CreateSubAccountKeys(ctx, userId, subAccountKey)
@@ -375,15 +375,15 @@ func main() {
 
 > SubAccountKey GetSubAccountKey(ctx, userId, key)
 
-Get the API Key of the sub-account
+Get the API Key of the sub-account.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | **int32**| Sub-account user id | 
-**key** | **string**| The API Key of the sub-account | 
+**userId** | **int32**| Sub-account user id. | 
+**key** | **string**| The API Key of the sub-account. | 
 
 ### Example
 
@@ -408,8 +408,8 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    userId := 56 // int32 - Sub-account user id
-    key := "key_example" // string - The API Key of the sub-account
+    userId := 56 // int32 - Sub-account user id.
+    key := "key_example" // string - The API Key of the sub-account.
     
     result, _, err := client.SubAccountApi.GetSubAccountKey(ctx, userId, key)
     if err != nil {
@@ -446,15 +446,15 @@ func main() {
 
 > UpdateSubAccountKeys(ctx, userId, key, subAccountKey)
 
-Update API key of the sub-account
+Update API key of the sub-account.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | **int32**| Sub-account user id | 
-**key** | **string**| The API Key of the sub-account | 
+**userId** | **int32**| Sub-account user id. | 
+**key** | **string**| The API Key of the sub-account. | 
 **subAccountKey** | [**SubAccountKey**](SubAccountKey.md)|  | 
 
 ### Example
@@ -480,8 +480,8 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    userId := 56 // int32 - Sub-account user id
-    key := "key_example" // string - The API Key of the sub-account
+    userId := 56 // int32 - Sub-account user id.
+    key := "key_example" // string - The API Key of the sub-account.
     subAccountKey := gateapi.SubAccountKey{} // SubAccountKey - 
     
     result, _, err := client.SubAccountApi.UpdateSubAccountKeys(ctx, userId, key, subAccountKey)
@@ -519,15 +519,15 @@ func main() {
 
 > DeleteSubAccountKeys(ctx, userId, key)
 
-Delete API key of the sub-account
+Delete API key of the sub-account.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | **int32**| Sub-account user id | 
-**key** | **string**| The API Key of the sub-account | 
+**userId** | **int32**| Sub-account user id. | 
+**key** | **string**| The API Key of the sub-account. | 
 
 ### Example
 
@@ -552,8 +552,8 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    userId := 56 // int32 - Sub-account user id
-    key := "key_example" // string - The API Key of the sub-account
+    userId := 56 // int32 - Sub-account user id.
+    key := "key_example" // string - The API Key of the sub-account.
     
     result, _, err := client.SubAccountApi.DeleteSubAccountKeys(ctx, userId, key)
     if err != nil {
@@ -590,14 +590,14 @@ func main() {
 
 > LockSubAccount(ctx, userId)
 
-Lock the sub-account
+Lock the sub-account.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | **int64**| The user id of the sub-account | 
+**userId** | **int64**| The user id of the sub-account. | 
 
 ### Example
 
@@ -622,7 +622,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    userId := 56 // int64 - The user id of the sub-account
+    userId := 56 // int64 - The user id of the sub-account.
     
     result, _, err := client.SubAccountApi.LockSubAccount(ctx, userId)
     if err != nil {
@@ -659,14 +659,14 @@ func main() {
 
 > UnlockSubAccount(ctx, userId)
 
-Unlock the sub-account
+Unlock the sub-account.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userId** | **int64**| The user id of the sub-account | 
+**userId** | **int64**| The user id of the sub-account. | 
 
 ### Example
 
@@ -691,7 +691,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    userId := 56 // int64 - The user id of the sub-account
+    userId := 56 // int64 - The user id of the sub-account.
     
     result, _, err := client.SubAccountApi.UnlockSubAccount(ctx, userId)
     if err != nil {
@@ -728,7 +728,7 @@ func main() {
 
 > []SubUserMode ListUnifiedMode(ctx, )
 
-Get sub-account mode
+Get sub-account mode.
 
 Unified account mode： - `classic`: Classic account mode - `multi_currency`: Multi-currency margin mode - `portfolio`: Portfolio margin mode
 

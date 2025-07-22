@@ -10,8 +10,8 @@
 package gateapi
 
 type UniLendInterest struct {
-	// Currency
+	// Currency.
 	Currency string `json:"currency,omitempty"`
-	// Interest
+	// Interest.
 	Interest string `json:"interest,omitempty"`
 }

@@ -27,7 +27,7 @@ var (
 type SpotApiService service
 
 /*
-ListCurrencies List all currencies' details
+ListCurrencies List all currencies' details.
 When a currency corresponds to multiple chains, you can query the information of multiple chains through the &#x60;chains&#x60; field, such as the charging and recharge status, identification, etc. of the chain.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
@@ -112,9 +112,9 @@ func (a *SpotApiService) ListCurrencies(ctx context.Context) ([]Currency, *http.
 }
 
 /*
-GetCurrency Get details of a specific currency
+GetCurrency Get details of a specific currency.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param currency Currency name
+  - @param currency Currency name.
 
 @return Currency
 */
@@ -199,7 +199,7 @@ func (a *SpotApiService) GetCurrency(ctx context.Context, currency string) (Curr
 }
 
 /*
-ListCurrencyPairs List all currency pairs supported
+ListCurrencyPairs List all currency pairs supported.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 @return []CurrencyPair
@@ -283,9 +283,9 @@ func (a *SpotApiService) ListCurrencyPairs(ctx context.Context) ([]CurrencyPair,
 }
 
 /*
-GetCurrencyPair Get details of a specifc currency pair
+GetCurrencyPair Get details of a specifc currency pair.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param currencyPair Currency pair
+  - @param currencyPair Currency pair.
 
 @return CurrencyPair
 */
@@ -376,12 +376,12 @@ type ListTickersOpts struct {
 }
 
 /*
-ListTickers Retrieve ticker information
+ListTickers Retrieve ticker information.
 Return only related data if &#x60;currency_pair&#x60; is specified; otherwise return all of them
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListTickersOpts - Optional Parameters:
-  - @param "CurrencyPair" (optional.String) -  Currency pair
-  - @param "Timezone" (optional.String) -  Timezone
+  - @param "CurrencyPair" (optional.String) -  Currency pair.
+  - @param "Timezone" (optional.String) -  Timezone.
 
 @return []Ticker
 */
@@ -477,14 +477,14 @@ type ListOrderBookOpts struct {
 }
 
 /*
-ListOrderBook Retrieve order book
-Market depth buy orders are sorted by price from high to low, sell orders are reversed are reversed
+ListOrderBook Retrieve order book.
+Market depth buy orders are sorted by price from high to low, sell orders are reversed
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param currencyPair Currency pair
+  - @param currencyPair Currency pair.
   - @param optional nil or *ListOrderBookOpts - Optional Parameters:
-  - @param "Interval" (optional.String) -  Order depth. 0 means no aggregation is applied. default to 0
-  - @param "Limit" (optional.Int32) -  Maximum number of order depth data in asks or bids
-  - @param "WithId" (optional.Bool) -  Return order book ID
+  - @param "Interval" (optional.String) -  Order depth. 0 means no aggregation is applied. default to 0.
+  - @param "Limit" (optional.Int32) -  Maximum number of order depth data in asks or bids.
+  - @param "WithId" (optional.Bool) -  Return order book ID.
 
 @return OrderBook
 */
@@ -587,17 +587,17 @@ type ListTradesOpts struct {
 }
 
 /*
-ListTrades Retrieve market trades
-Supports &#x60;from&#x60; and &#x60;to&#x60; by time range query or page-turn query based on &#x60;last_id&#x60;. By default, query by time range is the last 30 days.  The query method based on &#x60;last_id&#x60; page turn is no longer recommended. If &#x60;last_id&#x60; is specified, the time range query parameters will be ignored.  The maximum number of pages when searching data using limit&amp;page paging function is 100,000, that is, limit * (page - 1) &lt;&#x3D; 100,000.
+ListTrades Retrieve market trades.
+Supports &#x60;from&#x60; and &#x60;to&#x60; by time range query or page-turn query based on &#x60;last_id&#x60;. By default, is the last 30 days.  The query method based on &#x60;last_id&#x60; page turn is no longer recommended. If &#x60;last_id&#x60; is specified, the time range query parameters will be ignored.  The maximum number of pages when searching data using limit&amp;page paging function is 100,0, that is, limit * (page - 1) &lt;&#x3D; 100,0.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param currencyPair Currency pair
+  - @param currencyPair Currency pair.
   - @param optional nil or *ListTradesOpts - Optional Parameters:
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.  Default: 100, Minimum: 1, Maximum: 1000
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list. Default: 100, Minimum: 1, Maximum: 1000
   - @param "LastId" (optional.String) -  Specify the currency name to query in batches, and support up to 100 pass parameters at a time.
   - @param "Reverse" (optional.Bool) -  Whether the id of records to be retrieved should be less than the last_id specified. Default to false.  When `last_id` is specified. Set `reverse` to `true` to trace back trading history; `false` to retrieve latest tradings.  No effect if `last_id` is not specified.
-  - @param "From" (optional.Int64) -  Start timestamp of the query
-  - @param "To" (optional.Int64) -  Time range ending, default to current time
-  - @param "Page" (optional.Int32) -  Page number
+  - @param "From" (optional.Int64) -  Start timestamp of the query.
+  - @param "To" (optional.Int64) -  Time range ending, default to current time.
+  - @param "Page" (optional.Int32) -  Page number.
 
 @return []Trade
 */
@@ -707,14 +707,14 @@ type ListCandlesticksOpts struct {
 }
 
 /*
-ListCandlesticks Market candlesticks
+ListCandlesticks Market candlesticks.
 Maximum of 1000 points can be returned in a query. Be sure not to exceed the limit when specifying from, to and interval
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param currencyPair Currency pair
+  - @param currencyPair Currency pair.
   - @param optional nil or *ListCandlesticksOpts - Optional Parameters:
   - @param "Limit" (optional.Int32) -  Maximum recent data points to return. `limit` is conflicted with `from` and `to`. If either `from` or `to` is specified, request will be rejected.
   - @param "From" (optional.Int64) -  Start time of candlesticks, formatted in Unix timestamp in seconds. Default to`to - 100 * interval` if not specified
-  - @param "To" (optional.Int64) -  Specify the end time of the K-line chart, defaults to current time if not specified, note that the time format is Unix timestamp with second
+  - @param "To" (optional.Int64) -  Specify the end time of the K-line chart, defaults to current time if not specified, note that the time format is Unix timestamp with second precision specified
   - @param "Interval" (optional.String) -  Interval time between data points. Note that `30d` means 1 natual month, not 30 days
 
 @return [][]string
@@ -816,7 +816,7 @@ type GetFeeOpts struct {
 }
 
 /*
-GetFee Query user trading fee rates
+GetFee Query user trading fee rates.
 This API is deprecated in favour of new fee retrieving API &#x60;/wallet/fee&#x60;.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *GetFeeOpts - Optional Parameters:
@@ -912,9 +912,9 @@ func (a *SpotApiService) GetFee(ctx context.Context, localVarOptionals *GetFeeOp
 }
 
 /*
-GetBatchSpotFee Query a batch of user trading fee rates
+GetBatchSpotFee Query a batch of user trading fee rates.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param currencyPairs A request can only query up to 50 currency pairs
+  - @param currencyPairs A request can only query up to 50 currency pairs.
 
 @return map[string]SpotFee
 */
@@ -1009,10 +1009,10 @@ type ListSpotAccountsOpts struct {
 }
 
 /*
-ListSpotAccounts List spot accounts
+ListSpotAccounts List spot accounts.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListSpotAccountsOpts - Optional Parameters:
-  - @param "Currency" (optional.String) -  Retrieve data of the specified currency
+  - @param "Currency" (optional.String) -  Retrieve data of the specified currency.
 
 @return []SpotAccount
 */
@@ -1115,15 +1115,15 @@ type ListSpotAccountBookOpts struct {
 }
 
 /*
-ListSpotAccountBook Query account book
-Record query time range is not allowed to exceed 30 days.  The maximum number of pages when searching data using limit&amp;page paging function is 100,000, that is, limit * (page - 1) &lt;&#x3D; 100,000.
+ListSpotAccountBook Query account book.
+Record query time range is not allowed to exceed 30 days.  The maximum number of pages when searching data using limit&amp;page paging function is 100,0, that is, limit * (page - 1) &lt;&#x3D; 100,0.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListSpotAccountBookOpts - Optional Parameters:
-  - @param "Currency" (optional.String) -  Retrieve data of the specified currency
-  - @param "From" (optional.Int64) -  Start timestamp of the query
-  - @param "To" (optional.Int64) -  Time range ending, default to current time
-  - @param "Page" (optional.Int32) -  Page number
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Currency" (optional.String) -  Retrieve data of the specified currency.
+  - @param "From" (optional.Int64) -  Start timestamp of the query.
+  - @param "To" (optional.Int64) -  Time range ending, default to current time.
+  - @param "Page" (optional.Int32) -  Page number.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
   - @param "Type_" (optional.String) -  Only retrieve changes of the specified type. All types will be returned if not specified.
   - @param "Code" (optional.String) -  Specify account change code query, if not specified, all change types are included, and the priority is higher than `type`
 
@@ -1240,7 +1240,7 @@ type CreateBatchOrdersOpts struct {
 }
 
 /*
-CreateBatchOrders Create a batch of orders
+CreateBatchOrders Create a batch of orders.
 Batch orders requirements:  1. custom order field &#x60;text&#x60; is required 2. At most 4 currency pairs, maximum 10 orders each, are allowed in one request 3. No mixture of spot orders and margin orders, i.e. &#x60;account&#x60; must be identical for all orders
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param order
@@ -1346,12 +1346,12 @@ type ListAllOpenOrdersOpts struct {
 }
 
 /*
-ListAllOpenOrders List all open orders
-Query the current order list of all trading pairs. Please note that the paging parameter controls the number of pending orders in each trading pair. There is no paging control for the number of trading pairs. All trading pairs with pending orders will be returned.
+ListAllOpenOrders List all open orders.
+Query the current order list of all trading pairs. Please note that the paging parameter controls the number of pending orders in each trading pair. There is no paging control trading pairs. All trading pairs with pending orders will be returned.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListAllOpenOrdersOpts - Optional Parameters:
-  - @param "Page" (optional.Int32) -  Page number
-  - @param "Limit" (optional.Int32) -  Maximum number of records returned in one page in each currency pair
+  - @param "Page" (optional.Int32) -  Page number.
+  - @param "Limit" (optional.Int32) -  Maximum number of records returned in one page in each currency pair.
   - @param "Account" (optional.String) -  Specify query account.
 
 @return []OpenOrders
@@ -1450,7 +1450,7 @@ func (a *SpotApiService) ListAllOpenOrders(ctx context.Context, localVarOptional
 }
 
 /*
-CreateCrossLiquidateOrder close position when cross-currency is disabled
+CreateCrossLiquidateOrder close position when cross-currency is disabled.
 Currently, only cross-margin accounts are supported to close position when cross currencies are disabled.  Maximum buy quantity &#x3D; (unpaid principal and interest - currency balance - the amount of the currency in the order book) / 0.998
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param liquidateOrder
@@ -1554,18 +1554,18 @@ type ListOrdersOpts struct {
 }
 
 /*
-ListOrders List orders
-Note that the query results are spot order lists for spot, unified account and warehouse-by-site leverage accounts by default.  &#x60;status&#x60; is set to &#x60;open&#x60;, that is, when querying the pending order list, only pagination control of &#x60;page&#x60; and &#x60;limit&#x60; is supported. &#x60;limit&#x60; Maximum setting is only allowed to 100 . The &#x60;side&#x60; and &#x60;from&#x60;, &#x60;to&#x60; parameters for time range query are not supported.  &#x60;status&#x60; is set to &#x60;finished&#x60;, that is, when querying historical delegations, in addition to pagination queries, &#x60;from&#x60; and &#x60;to&#x60; are also supported by time range queries. In addition, it supports setting the &#x60;side&#x60; parameter to filter one-side history.  The parameters of the time range filtering are processed according to the order end time.
+ListOrders List orders.
+Note that the query results are spot order lists for spot, unified account and warehouse-by-site leverage accounts by default.  &#x60;status&#x60; is set to &#x60;open&#x60;, that is, when querying the pending order list, only pagination control of &#x60;page&#x60; and &#x60;limit&#x60; is supported. &#x60;limit&#x60; Maximum setting is only allowed to 100 . The &#x60;side&#x60; and &#x60;from&#x60;, &#x60;to&#x60; parameters for time range query are not supported.  &#x60;status&#x60; when querying historical delegations, in addition to pagination queries, &#x60;from&#x60; and &#x60;to&#x60; are also supported by time range queries. In addition, it supports setting the &#x60;side&#x60; parameter to filter one-side history.  The parameters of the time range filtering are processed according to the order end time.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param currencyPair Retrieve results with specified currency pair. It is required for open orders, but optional for finished ones.
   - @param status List orders based on status  `open` - order is waiting to be filled `finished` - order has been filled or cancelled
   - @param optional nil or *ListOrdersOpts - Optional Parameters:
-  - @param "Page" (optional.Int32) -  Page number
+  - @param "Page" (optional.Int32) -  Page number.
   - @param "Limit" (optional.Int32) -  Maximum number of records to be returned. If `status` is `open`, maximum of `limit` is 100
   - @param "Account" (optional.String) -  Specify query account.
-  - @param "From" (optional.Int64) -  Start timestamp of the query
-  - @param "To" (optional.Int64) -  Time range ending, default to current time
-  - @param "Side" (optional.String) -  All bids or asks. Both included if not specified
+  - @param "From" (optional.Int64) -  Start timestamp of the query.
+  - @param "To" (optional.Int64) -  Time range ending, default to current time.
+  - @param "Side" (optional.String) -  All bids or asks. Both included if not specified.
 
 @return []Order
 */
@@ -1679,8 +1679,8 @@ type CreateOrderOpts struct {
 }
 
 /*
-CreateOrder Create an order
-Support spot, margin, leverage, and full-position leverage orders. Use different accounts through the &#x60;account&#x60; field, default is &#x60;spot&#x60;, that is, use the spot account to place an order if the user is &#x60;unified&#x60; account, default is to place an order with a unified account  When using leveraged account trading, that is, when &#x60;account&#x60; is set to &#x60;margin&#x60;, you can set &#x60;auto_borrow&#x60; to &#x60;true&#x60;, In the case of insufficient account balance, the system will automatically execute the &#x60;POST /margin/uni/loans&#x60; to borrow the insufficient part. Whether the assets obtained after the leveraged order is automatically used to return the borrowing orders of the leveraged account in a position-by-store leverage account depends on the automatic repayment settings of the user&#39;s position-by-store leverage account**, The account automatic repayment settings can be queried and set through &#x60;/margin/auto_repay&#x60;.  Use unified account transactions, that is, when &#x60;account&#x60; is set to &#x60;unified&#x60;, &#x60;auto_borrow&#x60; \&quot; can also be enableTo realize the insufficient part of automatic borrowing, but unlike the leverage account, whether the entrustment of a unified account is automatically repayable depends on the   when placing an order&#x60;auto_repay&#x60; setting, this setting is only effective for the current entrustment, that is, only the assets obtained after the entrustment transaction will be used to repay the borrowing orders of the full-position leverage account. Unified account ordering currently supports &#x60;auto_borrow&#x60; and &#x60;auto_repay&#x60; at the same time.  Auto repayment will be triggered at the end of the order, i.e. &#x60;status&#x60; is &#x60;cancelled&#x60; or &#x60;closed&#x60; .  **Delegation Status**  The entrustment status in the pending order is &#x60;open&#x60;, which remains at &#x60;open&#x60; until all the quantity is traded. If it is eaten, the order ends and the status becomes &#x60;closed&#x60;. If the order is cancelled before all transactions are completed, regardless of whether there are partial transactions, the status will become &#x60;cancelled&#x60;  **Iceberg Entrustment**  &#x60;iceberg&#x60; is used to set the number of iceberg delegations displayed, and does not support complete hiding. Note that when hidden part of the transaction is charged according to the taker&#39;s handling rate.  **Restrict user transactions**  Set &#x60;stp_act&#x60; to decide to use strategies that limit user transactions
+CreateOrder Create an order.
+Support spot, margin, leverage, and full-position leverage orders. Use different accounts through the &#x60;account&#x60; field, default is &#x60;spot&#x60;, that is, use the spot account to place an order if the user is &#x60;unified&#x60; account, default is to place an order with a unified account  When using leveraged account trading, that is, when &#x60;account&#x60; is set to &#x60;margin&#x60;, you can set &#x60;auto_borrow&#x60; to &#x60;true&#x60;, In the case of insufficient account balance, the system will automatically execute the &#x60;POST /margin/uni/loans&#x60; to borrow the insufficient part. Whether the assets obtained after the leveraged order is automatically used to return the borrowing orders of the leveraged account in a position-by-store leverage account depends on the automatic repayment settings of the user&#39;s position-by-store leverage account**, The account automatic repayment settings can be queried and set through &#x60;/margin/auto_repay&#x60;.  Use unified is set to &#x60;unified&#x60;, &#x60;auto_borrow&#x60; \&quot; can also be enableTo realize the insufficient part of automatic borrowing, but unlike the leverage account, whether the entrustment of a unified account is automatically repayable depends on the   when placing an order&#x60;auto_repay&#x60; setting, this setting is only effective for the current entrustment, that is, only the assets obtained after the entrustment transaction will be used to repay the borrowing orders of the full-position leverage account. Unified account ordering currently supports &#x60;auto_borrow&#x60; and &#x60;auto_repay&#x60; at the same time.  Auto repayment will be triggered at the end of the order, i.e. &#x60;status&#x60; is &#x60;cancelled&#x60; or &#x60;closed&#x60; .  **Delegation Status**  The entrustment status in the pending order is &#x60;open&#x60;, which remains at &#x60;open&#x60; until all the quantity is traded. If it is eaten, the order ends and the status becomes &#x60;closed&#x60;. If the order is cancelled before all transactions are completed, regardless of whether there are partial transactions, the status will become &#x60;cancelled&#x60;  **Iceberg Entrustment**  &#x60;iceberg&#x60; is used to set the number of iceberg delegations displayed, and does not support complete hiding. Note that when hidden part of the transaction is charged according to the taker&#39;s handling rate.  **Restrict user transactions**  Set &#x60;stp_act&#x60; to decide to use strategies that limit user transactions
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param order
   - @param optional nil or *CreateOrderOpts - Optional Parameters:
@@ -1787,12 +1787,12 @@ type CancelOrdersOpts struct {
 }
 
 /*
-CancelOrders Cancel all `open` orders in specified currency pair
-When the &#x60;account&#x60; parameter is not specified, all pending orders including spot, unified account, and position-by-position leverage will be cancelled. When &#x60;currency_pair&#x60; is not specified, all transaction pairs are revoked You can specify a certain account separately to cancel all orders under the specified account
+CancelOrders Cancel all `open` orders in specified currency pair.
+When the &#x60;account&#x60; parameter is not specified, all pending orders including spot, unified account, and position-by-position leverage will be cancelled. When transaction pairs are revoked You can specify a certain account separately to cancel all orders under the specified account
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *CancelOrdersOpts - Optional Parameters:
-  - @param "CurrencyPair" (optional.String) -  Currency pair
-  - @param "Side" (optional.String) -  All bids or asks. Both included if not specified
+  - @param "CurrencyPair" (optional.String) -  Currency pair.
+  - @param "Side" (optional.String) -  All bids or asks. Both included if not specified.
   - @param "Account" (optional.String) -  Specify account type  Classic account: All are included if not specified Unified account: Specify unified
   - @param "ActionMode" (optional.String) -  Processing Mode  When placing an order, different fields are returned based on the action_mode  - ACK: Asynchronous mode, returns only key order fields - RESULT: No clearing information - FULL: Full mode (default)
   - @param "XGateExptime" (optional.String) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
@@ -1904,7 +1904,7 @@ type CancelBatchOrdersOpts struct {
 }
 
 /*
-CancelBatchOrders Cancel a batch of orders with an ID list
+CancelBatchOrders Cancel a batch of orders with an ID list.
 Multiple currency pairs can be specified, but maximum 20 orders are allowed per request
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param cancelBatchOrder
@@ -2008,11 +2008,11 @@ type GetOrderOpts struct {
 }
 
 /*
-GetOrder Get a single order
+GetOrder Get a single order.
 By default, orders for spot, unified account and warehouse-by-site leverage account are checked.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param orderId The order ID returned when the order was successfully created or the custom ID specified by the user's creation (i.e. the `text` field). Operations based on custom IDs can only be checked in pending orders. Only order ID can be used after the order is finished (transaction/cancel)
-  - @param currencyPair Specify the transaction pair to query. If you are querying pending order records, this field is required. If you are querying traded records, this field can be left blank.
+  - @param currencyPair Specify the transaction pair to query. If you are querying pending order records, this field is traded records, this field can be left blank.
   - @param optional nil or *GetOrderOpts - Optional Parameters:
   - @param "Account" (optional.String) -  Specify query account.
 
@@ -2116,11 +2116,11 @@ type CancelOrderOpts struct {
 }
 
 /*
-CancelOrder Cancel a single order
+CancelOrder Cancel a single order.
 By default, orders for spot, unified accounts and leveraged accounts are revoked.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param orderId The order ID returned when the order was successfully created or the custom ID specified by the user's creation (i.e. the `text` field). Operations based on custom IDs can only be checked in pending orders. Only order ID can be used after the order is finished (transaction/cancel)
-  - @param currencyPair Currency pair
+  - @param currencyPair Currency pair.
   - @param optional nil or *CancelOrderOpts - Optional Parameters:
   - @param "Account" (optional.String) -  Specify query account.
   - @param "ActionMode" (optional.String) -  Processing Mode  When placing an order, different fields are returned based on the action_mode  - ACK: Asynchronous mode, returns only key order fields - RESULT: No clearing information - FULL: Full mode (default)
@@ -2232,13 +2232,13 @@ type AmendOrderOpts struct {
 }
 
 /*
-AmendOrder Amend an order
-Modify orders in spot, unified account and isolated margin account by default.  Currently both request body and query support currency_pair and account parameters, but request body has higher priority.  currency_pair must be filled in one of the request body or query parameters.  About rate limit: Order modification and order creation share the same rate limit rules.  About matching priority: Only reducing the quantity does not affect the matching priority. Modifying the price or increasing the quantity will adjust the priority to the end of the new price level.  Note: Modifying the quantity to be less than the filled quantity will trigger a cancellation operation.Modify orders in spot, unified account and isolated margin account by default.  Currently both request body and query support currency_pair and account parameters, but request body has higher priority.  currency_pair must be filled in one of the request body or query parameters.  About rate limit: Order modification and order creation share the same rate limit rules.  About matching priority: Only reducing the quantity does not affect the matching priority. Modifying the price or increasing the quantity will adjust the priority to the end of the new price level.  Note: Modifying the quantity to be less than the filled quantity will trigger a cancellation operation.
+AmendOrder Amend an order.
+Modify orders in spot, unified account and isolated margin account by default.  Currently both request body and query support currency_pair and account parameters, but request body has higher priority.  currency_pair must be filled in one of the request body or query parameters.  About rate limit: Order modification and order creation share the same rate limit rules.  About matching priority: Only reducing the quantity does not affect the matching priority. Modifying the price or increasing the quantity will adjust the priority to the end of the new price level.  Note: Modifying the quantity to be less than the filled quantity will trigger a cancellation and isolated margin account by default.  Currently both request body and query support currency_pair and account parameters, but request body has higher priority.  currency_pair must be filled in one of the request body or query parameters.  About rate limit: Order modification and order creation share the same rate limit rules.  About matching priority: Only reducing the quantity does not affect the matching priority. Modifying the price or increasing the quantity will adjust the priority to the end of the new price level.  Note: Modifying the quantity to be less than the filled quantity will trigger a cancellation operation.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param orderId The order ID returned when the order was successfully created or the custom ID specified by the user's creation (i.e. the `text` field). Operations based on custom IDs can only be checked in pending orders. Only order ID can be used after the order is finished (transaction/cancel)
   - @param orderPatch
   - @param optional nil or *AmendOrderOpts - Optional Parameters:
-  - @param "CurrencyPair" (optional.String) -  Currency pair
+  - @param "CurrencyPair" (optional.String) -  Currency pair.
   - @param "Account" (optional.String) -  Specify query account.
   - @param "XGateExptime" (optional.String) -  Specify the expiration time (milliseconds); if the GATE receives the request time greater than the expiration time, the request will be rejected
 
@@ -2353,17 +2353,17 @@ type ListMyTradesOpts struct {
 }
 
 /*
-ListMyTrades List personal trading history
-By default query of transaction records for spot, unified account and warehouse-by-site leverage accounts.  The history within a specified time range can be queried by specifying &#x60;from&#x60; or (and) &#x60;to&#x60;.  - If no time parameters are specified, only data for the last 7 days can be obtained. - If only any parameter of &#x60;from&#x60; or &#x60;to&#x60; is specified, only 7-day data from the start (or end) of the specified time is returned. - The range of &#x60;from&#x60; and &#x60;to&#x60; is not allowed to exceed 30 days.  The parameters of the time range filter are processed according to the order end time.  The maximum number of pages when searching data using limit&amp;page paging function is 100,000, that is, limit * (page - 1) &lt;&#x3D; 100,000.
+ListMyTrades List personal trading history.
+By default query of transaction records for spot, unified account and warehouse-by-site leverage accounts.  The history within a specified time range can be queried by specifying &#x60;from&#x60; or (and) &#x60;to&#x60;.  - If no time parameters are specified, only data for the last 7 days can be obtained. - If only any parameter of &#x60;from&#x60; or &#x60;to&#x60; is specified, only 7-day data from the start (or end) of the specified time is returned. - The range not allowed to exceed 30 days.  The parameters of the time range filter are processed according to the order end time.  The maximum number of pages when searching data using limit&amp;page paging function is 100,0, that is, limit * (page - 1) &lt;&#x3D; 100,0.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListMyTradesOpts - Optional Parameters:
-  - @param "CurrencyPair" (optional.String) -  Retrieve results with specified currency pair
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.  Default: 100, Minimum: 1, Maximum: 1000
-  - @param "Page" (optional.Int32) -  Page number
+  - @param "CurrencyPair" (optional.String) -  Retrieve results with specified currency pair.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list. Default: 100, Minimum: 1, Maximum: 1000
+  - @param "Page" (optional.Int32) -  Page number.
   - @param "OrderId" (optional.String) -  Filter trades with specified order ID. `currency_pair` is also required if this field is present
   - @param "Account" (optional.String) -  Specify query account.
-  - @param "From" (optional.Int64) -  Start timestamp of the query
-  - @param "To" (optional.Int64) -  Time range ending, default to current time
+  - @param "From" (optional.Int64) -  Start timestamp of the query.
+  - @param "To" (optional.Int64) -  Time range ending, default to current time.
 
 @return []Trade
 */
@@ -2473,7 +2473,7 @@ func (a *SpotApiService) ListMyTrades(ctx context.Context, localVarOptionals *Li
 }
 
 /*
-GetSystemTime Get server current time
+GetSystemTime Get server current time.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 @return SystemTime
@@ -2557,8 +2557,8 @@ func (a *SpotApiService) GetSystemTime(ctx context.Context) (SystemTime, *http.R
 }
 
 /*
-CountdownCancelAllSpot Countdown cancel orders
-Spot order heartbeat detection. If there is no \&quot;cancel existing countdown\&quot; or \&quot;set new countdown\&quot; when the user-set &#x60;timeout&#x60; time is reached, the related &#x60;spot pending orders&#x60; will be automatically cancelled. This interface can be called repeatedly to set a new countdown or cancel the countdown. Usage example: Repeat this interface at 30s intervals, setting the countdown &#x60;timeout&#x60; to &#x60;30 (seconds)&#x60; each time. If this interface is not called again within 30 seconds, all pending orders on the &#x60;market&#x60; you specified will be automatically cancelled. If no &#x60;market&#x60; is specified, all market pending orders will be cancelled. If the &#x60;timeout&#x60; is set to 0 within 30 seconds, the countdown timer will be terminated and the automatic order cancellation function will be cancelled.
+CountdownCancelAllSpot Countdown cancel orders.
+Spot order heartbeat detection. If there is no \&quot;cancel existing countdown\&quot; or \&quot;set new countdown\&quot; when the user-set &#x60;timeout&#x60; time is reached, the related &#x60;spot pending orders&#x60; will be automatically cancelled. This interface can be called repeatedly to set a new countdown or cancel the countdown. Usage example: Repeat this interface at 30s intervals, setting the countdown &#x60;timeout&#x60; to &#x60;30 (seconds)&#x60; each time. If this interface is not called again within 30 seconds, all pending orders on the &#x60;market&#x60; you specified will be automatically cancelled. If no &#x60;market&#x60; is specified, all market cancelled. If the &#x60;timeout&#x60; is set to 0 within 30 seconds, the countdown timer will be terminated and the automatic order cancellation function will be cancelled.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param countdownCancelAllSpotTask
 
@@ -2656,8 +2656,8 @@ type AmendBatchOrdersOpts struct {
 }
 
 /*
-AmendBatchOrders Batch modification of orders
-Modify orders in spot, unified account and isolated margin account by default. Modify uncompleted orders, up to 5 orders can be modified at a time. Request parameters should be passed in array format. If there are order modification failures during the batch modification process, the modification of the next order will continue to be executed, and the execution will return with the corresponding order failure information. The call order of batch modification orders is consistent with the order list order. The return content order of batch modification orders is consistent with the order list order.
+AmendBatchOrders Batch modification of orders.
+Modify orders in spot, unified account and isolated margin account by default. Modify uncompleted orders, up to 5 orders can be modified at a time. Request parameters should be passed in array format. If there are order modification failures during the batch modification process, the modification of the next order will continue to be executed, and the execution will return with the corresponding order failure information. The call order of batch modification orders is consistent with the order list order. The return is consistent with the order list order.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param batchAmendItem
   - @param optional nil or *AmendBatchOrdersOpts - Optional Parameters:
@@ -2761,15 +2761,15 @@ type GetSpotInsuranceHistoryOpts struct {
 }
 
 /*
-GetSpotInsuranceHistory Query spot insurance fund historical data
+GetSpotInsuranceHistory Query spot insurance fund historical data.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param business Leverage business, margin - position by position; unified - unified account
-  - @param currency Currency
-  - @param from Start timestamp, seconds
-  - @param to End timestamp, in seconds
+  - @param currency Currency.
+  - @param from Start timestamp, seconds.
+  - @param to End timestamp, in seconds.
   - @param optional nil or *GetSpotInsuranceHistoryOpts - Optional Parameters:
-  - @param "Page" (optional.Int32) -  Page number
-  - @param "Limit" (optional.Int32) -  The maximum number of items returned in the list, the default value is 30
+  - @param "Page" (optional.Int32) -  Page number.
+  - @param "Limit" (optional.Int32) -  The maximum number of items returned in the list, the default value is 30.
 
 @return []SpotInsuranceHistory
 */
@@ -2870,14 +2870,14 @@ type ListSpotPriceTriggeredOrdersOpts struct {
 }
 
 /*
-ListSpotPriceTriggeredOrders Retrieve running auto order list
+ListSpotPriceTriggeredOrders Retrieve running auto order list.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param status Only list the orders with this status
+  - @param status Only list the orders with this status.
   - @param optional nil or *ListSpotPriceTriggeredOrdersOpts - Optional Parameters:
-  - @param "Market" (optional.String) -  Currency pair
-  - @param "Account" (optional.String) -  Trading account type.  Portfolio margin account must set to `unified`
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
-  - @param "Offset" (optional.Int32) -  List offset, starting from 0
+  - @param "Market" (optional.String) -  Currency pair.
+  - @param "Account" (optional.String) -  Trading account type. Portfolio margin account must set to `unified`.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0.
 
 @return []SpotPriceTriggeredOrder
 */
@@ -2979,7 +2979,7 @@ func (a *SpotApiService) ListSpotPriceTriggeredOrders(ctx context.Context, statu
 }
 
 /*
-CreateSpotPriceTriggeredOrder Create a price-triggered order
+CreateSpotPriceTriggeredOrder Create a price-triggered order.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param spotPriceTriggeredOrder
 
@@ -3078,11 +3078,11 @@ type CancelSpotPriceTriggeredOrderListOpts struct {
 }
 
 /*
-CancelSpotPriceTriggeredOrderList Cancel All Price-triggered Orders
+CancelSpotPriceTriggeredOrderList Cancel All Price-triggered Orders.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *CancelSpotPriceTriggeredOrderListOpts - Optional Parameters:
-  - @param "Market" (optional.String) -  Currency pair
-  - @param "Account" (optional.String) -  Trading account type.  Portfolio margin account must set to `unified`
+  - @param "Market" (optional.String) -  Currency pair.
+  - @param "Account" (optional.String) -  Trading account type. Portfolio margin account must set to `unified`.
 
 @return []SpotPriceTriggeredOrder
 */
@@ -3177,9 +3177,9 @@ func (a *SpotApiService) CancelSpotPriceTriggeredOrderList(ctx context.Context, 
 }
 
 /*
-GetSpotPriceTriggeredOrder Get a price-triggered order
+GetSpotPriceTriggeredOrder Get a price-triggered order.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param orderId Retrieve the data of the order with the specified ID
+  - @param orderId Retrieve the data of the order with the specified ID.
 
 @return SpotPriceTriggeredOrder
 */
@@ -3270,9 +3270,9 @@ func (a *SpotApiService) GetSpotPriceTriggeredOrder(ctx context.Context, orderId
 }
 
 /*
-CancelSpotPriceTriggeredOrder cancel a price-triggered order
+CancelSpotPriceTriggeredOrder cancel a price-triggered order.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param orderId Retrieve the data of the order with the specified ID
+  - @param orderId Retrieve the data of the order with the specified ID.
 
 @return SpotPriceTriggeredOrder
 */

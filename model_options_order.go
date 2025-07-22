@@ -9,56 +9,56 @@
 
 package gateapi
 
-// Options order detail
+// Options order detail.
 type OptionsOrder struct {
-	// Options order ID
+	// Options order ID.
 	Id int64 `json:"id,omitempty"`
-	// User ID
+	// User ID.
 	User int32 `json:"user,omitempty"`
-	// Creation time of order
+	// Creation time of order.
 	CreateTime float64 `json:"create_time,omitempty"`
-	// Order finished time. Not returned if order is open
+	// Order finished time. Not returned if order is open.
 	FinishTime float64 `json:"finish_time,omitempty"`
-	// Ending method, including:  - filled: fully completed - canceled: user canceled - liquidated: forced liquidation cancellation - ioc: Not fully filled immediately because tif is set to ioc - auto_deleveraged: automatic deleveraging cancel - reduce_only: Increased position is cancelled, because reduce_only is set or the position is closed - position_closed: Because the position was closed, the pending order was canceled - reduce_out: Only reduce the excluded pending orders that are not easy to be filled - mmp_cancelled: MMP canceled
+	// Ending method, including:  - filled: fully completed - canceled: user canceled - liquidated: forced liquidation cancellation - ioc: Not fully filled immediately because tif is set to ioc - auto_deleveraged: automatic deleveraging cancel - reduce_only: Increased position is cancelled, or the position is closed - position_closed: Because the position was closed, the pending order was canceled - reduce_out: Only reduce the excluded pending orders that are not easy to be filled - mmp_cancelled: MMP canceled
 	FinishAs string `json:"finish_as,omitempty"`
 	// Order status  - `open`: waiting to be traded - `finished`: finished
 	Status string `json:"status,omitempty"`
-	// Contract name
+	// Contract name.
 	Contract string `json:"contract"`
 	// Order size. Specify positive number to make a bid, and negative number to ask
 	Size int64 `json:"size"`
 	// Display size for iceberg order. 0 for non-iceberg. Note that you will have to pay the taker fee for the hidden size
 	Iceberg int64 `json:"iceberg,omitempty"`
-	// Order price. 0 for market order with `tif` set as `ioc` (USDT)
+	// Order price. 0 for market order with `tif` set as `ioc` (USDT).
 	Price string `json:"price,omitempty"`
-	// Set as `true` to close the position, with `size` set to 0
+	// Set as `true` to close the position, with `size` set to 0.
 	Close bool `json:"close,omitempty"`
-	// Is the order to close position
+	// Is the order to close position.
 	IsClose bool `json:"is_close,omitempty"`
-	// Set as `true` to be reduce-only order
+	// Set as `true` to be reduce-only order.
 	ReduceOnly bool `json:"reduce_only,omitempty"`
-	// Is the order reduce-only
+	// Is the order reduce-only.
 	IsReduceOnly bool `json:"is_reduce_only,omitempty"`
-	// Is the order for liquidation
+	// Is the order for liquidation.
 	IsLiq bool `json:"is_liq,omitempty"`
-	// When set to true, delegate to MMP
+	// When set to true, delegate to MMP.
 	Mmp bool `json:"mmp,omitempty"`
 	// Whether it is MMP delegation. Corresponds to `mmp` in the request.
 	IsMmp bool `json:"is_mmp,omitempty"`
 	// Time in force  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled, taker only - poc: PendingOrCancelled, makes a post-only order that always enjoys a maker fee
 	Tif string `json:"tif,omitempty"`
-	// Size left to be traded
+	// Size left to be traded.
 	Left int64 `json:"left,omitempty"`
-	// Fill price of the order
+	// Fill price of the order.
 	FillPrice string `json:"fill_price,omitempty"`
 	// User defined information. If not empty, must follow the rules below:  1. prefixed with `t-` 2. no longer than 28 bytes without `t-` prefix 3. can only include 0-9, A-Z, a-z, underscore(_), hyphen(-) or dot(.) Besides user defined information, reserved contents are listed below, denoting how the order is created:  - web: from web - api: from API - app: from mobile phones - auto_deleveraging: from ADL - liquidation: from liquidation - insurance: from insurance
 	Text string `json:"text,omitempty"`
-	// Taker fee
+	// Taker fee.
 	Tkfr string `json:"tkfr,omitempty"`
-	// Maker fee
+	// Maker fee.
 	Mkfr string `json:"mkfr,omitempty"`
-	// Reference user ID
+	// Reference user ID.
 	Refu int32 `json:"refu,omitempty"`
-	// Referrer rebate
+	// Referrer rebate.
 	Refr string `json:"refr,omitempty"`
 }

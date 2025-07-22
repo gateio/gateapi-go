@@ -10,11 +10,11 @@
 package gateapi
 
 type MultiCollateralRecordCurrency struct {
-	// Currency
+	// Currency.
 	Currency string `json:"currency,omitempty"`
-	// Currency Index Price
+	// Currency Index Price.
 	IndexPrice string `json:"index_price,omitempty"`
-	// Amount before the operation
+	// Amount before the operation.
 	BeforeAmount string `json:"before_amount,omitempty"`
 	// USDT Amount before the operation.
 	BeforeAmountUsdt string `json:"before_amount_usdt,omitempty"`

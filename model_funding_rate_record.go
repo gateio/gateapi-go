@@ -10,8 +10,8 @@
 package gateapi
 
 type FundingRateRecord struct {
-	// Unix timestamp in seconds
+	// Unix timestamp in seconds.
 	T int64 `json:"t,omitempty"`
-	// Funding rate
+	// Funding rate.
 	R string `json:"r,omitempty"`
 }

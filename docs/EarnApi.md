@@ -4,23 +4,23 @@ All URIs are relative to *https://api.gateio.ws/api/v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**SwapETH2**](EarnApi.md#SwapETH2) | **Post** /earn/staking/eth2/swap | ETH2 swap
-[**RateListETH2**](EarnApi.md#RateListETH2) | **Get** /earn/staking/eth2/rate_records | ETH2 historical rate of return query
-[**ListDualInvestmentPlans**](EarnApi.md#ListDualInvestmentPlans) | **Get** /earn/dual/investment_plan | Dual Investment product list
-[**ListDualOrders**](EarnApi.md#ListDualOrders) | **Get** /earn/dual/orders | Dual Investment order list
-[**PlaceDualOrder**](EarnApi.md#PlaceDualOrder) | **Post** /earn/dual/orders | Place Dual Investment order
-[**ListStructuredProducts**](EarnApi.md#ListStructuredProducts) | **Get** /earn/structured/products | Structured Product List
-[**ListStructuredOrders**](EarnApi.md#ListStructuredOrders) | **Get** /earn/structured/orders | Structured Product Order List
-[**PlaceStructuredOrder**](EarnApi.md#PlaceStructuredOrder) | **Post** /earn/structured/orders | Place Structured Product Order
-[**FindCoin**](EarnApi.md#FindCoin) | **Get** /earn/staking/coins | Staking Coins
-[**SwapStakingCoin**](EarnApi.md#SwapStakingCoin) | **Post** /earn/staking/swap | On-chain Token Swap for Earned Coins
+[**SwapETH2**](EarnApi.md#SwapETH2) | **Post** /earn/staking/eth2/swap | ETH2 swap.
+[**RateListETH2**](EarnApi.md#RateListETH2) | **Get** /earn/staking/eth2/rate_records | ETH2 historical rate of return query.
+[**ListDualInvestmentPlans**](EarnApi.md#ListDualInvestmentPlans) | **Get** /earn/dual/investment_plan | Dual Investment product list.
+[**ListDualOrders**](EarnApi.md#ListDualOrders) | **Get** /earn/dual/orders | Dual Investment order list.
+[**PlaceDualOrder**](EarnApi.md#PlaceDualOrder) | **Post** /earn/dual/orders | Place Dual Investment order.
+[**ListStructuredProducts**](EarnApi.md#ListStructuredProducts) | **Get** /earn/structured/products | Structured Product List.
+[**ListStructuredOrders**](EarnApi.md#ListStructuredOrders) | **Get** /earn/structured/orders | Structured Product Order List.
+[**PlaceStructuredOrder**](EarnApi.md#PlaceStructuredOrder) | **Post** /earn/structured/orders | Place Structured Product Order.
+[**FindCoin**](EarnApi.md#FindCoin) | **Get** /earn/staking/coins | Staking Coins.
+[**SwapStakingCoin**](EarnApi.md#SwapStakingCoin) | **Post** /earn/staking/swap | On-chain Token Swap for Earned Coins.
 
 
 ## SwapETH2
 
 > SwapETH2(ctx, eth2Swap)
 
-ETH2 swap
+ETH2 swap.
 
 ### Required Parameters
 
@@ -89,9 +89,9 @@ func main() {
 
 > []Eth2RateList RateListETH2(ctx, )
 
-ETH2 historical rate of return query
+ETH2 historical rate of return query.
 
-Check the ETH earnings rate record for the last 31 days
+Check the ETH earnings rate record for the last 31 days.
 
 ### Required Parameters
 
@@ -155,7 +155,7 @@ func main() {
 
 > []DualGetPlans ListDualInvestmentPlans(ctx, optional)
 
-Dual Investment product list
+Dual Investment product list.
 
 ### Required Parameters
 
@@ -170,7 +170,7 @@ Optional parameters are passed through a pointer to a ListDualInvestmentPlansOpt
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**planId** | **optional.Int64**| Financial project id | 
+**planId** | **optional.Int64**| Financial project id. | 
 
 ### Example
 
@@ -225,7 +225,7 @@ No authorization required
 
 > []DualGetOrders ListDualOrders(ctx, optional)
 
-Dual Investment order list
+Dual Investment order list.
 
 ### Required Parameters
 
@@ -240,10 +240,10 @@ Optional parameters are passed through a pointer to a ListDualOrdersOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**from** | **optional.Int64**| Start checkout time | 
-**to** | **optional.Int64**| End settlement time | 
-**page** | **optional.Int32**| Page number | [default to 1]
-**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
+**from** | **optional.Int64**| Start checkout time. | 
+**to** | **optional.Int64**| End settlement time. | 
+**page** | **optional.Int32**| Page number. | [default to 1]
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list. | [default to 100]
 
 ### Example
 
@@ -304,7 +304,7 @@ func main() {
 
 > PlaceDualOrder(ctx, placeDualInvestmentOrder)
 
-Place Dual Investment order
+Place Dual Investment order.
 
 ### Required Parameters
 
@@ -373,7 +373,7 @@ func main() {
 
 > []StructuredGetProjectList ListStructuredProducts(ctx, status, optional)
 
-Structured Product List
+Structured Product List.
 
 ### Required Parameters
 
@@ -390,8 +390,8 @@ Optional parameters are passed through a pointer to a ListStructuredProductsOpts
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **type_** | **optional.String**| Product Type (Default empty to query all)  &#x60;SharkFin2.0&#x60;-Shark Fin &#x60;BullishSharkFin&#x60;-Bullish Treasure &#x60;BearishSharkFin&#x60;-Bearish Treasure &#x60;DoubleNoTouch&#x60;-Volatility Treasure &#x60;RangeAccrual&#x60;-Range Smart Yield &#x60;SnowBall&#x60;-Snowball  | 
-**page** | **optional.Int32**| Page number | [default to 1]
-**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
+**page** | **optional.Int32**| Page number. | [default to 1]
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list. | [default to 100]
 
 ### Example
 
@@ -447,7 +447,7 @@ No authorization required
 
 > []StructuredOrderList ListStructuredOrders(ctx, optional)
 
-Structured Product Order List
+Structured Product Order List.
 
 ### Required Parameters
 
@@ -464,8 +464,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **from** | **optional.Int64**| Start timestamp  Specify start time, time format is Unix timestamp. If not specified, it defaults to (the data start time of the time range actually returned by to and limit) | 
 **to** | **optional.Int64**| Termination Timestamp  Specify the end time. If not specified, it defaults to the current time, and the time format is a Unix timestamp | 
-**page** | **optional.Int32**| Page number | [default to 1]
-**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
+**page** | **optional.Int32**| Page number. | [default to 1]
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list. | [default to 100]
 
 ### Example
 
@@ -526,7 +526,7 @@ func main() {
 
 > PlaceStructuredOrder(ctx, structuredBuy)
 
-Place Structured Product Order
+Place Structured Product Order.
 
 ### Required Parameters
 
@@ -595,7 +595,7 @@ func main() {
 
 > []string FindCoin(ctx, findCoin)
 
-Staking Coins
+Staking Coins.
 
 ### Required Parameters
 
@@ -664,7 +664,7 @@ func main() {
 
 > SwapCoinStruct SwapStakingCoin(ctx, swapCoin)
 
-On-chain Token Swap for Earned Coins
+On-chain Token Swap for Earned Coins.
 
 ### Required Parameters
 

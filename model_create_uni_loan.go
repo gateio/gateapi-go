@@ -9,16 +9,16 @@
 
 package gateapi
 
-// Borrow or repay
+// Borrow or repay.
 type CreateUniLoan struct {
-	// Currency
+	// Currency.
 	Currency string `json:"currency"`
-	// type: borrow - borrow, repay - repay
+	// type: borrow - borrow, repay - repay.
 	Type string `json:"type"`
-	// The amount of lending or repaying
+	// The amount of lending or repaying.
 	Amount string `json:"amount"`
-	// Full repayment.  Repay operation only.  If the value is `true`, the amount will be ignored and the loan will be repaid in full.
+	// Full repayment. Repay operation only. If the value is `true`, the amount will be ignored and repaid in full.
 	RepaidAll bool `json:"repaid_all,omitempty"`
-	// Currency pair
+	// Currency pair.
 	CurrencyPair string `json:"currency_pair"`
 }

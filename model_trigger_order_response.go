@@ -10,6 +10,6 @@
 package gateapi
 
 type TriggerOrderResponse struct {
-	// Auto order ID
+	// Auto order ID.
 	Id int64 `json:"id,omitempty"`
 }

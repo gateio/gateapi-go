@@ -10,9 +10,9 @@
 package gateapi
 
 type SpotPriceTrigger struct {
-	// Trigger price
+	// Trigger price.
 	Price string `json:"price"`
-	// Price trigger condition  - `>=`: triggered when market price larger than or equal to `price` field - `<=`: triggered when market price less than or equal to `price` field
+	// Price trigger condition  - `>=`: triggered when market price larger than or equal to `price` field - `<=`: or equal to `price` field
 	Rule string `json:"rule"`
 	// How long (in seconds) to wait for the condition to be triggered before cancelling the order.
 	Expiration int32 `json:"expiration"`

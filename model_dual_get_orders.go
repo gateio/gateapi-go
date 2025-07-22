@@ -10,38 +10,38 @@
 package gateapi
 
 type DualGetOrders struct {
-	// Order ID
+	// Order ID.
 	Id int32 `json:"id,omitempty"`
-	// Plan ID
+	// Plan ID.
 	PlanId int32 `json:"plan_id,omitempty"`
-	// Copies
+	// Copies.
 	Copies string `json:"copies,omitempty"`
-	// Investment Amount
+	// Investment Amount.
 	InvestAmount string `json:"invest_amount,omitempty"`
-	// Settlement Amount
+	// Settlement Amount.
 	SettlementAmount string `json:"settlement_amount,omitempty"`
-	// Creation time
+	// Creation time.
 	CreateTime int32 `json:"create_time,omitempty"`
-	// Completion Time
+	// Completion Time.
 	CompleteTime int32 `json:"complete_time,omitempty"`
 	// Status:  `INIT`-INIT `SETTLEMENT_SUCCESS`-Settlement Success `SETTLEMENT_PROCESSING`-SEttlement Processing `CANCELED`-Canceled `FAILED`-Failed
 	Status string `json:"status,omitempty"`
-	// Investment Currency
+	// Investment Currency.
 	InvestCurrency string `json:"invest_currency,omitempty"`
-	// Strike Currency
+	// Strike Currency.
 	ExerciseCurrency string `json:"exercise_currency,omitempty"`
-	// Strike price
+	// Strike price.
 	ExercisePrice string `json:"exercise_price,omitempty"`
-	// settlement price
+	// settlement price.
 	SettlementPrice string `json:"settlement_price,omitempty"`
-	// Settle currency
+	// Settle currency.
 	SettlementCurrency string `json:"settlement_currency,omitempty"`
-	// APY
+	// APY.
 	ApyDisplay string `json:"apy_display,omitempty"`
-	// Settlement APY
+	// Settlement APY.
 	ApySettlement string `json:"apy_settlement,omitempty"`
-	// Settlement time
+	// Settlement time.
 	DeliveryTime int32 `json:"delivery_time,omitempty"`
-	// Custom order information
+	// Custom order information.
 	Text string `json:"text,omitempty"`
 }

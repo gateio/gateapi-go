@@ -9,56 +9,56 @@
 
 package gateapi
 
-// Options contract detail
+// Options contract detail.
 type OptionsContract struct {
-	// Options contract name
+	// Options contract name.
 	Name string `json:"name,omitempty"`
-	// tag
+	// tag.
 	Tag string `json:"tag,omitempty"`
-	// Creation time
+	// Creation time.
 	CreateTime float64 `json:"create_time,omitempty"`
-	// Expiration time
+	// Expiration time.
 	ExpirationTime float64 `json:"expiration_time,omitempty"`
-	// `true` means call options, while `false` is put options
+	// `true` means call options, while `false` is put options.
 	IsCall bool `json:"is_call,omitempty"`
-	// Multiplier used in converting from invoicing to settlement currency
+	// Multiplier used in converting from invoicing to settlement currency.
 	Multiplier string `json:"multiplier,omitempty"`
-	// Underlying
+	// Underlying.
 	Underlying string `json:"underlying,omitempty"`
-	// Underlying price (quote currency)
+	// Underlying price (quote currency).
 	UnderlyingPrice string `json:"underlying_price,omitempty"`
-	// Last trading price
+	// Last trading price.
 	LastPrice string `json:"last_price,omitempty"`
-	// Current mark price (quote currency)
+	// Current mark price (quote currency).
 	MarkPrice string `json:"mark_price,omitempty"`
-	// Current index price (quote currency)
+	// Current index price (quote currency).
 	IndexPrice string `json:"index_price,omitempty"`
-	// Maker fee rate, where negative means rebate
+	// Maker fee rate, where negative means rebate.
 	MakerFeeRate string `json:"maker_fee_rate,omitempty"`
-	// Taker fee rate
+	// Taker fee rate.
 	TakerFeeRate string `json:"taker_fee_rate,omitempty"`
-	// Minimum order price increment
+	// Minimum order price increment.
 	OrderPriceRound string `json:"order_price_round,omitempty"`
-	// Minimum mark price increment
+	// Minimum mark price increment.
 	MarkPriceRound string `json:"mark_price_round,omitempty"`
-	// Minimum order size the contract allowed
+	// Minimum order size the contract allowed.
 	OrderSizeMin int64 `json:"order_size_min,omitempty"`
-	// Maximum order size the contract allowed
+	// Maximum order size the contract allowed.
 	OrderSizeMax int64 `json:"order_size_max,omitempty"`
-	// The positive and negative offset allowed between the order price and the current mark price, that is, the order price `order_price` must meet the following conditions:   order_price is within the range of mark_price +/- order_price_deviate * underlying_price  and does not distinguish between buy and sell orders
+	// The positive and negative offset allowed between the order price and the current mark price, that `order_price` must meet the following conditions:   order_price is within the range of mark_price +/- order_price_deviate * underlying_price and does not distinguish between buy and sell orders
 	OrderPriceDeviate string `json:"order_price_deviate,omitempty"`
-	// Referral fee rate discount
+	// Referral fee rate discount.
 	RefDiscountRate string `json:"ref_discount_rate,omitempty"`
-	// Referrer commission rate
+	// Referrer commission rate.
 	RefRebateRate string `json:"ref_rebate_rate,omitempty"`
-	// Current orderbook ID
+	// Current orderbook ID.
 	OrderbookId int64 `json:"orderbook_id,omitempty"`
-	// Current trade ID
+	// Current trade ID.
 	TradeId int64 `json:"trade_id,omitempty"`
-	// Historical accumulated trade size
+	// Historical accumulated trade size.
 	TradeSize int64 `json:"trade_size,omitempty"`
-	// Current total long position size
+	// Current total long position size.
 	PositionSize int64 `json:"position_size,omitempty"`
-	// Maximum number of open orders
+	// Maximum number of open orders.
 	OrdersLimit int32 `json:"orders_limit,omitempty"`
 }

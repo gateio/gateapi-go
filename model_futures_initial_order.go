@@ -10,15 +10,15 @@
 package gateapi
 
 type FuturesInitialOrder struct {
-	// Futures contract
+	// Futures contract.
 	Contract string `json:"contract"`
 	// Represents the number of contracts that need to be closed, full closing: size=0 Partial closing: plan-close-short-position size>0  Partial closing: plan-close-long-position size<0
 	Size int64 `json:"size,omitempty"`
-	// Order price. Set to 0 to use market price
+	// Order price. Set to 0 to use market price.
 	Price string `json:"price"`
 	// When all positions are closed in a single position mode, it must be set to true to perform the closing operation When partially closed positions in single-store mode/double-store mode, you can not set close, or close=false
 	Close bool `json:"close,omitempty"`
-	// Time in force strategy, default is gtc, market order currently only supports ioc mode Market order currently only supports ioc mode  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled
+	// Time in force strategy, default is gtc, market order currently only supports ioc mode mode  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled
 	Tif string `json:"tif,omitempty"`
 	// The source of the order, including: - web: web - api: api - app: app
 	Text string `json:"text,omitempty"`
@@ -26,8 +26,8 @@ type FuturesInitialOrder struct {
 	ReduceOnly bool `json:"reduce_only,omitempty"`
 	// Do not set auto_size When the dual-position mode is closed all positions (size=0), auto_size, close_long, close_short, short When the double-storey mode partially closes the position (size ≠ 0), there is no need to set auto_size
 	AutoSize string `json:"auto_size,omitempty"`
-	// Is the order reduce-only
+	// Is the order reduce-only.
 	IsReduceOnly bool `json:"is_reduce_only,omitempty"`
-	// Is the order to close position
+	// Is the order to close position.
 	IsClose bool `json:"is_close,omitempty"`
 }

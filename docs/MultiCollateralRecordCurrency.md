@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Currency** | **string** | Currency | [optional] 
-**IndexPrice** | **string** | Currency Index Price | [optional] 
-**BeforeAmount** | **string** | Amount before the operation | [optional] 
+**Currency** | **string** | Currency. | [optional] 
+**IndexPrice** | **string** | Currency Index Price. | [optional] 
+**BeforeAmount** | **string** | Amount before the operation. | [optional] 
 **BeforeAmountUsdt** | **string** | USDT Amount before the operation. | [optional] 
 **AfterAmount** | **string** | Amount after the operation. | [optional] 
 **AfterAmountUsdt** | **string** | USDT Amount after the operation. | [optional] 

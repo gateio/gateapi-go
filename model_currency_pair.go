@@ -9,44 +9,44 @@
 
 package gateapi
 
-// Spot currency pair
+// Spot currency pair.
 type CurrencyPair struct {
-	// Currency pair
+	// Currency pair.
 	Id string `json:"id,omitempty"`
-	// Base currency
+	// Base currency.
 	Base string `json:"base,omitempty"`
-	// Transaction currency name
+	// Transaction currency name.
 	BaseName string `json:"base_name,omitempty"`
-	// Quote currency
+	// Quote currency.
 	Quote string `json:"quote,omitempty"`
-	// Name of the denominated currency
+	// Name of the denominated currency.
 	QuoteName string `json:"quote_name,omitempty"`
-	// Trading fee
+	// Trading fee.
 	Fee string `json:"fee,omitempty"`
-	// Minimum amount of base currency to trade, `null` means no limit
+	// Minimum amount of base currency to trade, `null` means no limit.
 	MinBaseAmount string `json:"min_base_amount,omitempty"`
-	// Minimum amount of quote currency to trade, `null` means no limit
+	// Minimum amount of quote currency to trade, `null` means no limit.
 	MinQuoteAmount string `json:"min_quote_amount,omitempty"`
-	// Maximum amount of base currency to trade, `null` means no limit
+	// Maximum amount of base currency to trade, `null` means no limit.
 	MaxBaseAmount string `json:"max_base_amount,omitempty"`
-	// Maximum amount of quote currency to trade, `null` means no limit
+	// Maximum amount of quote currency to trade, `null` means no limit.
 	MaxQuoteAmount string `json:"max_quote_amount,omitempty"`
-	// Amount scale
+	// Amount scale.
 	AmountPrecision int32 `json:"amount_precision,omitempty"`
-	// Price scale
+	// Price scale.
 	Precision int32 `json:"precision,omitempty"`
-	// How currency pair can be traded  - untradable: cannot be bought or sold - buyable: can be bought - sellable: can be sold - tradable: can be bought or sold
+	// How currency pair can be traded  - untradable: cannot be bought or sold - buyable: can be bought - sellable: can be sold - tradable: sold
 	TradeStatus string `json:"trade_status,omitempty"`
-	// Sell start unix timestamp in seconds
+	// Sell start unix timestamp in seconds.
 	SellStart int64 `json:"sell_start,omitempty"`
-	// Buy start unix timestamp in seconds
+	// Buy start unix timestamp in seconds.
 	BuyStart int64 `json:"buy_start,omitempty"`
-	// Expected time to remove the shelves, Unix timestamp in seconds
+	// Expected time to remove the shelves, Unix timestamp in seconds.
 	DelistingTime int64 `json:"delisting_time,omitempty"`
-	// Trading pair type, normal: normal, premarket: pre-market
+	// Trading pair type, normal: normal, premarket: pre-market.
 	Type string `json:"type,omitempty"`
-	// Transaction link
+	// Transaction link.
 	TradeUrl string `json:"trade_url,omitempty"`
-	// Whether the trading pair is in ST risk assessment, false - No, true - Yes
+	// Whether the trading pair is in ST risk assessment, false - No, true - Yes.
 	StTag bool `json:"st_tag,omitempty"`
 }

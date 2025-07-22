@@ -4,24 +4,24 @@ All URIs are relative to *https://api.gateio.ws/api/v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ListUniCurrencies**](EarnUniApi.md#ListUniCurrencies) | **Get** /earn/uni/currencies | List currencies for lending
-[**GetUniCurrency**](EarnUniApi.md#GetUniCurrency) | **Get** /earn/uni/currencies/{currency} | Get currency detail for lending
-[**ListUserUniLends**](EarnUniApi.md#ListUserUniLends) | **Get** /earn/uni/lends | List user&#39;s lending orders
-[**CreateUniLend**](EarnUniApi.md#CreateUniLend) | **Post** /earn/uni/lends | Lend or redeem
-[**ChangeUniLend**](EarnUniApi.md#ChangeUniLend) | **Patch** /earn/uni/lends | Amend lending order
-[**ListUniLendRecords**](EarnUniApi.md#ListUniLendRecords) | **Get** /earn/uni/lend_records | List records of lending
-[**GetUniInterest**](EarnUniApi.md#GetUniInterest) | **Get** /earn/uni/interests/{currency} | Get the user&#39;s total interest income of specified currency
-[**ListUniInterestRecords**](EarnUniApi.md#ListUniInterestRecords) | **Get** /earn/uni/interest_records | List interest records
-[**GetUniInterestStatus**](EarnUniApi.md#GetUniInterestStatus) | **Get** /earn/uni/interest_status/{currency} | query currency interest compounding status
-[**ListUniChart**](EarnUniApi.md#ListUniChart) | **Get** /earn/uni/chart | UniLoan currency annualized trend chart
-[**ListUniRate**](EarnUniApi.md#ListUniRate) | **Get** /earn/uni/rate | Currency estimate annualized interest rate
+[**ListUniCurrencies**](EarnUniApi.md#ListUniCurrencies) | **Get** /earn/uni/currencies | List currencies for lending.
+[**GetUniCurrency**](EarnUniApi.md#GetUniCurrency) | **Get** /earn/uni/currencies/{currency} | Get currency detail for lending.
+[**ListUserUniLends**](EarnUniApi.md#ListUserUniLends) | **Get** /earn/uni/lends | List user&#39;s lending orders.
+[**CreateUniLend**](EarnUniApi.md#CreateUniLend) | **Post** /earn/uni/lends | Lend or redeem.
+[**ChangeUniLend**](EarnUniApi.md#ChangeUniLend) | **Patch** /earn/uni/lends | Amend lending order.
+[**ListUniLendRecords**](EarnUniApi.md#ListUniLendRecords) | **Get** /earn/uni/lend_records | List records of lending.
+[**GetUniInterest**](EarnUniApi.md#GetUniInterest) | **Get** /earn/uni/interests/{currency} | Get the user&#39;s total interest income of specified currency.
+[**ListUniInterestRecords**](EarnUniApi.md#ListUniInterestRecords) | **Get** /earn/uni/interest_records | List interest records.
+[**GetUniInterestStatus**](EarnUniApi.md#GetUniInterestStatus) | **Get** /earn/uni/interest_status/{currency} | query currency interest compounding status.
+[**ListUniChart**](EarnUniApi.md#ListUniChart) | **Get** /earn/uni/chart | UniLoan currency annualized trend chart.
+[**ListUniRate**](EarnUniApi.md#ListUniRate) | **Get** /earn/uni/rate | Currency estimate annualized interest rate.
 
 
 ## ListUniCurrencies
 
 > []UniCurrency ListUniCurrencies(ctx, )
 
-List currencies for lending
+List currencies for lending.
 
 ### Required Parameters
 
@@ -79,14 +79,14 @@ No authorization required
 
 > UniCurrency GetUniCurrency(ctx, currency)
 
-Get currency detail for lending
+Get currency detail for lending.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**currency** | **string**| Currency | 
+**currency** | **string**| Currency. | 
 
 ### Example
 
@@ -105,7 +105,7 @@ func main() {
     // uncomment the next line if your are testing against testnet
     // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
     ctx := context.Background()
-    currency := "btc" // string - Currency
+    currency := "btc" // string - Currency.
     
     result, _, err := client.EarnUniApi.GetUniCurrency(ctx, currency)
     if err != nil {
@@ -142,7 +142,7 @@ No authorization required
 
 > []UniLend ListUserUniLends(ctx, optional)
 
-List user's lending orders
+List user's lending orders.
 
 ### Required Parameters
 
@@ -157,9 +157,9 @@ Optional parameters are passed through a pointer to a ListUserUniLendsOpts struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**currency** | **optional.String**| Retrieve data of the specified currency | 
-**page** | **optional.Int32**| Page number | [default to 1]
-**limit** | **optional.Int32**| Maximum response items.  Default: 100, minimum: 1, Maximum: 100 | [default to 100]
+**currency** | **optional.String**| Retrieve data of the specified currency. | 
+**page** | **optional.Int32**| Page number. | [default to 1]
+**limit** | **optional.Int32**| Maximum response items. Default: 100, minimum: 1, Maximum: 100. | [default to 100]
 
 ### Example
 
@@ -220,9 +220,9 @@ func main() {
 
 > CreateUniLend(ctx, createUniLend)
 
-Lend or redeem
+Lend or redeem.
 
-Lending: When lending, a minimum lending rate must be set. After successful lending is determined on an hourly basis, earnings will be calculated based on the determined rate.  Earnings for each hour will be settled at the top of the hour. If lending fails due to an excessively high interest rate, no interest will be earned for that hour.   If funds are redeemed before the hourly determination, no interest will be earned for that hour.   Priority: Under the same interest rate, wealth management products created or modified earlier will be prioritized for lending.  Redemption: For funds that failed to be lent, redemption will be credited immediately. For funds successfully lent, they are entitled to the earnings for that hour, and redemption will be credited in the next hourly interval.  Note: The two minutes before and after the hourly mark are the settlement period, during which lending and redemption are prohibited. 
+Lending: When lending, a minimum lending rate must be set. After successful lending is determined on an hourly basis, earnings will be calculated based on the determined rate.  Earnings for each hour will be settled at the top of the hour. If lending fails due to an excessively high interest rate, no interest will be earned for that hour.  If funds are redeemed before the hourly for that hour.  Priority: Under the same interest rate, wealth management products created or modified earlier will be prioritized for lending.  Redemption: For funds that failed to be lent, redemption will be credited immediately. For funds successfully lent, they are entitled to the earnings for that hour, and redemption will be credited in the next hourly interval.  Note: The two minutes before and after the hourly mark are the settlement period, during which lending and redemption are prohibited. 
 
 ### Required Parameters
 
@@ -291,9 +291,9 @@ func main() {
 
 > ChangeUniLend(ctx, patchUniLend)
 
-Amend lending order
+Amend lending order.
 
-Currently only supports amending the minimum interest rate (hour)
+Currently only supports amending the minimum interest rate (hour).
 
 ### Required Parameters
 
@@ -362,7 +362,7 @@ func main() {
 
 > []UniLendRecord ListUniLendRecords(ctx, optional)
 
-List records of lending
+List records of lending.
 
 ### Required Parameters
 
@@ -377,12 +377,12 @@ Optional parameters are passed through a pointer to a ListUniLendRecordsOpts str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**currency** | **optional.String**| Retrieve data of the specified currency | 
-**page** | **optional.Int32**| Page number | [default to 1]
-**limit** | **optional.Int32**| Maximum response items.  Default: 100, minimum: 1, Maximum: 100 | [default to 100]
+**currency** | **optional.String**| Retrieve data of the specified currency. | 
+**page** | **optional.Int32**| Page number. | [default to 1]
+**limit** | **optional.Int32**| Maximum response items. Default: 100, minimum: 1, Maximum: 100. | [default to 100]
 **from** | **optional.Int64**| Start timestamp  Specify start time, time format is Unix timestamp. If not specified, it defaults to (the data start time of the time range actually returned by to and limit) | 
 **to** | **optional.Int64**| Termination Timestamp  Specify the end time. If not specified, it defaults to the current time, and the time format is a Unix timestamp | 
-**type_** | **optional.String**| type: lend - lend, redeem - redeem | 
+**type_** | **optional.String**| type: lend - lend, redeem - redeem. | 
 
 ### Example
 
@@ -443,14 +443,14 @@ func main() {
 
 > UniLendInterest GetUniInterest(ctx, currency)
 
-Get the user's total interest income of specified currency
+Get the user's total interest income of specified currency.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**currency** | **string**| Currency | 
+**currency** | **string**| Currency. | 
 
 ### Example
 
@@ -475,7 +475,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    currency := "btc" // string - Currency
+    currency := "btc" // string - Currency.
     
     result, _, err := client.EarnUniApi.GetUniInterest(ctx, currency)
     if err != nil {
@@ -512,7 +512,7 @@ func main() {
 
 > []UniInterestRecord ListUniInterestRecords(ctx, optional)
 
-List interest records
+List interest records.
 
 ### Required Parameters
 
@@ -527,9 +527,9 @@ Optional parameters are passed through a pointer to a ListUniInterestRecordsOpts
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**currency** | **optional.String**| Retrieve data of the specified currency | 
-**page** | **optional.Int32**| Page number | [default to 1]
-**limit** | **optional.Int32**| Maximum response items.  Default: 100, minimum: 1, Maximum: 100 | [default to 100]
+**currency** | **optional.String**| Retrieve data of the specified currency. | 
+**page** | **optional.Int32**| Page number. | [default to 1]
+**limit** | **optional.Int32**| Maximum response items. Default: 100, minimum: 1, Maximum: 100. | [default to 100]
 **from** | **optional.Int64**| Start timestamp  Specify start time, time format is Unix timestamp. If not specified, it defaults to (the data start time of the time range actually returned by to and limit) | 
 **to** | **optional.Int64**| Termination Timestamp  Specify the end time. If not specified, it defaults to the current time, and the time format is a Unix timestamp | 
 
@@ -592,14 +592,14 @@ func main() {
 
 > UniCurrencyInterest GetUniInterestStatus(ctx, currency)
 
-query currency interest compounding status
+query currency interest compounding status.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**currency** | **string**| Currency | 
+**currency** | **string**| Currency. | 
 
 ### Example
 
@@ -624,7 +624,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    currency := "btc" // string - Currency
+    currency := "btc" // string - Currency.
     
     result, _, err := client.EarnUniApi.GetUniInterestStatus(ctx, currency)
     if err != nil {
@@ -661,18 +661,18 @@ func main() {
 
 > []InlineResponse200 ListUniChart(ctx, from, to, asset)
 
-UniLoan currency annualized trend chart
+UniLoan currency annualized trend chart.
 
-Project-Id-Version: GateApiTools 1.0.0 Report-Msgid-Bugs-To: EMAIL@ADDRESS POT-Creation-Date: 2025-07-15 06:49+0000 PO-Revision-Date: 2019-01-02 17:30+0800 Last-Translator: FULL NAME <EMAIL@ADDRESS> Language: en Language-Team: en <L@li.org> Plural-Forms: nplurals=2; plural=(n !=1) MIME-Version: 1.0 Content-Type: text/plain; charset=utf-8 Content-Transfer-Encoding: 8bit Generated-By: Babel 2.8.0 
+Project-Id-Version: GateApiTools 1.0.0 Report-Msgid-Bugs-To: EMAIL@ADDRESS POT-Creation-Date: 2025-07-17 21:35+0800 PO-Revision-Date: 2019-01-02 17:30+0800 Last-Translator: FULL NAME <EMAIL@ADDRESS> Language: en Language-Team: en <L@li.org> Plural-Forms: nplurals=2; plural=(n !=1) MIME-Version: 1.0 Content-Type: text/plain; charset=utf-8 Content-Transfer-Encoding: 8bit Generated-By: Babel 2.8.0 
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**from** | **int64**| Start timestamp, unit s, maximum span of 30 days | 
-**to** | **int64**| End timestamp, unit s, maximum span of 30 days | 
-**asset** | **string**| Currency name | 
+**from** | **int64**| Start timestamp, unit s, maximum span of 30 days. | 
+**to** | **int64**| End timestamp, unit s, maximum span of 30 days. | 
+**asset** | **string**| Currency name. | 
 
 ### Example
 
@@ -697,9 +697,9 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    from := 1719763200 // int64 - Start timestamp, unit s, maximum span of 30 days
-    to := 1722441600 // int64 - End timestamp, unit s, maximum span of 30 days
-    asset := "BTC" // string - Currency name
+    from := 1719763200 // int64 - Start timestamp, unit s, maximum span of 30 days.
+    to := 1722441600 // int64 - End timestamp, unit s, maximum span of 30 days.
+    asset := "BTC" // string - Currency name.
     
     result, _, err := client.EarnUniApi.ListUniChart(ctx, from, to, asset)
     if err != nil {
@@ -736,9 +736,9 @@ func main() {
 
 > []InlineResponse2001 ListUniRate(ctx, )
 
-Currency estimate annualized interest rate
+Currency estimate annualized interest rate.
 
-Project-Id-Version: GateApiTools 1.0.0 Report-Msgid-Bugs-To: EMAIL@ADDRESS POT-Creation-Date: 2025-07-15 06:49+0000 PO-Revision-Date: 2019-01-02 17:30+0800 Last-Translator: FULL NAME <EMAIL@ADDRESS> Language: en Language-Team: en <L@li.org> Plural-Forms: nplurals=2; plural=(n !=1) MIME-Version: 1.0 Content-Type: text/plain; charset=utf-8 Content-Transfer-Encoding: 8bit Generated-By: Babel 2.8.0 
+Project-Id-Version: GateApiTools 1.0.0 Report-Msgid-Bugs-To: EMAIL@ADDRESS POT-Creation-Date: 2025-07-17 21:35+0800 PO-Revision-Date: 2019-01-02 17:30+0800 Last-Translator: FULL NAME <EMAIL@ADDRESS> Language: en Language-Team: en <L@li.org> Plural-Forms: nplurals=2; plural=(n !=1) MIME-Version: 1.0 Content-Type: text/plain; charset=utf-8 Content-Transfer-Encoding: 8bit Generated-By: Babel 2.8.0 
 
 ### Required Parameters
 

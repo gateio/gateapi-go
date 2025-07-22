@@ -9,34 +9,34 @@
 
 package gateapi
 
-// Multi-Collateral Order
+// Multi-Collateral Order.
 type MultiCollateralOrder struct {
-	// Order ID
+	// Order ID.
 	OrderId string `json:"order_id,omitempty"`
-	// current - current, fixed - fixed
+	// current - current, fixed - fixed.
 	OrderType string `json:"order_type,omitempty"`
 	// Fixed interest rate loan periods: 7d - 7 days, 30d - 30 days.
 	FixedType string `json:"fixed_type,omitempty"`
-	// Fixed interest rate
+	// Fixed interest rate.
 	FixedRate string `json:"fixed_rate,omitempty"`
 	// Expiration time, timestamp, unit in seconds.
 	ExpireTime int64 `json:"expire_time,omitempty"`
-	// Fixed interest rate, automatic renewal
+	// Fixed interest rate, automatic renewal.
 	AutoRenew bool `json:"auto_renew,omitempty"`
-	// Fixed interest rate, automatic repayment
+	// Fixed interest rate, automatic repayment.
 	AutoRepay bool `json:"auto_repay,omitempty"`
-	// The current collateralization rate
+	// The current collateralization rate.
 	CurrentLtv string `json:"current_ltv,omitempty"`
 	// Order status: - initial: Initial state after placing the order - collateral_deducted: Collateral deduction successful - collateral_returning: Loan failed - Collateral return pending - lent: Loan successful - repaying: Repayment in progress - liquidating: Liquidation in progress - finished: Order completed - closed_liquidated: Liquidation and repayment completed
 	Status string `json:"status,omitempty"`
-	// Borrowing time, timestamp in seconds
+	// Borrowing time, timestamp in seconds.
 	BorrowTime int64 `json:"borrow_time,omitempty"`
-	// Value of Left repay amount converted in USDT
+	// Value of Left repay amount converted in USDT.
 	TotalLeftRepayUsdt string `json:"total_left_repay_usdt,omitempty"`
-	// Value of Collateral amount in USDT
+	// Value of Collateral amount in USDT.
 	TotalLeftCollateralUsdt string `json:"total_left_collateral_usdt,omitempty"`
-	// Borrowing Currency List
+	// Borrowing Currency List.
 	BorrowCurrencies []BorrowCurrencyInfo `json:"borrow_currencies,omitempty"`
-	// Collateral Currency List
+	// Collateral Currency List.
 	CollateralCurrencies []CollateralCurrencyInfo `json:"collateral_currencies,omitempty"`
 }

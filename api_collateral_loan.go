@@ -35,13 +35,13 @@ type ListCollateralLoanOrdersOpts struct {
 }
 
 /*
-ListCollateralLoanOrders List Orders
+ListCollateralLoanOrders List Orders.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListCollateralLoanOrdersOpts - Optional Parameters:
-  - @param "Page" (optional.Int32) -  Page number
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
-  - @param "CollateralCurrency" (optional.String) -  Collateral
-  - @param "BorrowCurrency" (optional.String) -  Borrowed currency
+  - @param "Page" (optional.Int32) -  Page number.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
+  - @param "CollateralCurrency" (optional.String) -  Collateral.
+  - @param "BorrowCurrency" (optional.String) -  Borrowed currency.
 
 @return []CollateralOrder
 */
@@ -142,7 +142,7 @@ func (a *CollateralLoanApiService) ListCollateralLoanOrders(ctx context.Context,
 }
 
 /*
-CreateCollateralLoan Place order
+CreateCollateralLoan Place order.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param createCollateralOrder
 
@@ -235,9 +235,9 @@ func (a *CollateralLoanApiService) CreateCollateralLoan(ctx context.Context, cre
 }
 
 /*
-GetCollateralLoanOrderDetail Get a single order
+GetCollateralLoanOrderDetail Get a single order.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param orderId Order ID returned on successful order creation
+  - @param orderId Order ID returned on successful order creation.
 
 @return CollateralOrder
 */
@@ -328,7 +328,7 @@ func (a *CollateralLoanApiService) GetCollateralLoanOrderDetail(ctx context.Cont
 }
 
 /*
-RepayCollateralLoan Repayment
+RepayCollateralLoan Repayment.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param repayLoan
 
@@ -431,16 +431,16 @@ type ListRepayRecordsOpts struct {
 }
 
 /*
-ListRepayRecords Repayment history
+ListRepayRecords Repayment history.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param source Operation type: repay - Regular repayment, liquidate - Liquidation
+  - @param source Operation type: repay - Regular repayment, liquidate - Liquidation.
   - @param optional nil or *ListRepayRecordsOpts - Optional Parameters:
-  - @param "BorrowCurrency" (optional.String) -  Borrowed currency
-  - @param "CollateralCurrency" (optional.String) -  Collateral
-  - @param "Page" (optional.Int32) -  Page number
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
-  - @param "From" (optional.Int64) -  Start timestamp of the query
-  - @param "To" (optional.Int64) -  Time range ending, default to current time
+  - @param "BorrowCurrency" (optional.String) -  Borrowed currency.
+  - @param "CollateralCurrency" (optional.String) -  Collateral.
+  - @param "Page" (optional.Int32) -  Page number.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
+  - @param "From" (optional.Int64) -  Start timestamp of the query.
+  - @param "To" (optional.Int64) -  Time range ending, default to current time.
 
 @return []RepayRecord
 */
@@ -558,15 +558,15 @@ type ListCollateralRecordsOpts struct {
 }
 
 /*
-ListCollateralRecords Query collateral adjustment records
+ListCollateralRecords Query collateral adjustment records.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListCollateralRecordsOpts - Optional Parameters:
-  - @param "Page" (optional.Int32) -  Page number
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
-  - @param "From" (optional.Int64) -  Start timestamp of the query
-  - @param "To" (optional.Int64) -  Time range ending, default to current time
-  - @param "BorrowCurrency" (optional.String) -  Borrowed currency
-  - @param "CollateralCurrency" (optional.String) -  Collateral
+  - @param "Page" (optional.Int32) -  Page number.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
+  - @param "From" (optional.Int64) -  Start timestamp of the query.
+  - @param "To" (optional.Int64) -  Time range ending, default to current time.
+  - @param "BorrowCurrency" (optional.String) -  Borrowed currency.
+  - @param "CollateralCurrency" (optional.String) -  Collateral.
 
 @return []CollateralRecord
 */
@@ -673,7 +673,7 @@ func (a *CollateralLoanApiService) ListCollateralRecords(ctx context.Context, lo
 }
 
 /*
-OperateCollateral Increase or redeem collateral
+OperateCollateral Increase or redeem collateral.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param collateralAlign
 */
@@ -754,7 +754,7 @@ func (a *CollateralLoanApiService) OperateCollateral(ctx context.Context, collat
 }
 
 /*
-GetUserTotalAmount Query the total borrowing and collateral amount for the user
+GetUserTotalAmount Query the total borrowing and collateral amount for the user.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 @return UserTotalAmount
@@ -844,10 +844,10 @@ func (a *CollateralLoanApiService) GetUserTotalAmount(ctx context.Context) (User
 }
 
 /*
-GetUserLtvInfo Query user's collateralization ratio
+GetUserLtvInfo Query user's collateralization ratio.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param collateralCurrency Collateral
-  - @param borrowCurrency Borrowed currency
+  - @param collateralCurrency Collateral.
+  - @param borrowCurrency Borrowed currency.
 
 @return UserLtvInfo
 */
@@ -943,7 +943,7 @@ type ListCollateralCurrenciesOpts struct {
 }
 
 /*
-ListCollateralCurrencies Query supported borrowing and collateral currencies
+ListCollateralCurrencies Query supported borrowing and collateral currencies.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListCollateralCurrenciesOpts - Optional Parameters:
   - @param "LoanCurrency" (optional.String) -  The parameter loan_currency is used to specify the borrowing currency. If loan_currency is not provided, the API will return all supported borrowing currencies.

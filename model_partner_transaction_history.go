@@ -10,8 +10,8 @@
 package gateapi
 
 type PartnerTransactionHistory struct {
-	// Total
+	// Total.
 	Total int64 `json:"total,omitempty"`
-	// List of transaction history
+	// List of transaction history.
 	List []AgencyTransaction `json:"list,omitempty"`
 }

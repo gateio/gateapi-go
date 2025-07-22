@@ -9,16 +9,16 @@
 
 package gateapi
 
-// Loan records
+// Loan records.
 type UniLoanRecord struct {
-	// type: borrow - borrow, repay - repay
+	// type: borrow - borrow, repay - repay.
 	Type string `json:"type,omitempty"`
-	// Currency pair
+	// Currency pair.
 	CurrencyPair string `json:"currency_pair,omitempty"`
-	// Currency
+	// Currency.
 	Currency string `json:"currency,omitempty"`
-	// The amount of lending or repaying
+	// The amount of lending or repaying.
 	Amount string `json:"amount,omitempty"`
-	// Created time
+	// Created time.
 	CreateTime int64 `json:"create_time,omitempty"`
 }

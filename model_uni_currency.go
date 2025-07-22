@@ -9,16 +9,16 @@
 
 package gateapi
 
-// Currency detail
+// Currency detail.
 type UniCurrency struct {
-	// Currency name
+	// Currency name.
 	Currency string `json:"currency,omitempty"`
 	// The minimum lending amount, in the unit of the currency.
 	MinLendAmount string `json:"min_lend_amount,omitempty"`
-	// The total maximum lending amount, in USDT
+	// The total maximum lending amount, in USDT.
 	MaxLendAmount string `json:"max_lend_amount,omitempty"`
-	// Maximum rate (Hourly)
+	// Maximum rate (Hourly).
 	MaxRate string `json:"max_rate,omitempty"`
-	// Minimum rate (Hourly)
+	// Minimum rate (Hourly).
 	MinRate string `json:"min_rate,omitempty"`
 }

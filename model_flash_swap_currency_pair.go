@@ -9,20 +9,20 @@
 
 package gateapi
 
-// List all supported currencies in flash swap
+// List all supported currencies in flash swap.
 type FlashSwapCurrencyPair struct {
 	// The currency pair, BTC_USDT represents selling Bitcoin (BTC) and buying Tether (USDT).
 	CurrencyPair string `json:"currency_pair,omitempty"`
-	// The currency to be sold
+	// The currency to be sold.
 	SellCurrency string `json:"sell_currency,omitempty"`
-	// The currency to be bought
+	// The currency to be bought.
 	BuyCurrency string `json:"buy_currency,omitempty"`
-	// The minimum quantity required for selling
+	// The minimum quantity required for selling.
 	SellMinAmount string `json:"sell_min_amount,omitempty"`
-	// The maximum quantity allowed for selling
+	// The maximum quantity allowed for selling.
 	SellMaxAmount string `json:"sell_max_amount,omitempty"`
-	// The minimum quantity required for buying
+	// The minimum quantity required for buying.
 	BuyMinAmount string `json:"buy_min_amount,omitempty"`
-	// The maximum quantity allowed for buying
+	// The maximum quantity allowed for buying.
 	BuyMaxAmount string `json:"buy_max_amount,omitempty"`
 }

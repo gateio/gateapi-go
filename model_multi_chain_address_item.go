@@ -10,13 +10,13 @@
 package gateapi
 
 type MultiChainAddressItem struct {
-	// Name of the chain
+	// Name of the chain.
 	Chain string `json:"chain,omitempty"`
-	// Deposit address
+	// Deposit address.
 	Address string `json:"address,omitempty"`
-	// Notes that some currencies required(e.g., Tag, Memo) when depositing
+	// Notes that some currencies required(e.g., Tag, Memo) when depositing.
 	PaymentId string `json:"payment_id,omitempty"`
-	// Note type, `Tag` or `Memo`
+	// Note type, `Tag` or `Memo`.
 	PaymentName string `json:"payment_name,omitempty"`
 	// The obtain failed status- 0: address successfully obtained- 1: failed to obtain address
 	ObtainFailed int32 `json:"obtain_failed,omitempty"`

@@ -9,20 +9,20 @@
 
 package gateapi
 
-// Margin result
+// Margin result.
 type MockMarginResult struct {
-	// Position combination type `original_position` - Original position `long_delta_original_position` - Positive delta + Original position `short_delta_original_position` - Negative delta + Original position
+	// Position combination type `original_position` - Original position `long_delta_original_position` - Positive delta + Original position `short_delta_original_position` position
 	Type string `json:"type,omitempty"`
-	// The results of 33 pressure scenarios for MR1
+	// The results of 3 pressure scenarios for MR1.
 	ProfitLossRanges []ProfitLossRange `json:"profit_loss_ranges,omitempty"`
 	// 最大损失
 	MaxLoss ProfitLossRange `json:"max_loss,omitempty"`
-	// Stress testing
+	// Stress testing.
 	Mr1 string `json:"mr1,omitempty"`
-	// Basis spread risk
+	// Basis spread risk.
 	Mr2 string `json:"mr2,omitempty"`
-	// Volatility spread risk
+	// Volatility spread risk.
 	Mr3 string `json:"mr3,omitempty"`
-	// Option short risk
+	// Option short risk.
 	Mr4 string `json:"mr4,omitempty"`
 }

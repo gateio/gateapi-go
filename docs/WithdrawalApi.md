@@ -4,16 +4,16 @@ All URIs are relative to *https://api.gateio.ws/api/v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Withdraw**](WithdrawalApi.md#Withdraw) | **Post** /withdrawals | Withdraw
-[**WithdrawPushOrder**](WithdrawalApi.md#WithdrawPushOrder) | **Post** /withdrawals/push | UID transfer
-[**CancelWithdrawal**](WithdrawalApi.md#CancelWithdrawal) | **Delete** /withdrawals/{withdrawal_id} | Cancel withdrawal with specified ID
+[**Withdraw**](WithdrawalApi.md#Withdraw) | **Post** /withdrawals | Withdraw.
+[**WithdrawPushOrder**](WithdrawalApi.md#WithdrawPushOrder) | **Post** /withdrawals/push | UID transfer.
+[**CancelWithdrawal**](WithdrawalApi.md#CancelWithdrawal) | **Delete** /withdrawals/{withdrawal_id} | Cancel withdrawal with specified ID.
 
 
 ## Withdraw
 
 > LedgerRecord Withdraw(ctx, ledgerRecord)
 
-Withdraw
+Withdraw.
 
 Withdrawals to Gate addresses do not incur transaction fees.
 
@@ -84,7 +84,7 @@ func main() {
 
 > UidPushWithdrawalResp WithdrawPushOrder(ctx, uidPushWithdrawal)
 
-UID transfer
+UID transfer.
 
 Transfers between main spot accounts are allowed; however, both parties cannot be sub-accounts
 
@@ -155,7 +155,7 @@ func main() {
 
 > LedgerRecord CancelWithdrawal(ctx, withdrawalId)
 
-Cancel withdrawal with specified ID
+Cancel withdrawal with specified ID.
 
 ### Required Parameters
 

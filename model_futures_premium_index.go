@@ -9,16 +9,16 @@
 
 package gateapi
 
-// data point in every timestamp
+// data point in every timestamp.
 type FuturesPremiumIndex struct {
-	// Unix timestamp in seconds
+	// Unix timestamp in seconds.
 	T float64 `json:"t,omitempty"`
-	// Close price
+	// Close price.
 	C string `json:"c,omitempty"`
-	// Highest price
+	// Highest price.
 	H string `json:"h,omitempty"`
-	// Lowest price`
+	// Lowest price`.
 	L string `json:"l,omitempty"`
-	// Open price
+	// Open price.
 	O string `json:"o,omitempty"`
 }

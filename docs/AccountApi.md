@@ -4,13 +4,13 @@ All URIs are relative to *https://api.gateio.ws/api/v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetAccountDetail**](AccountApi.md#GetAccountDetail) | **Get** /account/detail | Get account detail
-[**GetAccountRateLimit**](AccountApi.md#GetAccountRateLimit) | **Get** /account/rate_limit | Get user transaction rate limit information
-[**ListSTPGroups**](AccountApi.md#ListSTPGroups) | **Get** /account/stp_groups | List STP Groups
-[**CreateSTPGroup**](AccountApi.md#CreateSTPGroup) | **Post** /account/stp_groups | Create STP Group
-[**ListSTPGroupsUsers**](AccountApi.md#ListSTPGroupsUsers) | **Get** /account/stp_groups/{stp_id}/users | List users of the STP group
-[**AddSTPGroupUsers**](AccountApi.md#AddSTPGroupUsers) | **Post** /account/stp_groups/{stp_id}/users | Add users to the STP group
-[**DeleteSTPGroupUsers**](AccountApi.md#DeleteSTPGroupUsers) | **Delete** /account/stp_groups/{stp_id}/users | Delete the user in the STP group
+[**GetAccountDetail**](AccountApi.md#GetAccountDetail) | **Get** /account/detail | Get account detail.
+[**GetAccountRateLimit**](AccountApi.md#GetAccountRateLimit) | **Get** /account/rate_limit | Get user transaction rate limit information.
+[**ListSTPGroups**](AccountApi.md#ListSTPGroups) | **Get** /account/stp_groups | List STP Groups.
+[**CreateSTPGroup**](AccountApi.md#CreateSTPGroup) | **Post** /account/stp_groups | Create STP Group.
+[**ListSTPGroupsUsers**](AccountApi.md#ListSTPGroupsUsers) | **Get** /account/stp_groups/{stp_id}/users | List users of the STP group.
+[**AddSTPGroupUsers**](AccountApi.md#AddSTPGroupUsers) | **Post** /account/stp_groups/{stp_id}/users | Add users to the STP group.
+[**DeleteSTPGroupUsers**](AccountApi.md#DeleteSTPGroupUsers) | **Delete** /account/stp_groups/{stp_id}/users | Delete the user in the STP group.
 [**GetDebitFee**](AccountApi.md#GetDebitFee) | **Get** /account/debit_fee | Query GT deduction configuration.
 [**SetDebitFee**](AccountApi.md#SetDebitFee) | **Post** /account/debit_fee | Set GT deduction.
 
@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 > AccountDetail GetAccountDetail(ctx, )
 
-Get account detail
+Get account detail.
 
 ### Required Parameters
 
@@ -83,7 +83,7 @@ func main() {
 
 > []AccountRateLimit GetAccountRateLimit(ctx, )
 
-Get user transaction rate limit information
+Get user transaction rate limit information.
 
 ### Required Parameters
 
@@ -147,9 +147,9 @@ func main() {
 
 > []StpGroup ListSTPGroups(ctx, optional)
 
-List STP Groups
+List STP Groups.
 
-Retrieve the list of STP groups created by the main account user only
+Retrieve the list of STP groups created by the main account user only.
 
 ### Required Parameters
 
@@ -164,7 +164,7 @@ Optional parameters are passed through a pointer to a ListSTPGroupsOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**name** | **optional.String**| Perform a fuzzy search based on the name | 
+**name** | **optional.String**| Perform a fuzzy search based on the name. | 
 
 ### Example
 
@@ -225,9 +225,9 @@ func main() {
 
 > StpGroup CreateSTPGroup(ctx, stpGroup)
 
-Create STP Group
+Create STP Group.
 
-Only the main account is allowed to create a new STP user group
+Only the main account is allowed to create a new STP user group.
 
 ### Required Parameters
 
@@ -296,16 +296,16 @@ func main() {
 
 > []StpGroupUser ListSTPGroupsUsers(ctx, stpId)
 
-List users of the STP group
+List users of the STP group.
 
-Only the main account that created this STP group can query the account 
+Only the main account that created this STP group can query the account.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**stpId** | **int64**| STP Group ID | 
+**stpId** | **int64**| STP Group ID. | 
 
 ### Example
 
@@ -330,7 +330,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    stpId := 1 // int64 - STP Group ID
+    stpId := 1 // int64 - STP Group ID.
     
     result, _, err := client.AccountApi.ListSTPGroupsUsers(ctx, stpId)
     if err != nil {
@@ -367,17 +367,17 @@ func main() {
 
 > []StpGroupUser AddSTPGroupUsers(ctx, stpId, requestBody)
 
-Add users to the STP group
+Add users to the STP group.
 
-- Only the master account that created the STP user group is allowed to add users to the STP user group.- Only accounts under the main account are allowed to be added. Cross-account is not permitted
+- Only the master account that created the STP user group is allowed to add users group.- Only accounts under the main account are allowed to be added. Cross-account is not permitted
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**stpId** | **int64**| STP Group ID | 
-**requestBody** | [**[]int64**](int64.md)| User ID | 
+**stpId** | **int64**| STP Group ID. | 
+**requestBody** | [**[]int64**](int64.md)| User ID. | 
 
 ### Example
 
@@ -402,8 +402,8 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    stpId := 1 // int64 - STP Group ID
-    requestBody := []int64{[1,2,3]} // []int64 - User ID
+    stpId := 1 // int64 - STP Group ID.
+    requestBody := []int64{[1,2,3]} // []int64 - User ID.
     
     result, _, err := client.AccountApi.AddSTPGroupUsers(ctx, stpId, requestBody)
     if err != nil {
@@ -440,7 +440,7 @@ func main() {
 
 > []StpGroupUser DeleteSTPGroupUsers(ctx, stpId, userId)
 
-Delete the user in the STP group
+Delete the user in the STP group.
 
 - Only the main account that created this STP group is allowed to delete users from the STP user group - Deletion is limited to accounts under the current main account; cross-account deletion is not permitted
 
@@ -449,8 +449,8 @@ Delete the user in the STP group
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**stpId** | **int64**| STP Group ID | 
-**userId** | **int64**| STP user ID, multiple can be separated by commas | 
+**stpId** | **int64**| STP Group ID. | 
+**userId** | **int64**| STP user ID, multiple can be separated by commas. | 
 
 ### Example
 
@@ -475,8 +475,8 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    stpId := 1 // int64 - STP Group ID
-    userId := 1 // int64 - STP user ID, multiple can be separated by commas
+    stpId := 1 // int64 - STP Group ID.
+    userId := 1 // int64 - STP user ID, multiple can be separated by commas.
     
     result, _, err := client.AccountApi.DeleteSTPGroupUsers(ctx, stpId, userId)
     if err != nil {

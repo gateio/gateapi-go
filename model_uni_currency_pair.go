@@ -9,14 +9,14 @@
 
 package gateapi
 
-// Currency pair of the loan
+// Currency pair of the loan.
 type UniCurrencyPair struct {
-	// Currency pair
+	// Currency pair.
 	CurrencyPair string `json:"currency_pair,omitempty"`
-	// Minimum borrow amount of base currency
+	// Minimum borrow amount of base currency.
 	BaseMinBorrowAmount string `json:"base_min_borrow_amount,omitempty"`
-	// Minimum borrow amount of quote currency
+	// Minimum borrow amount of quote currency.
 	QuoteMinBorrowAmount string `json:"quote_min_borrow_amount,omitempty"`
-	// Position leverage
+	// Position leverage.
 	Leverage string `json:"leverage,omitempty"`
 }

@@ -10,11 +10,11 @@
 package gateapi
 
 type CollateralAlign struct {
-	// Order ID
+	// Order ID.
 	OrderId int64 `json:"order_id"`
-	// Collateral
+	// Collateral.
 	CollateralCurrency string `json:"collateral_currency"`
-	// Collateral amount
+	// Collateral amount.
 	CollateralAmount string `json:"collateral_amount"`
 	// Operation types: append - for adding collateral, redeem - for withdrawing collateral
 	Type string `json:"type"`

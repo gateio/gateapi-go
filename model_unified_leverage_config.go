@@ -10,18 +10,18 @@
 package gateapi
 
 type UnifiedLeverageConfig struct {
-	// Current leverage ratio
+	// Current leverage ratio.
 	CurrentLeverage string `json:"current_leverage,omitempty"`
-	// Minimum adjustable leverage ratio
+	// Minimum adjustable leverage ratio.
 	MinLeverage string `json:"min_leverage,omitempty"`
-	// Maximum adjustable leverage ratio
+	// Maximum adjustable leverage ratio.
 	MaxLeverage string `json:"max_leverage,omitempty"`
-	// Current liabilities
+	// Current liabilities.
 	Debit string `json:"debit,omitempty"`
-	// Available Margin
+	// Available Margin.
 	AvailableMargin string `json:"available_margin,omitempty"`
-	// The current leverage you can choose is
+	// The current leverage you can choose is.
 	Borrowable string `json:"borrowable,omitempty"`
-	// The maximum amount of margin that can be borrowed and the maximum amount of Uniloan that can be borrowed, whichever is smaller
+	// The maximum amount of margin that can be borrowed and the be borrowed, whichever is smaller
 	ExceptLeverageBorrowable string `json:"except_leverage_borrowable,omitempty"`
 }

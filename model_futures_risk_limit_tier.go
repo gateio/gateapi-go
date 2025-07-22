@@ -9,18 +9,18 @@
 
 package gateapi
 
-// Information for each tier of the risk limit ladder
+// Information for each tier of the risk limit ladder.
 type FuturesRiskLimitTier struct {
-	// Tier
+	// Tier.
 	Tier int32 `json:"tier,omitempty"`
-	// Position risk limit
+	// Position risk limit.
 	RiskLimit string `json:"risk_limit,omitempty"`
-	// Initial margin rate
+	// Initial margin rate.
 	InitialRate string `json:"initial_rate,omitempty"`
-	// Maintenance margin rate
+	// Maintenance margin rate.
 	MaintenanceRate string `json:"maintenance_rate,omitempty"`
-	// Maximum leverage
+	// Maximum leverage.
 	LeverageMax string `json:"leverage_max,omitempty"`
-	// Maintenance margin quick calculation deduction
+	// Maintenance margin quick calculation deduction.
 	Deduction string `json:"deduction,omitempty"`
 }

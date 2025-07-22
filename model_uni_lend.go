@@ -9,26 +9,26 @@
 
 package gateapi
 
-// Loan record
+// Loan record.
 type UniLend struct {
-	// Currency
+	// Currency.
 	Currency string `json:"currency,omitempty"`
-	// Current amount
+	// Current amount.
 	CurrentAmount string `json:"current_amount,omitempty"`
-	// Total amount
+	// Total amount.
 	Amount string `json:"amount,omitempty"`
-	// Lent amount
+	// Lent amount.
 	LentAmount string `json:"lent_amount,omitempty"`
-	// Frozen amount
+	// Frozen amount.
 	FrozenAmount string `json:"frozen_amount,omitempty"`
-	// Minimum interest rate
+	// Minimum interest rate.
 	MinRate string `json:"min_rate,omitempty"`
-	// Interest status: interest_dividend - Normal dividend, interest_reinvest - Interest reinvestment Interest reinvestment
+	// Interest status: interest_dividend - Normal dividend, interest_reinvest - Interest reinvestment
 	InterestStatus string `json:"interest_status,omitempty"`
-	// Amount not reinvested
+	// Amount not reinvested.
 	ReinvestLeftAmount string `json:"reinvest_left_amount,omitempty"`
-	// Created time of the lending order
+	// Created time of the lending order.
 	CreateTime int64 `json:"create_time,omitempty"`
-	// Upated time of the lending order
+	// Upated time of the lending order.
 	UpdateTime int64 `json:"update_time,omitempty"`
 }

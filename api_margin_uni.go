@@ -28,7 +28,7 @@ var (
 type MarginUniApiService service
 
 /*
-ListUniCurrencyPairs List lending markets
+ListUniCurrencyPairs List lending markets.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 @return []UniCurrencyPair
@@ -112,9 +112,9 @@ func (a *MarginUniApiService) ListUniCurrencyPairs(ctx context.Context) ([]UniCu
 }
 
 /*
-GetUniCurrencyPair Get detail of lending market
+GetUniCurrencyPair Get detail of lending market.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param currencyPair Currency pair
+  - @param currencyPair Currency pair.
 
 @return UniCurrencyPair
 */
@@ -199,10 +199,10 @@ func (a *MarginUniApiService) GetUniCurrencyPair(ctx context.Context, currencyPa
 }
 
 /*
-GetMarginUniEstimateRate Estimate interest Rate
+GetMarginUniEstimateRate Estimate interest Rate.
 Please note that the interest rates are subject to change based on the borrowing and lending demand, and therefore, the provided rates may not be entirely accurate.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param currencies An array of up to 10 specifying the currency name
+  - @param currencies An array of up to 10 specifying the currency name.
 
 @return map[string]string
 */
@@ -316,13 +316,13 @@ type ListUniLoansOpts struct {
 }
 
 /*
-ListUniLoans List loans
+ListUniLoans List loans.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListUniLoansOpts - Optional Parameters:
-  - @param "CurrencyPair" (optional.String) -  Currency pair
-  - @param "Currency" (optional.String) -  Retrieve data of the specified currency
-  - @param "Page" (optional.Int32) -  Page number
-  - @param "Limit" (optional.Int32) -  Maximum response items.  Default: 100, minimum: 1, Maximum: 100
+  - @param "CurrencyPair" (optional.String) -  Currency pair.
+  - @param "Currency" (optional.String) -  Retrieve data of the specified currency.
+  - @param "Page" (optional.Int32) -  Page number.
+  - @param "Limit" (optional.Int32) -  Maximum response items. Default: 100, minimum: 1, Maximum: 100.
 
 @return []UniLoan
 */
@@ -423,7 +423,7 @@ func (a *MarginUniApiService) ListUniLoans(ctx context.Context, localVarOptional
 }
 
 /*
-CreateUniLoan Borrow or repay
+CreateUniLoan Borrow or repay.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param createUniLoan
 */
@@ -513,14 +513,14 @@ type ListUniLoanRecordsOpts struct {
 }
 
 /*
-ListUniLoanRecords Get load records
+ListUniLoanRecords Get load records.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListUniLoanRecordsOpts - Optional Parameters:
-  - @param "Type_" (optional.String) -  type: borrow - borrow, repay - repay
-  - @param "Currency" (optional.String) -  Retrieve data of the specified currency
-  - @param "CurrencyPair" (optional.String) -  Currency pair
-  - @param "Page" (optional.Int32) -  Page number
-  - @param "Limit" (optional.Int32) -  Maximum response items.  Default: 100, minimum: 1, Maximum: 100
+  - @param "Type_" (optional.String) -  type: borrow - borrow, repay - repay.
+  - @param "Currency" (optional.String) -  Retrieve data of the specified currency.
+  - @param "CurrencyPair" (optional.String) -  Currency pair.
+  - @param "Page" (optional.Int32) -  Page number.
+  - @param "Limit" (optional.Int32) -  Maximum response items. Default: 100, minimum: 1, Maximum: 100.
 
 @return []UniLoanRecord
 */
@@ -634,13 +634,13 @@ type ListUniLoanInterestRecordsOpts struct {
 }
 
 /*
-ListUniLoanInterestRecords List interest records
+ListUniLoanInterestRecords List interest records.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListUniLoanInterestRecordsOpts - Optional Parameters:
-  - @param "CurrencyPair" (optional.String) -  Currency pair
-  - @param "Currency" (optional.String) -  Retrieve data of the specified currency
-  - @param "Page" (optional.Int32) -  Page number
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "CurrencyPair" (optional.String) -  Currency pair.
+  - @param "Currency" (optional.String) -  Retrieve data of the specified currency.
+  - @param "Page" (optional.Int32) -  Page number.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
   - @param "From" (optional.Int64) -  Start timestamp  Specify start time, time format is Unix timestamp. If not specified, it defaults to (the data start time of the time range actually returned by to and limit)
   - @param "To" (optional.Int64) -  Termination Timestamp  Specify the end time. If not specified, it defaults to the current time, and the time format is a Unix timestamp
 
@@ -749,10 +749,10 @@ func (a *MarginUniApiService) ListUniLoanInterestRecords(ctx context.Context, lo
 }
 
 /*
-GetUniBorrowable Get maximum borrowable
+GetUniBorrowable Get maximum borrowable.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param currency Retrieve data of the specified currency
-  - @param currencyPair Currency pair
+  - @param currency Retrieve data of the specified currency.
+  - @param currencyPair Currency pair.
 
 @return MaxUniBorrowable
 */

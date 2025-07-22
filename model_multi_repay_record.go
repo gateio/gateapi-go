@@ -9,30 +9,30 @@
 
 package gateapi
 
-// Mult Repay Record
+// Mult Repay Record.
 type MultiRepayRecord struct {
-	// Order ID
+	// Order ID.
 	OrderId int64 `json:"order_id,omitempty"`
-	// Repayment record ID
+	// Repayment record ID.
 	RecordId int64 `json:"record_id,omitempty"`
-	// The initial collateralization rate
+	// The initial collateralization rate.
 	InitLtv string `json:"init_ltv,omitempty"`
-	// Ltv before the operation
+	// Ltv before the operation.
 	BeforeLtv string `json:"before_ltv,omitempty"`
-	// Ltv after the operation
+	// Ltv after the operation.
 	AfterLtv string `json:"after_ltv,omitempty"`
 	// Borrowing time, timestamp in seconds.
 	BorrowTime int64 `json:"borrow_time,omitempty"`
 	// Repayment time, timestamp in seconds.
 	RepayTime int64 `json:"repay_time,omitempty"`
-	// List of borrowing information
+	// List of borrowing information.
 	BorrowCurrencies []RepayRecordCurrency `json:"borrow_currencies,omitempty"`
-	// List of collateral information
+	// List of collateral information.
 	CollateralCurrencies []RepayRecordCurrency `json:"collateral_currencies,omitempty"`
-	// Repay Currency List
+	// Repay Currency List.
 	RepaidCurrencies []RepayRecordRepaidCurrency `json:"repaid_currencies,omitempty"`
-	// Total Interest List
+	// Total Interest List.
 	TotalInterestList []RepayRecordTotalInterest `json:"total_interest_list,omitempty"`
-	// List of left repay interest
+	// List of left repay interest.
 	LeftRepayInterestList []RepayRecordLeftInterest `json:"left_repay_interest_list,omitempty"`
 }

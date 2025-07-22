@@ -10,18 +10,18 @@
 package gateapi
 
 type FuturesTrade struct {
-	// Trade ID
+	// Trade ID.
 	Id int64 `json:"id,omitempty"`
-	// Trading time
+	// Trading time.
 	CreateTime float64 `json:"create_time,omitempty"`
 	// Trading time, with milliseconds set to 3 decimal places.
 	CreateTimeMs float64 `json:"create_time_ms,omitempty"`
-	// Futures contract
+	// Futures contract.
 	Contract string `json:"contract,omitempty"`
-	// Trading size
+	// Trading size.
 	Size int64 `json:"size,omitempty"`
-	// Trading price (quote currency)
+	// Trading price (quote currency).
 	Price string `json:"price,omitempty"`
-	// Whether internal trade. Internal trade refers to the takeover of liquidation orders by the insurance fund and ADL users. Since it is not a normal matching on the market depth, the transaction price may deviate, and it will not be recorded in the K-line. If it is not an internal trade, this field will not be returned.
+	// Whether internal trade. Internal trade refers to the takeover of liquidation orders by the insurance fund and ADL users. Since it is not a normal matching on the market depth, the transaction price may deviate, and it will not be recorded in the K-line. an internal trade, this field will not be returned.
 	IsInternal bool `json:"is_internal,omitempty"`
 }

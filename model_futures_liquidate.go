@@ -10,13 +10,13 @@
 package gateapi
 
 type FuturesLiquidate struct {
-	// Liquidation time
+	// Liquidation time.
 	Time int64 `json:"time,omitempty"`
-	// Futures contract
+	// Futures contract.
 	Contract string `json:"contract,omitempty"`
 	// Position leverage. Not returned in public endpoints.
 	Leverage string `json:"leverage,omitempty"`
-	// Position size
+	// Position size.
 	Size int64 `json:"size,omitempty"`
 	// Position margin. Not returned in public endpoints.
 	Margin string `json:"margin,omitempty"`
@@ -28,10 +28,10 @@ type FuturesLiquidate struct {
 	MarkPrice string `json:"mark_price,omitempty"`
 	// Liquidation order ID. Not returned in public endpoints.
 	OrderId int64 `json:"order_id,omitempty"`
-	// Liquidation order price
+	// Liquidation order price.
 	OrderPrice string `json:"order_price,omitempty"`
-	// Liquidation order average taker price
+	// Liquidation order average taker price.
 	FillPrice string `json:"fill_price,omitempty"`
-	// Liquidation order maker size
+	// Liquidation order maker size.
 	Left int64 `json:"left,omitempty"`
 }

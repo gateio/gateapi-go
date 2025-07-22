@@ -9,12 +9,12 @@
 
 package gateapi
 
-// Futures order
+// Futures order.
 type MockFuturesOrder struct {
 	// Futures name, currently only supports perpetual futures for BTC and ETH with USDT.
 	Contract string `json:"contract"`
 	// Futures quantity, representing the initial order quantity, not involved in actual settlement.
 	Size string `json:"size"`
-	// Unfilled contract quantity, involved in actual calculation
+	// Unfilled contract quantity, involved in actual calculation.
 	Left string `json:"left"`
 }

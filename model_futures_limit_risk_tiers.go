@@ -11,18 +11,18 @@ package gateapi
 
 // Retrieve risk limit configurations for different tiers under a specified contract.
 type FuturesLimitRiskTiers struct {
-	// Tier
+	// Tier.
 	Tier int32 `json:"tier,omitempty"`
-	// Position risk limit
+	// Position risk limit.
 	RiskLimit string `json:"risk_limit,omitempty"`
-	// Initial margin rate
+	// Initial margin rate.
 	InitialRate string `json:"initial_rate,omitempty"`
-	// Maintenance margin rate
+	// Maintenance margin rate.
 	MaintenanceRate string `json:"maintenance_rate,omitempty"`
-	// Maximum leverage
+	// Maximum leverage.
 	LeverageMax string `json:"leverage_max,omitempty"`
-	// Markets, visible only during market pagination requests
+	// Markets, visible only during market pagination requests.
 	Contract string `json:"contract,omitempty"`
-	// Maintenance margin quick calculation deduction
+	// Maintenance margin quick calculation deduction.
 	Deduction string `json:"deduction,omitempty"`
 }

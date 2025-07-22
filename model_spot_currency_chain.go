@@ -10,14 +10,14 @@
 package gateapi
 
 type SpotCurrencyChain struct {
-	// Chain name
+	// Chain name.
 	Name string `json:"name,omitempty"`
-	// token address
+	// token address.
 	Addr string `json:"addr,omitempty"`
-	// Whether currency's withdrawal is disabled
+	// Whether currency's withdrawal is disabled.
 	WithdrawDisabled bool `json:"withdraw_disabled,omitempty"`
-	// Whether currency's withdrawal is delayed
+	// Whether currency's withdrawal is delayed.
 	WithdrawDelayed bool `json:"withdraw_delayed,omitempty"`
-	// Whether currency's deposit is disabled
+	// Whether currency's deposit is disabled.
 	DepositDisabled bool `json:"deposit_disabled,omitempty"`
 }

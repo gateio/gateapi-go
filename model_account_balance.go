@@ -9,14 +9,14 @@
 
 package gateapi
 
-// Total balances calculated with specified currency unit
+// Total balances calculated with specified currency unit.
 type AccountBalance struct {
-	// Account total balance amount
+	// Account total balance amount.
 	Amount string `json:"amount,omitempty"`
-	// Currency
+	// Currency.
 	Currency string `json:"currency,omitempty"`
 	// Unrealised_pnl, this field will only appear in futures, options, delivery, and total accounts
 	UnrealisedPnl string `json:"unrealised_pnl,omitempty"`
-	// Borrowed，this field will only appear in margin and cross_margin accounts
+	// Borrowed，this field will only appear in margin and cross_margin accounts.
 	Borrowed string `json:"borrowed,omitempty"`
 }

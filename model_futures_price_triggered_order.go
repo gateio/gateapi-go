@@ -9,27 +9,27 @@
 
 package gateapi
 
-// Futures order details
+// Futures order details.
 type FuturesPriceTriggeredOrder struct {
 	Initial FuturesInitialOrder `json:"initial"`
 	Trigger FuturesPriceTrigger `json:"trigger"`
-	// Auto order ID
+	// Auto order ID.
 	Id int64 `json:"id,omitempty"`
-	// User ID
+	// User ID.
 	User int32 `json:"user,omitempty"`
-	// Creation time
+	// Creation time.
 	CreateTime float64 `json:"create_time,omitempty"`
-	// Finished time
+	// Finished time.
 	FinishTime float64 `json:"finish_time,omitempty"`
-	// ID of the newly created order on condition triggered
+	// ID of the newly created order on condition triggered.
 	TradeId int64 `json:"trade_id,omitempty"`
-	// Auto order status  - `open`: order is active - `finished`: order is finished - `inactive`: order is not active, only for close-long-order or close-short-order - `invalid`: order is invalid, only for close-long-order or close-short-order
+	// Auto order status  - `open`: order is active - `finished`: order is finished - `inactive`: order is not active, only for close-long-order or close-short-order - `invalid`: order is close-short-order
 	Status string `json:"status,omitempty"`
-	// How order is finished
+	// How order is finished.
 	FinishAs string `json:"finish_as,omitempty"`
-	// Additional remarks on how the order was finished
+	// Additional remarks on how the order was finished.
 	Reason string `json:"reason,omitempty"`
-	// Types of stop-profit and stop-loss, including:  - `close-long-order`: Entrusting order stop profit and stop loss, flat long position - `close-short-order`: Entrusted order stop profit and stop loss, short position  - `close-long-position`: Position stop-profit stop loss, used to close long positions - `close-short-position`: Position stop-profit stop loss, used to close all short positions - `plan-close-long-position`: Position plan take profit and stop loss, used to close long positions in all or part of long positions - `plan-close-short-position`: Position plan stop-profit and stop loss, used to close all short positions or partially close short positions  The two types of entrusted order stop-profit and stop-loss are read-only and cannot be passed in through requests
+	// Types of stop-profit and stop-loss, including:  - `close-long-order`: Entrusting order stop profit and stop loss, flat long position - `close-short-order`: loss, short position  - `close-long-position`: Position stop-profit stop loss, used to close long positions - `close-short-position`: Position stop-profit stop loss, used to close all short positions - `plan-close-long-position`: Position plan take profit and stop loss, used to close long positions in all or part of long positions - `plan-close-short-position`: Position plan stop-profit and stop loss, used to close all short positions or partially close short positions  The two types of entrusted order stop-profit and stop-loss are read-only and cannot be passed in through requests
 	OrderType string `json:"order_type,omitempty"`
 	// Corresponding order ID of order take-profit/stop-loss.
 	MeOrderId int64 `json:"me_order_id,omitempty"`

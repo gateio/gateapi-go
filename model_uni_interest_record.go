@@ -9,18 +9,18 @@
 
 package gateapi
 
-// Interest Record
+// Interest Record.
 type UniInterestRecord struct {
-	// Status: 0 - fail, 1 - success
+	// Status: 0 - fail, 1 - success.
 	Status int32 `json:"status,omitempty"`
-	// Currency
+	// Currency.
 	Currency string `json:"currency,omitempty"`
-	// Actual Rate
+	// Actual Rate.
 	ActualRate string `json:"actual_rate,omitempty"`
-	// Interest
+	// Interest.
 	Interest string `json:"interest,omitempty"`
-	// Interest status: interest_dividend - Normal dividend, interest_reinvest - Interest reinvestment Interest reinvestment
+	// Interest status: interest_dividend - Normal dividend, interest_reinvest - Interest reinvestment
 	InterestStatus string `json:"interest_status,omitempty"`
-	// Created time
+	// Created time.
 	CreateTime int64 `json:"create_time,omitempty"`
 }

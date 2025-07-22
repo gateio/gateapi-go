@@ -10,10 +10,10 @@
 package gateapi
 
 type AgencyCommissionHistory struct {
-	// Currency pair
+	// Currency pair.
 	CurrencyPair string `json:"currency_pair,omitempty"`
-	// Total
+	// Total.
 	Total int64 `json:"total,omitempty"`
-	// List of comission history
+	// List of comission history.
 	List []AgencyCommission `json:"list,omitempty"`
 }

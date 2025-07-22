@@ -10,16 +10,16 @@
 package gateapi
 
 type AgencyCommission struct {
-	// Commission Time. (unix timestamp)
+	// Commission Time. (unix timestamp).
 	CommissionTime int64 `json:"commission_time,omitempty"`
-	// User ID
+	// User ID.
 	UserId int64 `json:"user_id,omitempty"`
-	// Group name
+	// Group name.
 	GroupName string `json:"group_name,omitempty"`
-	// Commission Amount
+	// Commission Amount.
 	CommissionAmount string `json:"commission_amount,omitempty"`
-	// Commission Asset
+	// Commission Asset.
 	CommissionAsset string `json:"commission_asset,omitempty"`
-	// Source.  SPOT - SPOT Rebate, FUTURES - Futures Rebate
+	// Source. SPOT - SPOT Rebate, FUTURES - Futures Rebate.
 	Source string `json:"source,omitempty"`
 }

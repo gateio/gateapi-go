@@ -10,29 +10,29 @@
 package gateapi
 
 type TradeFee struct {
-	// User ID
+	// User ID.
 	UserId int64 `json:"user_id,omitempty"`
-	// taker fee rate
+	// taker fee rate.
 	TakerFee string `json:"taker_fee,omitempty"`
-	// maker fee rate
+	// maker fee rate.
 	MakerFee string `json:"maker_fee,omitempty"`
-	// If GT deduction is enabled
+	// If GT deduction is enabled.
 	GtDiscount bool `json:"gt_discount,omitempty"`
 	// Taker fee rate if using GT deduction. It will be 0 if GT deduction is disabled
 	GtTakerFee string `json:"gt_taker_fee,omitempty"`
 	// Maker fee rate if using GT deduction. It will be 0 if GT deduction is disabled
 	GtMakerFee string `json:"gt_maker_fee,omitempty"`
-	// Loan fee rate of margin lending
+	// Loan fee rate of margin lending.
 	LoanFee string `json:"loan_fee,omitempty"`
-	// Point type. 0 - Initial version. 1 - new version since 202009
+	// Point type. 0 - Initial version. 1 - new version since 202009.
 	PointType string `json:"point_type,omitempty"`
-	// Futures trading taker fee
+	// Futures trading taker fee.
 	FuturesTakerFee string `json:"futures_taker_fee,omitempty"`
-	// Future trading maker fee
+	// Future trading maker fee.
 	FuturesMakerFee string `json:"futures_maker_fee,omitempty"`
-	// Delivery trading taker fee
+	// Delivery trading taker fee.
 	DeliveryTakerFee string `json:"delivery_taker_fee,omitempty"`
-	// Delivery trading maker fee
+	// Delivery trading maker fee.
 	DeliveryMakerFee string `json:"delivery_maker_fee,omitempty"`
 	// Deduction types for rates, 1 - GT deduction, 2 - Point card deduction, 3 - VIP rates
 	DebitFee int32 `json:"debit_fee,omitempty"`

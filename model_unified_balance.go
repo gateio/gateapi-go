@@ -22,15 +22,15 @@ type UnifiedBalance struct {
 	FuturesPosLiab string `json:"futures_pos_liab,omitempty"`
 	// Equity, valid in single currency margin/cross currency margin/combined margin mode
 	Equity string `json:"equity,omitempty"`
-	// Total occupancy (discarded, to be offline field)
+	// Total occupancy (discarded, to be offline field).
 	TotalFreeze string `json:"total_freeze,omitempty"`
 	// Total borrowing, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode
 	TotalLiab string `json:"total_liab,omitempty"`
 	// The amount of spot hedging is valid in the combined margin mode, and is 0 in other margin modes such as single currency and cross-currency margin modes
 	SpotInUse string `json:"spot_in_use,omitempty"`
-	// Uniloan financial management amount, effective when Uniloan financial management is turned on as a unified account margin switch
+	// Uniloan financial management amount, effective when turned on as a unified account margin switch
 	Funding string `json:"funding,omitempty"`
-	// Funding version
+	// Funding version.
 	FundingVersion string `json:"funding_version,omitempty"`
 	// Full margin balance is valid in single currency margin mode, and is 0 in other modes such as cross currency margin/combined margin mode
 	CrossBalance string `json:"cross_balance,omitempty"`
@@ -48,6 +48,6 @@ type UnifiedBalance struct {
 	MarginBalance string `json:"margin_balance,omitempty"`
 	// Full margin available for full position is valid in single currency margin mode, and is 0 in other modes such as cross-currency margin/combined margin mode
 	AvailableMargin string `json:"available_margin,omitempty"`
-	// Currency enabled as margin: true - Enabled, false - Disabled
+	// Currency enabled as margin: true - Enabled, false - Disabled.
 	EnabledCollateral bool `json:"enabled_collateral,omitempty"`
 }

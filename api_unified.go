@@ -33,12 +33,12 @@ type ListUnifiedAccountsOpts struct {
 }
 
 /*
-ListUnifiedAccounts Get unified account information
+ListUnifiedAccounts Get unified account information.
 The assets of each currency in the account will be adjusted according to their liquidity, defined by corresponding adjustment coefficients, and then uniformly converted to USD to calculate the total asset value and position value of the account.  You can refer to the [Formula](#portfolio-account) in the documentation
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListUnifiedAccountsOpts - Optional Parameters:
-  - @param "Currency" (optional.String) -  Retrieve data of the specified currency
-  - @param "SubUid" (optional.String) -  Sub account user ID
+  - @param "Currency" (optional.String) -  Retrieve data of the specified currency.
+  - @param "SubUid" (optional.String) -  Sub account user ID.
 
 @return UnifiedAccount
 */
@@ -133,9 +133,9 @@ func (a *UnifiedApiService) ListUnifiedAccounts(ctx context.Context, localVarOpt
 }
 
 /*
-GetUnifiedBorrowable Query about the maximum borrowing for the unified account
+GetUnifiedBorrowable Query about the maximum borrowing for the unified account.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param currency Retrieve data of the specified currency
+  - @param currency Retrieve data of the specified currency.
 
 @return UnifiedBorrowable
 */
@@ -225,9 +225,9 @@ func (a *UnifiedApiService) GetUnifiedBorrowable(ctx context.Context, currency s
 }
 
 /*
-GetUnifiedTransferable Query about the maximum transferable for the unified account
+GetUnifiedTransferable Query about the maximum transferable for the unified account.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param currency Retrieve data of the specified currency
+  - @param currency Retrieve data of the specified currency.
 
 @return UnifiedTransferable
 */
@@ -409,7 +409,7 @@ func (a *UnifiedApiService) GetUnifiedTransferables(ctx context.Context, currenc
 }
 
 /*
-GetUnifiedBorrowableList Batch query unified account can be borrowed up to a maximum
+GetUnifiedBorrowableList Batch query unified account can be borrowed up to a maximum.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param currencies Specify the currency names for querying in an array, separated by commas, with a maximum of 10 currencies.
 
@@ -525,13 +525,13 @@ type ListUnifiedLoansOpts struct {
 }
 
 /*
-ListUnifiedLoans List loans
+ListUnifiedLoans List loans.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListUnifiedLoansOpts - Optional Parameters:
-  - @param "Currency" (optional.String) -  Retrieve data of the specified currency
-  - @param "Page" (optional.Int32) -  Page number
-  - @param "Limit" (optional.Int32) -  Maximum response items.  Default: 100, minimum: 1, Maximum: 100
-  - @param "Type_" (optional.String) -  Loan type, platform - platform, margin - margin
+  - @param "Currency" (optional.String) -  Retrieve data of the specified currency.
+  - @param "Page" (optional.Int32) -  Page number.
+  - @param "Limit" (optional.Int32) -  Maximum response items. Default: 100, minimum: 1, Maximum: 100.
+  - @param "Type_" (optional.String) -  Loan type, platform - platform, margin - margin.
 
 @return []UniLoan
 */
@@ -632,8 +632,8 @@ func (a *UnifiedApiService) ListUnifiedLoans(ctx context.Context, localVarOption
 }
 
 /*
-CreateUnifiedLoan Borrow or repay
-When borrowing, it is essential to ensure that the borrowed amount is not below the minimum borrowing threshold for the specific cryptocurrency and does not exceed the maximum borrowing limit set by the platform and the user.  The interest on the loan will be automatically deducted from the account at regular intervals. It is the user&#39;s responsibility to manage the repayment of the borrowed amount.  For repayment, the option to repay the entire borrowed amount is available by setting the parameter &#x60;repaid_all&#x3D;true&#x60;
+CreateUnifiedLoan Borrow or repay.
+When borrowing, it is essential to ensure that the borrowed amount is not below the minimum borrowing threshold for the specific cryptocurrency and does not exceed the maximum borrowing limit set by the platform and the user.  The interest on the loan will be automatically deducted from the account at regular intervals. It is the user&#39;s responsibility to manage the repayment of the borrowed amount.  For repayment, the option to repay the available by setting the parameter &#x60;repaid_all&#x3D;true&#x60;
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param unifiedLoan
 
@@ -734,13 +734,13 @@ type ListUnifiedLoanRecordsOpts struct {
 }
 
 /*
-ListUnifiedLoanRecords Get load records
+ListUnifiedLoanRecords Get load records.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListUnifiedLoanRecordsOpts - Optional Parameters:
-  - @param "Type_" (optional.String) -  The types of lending records, borrow - indicates the action of borrowing funds, repay - indicates the action of repaying the borrowed funds
-  - @param "Currency" (optional.String) -  Retrieve data of the specified currency
-  - @param "Page" (optional.Int32) -  Page number
-  - @param "Limit" (optional.Int32) -  Maximum response items.  Default: 100, minimum: 1, Maximum: 100
+  - @param "Type_" (optional.String) -  The types of lending records, borrow - indicates the action of borrowing funds, repaying the borrowed funds
+  - @param "Currency" (optional.String) -  Retrieve data of the specified currency.
+  - @param "Page" (optional.Int32) -  Page number.
+  - @param "Limit" (optional.Int32) -  Maximum response items. Default: 100, minimum: 1, Maximum: 100.
 
 @return []UnifiedLoanRecord
 */
@@ -851,14 +851,14 @@ type ListUnifiedLoanInterestRecordsOpts struct {
 }
 
 /*
-ListUnifiedLoanInterestRecords List interest records
+ListUnifiedLoanInterestRecords List interest records.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListUnifiedLoanInterestRecordsOpts - Optional Parameters:
-  - @param "Currency" (optional.String) -  Retrieve data of the specified currency
-  - @param "Page" (optional.Int32) -  Page number
-  - @param "Limit" (optional.Int32) -  Maximum response items.  Default: 100, minimum: 1, Maximum: 100
-  - @param "From" (optional.Int64) -  Start timestamp of the query
-  - @param "To" (optional.Int64) -  Time range ending, default to current time
+  - @param "Currency" (optional.String) -  Retrieve data of the specified currency.
+  - @param "Page" (optional.Int32) -  Page number.
+  - @param "Limit" (optional.Int32) -  Maximum response items. Default: 100, minimum: 1, Maximum: 100.
+  - @param "From" (optional.Int64) -  Start timestamp of the query.
+  - @param "To" (optional.Int64) -  Time range ending, default to current time.
   - @param "Type_" (optional.String) -  Loan type, platform loan - platform, leverage loan - margin, if not passed, defaults to margin
 
 @return []UniLoanInterestRecord
@@ -966,8 +966,8 @@ func (a *UnifiedApiService) ListUnifiedLoanInterestRecords(ctx context.Context, 
 }
 
 /*
-GetUnifiedRiskUnits Get user risk unit details
-Retrieve user risk unit details, only valid in portfolio margin mode
+GetUnifiedRiskUnits Get user risk unit details.
+Retrieve user risk unit details, only valid in portfolio margin mode.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 @return UnifiedRiskUnits
@@ -1057,7 +1057,7 @@ func (a *UnifiedApiService) GetUnifiedRiskUnits(ctx context.Context) (UnifiedRis
 }
 
 /*
-GetUnifiedMode Query mode of the unified account
+GetUnifiedMode Query mode of the unified account.
 Unified account mode: - &#x60;classic&#x60;: Classic account mode - &#x60;multi_currency&#x60;: Cross-currency margin mode - &#x60;portfolio&#x60;: Portfolio margin mode - &#x60;single_currency&#x60;: Single-currency margin mode
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
@@ -1148,8 +1148,8 @@ func (a *UnifiedApiService) GetUnifiedMode(ctx context.Context) (UnifiedModeSet,
 }
 
 /*
-SetUnifiedMode Set mode of the unified account
-Each account mode switch only requires passing the corresponding account mode parameter, and also supports turning on or off the configuration switches under the corresponding account mode during the switch. - When enabling the classic account mode, mode&#x3D;classic &#x60;&#x60;&#x60;     PUT /unified/unified_mode     {       \&quot;mode\&quot;: \&quot;classic\&quot;     } &#x60;&#x60;&#x60; - When enabling the cross-currency margin mode, mode&#x3D;multi_currency &#x60;&#x60;&#x60;     PUT /unified/unified_mode     {       \&quot;mode\&quot;: \&quot;multi_currency\&quot;,       \&quot;settings\&quot;: {          \&quot;usdt_futures\&quot;: true       }     } &#x60;&#x60;&#x60; - When enabling the portfolio margin mode, mode&#x3D;portfolio &#x60;&#x60;&#x60;     PUT /unified/unified_mode     {       \&quot;mode\&quot;: \&quot;portfolio\&quot;,       \&quot;settings\&quot;: {          \&quot;spot_hedge\&quot;: true       }     } &#x60;&#x60;&#x60; - When enabling the single-currency margin mode, mode&#x3D;single_currency &#x60;&#x60;&#x60;     PUT /unified/unified_mode     {       \&quot;mode\&quot;: \&quot;single_currency\&quot;     } &#x60;&#x60;&#x60;
+SetUnifiedMode Set mode of the unified account.
+Each account mode switch only requires passing the corresponding account mode parameter, and also supports turning on or off the configuration switches under the corresponding account mode during the switch. - When enabling the classic account mode, mode&#x3D;classic &#x60;&#x60;&#x60;  PUT /unified/unified_mode  {  \&quot;mode\&quot;: \&quot;classic\&quot;  } &#x60;&#x60;&#x60; - When enabling the cross-currency margin \&quot;multi_currency\&quot;,  \&quot;settings\&quot;: {  \&quot;usdt_futures\&quot;: true  }  } &#x60;&#x60;&#x60; - When enabling the portfolio margin mode, mode&#x3D;portfolio &#x60;&#x60;&#x60;  PUT /unified/unified_mode  {  \&quot;mode\&quot;: \&quot;portfolio\&quot;,  \&quot;settings\&quot;: {  \&quot;spot_hedge\&quot;: true  }  } &#x60;&#x60;&#x60; - When enabling the single-currency margin mode, mode&#x3D;single_currency &#x60;&#x60;&#x60;  PUT /unified/unified_mode  {  \&quot;mode\&quot;: \&quot;single_currency\&quot;  } &#x60;&#x60;&#x60;
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param unifiedModeSet
 */
@@ -1230,7 +1230,7 @@ func (a *UnifiedApiService) SetUnifiedMode(ctx context.Context, unifiedModeSet U
 }
 
 /*
-GetUnifiedEstimateRate Get unified estimate rate
+GetUnifiedEstimateRate Get unified estimate rate.
 Due to fluctuations in lending depth, hourly interest rates may vary, and thus, I cannot provide exact rates. When a currency is not supported, the interest rate returned will be an empty string.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param currencies Specify the currency names for querying in an array, separated by commas, with a maximum of 10 currencies.
@@ -1339,7 +1339,7 @@ func (a *UnifiedApiService) GetUnifiedEstimateRate(ctx context.Context, currenci
 }
 
 /*
-ListCurrencyDiscountTiers List currency discount tiers
+ListCurrencyDiscountTiers List currency discount tiers.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 @return []UnifiedDiscount
@@ -1423,7 +1423,7 @@ func (a *UnifiedApiService) ListCurrencyDiscountTiers(ctx context.Context) ([]Un
 }
 
 /*
-ListLoanMarginTiers List loan margin tiers
+ListLoanMarginTiers List loan margin tiers.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 @return []UnifiedMarginTiers
@@ -1507,8 +1507,8 @@ func (a *UnifiedApiService) ListLoanMarginTiers(ctx context.Context) ([]UnifiedM
 }
 
 /*
-CalculatePortfolioMargin Portfolio margin calculator
-Portfolio Margin Calculator When inputting a simulated position portfolio, each position includes the position name and quantity held, supporting markets within the range of BTC and ETH perpetual contracts, options, and spot markets. When inputting simulated orders, each order includes the market identifier, order price, and order quantity,  supporting markets within the range of BTC and ETH perpetual contracts, options, and spot markets. Market orders are not included.
+CalculatePortfolioMargin Portfolio margin calculator.
+Portfolio Margin Calculator When inputting a simulated position portfolio, each position includes the position name and quantity held, supporting markets within the range of BTC and ETH perpetual contracts, options, and spot markets. When inputting simulated orders, each order includes the market identifier, order price, and order of BTC and ETH perpetual contracts, options, and spot markets. Market orders are not included.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param unifiedPortfolioInput
 
@@ -1595,9 +1595,9 @@ func (a *UnifiedApiService) CalculatePortfolioMargin(ctx context.Context, unifie
 }
 
 /*
-GetUserLeverageCurrencyConfig Minimum currency leverage that can be set
+GetUserLeverageCurrencyConfig Minimum currency leverage that can be set.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param currency Currency
+  - @param currency Currency.
 
 @return UnifiedLeverageConfig
 */
@@ -1692,11 +1692,11 @@ type GetUserLeverageCurrencySettingOpts struct {
 }
 
 /*
-GetUserLeverageCurrencySetting Get the leverage multiple of the user currency
+GetUserLeverageCurrencySetting Get the leverage multiple of the user currency.
 Get the user&#39;s currency leverage. If currency is not passed, query all currencies.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *GetUserLeverageCurrencySettingOpts - Optional Parameters:
-  - @param "Currency" (optional.String) -  Currency
+  - @param "Currency" (optional.String) -  Currency.
 
 @return UnifiedLeverageSetting
 */
@@ -1788,7 +1788,7 @@ func (a *UnifiedApiService) GetUserLeverageCurrencySetting(ctx context.Context, 
 }
 
 /*
-SetUserLeverageCurrencySetting Set the loan currency leverage
+SetUserLeverageCurrencySetting Set the loan currency leverage.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param unifiedLeverageSetting
 */
@@ -1874,10 +1874,10 @@ type ListUnifiedCurrenciesOpts struct {
 }
 
 /*
-ListUnifiedCurrencies List of loan currencies supported by unified account
+ListUnifiedCurrencies List of loan currencies supported by unified account.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListUnifiedCurrenciesOpts - Optional Parameters:
-  - @param "Currency" (optional.String) -  Currency
+  - @param "Currency" (optional.String) -  Currency.
 
 @return []UnifiedCurrency
 */
@@ -1970,13 +1970,13 @@ type GetHistoryLoanRateOpts struct {
 }
 
 /*
-GetHistoryLoanRate get historical lending rates
+GetHistoryLoanRate get historical lending rates.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param currency Currency
+  - @param currency Currency.
   - @param optional nil or *GetHistoryLoanRateOpts - Optional Parameters:
-  - @param "Tier" (optional.String) -  The VIP level of the floating rate that needs to be queried
-  - @param "Page" (optional.Int32) -  Page number
-  - @param "Limit" (optional.Int32) -  Maximum response items.  Default: 100, minimum: 1, Maximum: 100
+  - @param "Tier" (optional.String) -  The VIP level of the floating rate that needs to be queried.
+  - @param "Page" (optional.Int32) -  Page number.
+  - @param "Limit" (optional.Int32) -  Maximum response items. Default: 100, minimum: 1, Maximum: 100.
 
 @return UnifiedHistoryLoanRate
 */
@@ -2069,7 +2069,7 @@ func (a *UnifiedApiService) GetHistoryLoanRate(ctx context.Context, currency str
 }
 
 /*
-SetUnifiedCollateral Set Collateral Currency
+SetUnifiedCollateral Set Collateral Currency.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param unifiedCollateralReq
 

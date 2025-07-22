@@ -4,15 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TransactionTime** | **int64** | Transaction Time. (unix timestamp) | [optional] 
-**UserId** | **int64** | User ID | [optional] 
-**GroupName** | **string** | Group name | [optional] 
-**Fee** | **string** | fee (usdt) | [optional] 
-**CurrencyPair** | **string** | Currency pair | [optional] 
-**Amount** | **string** | Commission Amount | [optional] 
-**FeeAsset** | **string** | Fee currency | [optional] 
-**Source** | **string** | Rebate Type: Spot、Futures、Options | [optional] 
+**TransactionTime** | **int64** | Transaction Time. (unix timestamp). | [optional] 
+**UserId** | **int64** | User ID. | [optional] 
+**GroupName** | **string** | Group name. | [optional] 
+**Fee** | **string** | fee (usdt). | [optional] 
+**CurrencyPair** | **string** | Currency pair. | [optional] 
+**Amount** | **string** | Commission Amount. | [optional] 
+**FeeAsset** | **string** | Fee currency. | [optional] 
+**Source** | **string** | Rebate Type: Spot、Futures、Options.、Alpha | [optional] 
 **SubBrokerInfo** | [**BrokerCommissionSubBrokerInfo**](BrokerCommission_sub_broker_info.md) |  | [optional] 
+**AlphaContractAddr** | **string** | Alpha token address | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

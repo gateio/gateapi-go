@@ -4,24 +4,24 @@ All URIs are relative to *https://api.gateio.ws/api/v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AgencyTransactionHistory**](RebateApi.md#AgencyTransactionHistory) | **Get** /rebate/agency/transaction_history | The agency obtains the transaction history of the recommended user
-[**AgencyCommissionsHistory**](RebateApi.md#AgencyCommissionsHistory) | **Get** /rebate/agency/commission_history | The agency obtains the commission history of the recommended user
-[**PartnerTransactionHistory**](RebateApi.md#PartnerTransactionHistory) | **Get** /rebate/partner/transaction_history | Partner obtains transaction records of recommended users
-[**PartnerCommissionsHistory**](RebateApi.md#PartnerCommissionsHistory) | **Get** /rebate/partner/commission_history | Partner obtains commission records of recommended users
-[**PartnerSubList**](RebateApi.md#PartnerSubList) | **Get** /rebate/partner/sub_list | Partner subordinate list
-[**RebateBrokerCommissionHistory**](RebateApi.md#RebateBrokerCommissionHistory) | **Get** /rebate/broker/commission_history | The broker obtains the user&#39;s commission rebate records
-[**RebateBrokerTransactionHistory**](RebateApi.md#RebateBrokerTransactionHistory) | **Get** /rebate/broker/transaction_history | The broker obtains the user&#39;s trading history
-[**RebateUserInfo**](RebateApi.md#RebateUserInfo) | **Get** /rebate/user/info | User retrieves rebate information
-[**UserSubRelation**](RebateApi.md#UserSubRelation) | **Get** /rebate/user/sub_relation | User-subordinate relationship
+[**AgencyTransactionHistory**](RebateApi.md#AgencyTransactionHistory) | **Get** /rebate/agency/transaction_history | The agency obtains the transaction history of the recommended user.
+[**AgencyCommissionsHistory**](RebateApi.md#AgencyCommissionsHistory) | **Get** /rebate/agency/commission_history | The agency obtains the commission history of the recommended user.
+[**PartnerTransactionHistory**](RebateApi.md#PartnerTransactionHistory) | **Get** /rebate/partner/transaction_history | Partner obtains transaction records of recommended users.
+[**PartnerCommissionsHistory**](RebateApi.md#PartnerCommissionsHistory) | **Get** /rebate/partner/commission_history | Partner obtains commission records of recommended users.
+[**PartnerSubList**](RebateApi.md#PartnerSubList) | **Get** /rebate/partner/sub_list | Partner subordinate list.
+[**RebateBrokerCommissionHistory**](RebateApi.md#RebateBrokerCommissionHistory) | **Get** /rebate/broker/commission_history | The broker obtains the user&#39;s commission rebate records.
+[**RebateBrokerTransactionHistory**](RebateApi.md#RebateBrokerTransactionHistory) | **Get** /rebate/broker/transaction_history | The broker obtains the user&#39;s trading history.
+[**RebateUserInfo**](RebateApi.md#RebateUserInfo) | **Get** /rebate/user/info | User retrieves rebate information.
+[**UserSubRelation**](RebateApi.md#UserSubRelation) | **Get** /rebate/user/sub_relation | User-subordinate relationship.
 
 
 ## AgencyTransactionHistory
 
 > []AgencyTransactionHistory AgencyTransactionHistory(ctx, optional)
 
-The agency obtains the transaction history of the recommended user
+The agency obtains the transaction history of the recommended user.
 
-Record time range cannot exceed 30 days
+Record time range cannot exceed 30 days.
 
 ### Required Parameters
 
@@ -36,12 +36,12 @@ Optional parameters are passed through a pointer to a AgencyTransactionHistoryOp
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**currencyPair** | **optional.String**| Specify the currency pair, if not specified, return all currency pairs | 
-**userId** | **optional.Int64**| User ID. If not specified, all user records will be returned | 
-**from** | **optional.Int64**| Time range beginning, default to 7 days before current time | 
-**to** | **optional.Int64**| Time range ending, default to current time | 
-**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
-**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
+**currencyPair** | **optional.String**| Specify the currency pair, if not specified, return all currency pairs. | 
+**userId** | **optional.Int64**| User ID. If not specified, all user records will be returned. | 
+**from** | **optional.Int64**| Time range beginning, default to 7 days before current time. | 
+**to** | **optional.Int64**| Time range ending, default to current time. | 
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list. | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0. | [default to 0]
 
 ### Example
 
@@ -102,9 +102,9 @@ func main() {
 
 > []AgencyCommissionHistory AgencyCommissionsHistory(ctx, optional)
 
-The agency obtains the commission history of the recommended user
+The agency obtains the commission history of the recommended user.
 
-Record time range cannot exceed 30 days
+Record time range cannot exceed 30 days.
 
 ### Required Parameters
 
@@ -119,12 +119,12 @@ Optional parameters are passed through a pointer to a AgencyCommissionsHistoryOp
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**currency** | **optional.String**| Filter by currency. Return all currency records if not specified | 
-**userId** | **optional.Int64**| User ID. If not specified, all user records will be returned | 
-**from** | **optional.Int64**| Time range beginning, default to 7 days before current time | 
-**to** | **optional.Int64**| Time range ending, default to current time | 
-**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
-**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
+**currency** | **optional.String**| Filter by currency. Return all currency records if not specified. | 
+**userId** | **optional.Int64**| User ID. If not specified, all user records will be returned. | 
+**from** | **optional.Int64**| Time range beginning, default to 7 days before current time. | 
+**to** | **optional.Int64**| Time range ending, default to current time. | 
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list. | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0. | [default to 0]
 
 ### Example
 
@@ -185,9 +185,9 @@ func main() {
 
 > PartnerTransactionHistory PartnerTransactionHistory(ctx, optional)
 
-Partner obtains transaction records of recommended users
+Partner obtains transaction records of recommended users.
 
-Record time range cannot exceed 30 days
+Record time range cannot exceed 30 days.
 
 ### Required Parameters
 
@@ -202,12 +202,12 @@ Optional parameters are passed through a pointer to a PartnerTransactionHistoryO
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**currencyPair** | **optional.String**| Specify the currency pair, if not specified, return all currency pairs | 
-**userId** | **optional.Int64**| User ID. If not specified, all user records will be returned | 
-**from** | **optional.Int64**| Time range beginning, default to 7 days before current time | 
-**to** | **optional.Int64**| Time range ending, default to current time | 
-**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
-**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
+**currencyPair** | **optional.String**| Specify the currency pair, if not specified, return all currency pairs. | 
+**userId** | **optional.Int64**| User ID. If not specified, all user records will be returned. | 
+**from** | **optional.Int64**| Time range beginning, default to 7 days before current time. | 
+**to** | **optional.Int64**| Time range ending, default to current time. | 
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list. | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0. | [default to 0]
 
 ### Example
 
@@ -268,9 +268,9 @@ func main() {
 
 > PartnerCommissionHistory PartnerCommissionsHistory(ctx, optional)
 
-Partner obtains commission records of recommended users
+Partner obtains commission records of recommended users.
 
-Record time range cannot exceed 30 days
+Record time range cannot exceed 30 days.
 
 ### Required Parameters
 
@@ -285,12 +285,12 @@ Optional parameters are passed through a pointer to a PartnerCommissionsHistoryO
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**currency** | **optional.String**| Filter by currency. Return all currency records if not specified | 
-**userId** | **optional.Int64**| User ID. If not specified, all user records will be returned | 
-**from** | **optional.Int64**| Time range beginning, default to 7 days before current time | 
-**to** | **optional.Int64**| Time range ending, default to current time | 
-**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
-**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
+**currency** | **optional.String**| Filter by currency. Return all currency records if not specified. | 
+**userId** | **optional.Int64**| User ID. If not specified, all user records will be returned. | 
+**from** | **optional.Int64**| Time range beginning, default to 7 days before current time. | 
+**to** | **optional.Int64**| Time range ending, default to current time. | 
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list. | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0. | [default to 0]
 
 ### Example
 
@@ -351,9 +351,9 @@ func main() {
 
 > PartnerSubList PartnerSubList(ctx, optional)
 
-Partner subordinate list
+Partner subordinate list.
 
-Including sub-agents, direct customers, indirect customers
+Including sub-agents, direct customers, indirect customers.
 
 ### Required Parameters
 
@@ -368,9 +368,9 @@ Optional parameters are passed through a pointer to a PartnerSubListOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**userId** | **optional.Int64**| User ID. If not specified, all user records will be returned | 
-**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
-**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
+**userId** | **optional.Int64**| User ID. If not specified, all user records will be returned. | 
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list. | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0. | [default to 0]
 
 ### Example
 
@@ -431,9 +431,9 @@ func main() {
 
 > []BrokerCommission RebateBrokerCommissionHistory(ctx, optional)
 
-The broker obtains the user's commission rebate records
+The broker obtains the user's commission rebate records.
 
-Record time range cannot exceed 30 days
+Record time range cannot exceed 30 days.
 
 ### Required Parameters
 
@@ -448,11 +448,11 @@ Optional parameters are passed through a pointer to a RebateBrokerCommissionHist
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
-**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
-**userId** | **optional.Int64**| User ID. If not specified, all user records will be returned | 
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list. | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0. | [default to 0]
+**userId** | **optional.Int64**| User ID. If not specified, all user records will be returned. | 
 **from** | **optional.Int64**| The start time of the query record. If not specified, the default is to push forward 30 days from the current time. | 
-**to** | **optional.Int64**| Time range ending, default to current time | 
+**to** | **optional.Int64**| Time range ending, default to current time. | 
 
 ### Example
 
@@ -513,9 +513,9 @@ func main() {
 
 > []BrokerTransaction RebateBrokerTransactionHistory(ctx, optional)
 
-The broker obtains the user's trading history
+The broker obtains the user's trading history.
 
-Record time range cannot exceed 30 days
+Record time range cannot exceed 30 days.
 
 ### Required Parameters
 
@@ -530,11 +530,11 @@ Optional parameters are passed through a pointer to a RebateBrokerTransactionHis
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
-**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
-**userId** | **optional.Int64**| User ID. If not specified, all user records will be returned | 
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list. | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0. | [default to 0]
+**userId** | **optional.Int64**| User ID. If not specified, all user records will be returned. | 
 **from** | **optional.Int64**| The start time of the query record. If not specified, the default is to push forward 30 days from the current time. | 
-**to** | **optional.Int64**| Time range ending, default to current time | 
+**to** | **optional.Int64**| Time range ending, default to current time. | 
 
 ### Example
 
@@ -595,7 +595,7 @@ func main() {
 
 > []RebateUserInfo RebateUserInfo(ctx, )
 
-User retrieves rebate information
+User retrieves rebate information.
 
 ### Required Parameters
 
@@ -659,16 +659,16 @@ func main() {
 
 > UserSubRelation UserSubRelation(ctx, userIdList)
 
-User-subordinate relationship
+User-subordinate relationship.
 
-Query whether the specified user is in the system
+Query whether the specified user is in the system.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**userIdList** | **string**| Query the user&#39;s ID list, split by,, if there are more than 100, take 100 | 
+**userIdList** | **string**| Query the user&#39;s ID list, split by,, if there are more than 100, take 100. | 
 
 ### Example
 
@@ -693,7 +693,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    userIdList := "1, 2, 3" // string - Query the user's ID list, split by,, if there are more than 100, take 100
+    userIdList := "1, 2, 3" // string - Query the user's ID list, split by,, if there are more than 100, take 100.
     
     result, _, err := client.RebateApi.UserSubRelation(ctx, userIdList)
     if err != nil {

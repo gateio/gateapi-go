@@ -10,8 +10,8 @@
 package gateapi
 
 type BrokerTransaction struct {
-	// Total
+	// Total.
 	Total int64 `json:"total,omitempty"`
-	// List of transaction history
+	// List of transaction history.
 	List []BrokerTransaction1 `json:"list,omitempty"`
 }

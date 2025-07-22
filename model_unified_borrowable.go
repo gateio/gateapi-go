@@ -10,8 +10,8 @@
 package gateapi
 
 type UnifiedBorrowable struct {
-	// Currency detail
+	// Currency detail.
 	Currency string `json:"currency,omitempty"`
-	// Max borrowable amount
+	// Max borrowable amount.
 	Amount string `json:"amount,omitempty"`
 }

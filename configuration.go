@@ -90,16 +90,16 @@ func NewConfiguration() *Configuration {
 	cfg := &Configuration{
 		BasePath:      "https://api.gateio.ws/api/v4",
 		DefaultHeader: make(map[string]string),
-		UserAgent:     "OpenAPI-Generator/6.102.1/go",
+		UserAgent:     "OpenAPI-Generator/6.102.6/go",
 		Debug:         false,
 		Servers: []ServerConfiguration{
 			{
 				Url:         "https://api.gateio.ws/api/v4",
-				Description: "Real Trading",
+				Description: "Real Trading.",
 			},
 			{
 				Url:         "https://fx-api-testnet.gateio.ws/api/v4",
-				Description: "TestNet Trading",
+				Description: "TestNet Trading.",
 			},
 		},
 	}

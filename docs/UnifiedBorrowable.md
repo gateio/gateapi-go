@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Currency** | **string** | Currency detail | [optional] 
-**Amount** | **string** | Max borrowable amount | [optional] 
+**Currency** | **string** | Currency detail. | [optional] 
+**Amount** | **string** | Max borrowable amount. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

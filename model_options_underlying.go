@@ -10,8 +10,8 @@
 package gateapi
 
 type OptionsUnderlying struct {
-	// Underlying name
+	// Underlying name.
 	Name string `json:"name,omitempty"`
-	// Spot index price (quote currency)
+	// Spot index price (quote currency).
 	IndexPrice string `json:"index_price,omitempty"`
 }

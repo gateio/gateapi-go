@@ -9,8 +9,8 @@
 
 package gateapi
 
-// API Key detail
+// API Key detail.
 type AccountDetailKey struct {
-	// mode: 1 - classic account 2 - portfolio margin account
+	// mode: 1 - classic account 2 - portfolio margin account.
 	Mode int32 `json:"mode,omitempty"`
 }

@@ -10,20 +10,20 @@
 package gateapi
 
 type RiskUnits struct {
-	// Risk unit flag
+	// Risk unit flag.
 	Symbol string `json:"symbol,omitempty"`
-	// Spot hedging utilization
+	// Spot hedging utilization.
 	SpotInUse string `json:"spot_in_use,omitempty"`
-	// Maintenance margin for risk unit
+	// Maintenance margin for risk unit.
 	MaintainMargin string `json:"maintain_margin,omitempty"`
-	// Initial margin for risk unit
+	// Initial margin for risk unit.
 	InitialMargin string `json:"initial_margin,omitempty"`
-	// Total Delta of risk unit
+	// Total Delta of risk unit.
 	Delta string `json:"delta,omitempty"`
-	// Total Gamma of risk unit
+	// Total Gamma of risk unit.
 	Gamma string `json:"gamma,omitempty"`
-	// Total Theta of risk unit
+	// Total Theta of risk unit.
 	Theta string `json:"theta,omitempty"`
-	// Total Vega of risk unit
+	// Total Vega of risk unit.
 	Vega string `json:"vega,omitempty"`
 }

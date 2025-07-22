@@ -10,6 +10,6 @@
 package gateapi
 
 type DebitFee struct {
-	// Whether GT fee discount is used
+	// Whether GT fee discount is used.
 	Enabled bool `json:"enabled"`
 }

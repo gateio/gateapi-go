@@ -10,8 +10,8 @@
 package gateapi
 
 type FuturesPositionCrossMode struct {
-	// Full position-by-position model, ISOLATED-by-position, CROSS-full position
+	// Full position-by-position model, ISOLATED-by-position, CROSS-full position.
 	Mode string `json:"mode"`
-	// Contract Market
+	// Contract Market.
 	Contract string `json:"contract"`
 }

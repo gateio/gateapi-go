@@ -10,8 +10,8 @@
 package gateapi
 
 type UniCurrencyInterest struct {
-	// Currency
+	// Currency.
 	Currency string `json:"currency,omitempty"`
-	// Interest status: interest_dividend - Normal dividend, interest_reinvest - Interest reinvestment Interest reinvestment
+	// Interest status: interest_dividend - Normal dividend, interest_reinvest - Interest reinvestment
 	InterestStatus string `json:"interest_status,omitempty"`
 }

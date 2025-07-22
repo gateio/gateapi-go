@@ -12,10 +12,10 @@ package gateapi
 type AccountRateLimit struct {
 	// Frequency limit level (For detailed frequency limit rules, see [Transaction ratio frequency limit](#rate-limit-based-on-fill-ratio))
 	Tier string `json:"tier,omitempty"`
-	// Transaction rate
+	// Transaction rate.
 	Ratio string `json:"ratio,omitempty"`
-	// Total transaction ratio of main account
+	// Total transaction ratio of main account.
 	MainRatio string `json:"main_ratio,omitempty"`
-	// Update time
+	// Update time.
 	UpdatedAt string `json:"updated_at,omitempty"`
 }

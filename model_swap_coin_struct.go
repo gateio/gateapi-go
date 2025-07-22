@@ -10,22 +10,34 @@
 package gateapi
 
 type SwapCoinStruct struct {
-	// Order ID
+	// Order ID.
 	Id int32 `json:"id,omitempty"`
-	// User ID
-	Uid int32 `json:"uid,omitempty"`
-	// Currency
-	Coin string `json:"coin,omitempty"`
-	// Type: 0-Lock, 1-Certificate
-	Type int32 `json:"type,omitempty"`
-	// Amount
-	Amount string `json:"amount,omitempty"`
-	// Exchange Ratio
-	ExchangeRate string `json:"exchange_rate,omitempty"`
-	// Plan ID
+	// Plan ID.
 	Pid int32 `json:"pid,omitempty"`
-	// status 1-success
-	Status int32 `json:"status,omitempty"`
-	// Transaction timestamp
+	// User ID.
+	Uid int32 `json:"uid,omitempty"`
+	// Currency.
+	Coin string `json:"coin,omitempty"`
+	// 类型 0-质押 1-赎回
+	Type int32 `json:"type,omitempty"`
+	// 子类型
+	Subtype string `json:"subtype,omitempty"`
+	// Amount.
+	Amount string `json:"amount,omitempty"`
+	// Exchange Ratio.
+	ExchangeRate string `json:"exchange_rate,omitempty"`
+	// 兑换金额
+	ExchangeAmount string `json:"exchange_amount,omitempty"`
+	// 更新时间戳
+	UpdateStamp int32 `json:"updateStamp,omitempty"`
+	// Transaction timestamp.
 	CreateStamp int32 `json:"createStamp,omitempty"`
+	// status 1-success.
+	Status int32 `json:"status,omitempty"`
+	// DEFI协议类型
+	ProtocolType int32 `json:"protocol_type,omitempty"`
+	// 参考ID
+	ClientOrderId string `json:"client_order_id,omitempty"`
+	// Order source.
+	Source string `json:"source,omitempty"`
 }

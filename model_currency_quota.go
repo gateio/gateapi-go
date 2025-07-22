@@ -9,16 +9,16 @@
 
 package gateapi
 
-// Currency Quota
+// Currency Quota.
 type CurrencyQuota struct {
-	// Currency
+	// Currency.
 	Currency string `json:"currency,omitempty"`
-	// Currency Index Price
+	// Currency Index Price.
 	IndexPrice string `json:"index_price,omitempty"`
-	// Minimum borrowing/collateral quota for the currency
+	// Minimum borrowing/collateral quota for the currency.
 	MinQuota string `json:"min_quota,omitempty"`
-	// Remaining borrowing/collateral limit for the currency
+	// Remaining borrowing/collateral limit for the currency.
 	LeftQuota string `json:"left_quota,omitempty"`
-	// Remaining currency limit converted to USDT
+	// Remaining currency limit converted to USDT.
 	LeftQuoteUsdt string `json:"left_quote_usdt,omitempty"`
 }

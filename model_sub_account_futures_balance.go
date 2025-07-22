@@ -10,8 +10,8 @@
 package gateapi
 
 type SubAccountFuturesBalance struct {
-	// User ID
+	// User ID.
 	Uid string `json:"uid,omitempty"`
-	// Futures account balances
+	// Futures account balances.
 	Available map[string]FuturesAccount `json:"available,omitempty"`
 }

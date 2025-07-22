@@ -10,14 +10,14 @@
 package gateapi
 
 type UnifiedAccount struct {
-	// User ID
+	// User ID.
 	UserId int64 `json:"user_id,omitempty"`
-	// Time of the most recent refresh
+	// Time of the most recent refresh.
 	RefreshTime int64 `json:"refresh_time,omitempty"`
 	// Whether the account is locked, valid in cross-currency margin/combined margin mode, false in other modes such as single-currency margin mode
 	Locked   bool                      `json:"locked,omitempty"`
 	Balances map[string]UnifiedBalance `json:"balances,omitempty"`
-	// Total account assets converted to USD, i.e. the sum of `(available + freeze) * price`  in all currencies (deprecated, to be deprecated, replaced by unified_account_total)
+	// Total account assets converted to USD, i.e. the sum of `(available + freeze) * price` in all currencies (deprecated, to be deprecated, replaced by unified_account_total)
 	Total string `json:"total,omitempty"`
 	// The total borrowed amount of the account converted into USD, i.e. the sum of `borrowed * price` of all currencies (excluding Point Cards). It is valid in cross-currency margin/combined margin mode, and is 0 in other modes such as single-currency margin mode.
 	Borrowed string `json:"borrowed,omitempty"`
@@ -39,14 +39,14 @@ type UnifiedAccount struct {
 	UnifiedAccountTotalLiab string `json:"unified_account_total_liab,omitempty"`
 	// Unify the total account equity, valid in single currency margin/cross-currency margin/combined margin mode
 	UnifiedAccountTotalEquity string `json:"unified_account_total_equity,omitempty"`
-	// Actual leverage, valid in cross-currency margin/combined margin mode
+	// Actual leverage, valid in cross-currency margin/combined margin mode.
 	Leverage string `json:"leverage,omitempty"`
 	// Total pending order loss, in USDT, valid in cross-currency margin/combined margin mode, 0 in other modes such as single-currency margin mode
 	SpotOrderLoss string `json:"spot_order_loss,omitempty"`
 	// Spot hedging status, true - enabled, false - not enabled.
 	SpotHedge bool `json:"spot_hedge,omitempty"`
-	// Whether to use funds as margin
+	// Whether to use funds as margin.
 	UseFunding bool `json:"use_funding,omitempty"`
-	// Whether all currencies are used as margin, true - All currencies are used as margin, false - No
+	// Whether all currencies are used as margin, true - false - No
 	IsAllCollateral bool `json:"is_all_collateral,omitempty"`
 }

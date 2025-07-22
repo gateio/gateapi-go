@@ -27,7 +27,7 @@ var (
 type AccountApiService service
 
 /*
-GetAccountDetail Get account detail
+GetAccountDetail Get account detail.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 @return AccountDetail
@@ -117,7 +117,7 @@ func (a *AccountApiService) GetAccountDetail(ctx context.Context) (AccountDetail
 }
 
 /*
-GetAccountRateLimit Get user transaction rate limit information
+GetAccountRateLimit Get user transaction rate limit information.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 @return []AccountRateLimit
@@ -212,11 +212,11 @@ type ListSTPGroupsOpts struct {
 }
 
 /*
-ListSTPGroups List STP Groups
-Retrieve the list of STP groups created by the main account user only
+ListSTPGroups List STP Groups.
+Retrieve the list of STP groups created by the main account user only.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListSTPGroupsOpts - Optional Parameters:
-  - @param "Name" (optional.String) -  Perform a fuzzy search based on the name
+  - @param "Name" (optional.String) -  Perform a fuzzy search based on the name.
 
 @return []StpGroup
 */
@@ -308,8 +308,8 @@ func (a *AccountApiService) ListSTPGroups(ctx context.Context, localVarOptionals
 }
 
 /*
-CreateSTPGroup Create STP Group
-Only the main account is allowed to create a new STP user group
+CreateSTPGroup Create STP Group.
+Only the main account is allowed to create a new STP user group.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param stpGroup
 
@@ -402,10 +402,10 @@ func (a *AccountApiService) CreateSTPGroup(ctx context.Context, stpGroup StpGrou
 }
 
 /*
-ListSTPGroupsUsers List users of the STP group
-Only the main account that created this STP group can query the account
+ListSTPGroupsUsers List users of the STP group.
+Only the main account that created this STP group can query the account.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param stpId STP Group ID
+  - @param stpId STP Group ID.
 
 @return []StpGroupUser
 */
@@ -496,11 +496,11 @@ func (a *AccountApiService) ListSTPGroupsUsers(ctx context.Context, stpId int64)
 }
 
 /*
-AddSTPGroupUsers Add users to the STP group
-- Only the master account that created the STP user group is allowed to add users to the STP user group.- Only accounts under the main account are allowed to be added. Cross-account is not permitted
+AddSTPGroupUsers Add users to the STP group.
+- Only the master account that created the STP user group is allowed to add users group.- Only accounts under the main account are allowed to be added. Cross-account is not permitted
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param stpId STP Group ID
-  - @param requestBody User ID
+  - @param stpId STP Group ID.
+  - @param requestBody User ID.
 
 @return []StpGroupUser
 */
@@ -593,11 +593,11 @@ func (a *AccountApiService) AddSTPGroupUsers(ctx context.Context, stpId int64, r
 }
 
 /*
-DeleteSTPGroupUsers Delete the user in the STP group
+DeleteSTPGroupUsers Delete the user in the STP group.
 - Only the main account that created this STP group is allowed to delete users from the STP user group - Deletion is limited to accounts under the current main account; cross-account deletion is not permitted
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param stpId STP Group ID
-  - @param userId STP user ID, multiple can be separated by commas
+  - @param stpId STP Group ID.
+  - @param userId STP user ID, multiple can be separated by commas.
 
 @return []StpGroupUser
 */

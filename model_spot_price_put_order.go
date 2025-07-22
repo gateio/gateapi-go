@@ -14,17 +14,17 @@ type SpotPricePutOrder struct {
 	Type string `json:"type,omitempty"`
 	// Order side  - buy: buy side - sell: sell side
 	Side string `json:"side"`
-	// Order price
+	// Order price.
 	Price string `json:"price"`
-	// When `type` is limit, it refers to base currency.  For instance, `BTC_USDT` means `BTC`  When `type` is `market`, it refers to different currency according to `side`  - `side` : `buy` means quote currency, `BTC_USDT` means `USDT` - `side` : `sell` means base currency，`BTC_USDT` means `BTC`
+	// When `type` is limit, it refers to base currency. For instance, `BTC_USDT` means `BTC`  When different currency according to `side`  - `side` : `buy` means quote currency, `BTC_USDT` means `USDT` - `side` : `sell` means base currency，`BTC_USDT` means `BTC`
 	Amount string `json:"amount"`
 	// Trading account type. Portfolio margin account must set to `unified`  -normal: spot trading - margin: margin trading - unified: unified trading
 	Account string `json:"account"`
 	// time_in_force  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled, taker only
 	TimeInForce string `json:"time_in_force,omitempty"`
-	// Whether to borrow coins automatically
+	// Whether to borrow coins automatically.
 	AutoBorrow bool `json:"auto_borrow,omitempty"`
-	// Whether to repay the loan automatically
+	// Whether to repay the loan automatically.
 	AutoRepay bool `json:"auto_repay,omitempty"`
 	// The source of the order, including: - web: web - api: api - app: app
 	Text string `json:"text,omitempty"`

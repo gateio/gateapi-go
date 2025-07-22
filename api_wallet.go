@@ -26,9 +26,9 @@ var (
 type WalletApiService service
 
 /*
-ListCurrencyChains List chains supported for specified currency
+ListCurrencyChains List chains supported for specified currency.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param currency Currency name
+  - @param currency Currency name.
 
 @return []CurrencyChain
 */
@@ -112,9 +112,9 @@ func (a *WalletApiService) ListCurrencyChains(ctx context.Context, currency stri
 }
 
 /*
-GetDepositAddress Generate currency deposit address
+GetDepositAddress Generate currency deposit address.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param currency Currency name
+  - @param currency Currency name.
 
 @return DepositAddress
 */
@@ -216,18 +216,18 @@ type ListWithdrawalsOpts struct {
 }
 
 /*
-ListWithdrawals Retrieve withdrawal records
-Record time range cannot exceed 30 days
+ListWithdrawals Retrieve withdrawal records.
+Record time range cannot exceed 30 days.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListWithdrawalsOpts - Optional Parameters:
-  - @param "Currency" (optional.String) -  Filter by currency. Return all currency records if not specified
+  - @param "Currency" (optional.String) -  Filter by currency. Return all currency records if not specified.
   - @param "WithdrawId" (optional.String) -  The withdrawal record id starts with w, such as: w1879219868. When withdraw_id is not empty, the value querys this withdrawal record and no longer querys according to time
   - @param "AssetClass" (optional.String) -  The currency type of withdrawal record is empty by default. It supports users to query the withdrawal records in the main and innovation areas on demand. Value range: SPOT, PILOT  SPOT: Main Zone  PILOT: Innovation Zone
   - @param "WithdrawOrderId" (optional.String) -  User-defined order number when withdrawing. Default is empty. When not empty, the specified user-defined order number record will be queried
-  - @param "From" (optional.Int64) -  Time range beginning, default to 7 days before current time
-  - @param "To" (optional.Int64) -  Time range ending, default to current time
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
-  - @param "Offset" (optional.Int32) -  List offset, starting from 0
+  - @param "From" (optional.Int64) -  Time range beginning, default to 7 days before current time.
+  - @param "To" (optional.Int64) -  Time range ending, default to current time.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0.
 
 @return []WithdrawalRecord
 */
@@ -349,15 +349,15 @@ type ListDepositsOpts struct {
 }
 
 /*
-ListDeposits Retrieve deposit records
-Record time range cannot exceed 30 days
+ListDeposits Retrieve deposit records.
+Record time range cannot exceed 30 days.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListDepositsOpts - Optional Parameters:
-  - @param "Currency" (optional.String) -  Filter by currency. Return all currency records if not specified
-  - @param "From" (optional.Int64) -  Time range beginning, default to 7 days before current time
-  - @param "To" (optional.Int64) -  Time range ending, default to current time
+  - @param "Currency" (optional.String) -  Filter by currency. Return all currency records if not specified.
+  - @param "From" (optional.Int64) -  Time range beginning, default to 7 days before current time.
+  - @param "To" (optional.Int64) -  Time range ending, default to current time.
   - @param "Limit" (optional.Int32) -  The maximum number of entries returned in the list is limited to 500 transactions.
-  - @param "Offset" (optional.Int32) -  List offset, starting from 0
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0.
 
 @return []DepositRecord
 */
@@ -461,8 +461,8 @@ func (a *WalletApiService) ListDeposits(ctx context.Context, localVarOptionals *
 }
 
 /*
-Transfer Transfer between trading accounts
-Transfer between different accounts. Currently support transfers between the following:  1. spot - margin 2. spot - futures(perpetual) 3. spot - delivery 4. spot - options
+Transfer Transfer between trading accounts.
+Transfer between different accounts. Currently support transfers between the following:  1. spot - margin 2. spot - futures(perpetual) 3. options
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param transfer
 
@@ -564,15 +564,15 @@ type ListSubAccountTransfersOpts struct {
 }
 
 /*
-ListSubAccountTransfers Retrieve transfer records between main and sub accounts
+ListSubAccountTransfers Retrieve transfer records between main and sub accounts.
 Record time range cannot exceed 30 days  &gt; Note: only records after 20-04-10can be retrieved
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListSubAccountTransfersOpts - Optional Parameters:
   - @param "SubUid" (optional.String) -  User ID of sub-account, you can query multiple records separated by `,`. If not specified, it will return the records of all sub accounts
-  - @param "From" (optional.Int64) -  Time range beginning, default to 7 days before current time
-  - @param "To" (optional.Int64) -  Time range ending, default to current time
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
-  - @param "Offset" (optional.Int32) -  List offset, starting from 0
+  - @param "From" (optional.Int64) -  Time range beginning, default to 7 days before current time.
+  - @param "To" (optional.Int64) -  Time range ending, default to current time.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0.
 
 @return []SubAccountTransferRecordItem
 */
@@ -676,7 +676,7 @@ func (a *WalletApiService) ListSubAccountTransfers(ctx context.Context, localVar
 }
 
 /*
-TransferWithSubAccount Transfer between main and sub accounts
+TransferWithSubAccount Transfer between main and sub accounts.
 Support transferring with sub user&#39;s spot or futures account. Note that only main user&#39;s spot account is used no matter which sub user&#39;s account is operated.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param subAccountTransfer
@@ -770,8 +770,8 @@ func (a *WalletApiService) TransferWithSubAccount(ctx context.Context, subAccoun
 }
 
 /*
-SubAccountToSubAccount Sub-account transfers to sub-account
-It is possible to perform balance transfers between two sub-accounts under the same main account. You can use either the API Key of the main account or the API Key of the sub-account to initiate the transfer.
+SubAccountToSubAccount Sub-account transfers to sub-account.
+It is possible to perform balance transfers between two sub-accounts under the same main account. You can use either the API Key of the main account sub-account to initiate the transfer.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param subAccountToSubAccount
 
@@ -870,7 +870,7 @@ type GetTransferOrderStatusOpts struct {
 }
 
 /*
-GetTransferOrderStatus Transfer status query
+GetTransferOrderStatus Transfer status query.
 Support querying transfer status based on user-defined client_order_id or tx_id returned by the transfer interface
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *GetTransferOrderStatusOpts - Optional Parameters:
@@ -975,10 +975,10 @@ type ListWithdrawStatusOpts struct {
 }
 
 /*
-ListWithdrawStatus Retrieve withdrawal status
+ListWithdrawStatus Retrieve withdrawal status.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListWithdrawStatusOpts - Optional Parameters:
-  - @param "Currency" (optional.String) -  Retrieve data of the specified currency
+  - @param "Currency" (optional.String) -  Retrieve data of the specified currency.
 
 @return []WithdrawStatus
 */
@@ -1075,7 +1075,7 @@ type ListSubAccountBalancesOpts struct {
 }
 
 /*
-ListSubAccountBalances Retrieve sub account balances
+ListSubAccountBalances Retrieve sub account balances.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListSubAccountBalancesOpts - Optional Parameters:
   - @param "SubUid" (optional.String) -  User ID of sub-account, you can query multiple records separated by `,`. If not specified, it will return the records of all sub accounts
@@ -1175,7 +1175,7 @@ type ListSubAccountMarginBalancesOpts struct {
 }
 
 /*
-ListSubAccountMarginBalances Query sub accounts' margin balances
+ListSubAccountMarginBalances Query sub accounts' margin balances.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListSubAccountMarginBalancesOpts - Optional Parameters:
   - @param "SubUid" (optional.String) -  User ID of sub-account, you can query multiple records separated by `,`. If not specified, it will return the records of all sub accounts
@@ -1276,11 +1276,11 @@ type ListSubAccountFuturesBalancesOpts struct {
 }
 
 /*
-ListSubAccountFuturesBalances Query sub accounts' futures account balances
+ListSubAccountFuturesBalances Query sub accounts' futures account balances.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListSubAccountFuturesBalancesOpts - Optional Parameters:
   - @param "SubUid" (optional.String) -  User ID of sub-account, you can query multiple records separated by `,`. If not specified, it will return the records of all sub accounts
-  - @param "Settle" (optional.String) -  Query only balances of specified settle currency
+  - @param "Settle" (optional.String) -  Query only balances of specified settle currency.
 
 @return []SubAccountFuturesBalance
 */
@@ -1380,7 +1380,7 @@ type ListSubAccountCrossMarginBalancesOpts struct {
 }
 
 /*
-ListSubAccountCrossMarginBalances Query subaccount's cross_margin account info
+ListSubAccountCrossMarginBalances Query subaccount's cross_margin account info.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListSubAccountCrossMarginBalancesOpts - Optional Parameters:
   - @param "SubUid" (optional.String) -  User ID of sub-account, you can query multiple records separated by `,`. If not specified, it will return the records of all sub accounts
@@ -1482,13 +1482,13 @@ type ListSavedAddressOpts struct {
 }
 
 /*
-ListSavedAddress Query saved address
+ListSavedAddress Query saved address.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param currency Currency
+  - @param currency Currency.
   - @param optional nil or *ListSavedAddressOpts - Optional Parameters:
-  - @param "Chain" (optional.String) -  Chain name
-  - @param "Limit" (optional.String) -  Maximum number returned, 100 at most
-  - @param "Page" (optional.Int32) -  Page number
+  - @param "Chain" (optional.String) -  Chain name.
+  - @param "Limit" (optional.String) -  Maximum number returned, 100 at most.
+  - @param "Page" (optional.Int32) -  Page number.
 
 @return []SavedAddress
 */
@@ -1593,7 +1593,7 @@ type GetTradeFeeOpts struct {
 }
 
 /*
-GetTradeFee Retrieve personal trading fee
+GetTradeFee Retrieve personal trading fee.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *GetTradeFeeOpts - Optional Parameters:
   - @param "CurrencyPair" (optional.String) -  Specify a currency pair to retrieve precise fee rate  This field is optional. In most cases, the fee rate is identical among all currency pairs
@@ -1697,8 +1697,8 @@ type GetTotalBalanceOpts struct {
 }
 
 /*
-GetTotalBalance Retrieve user's total balances
-This endpoint returns an approximate sum of exchanged amount from all currencies to input currency for each account.The exchange rate and account balance could have been cached for at most 1 minute. It is not recommended to use its result for any trading calculation.  For trading calculation, use the corresponding account query endpoint for each account type. For example:   - &#x60;GET /spot/accounts&#x60; to query spot account balance - &#x60;GET /margin/accounts&#x60; to query margin account balance - &#x60;GET /futures/{settle}/accounts&#x60; to query futures account balance
+GetTotalBalance Retrieve user's total balances.
+This endpoint returns an approximate sum of exchanged amount from all currencies to input currency for each account.The exchange rate and account balance could have been cached for at most 1 minute. It is not recommended to use its result for any trading calculation.  For trading calculation, use the corresponding account query endpoint for each account type. For example:   - &#x60;GET /spot/accounts&#x60; to query spot account balance - &#x60;GET /margin/accounts&#x60; /futures/{settle}/accounts&#x60; to query futures account balance
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *GetTotalBalanceOpts - Optional Parameters:
   - @param "Currency" (optional.String) -  Currency unit used to calculate the balance amount. BTC, CNY, USD and USDT are allowed. USDT is the default.
@@ -1793,7 +1793,7 @@ func (a *WalletApiService) GetTotalBalance(ctx context.Context, localVarOptional
 }
 
 /*
-ListSmallBalance List small balance
+ListSmallBalance List small balance.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 @return []SmallBalance
@@ -1883,7 +1883,7 @@ func (a *WalletApiService) ListSmallBalance(ctx context.Context) ([]SmallBalance
 }
 
 /*
-ConvertSmallBalance Convert small balance
+ConvertSmallBalance Convert small balance.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param convertSmallBalance
 */
@@ -1971,12 +1971,12 @@ type ListSmallBalanceHistoryOpts struct {
 }
 
 /*
-ListSmallBalanceHistory List small balance history
+ListSmallBalanceHistory List small balance history.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListSmallBalanceHistoryOpts - Optional Parameters:
-  - @param "Currency" (optional.String) -  Currency
-  - @param "Page" (optional.Int32) -  Page number
-  - @param "Limit" (optional.Int32) -  Maximum response items.  Default: 100, minimum: 1, Maximum: 100
+  - @param "Currency" (optional.String) -  Currency.
+  - @param "Page" (optional.Int32) -  Page number.
+  - @param "Limit" (optional.Int32) -  Maximum response items. Default: 100, minimum: 1, Maximum: 100.
 
 @return []SmallBalanceHistory
 */
@@ -2084,14 +2084,14 @@ type ListPushOrdersOpts struct {
 }
 
 /*
-ListPushOrders Retrieve the UID transfer history
+ListPushOrders Retrieve the UID transfer history.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListPushOrdersOpts - Optional Parameters:
-  - @param "Id" (optional.Int32) -  Order ID
+  - @param "Id" (optional.Int32) -  Order ID.
   - @param "From" (optional.Int32) -  The start time of the query record. If not specified, it defaults to 7 days forward from the current time, in seconds Unix timestamp
   - @param "To" (optional.Int32) -  The end time of the query record. If not specified, the default is the current time, which is a Unix timestamp in seconds.
-  - @param "Limit" (optional.Int32) -  The maximum number of items returned in the list, the default value is 100
-  - @param "Offset" (optional.Int32) -  List offset, starting from 0
+  - @param "Limit" (optional.Int32) -  The maximum number of items returned in the list, the default value is 100.
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0.
   - @param "TransactionType" (optional.String) -  The list returns the order type `withdraw`, `deposit`, the default is `withdraw`.
 
 @return []UidPushOrder

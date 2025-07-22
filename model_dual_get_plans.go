@@ -10,29 +10,29 @@
 package gateapi
 
 type DualGetPlans struct {
-	// Plan ID
+	// Plan ID.
 	Id int32 `json:"id,omitempty"`
-	// Instrument Name
+	// Instrument Name.
 	InstrumentName string `json:"instrument_name,omitempty"`
-	// Investment Currency
+	// Investment Currency.
 	InvestCurrency string `json:"invest_currency,omitempty"`
-	// Strike Currency
+	// Strike Currency.
 	ExerciseCurrency string `json:"exercise_currency,omitempty"`
-	// Strike price
+	// Strike price.
 	ExercisePrice float64 `json:"exercise_price,omitempty"`
-	// Settlement time
+	// Settlement time.
 	DeliveryTime int32 `json:"delivery_time,omitempty"`
-	// Minimum Copies
+	// Minimum Copies.
 	MinCopies int32 `json:"min_copies,omitempty"`
-	// Maximum Copies
+	// Maximum Copies.
 	MaxCopies int32 `json:"max_copies,omitempty"`
-	// Per Unit Value
+	// Per Unit Value.
 	PerValue string `json:"per_value,omitempty"`
-	// APY
+	// APY.
 	ApyDisplay string `json:"apy_display,omitempty"`
-	// start time
+	// start time.
 	StartTime int32 `json:"start_time,omitempty"`
-	// Finished time
+	// Finished time.
 	EndTime int32 `json:"end_time,omitempty"`
 	// Status:   `NOTSTARTED`-not started  `ONGOING`-ongoing  `ENDED`-ended
 	Status string `json:"status,omitempty"`

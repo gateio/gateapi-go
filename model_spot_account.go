@@ -10,12 +10,12 @@
 package gateapi
 
 type SpotAccount struct {
-	// Currency detail
+	// Currency detail.
 	Currency string `json:"currency,omitempty"`
-	// Available amount
+	// Available amount.
 	Available string `json:"available,omitempty"`
-	// Locked amount, used in trading
+	// Locked amount, used in trading.
 	Locked string `json:"locked,omitempty"`
-	// Version number
+	// Version number.
 	UpdateId int64 `json:"update_id,omitempty"`
 }

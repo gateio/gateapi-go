@@ -13,13 +13,13 @@ package gateapi
 type Transfer struct {
 	// Transfer currency. For futures account, `currency` can be set to `POINT` or settle currency
 	Currency string `json:"currency"`
-	// Account to transfer from
+	// Account to transfer from.
 	From string `json:"from"`
-	// Account to transfer to
+	// Account to transfer to.
 	To string `json:"to"`
-	// Transfer amount
+	// Transfer amount.
 	Amount string `json:"amount"`
-	// Margin currency pair. Required if transfer from or to margin account
+	// Margin currency pair. Required if transfer from or to margin account.
 	CurrencyPair string `json:"currency_pair,omitempty"`
 	// Futures settle currency. Required if transferring from or to futures account
 	Settle string `json:"settle,omitempty"`

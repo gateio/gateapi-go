@@ -9,9 +9,9 @@
 
 package gateapi
 
-// Info of order to be cancelled
+// Info of order to be cancelled.
 type CancelBatchOrder struct {
-	// Order currency pair
+	// Order currency pair.
 	CurrencyPair string `json:"currency_pair"`
 	// Order ID or user custom ID. Custom ID are accepted only within 30 minutes after order creation
 	Id string `json:"id"`

@@ -9,26 +9,26 @@
 
 package gateapi
 
-// Collateral record
+// Collateral record.
 type CollateralRecord struct {
-	// Order ID
+	// Order ID.
 	OrderId int64 `json:"order_id,omitempty"`
-	// Collateral record ID
+	// Collateral record ID.
 	RecordId int64 `json:"record_id,omitempty"`
-	// Borrowed currency
+	// Borrowed currency.
 	BorrowCurrency string `json:"borrow_currency,omitempty"`
-	// Borrowing amount
+	// Borrowing amount.
 	BorrowAmount string `json:"borrow_amount,omitempty"`
-	// Collateral
+	// Collateral.
 	CollateralCurrency string `json:"collateral_currency,omitempty"`
-	// The collateral amount before adjustment
+	// The collateral amount before adjustment.
 	BeforeCollateral string `json:"before_collateral,omitempty"`
-	// The collateral amount after adjustment
+	// The collateral amount after adjustment.
 	AfterCollateral string `json:"after_collateral,omitempty"`
-	// The collateral ratio before adjustment
+	// The collateral ratio before adjustment.
 	BeforeLtv string `json:"before_ltv,omitempty"`
-	// The collateral ratio after adjustment
+	// The collateral ratio after adjustment.
 	AfterLtv string `json:"after_ltv,omitempty"`
-	// Timestamp of the operation, in seconds
+	// Timestamp of the operation, in seconds.
 	OperateTime int64 `json:"operate_time,omitempty"`
 }

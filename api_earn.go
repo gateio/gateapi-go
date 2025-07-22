@@ -26,7 +26,7 @@ var (
 type EarnApiService service
 
 /*
-SwapETH2 ETH2 swap
+SwapETH2 ETH2 swap.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param eth2Swap
 */
@@ -107,8 +107,8 @@ func (a *EarnApiService) SwapETH2(ctx context.Context, eth2Swap Eth2Swap) (*http
 }
 
 /*
-RateListETH2 ETH2 historical rate of return query
-Check the ETH earnings rate record for the last 31 days
+RateListETH2 ETH2 historical rate of return query.
+Check the ETH earnings rate record for the last 31 days.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 @return []Eth2RateList
@@ -203,10 +203,10 @@ type ListDualInvestmentPlansOpts struct {
 }
 
 /*
-ListDualInvestmentPlans Dual Investment product list
+ListDualInvestmentPlans Dual Investment product list.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListDualInvestmentPlansOpts - Optional Parameters:
-  - @param "PlanId" (optional.Int64) -  Financial project id
+  - @param "PlanId" (optional.Int64) -  Financial project id.
 
 @return []DualGetPlans
 */
@@ -300,13 +300,13 @@ type ListDualOrdersOpts struct {
 }
 
 /*
-ListDualOrders Dual Investment order list
+ListDualOrders Dual Investment order list.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListDualOrdersOpts - Optional Parameters:
-  - @param "From" (optional.Int64) -  Start checkout time
-  - @param "To" (optional.Int64) -  End settlement time
-  - @param "Page" (optional.Int32) -  Page number
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "From" (optional.Int64) -  Start checkout time.
+  - @param "To" (optional.Int64) -  End settlement time.
+  - @param "Page" (optional.Int32) -  Page number.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
 
 @return []DualGetOrders
 */
@@ -407,7 +407,7 @@ func (a *EarnApiService) ListDualOrders(ctx context.Context, localVarOptionals *
 }
 
 /*
-PlaceDualOrder Place Dual Investment order
+PlaceDualOrder Place Dual Investment order.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param placeDualInvestmentOrder
 */
@@ -495,13 +495,13 @@ type ListStructuredProductsOpts struct {
 }
 
 /*
-ListStructuredProducts Structured Product List
+ListStructuredProducts Structured Product List.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param status Status (Default empty to query all)  `in_process`-In progress `will_begin`-Not started `wait_settlement`-Pending settlement `done`-Completed
   - @param optional nil or *ListStructuredProductsOpts - Optional Parameters:
   - @param "Type_" (optional.String) -  Product Type (Default empty to query all)  `SharkFin2.0`-Shark Fin `BullishSharkFin`-Bullish Treasure `BearishSharkFin`-Bearish Treasure `DoubleNoTouch`-Volatility Treasure `RangeAccrual`-Range Smart Yield `SnowBall`-Snowball
-  - @param "Page" (optional.Int32) -  Page number
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Page" (optional.Int32) -  Page number.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
 
 @return []StructuredGetProjectList
 */
@@ -602,13 +602,13 @@ type ListStructuredOrdersOpts struct {
 }
 
 /*
-ListStructuredOrders Structured Product Order List
+ListStructuredOrders Structured Product Order List.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListStructuredOrdersOpts - Optional Parameters:
   - @param "From" (optional.Int64) -  Start timestamp  Specify start time, time format is Unix timestamp. If not specified, it defaults to (the data start time of the time range actually returned by to and limit)
   - @param "To" (optional.Int64) -  Termination Timestamp  Specify the end time. If not specified, it defaults to the current time, and the time format is a Unix timestamp
-  - @param "Page" (optional.Int32) -  Page number
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Page" (optional.Int32) -  Page number.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
 
 @return []StructuredOrderList
 */
@@ -709,7 +709,7 @@ func (a *EarnApiService) ListStructuredOrders(ctx context.Context, localVarOptio
 }
 
 /*
-PlaceStructuredOrder Place Structured Product Order
+PlaceStructuredOrder Place Structured Product Order.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param structuredBuy
 */
@@ -790,7 +790,7 @@ func (a *EarnApiService) PlaceStructuredOrder(ctx context.Context, structuredBuy
 }
 
 /*
-FindCoin Staking Coins
+FindCoin Staking Coins.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param findCoin
 
@@ -883,7 +883,7 @@ func (a *EarnApiService) FindCoin(ctx context.Context, findCoin FindCoin) ([]str
 }
 
 /*
-SwapStakingCoin On-chain Token Swap for Earned Coins
+SwapStakingCoin On-chain Token Swap for Earned Coins.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param swapCoin
 

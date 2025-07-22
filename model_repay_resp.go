@@ -9,10 +9,10 @@
 
 package gateapi
 
-// Repay
+// Repay.
 type RepayResp struct {
-	// Principal
+	// Principal.
 	RepaidPrincipal string `json:"repaid_principal,omitempty"`
-	// Interest
+	// Interest.
 	RepaidInterest string `json:"repaid_interest,omitempty"`
 }

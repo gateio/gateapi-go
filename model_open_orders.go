@@ -10,7 +10,7 @@
 package gateapi
 
 type OpenOrders struct {
-	// Currency pair
+	// Currency pair.
 	CurrencyPair string `json:"currency_pair,omitempty"`
 	// The total number of pending orders for this trading pair on the current page
 	Total  int32   `json:"total,omitempty"`

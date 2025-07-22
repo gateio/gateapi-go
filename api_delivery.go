@@ -27,9 +27,9 @@ var (
 type DeliveryApiService service
 
 /*
-ListDeliveryContracts List all futures contracts
+ListDeliveryContracts List all futures contracts.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
+  - @param settle Settle currency.
 
 @return []DeliveryContract
 */
@@ -114,10 +114,10 @@ func (a *DeliveryApiService) ListDeliveryContracts(ctx context.Context, settle s
 }
 
 /*
-GetDeliveryContract Get a single contract
+GetDeliveryContract Get a single contract.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
-  - @param contract Futures contract
+  - @param settle Settle currency.
+  - @param contract Futures contract.
 
 @return DeliveryContract
 */
@@ -211,14 +211,14 @@ type ListDeliveryOrderBookOpts struct {
 }
 
 /*
-ListDeliveryOrderBook Futures order book
-Bids will be sorted by price from high to low, while asks sorted reversely
+ListDeliveryOrderBook Futures order book.
+Bids will be sorted by price from high to low, while asks sorted reversely.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
-  - @param contract Futures contract
+  - @param settle Settle currency.
+  - @param contract Futures contract.
   - @param optional nil or *ListDeliveryOrderBookOpts - Optional Parameters:
-  - @param "Interval" (optional.String) -  Order depth. 0 means no aggregation is applied. default to 0
-  - @param "Limit" (optional.Int32) -  Maximum number of order depth data in asks or bids
+  - @param "Interval" (optional.String) -  Order depth. 0 means no aggregation is applied. default to 0.
+  - @param "Limit" (optional.Int32) -  Maximum number of order depth data in asks or bids.
   - @param "WithId" (optional.Bool) -  Whether to return depth update ID. This ID increments by 1 each time.
 
 @return FuturesOrderBook
@@ -322,15 +322,15 @@ type ListDeliveryTradesOpts struct {
 }
 
 /*
-ListDeliveryTrades Futures trading history
+ListDeliveryTrades Futures trading history.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
-  - @param contract Futures contract
+  - @param settle Settle currency.
+  - @param contract Futures contract.
   - @param optional nil or *ListDeliveryTradesOpts - Optional Parameters:
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
   - @param "LastId" (optional.String) -  以上个列表的最后一条记录的 ID 作为下个列表的起点。 该字段不再继续支持，新的请求请使用 `from` 和 `to` 字段来限定时间范围
   - @param "From" (optional.Int64) -  Specify starting time in Unix seconds. If not specified, `to` and `limit` will be used to limit response items. If items between `from` and `to` are more than `limit`, only `limit` number will be returned.
-  - @param "To" (optional.Int64) -  Specify end time in Unix seconds, default to current time
+  - @param "To" (optional.Int64) -  Specify end time in Unix seconds, default to current time.
 
 @return []FuturesTrade
 */
@@ -436,16 +436,16 @@ type ListDeliveryCandlesticksOpts struct {
 }
 
 /*
-ListDeliveryCandlesticks Get futures candlesticks
+ListDeliveryCandlesticks Get futures candlesticks.
 Return specified contract candlesticks. If prefix &#x60;contract&#x60; with &#x60;mark_&#x60;, the contract&#39;s mark price candlesticks are returned; if prefix with &#x60;index_&#x60;, index price candlesticks will be returned.  Maximum of 2000 points are returned in one query. Be sure not to exceed the limit when specifying &#x60;from&#x60;, &#x60;to&#x60; and &#x60;interval&#x60;
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
-  - @param contract Futures contract
+  - @param settle Settle currency.
+  - @param contract Futures contract.
   - @param optional nil or *ListDeliveryCandlesticksOpts - Optional Parameters:
   - @param "From" (optional.Int64) -  Start time of candlesticks, formatted in Unix timestamp in seconds. Default to`to - 100 * interval` if not specified
-  - @param "To" (optional.Int64) -  Specify the end time of the K-line chart, defaults to current time if not specified, note that the time format is Unix timestamp with second
+  - @param "To" (optional.Int64) -  Specify the end time of the K-line chart, defaults to current time if not specified, note that the time format is Unix timestamp with second precision specified
   - @param "Limit" (optional.Int32) -  Maximum recent data points to return. `limit` is conflicted with `from` and `to`. If either `from` or `to` is specified, request will be rejected.
-  - @param "Interval" (optional.String) -  Time interval between data points, note that 1w represents a natural week, 7d time is aligned with Unix initial timeweek
+  - @param "Interval" (optional.String) -  Time interval between data points, note that 1w represents a natural week, 7d time is aligned with Unix initial timeweek, 7d time is aligned with Unix initial time
 
 @return []DeliveryCandlestick
 */
@@ -548,11 +548,11 @@ type ListDeliveryTickersOpts struct {
 }
 
 /*
-ListDeliveryTickers List futures tickers
+ListDeliveryTickers List futures tickers.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
+  - @param settle Settle currency.
   - @param optional nil or *ListDeliveryTickersOpts - Optional Parameters:
-  - @param "Contract" (optional.String) -  Futures contract
+  - @param "Contract" (optional.String) -  Futures contract.
 
 @return []DeliveryTicker
 */
@@ -645,11 +645,11 @@ type ListDeliveryInsuranceLedgerOpts struct {
 }
 
 /*
-ListDeliveryInsuranceLedger Futures insurance balance history
+ListDeliveryInsuranceLedger Futures insurance balance history.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
+  - @param settle Settle currency.
   - @param optional nil or *ListDeliveryInsuranceLedgerOpts - Optional Parameters:
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
 
 @return []InsuranceRecord
 */
@@ -737,9 +737,9 @@ func (a *DeliveryApiService) ListDeliveryInsuranceLedger(ctx context.Context, se
 }
 
 /*
-ListDeliveryAccounts Query futures account
+ListDeliveryAccounts Query futures account.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
+  - @param settle Settle currency.
 
 @return FuturesAccount
 */
@@ -838,14 +838,14 @@ type ListDeliveryAccountBookOpts struct {
 }
 
 /*
-ListDeliveryAccountBook Query account book
+ListDeliveryAccountBook Query account book.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
+  - @param settle Settle currency.
   - @param optional nil or *ListDeliveryAccountBookOpts - Optional Parameters:
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
   - @param "From" (optional.Int64) -  Start timestamp  Specify start time, time format is Unix timestamp. If not specified, it defaults to (the data start time of the time range actually returned by to and limit)
   - @param "To" (optional.Int64) -  Termination Timestamp  Specify the end time. If not specified, it defaults to the current time, and the time format is a Unix timestamp
-  - @param "Type_" (optional.String) -  Changing Type: - dnw: Deposit & Withdraw - pnl: Profit & Loss by reducing position - fee: Trading fee - refr: Referrer rebate - fund: Funding - point_dnw: POINT Deposit & Withdraw - point_fee: POINT Trading fee - point_refr: POINT Referrer rebate
+  - @param "Type_" (optional.String) -  Changing Type: - dnw: Deposit & Withdraw - pnl: Profit & Loss by reducing position - fee: Trading fee - refr: Referrer rebate - fund: Funding - point_dnw: point_fee: POINT Trading fee - point_refr: POINT Referrer rebate
 
 @return []FuturesAccountBook
 */
@@ -948,9 +948,9 @@ func (a *DeliveryApiService) ListDeliveryAccountBook(ctx context.Context, settle
 }
 
 /*
-ListDeliveryPositions List all positions of a user
+ListDeliveryPositions List all positions of a user.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
+  - @param settle Settle currency.
 
 @return []Position
 */
@@ -1041,10 +1041,10 @@ func (a *DeliveryApiService) ListDeliveryPositions(ctx context.Context, settle s
 }
 
 /*
-GetDeliveryPosition Get single position
+GetDeliveryPosition Get single position.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
-  - @param contract Futures contract
+  - @param settle Settle currency.
+  - @param contract Futures contract.
 
 @return Position
 */
@@ -1137,11 +1137,11 @@ func (a *DeliveryApiService) GetDeliveryPosition(ctx context.Context, settle str
 }
 
 /*
-UpdateDeliveryPositionMargin Update position margin
+UpdateDeliveryPositionMargin Update position margin.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
-  - @param contract Futures contract
-  - @param change Margin change amount, positive number increases, negative number
+  - @param settle Settle currency.
+  - @param contract Futures contract.
+  - @param change Margin change amount, positive number increases, negative number.
 
 @return Position
 */
@@ -1235,11 +1235,11 @@ func (a *DeliveryApiService) UpdateDeliveryPositionMargin(ctx context.Context, s
 }
 
 /*
-UpdateDeliveryPositionLeverage Update position leverage
+UpdateDeliveryPositionLeverage Update position leverage.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
-  - @param contract Futures contract
-  - @param leverage New position leverage
+  - @param settle Settle currency.
+  - @param contract Futures contract.
+  - @param leverage New position leverage.
 
 @return Position
 */
@@ -1333,11 +1333,11 @@ func (a *DeliveryApiService) UpdateDeliveryPositionLeverage(ctx context.Context,
 }
 
 /*
-UpdateDeliveryPositionRiskLimit Update position risk limit
+UpdateDeliveryPositionRiskLimit Update position risk limit.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
-  - @param contract Futures contract
-  - @param riskLimit New position risk limit
+  - @param settle Settle currency.
+  - @param contract Futures contract.
+  - @param riskLimit New position risk limit.
 
 @return Position
 */
@@ -1440,17 +1440,17 @@ type ListDeliveryOrdersOpts struct {
 }
 
 /*
-ListDeliveryOrders List futures orders
-Zero-filled order cannot be retrieved 10 minutes after order cancellation
+ListDeliveryOrders List futures orders.
+Zero-filled order cannot be retrieved 10 minutes after order cancellation.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
-  - @param status Only list the orders with this status
+  - @param settle Settle currency.
+  - @param status Only list the orders with this status.
   - @param optional nil or *ListDeliveryOrdersOpts - Optional Parameters:
-  - @param "Contract" (optional.String) -  Futures contract
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
-  - @param "Offset" (optional.Int32) -  List offset, starting from 0
+  - @param "Contract" (optional.String) -  Futures contract.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0.
   - @param "LastId" (optional.String) -  Specify the currency name to query in batches, and support up to 100 pass parameters at a time.
-  - @param "CountTotal" (optional.Int32) -  Whether to return total number matched. Default to 0(no return)
+  - @param "CountTotal" (optional.Int32) -  Whether to return total number matched. Default to 0(no return).
 
 @return []FuturesOrder
 */
@@ -1557,10 +1557,10 @@ func (a *DeliveryApiService) ListDeliveryOrders(ctx context.Context, settle stri
 }
 
 /*
-CreateDeliveryOrder Create a futures order
-Zero-filled order cannot be retrieved 10 minutes after order cancellation
+CreateDeliveryOrder Create a futures order.
+Zero-filled order cannot be retrieved 10 minutes after order cancellation.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
+  - @param settle Settle currency.
   - @param futuresOrder
 
 @return FuturesOrder
@@ -1659,13 +1659,13 @@ type CancelDeliveryOrdersOpts struct {
 }
 
 /*
-CancelDeliveryOrders Cancel all `open` orders matched
-Zero-filled order cannot be retrieved 10 minutes after order cancellation
+CancelDeliveryOrders Cancel all `open` orders matched.
+Zero-filled order cannot be retrieved 10 minutes after order cancellation.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
-  - @param contract Futures contract
+  - @param settle Settle currency.
+  - @param contract Futures contract.
   - @param optional nil or *CancelDeliveryOrdersOpts - Optional Parameters:
-  - @param "Side" (optional.String) -  All bids or asks. Both included if not specified
+  - @param "Side" (optional.String) -  All bids or asks. Both included if not specified.
 
 @return []FuturesOrder
 */
@@ -1760,11 +1760,11 @@ func (a *DeliveryApiService) CancelDeliveryOrders(ctx context.Context, settle st
 }
 
 /*
-GetDeliveryOrder Get a single order
-Zero-filled order cannot be retrieved 10 minutes after order cancellation
+GetDeliveryOrder Get a single order.
+Zero-filled order cannot be retrieved 10 minutes after order cancellation.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
-  - @param orderId Retrieve the data of the order with the specified ID
+  - @param settle Settle currency.
+  - @param orderId Retrieve the data of the order with the specified ID.
 
 @return FuturesOrder
 */
@@ -1857,10 +1857,10 @@ func (a *DeliveryApiService) GetDeliveryOrder(ctx context.Context, settle string
 }
 
 /*
-CancelDeliveryOrder Cancel a single order
+CancelDeliveryOrder Cancel a single order.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
-  - @param orderId Retrieve the data of the order with the specified ID
+  - @param settle Settle currency.
+  - @param orderId Retrieve the data of the order with the specified ID.
 
 @return FuturesOrder
 */
@@ -1963,16 +1963,16 @@ type GetMyDeliveryTradesOpts struct {
 }
 
 /*
-GetMyDeliveryTrades List personal trading history
+GetMyDeliveryTrades List personal trading history.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
+  - @param settle Settle currency.
   - @param optional nil or *GetMyDeliveryTradesOpts - Optional Parameters:
-  - @param "Contract" (optional.String) -  Futures contract
-  - @param "Order" (optional.Int64) -  Futures order ID, return related data only if specified
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
-  - @param "Offset" (optional.Int32) -  List offset, starting from 0
+  - @param "Contract" (optional.String) -  Futures contract.
+  - @param "Order" (optional.Int64) -  Futures order ID, return related data only if specified.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0.
   - @param "LastId" (optional.String) -  Specify the currency name to query in batches, and support up to 100 pass parameters at a time.
-  - @param "CountTotal" (optional.Int32) -  Whether to return total number matched. Default to 0(no return)
+  - @param "CountTotal" (optional.Int32) -  Whether to return total number matched. Default to 0(no return).
 
 @return []MyFuturesTrade
 */
@@ -2087,12 +2087,12 @@ type ListDeliveryPositionCloseOpts struct {
 }
 
 /*
-ListDeliveryPositionClose List position close history
+ListDeliveryPositionClose List position close history.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
+  - @param settle Settle currency.
   - @param optional nil or *ListDeliveryPositionCloseOpts - Optional Parameters:
-  - @param "Contract" (optional.String) -  Futures contract
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "Contract" (optional.String) -  Futures contract.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
 
 @return []PositionClose
 */
@@ -2196,13 +2196,13 @@ type ListDeliveryLiquidatesOpts struct {
 }
 
 /*
-ListDeliveryLiquidates List liquidation history
+ListDeliveryLiquidates List liquidation history.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
+  - @param settle Settle currency.
   - @param optional nil or *ListDeliveryLiquidatesOpts - Optional Parameters:
-  - @param "Contract" (optional.String) -  Futures contract
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
-  - @param "At" (optional.Int32) -  Specify a liquidation timestamp
+  - @param "Contract" (optional.String) -  Futures contract.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
+  - @param "At" (optional.Int32) -  Specify a liquidation timestamp.
 
 @return []FuturesLiquidate
 */
@@ -2309,13 +2309,13 @@ type ListDeliverySettlementsOpts struct {
 }
 
 /*
-ListDeliverySettlements List settlement history
+ListDeliverySettlements List settlement history.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
+  - @param settle Settle currency.
   - @param optional nil or *ListDeliverySettlementsOpts - Optional Parameters:
-  - @param "Contract" (optional.String) -  Futures contract
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
-  - @param "At" (optional.Int32) -  Specify a settlement timestamp
+  - @param "Contract" (optional.String) -  Futures contract.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
+  - @param "At" (optional.Int32) -  Specify a settlement timestamp.
 
 @return []DeliverySettlement
 */
@@ -2422,14 +2422,14 @@ type ListDeliveryRiskLimitTiersOpts struct {
 }
 
 /*
-ListDeliveryRiskLimitTiers List risk limit tiers
-When the &#39;contract&#39; parameter is not passed, the default is to query the risk limits for the top 100 markets.&#39;Limit&#39; and &#39;offset&#39; correspond to pagination queries at the market level, not to the length of the returned array. This only takes effect when the &#39;contract&#39; parameter is empty.
+ListDeliveryRiskLimitTiers List risk limit tiers.
+When the &#39;contract&#39; parameter is not passed, the default is to query the risk limits for the top 100 markets.&#39;Limit&#39; and &#39;offset&#39; correspond to pagination queries at the market level, not to the length of the returned array. This only takes effect empty.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
+  - @param settle Settle currency.
   - @param optional nil or *ListDeliveryRiskLimitTiersOpts - Optional Parameters:
-  - @param "Contract" (optional.String) -  Futures contract
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
-  - @param "Offset" (optional.Int32) -  List offset, starting from 0
+  - @param "Contract" (optional.String) -  Futures contract.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0.
 
 @return []FuturesLimitRiskTiers
 */
@@ -2530,14 +2530,14 @@ type ListPriceTriggeredDeliveryOrdersOpts struct {
 }
 
 /*
-ListPriceTriggeredDeliveryOrders List All Price-triggered Orders
+ListPriceTriggeredDeliveryOrders List All Price-triggered Orders.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
-  - @param status Only list the orders with this status
+  - @param settle Settle currency.
+  - @param status Only list the orders with this status.
   - @param optional nil or *ListPriceTriggeredDeliveryOrdersOpts - Optional Parameters:
-  - @param "Contract" (optional.String) -  Futures contract, return related data only if specified
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
-  - @param "Offset" (optional.Int32) -  List offset, starting from 0
+  - @param "Contract" (optional.String) -  Futures contract, return related data only if specified.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0.
 
 @return []FuturesPriceTriggeredOrder
 */
@@ -2638,9 +2638,9 @@ func (a *DeliveryApiService) ListPriceTriggeredDeliveryOrders(ctx context.Contex
 }
 
 /*
-CreatePriceTriggeredDeliveryOrder Create a price-triggered order
+CreatePriceTriggeredDeliveryOrder Create a price-triggered order.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
+  - @param settle Settle currency.
   - @param futuresPriceTriggeredOrder
 
 @return TriggerOrderResponse
@@ -2734,10 +2734,10 @@ func (a *DeliveryApiService) CreatePriceTriggeredDeliveryOrder(ctx context.Conte
 }
 
 /*
-CancelPriceTriggeredDeliveryOrderList Cancel All Price-triggered Orders
+CancelPriceTriggeredDeliveryOrderList Cancel All Price-triggered Orders.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
-  - @param contract Futures contract
+  - @param settle Settle currency.
+  - @param contract Futures contract.
 
 @return []FuturesPriceTriggeredOrder
 */
@@ -2829,10 +2829,10 @@ func (a *DeliveryApiService) CancelPriceTriggeredDeliveryOrderList(ctx context.C
 }
 
 /*
-GetPriceTriggeredDeliveryOrder Get a price-triggered order
+GetPriceTriggeredDeliveryOrder Get a price-triggered order.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
-  - @param orderId Retrieve the data of the order with the specified ID
+  - @param settle Settle currency.
+  - @param orderId Retrieve the data of the order with the specified ID.
 
 @return FuturesPriceTriggeredOrder
 */
@@ -2925,10 +2925,10 @@ func (a *DeliveryApiService) GetPriceTriggeredDeliveryOrder(ctx context.Context,
 }
 
 /*
-CancelPriceTriggeredDeliveryOrder cancel a price-triggered order
+CancelPriceTriggeredDeliveryOrder cancel a price-triggered order.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param settle Settle currency
-  - @param orderId Retrieve the data of the order with the specified ID
+  - @param settle Settle currency.
+  - @param orderId Retrieve the data of the order with the specified ID.
 
 @return FuturesPriceTriggeredOrder
 */

@@ -9,12 +9,12 @@
 
 package gateapi
 
-// Market gradient information
+// Market gradient information.
 type MarginLeverageTier struct {
-	// Maximum loan limit
+	// Maximum loan limit.
 	UpperLimit string `json:"upper_limit,omitempty"`
-	// Maintenance margin rate
+	// Maintenance margin rate.
 	Mmr string `json:"mmr,omitempty"`
-	// Maximum leverage multiple
+	// Maximum leverage multiple.
 	Leverage string `json:"leverage,omitempty"`
 }

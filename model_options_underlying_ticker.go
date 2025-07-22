@@ -9,12 +9,12 @@
 
 package gateapi
 
-// Options underlying detail
+// Options underlying detail.
 type OptionsUnderlyingTicker struct {
-	// Total put options trades amount in last 24h
+	// Total put options trades amount in last 24h.
 	TradePut int64 `json:"trade_put,omitempty"`
-	// Total call options trades amount in last 24h
+	// Total call options trades amount in last 24h.
 	TradeCall int64 `json:"trade_call,omitempty"`
-	// Index price (quote currency)
+	// Index price (quote currency).
 	IndexPrice string `json:"index_price,omitempty"`
 }

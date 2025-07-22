@@ -9,20 +9,20 @@
 
 package gateapi
 
-// Interest record
+// Interest record.
 type UniLoanInterestRecord struct {
-	// Currency name
+	// Currency name.
 	Currency string `json:"currency,omitempty"`
-	// Currency pair
+	// Currency pair.
 	CurrencyPair string `json:"currency_pair,omitempty"`
-	// Actual rate
+	// Actual rate.
 	ActualRate string `json:"actual_rate,omitempty"`
-	// Interest
+	// Interest.
 	Interest string `json:"interest,omitempty"`
-	// Status: 0 - fail, 1 - success
+	// Status: 0 - fail, 1 - success.
 	Status int32 `json:"status,omitempty"`
-	// Type, platform - platform，margin - margin
+	// Type, platform - platform，margin - margin.
 	Type string `json:"type,omitempty"`
-	// Created time
+	// Created time.
 	CreateTime int64 `json:"create_time,omitempty"`
 }

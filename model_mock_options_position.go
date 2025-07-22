@@ -9,7 +9,7 @@
 
 package gateapi
 
-// Options positions
+// Options positions.
 type MockOptionsPosition struct {
 	// Option name, currently only supports options for BTC and ETH with USDT.
 	OptionsName string `json:"options_name"`

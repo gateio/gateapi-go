@@ -10,16 +10,16 @@
 package gateapi
 
 type SavedAddress struct {
-	// Currency
+	// Currency.
 	Currency string `json:"currency,omitempty"`
-	// Chain name
+	// Chain name.
 	Chain string `json:"chain,omitempty"`
-	// Address
+	// Address.
 	Address string `json:"address,omitempty"`
-	// Name
+	// Name.
 	Name string `json:"name,omitempty"`
-	// Tag
+	// Tag.
 	Tag string `json:"tag,omitempty"`
-	// Whether to pass the verification 0-unverified, 1-verified
+	// Whether to pass the verification 0-unverified, 1-verified.
 	Verified string `json:"verified,omitempty"`
 }

@@ -10,13 +10,13 @@
 package gateapi
 
 type SubAccountTransfer struct {
-	// Sub account user ID
+	// Sub account user ID.
 	SubAccount string `json:"sub_account"`
 	// Target sub user's account. `spot` - spot account, `futures` - perpetual contract account, `delivery` - delivery account
 	SubAccountType string `json:"sub_account_type,omitempty"`
-	// Transfer currency name
+	// Transfer currency name.
 	Currency string `json:"currency"`
-	// Transfer amount
+	// Transfer amount.
 	Amount string `json:"amount"`
 	// Transfer direction. to - transfer into sub account; from - transfer out from sub account
 	Direction string `json:"direction"`

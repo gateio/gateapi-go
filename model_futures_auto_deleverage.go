@@ -10,24 +10,24 @@
 package gateapi
 
 type FuturesAutoDeleverage struct {
-	// Automatic deleveraging time
+	// Automatic deleveraging time.
 	Time int64 `json:"time,omitempty"`
-	// User ID
+	// User ID.
 	User int64 `json:"user,omitempty"`
-	// Order ID. Order IDs before 2023-02-20 are null
+	// Order ID. Order IDs before 2023-02-20 are null.
 	OrderId int64 `json:"order_id,omitempty"`
-	// Futures contract
+	// Futures contract.
 	Contract string `json:"contract,omitempty"`
-	// Position leverage
+	// Position leverage.
 	Leverage string `json:"leverage,omitempty"`
-	// Cross margin leverage(valid only when `leverage` is 0)
+	// Cross margin leverage(valid only when `leverage` is 0).
 	CrossLeverageLimit string `json:"cross_leverage_limit,omitempty"`
-	// Average entry price
+	// Average entry price.
 	EntryPrice string `json:"entry_price,omitempty"`
-	// Average fill price
+	// Average fill price.
 	FillPrice string `json:"fill_price,omitempty"`
-	// Trading size
+	// Trading size.
 	TradeSize int64 `json:"trade_size,omitempty"`
-	// Positions after auto-deleveraging
+	// Positions after auto-deleveraging.
 	PositionSize int64 `json:"position_size,omitempty"`
 }

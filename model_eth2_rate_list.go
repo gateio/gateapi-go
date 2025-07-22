@@ -10,10 +10,10 @@
 package gateapi
 
 type Eth2RateList struct {
-	// Date and Time Stamp
+	// Date and Time Stamp.
 	DateTime int64 `json:"date_time,omitempty"`
-	// Date
+	// Date.
 	Date string `json:"date,omitempty"`
-	// percentage
+	// percentage.
 	Rate string `json:"rate,omitempty"`
 }

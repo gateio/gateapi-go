@@ -10,28 +10,28 @@
 package gateapi
 
 type WithdrawStatus struct {
-	// Currency
+	// Currency.
 	Currency string `json:"currency,omitempty"`
-	// Currency name
+	// Currency name.
 	Name string `json:"name,omitempty"`
-	// Currency Chinese name
+	// Currency Chinese name.
 	NameCn string `json:"name_cn,omitempty"`
-	// Deposits fee
+	// Deposits fee.
 	Deposit string `json:"deposit,omitempty"`
-	// Withdrawal fee rate percentage
+	// Withdrawal fee rate percentage.
 	WithdrawPercent string `json:"withdraw_percent,omitempty"`
-	// Fixed withdrawal fee
+	// Fixed withdrawal fee.
 	WithdrawFix string `json:"withdraw_fix,omitempty"`
-	// Daily allowed withdrawal amount
+	// Daily allowed withdrawal amount.
 	WithdrawDayLimit string `json:"withdraw_day_limit,omitempty"`
-	// Minimum withdrawal amount
+	// Minimum withdrawal amount.
 	WithdrawAmountMini string `json:"withdraw_amount_mini,omitempty"`
-	// Daily withdrawal amount left
+	// Daily withdrawal amount left.
 	WithdrawDayLimitRemain string `json:"withdraw_day_limit_remain,omitempty"`
-	// Maximum amount for each withdrawal
+	// Maximum amount for each withdrawal.
 	WithdrawEachtimeLimit string `json:"withdraw_eachtime_limit,omitempty"`
-	// Fixed withdrawal fee on multiple chains
+	// Fixed withdrawal fee on multiple chains.
 	WithdrawFixOnChains map[string]string `json:"withdraw_fix_on_chains,omitempty"`
-	// Percentage withdrawal fee on multiple chains
+	// Percentage withdrawal fee on multiple chains.
 	WithdrawPercentOnChains map[string]string `json:"withdraw_percent_on_chains,omitempty"`
 }

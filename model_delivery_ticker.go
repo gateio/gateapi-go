@@ -10,50 +10,50 @@
 package gateapi
 
 type DeliveryTicker struct {
-	// Futures contract
+	// Futures contract.
 	Contract string `json:"contract,omitempty"`
-	// Last trading price
+	// Last trading price.
 	Last string `json:"last,omitempty"`
 	// Change percentage.
 	ChangePercentage string `json:"change_percentage,omitempty"`
-	// Contract total size
+	// Contract total size.
 	TotalSize string `json:"total_size,omitempty"`
-	// Lowest trading price in recent 24h
+	// Lowest trading price in recent 24h.
 	Low24h string `json:"low_24h,omitempty"`
-	// Highest trading price in recent 24h
+	// Highest trading price in recent 24h.
 	High24h string `json:"high_24h,omitempty"`
-	// Trade size in recent 24h
+	// Trade size in recent 24h.
 	Volume24h string `json:"volume_24h,omitempty"`
 	// Trade volumes in recent 24h in BTC(deprecated, use `volume_24h_base`, `volume_24h_quote`, `volume_24h_settle` instead)
 	Volume24hBtc string `json:"volume_24h_btc,omitempty"`
 	// Trade volumes in recent 24h in USD(deprecated, use `volume_24h_base`, `volume_24h_quote`, `volume_24h_settle` instead)
 	Volume24hUsd string `json:"volume_24h_usd,omitempty"`
-	// Trade volume in recent 24h, in base currency
+	// Trade volume in recent 24h, in base currency.
 	Volume24hBase string `json:"volume_24h_base,omitempty"`
-	// Trade volume in recent 24h, in quote currency
+	// Trade volume in recent 24h, in quote currency.
 	Volume24hQuote string `json:"volume_24h_quote,omitempty"`
-	// Trade volume in recent 24h, in settle currency
+	// Trade volume in recent 24h, in settle currency.
 	Volume24hSettle string `json:"volume_24h_settle,omitempty"`
-	// Recent mark price
+	// Recent mark price.
 	MarkPrice string `json:"mark_price,omitempty"`
-	// Funding rate
+	// Funding rate.
 	FundingRate string `json:"funding_rate,omitempty"`
-	// Indicative Funding rate in next period. (deprecated. use `funding_rate`)
+	// Indicative Funding rate in next period. (deprecated. use `funding_rate`).
 	FundingRateIndicative string `json:"funding_rate_indicative,omitempty"`
-	// Index price
+	// Index price.
 	IndexPrice string `json:"index_price,omitempty"`
 	// Exchange rate of base currency and settlement currency in Quanto contract. Does not exists in contracts of other types
 	QuantoBaseRate string `json:"quanto_base_rate,omitempty"`
-	// Basis rate
+	// Basis rate.
 	BasisRate string `json:"basis_rate,omitempty"`
-	// Basis value
+	// Basis value.
 	BasisValue string `json:"basis_value,omitempty"`
-	// Recent lowest ask
+	// Recent lowest ask.
 	LowestAsk string `json:"lowest_ask,omitempty"`
-	// The latest seller's lowest price order quantity
+	// The latest seller's lowest price order quantity.
 	LowestSize string `json:"lowest_size,omitempty"`
-	// Recent highest bid
+	// Recent highest bid.
 	HighestBid string `json:"highest_bid,omitempty"`
-	// The latest buyer's highest price order volume
+	// The latest buyer's highest price order volume.
 	HighestSize string `json:"highest_size,omitempty"`
 }

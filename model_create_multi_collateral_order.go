@@ -10,22 +10,22 @@
 package gateapi
 
 type CreateMultiCollateralOrder struct {
-	// Order ID
+	// Order ID.
 	OrderId string `json:"order_id,omitempty"`
-	// current - current, fixed - fixed, if not specified, default to current
+	// current - current, fixed - fixed, if not specified, default to current.
 	OrderType string `json:"order_type,omitempty"`
 	// Fixed interest rate loan period: 7d - 7 days, 30d - 30 days. Must be provided for fixed
 	FixedType string `json:"fixed_type,omitempty"`
-	// Fixed interest rate, must be specified for fixed
+	// Fixed interest rate, must be specified for fixed.
 	FixedRate string `json:"fixed_rate,omitempty"`
-	// Fixed interest rate, automatic renewal
+	// Fixed interest rate, automatic renewal.
 	AutoRenew bool `json:"auto_renew,omitempty"`
-	// Fixed interest rate, automatic repayment
+	// Fixed interest rate, automatic repayment.
 	AutoRepay bool `json:"auto_repay,omitempty"`
-	// Borrowed currency
+	// Borrowed currency.
 	BorrowCurrency string `json:"borrow_currency"`
-	// Borrowing amount
+	// Borrowing amount.
 	BorrowAmount string `json:"borrow_amount"`
-	// Collateral currency and amount
+	// Collateral currency and amount.
 	CollateralCurrencies []CollateralCurrency `json:"collateral_currencies,omitempty"`
 }

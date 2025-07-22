@@ -10,8 +10,8 @@
 package gateapi
 
 type PatchUniLend struct {
-	// Currency name
+	// Currency name.
 	Currency string `json:"currency,omitempty"`
-	// Minimum interest rate
+	// Minimum interest rate.
 	MinRate string `json:"min_rate,omitempty"`
 }

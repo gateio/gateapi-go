@@ -13,10 +13,10 @@ package gateapi
 type UnifiedPortfolioOutput struct {
 	// Total maintenance margin, including only the portfolio margin calculation results for positions in the risk unit,  excluding borrowed margin. If borrowing exists, conventional borrowing margin requirements will still apply.
 	MaintainMarginTotal string `json:"maintain_margin_total,omitempty"`
-	// Total initial margin, calculated as the maximum of the following three combinations: position,  position + positive delta orders, position + negative delta orders.
+	// Total initial margin, calculated as the maximum of the following three combinations: position,  position + positive delta orders, orders.
 	InitialMarginTotal string `json:"initial_margin_total,omitempty"`
-	// Calculate time
+	// Calculate time.
 	CalculateTime int64 `json:"calculate_time,omitempty"`
-	// Risk unit
+	// Risk unit.
 	RiskUnit []MockRiskUnit `json:"risk_unit,omitempty"`
 }

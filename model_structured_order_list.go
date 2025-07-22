@@ -9,20 +9,20 @@
 
 package gateapi
 
-// Structured order
+// Structured order.
 type StructuredOrderList struct {
-	// Order ID
+	// Order ID.
 	Id int32 `json:"id,omitempty"`
-	// Plan ID
+	// Plan ID.
 	Pid string `json:"pid,omitempty"`
-	// Locked coin
+	// Locked coin.
 	LockCoin string `json:"lock_coin,omitempty"`
-	// Locked amount
+	// Locked amount.
 	Amount string `json:"amount,omitempty"`
 	// Status:   SUCCESS - SUCCESS  FAILED - FAILED DONE - DONE
 	Status string `json:"status,omitempty"`
-	// Income
+	// Income.
 	Income string `json:"income,omitempty"`
-	// Created time
+	// Created time.
 	CreateTime int32 `json:"create_time,omitempty"`
 }

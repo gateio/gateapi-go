@@ -11,17 +11,17 @@ package gateapi
 
 // Margin account detail. `base` refers to base currency, while `quotes to quote currency
 type MarginAccount struct {
-	// Currency pair
+	// Currency pair.
 	CurrencyPair string `json:"currency_pair,omitempty"`
-	// Account type, risk - risk rate account, mmr - maintenance margin rate account, inactive - market not activated
+	// Account type, risk - risk rate account, mmr - maintenance margin market not activated
 	AccountType string `json:"account_type,omitempty"`
-	// User current market leverage multiple
+	// User current market leverage multiple.
 	Leverage string `json:"leverage,omitempty"`
-	// Whether account is locked
+	// Whether account is locked.
 	Locked bool `json:"locked,omitempty"`
 	// Leveraged Account Current Risk Rate (Returned when the Account is a Risk Rate Account)
 	Risk string `json:"risk,omitempty"`
-	// Leveraged Account Current Maintenance Margin Rate (returned when the Account is a Maintenance Margin Rate Account)
+	// Leveraged Account Current Maintenance Margin Rate (returned when the Account is Account)
 	Mmr   string                `json:"mmr,omitempty"`
 	Base  MarginAccountCurrency `json:"base,omitempty"`
 	Quote MarginAccountCurrency `json:"quote,omitempty"`

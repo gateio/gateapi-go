@@ -9,11 +9,11 @@
 
 package gateapi
 
-// Dual Investment order
+// Dual Investment order.
 type PlaceDualInvestmentOrder struct {
-	// Plan ID
+	// Plan ID.
 	PlanId string `json:"plan_id"`
-	// Subscription amount, mutually exclusive with the copies field
+	// Subscription amount, mutually exclusive with the copies field.
 	Amount string `json:"amount"`
 	// User defined information. If not empty, must follow the rules below:  1. prefixed with `t-` 2. no longer than 28 bytes without `t-` prefix 3. can only include 0-9, A-Z, a-z, underscore(_), hyphen(-) or dot(.)
 	Text string `json:"text,omitempty"`

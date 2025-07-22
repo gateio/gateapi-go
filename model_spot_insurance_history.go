@@ -10,10 +10,10 @@
 package gateapi
 
 type SpotInsuranceHistory struct {
-	// Currency
+	// Currency.
 	Currency string `json:"currency,omitempty"`
-	// balance
+	// balance.
 	Balance string `json:"balance,omitempty"`
-	// Creation time, timestamp, milliseconds
+	// Creation time, timestamp, milliseconds.
 	Time int64 `json:"time,omitempty"`
 }

@@ -9,24 +9,24 @@
 
 package gateapi
 
-// Risk unit
+// Risk unit.
 type MockRiskUnit struct {
-	// Risk unit name
+	// Risk unit name.
 	Symbol string `json:"symbol,omitempty"`
-	// Spot usage
+	// Spot usage.
 	SpotInUse string `json:"spot_in_use,omitempty"`
-	// Maintenance margin
+	// Maintenance margin.
 	MaintainMargin string `json:"maintain_margin,omitempty"`
-	// Initial margin
+	// Initial margin.
 	InitialMargin string `json:"initial_margin,omitempty"`
-	// Margin result
+	// Margin result.
 	MarginResult []MockMarginResult `json:"margin_result,omitempty"`
-	// Total Delta of risk unit
+	// Total Delta of risk unit.
 	Delta string `json:"delta,omitempty"`
-	// Total Gamma of risk unit
+	// Total Gamma of risk unit.
 	Gamma string `json:"gamma,omitempty"`
-	// Total Theta of risk unit
+	// Total Theta of risk unit.
 	Theta string `json:"theta,omitempty"`
-	// Total Vega of risk unit
+	// Total Vega of risk unit.
 	Vega string `json:"vega,omitempty"`
 }

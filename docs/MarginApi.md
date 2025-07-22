@@ -4,25 +4,25 @@ All URIs are relative to *https://api.gateio.ws/api/v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ListMarginAccounts**](MarginApi.md#ListMarginAccounts) | **Get** /margin/accounts | Margin account list
-[**ListMarginAccountBook**](MarginApi.md#ListMarginAccountBook) | **Get** /margin/account_book | List margin account balance change history
-[**ListFundingAccounts**](MarginApi.md#ListFundingAccounts) | **Get** /margin/funding_accounts | Funding account list
-[**GetAutoRepayStatus**](MarginApi.md#GetAutoRepayStatus) | **Get** /margin/auto_repay | Retrieve user auto repayment setting
-[**SetAutoRepay**](MarginApi.md#SetAutoRepay) | **Post** /margin/auto_repay | Update user&#39;s auto repayment setting
-[**GetMarginTransferable**](MarginApi.md#GetMarginTransferable) | **Get** /margin/transferable | Get the max transferable amount for a specific margin currency
-[**GetUserMarginTier**](MarginApi.md#GetUserMarginTier) | **Get** /margin/user/loan_margin_tiers | Check the user&#39;s own leverage lending gradient in the current market
-[**GetMarketMarginTier**](MarginApi.md#GetMarketMarginTier) | **Get** /margin/loan_margin_tiers | Query the current market leverage lending gradient
-[**SetUserMarketLeverage**](MarginApi.md#SetUserMarketLeverage) | **Post** /margin/leverage/user_market_setting | Set the user market leverage multiple
-[**ListMarginUserAccount**](MarginApi.md#ListMarginUserAccount) | **Get** /margin/user/account | Query the user&#39;s leverage account list
-[**ListCrossMarginLoans**](MarginApi.md#ListCrossMarginLoans) | **Get** /margin/cross/loans | List cross margin borrow history. (deprecated)
-[**ListCrossMarginRepayments**](MarginApi.md#ListCrossMarginRepayments) | **Get** /margin/cross/repayments | Retrieve cross margin repayments. (deprecated)
+[**ListMarginAccounts**](MarginApi.md#ListMarginAccounts) | **Get** /margin/accounts | Margin account list.
+[**ListMarginAccountBook**](MarginApi.md#ListMarginAccountBook) | **Get** /margin/account_book | List margin account balance change history.
+[**ListFundingAccounts**](MarginApi.md#ListFundingAccounts) | **Get** /margin/funding_accounts | Funding account list.
+[**GetAutoRepayStatus**](MarginApi.md#GetAutoRepayStatus) | **Get** /margin/auto_repay | Retrieve user auto repayment setting.
+[**SetAutoRepay**](MarginApi.md#SetAutoRepay) | **Post** /margin/auto_repay | Update user&#39;s auto repayment setting.
+[**GetMarginTransferable**](MarginApi.md#GetMarginTransferable) | **Get** /margin/transferable | Get the max transferable amount for a specific margin currency.
+[**GetUserMarginTier**](MarginApi.md#GetUserMarginTier) | **Get** /margin/user/loan_margin_tiers | Check the user&#39;s own leverage lending gradient in the current market.
+[**GetMarketMarginTier**](MarginApi.md#GetMarketMarginTier) | **Get** /margin/loan_margin_tiers | Query the current market leverage lending gradient.
+[**SetUserMarketLeverage**](MarginApi.md#SetUserMarketLeverage) | **Post** /margin/leverage/user_market_setting | Set the user market leverage multiple.
+[**ListMarginUserAccount**](MarginApi.md#ListMarginUserAccount) | **Get** /margin/user/account | Query the user&#39;s leverage account list.
+[**ListCrossMarginLoans**](MarginApi.md#ListCrossMarginLoans) | **Get** /margin/cross/loans | List cross margin borrow history. (deprecated).
+[**ListCrossMarginRepayments**](MarginApi.md#ListCrossMarginRepayments) | **Get** /margin/cross/repayments | Retrieve cross margin repayments. (deprecated).
 
 
 ## ListMarginAccounts
 
 > []MarginAccount ListMarginAccounts(ctx, optional)
 
-Margin account list
+Margin account list.
 
 ### Required Parameters
 
@@ -37,7 +37,7 @@ Optional parameters are passed through a pointer to a ListMarginAccountsOpts str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**currencyPair** | **optional.String**| Currency pair | 
+**currencyPair** | **optional.String**| Currency pair. | 
 
 ### Example
 
@@ -98,7 +98,7 @@ func main() {
 
 > []MarginAccountBook ListMarginAccountBook(ctx, optional)
 
-List margin account balance change history
+List margin account balance change history.
 
 Only transferals from and to margin account are provided for now. Time range allows 30 days at most
 
@@ -118,10 +118,10 @@ Name | Type | Description  | Notes
 **currency** | **optional.String**| List records related to specified currency only. If specified, &#x60;currency_pair&#x60; is also required. | 
 **currencyPair** | **optional.String**| List records related to specified currency pair. Used in combination with &#x60;currency&#x60;. Ignored if &#x60;currency&#x60; is not provided | 
 **type_** | **optional.String**| Only retrieve changes of the specified type. All types will be returned if not specified. | 
-**from** | **optional.Int64**| Start timestamp of the query | 
-**to** | **optional.Int64**| Time range ending, default to current time | 
-**page** | **optional.Int32**| Page number | [default to 1]
-**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
+**from** | **optional.Int64**| Start timestamp of the query. | 
+**to** | **optional.Int64**| Time range ending, default to current time. | 
+**page** | **optional.Int32**| Page number. | [default to 1]
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list. | [default to 100]
 
 ### Example
 
@@ -182,7 +182,7 @@ func main() {
 
 > []FundingAccount ListFundingAccounts(ctx, optional)
 
-Funding account list
+Funding account list.
 
 ### Required Parameters
 
@@ -197,7 +197,7 @@ Optional parameters are passed through a pointer to a ListFundingAccountsOpts st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**currency** | **optional.String**| Retrieve data of the specified currency | 
+**currency** | **optional.String**| Retrieve data of the specified currency. | 
 
 ### Example
 
@@ -258,7 +258,7 @@ func main() {
 
 > AutoRepaySetting GetAutoRepayStatus(ctx, )
 
-Retrieve user auto repayment setting
+Retrieve user auto repayment setting.
 
 ### Required Parameters
 
@@ -322,14 +322,14 @@ func main() {
 
 > AutoRepaySetting SetAutoRepay(ctx, status)
 
-Update user's auto repayment setting
+Update user's auto repayment setting.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**status** | **string**| New auto repayment status. &#x60;on&#x60; - enabled, &#x60;off&#x60; - disabled | 
+**status** | **string**| New auto repayment status. &#x60;on&#x60; - enabled, &#x60;off&#x60; - disabled. | 
 
 ### Example
 
@@ -354,7 +354,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    status := "on" // string - New auto repayment status. `on` - enabled, `off` - disabled
+    status := "on" // string - New auto repayment status. `on` - enabled, `off` - disabled.
     
     result, _, err := client.MarginApi.SetAutoRepay(ctx, status)
     if err != nil {
@@ -391,14 +391,14 @@ func main() {
 
 > MarginTransferable GetMarginTransferable(ctx, currency, optional)
 
-Get the max transferable amount for a specific margin currency
+Get the max transferable amount for a specific margin currency.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**currency** | **string**| Retrieve data of the specified currency | 
+**currency** | **string**| Retrieve data of the specified currency. | 
 **optional** | **GetMarginTransferableOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -407,7 +407,7 @@ Optional parameters are passed through a pointer to a GetMarginTransferableOpts 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**currencyPair** | **optional.String**| Currency pair | 
+**currencyPair** | **optional.String**| Currency pair. | 
 
 ### Example
 
@@ -432,7 +432,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    currency := "BTC" // string - Retrieve data of the specified currency
+    currency := "BTC" // string - Retrieve data of the specified currency.
     
     result, _, err := client.MarginApi.GetMarginTransferable(ctx, currency, nil)
     if err != nil {
@@ -469,14 +469,14 @@ func main() {
 
 > []MarginLeverageTier GetUserMarginTier(ctx, currencyPair)
 
-Check the user's own leverage lending gradient in the current market
+Check the user's own leverage lending gradient in the current market.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**currencyPair** | **string**| Currency pair | 
+**currencyPair** | **string**| Currency pair. | 
 
 ### Example
 
@@ -501,7 +501,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    currencyPair := "BTC_USDT" // string - Currency pair
+    currencyPair := "BTC_USDT" // string - Currency pair.
     
     result, _, err := client.MarginApi.GetUserMarginTier(ctx, currencyPair)
     if err != nil {
@@ -538,14 +538,14 @@ func main() {
 
 > []MarginLeverageTier GetMarketMarginTier(ctx, currencyPair)
 
-Query the current market leverage lending gradient
+Query the current market leverage lending gradient.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**currencyPair** | **string**| Currency pair | 
+**currencyPair** | **string**| Currency pair. | 
 
 ### Example
 
@@ -564,7 +564,7 @@ func main() {
     // uncomment the next line if your are testing against testnet
     // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
     ctx := context.Background()
-    currencyPair := "BTC_USDT" // string - Currency pair
+    currencyPair := "BTC_USDT" // string - Currency pair.
     
     result, _, err := client.MarginApi.GetMarketMarginTier(ctx, currencyPair)
     if err != nil {
@@ -601,7 +601,7 @@ No authorization required
 
 > SetUserMarketLeverage(ctx, marginMarketLeverage)
 
-Set the user market leverage multiple
+Set the user market leverage multiple.
 
 ### Required Parameters
 
@@ -670,7 +670,7 @@ func main() {
 
 > []MarginAccount ListMarginUserAccount(ctx, optional)
 
-Query the user's leverage account list
+Query the user's leverage account list.
 
 Support querying risk rate per position account and margin rate per position account
 
@@ -687,7 +687,7 @@ Optional parameters are passed through a pointer to a ListMarginUserAccountOpts 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**currencyPair** | **optional.String**| Currency pair | 
+**currencyPair** | **optional.String**| Currency pair. | 
 
 ### Example
 
@@ -748,7 +748,7 @@ func main() {
 
 > []CrossMarginLoan ListCrossMarginLoans(ctx, status, optional)
 
-List cross margin borrow history. (deprecated)
+List cross margin borrow history. (deprecated).
 
 Sort by creation time in descending order by default. Set `reverse=false` to return ascending results.
 
@@ -757,7 +757,7 @@ Sort by creation time in descending order by default. Set `reverse=false` to ret
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**status** | **int32**| Filter by status. Supported values are 2 and 3. (deprecated.) | 
+**status** | **int32**| Filter by status. Supported values are 2 and 3. (deprecated.). | 
 **optional** | **ListCrossMarginLoansOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -766,9 +766,9 @@ Optional parameters are passed through a pointer to a ListCrossMarginLoansOpts s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**currency** | **optional.String**| Filter by currency | 
-**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
-**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
+**currency** | **optional.String**| Filter by currency. | 
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list. | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0. | [default to 0]
 **reverse** | **optional.Bool**| Whether to sort in descending order, which is the default. Set &#x60;reverse&#x3D;false&#x60; to return ascending results | [default to true]
 
 ### Example
@@ -794,7 +794,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    status := 56 // int32 - Filter by status. Supported values are 2 and 3. (deprecated.)
+    status := 56 // int32 - Filter by status. Supported values are 2 and 3. (deprecated.).
     
     result, _, err := client.MarginApi.ListCrossMarginLoans(ctx, status, nil)
     if err != nil {
@@ -831,7 +831,7 @@ func main() {
 
 > []CrossMarginRepayment ListCrossMarginRepayments(ctx, optional)
 
-Retrieve cross margin repayments. (deprecated)
+Retrieve cross margin repayments. (deprecated).
 
 Sort by creation time in descending order by default. Set `reverse=false` to return ascending results.
 
@@ -850,8 +850,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **currency** | **optional.String**|  | 
 **loanId** | **optional.String**|  | 
-**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
-**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list. | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0. | [default to 0]
 **reverse** | **optional.Bool**| Whether to sort in descending order, which is the default. Set &#x60;reverse&#x3D;false&#x60; to return ascending results | [default to true]
 
 ### Example

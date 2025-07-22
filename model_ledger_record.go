@@ -10,21 +10,21 @@
 package gateapi
 
 type LedgerRecord struct {
-	// Record ID
+	// Record ID.
 	Id string `json:"id,omitempty"`
-	// Hash record of the withdrawal
+	// Hash record of the withdrawal.
 	Txid string `json:"txid,omitempty"`
 	// User-defined order number when withdrawing. Default is empty. When not empty, the specified user-defined order number record will be queried
 	WithdrawOrderId string `json:"withdraw_order_id,omitempty"`
-	// Operation time
+	// Operation time.
 	Timestamp string `json:"timestamp,omitempty"`
-	// Currency amount
+	// Currency amount.
 	Amount string `json:"amount"`
-	// Currency name
+	// Currency name.
 	Currency string `json:"currency"`
-	// Withdrawal address. Required for withdrawals
+	// Withdrawal address. Required for withdrawals.
 	Address string `json:"address,omitempty"`
-	// Additional remarks with regards to the withdrawal
+	// Additional remarks with regards to the withdrawal.
 	Memo string `json:"memo,omitempty"`
 	// The withdrawal record id starts with w, such as: w1879219868. When withdraw_id is not empty, the value querys this withdrawal record and no longer querys according to time
 	WithdrawId string `json:"withdraw_id,omitempty"`
@@ -32,6 +32,6 @@ type LedgerRecord struct {
 	AssetClass string `json:"asset_class,omitempty"`
 	// Record status.  - DONE: done - CANCEL: cancelled - REQUEST: requesting - MANUAL: pending manual approval - BCODE: GateCode operation - EXTPEND: pending confirm after sending - FAIL: pending confirm when fail - INVALID: invalid order - VERIFY: verifying - PROCES: processing - PEND: pending - DMOVE: required manual approval - REVIEW: Under review
 	Status string `json:"status,omitempty"`
-	// Name of the chain used in withdrawals
+	// Name of the chain used in withdrawals.
 	Chain string `json:"chain"`
 }

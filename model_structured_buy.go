@@ -9,10 +9,10 @@
 
 package gateapi
 
-// Dual Investment Purchase
+// Dual Investment Purchase.
 type StructuredBuy struct {
-	// Plan ID
+	// Plan ID.
 	Pid string `json:"pid,omitempty"`
-	// Purchase Amount
+	// Purchase Amount.
 	Amount string `json:"amount,omitempty"`
 }

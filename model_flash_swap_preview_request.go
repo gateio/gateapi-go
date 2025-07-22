@@ -9,7 +9,7 @@
 
 package gateapi
 
-// Parameters of flash swap order creation
+// Parameters of flash swap order creation.
 type FlashSwapPreviewRequest struct {
 	// The name of the asset being sold, as obtained from the \"GET /flash_swap/currency_pairs\" API, which retrieves a list of supported flash swap currency pairs.
 	SellCurrency string `json:"sell_currency"`

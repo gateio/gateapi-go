@@ -9,23 +9,23 @@
 
 package gateapi
 
-// Flash swap order
+// Flash swap order.
 type FlashSwapOrder struct {
-	// Flash swap order ID
+	// Flash swap order ID.
 	Id int64 `json:"id,omitempty"`
-	// Creation time of order (in milliseconds)
+	// Creation time of order (in milliseconds).
 	CreateTime int64 `json:"create_time,omitempty"`
-	// User ID
+	// User ID.
 	UserId int64 `json:"user_id,omitempty"`
-	// Currency to sell
+	// Currency to sell.
 	SellCurrency string `json:"sell_currency,omitempty"`
-	// Amount to sell
+	// Amount to sell.
 	SellAmount string `json:"sell_amount,omitempty"`
-	// Currency to buy
+	// Currency to buy.
 	BuyCurrency string `json:"buy_currency,omitempty"`
-	// Amount to buy
+	// Amount to buy.
 	BuyAmount string `json:"buy_amount,omitempty"`
-	// Price
+	// Price.
 	Price string `json:"price,omitempty"`
 	// Flash swap order status  `1` - success `2` - failure
 	Status int32 `json:"status,omitempty"`

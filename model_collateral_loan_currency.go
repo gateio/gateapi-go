@@ -9,10 +9,10 @@
 
 package gateapi
 
-// Supported borrowing and collateral currencies
+// Supported borrowing and collateral currencies.
 type CollateralLoanCurrency struct {
-	// Borrowed currency
+	// Borrowed currency.
 	LoanCurrency string `json:"loan_currency,omitempty"`
-	// List of supported collateral currencies
+	// List of supported collateral currencies.
 	CollateralCurrency []string `json:"collateral_currency,omitempty"`
 }

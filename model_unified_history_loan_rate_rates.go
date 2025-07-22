@@ -10,8 +10,8 @@
 package gateapi
 
 type UnifiedHistoryLoanRateRates struct {
-	// The hourly timestamp corresponding to the interest rate, in milliseconds
+	// The hourly timestamp corresponding to the interest rate, in milliseconds.
 	Time int64 `json:"time,omitempty"`
-	// Historical interest rates for this hour
+	// Historical interest rates for this hour.
 	Rate string `json:"rate,omitempty"`
 }

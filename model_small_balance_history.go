@@ -9,16 +9,16 @@
 
 package gateapi
 
-// Convert Small Balance
+// Convert Small Balance.
 type SmallBalanceHistory struct {
-	// Order ID
+	// Order ID.
 	Id string `json:"id,omitempty"`
-	// Currency
+	// Currency.
 	Currency string `json:"currency,omitempty"`
-	// amount
+	// amount.
 	Amount string `json:"amount,omitempty"`
-	// GT amount
+	// GT amount.
 	GtAmount string `json:"gt_amount,omitempty"`
-	// Exchange time (in seconds)
+	// Exchange time (in seconds).
 	CreateTime int64 `json:"create_time,omitempty"`
 }

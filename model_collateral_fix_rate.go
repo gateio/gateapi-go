@@ -9,14 +9,14 @@
 
 package gateapi
 
-// Multi-collateral fixed interest rate
+// Multi-collateral fixed interest rate.
 type CollateralFixRate struct {
-	// Currency
+	// Currency.
 	Currency string `json:"currency,omitempty"`
-	// Fixed interest rate for a lending period of 7 days
+	// Fixed interest rate for a lending period of 7 days.
 	Rate7d string `json:"rate_7d,omitempty"`
-	// Fixed interest rate for a lending period of 30 days
+	// Fixed interest rate for a lending period of 30 days.
 	Rate30d string `json:"rate_30d,omitempty"`
-	// Update time, timestamp, unit in seconds
+	// Update time, timestamp, unit in seconds.
 	UpdateTime int64 `json:"update_time,omitempty"`
 }

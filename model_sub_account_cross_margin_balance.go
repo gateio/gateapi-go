@@ -10,7 +10,7 @@
 package gateapi
 
 type SubAccountCrossMarginBalance struct {
-	// User ID
+	// User ID.
 	Uid string `json:"uid,omitempty"`
 	// 账户余额信息
 	Available SubCrossMarginAccount `json:"available,omitempty"`

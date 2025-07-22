@@ -4,41 +4,41 @@ All URIs are relative to *https://api.gateio.ws/api/v4*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ListCurrencyChains**](WalletApi.md#ListCurrencyChains) | **Get** /wallet/currency_chains | List chains supported for specified currency
-[**GetDepositAddress**](WalletApi.md#GetDepositAddress) | **Get** /wallet/deposit_address | Generate currency deposit address
-[**ListWithdrawals**](WalletApi.md#ListWithdrawals) | **Get** /wallet/withdrawals | Retrieve withdrawal records
-[**ListDeposits**](WalletApi.md#ListDeposits) | **Get** /wallet/deposits | Retrieve deposit records
-[**Transfer**](WalletApi.md#Transfer) | **Post** /wallet/transfers | Transfer between trading accounts
-[**ListSubAccountTransfers**](WalletApi.md#ListSubAccountTransfers) | **Get** /wallet/sub_account_transfers | Retrieve transfer records between main and sub accounts
-[**TransferWithSubAccount**](WalletApi.md#TransferWithSubAccount) | **Post** /wallet/sub_account_transfers | Transfer between main and sub accounts
-[**SubAccountToSubAccount**](WalletApi.md#SubAccountToSubAccount) | **Post** /wallet/sub_account_to_sub_account | Sub-account transfers to sub-account
-[**GetTransferOrderStatus**](WalletApi.md#GetTransferOrderStatus) | **Get** /wallet/order_status | Transfer status query
-[**ListWithdrawStatus**](WalletApi.md#ListWithdrawStatus) | **Get** /wallet/withdraw_status | Retrieve withdrawal status
-[**ListSubAccountBalances**](WalletApi.md#ListSubAccountBalances) | **Get** /wallet/sub_account_balances | Retrieve sub account balances
-[**ListSubAccountMarginBalances**](WalletApi.md#ListSubAccountMarginBalances) | **Get** /wallet/sub_account_margin_balances | Query sub accounts&#39; margin balances
-[**ListSubAccountFuturesBalances**](WalletApi.md#ListSubAccountFuturesBalances) | **Get** /wallet/sub_account_futures_balances | Query sub accounts&#39; futures account balances
-[**ListSubAccountCrossMarginBalances**](WalletApi.md#ListSubAccountCrossMarginBalances) | **Get** /wallet/sub_account_cross_margin_balances | Query subaccount&#39;s cross_margin account info
-[**ListSavedAddress**](WalletApi.md#ListSavedAddress) | **Get** /wallet/saved_address | Query saved address
-[**GetTradeFee**](WalletApi.md#GetTradeFee) | **Get** /wallet/fee | Retrieve personal trading fee
-[**GetTotalBalance**](WalletApi.md#GetTotalBalance) | **Get** /wallet/total_balance | Retrieve user&#39;s total balances
-[**ListSmallBalance**](WalletApi.md#ListSmallBalance) | **Get** /wallet/small_balance | List small balance
-[**ConvertSmallBalance**](WalletApi.md#ConvertSmallBalance) | **Post** /wallet/small_balance | Convert small balance
-[**ListSmallBalanceHistory**](WalletApi.md#ListSmallBalanceHistory) | **Get** /wallet/small_balance_history | List small balance history
-[**ListPushOrders**](WalletApi.md#ListPushOrders) | **Get** /wallet/push | Retrieve the UID transfer history
+[**ListCurrencyChains**](WalletApi.md#ListCurrencyChains) | **Get** /wallet/currency_chains | List chains supported for specified currency.
+[**GetDepositAddress**](WalletApi.md#GetDepositAddress) | **Get** /wallet/deposit_address | Generate currency deposit address.
+[**ListWithdrawals**](WalletApi.md#ListWithdrawals) | **Get** /wallet/withdrawals | Retrieve withdrawal records.
+[**ListDeposits**](WalletApi.md#ListDeposits) | **Get** /wallet/deposits | Retrieve deposit records.
+[**Transfer**](WalletApi.md#Transfer) | **Post** /wallet/transfers | Transfer between trading accounts.
+[**ListSubAccountTransfers**](WalletApi.md#ListSubAccountTransfers) | **Get** /wallet/sub_account_transfers | Retrieve transfer records between main and sub accounts.
+[**TransferWithSubAccount**](WalletApi.md#TransferWithSubAccount) | **Post** /wallet/sub_account_transfers | Transfer between main and sub accounts.
+[**SubAccountToSubAccount**](WalletApi.md#SubAccountToSubAccount) | **Post** /wallet/sub_account_to_sub_account | Sub-account transfers to sub-account.
+[**GetTransferOrderStatus**](WalletApi.md#GetTransferOrderStatus) | **Get** /wallet/order_status | Transfer status query.
+[**ListWithdrawStatus**](WalletApi.md#ListWithdrawStatus) | **Get** /wallet/withdraw_status | Retrieve withdrawal status.
+[**ListSubAccountBalances**](WalletApi.md#ListSubAccountBalances) | **Get** /wallet/sub_account_balances | Retrieve sub account balances.
+[**ListSubAccountMarginBalances**](WalletApi.md#ListSubAccountMarginBalances) | **Get** /wallet/sub_account_margin_balances | Query sub accounts&#39; margin balances.
+[**ListSubAccountFuturesBalances**](WalletApi.md#ListSubAccountFuturesBalances) | **Get** /wallet/sub_account_futures_balances | Query sub accounts&#39; futures account balances.
+[**ListSubAccountCrossMarginBalances**](WalletApi.md#ListSubAccountCrossMarginBalances) | **Get** /wallet/sub_account_cross_margin_balances | Query subaccount&#39;s cross_margin account info.
+[**ListSavedAddress**](WalletApi.md#ListSavedAddress) | **Get** /wallet/saved_address | Query saved address.
+[**GetTradeFee**](WalletApi.md#GetTradeFee) | **Get** /wallet/fee | Retrieve personal trading fee.
+[**GetTotalBalance**](WalletApi.md#GetTotalBalance) | **Get** /wallet/total_balance | Retrieve user&#39;s total balances.
+[**ListSmallBalance**](WalletApi.md#ListSmallBalance) | **Get** /wallet/small_balance | List small balance.
+[**ConvertSmallBalance**](WalletApi.md#ConvertSmallBalance) | **Post** /wallet/small_balance | Convert small balance.
+[**ListSmallBalanceHistory**](WalletApi.md#ListSmallBalanceHistory) | **Get** /wallet/small_balance_history | List small balance history.
+[**ListPushOrders**](WalletApi.md#ListPushOrders) | **Get** /wallet/push | Retrieve the UID transfer history.
 
 
 ## ListCurrencyChains
 
 > []CurrencyChain ListCurrencyChains(ctx, currency)
 
-List chains supported for specified currency
+List chains supported for specified currency.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**currency** | **string**| Currency name | 
+**currency** | **string**| Currency name. | 
 
 ### Example
 
@@ -57,7 +57,7 @@ func main() {
     // uncomment the next line if your are testing against testnet
     // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
     ctx := context.Background()
-    currency := "GT" // string - Currency name
+    currency := "GT" // string - Currency name.
     
     result, _, err := client.WalletApi.ListCurrencyChains(ctx, currency)
     if err != nil {
@@ -94,14 +94,14 @@ No authorization required
 
 > DepositAddress GetDepositAddress(ctx, currency)
 
-Generate currency deposit address
+Generate currency deposit address.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**currency** | **string**| Currency name | 
+**currency** | **string**| Currency name. | 
 
 ### Example
 
@@ -126,7 +126,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    currency := "USDT" // string - Currency name
+    currency := "USDT" // string - Currency name.
     
     result, _, err := client.WalletApi.GetDepositAddress(ctx, currency)
     if err != nil {
@@ -163,9 +163,9 @@ func main() {
 
 > []WithdrawalRecord ListWithdrawals(ctx, optional)
 
-Retrieve withdrawal records
+Retrieve withdrawal records.
 
-Record time range cannot exceed 30 days
+Record time range cannot exceed 30 days.
 
 ### Required Parameters
 
@@ -180,14 +180,14 @@ Optional parameters are passed through a pointer to a ListWithdrawalsOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**currency** | **optional.String**| Filter by currency. Return all currency records if not specified | 
+**currency** | **optional.String**| Filter by currency. Return all currency records if not specified. | 
 **withdrawId** | **optional.String**| The withdrawal record id starts with w, such as: w1879219868. When withdraw_id is not empty, the value querys this withdrawal record and no longer querys according to time | 
 **assetClass** | **optional.String**| The currency type of withdrawal record is empty by default. It supports users to query the withdrawal records in the main and innovation areas on demand. Value range: SPOT, PILOT  SPOT: Main Zone  PILOT: Innovation Zone | 
 **withdrawOrderId** | **optional.String**| User-defined order number when withdrawing. Default is empty. When not empty, the specified user-defined order number record will be queried | 
-**from** | **optional.Int64**| Time range beginning, default to 7 days before current time | 
-**to** | **optional.Int64**| Time range ending, default to current time | 
-**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
-**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
+**from** | **optional.Int64**| Time range beginning, default to 7 days before current time. | 
+**to** | **optional.Int64**| Time range ending, default to current time. | 
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list. | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0. | [default to 0]
 
 ### Example
 
@@ -248,9 +248,9 @@ func main() {
 
 > []DepositRecord ListDeposits(ctx, optional)
 
-Retrieve deposit records
+Retrieve deposit records.
 
-Record time range cannot exceed 30 days
+Record time range cannot exceed 30 days.
 
 ### Required Parameters
 
@@ -265,11 +265,11 @@ Optional parameters are passed through a pointer to a ListDepositsOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**currency** | **optional.String**| Filter by currency. Return all currency records if not specified | 
-**from** | **optional.Int64**| Time range beginning, default to 7 days before current time | 
-**to** | **optional.Int64**| Time range ending, default to current time | 
+**currency** | **optional.String**| Filter by currency. Return all currency records if not specified. | 
+**from** | **optional.Int64**| Time range beginning, default to 7 days before current time. | 
+**to** | **optional.Int64**| Time range ending, default to current time. | 
 **limit** | **optional.Int32**| The maximum number of entries returned in the list is limited to 500 transactions. | [default to 100]
-**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
+**offset** | **optional.Int32**| List offset, starting from 0. | [default to 0]
 
 ### Example
 
@@ -330,9 +330,9 @@ func main() {
 
 > TransactionId Transfer(ctx, transfer)
 
-Transfer between trading accounts
+Transfer between trading accounts.
 
-Transfer between different accounts. Currently support transfers between the following:  1. spot - margin 2. spot - futures(perpetual) 3. spot - delivery 4. spot - options
+Transfer between different accounts. Currently support transfers between the following:  1. spot - margin 2. spot - futures(perpetual) 3. options
 
 ### Required Parameters
 
@@ -401,7 +401,7 @@ func main() {
 
 > []SubAccountTransferRecordItem ListSubAccountTransfers(ctx, optional)
 
-Retrieve transfer records between main and sub accounts
+Retrieve transfer records between main and sub accounts.
 
 Record time range cannot exceed 30 days  > Note: only records after 20-04-10can be retrieved
 
@@ -419,10 +419,10 @@ Optional parameters are passed through a pointer to a ListSubAccountTransfersOpt
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **subUid** | **optional.String**| User ID of sub-account, you can query multiple records separated by &#x60;,&#x60;. If not specified, it will return the records of all sub accounts | 
-**from** | **optional.Int64**| Time range beginning, default to 7 days before current time | 
-**to** | **optional.Int64**| Time range ending, default to current time | 
-**limit** | **optional.Int32**| Maximum number of records to be returned in a single list | [default to 100]
-**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
+**from** | **optional.Int64**| Time range beginning, default to 7 days before current time. | 
+**to** | **optional.Int64**| Time range ending, default to current time. | 
+**limit** | **optional.Int32**| Maximum number of records to be returned in a single list. | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0. | [default to 0]
 
 ### Example
 
@@ -483,7 +483,7 @@ func main() {
 
 > TransactionId TransferWithSubAccount(ctx, subAccountTransfer)
 
-Transfer between main and sub accounts
+Transfer between main and sub accounts.
 
 Support transferring with sub user's spot or futures account. Note that only main user's spot account is used no matter which sub user's account is operated.
 
@@ -554,9 +554,9 @@ func main() {
 
 > TransactionId SubAccountToSubAccount(ctx, subAccountToSubAccount)
 
-Sub-account transfers to sub-account
+Sub-account transfers to sub-account.
 
-It is possible to perform balance transfers between two sub-accounts under the same main account. You can use either the API Key of the main account or the API Key of the sub-account to initiate the transfer.
+It is possible to perform balance transfers between two sub-accounts under the same main account. You can use either the API Key of the main account sub-account to initiate the transfer.
 
 ### Required Parameters
 
@@ -625,7 +625,7 @@ func main() {
 
 > TransferOrderStatus GetTransferOrderStatus(ctx, optional)
 
-Transfer status query
+Transfer status query.
 
 Support querying transfer status based on user-defined client_order_id or tx_id returned by the transfer interface
 
@@ -704,7 +704,7 @@ func main() {
 
 > []WithdrawStatus ListWithdrawStatus(ctx, optional)
 
-Retrieve withdrawal status
+Retrieve withdrawal status.
 
 ### Required Parameters
 
@@ -719,7 +719,7 @@ Optional parameters are passed through a pointer to a ListWithdrawStatusOpts str
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**currency** | **optional.String**| Retrieve data of the specified currency | 
+**currency** | **optional.String**| Retrieve data of the specified currency. | 
 
 ### Example
 
@@ -780,7 +780,7 @@ func main() {
 
 > []SubAccountBalance ListSubAccountBalances(ctx, optional)
 
-Retrieve sub account balances
+Retrieve sub account balances.
 
 ### Required Parameters
 
@@ -856,7 +856,7 @@ func main() {
 
 > []SubAccountMarginBalance ListSubAccountMarginBalances(ctx, optional)
 
-Query sub accounts' margin balances
+Query sub accounts' margin balances.
 
 ### Required Parameters
 
@@ -932,7 +932,7 @@ func main() {
 
 > []SubAccountFuturesBalance ListSubAccountFuturesBalances(ctx, optional)
 
-Query sub accounts' futures account balances
+Query sub accounts' futures account balances.
 
 ### Required Parameters
 
@@ -948,7 +948,7 @@ Optional parameters are passed through a pointer to a ListSubAccountFuturesBalan
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **subUid** | **optional.String**| User ID of sub-account, you can query multiple records separated by &#x60;,&#x60;. If not specified, it will return the records of all sub accounts | 
-**settle** | **optional.String**| Query only balances of specified settle currency | 
+**settle** | **optional.String**| Query only balances of specified settle currency. | 
 
 ### Example
 
@@ -1009,7 +1009,7 @@ func main() {
 
 > []SubAccountCrossMarginBalance ListSubAccountCrossMarginBalances(ctx, optional)
 
-Query subaccount's cross_margin account info
+Query subaccount's cross_margin account info.
 
 ### Required Parameters
 
@@ -1085,14 +1085,14 @@ func main() {
 
 > []SavedAddress ListSavedAddress(ctx, currency, optional)
 
-Query saved address
+Query saved address.
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**currency** | **string**| Currency | 
+**currency** | **string**| Currency. | 
 **optional** | **ListSavedAddressOpts** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -1101,9 +1101,9 @@ Optional parameters are passed through a pointer to a ListSavedAddressOpts struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**chain** | **optional.String**| Chain name | [default to ]
-**limit** | **optional.String**| Maximum number returned, 100 at most | [default to 50]
-**page** | **optional.Int32**| Page number | [default to 1]
+**chain** | **optional.String**| Chain name. | [default to ]
+**limit** | **optional.String**| Maximum number returned, 100 at most. | [default to 50]
+**page** | **optional.Int32**| Page number. | [default to 1]
 
 ### Example
 
@@ -1128,7 +1128,7 @@ func main() {
                                  Secret: "YOUR_API_SECRET",
                              }
                             )
-    currency := "USDT" // string - Currency
+    currency := "USDT" // string - Currency.
     
     result, _, err := client.WalletApi.ListSavedAddress(ctx, currency, nil)
     if err != nil {
@@ -1165,7 +1165,7 @@ func main() {
 
 > TradeFee GetTradeFee(ctx, optional)
 
-Retrieve personal trading fee
+Retrieve personal trading fee.
 
 ### Required Parameters
 
@@ -1242,9 +1242,9 @@ func main() {
 
 > TotalBalance GetTotalBalance(ctx, optional)
 
-Retrieve user's total balances
+Retrieve user's total balances.
 
-This endpoint returns an approximate sum of exchanged amount from all currencies to input currency for each account.The exchange rate and account balance could have been cached for at most 1 minute. It is not recommended to use its result for any trading calculation.  For trading calculation, use the corresponding account query endpoint for each account type. For example:   - `GET /spot/accounts` to query spot account balance - `GET /margin/accounts` to query margin account balance - `GET /futures/{settle}/accounts` to query futures account balance
+This endpoint returns an approximate sum of exchanged amount from all currencies to input currency for each account.The exchange rate and account balance could have been cached for at most 1 minute. It is not recommended to use its result for any trading calculation.  For trading calculation, use the corresponding account query endpoint for each account type. For example:   - `GET /spot/accounts` to query spot account balance - `GET /margin/accounts` /futures/{settle}/accounts` to query futures account balance
 
 ### Required Parameters
 
@@ -1320,7 +1320,7 @@ func main() {
 
 > []SmallBalance ListSmallBalance(ctx, )
 
-List small balance
+List small balance.
 
 ### Required Parameters
 
@@ -1384,7 +1384,7 @@ func main() {
 
 > ConvertSmallBalance(ctx, convertSmallBalance)
 
-Convert small balance
+Convert small balance.
 
 ### Required Parameters
 
@@ -1453,7 +1453,7 @@ func main() {
 
 > []SmallBalanceHistory ListSmallBalanceHistory(ctx, optional)
 
-List small balance history
+List small balance history.
 
 ### Required Parameters
 
@@ -1468,9 +1468,9 @@ Optional parameters are passed through a pointer to a ListSmallBalanceHistoryOpt
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**currency** | **optional.String**| Currency | 
-**page** | **optional.Int32**| Page number | [default to 1]
-**limit** | **optional.Int32**| Maximum response items.  Default: 100, minimum: 1, Maximum: 100 | [default to 100]
+**currency** | **optional.String**| Currency. | 
+**page** | **optional.Int32**| Page number. | [default to 1]
+**limit** | **optional.Int32**| Maximum response items. Default: 100, minimum: 1, Maximum: 100. | [default to 100]
 
 ### Example
 
@@ -1531,7 +1531,7 @@ func main() {
 
 > []UidPushOrder ListPushOrders(ctx, optional)
 
-Retrieve the UID transfer history
+Retrieve the UID transfer history.
 
 ### Required Parameters
 
@@ -1546,11 +1546,11 @@ Optional parameters are passed through a pointer to a ListPushOrdersOpts struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**id** | **optional.Int32**| Order ID | 
+**id** | **optional.Int32**| Order ID. | 
 **from** | **optional.Int32**| The start time of the query record. If not specified, it defaults to 7 days forward from the current time, in seconds Unix timestamp | 
 **to** | **optional.Int32**| The end time of the query record. If not specified, the default is the current time, which is a Unix timestamp in seconds. | 
-**limit** | **optional.Int32**| The maximum number of items returned in the list, the default value is 100 | [default to 100]
-**offset** | **optional.Int32**| List offset, starting from 0 | [default to 0]
+**limit** | **optional.Int32**| The maximum number of items returned in the list, the default value is 100. | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0. | [default to 0]
 **transactionType** | **optional.String**| The list returns the order type &#x60;withdraw&#x60;, &#x60;deposit&#x60;, the default is &#x60;withdraw&#x60;. | [default to withdraw]
 
 ### Example

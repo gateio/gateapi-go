@@ -9,60 +9,58 @@
 
 package gateapi
 
-// Futures order details
+// Futures order details.
 type FuturesOrder struct {
-	// Futures order ID
+	// Futures order ID.
 	Id int64 `json:"id,omitempty"`
-	// User ID
+	// User ID.
 	User int32 `json:"user,omitempty"`
-	// Creation time of order
+	// Creation time of order.
 	CreateTime float64 `json:"create_time,omitempty"`
-	// Order finished time. Not returned if order is open
+	// Order finished time. Not returned if order is open.
 	FinishTime float64 `json:"finish_time,omitempty"`
-	// How the order was finished.  - filled: all filled - cancelled: manually cancelled - liquidated: cancelled because of liquidation - ioc: time in force is `IOC`, finish immediately - auto_deleveraged: finished by ADL - reduce_only: cancelled because of increasing position while `reduce-only` set- position_closed: cancelled because of position close - position_closed: canceled because the position was closed - reduce_out: only reduce positions by excluding hard-to-fill orders - stp: cancelled because self trade prevention
+	// How the order was finished.  - filled: all filled - cancelled: manually cancelled - liquidated: cancelled because of liquidation - ioc: time in force is `IOC`, finish immediately - auto_deleveraged: finished by ADL - increasing position while `reduce-only` set- position_closed: cancelled because of position close - position_closed: canceled because the position was closed - reduce_out: only reduce positions by excluding hard-to-fill orders - stp: cancelled because self trade prevention
 	FinishAs string `json:"finish_as,omitempty"`
 	// Order status  - `open`: waiting to be traded - `finished`: finished
 	Status string `json:"status,omitempty"`
-	// Futures contract
+	// Futures contract.
 	Contract string `json:"contract"`
 	// Order size. Specify positive number to make a bid, and negative number to ask
 	Size int64 `json:"size"`
 	// Display size for iceberg order. 0 for non-iceberg. Note that you will have to pay the taker fee for the hidden size
 	Iceberg int64 `json:"iceberg,omitempty"`
-	// Order price. 0 for market order with `tif` set as `ioc`
+	// Order price. 0 for market order with `tif` set as `ioc`.
 	Price string `json:"price,omitempty"`
-	// Set as `true` to close the position, with `size` set to 0
+	// Set as `true` to close the position, with `size` set to 0.
 	Close bool `json:"close,omitempty"`
-	// Is the order to close position
+	// Is the order to close position.
 	IsClose bool `json:"is_close,omitempty"`
-	// Set as `true` to be reduce-only order
+	// Set as `true` to be reduce-only order.
 	ReduceOnly bool `json:"reduce_only,omitempty"`
-	// Is the order reduce-only
+	// Is the order reduce-only.
 	IsReduceOnly bool `json:"is_reduce_only,omitempty"`
-	// Is the order for liquidation
+	// Is the order for liquidation.
 	IsLiq bool `json:"is_liq,omitempty"`
 	// Time in force  - gtc: GoodTillCancelled - ioc: ImmediateOrCancelled, taker only - poc: PendingOrCancelled, makes a post-only order that always enjoys a maker fee - fok: FillOrKill, fill either completely or none
 	Tif string `json:"tif,omitempty"`
-	// Size left to be traded
+	// Size left to be traded.
 	Left int64 `json:"left,omitempty"`
-	// Fill price of the order
+	// Fill price of the order.
 	FillPrice string `json:"fill_price,omitempty"`
-	// Order custom information, users can use this field to set a custom ID, and the user-defined field must meet the following conditions:  1. Must start with `t-` 2. If `t-` is not calculated, the length cannot exceed 28 bytes 3. The input content can only contain numbers, letters, underscores (_), midscores (-) or dots (.)  In addition to user-defined information, the following are internal reserved fields that identifies the source of the order:  - web: web page - api: API call - app: mobile terminal - auto_deleveraging: Automatic position reduction - liquidation: Liquidation under the classic account’s old liquidation mode - liq-xxx: a. Liquidation under the classic account’s new liquidation mode (isolated, cross margin one-way mode, non-hedging part of cross margin hedge mode) b. Liquidation under isolated margin in unified account single currency margin mode  - hedge-liq-xxx: Liquidation under the new liquidation mode of the classic account hedge mode, the cross margin hedged part undergoes liquidation, meaning both long and short positions are liquidated simultaneously. - pm_liquidate: Unified account multi-currency margin mode liquidation - comb_margin_liquidate: Unified account portfolio margin mode liquidation - scm_liquidate: Unified account single currency margin mode liquidation - insurance: insurance
+	// Order custom information, users can use this field to set a custom ID, and the user-defined field must meet the following conditions:  1. Must start with `t-` 2. If `t-` is not calculated, the length cannot exceed 28 bytes 3. The input content can only contain numbers, letters, underscores (_), midscores (-) or dots (.)  In addition to user-defined information, the following are internal reserved fields that identifies the source of the order:  - web: web page - api: API call - app: mobile terminal - auto_deleveraging: Automatic position reduction - liquidation: Liquidation under the classic account’s old liquidation mode - liq-x: new liquidation mode (isolated, cross margin one-way mode, non-hedging part of cross margin hedge mode) b. Liquidation under isolated margin in unified account single currency margin mode  - hedge-liq-x: Liquidation under the new liquidation mode of the classic account hedge mode, the cross margin hedged part undergoes liquidation, meaning both long and short positions are liquidated simultaneously. - pm_liquidate: Unified account multi-currency margin mode liquidation - comb_margin_liquidate: Unified account portfolio margin mode liquidation - scm_liquidate: Unified account single currency margin mode liquidation - insurance: insurance
 	Text string `json:"text,omitempty"`
-	// Taker fee
+	// Taker fee.
 	Tkfr string `json:"tkfr,omitempty"`
-	// Maker fee
+	// Maker fee.
 	Mkfr string `json:"mkfr,omitempty"`
-	// Reference user ID
+	// Reference user ID.
 	Refu int32 `json:"refu,omitempty"`
 	// Set side to close dual-mode position. `close_long` closes the long side; while `close_short` the short one. Note `size` also needs to be set to 0
 	AutoSize string `json:"auto_size,omitempty"`
 	// Orders between users in the same `stp_id` group are not allowed to be self-traded  1. If the `stp_id` of two orders being matched is non-zero and equal, they will not be executed. Instead, the corresponding strategy will be executed based on the `stp_act` of the taker. 2. `stp_id` returns `0` by default for orders that have not been set for `STP group`
 	StpId int32 `json:"stp_id,omitempty"`
-	// Self-Trading Prevention Action. Users can use this field to set self-trade prevetion strategies  1. After users join the `STP Group`, he can pass `stp_act` to limit the user's self-trade prevetion strategy. If `stp_act` is not passed, the default is `cn` strategy。 2. When the user does not join the `STP group`, an error will be returned when passing the `stp_act` parameter。 3. If the user did not use 'stp_act' when placing the order, 'stp_act' will return '-'  - cn: Cancel newest, Cancel new orders and keep old ones - co: Cancel oldest, Cancel old orders and keep new ones - cb: Cancel both, Both old and new orders will be cancelled
+	// Self-Trading Prevention Action. Users can use this field to set self-trade prevetion strategies  1. After users join the `STP Group`, he can pass `stp_act` to limit the user's self-trade prevetion strategy. If `stp_act` is not passed, the default is `cn` strategy。 2. When the user does not join the `STP group`, an error will be returned when passing the `stp_act` parameter。 3. If the user did not use 'stp_act' when placing the order, 'stp_act' will return '-'  - cn: Cancel newest, Cancel new orders and keep old ones - co: Cancel oldest, new ones - cb: Cancel both, Both old and new orders will be cancelled
 	StpAct string `json:"stp_act,omitempty"`
-	// The custom data that the user remarked when amending the order
+	// The custom data that the user remarked when amending the order.
 	AmendText string `json:"amend_text,omitempty"`
-	// Additional information
-	BizInfo string `json:"biz_info,omitempty"`
 }

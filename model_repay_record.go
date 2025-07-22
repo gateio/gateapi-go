@@ -9,32 +9,32 @@
 
 package gateapi
 
-// Repayment record
+// Repayment record.
 type RepayRecord struct {
-	// Order ID
+	// Order ID.
 	OrderId int64 `json:"order_id,omitempty"`
-	// Repayment record ID
+	// Repayment record ID.
 	RecordId int64 `json:"record_id,omitempty"`
-	// Repayment amount
+	// Repayment amount.
 	RepaidAmount string `json:"repaid_amount,omitempty"`
-	// Borrowed currency
+	// Borrowed currency.
 	BorrowCurrency string `json:"borrow_currency,omitempty"`
-	// Collateral
+	// Collateral.
 	CollateralCurrency string `json:"collateral_currency,omitempty"`
-	// The initial collateralization rate
+	// The initial collateralization rate.
 	InitLtv string `json:"init_ltv,omitempty"`
-	// Borrowing time, timestamp
+	// Borrowing time, timestamp.
 	BorrowTime int64 `json:"borrow_time,omitempty"`
-	// Repayment time, timestamp
+	// Repayment time, timestamp.
 	RepayTime int64 `json:"repay_time,omitempty"`
-	// Total interest
+	// Total interest.
 	TotalInterest string `json:"total_interest,omitempty"`
-	// Principal to be repaid before repayment
+	// Principal to be repaid before repayment.
 	BeforeLeftPrincipal string `json:"before_left_principal,omitempty"`
-	// Principal to be repaid after repayment
+	// Principal to be repaid after repayment.
 	AfterLeftPrincipal string `json:"after_left_principal,omitempty"`
-	// Collateral quantity before repayment
+	// Collateral quantity before repayment.
 	BeforeLeftCollateral string `json:"before_left_collateral,omitempty"`
-	// Collateral quantity after repayment
+	// Collateral quantity after repayment.
 	AfterLeftCollateral string `json:"after_left_collateral,omitempty"`
 }

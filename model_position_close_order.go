@@ -9,12 +9,12 @@
 
 package gateapi
 
-// Current close order if any, or `null`
+// Current close order if any, or `null`.
 type PositionCloseOrder struct {
-	// Close order ID
+	// Close order ID.
 	Id int64 `json:"id,omitempty"`
-	// Close order price
+	// Close order price.
 	Price string `json:"price,omitempty"`
-	// Is the close order from liquidation
+	// Is the close order from liquidation.
 	IsLiq bool `json:"is_liq,omitempty"`
 }

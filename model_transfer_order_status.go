@@ -10,7 +10,7 @@
 package gateapi
 
 type TransferOrderStatus struct {
-	// Order id
+	// Order id.
 	TxId string `json:"tx_id,omitempty"`
 	// Transfer status, PENDING - in process, SUCCESS - successful transfer, FAIL - failed transfer, PARTIAL_SUCCESS - Partially successful (this status will appear when transferring between sub-subs)
 	Status string `json:"status,omitempty"`

@@ -31,10 +31,10 @@ type ListMarginAccountsOpts struct {
 }
 
 /*
-ListMarginAccounts Margin account list
+ListMarginAccounts Margin account list.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListMarginAccountsOpts - Optional Parameters:
-  - @param "CurrencyPair" (optional.String) -  Currency pair
+  - @param "CurrencyPair" (optional.String) -  Currency pair.
 
 @return []MarginAccount
 */
@@ -137,17 +137,17 @@ type ListMarginAccountBookOpts struct {
 }
 
 /*
-ListMarginAccountBook List margin account balance change history
+ListMarginAccountBook List margin account balance change history.
 Only transferals from and to margin account are provided for now. Time range allows 30 days at most
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListMarginAccountBookOpts - Optional Parameters:
   - @param "Currency" (optional.String) -  List records related to specified currency only. If specified, `currency_pair` is also required.
   - @param "CurrencyPair" (optional.String) -  List records related to specified currency pair. Used in combination with `currency`. Ignored if `currency` is not provided
   - @param "Type_" (optional.String) -  Only retrieve changes of the specified type. All types will be returned if not specified.
-  - @param "From" (optional.Int64) -  Start timestamp of the query
-  - @param "To" (optional.Int64) -  Time range ending, default to current time
-  - @param "Page" (optional.Int32) -  Page number
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
+  - @param "From" (optional.Int64) -  Start timestamp of the query.
+  - @param "To" (optional.Int64) -  Time range ending, default to current time.
+  - @param "Page" (optional.Int32) -  Page number.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
 
 @return []MarginAccountBook
 */
@@ -262,10 +262,10 @@ type ListFundingAccountsOpts struct {
 }
 
 /*
-ListFundingAccounts Funding account list
+ListFundingAccounts Funding account list.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListFundingAccountsOpts - Optional Parameters:
-  - @param "Currency" (optional.String) -  Retrieve data of the specified currency
+  - @param "Currency" (optional.String) -  Retrieve data of the specified currency.
 
 @return []FundingAccount
 */
@@ -357,7 +357,7 @@ func (a *MarginApiService) ListFundingAccounts(ctx context.Context, localVarOpti
 }
 
 /*
-GetAutoRepayStatus Retrieve user auto repayment setting
+GetAutoRepayStatus Retrieve user auto repayment setting.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 @return AutoRepaySetting
@@ -447,9 +447,9 @@ func (a *MarginApiService) GetAutoRepayStatus(ctx context.Context) (AutoRepaySet
 }
 
 /*
-SetAutoRepay Update user's auto repayment setting
+SetAutoRepay Update user's auto repayment setting.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param status New auto repayment status. `on` - enabled, `off` - disabled
+  - @param status New auto repayment status. `on` - enabled, `off` - disabled.
 
 @return AutoRepaySetting
 */
@@ -544,11 +544,11 @@ type GetMarginTransferableOpts struct {
 }
 
 /*
-GetMarginTransferable Get the max transferable amount for a specific margin currency
+GetMarginTransferable Get the max transferable amount for a specific margin currency.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param currency Retrieve data of the specified currency
+  - @param currency Retrieve data of the specified currency.
   - @param optional nil or *GetMarginTransferableOpts - Optional Parameters:
-  - @param "CurrencyPair" (optional.String) -  Currency pair
+  - @param "CurrencyPair" (optional.String) -  Currency pair.
 
 @return MarginTransferable
 */
@@ -641,9 +641,9 @@ func (a *MarginApiService) GetMarginTransferable(ctx context.Context, currency s
 }
 
 /*
-GetUserMarginTier Check the user's own leverage lending gradient in the current market
+GetUserMarginTier Check the user's own leverage lending gradient in the current market.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param currencyPair Currency pair
+  - @param currencyPair Currency pair.
 
 @return []MarginLeverageTier
 */
@@ -733,9 +733,9 @@ func (a *MarginApiService) GetUserMarginTier(ctx context.Context, currencyPair s
 }
 
 /*
-GetMarketMarginTier Query the current market leverage lending gradient
+GetMarketMarginTier Query the current market leverage lending gradient.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param currencyPair Currency pair
+  - @param currencyPair Currency pair.
 
 @return []MarginLeverageTier
 */
@@ -819,7 +819,7 @@ func (a *MarginApiService) GetMarketMarginTier(ctx context.Context, currencyPair
 }
 
 /*
-SetUserMarketLeverage Set the user market leverage multiple
+SetUserMarketLeverage Set the user market leverage multiple.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param marginMarketLeverage
 */
@@ -905,11 +905,11 @@ type ListMarginUserAccountOpts struct {
 }
 
 /*
-ListMarginUserAccount Query the user's leverage account list
+ListMarginUserAccount Query the user's leverage account list.
 Support querying risk rate per position account and margin rate per position account
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListMarginUserAccountOpts - Optional Parameters:
-  - @param "CurrencyPair" (optional.String) -  Currency pair
+  - @param "CurrencyPair" (optional.String) -  Currency pair.
 
 @return []MarginAccount
 */
@@ -1009,14 +1009,14 @@ type ListCrossMarginLoansOpts struct {
 }
 
 /*
-ListCrossMarginLoans List cross margin borrow history. (deprecated)
+ListCrossMarginLoans List cross margin borrow history. (deprecated).
 Sort by creation time in descending order by default. Set &#x60;reverse&#x3D;false&#x60; to return ascending results.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param status Filter by status. Supported values are 2 and 3. (deprecated.)
+  - @param status Filter by status. Supported values are 2 and 3. (deprecated.).
   - @param optional nil or *ListCrossMarginLoansOpts - Optional Parameters:
-  - @param "Currency" (optional.String) -  Filter by currency
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
-  - @param "Offset" (optional.Int32) -  List offset, starting from 0
+  - @param "Currency" (optional.String) -  Filter by currency.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0.
   - @param "Reverse" (optional.Bool) -  Whether to sort in descending order, which is the default. Set `reverse=false` to return ascending results
 
 @return []CrossMarginLoan
@@ -1128,14 +1128,14 @@ type ListCrossMarginRepaymentsOpts struct {
 }
 
 /*
-ListCrossMarginRepayments Retrieve cross margin repayments. (deprecated)
+ListCrossMarginRepayments Retrieve cross margin repayments. (deprecated).
 Sort by creation time in descending order by default. Set &#x60;reverse&#x3D;false&#x60; to return ascending results.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListCrossMarginRepaymentsOpts - Optional Parameters:
   - @param "Currency" (optional.String) -
   - @param "LoanId" (optional.String) -
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
-  - @param "Offset" (optional.Int32) -  List offset, starting from 0
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
+  - @param "Offset" (optional.Int32) -  List offset, starting from 0.
   - @param "Reverse" (optional.Bool) -  Whether to sort in descending order, which is the default. Set `reverse=false` to return ascending results
 
 @return []CrossMarginRepayment

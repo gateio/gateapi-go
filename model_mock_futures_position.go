@@ -9,7 +9,7 @@
 
 package gateapi
 
-// Futures positions
+// Futures positions.
 type MockFuturesPosition struct {
 	// Futures name, currently only supports perpetual futures for BTC and ETH with USDT.
 	Contract string `json:"contract"`

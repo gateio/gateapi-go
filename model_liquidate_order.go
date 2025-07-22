@@ -9,15 +9,15 @@
 
 package gateapi
 
-// Liquidate Order detail
+// Liquidate Order detail.
 type LiquidateOrder struct {
 	// User defined information. If not empty, must follow the rules below:  1. prefixed with `t-` 2. no longer than 28 bytes without `t-` prefix 3. can only include 0-9, A-Z, a-z, underscore(_), hyphen(-) or dot(.)
 	Text string `json:"text,omitempty"`
-	// Currency pair
+	// Currency pair.
 	CurrencyPair string `json:"currency_pair"`
-	// Trade amount
+	// Trade amount.
 	Amount string `json:"amount"`
-	// Order price
+	// Order price.
 	Price string `json:"price"`
 	// Processing Mode:  Different fields are returned when placing an order based on action_mode. This field is only valid during the request, and it is not included in the response result ACK: Asynchronous mode, only returns key order fields RESULT: No clearing information FULL: Full mode (default)
 	ActionMode string `json:"action_mode,omitempty"`

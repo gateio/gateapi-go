@@ -9,12 +9,12 @@
 
 package gateapi
 
-// Option orders
+// Option orders.
 type MockOptionsOrder struct {
 	// Option name, currently only supports options for BTC and ETH with USDT.
 	OptionsName string `json:"options_name"`
-	// Initial order quantity, not involved in actual calculation
+	// Initial order quantity, not involved in actual calculation.
 	Size string `json:"size"`
-	// Unfilled contract quantity, involved in actual calculation
+	// Unfilled contract quantity, involved in actual calculation.
 	Left string `json:"left"`
 }

@@ -10,20 +10,20 @@
 package gateapi
 
 type CurrencyChain struct {
-	// Chain name
+	// Chain name.
 	Chain string `json:"chain,omitempty"`
-	// Chain name in Chinese
+	// Chain name in Chinese.
 	NameCn string `json:"name_cn,omitempty"`
-	// Chain name in English
+	// Chain name in English.
 	NameEn string `json:"name_en,omitempty"`
 	// Smart contract address for the currency; if no address is available, it will be an empty string
 	ContractAddress string `json:"contract_address,omitempty"`
-	// If it is disabled. 0 means NOT being disabled
+	// If it is disabled. 0 means NOT being disabled.
 	IsDisabled int32 `json:"is_disabled,omitempty"`
-	// Is deposit disabled. 0 means not
+	// Is deposit disabled. 0 means not.
 	IsDepositDisabled int32 `json:"is_deposit_disabled,omitempty"`
-	// Is withdrawal disabled. 0 means not
+	// Is withdrawal disabled. 0 means not.
 	IsWithdrawDisabled int32 `json:"is_withdraw_disabled,omitempty"`
-	// Withdrawal precision
+	// Withdrawal precision.
 	Decimal string `json:"decimal,omitempty"`
 }

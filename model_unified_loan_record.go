@@ -9,22 +9,22 @@
 
 package gateapi
 
-// Loan records
+// Loan records.
 type UnifiedLoanRecord struct {
-	// ID
+	// ID.
 	Id int64 `json:"id,omitempty"`
-	// type: borrow - borrow, repay - repay
+	// type: borrow - borrow, repay - repay.
 	Type string `json:"type,omitempty"`
-	// Repayment type, none - No repayment type, manual_repay - Manual repayment, auto_repay - Automatic repayment, cancel_auto_repay - Automatic repayment after withdrawal, different_currencies_repayment - Different currency repayment
+	// Repayment type, none - No repayment type, manual_repay - Manual repayment, auto_repay - Automatic repayment after withdrawal, different_currencies_repayment - Different currency repayment
 	RepaymentType string `json:"repayment_type,omitempty"`
 	// Loan type, returned when querying loan records. manual_borrow - Manual repayment , auto_borrow - Automatic repayment
 	BorrowType string `json:"borrow_type,omitempty"`
-	// Currency pair
+	// Currency pair.
 	CurrencyPair string `json:"currency_pair,omitempty"`
-	// Currency
+	// Currency.
 	Currency string `json:"currency,omitempty"`
-	// The amount of lending or repaying
+	// The amount of lending or repaying.
 	Amount string `json:"amount,omitempty"`
-	// Created time
+	// Created time.
 	CreateTime int64 `json:"create_time,omitempty"`
 }

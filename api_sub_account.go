@@ -32,7 +32,7 @@ type ListSubAccountsOpts struct {
 }
 
 /*
-ListSubAccounts List sub-accounts
+ListSubAccounts List sub-accounts.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListSubAccountsOpts - Optional Parameters:
   - @param "Type_" (optional.String) -  `0` to list all types of sub-accounts (currently supporting cross margin accounts and sub-accounts).  `1` to list sub-accounts only. If no parameter is passed, only sub-accounts will be listed by default.
@@ -127,7 +127,7 @@ func (a *SubAccountApiService) ListSubAccounts(ctx context.Context, localVarOpti
 }
 
 /*
-CreateSubAccounts Create a new sub-account
+CreateSubAccounts Create a new sub-account.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param subAccount
 
@@ -220,9 +220,9 @@ func (a *SubAccountApiService) CreateSubAccounts(ctx context.Context, subAccount
 }
 
 /*
-GetSubAccount Get the sub-account
+GetSubAccount Get the sub-account.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param userId Sub-account user id
+  - @param userId Sub-account user id.
 
 @return SubAccount
 */
@@ -313,9 +313,9 @@ func (a *SubAccountApiService) GetSubAccount(ctx context.Context, userId int64) 
 }
 
 /*
-ListSubAccountKeys List all API Key of the sub-account
+ListSubAccountKeys List all API Key of the sub-account.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param userId Sub-account user id
+  - @param userId Sub-account user id.
 
 @return []SubAccountKey
 */
@@ -406,9 +406,9 @@ func (a *SubAccountApiService) ListSubAccountKeys(ctx context.Context, userId in
 }
 
 /*
-CreateSubAccountKeys Create API Key of the sub-account
+CreateSubAccountKeys Create API Key of the sub-account.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param userId Sub-account user id
+  - @param userId Sub-account user id.
   - @param subAccountKey
 
 @return SubAccountKey
@@ -502,10 +502,10 @@ func (a *SubAccountApiService) CreateSubAccountKeys(ctx context.Context, userId 
 }
 
 /*
-GetSubAccountKey Get the API Key of the sub-account
+GetSubAccountKey Get the API Key of the sub-account.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param userId Sub-account user id
-  - @param key The API Key of the sub-account
+  - @param userId Sub-account user id.
+  - @param key The API Key of the sub-account.
 
 @return SubAccountKey
 */
@@ -598,10 +598,10 @@ func (a *SubAccountApiService) GetSubAccountKey(ctx context.Context, userId int3
 }
 
 /*
-UpdateSubAccountKeys Update API key of the sub-account
+UpdateSubAccountKeys Update API key of the sub-account.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param userId Sub-account user id
-  - @param key The API Key of the sub-account
+  - @param userId Sub-account user id.
+  - @param key The API Key of the sub-account.
   - @param subAccountKey
 */
 func (a *SubAccountApiService) UpdateSubAccountKeys(ctx context.Context, userId int32, key string, subAccountKey SubAccountKey) (*http.Response, error) {
@@ -685,10 +685,10 @@ func (a *SubAccountApiService) UpdateSubAccountKeys(ctx context.Context, userId 
 }
 
 /*
-DeleteSubAccountKeys Delete API key of the sub-account
+DeleteSubAccountKeys Delete API key of the sub-account.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param userId Sub-account user id
-  - @param key The API Key of the sub-account
+  - @param userId Sub-account user id.
+  - @param key The API Key of the sub-account.
 */
 func (a *SubAccountApiService) DeleteSubAccountKeys(ctx context.Context, userId int32, key string) (*http.Response, error) {
 	var (
@@ -769,9 +769,9 @@ func (a *SubAccountApiService) DeleteSubAccountKeys(ctx context.Context, userId 
 }
 
 /*
-LockSubAccount Lock the sub-account
+LockSubAccount Lock the sub-account.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param userId The user id of the sub-account
+  - @param userId The user id of the sub-account.
 */
 func (a *SubAccountApiService) LockSubAccount(ctx context.Context, userId int64) (*http.Response, error) {
 	var (
@@ -850,9 +850,9 @@ func (a *SubAccountApiService) LockSubAccount(ctx context.Context, userId int64)
 }
 
 /*
-UnlockSubAccount Unlock the sub-account
+UnlockSubAccount Unlock the sub-account.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param userId The user id of the sub-account
+  - @param userId The user id of the sub-account.
 */
 func (a *SubAccountApiService) UnlockSubAccount(ctx context.Context, userId int64) (*http.Response, error) {
 	var (
@@ -931,7 +931,7 @@ func (a *SubAccountApiService) UnlockSubAccount(ctx context.Context, userId int6
 }
 
 /*
-ListUnifiedMode Get sub-account mode
+ListUnifiedMode Get sub-account mode.
 Unified account mode： - &#x60;classic&#x60;: Classic account mode - &#x60;multi_currency&#x60;: Multi-currency margin mode - &#x60;portfolio&#x60;: Portfolio margin mode
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 

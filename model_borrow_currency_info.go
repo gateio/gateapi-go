@@ -10,14 +10,14 @@
 package gateapi
 
 type BorrowCurrencyInfo struct {
-	// Currency
+	// Currency.
 	Currency string `json:"currency,omitempty"`
-	// Currency Index Price
+	// Currency Index Price.
 	IndexPrice string `json:"index_price,omitempty"`
-	// outstanding principal
+	// outstanding principal.
 	LeftRepayPrincipal string `json:"left_repay_principal,omitempty"`
-	// outstanding interest
+	// outstanding interest.
 	LeftRepayInterest string `json:"left_repay_interest,omitempty"`
-	// Value of left total repayments amount in USDT
+	// Value of left total repayments amount in USDT.
 	LeftRepayUsdt string `json:"left_repay_usdt,omitempty"`
 }

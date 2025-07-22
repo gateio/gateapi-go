@@ -9,8 +9,8 @@
 
 package gateapi
 
-// Retrieve user rebate information
+// Retrieve user rebate information.
 type RebateUserInfo struct {
-	// My inviter's UID
+	// My inviter's UID.
 	InviteUid int64 `json:"invite_uid,omitempty"`
 }

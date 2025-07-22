@@ -9,10 +9,10 @@
 
 package gateapi
 
-// ETH2 Staking
+// ETH2 Staking.
 type Eth2Swap struct {
-	// 1-Forward Swap（ETH -> ETH2）, 2-Reverse Swap（ETH2 -> ETH）
+	// 1-Forward Swap（ETH -> ETH2）, 2-Reverse Swap（ETH2 -> ETH）.
 	Side string `json:"side"`
-	// amount
+	// amount.
 	Amount string `json:"amount"`
 }

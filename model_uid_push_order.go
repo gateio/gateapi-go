@@ -10,22 +10,22 @@
 package gateapi
 
 type UidPushOrder struct {
-	// Order ID
+	// Order ID.
 	Id int64 `json:"id,omitempty"`
-	// Initiator User ID
+	// Initiator User ID.
 	PushUid int64 `json:"push_uid,omitempty"`
-	// Recipient User ID
+	// Recipient User ID.
 	ReceiveUid int64 `json:"receive_uid,omitempty"`
-	// Currency name
+	// Currency name.
 	Currency string `json:"currency,omitempty"`
-	// Transfer amount
+	// Transfer amount.
 	Amount string `json:"amount,omitempty"`
-	// Creation time
+	// Creation time.
 	CreateTime int64 `json:"create_time,omitempty"`
 	// Withdrawal Status  - CREATING: Creating - PENDING: Waiting for receiving(Please contact the other party to accept the transfer on the Gate official website) - CANCELLING: Cancelling - CANCELLED: Revoked - REFUSING: Rejection - REFUSED: Rejected - RECEIVING: Receiving - RECEIVED: Success
 	Status string `json:"status,omitempty"`
-	// PENDING Reason Tips
+	// PENDING Reason Tips.
 	Message string `json:"message,omitempty"`
-	// Order Type
+	// Order Type.
 	TransactionType string `json:"transaction_type,omitempty"`
 }

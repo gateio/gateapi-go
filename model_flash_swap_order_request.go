@@ -9,16 +9,16 @@
 
 package gateapi
 
-// Parameters of flash swap order creation
+// Parameters of flash swap order creation.
 type FlashSwapOrderRequest struct {
-	// Preview result ID
+	// Preview result ID.
 	PreviewId string `json:"preview_id"`
 	// Name of the asset to be sold, obtained from the interface GET /flash_swap/currency_pairs: Query the list of all trading pairs supporting flash swap
 	SellCurrency string `json:"sell_currency"`
-	// Amount to sell (based on the preview result)
+	// Amount to sell (based on the preview result).
 	SellAmount string `json:"sell_amount"`
 	// Name of the asset to be bought, obtained from the interface GET /flash_swap/currency_pairs: Query the list of all trading pairs supporting flash swap
 	BuyCurrency string `json:"buy_currency"`
-	// Amount to buy (based on the preview result)
+	// Amount to buy (based on the preview result).
 	BuyAmount string `json:"buy_amount"`
 }

@@ -9,29 +9,29 @@
 
 package gateapi
 
-// Structured Products
+// Structured Products.
 type StructuredGetProjectList struct {
-	// Plan ID
+	// Plan ID.
 	Id int32 `json:"id,omitempty"`
 	// product type:   `SharkFin2.0`-Shark Fin2.0  `BullishSharkFin`-Bullish Shark Fin  `BearishSharkFin`-Bearish Shark Fin `DoubleNoTouch`-Double No-Touch `RangeAccrual`-Range Accrual `SnowBall`-Snow Ball
 	Type string `json:"type,omitempty"`
-	// name
+	// name.
 	NameEn string `json:"name_en,omitempty"`
-	// Investment Currency
+	// Investment Currency.
 	InvestmentCoin string `json:"investment_coin,omitempty"`
-	// Investment term
+	// Investment term.
 	InvestmentPeriod string `json:"investment_period,omitempty"`
-	// Minimum annual rate
+	// Minimum annual rate.
 	MinAnnualRate string `json:"min_annual_rate,omitempty"`
-	// Intermediate annual rate
+	// Intermediate annual rate.
 	MidAnnualRate string `json:"mid_annual_rate,omitempty"`
-	// Maximum annual rate
+	// Maximum annual rate.
 	MaxAnnualRate string `json:"max_annual_rate,omitempty"`
-	// Watch market
+	// Watch market.
 	WatchMarket string `json:"watch_market,omitempty"`
-	// start time
+	// start time.
 	StartTime int32 `json:"start_time,omitempty"`
-	// Finished time
+	// Finished time.
 	EndTime int32 `json:"end_time,omitempty"`
 	// Status:   `in_process`-in progress  `will_begin`-will begin  `wait_settlement`-waiting for settlement  `done`-done
 	Status string `json:"status,omitempty"`

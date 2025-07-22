@@ -9,14 +9,14 @@
 
 package gateapi
 
-// Order cancellation result
+// Order cancellation result.
 type FutureCancelOrderResult struct {
-	// Order ID
+	// Order ID.
 	Id string `json:"id,omitempty"`
-	// User ID
+	// User ID.
 	UserId int64 `json:"user_id,omitempty"`
-	// Whether cancellation succeeded
+	// Whether cancellation succeeded.
 	Succeeded bool `json:"succeeded,omitempty"`
-	// Error message when failed to cancel the order; empty if succeeded
+	// Error message when failed to cancel the order; empty if succeeded.
 	Message string `json:"message,omitempty"`
 }

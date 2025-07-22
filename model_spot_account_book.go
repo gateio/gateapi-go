@@ -10,20 +10,20 @@
 package gateapi
 
 type SpotAccountBook struct {
-	// Balance change record ID
+	// Balance change record ID.
 	Id string `json:"id,omitempty"`
-	// The timestamp of the change (in milliseconds)
+	// The timestamp of the change (in milliseconds).
 	Time int64 `json:"time,omitempty"`
-	// Currency changed
+	// Currency changed.
 	Currency string `json:"currency,omitempty"`
-	// Amount changed. Positive value means transferring in, while negative out
+	// Amount changed. Positive value means transferring in, while negative out.
 	Change string `json:"change,omitempty"`
-	// Balance after change
+	// Balance after change.
 	Balance string `json:"balance,omitempty"`
-	// Account book type.  Please refer to [account book type](#accountbook-type) for more detail
+	// Account book type. Please refer to [account book type](#accountbook-type) for more detail
 	Type string `json:"type,omitempty"`
-	// Account change code, see [Asset Record Code] (Asset Record Code)
+	// Account change code, see [Asset Record Code] (Asset Record Code).
 	Code string `json:"code,omitempty"`
-	// Additional information
+	// Additional information.
 	Text string `json:"text,omitempty"`
 }

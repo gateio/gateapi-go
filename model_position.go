@@ -9,71 +9,71 @@
 
 package gateapi
 
-// Futures position details
+// Futures position details.
 type Position struct {
-	// User ID
+	// User ID.
 	User int64 `json:"user,omitempty"`
-	// Futures contract
+	// Futures contract.
 	Contract string `json:"contract,omitempty"`
-	// Position size
+	// Position size.
 	Size int64 `json:"size,omitempty"`
 	// Position leverage. 0 means cross margin; positive number means isolated margin
 	Leverage string `json:"leverage,omitempty"`
-	// Position risk limit
+	// Position risk limit.
 	RiskLimit string `json:"risk_limit,omitempty"`
-	// Maximum leverage under current risk limit
+	// Maximum leverage under current risk limit.
 	LeverageMax string `json:"leverage_max,omitempty"`
-	// Maintenance rate under current risk limit
+	// Maintenance rate under current risk limit.
 	MaintenanceRate string `json:"maintenance_rate,omitempty"`
-	// Position value calculated in settlement currency
+	// Position value calculated in settlement currency.
 	Value string `json:"value,omitempty"`
-	// Position margin
+	// Position margin.
 	Margin string `json:"margin,omitempty"`
-	// Entry price
+	// Entry price.
 	EntryPrice string `json:"entry_price,omitempty"`
-	// Liquidation price
+	// Liquidation price.
 	LiqPrice string `json:"liq_price,omitempty"`
-	// Current mark price
+	// Current mark price.
 	MarkPrice string `json:"mark_price,omitempty"`
 	// The initial margin occupied by the position, applicable to the portfolio margin account
 	InitialMargin string `json:"initial_margin,omitempty"`
 	// Maintenance margin required for the position, applicable to portfolio margin account
 	MaintenanceMargin string `json:"maintenance_margin,omitempty"`
-	// Unrealized PNL
+	// Unrealized PNL.
 	UnrealisedPnl string `json:"unrealised_pnl,omitempty"`
-	// Realized PNL
+	// Realized PNL.
 	RealisedPnl string `json:"realised_pnl,omitempty"`
-	// Realized PNL - Position P/L
+	// Realized PNL - Position P/L.
 	PnlPnl string `json:"pnl_pnl,omitempty"`
-	// Realized PNL -  Funding Fees
+	// Realized PNL - Funding Fees.
 	PnlFund string `json:"pnl_fund,omitempty"`
-	// Realized PNL - Transaction Fees
+	// Realized PNL - Transaction Fees.
 	PnlFee string `json:"pnl_fee,omitempty"`
-	// History realized PNL
+	// History realized PNL.
 	HistoryPnl string `json:"history_pnl,omitempty"`
-	// PNL of last position close
+	// PNL of last position close.
 	LastClosePnl string `json:"last_close_pnl,omitempty"`
-	// Realized POINT PNL
+	// Realized POINT PNL.
 	RealisedPoint string `json:"realised_point,omitempty"`
-	// History realized POINT PNL
+	// History realized POINT PNL.
 	HistoryPoint string `json:"history_point,omitempty"`
 	// Ranking of auto deleveraging, a total of 1-5 grades, `1` is the highest, `5` is the lowest, and `6` is the special case when there is no position held or in liquidation
 	AdlRanking int32 `json:"adl_ranking,omitempty"`
-	// Current open orders
+	// Current open orders.
 	PendingOrders int32               `json:"pending_orders,omitempty"`
 	CloseOrder    *PositionCloseOrder `json:"close_order,omitempty"`
-	// Position mode, including:  - `single`: dual mode is not enabled- `dual_long`: long position in dual mode- `dual_short`: short position in dual mode
+	// Position mode, including:  - `single`: dual mode is not enabled- `dual_long`: long position in dual mode- `dual_short`: mode
 	Mode string `json:"mode,omitempty"`
-	// Cross margin leverage(valid only when `leverage` is 0)
+	// Cross margin leverage(valid only when `leverage` is 0).
 	CrossLeverageLimit string `json:"cross_leverage_limit,omitempty"`
-	// Last update time
+	// Last update time.
 	UpdateTime int64 `json:"update_time,omitempty"`
 	// Update id. Each time the position is updated, the value will be +1.
 	UpdateId int64 `json:"update_id,omitempty"`
-	// First Open Time
+	// First Open Time.
 	OpenTime int64 `json:"open_time,omitempty"`
-	// Risk limit table ID
+	// Risk limit table ID.
 	RiskLimitTable string `json:"risk_limit_table,omitempty"`
-	// Average maintenance margin rate
+	// Average maintenance margin rate.
 	AverageMaintenanceRate string `json:"average_maintenance_rate,omitempty"`
 }

@@ -27,7 +27,7 @@ var (
 type EarnUniApiService service
 
 /*
-ListUniCurrencies List currencies for lending
+ListUniCurrencies List currencies for lending.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 @return []UniCurrency
@@ -111,9 +111,9 @@ func (a *EarnUniApiService) ListUniCurrencies(ctx context.Context) ([]UniCurrenc
 }
 
 /*
-GetUniCurrency Get currency detail for lending
+GetUniCurrency Get currency detail for lending.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param currency Currency
+  - @param currency Currency.
 
 @return UniCurrency
 */
@@ -205,12 +205,12 @@ type ListUserUniLendsOpts struct {
 }
 
 /*
-ListUserUniLends List user's lending orders
+ListUserUniLends List user's lending orders.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListUserUniLendsOpts - Optional Parameters:
-  - @param "Currency" (optional.String) -  Retrieve data of the specified currency
-  - @param "Page" (optional.Int32) -  Page number
-  - @param "Limit" (optional.Int32) -  Maximum response items.  Default: 100, minimum: 1, Maximum: 100
+  - @param "Currency" (optional.String) -  Retrieve data of the specified currency.
+  - @param "Page" (optional.Int32) -  Page number.
+  - @param "Limit" (optional.Int32) -  Maximum response items. Default: 100, minimum: 1, Maximum: 100.
 
 @return []UniLend
 */
@@ -308,8 +308,8 @@ func (a *EarnUniApiService) ListUserUniLends(ctx context.Context, localVarOption
 }
 
 /*
-CreateUniLend Lend or redeem
-Lending: When lending, a minimum lending rate must be set. After successful lending is determined on an hourly basis, earnings will be calculated based on the determined rate.  Earnings for each hour will be settled at the top of the hour. If lending fails due to an excessively high interest rate, no interest will be earned for that hour.   If funds are redeemed before the hourly determination, no interest will be earned for that hour.   Priority: Under the same interest rate, wealth management products created or modified earlier will be prioritized for lending.  Redemption: For funds that failed to be lent, redemption will be credited immediately. For funds successfully lent, they are entitled to the earnings for that hour, and redemption will be credited in the next hourly interval.  Note: The two minutes before and after the hourly mark are the settlement period, during which lending and redemption are prohibited.
+CreateUniLend Lend or redeem.
+Lending: When lending, a minimum lending rate must be set. After successful lending is determined on an hourly basis, earnings will be calculated based on the determined rate.  Earnings for each hour will be settled at the top of the hour. If lending fails due to an excessively high interest rate, no interest will be earned for that hour.  If funds are redeemed before the hourly for that hour.  Priority: Under the same interest rate, wealth management products created or modified earlier will be prioritized for lending.  Redemption: For funds that failed to be lent, redemption will be credited immediately. For funds successfully lent, they are entitled to the earnings for that hour, and redemption will be credited in the next hourly interval.  Note: The two minutes before and after the hourly mark are the settlement period, during which lending and redemption are prohibited.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param createUniLend
 */
@@ -390,8 +390,8 @@ func (a *EarnUniApiService) CreateUniLend(ctx context.Context, createUniLend Cre
 }
 
 /*
-ChangeUniLend Amend lending order
-Currently only supports amending the minimum interest rate (hour)
+ChangeUniLend Amend lending order.
+Currently only supports amending the minimum interest rate (hour).
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param patchUniLend
 */
@@ -482,15 +482,15 @@ type ListUniLendRecordsOpts struct {
 }
 
 /*
-ListUniLendRecords List records of lending
+ListUniLendRecords List records of lending.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListUniLendRecordsOpts - Optional Parameters:
-  - @param "Currency" (optional.String) -  Retrieve data of the specified currency
-  - @param "Page" (optional.Int32) -  Page number
-  - @param "Limit" (optional.Int32) -  Maximum response items.  Default: 100, minimum: 1, Maximum: 100
+  - @param "Currency" (optional.String) -  Retrieve data of the specified currency.
+  - @param "Page" (optional.Int32) -  Page number.
+  - @param "Limit" (optional.Int32) -  Maximum response items. Default: 100, minimum: 1, Maximum: 100.
   - @param "From" (optional.Int64) -  Start timestamp  Specify start time, time format is Unix timestamp. If not specified, it defaults to (the data start time of the time range actually returned by to and limit)
   - @param "To" (optional.Int64) -  Termination Timestamp  Specify the end time. If not specified, it defaults to the current time, and the time format is a Unix timestamp
-  - @param "Type_" (optional.String) -  type: lend - lend, redeem - redeem
+  - @param "Type_" (optional.String) -  type: lend - lend, redeem - redeem.
 
 @return []UniLendRecord
 */
@@ -597,9 +597,9 @@ func (a *EarnUniApiService) ListUniLendRecords(ctx context.Context, localVarOpti
 }
 
 /*
-GetUniInterest Get the user's total interest income of specified currency
+GetUniInterest Get the user's total interest income of specified currency.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param currency Currency
+  - @param currency Currency.
 
 @return UniLendInterest
 */
@@ -699,12 +699,12 @@ type ListUniInterestRecordsOpts struct {
 }
 
 /*
-ListUniInterestRecords List interest records
+ListUniInterestRecords List interest records.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListUniInterestRecordsOpts - Optional Parameters:
-  - @param "Currency" (optional.String) -  Retrieve data of the specified currency
-  - @param "Page" (optional.Int32) -  Page number
-  - @param "Limit" (optional.Int32) -  Maximum response items.  Default: 100, minimum: 1, Maximum: 100
+  - @param "Currency" (optional.String) -  Retrieve data of the specified currency.
+  - @param "Page" (optional.Int32) -  Page number.
+  - @param "Limit" (optional.Int32) -  Maximum response items. Default: 100, minimum: 1, Maximum: 100.
   - @param "From" (optional.Int64) -  Start timestamp  Specify start time, time format is Unix timestamp. If not specified, it defaults to (the data start time of the time range actually returned by to and limit)
   - @param "To" (optional.Int64) -  Termination Timestamp  Specify the end time. If not specified, it defaults to the current time, and the time format is a Unix timestamp
 
@@ -810,9 +810,9 @@ func (a *EarnUniApiService) ListUniInterestRecords(ctx context.Context, localVar
 }
 
 /*
-GetUniInterestStatus query currency interest compounding status
+GetUniInterestStatus query currency interest compounding status.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param currency Currency
+  - @param currency Currency.
 
 @return UniCurrencyInterest
 */
@@ -903,12 +903,12 @@ func (a *EarnUniApiService) GetUniInterestStatus(ctx context.Context, currency s
 }
 
 /*
-ListUniChart UniLoan currency annualized trend chart
-Project-Id-Version: GateApiTools 1.0.0 Report-Msgid-Bugs-To: EMAIL@ADDRESS POT-Creation-Date: 2025-07-15 06:49+0000 PO-Revision-Date: 2019-01-02 17:30+0800 Last-Translator: FULL NAME &lt;EMAIL@ADDRESS&gt; Language: en Language-Team: en &lt;L@li.org&gt; Plural-Forms: nplurals&#x3D;2; plural&#x3D;(n !&#x3D;1) MIME-Version: 1.0 Content-Type: text/plain; charset&#x3D;utf-8 Content-Transfer-Encoding: 8bit Generated-By: Babel 2.8.0
+ListUniChart UniLoan currency annualized trend chart.
+Project-Id-Version: GateApiTools 1.0.0 Report-Msgid-Bugs-To: EMAIL@ADDRESS POT-Creation-Date: 2025-07-17 21:35+0800 PO-Revision-Date: 2019-01-02 17:30+0800 Last-Translator: FULL NAME &lt;EMAIL@ADDRESS&gt; Language: en Language-Team: en &lt;L@li.org&gt; Plural-Forms: nplurals&#x3D;2; plural&#x3D;(n !&#x3D;1) MIME-Version: 1.0 Content-Type: text/plain; charset&#x3D;utf-8 Content-Transfer-Encoding: 8bit Generated-By: Babel 2.8.0
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param from Start timestamp, unit s, maximum span of 30 days
-  - @param to End timestamp, unit s, maximum span of 30 days
-  - @param asset Currency name
+  - @param from Start timestamp, unit s, maximum span of 30 days.
+  - @param to End timestamp, unit s, maximum span of 30 days.
+  - @param asset Currency name.
 
 @return []InlineResponse200
 */
@@ -1000,8 +1000,8 @@ func (a *EarnUniApiService) ListUniChart(ctx context.Context, from int64, to int
 }
 
 /*
-ListUniRate Currency estimate annualized interest rate
-Project-Id-Version: GateApiTools 1.0.0 Report-Msgid-Bugs-To: EMAIL@ADDRESS POT-Creation-Date: 2025-07-15 06:49+0000 PO-Revision-Date: 2019-01-02 17:30+0800 Last-Translator: FULL NAME &lt;EMAIL@ADDRESS&gt; Language: en Language-Team: en &lt;L@li.org&gt; Plural-Forms: nplurals&#x3D;2; plural&#x3D;(n !&#x3D;1) MIME-Version: 1.0 Content-Type: text/plain; charset&#x3D;utf-8 Content-Transfer-Encoding: 8bit Generated-By: Babel 2.8.0
+ListUniRate Currency estimate annualized interest rate.
+Project-Id-Version: GateApiTools 1.0.0 Report-Msgid-Bugs-To: EMAIL@ADDRESS POT-Creation-Date: 2025-07-17 21:35+0800 PO-Revision-Date: 2019-01-02 17:30+0800 Last-Translator: FULL NAME &lt;EMAIL@ADDRESS&gt; Language: en Language-Team: en &lt;L@li.org&gt; Plural-Forms: nplurals&#x3D;2; plural&#x3D;(n !&#x3D;1) MIME-Version: 1.0 Content-Type: text/plain; charset&#x3D;utf-8 Content-Transfer-Encoding: 8bit Generated-By: Babel 2.8.0
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 @return []InlineResponse2001

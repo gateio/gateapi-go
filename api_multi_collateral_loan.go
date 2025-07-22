@@ -36,12 +36,12 @@ type ListMultiCollateralOrdersOpts struct {
 }
 
 /*
-ListMultiCollateralOrders List Multi-Collateral Orders
+ListMultiCollateralOrders List Multi-Collateral Orders.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListMultiCollateralOrdersOpts - Optional Parameters:
-  - @param "Page" (optional.Int32) -  Page number
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
-  - @param "Sort" (optional.String) -  Query the current interest rate of the currency in the previous hour
+  - @param "Page" (optional.Int32) -  Page number.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
+  - @param "Sort" (optional.String) -  Query the current interest rate of the currency in the previous hour.
   - @param "OrderType" (optional.String) -  Order type: current - Query current orders, fixed - Query fixed orders, defaults to current orders if not specified
 
 @return []MultiCollateralOrder
@@ -143,7 +143,7 @@ func (a *MultiCollateralLoanApiService) ListMultiCollateralOrders(ctx context.Co
 }
 
 /*
-CreateMultiCollateral Create Multi-Collateral Order
+CreateMultiCollateral Create Multi-Collateral Order.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param createMultiCollateralOrder
 
@@ -236,9 +236,9 @@ func (a *MultiCollateralLoanApiService) CreateMultiCollateral(ctx context.Contex
 }
 
 /*
-GetMultiCollateralOrderDetail Get Multi-Collateral Order Detail
+GetMultiCollateralOrderDetail Get Multi-Collateral Order Detail.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param orderId Order ID returned on successful order creation
+  - @param orderId Order ID returned on successful order creation.
 
 @return MultiCollateralOrder
 */
@@ -338,15 +338,15 @@ type ListMultiRepayRecordsOpts struct {
 }
 
 /*
-ListMultiRepayRecords List Multi-Collateral Repay Records
+ListMultiRepayRecords List Multi-Collateral Repay Records.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param type_ Operation type: repay - Regular repayment, liquidate - Liquidation
+  - @param type_ Operation type: repay - Regular repayment, liquidate - Liquidation.
   - @param optional nil or *ListMultiRepayRecordsOpts - Optional Parameters:
-  - @param "BorrowCurrency" (optional.String) -  Borrowed currency
-  - @param "Page" (optional.Int32) -  Page number
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
-  - @param "From" (optional.Int64) -  Start timestamp of the query
-  - @param "To" (optional.Int64) -  Time range ending, default to current time
+  - @param "BorrowCurrency" (optional.String) -  Borrowed currency.
+  - @param "Page" (optional.Int32) -  Page number.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
+  - @param "From" (optional.Int64) -  Start timestamp of the query.
+  - @param "To" (optional.Int64) -  Time range ending, default to current time.
 
 @return []MultiRepayRecord
 */
@@ -451,7 +451,7 @@ func (a *MultiCollateralLoanApiService) ListMultiRepayRecords(ctx context.Contex
 }
 
 /*
-RepayMultiCollateralLoan Repay Multi-Collateral Loan
+RepayMultiCollateralLoan Repay Multi-Collateral Loan.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param repayMultiLoan
 
@@ -553,14 +553,14 @@ type ListMultiCollateralRecordsOpts struct {
 }
 
 /*
-ListMultiCollateralRecords Query collateral adjustment records
+ListMultiCollateralRecords Query collateral adjustment records.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param optional nil or *ListMultiCollateralRecordsOpts - Optional Parameters:
-  - @param "Page" (optional.Int32) -  Page number
-  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list
-  - @param "From" (optional.Int64) -  Start timestamp of the query
-  - @param "To" (optional.Int64) -  Time range ending, default to current time
-  - @param "CollateralCurrency" (optional.String) -  Collateral
+  - @param "Page" (optional.Int32) -  Page number.
+  - @param "Limit" (optional.Int32) -  Maximum number of records to be returned in a single list.
+  - @param "From" (optional.Int64) -  Start timestamp of the query.
+  - @param "To" (optional.Int64) -  Time range ending, default to current time.
+  - @param "CollateralCurrency" (optional.String) -  Collateral.
 
 @return []MultiCollateralRecord
 */
@@ -664,7 +664,7 @@ func (a *MultiCollateralLoanApiService) ListMultiCollateralRecords(ctx context.C
 }
 
 /*
-OperateMultiCollateral Operate Multi-Collateral
+OperateMultiCollateral Operate Multi-Collateral.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param collateralAdjust
 
@@ -757,10 +757,10 @@ func (a *MultiCollateralLoanApiService) OperateMultiCollateral(ctx context.Conte
 }
 
 /*
-ListUserCurrencyQuota List User Currency Quota
+ListUserCurrencyQuota List User Currency Quota.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-  - @param type_ Currency type: collateral - Collateral currency, borrow - Borrowing
-  - @param currency When it is a collateral currency, multiple currencies can be passed separated by commas;when it is a borrowing currency, only one currenc
+  - @param type_ Currency type: collateral - Collateral currency, borrow - Borrowing.
+  - @param currency When it is a collateral currency, multiple currencies can be passed separated by commas; when it is a borrowing currency, only one currency can be passedseparated by commas; when it is a borrowing currency, only one currency can be passedseparated by commas; when it is a borrowing currency, only one commas; when it is a borrowing currency, only one currency can be passed
 
 @return []CurrencyQuota
 */
@@ -851,7 +851,7 @@ func (a *MultiCollateralLoanApiService) ListUserCurrencyQuota(ctx context.Contex
 }
 
 /*
-ListMultiCollateralCurrencies Query supported borrowing and collateral currencies in Multi-Collateral
+ListMultiCollateralCurrencies Query supported borrowing and collateral currencies in Multi-Collateral.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 @return MultiCollateralCurrency
@@ -935,7 +935,7 @@ func (a *MultiCollateralLoanApiService) ListMultiCollateralCurrencies(ctx contex
 }
 
 /*
-GetMultiCollateralLtv Get Multi-Collateral ratio
+GetMultiCollateralLtv Get Multi-Collateral ratio.
 The Multi-Collateral ratio is fixed, irrespective of the currency.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
@@ -1020,7 +1020,7 @@ func (a *MultiCollateralLoanApiService) GetMultiCollateralLtv(ctx context.Contex
 }
 
 /*
-GetMultiCollateralFixRate Query fixed interest rates for the currency for 7 days and 30 days
+GetMultiCollateralFixRate Query fixed interest rates for the currency for 7 days and 30 days.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
 @return []CollateralFixRate
@@ -1109,12 +1109,12 @@ type GetMultiCollateralCurrentRateOpts struct {
 }
 
 /*
-GetMultiCollateralCurrentRate Query the current interest rate of the currency
+GetMultiCollateralCurrentRate Query the current interest rate of the currency.
 Query the current interest rate of the currency in the previous hour.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param currencies Specify currency name query array, separated by commas, maximum 100items.
   - @param optional nil or *GetMultiCollateralCurrentRateOpts - Optional Parameters:
-  - @param "VipLevel" (optional.String) -  VIP level, defaults to 0 if not transferred
+  - @param "VipLevel" (optional.String) -  VIP level, defaults to 0 if not transferred.
 
 @return []CollateralCurrentRate
 */

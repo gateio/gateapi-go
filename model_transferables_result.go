@@ -9,10 +9,10 @@
 
 package gateapi
 
-// Batch query unified account can be transferred up to a maximum of results
+// Batch query unified account can be transferred up to a maximum of results.
 type TransferablesResult struct {
-	// Currency detail
+	// Currency detail.
 	Currency string `json:"currency,omitempty"`
-	// The maximum amount that can be transferred out
+	// The maximum amount that can be transferred out.
 	Amount string `json:"amount,omitempty"`
 }

@@ -9,12 +9,12 @@
 
 package gateapi
 
-// Collateral Ratio
+// Collateral Ratio.
 type CollateralLtv struct {
-	// The initial collateralization rate
+	// The initial collateralization rate.
 	InitLtv string `json:"init_ltv,omitempty"`
-	// Warning collateralization ratio
+	// Warning collateralization ratio.
 	AlertLtv string `json:"alert_ltv,omitempty"`
-	// The liquidation collateralization rate
+	// The liquidation collateralization rate.
 	LiquidateLtv string `json:"liquidate_ltv,omitempty"`
 }

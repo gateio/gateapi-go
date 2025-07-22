@@ -10,16 +10,16 @@
 package gateapi
 
 type RepayRecordLeftInterest struct {
-	// Currency
+	// Currency.
 	Currency string `json:"currency,omitempty"`
-	// Currency Index Price
+	// Currency Index Price.
 	IndexPrice string `json:"index_price,omitempty"`
-	// Interest amount before repayment
+	// Interest amount before repayment.
 	BeforeAmount string `json:"before_amount,omitempty"`
-	// Converted value of interest before repayment in USDT
+	// Converted value of interest before repayment in USDT.
 	BeforeAmountUsdt string `json:"before_amount_usdt,omitempty"`
-	// Interest amount after repayment
+	// Interest amount after repayment.
 	AfterAmount string `json:"after_amount,omitempty"`
-	// Converted value of interest after repayment in USDT
+	// Converted value of interest after repayment in USDT.
 	AfterAmountUsdt string `json:"after_amount_usdt,omitempty"`
 }

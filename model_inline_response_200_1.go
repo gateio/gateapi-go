@@ -11,6 +11,6 @@ package gateapi
 
 type InlineResponse2001 struct {
 	Currency string `json:"currency,omitempty"`
-	// Unconverted percentage
+	// Unconverted percentage.
 	EstRate string `json:"est_rate,omitempty"`
 }

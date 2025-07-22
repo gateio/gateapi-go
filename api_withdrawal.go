@@ -26,7 +26,7 @@ var (
 type WithdrawalApiService service
 
 /*
-Withdraw Withdraw
+Withdraw Withdraw.
 Withdrawals to Gate addresses do not incur transaction fees.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param ledgerRecord
@@ -120,7 +120,7 @@ func (a *WithdrawalApiService) Withdraw(ctx context.Context, ledgerRecord Ledger
 }
 
 /*
-WithdrawPushOrder UID transfer
+WithdrawPushOrder UID transfer.
 Transfers between main spot accounts are allowed; however, both parties cannot be sub-accounts
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param uidPushWithdrawal
@@ -214,7 +214,7 @@ func (a *WithdrawalApiService) WithdrawPushOrder(ctx context.Context, uidPushWit
 }
 
 /*
-CancelWithdrawal Cancel withdrawal with specified ID
+CancelWithdrawal Cancel withdrawal with specified ID.
   - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
   - @param withdrawalId
 

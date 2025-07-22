@@ -9,10 +9,10 @@
 
 package gateapi
 
-// Currency discount tiers
+// Currency discount tiers.
 type UnifiedDiscount struct {
-	// Currency name
+	// Currency name.
 	Currency string `json:"currency,omitempty"`
-	// Tiered discount
+	// Tiered discount.
 	DiscountTiers []UnifiedDiscountTiers `json:"discount_tiers,omitempty"`
 }
