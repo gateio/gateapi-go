@@ -24,6 +24,7 @@ Method | HTTP request | Description
 [**UpdatePositionMargin**](FuturesApi.md#UpdatePositionMargin) | **Post** /futures/{settle}/positions/{contract}/margin | Update position margin.
 [**UpdatePositionLeverage**](FuturesApi.md#UpdatePositionLeverage) | **Post** /futures/{settle}/positions/{contract}/leverage | Update position leverage.
 [**UpdatePositionCrossMode**](FuturesApi.md#UpdatePositionCrossMode) | **Post** /futures/{settle}/positions/cross_mode | Switch to the full position-by-store mode.
+[**UpdateDualCompPositionCrossMode**](FuturesApi.md#UpdateDualCompPositionCrossMode) | **Post** /futures/{settle}/dual_comp/positions/cross_mode | 双仓模式下切换全逐仓模式
 [**UpdatePositionRiskLimit**](FuturesApi.md#UpdatePositionRiskLimit) | **Post** /futures/{settle}/positions/{contract}/risk_limit | Update position risk limit.
 [**SetDualMode**](FuturesApi.md#SetDualMode) | **Post** /futures/{settle}/dual_mode | Enable or disable dual mode.
 [**GetDualModePosition**](FuturesApi.md#GetDualModePosition) | **Get** /futures/{settle}/dual_comp/positions/{contract} | Retrieve position detail in dual mode.
@@ -1552,6 +1553,77 @@ func main() {
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
+## UpdateDualCompPositionCrossMode
+
+> []Position UpdateDualCompPositionCrossMode(ctx, settle, inlineObject)
+
+双仓模式下切换全逐仓模式
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**settle** | **string**| Settle currency. | 
+**inlineObject** | [**InlineObject**](InlineObject.md)|  | 
+
+### Example
+
+```golang
+package main
+
+import (
+    "context"
+    "fmt"
+
+    "github.com/gateio/gateapi-go/v6"
+)
+
+func main() {
+    client := gateapi.NewAPIClient(gateapi.NewConfiguration())
+    // uncomment the next line if your are testing against testnet
+    // client.ChangeBasePath("https://fx-api-testnet.gateio.ws/api/v4")
+    ctx := context.WithValue(context.Background(),
+                             gateapi.ContextGateAPIV4,
+                             gateapi.GateAPIV4{
+                                 Key:    "YOUR_API_KEY",
+                                 Secret: "YOUR_API_SECRET",
+                             }
+                            )
+    settle := "usdt" // string - Settle currency.
+    inlineObject := gateapi.InlineObject{} // InlineObject - 
+    
+    result, _, err := client.FuturesApi.UpdateDualCompPositionCrossMode(ctx, settle, inlineObject)
+    if err != nil {
+        if e, ok := err.(gateapi.GateAPIError); ok {
+            fmt.Printf("gate api error: %s\n", e.Error())
+        } else {
+            fmt.Printf("generic error: %s\n", err.Error())
+        }
+    } else {
+        fmt.Println(result)
+    }
+}
+```
+
+
+### Return type
+
+[**[]Position**](Position.md)
+
+### Authorization
+
+[apiv4](../README.md#apiv4)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
 ## UpdatePositionRiskLimit
 
 > Position UpdatePositionRiskLimit(ctx, settle, contract, riskLimit)
@@ -2921,6 +2993,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **contract** | **optional.String**| Futures contract, return related data only if specified. | 
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list. | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0. | [default to 0]
+**from** | **optional.Int64**| Start timestamp  Specify start time, time format is Unix timestamp. If not specified, it defaults to (the data start time of the time range actually returned by to and limit) | 
+**to** | **optional.Int64**| Termination Timestamp  Specify the end time. If not specified, it defaults to the current time, and the time format is a Unix timestamp | 
 **at** | **optional.Int32**| Specify a liquidation timestamp. | [default to 0]
 
 ### Example
@@ -3001,6 +3076,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **contract** | **optional.String**| Futures contract, return related data only if specified. | 
 **limit** | **optional.Int32**| Maximum number of records to be returned in a single list. | [default to 100]
+**offset** | **optional.Int32**| List offset, starting from 0. | [default to 0]
+**from** | **optional.Int64**| Start timestamp  Specify start time, time format is Unix timestamp. If not specified, it defaults to (the data start time of the time range actually returned by to and limit) | 
+**to** | **optional.Int64**| Termination Timestamp  Specify the end time. If not specified, it defaults to the current time, and the time format is a Unix timestamp | 
 **at** | **optional.Int32**| Specify an auto-deleveraging timestamp. | [default to 0]
 
 ### Example
