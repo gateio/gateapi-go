@@ -1,3 +1,7 @@
+
+> [!WARNING]
+> This repository has been archived and is no longer maintained. The project has moved to **[gate/gateapi-go](https://github.com/gate/gateapi-go)**. Please use the new repository for updates, issues, and pull requests.
+
 # Go API client for gateapi
 
 Welcome to Gate API
